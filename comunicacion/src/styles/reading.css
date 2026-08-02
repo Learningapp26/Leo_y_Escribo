@@ -91,6 +91,43 @@
     box-shadow: var(--shadow-md);
 }
 
+/* Sección "Conversemos sobre el cuento" */
+
+.comprehension-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+}
+
+.comprehension-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-lg);
+}
+
+.comprehension-grid__item {
+    gap: var(--space-md);
+}
+
+.comprehension-list__number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 2rem;
+    height: 2rem;
+
+    border-radius: var(--radius-full);
+
+    background: var(--lesson-primary, var(--color-action));
+    color: white;
+
+    font-family: var(--font-ui);
+    font-weight: var(--font-weight-black);
+    font-size: var(--font-size-sm);
+}
+
 /* Donde ira la paginación */
 /* Propuesta pensada que vaya la paginación en el footer */
 .reading-footer {
