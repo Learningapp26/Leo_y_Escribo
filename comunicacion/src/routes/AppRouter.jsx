@@ -10,6 +10,10 @@ import ProgressPage from '../pages/ProgressPage'
 import NotFoundPage from '../pages/NotFoundPage'
 import LeccionVocalesPage from '../pages/LeccionVocalesPage'
 import ActividadVocalesPage from '../pages/ActividadVocalesPage'
+import LeccionYPage from '../pages/LeccionYPage'
+import ActividadYParejasPage from '../pages/ActividadYParejasPage'
+import ActividadYUnirImagenesPage from '../pages/ActividadYUnirImagenesPage'
+import ActividadYFinalPage from '../pages/ActividadYFinalPage'
 
 function AppRouter() {
   return (
@@ -24,6 +28,26 @@ function AppRouter() {
         <Route
           path="/lecciones/vocales"
           element={<LeccionVocalesPage />}
+        />
+
+        <Route
+          path="/lecciones/y-conjuncion"
+          element={<LeccionYPage />}
+        />
+
+        <Route
+          path="/actividad/y-formar-parejas"
+          element={<ActividadYParejasPage />}
+        />
+
+        <Route
+          path="/actividad/y-unir-imagenes"
+          element={<ActividadYUnirImagenesPage />}
+        />
+
+        <Route
+          path="/actividad/y-final"
+          element={<ActividadYFinalPage />}
         />
 
         <Route
