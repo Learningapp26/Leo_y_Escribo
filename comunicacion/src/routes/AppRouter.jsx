@@ -19,6 +19,7 @@ import ActividadLImagenesPage from '../pages/ActividadLImagenesPage'
 import ActividadLSilabasPage from '../pages/ActividadLSilabasPage'
 import ActividadLCompletarPage from '../pages/ActividadLCompletarPage'
 import ActividadLFinalPage from '../pages/ActividadLFinalPage'
+import LeccionMPage from '../pages/LeccionMPage'
 
 function AppRouter() {
   return (
@@ -33,6 +34,10 @@ function AppRouter() {
         <Route
           path="/lecciones/vocales"
           element={<LeccionVocalesPage />}
+        />
+        <Route
+          path="/lecciones/m"
+          element={<LeccionMPage />}
         />
 
         <Route
