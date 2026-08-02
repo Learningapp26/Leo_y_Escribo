@@ -16,6 +16,8 @@ import ActividadYUnirImagenesPage from '../pages/ActividadYUnirImagenesPage'
 import ActividadYFinalPage from '../pages/ActividadYFinalPage'
 import LeccionLPage from '../pages/LeccionLPage'
 import ActividadLImagenesPage from '../pages/ActividadLImagenesPage'
+import ActividadLSilabasPage from '../pages/ActividadLSilabasPage'
+import ActividadLCompletarPage from '../pages/ActividadLCompletarPage'
 
 function AppRouter() {
   return (
@@ -45,6 +47,16 @@ function AppRouter() {
         <Route
           path="/actividad/l-imagenes"
           element={<ActividadLImagenesPage />}
+        />
+
+        <Route
+          path="/actividad/l-silabas"
+          element={<ActividadLSilabasPage />}
+        />
+
+        <Route
+          path="/actividad/l-completar"
+          element={<ActividadLCompletarPage />}
         />
 
         <Route

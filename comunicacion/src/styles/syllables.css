@@ -47,6 +47,19 @@
 }
 
 
+/* Primera instrucción de cada actividad: más grande y en negrita para que resalte */
+
+.syllables-instructions p.text-instruction:first-of-type,
+.syllables-card > p.text-instruction:first-child {
+
+    font-family: var(--font-alt);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+
+}
+
+
 /* Área de audio */
 
 .syllables-audio {

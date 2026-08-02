@@ -599,6 +599,30 @@ input::placeholder {
   height: 100%;
 }
 
+.activity-navigation {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  width: 100%;
+}
+
+.selection-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  width: 100%;
+}
+
+.selection-columns .selection-options {
+  grid-template-columns: 1fr;
+}
+
+@media (max-width: 600px) {
+  .selection-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ── 15. Grilla login ──────────────────────────────────────── */
 .login-grid {
   display: flex;
