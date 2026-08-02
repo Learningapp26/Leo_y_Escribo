@@ -106,7 +106,7 @@
 
     gap: var(--space-md);
 
-    min-height: 170px;
+    min-height: 210px;
 
     padding: var(--space-lg);
 
@@ -177,10 +177,38 @@
 .selection-image {
 
     width: 100%;
-    max-width: 140px;
-    height: 140px;
+    max-width: 185px;
+    height: 185px;
 
     object-fit: contain;
+
+}
+
+
+/* Cuando la imagen es la única protagonista de la pantalla
+   (una palabra a la vez, no una grilla de opciones) */
+
+.selection-image--featured {
+
+    max-width: 260px;
+    height: 260px;
+
+}
+
+
+/* Círculo de color, cuando la palabra no necesita una foto (ej. "lila") */
+/* También se muestra sola, así que usa el mismo tamaño destacado */
+
+.practice-color-swatch {
+
+    display: block;
+
+    width: 260px;
+    height: 260px;
+
+    border-radius: 50%;
+
+    box-shadow: var(--shadow-md);
 
 }
 
@@ -339,14 +367,28 @@
 
     .selection-button {
 
-        min-height: 140px;
+        min-height: 175px;
 
     }
 
     .selection-image {
 
-        max-width: 110px;
-        height: 110px;
+        max-width: 145px;
+        height: 145px;
+
+    }
+
+    .selection-image--featured {
+
+        max-width: 200px;
+        height: 200px;
+
+    }
+
+    .practice-color-swatch {
+
+        width: 200px;
+        height: 200px;
 
     }
 
@@ -363,14 +405,28 @@
 
     .selection-button {
 
-        min-height: 120px;
+        min-height: 150px;
 
     }
 
     .selection-image {
 
-        max-width: 90px;
-        height: 90px;
+        max-width: 120px;
+        height: 120px;
+
+    }
+
+    .selection-image--featured {
+
+        max-width: 170px;
+        height: 170px;
+
+    }
+
+    .practice-color-swatch {
+
+        width: 170px;
+        height: 170px;
 
     }
 
