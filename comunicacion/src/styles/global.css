@@ -587,6 +587,18 @@ input::placeholder {
   font-weight: var(--font-weight-bold);
 }
 
+/* ── 14b. Menú de actividades dentro de una lección ─────────── */
+.lesson-activity-menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-lg);
+  margin-top: var(--space-lg);
+}
+
+.lesson-activity-menu__card {
+  height: 100%;
+}
+
 /* ── 15. Grilla login ──────────────────────────────────────── */
 .login-grid {
   display: flex;

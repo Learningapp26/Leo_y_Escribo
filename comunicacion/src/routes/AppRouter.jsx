@@ -14,6 +14,7 @@ import LeccionYPage from '../pages/LeccionYPage'
 import ActividadYParejasPage from '../pages/ActividadYParejasPage'
 import ActividadYUnirImagenesPage from '../pages/ActividadYUnirImagenesPage'
 import ActividadYFinalPage from '../pages/ActividadYFinalPage'
+import LeccionLPage from '../pages/LeccionLPage'
 
 function AppRouter() {
   return (
@@ -33,6 +34,11 @@ function AppRouter() {
         <Route
           path="/lecciones/y-conjuncion"
           element={<LeccionYPage />}
+        />
+
+        <Route
+          path="/lecciones/l"
+          element={<LeccionLPage />}
         />
 
         <Route
