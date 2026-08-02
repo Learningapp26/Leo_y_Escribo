@@ -15,6 +15,7 @@ import ActividadYParejasPage from '../pages/ActividadYParejasPage'
 import ActividadYUnirImagenesPage from '../pages/ActividadYUnirImagenesPage'
 import ActividadYFinalPage from '../pages/ActividadYFinalPage'
 import LeccionLPage from '../pages/LeccionLPage'
+import ActividadLImagenesPage from '../pages/ActividadLImagenesPage'
 
 function AppRouter() {
   return (
@@ -39,6 +40,11 @@ function AppRouter() {
         <Route
           path="/lecciones/l"
           element={<LeccionLPage />}
+        />
+
+        <Route
+          path="/actividad/l-imagenes"
+          element={<ActividadLImagenesPage />}
         />
 
         <Route

@@ -43,6 +43,19 @@
     max-width: 720px;
 }
 
+
+/* Primera instrucción de cada actividad: más grande y en negrita para que resalte */
+
+.selection-instructions p.text-instruction:first-of-type,
+.selection-card > p.text-instruction:first-child {
+
+    font-family: var(--font-alt);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+
+}
+
 .selection-instructions p {
     margin: 0;
 }
@@ -60,6 +73,17 @@
         repeat(auto-fit, minmax(170px, 1fr));
 
     gap: var(--space-lg);
+
+}
+
+
+/* Variante para grillas con una cantidad fija de tarjetas (ej. 10 en "unir por
+   sonido"): columnas fijas para que no quede una tarjeta sola y suelta en la
+   última fila. Los saltos de línea (768px, 480px) siguen aplicando después. */
+
+.selection-options--pairs {
+
+    grid-template-columns: repeat(5, 1fr);
 
 }
 
