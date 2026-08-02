@@ -49,9 +49,9 @@
      --font-ui      : Nunito  — botones, títulos, menús, navegación
      --font-alt     : Lexend  — alternativa para instrucciones secundarias
   */
-  --font-content:       'Andika',   system-ui, sans-serif;
-  --font-ui:            'Nunito',   system-ui, sans-serif;
-  --font-alt:           'Lexend',   system-ui, sans-serif;
+  --font-content: 'Lexend', system-ui, sans-serif;
+  --font-ui: 'Lexend', system-ui, sans-serif;
+  --font-alt: 'Lexend', system-ui, sans-serif;
 
   --font-size-xs:       0.875rem;  /* 14px — etiquetas pequeñas */
   --font-size-sm:       1rem;      /* 16px — texto de apoyo */
