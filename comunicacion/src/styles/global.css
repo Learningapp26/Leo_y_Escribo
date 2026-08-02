@@ -623,6 +623,23 @@ input::placeholder {
   }
 }
 
+.finish-icon {
+  font-size: 4rem;
+  line-height: 1;
+}
+
+.sentence-words {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.sentence-word-button {
+  display: inline-flex;
+}
+
 /* ── 15. Grilla login ──────────────────────────────────────── */
 .login-grid {
   display: flex;

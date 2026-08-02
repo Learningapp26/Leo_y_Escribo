@@ -18,6 +18,7 @@ import LeccionLPage from '../pages/LeccionLPage'
 import ActividadLImagenesPage from '../pages/ActividadLImagenesPage'
 import ActividadLSilabasPage from '../pages/ActividadLSilabasPage'
 import ActividadLCompletarPage from '../pages/ActividadLCompletarPage'
+import ActividadLFinalPage from '../pages/ActividadLFinalPage'
 
 function AppRouter() {
   return (
@@ -57,6 +58,11 @@ function AppRouter() {
         <Route
           path="/actividad/l-completar"
           element={<ActividadLCompletarPage />}
+        />
+
+        <Route
+          path="/actividad/l-final"
+          element={<ActividadLFinalPage />}
         />
 
         <Route
