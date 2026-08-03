@@ -22,6 +22,7 @@ import ActividadLFinalPage from '../pages/ActividadLFinalPage'
 import LeccionMPage from '../pages/LeccionMPage'
 import ActividadMSonidosPage from '../pages/ActividadMSonidosPage'
 import ActividadMSilabasPage from '../pages/ActividadMSilabasPage'
+import ActividadMCompletarPage from '../pages/ActividadMCompletarPage'
 
 function AppRouter() {
   return (
@@ -50,6 +51,11 @@ function AppRouter() {
         <Route
           path="/actividad/m-silabas"
           element={<ActividadMSilabasPage />}
+        />
+
+        <Route
+          path="/actividad/m-completar"
+          element={<ActividadMCompletarPage />}
         />
 
 

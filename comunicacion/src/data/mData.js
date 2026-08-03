@@ -264,27 +264,16 @@ export const mSyllableSelection = [
 ]
 
 
-
-
 // ACTIVIDAD DE COMPLETAR PALABRAS
 
 export const mSyllableOptions = ['ma', 'me', 'mi', 'mo', 'mu']
 
-// Completar palabras con la silaba que contenga la letra M
-
+// Fase 1: completar la palabra con la sílaba que falta (se muestra el patrón)
 export const mWordCompletion = [
-  {
-    id: 'mono',
-    word: 'mono',
-    pattern: '___no',
-    image: '/images/lecciones/m/mono.png',
-    audio: '/audio/lecciones/m/mono.mp3',
-    answer: 'mo',
-  },
   {
     id: 'mesa',
     word: 'mesa',
-    pattern: '___sa',
+    pattern: '__sa',
     image: '/images/lecciones/m/mesa.png',
     audio: '/audio/lecciones/m/mesa.mp3',
     answer: 'me',
@@ -292,19 +281,90 @@ export const mWordCompletion = [
   {
     id: 'milpa',
     word: 'milpa',
-    pattern: '___lpa',
+    pattern: '__lpa',
     image: '/images/lecciones/m/milpa.png',
     audio: '/audio/lecciones/m/milpa.mp3',
     answer: 'mi',
   },
-  
+  {
+    id: 'mono',
+    word: 'mono',
+    pattern: '__no',
+    image: '/images/lecciones/m/mono.png',
+    audio: '/audio/lecciones/m/mono.mp3',
+    answer: 'mo',
+  },
   {
     id: 'mula',
     word: 'mula',
-    pattern: '___la',
+    pattern: '__la',
     image: '/images/lecciones/m/mula.png',
     audio: '/audio/lecciones/m/mula.mp3',
     answer: 'mu',
   },
 ]
 
+// Fase 2: solo imagen + audio. 
+// Elegir la sílaba con sonido Mque está en la palabra
+export const mWordSyllableSelection = [
+  {
+    id: 'mani',
+    word: 'maní',
+    image: '/images/lecciones/m/mani.png',
+    audio: '/audio/lecciones/m/mani.mp3',
+    answer: 'ma',
+  },
+  {
+    id: 'mesa',
+    word: 'mesa',
+    image: '/images/lecciones/m/mesa.png',
+    audio: '/audio/lecciones/m/mesa.mp3',
+    answer: 'me',
+  },
+  {
+    id: 'camisa',
+    word: 'camisa',
+    image: '/images/lecciones/m/camisa.png',
+    audio: '/audio/lecciones/m/camisa.mp3',
+    answer: 'mi',
+  },
+  {
+    id: 'mama',
+    word: 'mamá',
+    image: '/images/lecciones/m/mama.png',
+    audio: '/audio/lecciones/m/mama.mp3',
+    answer: 'ma',
+  },
+  {
+    id: 'motocicleta',
+    word: 'motocicleta',
+    image: '/images/lecciones/m/motocicleta.png',
+    audio: '/audio/lecciones/m/motocicleta.mp3',
+    answer: 'mo',
+  },
+  {
+    id: 'mochila',
+    word: 'mochila',
+    image: '/images/lecciones/m/mochila.png',
+    audio: '/audio/lecciones/m/mochila.mp3',
+    answer: 'mo',
+  },
+]
+
+// Fase 3: formar palabras tocando sílabas (pueden repetirse entre las 4
+// opciones). 
+// Se valida el texto formado contra "word", no un id fijo
+export const mSyllableJoin = [
+  {
+    id: 'mimo',
+    word: 'mimo',
+    wordAudio: '/audio/lecciones/m/mimo.mp3',
+    options: ['mi', 'mo', 'mo', 'mi'],
+  },
+  {
+    id: 'mama',
+    word: 'mama',
+    wordAudio: '/audio/lecciones/m/mama.mp3',
+    options: ['ma', 'ma', 'mu', 'a'],
+  },
+]

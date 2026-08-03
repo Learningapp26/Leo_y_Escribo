@@ -145,8 +145,8 @@ function LeccionMPage() {
           <Card
             className="lesson-activity-menu__card"
             icon={PenLine}
-            title=""
-            description=""
+            title="Completar palabras"
+            description="Completa las palabras con las sílabas que faltan"
             footer={
               <Button
                 to="/actividad/m-completar"
