@@ -30,6 +30,8 @@ export const MComprehensionQuestions = [
   '¿Qué cosas te emocionan?',
 ]
 
+
+//ACTIVIDAD DE RECONOCER SONIDOS
 // Para audio e imagen de la actividad de reconocer sonidos
 
 // Fase 1: solo escuchar la palabra mamá y el sonido /m/
@@ -151,3 +153,158 @@ export const mSoundMatching = {
     },
   ],
 }
+
+
+
+// ACTIVIDAD DE SÍLABAS
+// Conocer la letra M y sus combinaciones.
+export const mLetterPresentation = {
+  soundAudio: '/audio/lecciones/m/sonido-m.mp3',
+  combinations: [
+    { syllable: 'ma', audio: '/audio/lecciones/m/silaba-ma.mp3' },
+    { syllable: 'me', audio: '/audio/lecciones/m/silaba-me.mp3' },
+    { syllable: 'mi', audio: '/audio/lecciones/m/silaba-mi.mp3' },
+    { syllable: 'mo', audio: '/audio/lecciones/m/silaba-mo.mp3' },
+    { syllable: 'mu', audio: '/audio/lecciones/m/silaba-mu.mp3' },
+  ],
+}
+
+// Buscar sílabas que contengan la letra M
+export const mSyllableSearch = {
+  instructionAudio: '/audio/lecciones/m/instruccion-buscar-silabas.mp3',
+  targetSyllables: ['ma', 'me', 'mi', 'mo', 'mu'],
+  options: [
+    { syllable: 'la', audio: '/audio/lecciones/m/silaba-la.mp3' },
+    { syllable: 'ma', audio: '/audio/lecciones/m/silaba-ma.mp3' },
+    { syllable: 'me', audio: '/audio/lecciones/m/silaba-me.mp3' },
+    { syllable: 'sa', audio: '/audio/lecciones/m/silaba-sa.mp3' },
+    { syllable: 'mi', audio: '/audio/lecciones/m/silaba-mi.mp3' },
+    { syllable: 'ta', audio: '/audio/lecciones/m/silaba-ta.mp3' },
+    { syllable: 'mo', audio: '/audio/lecciones/m/silaba-mo.mp3' },
+    { syllable: 'da', audio: '/audio/lecciones/m/silaba-da.mp3' },
+    { syllable: 'lu', audio: '/audio/lecciones/m/silaba-lu.mp3' },
+    { syllable: 'mu', audio: '/audio/lecciones/m/silaba-mu.mp3' },
+  ],
+}
+
+// Asociar imagen, palabra y sílaba con M.
+export const mSyllableAssociation = [
+  {
+    id: 'mama',
+    word: 'mamá',
+    highlighted: 'ma',
+    rest: 'má',
+    image: '/images/lecciones/m/mama.png',
+    syllableAudio: '/audio/lecciones/m/silaba-ma.mp3',
+    wordAudio: '/audio/lecciones/m/mama.mp3',
+  },
+  {
+    id: 'miel',
+    word: 'miel',
+    highlighted: 'mi',
+    rest: 'el',
+    image: '/images/lecciones/m/miel.png',
+    syllableAudio: '/audio/lecciones/m/silaba-mi.mp3',
+    wordAudio: '/audio/lecciones/m/miel.mp3',
+  },
+  {
+    id: 'mono',
+    word: 'mono',
+    highlighted: 'mo',
+    rest: 'no',
+    image: '/images/lecciones/m/mono.png',
+    syllableAudio: '/audio/lecciones/m/silaba-mo.mp3',
+    wordAudio: '/audio/lecciones/m/mono.mp3',
+  },
+]
+
+// Actividad final: mostrar imagen por imagen y elegir la sílaba con la
+// que empieza el nombre. Cada item tiene 2 opciones, una correcta.
+export const mSyllableSelection = [
+  {
+    id: 'mono',
+    name: 'moño',
+    image: '/images/lecciones/m/moño.png',
+    wordAudio: '/audio/lecciones/m/moño.mp3',
+    options: [
+      { syllable: 'mo', audio: '/audio/lecciones/m/silaba-mo.mp3', isCorrect: true },
+      { syllable: 'mi', audio: '/audio/lecciones/m/silaba-mi.mp3', isCorrect: false },
+    ],
+  },
+  {
+    id: 'melon',
+    name: 'melón',
+    image: '/images/lecciones/m/melon.png',
+    wordAudio: '/audio/lecciones/m/melón.mp3',
+    options: [
+      { syllable: 'mu', audio: '/audio/lecciones/m/silaba-mu.mp3', isCorrect: false },
+      { syllable: 'me', audio: '/audio/lecciones/m/silaba-me.mp3', isCorrect: true },
+    ],
+  },
+  {
+    id: 'mano',
+    name: 'mano',
+    image: '/images/lecciones/m/mano.png',
+    wordAudio: '/audio/lecciones/m/mano.mp3',
+    options: [
+      { syllable: 'ma', audio: '/audio/lecciones/m/silaba-ma.mp3', isCorrect: true },
+      { syllable: 'mo', audio: '/audio/lecciones/m/silaba-mo.mp3', isCorrect: false },
+    ],
+  },
+  {
+    id: 'muneca',
+    name: 'muñeca',
+    image: '/images/lecciones/m/muñeca.png',
+    wordAudio: '/audio/lecciones/m/muñeca.mp3',
+    options: [
+      { syllable: 'me', audio: '/audio/lecciones/m/silaba-me.mp3', isCorrect: false },
+      { syllable: 'mu', audio: '/audio/lecciones/m/silaba-mu.mp3', isCorrect: true },
+    ],
+  },
+]
+
+
+
+
+// ACTIVIDAD DE COMPLETAR PALABRAS
+
+export const mSyllableOptions = ['ma', 'me', 'mi', 'mo', 'mu']
+
+// Completar palabras con la silaba que contenga la letra M
+
+export const mWordCompletion = [
+  {
+    id: 'mono',
+    word: 'mono',
+    pattern: '___no',
+    image: '/images/lecciones/m/mono.png',
+    audio: '/audio/lecciones/m/mono.mp3',
+    answer: 'mo',
+  },
+  {
+    id: 'mesa',
+    word: 'mesa',
+    pattern: '___sa',
+    image: '/images/lecciones/m/mesa.png',
+    audio: '/audio/lecciones/m/mesa.mp3',
+    answer: 'me',
+  },
+  {
+    id: 'milpa',
+    word: 'milpa',
+    pattern: '___lpa',
+    image: '/images/lecciones/m/milpa.png',
+    audio: '/audio/lecciones/m/milpa.mp3',
+    answer: 'mi',
+  },
+  
+  {
+    id: 'mula',
+    word: 'mula',
+    pattern: '___la',
+    image: '/images/lecciones/m/mula.png',
+    audio: '/audio/lecciones/m/mula.mp3',
+    answer: 'mu',
+  },
+]
+

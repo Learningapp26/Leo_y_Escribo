@@ -21,6 +21,7 @@ import ActividadLCompletarPage from '../pages/ActividadLCompletarPage'
 import ActividadLFinalPage from '../pages/ActividadLFinalPage'
 import LeccionMPage from '../pages/LeccionMPage'
 import ActividadMSonidosPage from '../pages/ActividadMSonidosPage'
+import ActividadMSilabasPage from '../pages/ActividadMSilabasPage'
 
 function AppRouter() {
   return (
@@ -45,6 +46,12 @@ function AppRouter() {
           path="/actividad/m-sonidos"
           element={<ActividadMSonidosPage />}
         />
+
+        <Route
+          path="/actividad/m-silabas"
+          element={<ActividadMSilabasPage />}
+        />
+
 
         <Route
           path="/lecciones/y-conjuncion"

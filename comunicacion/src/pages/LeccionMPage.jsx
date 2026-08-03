@@ -127,8 +127,8 @@ function LeccionMPage() {
           <Card
             className="lesson-activity-menu__card"
             icon={ListMusic}
-            title=""
-            description=""
+            title="Silabas con M"
+            description="Reconoce y forma sílabas con la letra M"
             footer={
               <Button
                 to="/actividad/m-silabas"
