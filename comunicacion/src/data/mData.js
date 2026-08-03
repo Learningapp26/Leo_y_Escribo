@@ -1,3 +1,5 @@
+
+// Para la parte del cuento
 export const mReading = {
   title: '!Te amo, mamá!',
  paragraphs: [
@@ -25,10 +27,135 @@ export const mReading = {
     '/audio/lecciones/m/te-amo-mama.mp3',
 }
 
-
+// Preguntas 
 export const MComprehensionQuestions = [
   '¿De qué trata la historia?',
   '¿Qué tenía escondido el niño? ¿Cómo es un tierno abrazo?',
   '¿Qué te gustaría regalarle a tu mamá? ¿Por qué?',
   '¿Qué cosas te emocionan?',
 ]
+
+// Para audio e imagen de la actividad de reconocer sonidos
+
+// Para lo primero para reconocer el sonido
+export const mSoundIntro = {
+  mainWord: {
+    name: 'mamá',
+    image: '/images/lecciones/m/mama.png',
+    audio: '/audio/lecciones/m/mama.mp3',
+  },
+  soundAudio: '/audio/lecciones/m/sonido-m.mp3',
+  
+}
+
+// Para solo selección de imagenes con m
+export const mImagePool = [
+  {
+    id: 'mamá',
+    name: 'mamá',
+    image: '/images/lecciones/m/mama.png',
+    audio: '/audio/lecciones/m/mama.mp3',
+    startsWithL: true,
+  },
+  {
+    id: 'mano',
+    name: 'mano',
+    image: '/images/lecciones/m/mano.png',
+    audio: '/audio/lecciones/l/mano.mp3',
+    startsWithL: true,
+  },
+  {
+    id: 'mariposa',
+    name: 'mariposa',
+    image: '/images/lecciones/m/mariposa.png',
+    audio: '/audio/lecciones/m/mariposa.mp3',
+    startsWithL: true,
+  },
+  {
+    id: 'miel',
+    name: 'miel',
+    image: '/images/lecciones/m/miel.png',
+    audio: '/audio/lecciones/m/miel.mp3',
+    startsWithL: true,
+  },
+  {
+    id: 'gallina',
+    name: 'gallina',
+    image: '/images/lecciones/m/gallina.png',
+    audio: '/audio/lecciones/m/gallina.mp3',
+    startsWithL: false,
+  },
+]
+
+// Para la actividad de seleccionar todos los que tengan el sonido m
+export const mSoundMatching = {
+  instructionAudio: '/audio/lecciones/m/instruccion-parejas.mp3',
+  items: [
+    {
+      id: 'limón',
+      name: 'limón',
+      image: '/images/lecciones/m/limon.png',
+      audio: '/audio/lecciones/m/limon.mp3',
+      containsM: true,
+    },
+    {
+      id: 'bolsa',
+      name: 'bolsa',
+      image: '/images/lecciones/m/bolsa.png',
+      audio: '/audio/lecciones/m/bolsa.mp3',
+      containsM: false,
+    },
+    {
+      id: 'mosca',
+      name: 'mosca',
+      image: '/images/lecciones/m/mosca.png',
+      audio: '/audio/lecciones/m/mosca.mp3',
+      containsM: true,
+    },
+    {
+      id: 'rama',
+      name: 'rama',
+      image: '/images/lecciones/m/rama.png',
+      audio: '/audio/lecciones/m/rama.mp3',
+      containsM: true,
+    },
+    {
+      id: 'mango',
+      name: 'mango',
+      image: '/images/lecciones/m/mango.png',
+      audio: '/audio/lecciones/m/mango.mp3',
+      containsM: true,
+    },
+        {
+      id: 'gato',
+      name: 'gato',
+      image: '/images/lecciones/m/gato.png',
+      audio: '/audio/lecciones/m/gato.mp3',
+      containsM: false,
+    },
+        {
+      id: 'pera',
+      name: 'pera',
+      image: '/images/lecciones/m/pera.png',
+      audio: '/audio/lecciones/m/pera.mp3',
+      containsM: false,
+    },
+
+    {
+      id: 'pluma',
+      name: 'pluma',
+      image: '/images/lecciones/m/pluma.png',
+      audio: '/audio/lecciones/m/pluma.mp3',
+      containsM: true,
+    },
+
+    {
+      id: 'cama',
+      name: 'cama',
+      image: '/images/lecciones/m/cama.png',
+      audio: '/audio/lecciones/m/cama.mp3',
+      containsM: true,
+    },
+
+  ],
+}

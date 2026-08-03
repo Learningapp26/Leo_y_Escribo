@@ -40,6 +40,8 @@ function AppRouter() {
           element={<LeccionMPage />}
         />
 
+   
+
         <Route
           path="/lecciones/y-conjuncion"
           element={<LeccionYPage />}

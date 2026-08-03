@@ -110,11 +110,11 @@ function LeccionMPage() {
           <Card
             className="lesson-activity-menu__card"
             icon={Images}
-            title=""
+            title="Reconoce los sonidos"
             description=""
             footer={
               <Button
-                to="/actividad/m-imagenes"
+                to="/actividad/m-sonidos"
                 icon={ArrowRight}
                 iconPosition="right"
                 fullWidth
