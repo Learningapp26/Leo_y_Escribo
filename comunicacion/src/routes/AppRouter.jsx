@@ -23,10 +23,7 @@ import LeccionMPage from '../pages/LeccionMPage'
 import ActividadMSonidosPage from '../pages/ActividadMSonidosPage'
 import ActividadMSilabasPage from '../pages/ActividadMSilabasPage'
 import ActividadMCompletarPage from '../pages/ActividadMCompletarPage'
-import LeccionRPage from '../pages/LeccionRPage'
-import ActividadRSilabasPage from '../pages/ActividadRSilabasPage'
-import ActividadRSonidosPage from '../pages/ActividadRSonidosPage'
-import ActividadRFinalPage from '../pages/ActividadRFinalPage'
+import ActividadMFinalPage from '../pages/ActividadMFinalPage'
 
 function AppRouter() {
   return (
@@ -61,6 +58,12 @@ function AppRouter() {
           path="/actividad/m-completar"
           element={<ActividadMCompletarPage />}
         />
+
+        <Route
+          path="/actividad/m-final"
+          element={<ActividadMFinalPage />}
+        />
+
 
 
         <Route
@@ -106,26 +109,6 @@ function AppRouter() {
         <Route
           path="/actividad/y-final"
           element={<ActividadYFinalPage />}
-        />
-
-        <Route
-          path="/lecciones/r"
-          element={<LeccionRPage />}
-        />
-
-        <Route
-          path="/actividad/r-silabas"
-          element={<ActividadRSilabasPage />}
-        />
-
-        <Route
-          path="/actividad/r-sonidos"
-          element={<ActividadRSonidosPage />}
-        />
-
-        <Route
-          path="/actividad/r-final"
-          element={<ActividadRFinalPage />}
         />
 
         <Route

@@ -368,3 +368,120 @@ export const mSyllableJoin = [
     options: ['ma', 'ma', 'mu', 'a'],
   },
 ]
+
+
+
+// ACTIVIDAD FINAL
+
+// Seleccionar sílaba de mayúscula o minúscula
+export const mSyllableCaseSelection = [
+  {
+    id: 'mama',
+    name: 'mamá',
+    image: '/images/lecciones/m/mama.png',
+    wordAudio: '/audio/lecciones/m/mama.mp3',
+    pattern: '__má',
+    options: [
+      {
+        syllable: 'Ma',
+        audio: '/audio/lecciones/m/silaba-ma.mp3',
+        isCorrect: false,
+      },
+      {
+        syllable: 'ma',
+        audio: '/audio/lecciones/m/silaba-ma.mp3',
+        isCorrect: true,
+      },
+    ],
+  },
+  {
+    id: 'memo',
+    name: 'Memo',
+    image: '/images/lecciones/m/memo.png',
+    wordAudio: '/audio/lecciones/m/memo.mp3',
+    pattern: '__mo',
+    options: [
+      {
+        syllable: 'Me',
+        audio: '/audio/lecciones/m/silaba-me.mp3',
+        isCorrect: true,
+      },
+      {
+        syllable: 'me',
+        audio: '/audio/lecciones/m/silaba-me.mp3',
+        isCorrect: false,
+      },
+    ],
+  },
+  {
+    id: 'meme',
+    name: 'Meme',
+    image: '/images/lecciones/m/meme.png',
+    wordAudio: '/audio/lecciones/m/meme.mp3',
+    pattern: '__me',
+    options: [
+      {
+        syllable: 'Me',
+        audio: '/audio/lecciones/m/silaba-me.mp3',
+        isCorrect: true,
+      },
+      {
+        syllable: 'me',
+        audio: '/audio/lecciones/m/silaba-me.mp3',
+        isCorrect: false,
+      },
+    ],
+  },
+  {
+    id: 'mimi',
+    name: 'Mimi',
+    image: '/images/lecciones/m/mimi.png',
+    wordAudio: '/audio/lecciones/m/mimi.mp3',
+    pattern: '__mi',
+    options: [
+      {
+        syllable: 'Mi',
+        audio: '/audio/lecciones/m/silaba-mi.mp3',
+        isCorrect: true,
+      },
+      {
+        syllable: 'mi',
+        audio: '/audio/lecciones/m/silaba-mi.mp3',
+        isCorrect: false,
+      },
+    ],
+  },
+]
+
+// Contar palabras en cada oración.
+// Cada figura de la oración también se cuenta como una palabra.
+export const mWordCounting = [
+  {
+    id: 'mama-mimi',
+    words: ['Mi', 'mamá', 'ama', 'a', 'Mimi.'],
+    audio: '/audio/lecciones/m/contar-mama-mimi.mp3',
+    answer: 5,
+    options: [3, 4, 5],
+  },
+  {
+    id: 'mimo-meme',
+    words: ['Mimo', 'a', 'Meme.'],
+    audio: '/audio/lecciones/m/contar-mimo-meme.mp3',
+    answer: 3,
+    options: [3, 4, 5],
+  },
+  {
+    id: 'meme-mima',
+    words: ['Meme', 'me', 'mima'],
+    audio: '/audio/lecciones/m/contar-meme-mima.mp3',
+    answer: 3,
+    options: [3, 4, 5],
+  },
+  {
+    id: 'memo-mama',
+    words: ['Memo', 'ama', 'a', 'mi', 'mamá'],
+    audio: '/audio/lecciones/m/contar-memo-mama.mp3',
+    answer: 5,
+    options: [3, 4, 5],
+  },
+]

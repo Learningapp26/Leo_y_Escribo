@@ -111,7 +111,7 @@ function LeccionMPage() {
             className="lesson-activity-menu__card"
             icon={Images}
             title="Reconoce los sonidos"
-            description=""
+            description="Escucha y reconoce los sonidos de la letra M"
             footer={
               <Button
                 to="/actividad/m-sonidos"
@@ -163,8 +163,8 @@ function LeccionMPage() {
           <Card
             className="lesson-activity-menu__card"
             icon={Sparkles}
-            title=""
-            description=""
+            title="Actividad final"
+            description="Completa las palabras con mayúsculas o minúsculas y cuenta las palabras que contienen la letra M"
             footer={
               <Button
                 to="/actividad/m-final"
