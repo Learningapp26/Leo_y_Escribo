@@ -14,29 +14,33 @@ import StarsCounter from '../components/progress/StarsCounter'
 import { getLessonThemeClass } from '../data/lessonColors'
 import { finalExercises } from '../data/yConjunctionData'
 import { playAudio } from '../lib/audioPlayer'
-import '../styles/y-conjunction.css'
+
+function getOptionAudioPath(optionName) {
+  const normalizedName = optionName
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+
+  return `/audio/lecciones/y/${normalizedName}.mp3`
+}
 
 function ActividadYFinalPage() {
-  const [exerciseIndex, setExerciseIndex] =
-    useState(0)
+  const [exerciseIndex, setExerciseIndex] = useState(0)
+  const [selectedAnswer, setSelectedAnswer] = useState('')
+  const [result, setResult] = useState('')
+  const [stars, setStars] = useState(0)
+  const [finished, setFinished] = useState(false)
 
-  const [selectedAnswer, setSelectedAnswer] =
-    useState('')
+  const themeClass = getLessonThemeClass('y-conjuncion')
+  const exercise = finalExercises[exerciseIndex]
 
-  const [result, setResult] =
-    useState('')
+  const selectAnswer = (optionName) => {
+    if (result === 'correct') return
 
-  const [stars, setStars] =
-    useState(0)
-
-  const [finished, setFinished] =
-    useState(false)
-
-  const themeClass =
-    getLessonThemeClass('y-conjuncion')
-
-  const exercise =
-    finalExercises[exerciseIndex]
+    setSelectedAnswer(optionName)
+    setResult('')
+    playAudio(getOptionAudioPath(optionName))
+  }
 
   const checkAnswer = () => {
     if (!selectedAnswer) return
@@ -44,9 +48,7 @@ function ActividadYFinalPage() {
     const isCorrect =
       selectedAnswer === exercise.answer
 
-    setResult(
-      isCorrect ? 'correct' : 'retry',
-    )
+    setResult(isCorrect ? 'correct' : 'retry')
 
     if (isCorrect) {
       setStars((current) => current + 1)
@@ -76,82 +78,94 @@ function ActividadYFinalPage() {
   if (finished) {
     return (
       <main
-        className={`page y-page ${themeClass}`}
+        className={`page completion-page ${themeClass}`}
+        aria-labelledby="finished-title"
       >
-        <section className="y-page__content">
-          <Card className="y-finish-card">
-            <span
-              className="y-finish-card__star"
-              aria-hidden="true"
-            >
-              ⭐
-            </span>
+        <Card className="completion-card">
+          <span
+            className="text-letter"
+            aria-hidden="true"
+          >
+            ⭐
+          </span>
 
-            <h1>¡Terminaste la lección!</h1>
+          <h1 id="finished-title">
+            ¡Terminaste la lección!
+          </h1>
 
-            <p className="text-instruction">
-              Aprendiste que la palabra y sirve para unir
-              dos personas, animales u objetos.
-            </p>
+          <p className="text-instruction">
+            Aprendiste que la palabra y sirve para unir dos
+            personas, animales u objetos.
+          </p>
 
-            <StarsCounter
-              current={stars}
-              total={finalExercises.length}
-              label="Estrellas"
-            />
+          <StarsCounter
+            current={stars}
+            total={finalExercises.length}
+            label="Estrellas"
+          />
 
-            <Button
-              variant="audio"
-              icon={Volume2}
-              fullWidth
-              onClick={() =>
-                playAudio(
-                  '/audio/lecciones/y/felicitacion-final.mp3',
-                )
-              }
-            >
-              Escuchar felicitación
-            </Button>
+          <Button
+            variant="audio"
+            icon={Volume2}
+            fullWidth
+            onClick={() =>
+              playAudio(
+                '/audio/lecciones/y/felicitacion-final.mp3',
+              )
+            }
+          >
+            Escuchar felicitación
+          </Button>
 
-            <Button
-              to="/lecciones"
-              icon={ArrowRight}
-              iconPosition="right"
-              size="large"
-              fullWidth
-            >
-              Volver a las lecciones
-            </Button>
-          </Card>
-        </section>
+          <Button
+            to="/lecciones"
+            icon={ArrowRight}
+            iconPosition="right"
+            size="large"
+            fullWidth
+          >
+            Volver a las lecciones
+          </Button>
+        </Card>
       </main>
     )
   }
 
   return (
     <main
-      className={`page y-page ${themeClass}`}
+      className={`page completion-page ${themeClass}`}
       aria-labelledby="y-final-title"
     >
-      <section className="y-page__content">
-        <BackButton
-          label="Volver a la lección"
-          to="/lecciones/y-conjuncion"
-        />
+      <BackButton
+        label="Volver a la lección"
+        to="/lecciones/y-conjuncion"
+      />
 
-        <header className="y-page__header">
-          <span className="y-page__unit">
-            Actividad final
-          </span>
+      <header className="text-center">
+        <span className="text-ui-label">
+          Actividad final
+        </span>
 
-          <h1
-            className="y-page__title"
-            id="y-final-title"
-          >
-            Completa la frase
-          </h1>
+        <h1 id="y-final-title">
+          Completa la frase
+        </h1>
+      </header>
 
-          <p className="text-instruction y-page__instruction">
+      <ProgressBar
+        value={exerciseIndex + 1}
+        max={finalExercises.length}
+        label={`Ejercicio ${exerciseIndex + 1} de ${finalExercises.length}`}
+      />
+
+      <StarsCounter
+        current={stars}
+        total={finalExercises.length}
+        label="Estrellas"
+      />
+
+      <Card className="completion-card">
+        <div className="completion-instructions">
+          <p className="text-instruction">
             {exercise.instruction}
           </p>
 
@@ -165,55 +179,65 @@ function ActividadYFinalPage() {
           >
             Escuchar ejercicio
           </Button>
-        </header>
+        </div>
 
-        <ProgressBar
-          value={exerciseIndex + 1}
-          max={finalExercises.length}
-          label={`Ejercicio ${exerciseIndex + 1} de ${finalExercises.length}`}
-        />
-
-        <StarsCounter
-          current={stars}
-          total={finalExercises.length}
-          label="Estrellas"
-        />
-
-        <Card>
-          <div className="y-final-prompt">
+        <div className="completion-content">
+          <div className="completion-word">
             <img
-              className="y-final-prompt__image"
+              className="completion-word-image"
               src={exercise.first.image}
               alt={exercise.first.imageAlt}
             />
 
-            <p className="y-pair__phrase">
-              <span>{exercise.first.name}</span>
-
-              <span className="y-connector">
-                y
-              </span>
-
-              <span>
-                {selectedAnswer || '________'}
-              </span>
-            </p>
+            <div className="completion-word-content">
+              <p className="completion-words-sentence">
+                {exercise.first.name}{' '}
+                <strong>y</strong>{' '}
+                <span
+                  className={[
+                    'completion-word-slot',
+                    selectedAnswer ? 'filled' : '',
+                  ]
+                    .filter(Boolean)
+                    .join(' ')}
+                >
+                  {selectedAnswer || '________'}
+                </span>
+              </p>
+            </div>
           </div>
 
+          <p className="text-instruction">
+            Selecciona la imagen que completa la frase.
+          </p>
+
           <div
-            className="y-final-options"
+            className="selection-options"
             aria-label="Opciones de respuesta"
           >
             {exercise.options.map((option) => {
               const selected =
                 selectedAnswer === option.name
 
+              const isCorrectOption =
+                result === 'correct' &&
+                option.name === exercise.answer
+
+              const isIncorrectOption =
+                result === 'retry' && selected
+
               return (
                 <button
                   className={[
-                    'y-final-option',
+                    'selection-button',
                     selected
-                      ? 'y-final-option--selected'
+                      ? 'selection-button--selected'
+                      : '',
+                    isCorrectOption
+                      ? 'selection-button--correct'
+                      : '',
+                    isIncorrectOption
+                      ? 'selection-button--incorrect'
                       : '',
                   ]
                     .filter(Boolean)
@@ -221,37 +245,23 @@ function ActividadYFinalPage() {
                   type="button"
                   key={option.name}
                   aria-pressed={selected}
-                  onClick={() => {
-                    setSelectedAnswer(option.name)
-                    setResult('')
-                  }}
+                  onClick={() =>
+                    selectAnswer(option.name)
+                  }
                 >
                   <img
-                    className="y-final-option__image"
+                    className="selection-image"
                     src={option.image}
                     alt={option.name}
                   />
 
-                  <span>{option.name}</span>
+                  <span className="selection-word">
+                    {option.name}
+                  </span>
 
-                  <Button
-                    variant="audio"
-                    size="small"
-                    icon={Volume2}
-                    onClick={(event) => {
-                      event.stopPropagation()
-
-                      playAudio(
-                        `/audio/lecciones/y/${option.name
-                          .normalize('NFD')
-                          .replace(/[\u0300-\u036f]/g, '')
-                          .toLowerCase()}.mp3`,
-                      )
-                    }}
-                    aria-label={`Escuchar la palabra ${option.name}`}
-                  >
-                    Escuchar
-                  </Button>
+                  <span className="text-ui-label">
+                    Toca para escuchar
+                  </span>
                 </button>
               )
             })}
@@ -259,7 +269,7 @@ function ActividadYFinalPage() {
 
           {result === 'correct' && (
             <p
-              className="y-feedback y-feedback--correct"
+              className="selection-feedback selection-feedback--correct"
               role="status"
             >
               ¡Correcto! Formaste la frase{' '}
@@ -269,10 +279,10 @@ function ActividadYFinalPage() {
 
           {result === 'retry' && (
             <p
-              className="y-feedback y-feedback--retry"
+              className="selection-feedback selection-feedback--retry"
               role="status"
             >
-              Esa imagen no completa la pareja. Escucha otra
+              Esa imagen no completa la frase. Escucha otra
               vez e inténtalo nuevamente.
             </p>
           )}
@@ -315,8 +325,8 @@ function ActividadYFinalPage() {
                 : 'Siguiente ejercicio'}
             </Button>
           )}
-        </Card>
-      </section>
+        </div>
+      </Card>
     </main>
   )
 }

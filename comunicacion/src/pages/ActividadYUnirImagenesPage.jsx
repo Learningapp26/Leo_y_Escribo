@@ -13,7 +13,6 @@ import ProgressBar from '../components/progress/ProgressBar'
 import { getLessonThemeClass } from '../data/lessonColors'
 import { page27Pairs } from '../data/yConjunctionData'
 import { playAudio } from '../lib/audioPlayer'
-import '../styles/y-conjunction.css'
 
 const leftOptions = page27Pairs.map(
   (pair) => pair.first,
@@ -26,34 +25,43 @@ const rightOptions = [
 ]
 
 function ActividadYUnirImagenesPage() {
-  const [selectedLeft, setSelectedLeft] =
-    useState(null)
+  const [selectedLeft, setSelectedLeft] = useState(null)
+  const [selectedRight, setSelectedRight] = useState(null)
+  const [matchedPairs, setMatchedPairs] = useState([])
+  const [feedback, setFeedback] = useState('')
 
-  const [selectedRight, setSelectedRight] =
-    useState(null)
-
-  const [matchedPairs, setMatchedPairs] =
-    useState([])
-
-  const [feedback, setFeedback] =
-    useState('')
-
-  const themeClass =
-    getLessonThemeClass('y-conjuncion')
+  const themeClass = getLessonThemeClass('y-conjuncion')
 
   const isFinished =
     matchedPairs.length === page27Pairs.length
 
-  const isMatched = (itemId) =>
-    matchedPairs.some(
-      (pairId) =>
-        page27Pairs
-          .find((pair) => pair.id === pairId)
-          ?.first.id === itemId ||
-        page27Pairs
-          .find((pair) => pair.id === pairId)
-          ?.second.id === itemId,
-    )
+  const isItemMatched = (itemId) =>
+    matchedPairs.some((pairId) => {
+      const pair = page27Pairs.find(
+        (currentPair) => currentPair.id === pairId,
+      )
+
+      return (
+        pair?.first.id === itemId ||
+        pair?.second.id === itemId
+      )
+    })
+
+  const selectLeft = (item) => {
+    if (isItemMatched(item.id)) return
+
+    setSelectedLeft(item)
+    setFeedback('')
+    playAudio(item.audio)
+  }
+
+  const selectRight = (item) => {
+    if (isItemMatched(item.id)) return
+
+    setSelectedRight(item)
+    setFeedback('')
+    playAudio(item.audio)
+  }
 
   const checkPair = () => {
     if (!selectedLeft || !selectedRight) return
@@ -78,13 +86,7 @@ function ActividadYUnirImagenesPage() {
     playAudio(matchingPair.phraseAudio)
   }
 
-  const continueActivity = () => {
-    setSelectedLeft(null)
-    setSelectedRight(null)
-    setFeedback('')
-  }
-
-  const retryPair = () => {
+  const clearSelection = () => {
     setSelectedLeft(null)
     setSelectedRight(null)
     setFeedback('')
@@ -92,29 +94,34 @@ function ActividadYUnirImagenesPage() {
 
   return (
     <main
-      className={`page y-page ${themeClass}`}
+      className={`page selection-page ${themeClass}`}
       aria-labelledby="y-match-title"
     >
-      <section className="y-page__content">
-        <BackButton
-          label="Volver a la lección"
-          to="/lecciones/y-conjuncion"
-        />
+      <BackButton
+        label="Volver a la lección"
+        to="/lecciones/y-conjuncion"
+      />
 
-        <header className="y-page__header">
-          <span className="y-page__unit">
-            Actividad 2
-          </span>
+      <header className="text-center">
+        <span className="text-ui-label">
+          Actividad 2
+        </span>
 
-          <h1
-            className="y-page__title"
-            id="y-match-title"
-          >
-            Unimos imágenes
-          </h1>
+        <h1 id="y-match-title">
+          Unimos imágenes
+        </h1>
+      </header>
 
-          <p className="text-instruction y-page__instruction">
-            Selecciona una imagen de cada columna para formar
+      <ProgressBar
+        value={matchedPairs.length}
+        max={page27Pairs.length}
+        label={`Parejas encontradas: ${matchedPairs.length} de ${page27Pairs.length}`}
+      />
+
+      <Card className="selection-card">
+        <div className="selection-instructions">
+          <p className="text-instruction">
+            Selecciona una imagen de cada grupo para formar
             una pareja.
           </p>
 
@@ -130,202 +137,198 @@ function ActividadYUnirImagenesPage() {
           >
             Escuchar instrucción
           </Button>
-        </header>
+        </div>
 
-        <ProgressBar
-          value={matchedPairs.length}
-          max={page27Pairs.length}
-          label={`Parejas encontradas: ${matchedPairs.length} de ${page27Pairs.length}`}
-        />
+        <p className="text-instruction">
+          Primero selecciona una imagen de este grupo.
+        </p>
 
-        <Card>
-          <div className="y-match-board">
-            <section className="y-match-column">
-              <h2 className="y-match-column__title">
-                Primera imagen
-              </h2>
+        <div
+          className="selection-options"
+          aria-label="Primer grupo de imágenes"
+        >
+          {leftOptions.map((item) => {
+            const selected =
+              selectedLeft?.id === item.id
 
-              {leftOptions.map((item) => {
-                const selected =
-                  selectedLeft?.id === item.id
+            const matched = isItemMatched(item.id)
 
-                const matched = isMatched(item.id)
+            return (
+              <button
+                className={[
+                  'selection-button',
+                  selected
+                    ? 'selection-button--selected'
+                    : '',
+                  matched
+                    ? 'selection-button--correct'
+                    : '',
+                ]
+                  .filter(Boolean)
+                  .join(' ')}
+                type="button"
+                key={item.id}
+                disabled={matched}
+                aria-pressed={selected}
+                onClick={() => selectLeft(item)}
+              >
+                <img
+                  className="selection-image"
+                  src={item.image}
+                  alt={item.name}
+                />
 
-                return (
-                  <button
-                    className={[
-                      'y-image-option',
-                      selected
-                        ? 'y-image-option--selected'
-                        : '',
-                      matched
-                        ? 'y-image-option--matched'
-                        : '',
-                    ]
-                      .filter(Boolean)
-                      .join(' ')}
-                    type="button"
-                    key={item.id}
-                    disabled={matched}
-                    aria-pressed={selected}
-                    onClick={() => {
-                      setSelectedLeft(item)
-                      setFeedback('')
-                    }}
-                  >
-                    <img
-                      className="y-image-option__image"
-                      src={item.image}
-                      alt={item.name}
-                    />
+                <span className="selection-word">
+                  {item.name}
+                </span>
+              </button>
+            )
+          })}
+        </div>
 
-                    <span>{item.name}</span>
-                  </button>
-                )
-              })}
-            </section>
+        <p className="text-instruction">
+          Ahora selecciona la imagen que completa la pareja.
+        </p>
 
-            <section className="y-match-column">
-              <h2 className="y-match-column__title">
-                Segunda imagen
-              </h2>
+        <div
+          className="selection-options"
+          aria-label="Segundo grupo de imágenes"
+        >
+          {rightOptions.map((item) => {
+            const selected =
+              selectedRight?.id === item.id
 
-              {rightOptions.map((item) => {
-                const selected =
-                  selectedRight?.id === item.id
+            const matched = isItemMatched(item.id)
 
-                const matched = isMatched(item.id)
+            return (
+              <button
+                className={[
+                  'selection-button',
+                  selected
+                    ? 'selection-button--selected'
+                    : '',
+                  matched
+                    ? 'selection-button--correct'
+                    : '',
+                ]
+                  .filter(Boolean)
+                  .join(' ')}
+                type="button"
+                key={item.id}
+                disabled={matched}
+                aria-pressed={selected}
+                onClick={() => selectRight(item)}
+              >
+                <img
+                  className="selection-image"
+                  src={item.image}
+                  alt={item.name}
+                />
 
-                return (
-                  <button
-                    className={[
-                      'y-image-option',
-                      selected
-                        ? 'y-image-option--selected'
-                        : '',
-                      matched
-                        ? 'y-image-option--matched'
-                        : '',
-                    ]
-                      .filter(Boolean)
-                      .join(' ')}
-                    type="button"
-                    key={item.id}
-                    disabled={matched}
-                    aria-pressed={selected}
-                    onClick={() => {
-                      setSelectedRight(item)
-                      setFeedback('')
-                    }}
-                  >
-                    <img
-                      className="y-image-option__image"
-                      src={item.image}
-                      alt={item.name}
-                    />
+                <span className="selection-word">
+                  {item.name}
+                </span>
+              </button>
+            )
+          })}
+        </div>
 
-                    <span>{item.name}</span>
-                  </button>
-                )
-              })}
-            </section>
-          </div>
+        <div
+          className="completion-target"
+          aria-live="polite"
+        >
+          {!selectedLeft && !selectedRight && (
+            <p className="text-reading">
+              Selecciona dos imágenes.
+            </p>
+          )}
 
-          <div
-            className="y-selected-pair"
-            aria-live="polite"
+          {selectedLeft && (
+            <span className="completion-chip">
+              {selectedLeft.name}
+            </span>
+          )}
+
+          {selectedLeft && selectedRight && (
+            <span className="completion-chip">
+              y
+            </span>
+          )}
+
+          {selectedRight && (
+            <span className="completion-chip">
+              {selectedRight.name}
+            </span>
+          )}
+        </div>
+
+        {feedback === 'correct' && (
+          <p
+            className="selection-feedback selection-feedback--correct"
+            role="status"
           >
-            {!selectedLeft && !selectedRight && (
-              <span>
-                Selecciona dos imágenes
-              </span>
-            )}
+            ¡Muy bien! Encontraste la pareja.
+          </p>
+        )}
 
-            {selectedLeft && (
-              <span>{selectedLeft.name}</span>
-            )}
+        {feedback === 'retry' && (
+          <p
+            className="selection-feedback selection-feedback--retry"
+            role="status"
+          >
+            Esas imágenes no forman una pareja. Escucha de
+            nuevo e inténtalo otra vez.
+          </p>
+        )}
 
-            {selectedLeft && selectedRight && (
-              <span className="y-connector">
-                y
-              </span>
-            )}
+        {!feedback && (
+          <Button
+            icon={Check}
+            size="large"
+            fullWidth
+            disabled={!selectedLeft || !selectedRight}
+            onClick={checkPair}
+          >
+            Comprobar pareja
+          </Button>
+        )}
 
-            {selectedRight && (
-              <span>{selectedRight.name}</span>
-            )}
-          </div>
+        {feedback === 'retry' && (
+          <Button
+            variant="retry"
+            icon={RotateCcw}
+            size="large"
+            fullWidth
+            onClick={clearSelection}
+          >
+            Intentar nuevamente
+          </Button>
+        )}
 
-          {feedback === 'correct' && (
-            <p
-              className="y-feedback y-feedback--correct"
-              role="status"
-            >
-              ¡Muy bien! Encontraste la pareja.
-            </p>
-          )}
+        {feedback === 'correct' && !isFinished && (
+          <Button
+            icon={ArrowRight}
+            iconPosition="right"
+            size="large"
+            fullWidth
+            onClick={clearSelection}
+          >
+            Buscar otra pareja
+          </Button>
+        )}
 
-          {feedback === 'retry' && (
-            <p
-              className="y-feedback y-feedback--retry"
-              role="status"
-            >
-              Esas imágenes no forman la pareja del libro.
-              Inténtalo nuevamente.
-            </p>
-          )}
-
-          {!feedback && (
-            <Button
-              icon={Check}
-              size="large"
-              fullWidth
-              disabled={
-                !selectedLeft || !selectedRight
-              }
-              onClick={checkPair}
-            >
-              Comprobar pareja
-            </Button>
-          )}
-
-          {feedback === 'retry' && (
-            <Button
-              variant="retry"
-              icon={RotateCcw}
-              size="large"
-              fullWidth
-              onClick={retryPair}
-            >
-              Intentar nuevamente
-            </Button>
-          )}
-
-          {feedback === 'correct' && !isFinished && (
-            <Button
-              icon={ArrowRight}
-              iconPosition="right"
-              size="large"
-              fullWidth
-              onClick={continueActivity}
-            >
-              Buscar otra pareja
-            </Button>
-          )}
-
-          {isFinished && (
-            <Button
-              to="/actividad/y-final"
-              icon={ArrowRight}
-              iconPosition="right"
-              size="large"
-              fullWidth
-            >
-              Ir a la actividad final
-            </Button>
-          )}
-        </Card>
-      </section>
+        {isFinished && (
+          <Button
+            to="/actividad/y-final"
+            icon={ArrowRight}
+            iconPosition="right"
+            size="large"
+            fullWidth
+          >
+            Ir a la actividad final
+          </Button>
+        )}
+      </Card>
     </main>
   )
 }
