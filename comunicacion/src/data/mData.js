@@ -30,12 +30,12 @@ export const MComprehensionQuestions = [
   '¿Qué cosas te emocionan?',
 ]
 
-
-//ACTIVIDAD DE RECONOCER SONIDOS
+// ACTIVIDAD DE RECONOCER SONIDOS
 // Para audio e imagen de la actividad de reconocer sonidos
 
 // Fase 1: solo escuchar la palabra mamá y el sonido /m/
 export const mSoundIntro = {
+  instructionAudio: '/audio/lecciones/m/instruccion-sonido-m.mp3',
   mainWord: {
     name: 'mamá',
     image: '/images/lecciones/m/mama.png',
@@ -43,6 +43,14 @@ export const mSoundIntro = {
   },
   soundAudio: '/audio/lecciones/m/sonido-m.mp3',
 }
+
+// Audio de instrucción para la fase 2 (seleccionar las que empiezan con /m/)
+export const mSelectionInstructionAudio =
+  '/audio/lecciones/m/instruccion-seleccion-m.mp3'
+
+// Audio de instrucción para la fase 3 (parejas que empiezan con /m/)
+export const mPairsInstructionAudio =
+  '/audio/lecciones/m/instruccion-parejas-inicio-m.mp3'
 
 // Fase 2 y 3: seleccionar / emparejar imágenes que empiecen con el sonido /m/
 export const mImagePool = [
@@ -84,7 +92,7 @@ export const mImagePool = [
 ]
 
 // Fase 4: tocar las figuras que contengan el sonido /m/ en cualquier parte
-// es selección múltiple contra "containsM")
+// (es selección múltiple contra "containsM")
 export const mSoundMatching = {
   instructionAudio: '/audio/lecciones/m/instruccion-parejas.mp3',
   items: [
@@ -154,11 +162,12 @@ export const mSoundMatching = {
   ],
 }
 
-
-
+// ============================================================
 // ACTIVIDAD DE SÍLABAS
+
 // Conocer la letra M y sus combinaciones.
 export const mLetterPresentation = {
+  instructionAudio: '/audio/lecciones/m/instruccion-letra-m.mp3',
   soundAudio: '/audio/lecciones/m/sonido-m.mp3',
   combinations: [
     { syllable: 'ma', audio: '/audio/lecciones/m/silaba-ma.mp3' },
@@ -168,7 +177,7 @@ export const mLetterPresentation = {
     { syllable: 'mu', audio: '/audio/lecciones/m/silaba-mu.mp3' },
   ],
 }
-
+ 
 // Buscar sílabas que contengan la letra M
 export const mSyllableSearch = {
   instructionAudio: '/audio/lecciones/m/instruccion-buscar-silabas.mp3',
@@ -186,7 +195,11 @@ export const mSyllableSearch = {
     { syllable: 'mu', audio: '/audio/lecciones/m/silaba-mu.mp3' },
   ],
 }
-
+ 
+// Audio de instrucción para la fase "asociar" (imagen + palabra + sílaba)
+export const mAssociationInstructionAudio =
+  '/audio/lecciones/m/instruccion-asociar-m.mp3'
+ 
 // Asociar imagen, palabra y sílaba con M.
 export const mSyllableAssociation = [
   {
@@ -217,7 +230,11 @@ export const mSyllableAssociation = [
     wordAudio: '/audio/lecciones/m/mono.mp3',
   },
 ]
-
+ 
+// Audio de instrucción para la fase "seleccionar"
+export const mSelectSyllableInstructionAudio =
+  '/audio/lecciones/m/instruccion-seleccionar-silaba.mp3'
+ 
 // Actividad final: mostrar imagen por imagen y elegir la sílaba con la
 // que empieza el nombre. Cada item tiene 2 opciones, una correcta.
 export const mSyllableSelection = [
@@ -227,8 +244,16 @@ export const mSyllableSelection = [
     image: '/images/lecciones/m/moño.png',
     wordAudio: '/audio/lecciones/m/moño.mp3',
     options: [
-      { syllable: 'mo', audio: '/audio/lecciones/m/silaba-mo.mp3', isCorrect: true },
-      { syllable: 'mi', audio: '/audio/lecciones/m/silaba-mi.mp3', isCorrect: false },
+      {
+        syllable: 'mo',
+        audio: '/audio/lecciones/m/silaba-mo.mp3',
+        isCorrect: true,
+      },
+      {
+        syllable: 'mi',
+        audio: '/audio/lecciones/m/silaba-mi.mp3',
+        isCorrect: false,
+      },
     ],
   },
   {
@@ -237,8 +262,16 @@ export const mSyllableSelection = [
     image: '/images/lecciones/m/melon.png',
     wordAudio: '/audio/lecciones/m/melón.mp3',
     options: [
-      { syllable: 'mu', audio: '/audio/lecciones/m/silaba-mu.mp3', isCorrect: false },
-      { syllable: 'me', audio: '/audio/lecciones/m/silaba-me.mp3', isCorrect: true },
+      {
+        syllable: 'mu',
+        audio: '/audio/lecciones/m/silaba-mu.mp3',
+        isCorrect: false,
+      },
+      {
+        syllable: 'me',
+        audio: '/audio/lecciones/m/silaba-me.mp3',
+        isCorrect: true,
+      },
     ],
   },
   {
@@ -247,8 +280,16 @@ export const mSyllableSelection = [
     image: '/images/lecciones/m/mano.png',
     wordAudio: '/audio/lecciones/m/mano.mp3',
     options: [
-      { syllable: 'ma', audio: '/audio/lecciones/m/silaba-ma.mp3', isCorrect: true },
-      { syllable: 'mo', audio: '/audio/lecciones/m/silaba-mo.mp3', isCorrect: false },
+      {
+        syllable: 'ma',
+        audio: '/audio/lecciones/m/silaba-ma.mp3',
+        isCorrect: true,
+      },
+      {
+        syllable: 'mo',
+        audio: '/audio/lecciones/m/silaba-mo.mp3',
+        isCorrect: false,
+      },
     ],
   },
   {
@@ -257,18 +298,33 @@ export const mSyllableSelection = [
     image: '/images/lecciones/m/muñeca.png',
     wordAudio: '/audio/lecciones/m/muñeca.mp3',
     options: [
-      { syllable: 'me', audio: '/audio/lecciones/m/silaba-me.mp3', isCorrect: false },
-      { syllable: 'mu', audio: '/audio/lecciones/m/silaba-mu.mp3', isCorrect: true },
+      {
+        syllable: 'me',
+        audio: '/audio/lecciones/m/silaba-me.mp3',
+        isCorrect: false,
+      },
+      {
+        syllable: 'mu',
+        audio: '/audio/lecciones/m/silaba-mu.mp3',
+        isCorrect: true,
+      },
     ],
   },
 ]
-
-
+ 
+// ============================================================
 // ACTIVIDAD DE COMPLETAR PALABRAS
 
 export const mSyllableOptions = ['ma', 'me', 'mi', 'mo', 'mu']
-
+ 
+// Audio de instrucción para la fase 1 (completar con patrón)
+export const mCompletionInstructionAudio =
+  '/audio/lecciones/m/instruccion-completar-m.mp3'
+ 
 // Fase 1: completar la palabra con la sílaba que falta (se muestra el patrón)
+// Nota: cubre me/mi/mo/mu pero no "ma" con ninguna palabra — el banco de
+// sílabas igual muestra las 5 opciones, "ma" solo queda sin una palabra
+// propia en esta fase. Dime si quieres que agregue una (ej. "maleta").
 export const mWordCompletion = [
   {
     id: 'mesa',
@@ -303,9 +359,13 @@ export const mWordCompletion = [
     answer: 'mu',
   },
 ]
-
-// Fase 2: solo imagen + audio. 
-// Elegir la sílaba con sonido Mque está en la palabra
+ 
+// Audio de instrucción para la fase 2 (imagen + audio, sin patrón)
+export const mSoundSelectionInstructionAudio =
+  '/audio/lecciones/m/instruccion-sonido-completar-m.mp3'
+ 
+// Fase 2: solo imagen + audio.
+// Elegir la sílaba con sonido M que está en la palabra
 export const mWordSyllableSelection = [
   {
     id: 'mani',
@@ -338,8 +398,8 @@ export const mWordSyllableSelection = [
   {
     id: 'motocicleta',
     word: 'motocicleta',
-    image: '/images/lecciones/m/motocicleta.png',
-    audio: '/audio/lecciones/m/motocicleta.mp3',
+    image: '/images/lecciones/m/moto.png',
+    audio: '/audio/lecciones/m/moto.mp3',
     answer: 'mo',
   },
   {
@@ -350,9 +410,13 @@ export const mWordSyllableSelection = [
     answer: 'mo',
   },
 ]
-
+ 
+// Audio de instrucción para la fase 3 (formar palabras)
+export const mJoinInstructionAudio =
+  '/audio/lecciones/m/instruccion-formar-m.mp3'
+ 
 // Fase 3: formar palabras tocando sílabas (pueden repetirse entre las 4
-// opciones). 
+// opciones).
 // Se valida el texto formado contra "word", no un id fijo
 export const mSyllableJoin = [
   {
@@ -368,11 +432,14 @@ export const mSyllableJoin = [
     options: ['ma', 'ma', 'mu', 'a'],
   },
 ]
-
-
-
+ 
+// ============================================================
 // ACTIVIDAD FINAL
 
+// Audio de instrucción para la fase 1 (sílaba mayúscula/minúscula)
+export const mCaseSelectionInstructionAudio =
+  '/audio/lecciones/m/instruccion-mayuscula-minuscula-m.mp3'
+ 
 // Seleccionar sílaba de mayúscula o minúscula
 export const mSyllableCaseSelection = [
   {
@@ -452,7 +519,11 @@ export const mSyllableCaseSelection = [
     ],
   },
 ]
-
+ 
+// Audio de instrucción para la fase 2 (contar palabras)
+export const mWordCountingInstructionAudio =
+  '/audio/lecciones/m/instruccion-contar-palabras-m.mp3'
+ 
 // Contar palabras en cada oración.
 // Cada figura de la oración también se cuenta como una palabra.
 export const mWordCounting = [
@@ -485,3 +556,4 @@ export const mWordCounting = [
     options: [3, 4, 5],
   },
 ]
+ 

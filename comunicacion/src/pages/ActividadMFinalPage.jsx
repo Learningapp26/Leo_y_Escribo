@@ -7,7 +7,12 @@ import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
 import StarsCounter from '../components/progress/StarsCounter'
 import { getLessonThemeClass } from '../data/lessonColors'
-import { mSyllableCaseSelection, mWordCounting } from '../data/mData'
+import {
+  mCaseSelectionInstructionAudio,
+  mSyllableCaseSelection,
+  mWordCounting,
+  mWordCountingInstructionAudio,
+} from '../data/mData'
 import { playAudio } from '../lib/audioPlayer'
 import '../styles/selection.css'
 import '../styles/syllables.css'
@@ -186,10 +191,20 @@ function ActividadMFinalPage() {
 
       {phase === 'silaba' && (
         <Card className="selection-card">
-          <p className="text-instruction">
-            Escucha el nombre y toca la sílaba correcta: con mayúscula si
-            va al inicio de un nombre propio, o con minúscula si no.
-          </p>
+          <div className="selection-instructions">
+            <p className="text-instruction">
+              Escucha el nombre y toca la sílaba correcta: con mayúscula si
+              va al inicio de un nombre propio, o con minúscula si no.
+            </p>
+
+            <Button
+              variant="audio"
+              icon={Volume2}
+              onClick={() => playAudio(mCaseSelectionInstructionAudio)}
+            >
+              Escuchar instrucción
+            </Button>
+          </div>
 
           <img
             className="selection-image selection-image--featured"
@@ -296,10 +311,20 @@ function ActividadMFinalPage() {
 
       {phase === 'contar' && (
         <Card className="selection-card">
-          <p className="text-instruction">
-            Toca cada palabra de la oración para contarla. Luego elige
-            cuántas palabras son.
-          </p>
+          <div className="selection-instructions">
+            <p className="text-instruction">
+              Toca cada palabra de la oración para contarla. Luego elige
+              cuántas palabras son.
+            </p>
+
+            <Button
+              variant="audio"
+              icon={Volume2}
+              onClick={() => playAudio(mWordCountingInstructionAudio)}
+            >
+              Escuchar instrucción
+            </Button>
+          </div>
 
           <Button
             variant="audio"

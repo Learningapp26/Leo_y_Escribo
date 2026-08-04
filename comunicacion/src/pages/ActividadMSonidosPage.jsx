@@ -6,7 +6,13 @@ import Card from '../components/common/Card'
 import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
 import { getLessonThemeClass } from '../data/lessonColors'
-import { mImagePool, mSoundIntro, mSoundMatching } from '../data/mData'
+import {
+  mImagePool,
+  mPairsInstructionAudio,
+  mSelectionInstructionAudio,
+  mSoundIntro,
+  mSoundMatching,
+} from '../data/mData'
 import { playAudio } from '../lib/audioPlayer'
 
 import '../styles/selection.css'
@@ -131,7 +137,7 @@ function ActividadMSonidosPage() {
 
   const isPairsFinished = matchedIds.length === targetIds.length
 
-  //Fase 4: seleccionar las que contienen /m/
+  // Fase 4: seleccionar las que contienen /m/
   const toggleContainsSelected = (item) => {
     if (containsFeedback === 'correct') return
 
@@ -183,7 +189,24 @@ function ActividadMSonidosPage() {
             <p className="text-instruction">
               Escucha el sonido de la letra m y la palabra mamá.
             </p>
+
+            <Button
+              variant="audio"
+              icon={Volume2}
+              onClick={() => playAudio(mSoundIntro.instructionAudio)}
+            >
+              Escuchar instrucción
+            </Button>
           </div>
+
+          <Button
+            variant="audio"
+            size="large"
+            icon={Volume2}
+            onClick={() => playAudio(mSoundIntro.soundAudio)}
+          >
+            Escuchar el sonido /m/
+          </Button>
 
           <img
             className="selection-image selection-image--featured"
@@ -197,9 +220,9 @@ function ActividadMSonidosPage() {
             variant="audio"
             size="large"
             icon={Volume2}
-            onClick={() => playAudio(mSoundIntro.soundAudio)}
+            onClick={() => playAudio(mSoundIntro.mainWord.audio)}
           >
-            Escuchar el sonido /m/
+            Escuchar el sonido de mamá
           </Button>
 
           <Button
@@ -220,6 +243,14 @@ function ActividadMSonidosPage() {
             <p className="text-instruction">
               Toca las imágenes cuyo nombre empieza con el sonido de mamá.
             </p>
+
+            <Button
+              variant="audio"
+              icon={Volume2}
+              onClick={() => playAudio(mSelectionInstructionAudio)}
+            >
+              Escuchar instrucción
+            </Button>
           </div>
 
           <div className="selection-options">
@@ -309,6 +340,14 @@ function ActividadMSonidosPage() {
             <p className="text-instruction">
               Selecciona dos imágenes que empiecen con el mismo sonido.
             </p>
+
+            <Button
+              variant="audio"
+              icon={Volume2}
+              onClick={() => playAudio(mPairsInstructionAudio)}
+            >
+              Escuchar instrucción
+            </Button>
           </div>
 
           <div className="selection-options">

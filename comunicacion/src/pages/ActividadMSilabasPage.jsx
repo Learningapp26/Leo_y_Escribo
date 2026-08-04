@@ -6,7 +6,14 @@ import Card from '../components/common/Card'
 import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
 import { getLessonThemeClass } from '../data/lessonColors'
-import {mLetterPresentation, mSyllableAssociation, mSyllableSearch, mSyllableSelection, } from '../data/mData'
+import {
+  mAssociationInstructionAudio,
+  mLetterPresentation,
+  mSelectSyllableInstructionAudio,
+  mSyllableAssociation,
+  mSyllableSearch,
+  mSyllableSelection,
+} from '../data/mData'
 import { playAudio } from '../lib/audioPlayer'
 import '../styles/selection.css'
 import '../styles/syllables.css'
@@ -114,9 +121,19 @@ function ActividadMSilabasPage() {
 
       {phase === 'letra' && (
         <Card className="syllables-card">
-          <p className="text-instruction">
-            Conoce la letra M. Toca cada combinación para escucharla.
-          </p>
+          <div className="syllables-instructions">
+            <p className="text-instruction">
+              Conoce la letra M. Toca cada combinación para escucharla.
+            </p>
+
+            <Button
+              variant="audio"
+              icon={Volume2}
+              onClick={() => playAudio(mLetterPresentation.instructionAudio)}
+            >
+              Escuchar instrucción
+            </Button>
+          </div>
 
           <div className="selection-options">
             <span className="text-letter">M</span>
@@ -262,9 +279,20 @@ function ActividadMSilabasPage() {
 
       {phase === 'asociar' && (
         <Card className="selection-card">
-          <p className="text-instruction">
-            Toca la sílaba resaltada o la palabra completa para escucharlas.
-          </p>
+          <div className="selection-instructions">
+            <p className="text-instruction">
+              Toca la sílaba resaltada o la palabra completa para
+              escucharlas.
+            </p>
+
+            <Button
+              variant="audio"
+              icon={Volume2}
+              onClick={() => playAudio(mAssociationInstructionAudio)}
+            >
+              Escuchar instrucción
+            </Button>
+          </div>
 
           <img
             className="selection-image selection-image--featured"
@@ -331,9 +359,21 @@ function ActividadMSilabasPage() {
 
       {phase === 'seleccionar' && (
         <Card className="selection-card">
-          <p className="text-instruction">
-            Mira la imagen y toca la sílaba con la que empieza su nombre.
-          </p>
+          <div className="selection-instructions">
+            <p className="text-instruction">
+              Mira la imagen y toca la sílaba con la que empieza su nombre.
+            </p>
+
+            <Button
+              variant="audio"
+              icon={Volume2}
+              onClick={() =>
+                playAudio(mSelectSyllableInstructionAudio)
+              }
+            >
+              Escuchar instrucción
+            </Button>
+          </div>
 
           <img
             className="selection-image selection-image--featured"
@@ -341,15 +381,13 @@ function ActividadMSilabasPage() {
             alt={selectItem.name}
           />
 
-          <span className="text-audio" aria-label="Escuchar palabra">
-            <Button
-              variant="audio"
-              icon={Volume2}
-              onClick={() => playAudio(selectItem.wordAudio)}
-            >
-              Escuchar palabra
-            </Button>
-          </span>
+          <Button
+            variant="audio"
+            icon={Volume2}
+            onClick={() => playAudio(selectItem.wordAudio)}
+          >
+            Escuchar palabra
+          </Button>
 
           <div className="syllables-options">
             {selectItem.options.map((option) => {

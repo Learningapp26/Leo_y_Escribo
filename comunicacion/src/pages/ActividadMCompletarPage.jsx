@@ -7,6 +7,9 @@ import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
 import { getLessonThemeClass } from '../data/lessonColors'
 import {
+  mCompletionInstructionAudio,
+  mJoinInstructionAudio,
+  mSoundSelectionInstructionAudio,
   mSyllableJoin,
   mSyllableOptions,
   mWordCompletion,
@@ -166,9 +169,19 @@ function ActividadMCompletarPage() {
 
       {phase === 'completar' && (
         <Card className="completion-card">
-          <p className="text-instruction">
-            Escucha la palabra y elige la sílaba que falta.
-          </p>
+          <div className="selection-instructions">
+            <p className="text-instruction">
+              Escucha la palabra y elige la sílaba que falta.
+            </p>
+
+            <Button
+              variant="audio"
+              icon={Volume2}
+              onClick={() => playAudio(mCompletionInstructionAudio)}
+            >
+              Escuchar instrucción
+            </Button>
+          </div>
 
           <img
             className="completion-word-image"
@@ -265,10 +278,20 @@ function ActividadMCompletarPage() {
 
       {phase === 'sonido' && (
         <Card className="completion-card">
-          <p className="text-instruction">
-            Escucha la palabra y elige la sílaba con sonido M que
-            escuchaste, sin importar en qué parte de la palabra está.
-          </p>
+          <div className="selection-instructions">
+            <p className="text-instruction">
+              Escucha la palabra y elige la sílaba con sonido M que
+              escuchaste, sin importar en qué parte de la palabra está.
+            </p>
+
+            <Button
+              variant="audio"
+              icon={Volume2}
+              onClick={() => playAudio(mSoundSelectionInstructionAudio)}
+            >
+              Escuchar instrucción
+            </Button>
+          </div>
 
           <img
             className="completion-word-image"
@@ -365,9 +388,19 @@ function ActividadMCompletarPage() {
 
       {phase === 'formar' && (
         <Card className="selection-card">
-          <p className="text-instruction">
-            Toca las sílabas en orden para formar la palabra.
-          </p>
+          <div className="selection-instructions">
+            <p className="text-instruction">
+              Toca las sílabas en orden para formar la palabra.
+            </p>
+
+            <Button
+              variant="audio"
+              icon={Volume2}
+              onClick={() => playAudio(mJoinInstructionAudio)}
+            >
+              Escuchar instrucción
+            </Button>
+          </div>
 
           <p aria-live="polite" className="text-word">
             {slots[0]?.syllable ?? '__'}
