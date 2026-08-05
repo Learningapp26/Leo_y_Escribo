@@ -19,15 +19,18 @@ import '../styles/selection.css'
 
 const PHASES = ['sonido', 'seleccion', 'parejas', 'diferente']
 
-// Fase 2 y 3
+// Fase 2 y 3: imágenes que empiezan con /t/
 const targetIds = tImagePool
   .filter((item) => item.startsWithT)
   .map((item) => item.id)
 
-// Fase 4: figuras que NO empiezan con /t/ (son las que hay que tocar)
-const nonTIds = tOddOneOut.items
-  .filter((item) => !item.startsWithT)
-  .map((item) => item.id)
+// Fase 4: figuras que NO empiezan con /t/, agrupadas de 3 en 3
+const ODD_GROUP_SIZE = 3
+
+const oddGroups = []
+for (let i = 0; i < tOddOneOut.items.length; i += ODD_GROUP_SIZE) {
+  oddGroups.push(tOddOneOut.items.slice(i, i + ODD_GROUP_SIZE))
+}
 
 function selectionClass(id, selectedIds, feedback) {
   const isSelected = selectedIds.includes(id)
@@ -45,17 +48,18 @@ function ActividadTSonidosPage() {
   const [phaseIndex, setPhaseIndex] = useState(0)
   const phase = PHASES[phaseIndex]
 
-  // Fase 2: seleccionar las que empiezan con t
+  // Fase 2: seleccionar las que empiezan con /t/
   const [selectedIds, setSelectedIds] = useState([])
   const [selectionFeedback, setSelectionFeedback] = useState('')
 
-  // Fase 3: parejas que empiezan con t
+  // Fase 3: parejas que empiezan con /t/
   const [firstPick, setFirstPick] = useState(null)
   const [secondPick, setSecondPick] = useState(null)
   const [matchedIds, setMatchedIds] = useState([])
   const [pairFeedback, setPairFeedback] = useState('')
 
-  // Fase 4: seleccionar las que NO empiezan con t
+  // Fase 4: seleccionar las que NO empiezan con /t/, de 3 en 3
+  const [oddGroupIndex, setOddGroupIndex] = useState(0)
   const [oddSelectedIds, setOddSelectedIds] = useState([])
   const [oddFeedback, setOddFeedback] = useState('')
 
@@ -90,7 +94,7 @@ function ActividadTSonidosPage() {
     setSelectionFeedback('')
   }
 
-  // Fase 3: parejas que empiezan con t
+  // Fase 3: parejas que empiezan con /t/
   const isMatched = (id) => matchedIds.includes(id)
 
   const pickCard = (item) => {
@@ -137,7 +141,14 @@ function ActividadTSonidosPage() {
 
   const isPairsFinished = matchedIds.length === targetIds.length
 
-  // Fase 4: seleccionar las que NO empiezan con t
+  // Fase 4: seleccionar las que NO empiezan con /t/ (grupo actual)
+  const currentOddGroup = oddGroups[oddGroupIndex]
+  const isLastOddGroup = oddGroupIndex === oddGroups.length - 1
+
+  const currentOddTargetIds = currentOddGroup
+    .filter((item) => !item.startsWithT)
+    .map((item) => item.id)
+
   const toggleOddSelected = (item) => {
     if (oddFeedback === 'correct') return
 
@@ -153,8 +164,8 @@ function ActividadTSonidosPage() {
 
   const checkOddSelection = () => {
     const isCorrect =
-      oddSelectedIds.length === nonTIds.length &&
-      oddSelectedIds.every((id) => nonTIds.includes(id))
+      oddSelectedIds.length === currentOddTargetIds.length &&
+      oddSelectedIds.every((id) => currentOddTargetIds.includes(id))
 
     setOddFeedback(isCorrect ? 'correct' : 'retry')
   }
@@ -162,6 +173,12 @@ function ActividadTSonidosPage() {
   const retryOddSelection = () => {
     setOddSelectedIds([])
     setOddFeedback('')
+  }
+
+  const nextOddGroup = () => {
+    setOddSelectedIds([])
+    setOddFeedback('')
+    setOddGroupIndex((current) => current + 1)
   }
 
   return (
@@ -460,8 +477,7 @@ function ActividadTSonidosPage() {
         <Card className="selection-card">
           <div className="selection-instructions">
             <p className="text-instruction">
-              Toca las figuras que <strong>NO</strong> tengan el
-              sonido de la <strong>t</strong>.
+              Di las palabras en voz alta y luego slecciona la que termina de forma diferente
             </p>
 
             <Button
@@ -474,7 +490,7 @@ function ActividadTSonidosPage() {
           </div>
 
           <div className="selection-options selection-options--trio">
-            {tOddOneOut.items.map((item) => (
+            {currentOddGroup.map((item) => (
               <button
                 className={[
                   'selection-button',
@@ -503,7 +519,7 @@ function ActividadTSonidosPage() {
               className="selection-feedback selection-feedback--correct"
               role="status"
             >
-              ¡Muy bien! Esas figuras no tienen el sonido /t/.
+              ¡Muy bien! Esa es la que termina de forma diferente.
             </p>
           )}
 
@@ -512,7 +528,7 @@ function ActividadTSonidosPage() {
               className="selection-feedback selection-feedback--retry"
               role="status"
             >
-              Revisa otra vez. Algunas de las que tocaste sí tienen /t/.
+              Revisa otra vez. Alguna no termina de forma diferente.
             </p>
           )}
 
@@ -540,7 +556,19 @@ function ActividadTSonidosPage() {
             </Button>
           )}
 
-          {oddFeedback === 'correct' && (
+          {oddFeedback === 'correct' && !isLastOddGroup && (
+            <Button
+              icon={ArrowRight}
+              iconPosition="right"
+              size="large"
+              fullWidth
+              onClick={nextOddGroup}
+            >
+              Siguiente conjunto
+            </Button>
+          )}
+
+          {oddFeedback === 'correct' && isLastOddGroup && (
             <Button
               to="/actividad/t-silabas"
               icon={ArrowRight}

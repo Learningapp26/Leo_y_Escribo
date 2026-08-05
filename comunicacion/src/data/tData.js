@@ -197,7 +197,7 @@ export const tOddOneOut = {
       name: 'canasta',
       image: '/images/lecciones/t/canasto.png',
       audio: '/audio/lecciones/t/canasta.mp3',
-      startsWithT: true,
+      startsWithT: false,
     },
     {
       id: 'ejote',
