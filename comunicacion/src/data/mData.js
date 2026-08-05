@@ -322,9 +322,6 @@ export const mCompletionInstructionAudio =
   '/audio/lecciones/m/instruccion-completar-m.mp3'
  
 // Fase 1: completar la palabra con la sílaba que falta (se muestra el patrón)
-// Nota: cubre me/mi/mo/mu pero no "ma" con ninguna palabra — el banco de
-// sílabas igual muestra las 5 opciones, "ma" solo queda sin una palabra
-// propia en esta fase. Dime si quieres que agregue una (ej. "maleta").
 export const mWordCompletion = [
   {
     id: 'mesa',

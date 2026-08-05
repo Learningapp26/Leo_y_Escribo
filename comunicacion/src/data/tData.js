@@ -208,3 +208,117 @@ export const tOddOneOut = {
     },
   ],
 }
+
+
+
+// ============================================================
+// ACTIVIDAD DE SÍLABAS
+
+// Conocer la letra T y sus combinaciones.
+export const tLetterPresentation = {
+  instructionAudio: '/audio/lecciones/t/instruccion-letra-t.mp3',
+  soundAudio: '/audio/lecciones/t/sonido-t.mp3',
+  combinations: [
+    { syllable: 'ta', audio: '/audio/lecciones/t/silaba-ta.mp3' },
+    { syllable: 'te', audio: '/audio/lecciones/t/silaba-te.mp3' },
+    { syllable: 'ti', audio: '/audio/lecciones/t/silaba-ti.mp3' },
+    { syllable: 'to', audio: '/audio/lecciones/t/silaba-to.mp3' },
+    { syllable: 'tu', audio: '/audio/lecciones/t/silaba-tu.mp3' },
+  ],
+}
+ 
+// Buscar sílabas que contengan la letra T
+export const tSyllableSearch = {
+  instructionAudio: '/audio/lecciones/t/instruccion-buscar-silabas.mp3',
+  targetSyllables: ['ta', 'te', 'ti', 'to', 'tu'],
+  options: [
+    { syllable: 'ta', audio: '/audio/lecciones/t/silaba-ta.mp3' },
+    { syllable: 'la', audio: '/audio/lecciones/t/silaba-la.mp3' },
+    { syllable: 'te', audio: '/audio/lecciones/t/silaba-te.mp3' },
+    { syllable: 'sa', audio: '/audio/lecciones/t/silaba-sa.mp3' },
+    { syllable: 'ti', audio: '/audio/lecciones/t/silaba-ti.mp3' },
+    { syllable: 'to', audio: '/audio/lecciones/t/silaba-to.mp3' },
+    { syllable: 'tu', audio: '/audio/lecciones/t/silaba-tu.mp3' },
+    { syllable: 'da', audio: '/audio/lecciones/t/silaba-da.mp3' },
+    { syllable: 'mu', audio: '/audio/lecciones/t/silaba-mu.mp3' },
+  ],
+}
+ 
+// Audio de instrucción para la fase "asociar" (imagen + palabra + sílaba)
+export const tAssociationInstructionAudio =
+  '/audio/lecciones/t/instruccion-asociar-t.mp3'
+ 
+// Asociar imagen, palabra y sílaba con T.
+export const tSyllableAssociation = [
+  {
+    id: 'tamal',
+    word: 'tamal',
+    highlighted: 'ta',
+    rest: 'mal',
+    image: '/images/lecciones/t/tamal.png',
+    syllableAudio: '/audio/lecciones/t/silaba-ta.mp3',
+    wordAudio: '/audio/lecciones/t/tamal.mp3',
+  },
+  {
+    id: 'tijera',
+    word: 'tijera',
+    highlighted: 'ti',
+    rest: 'jera',
+    image: '/images/lecciones/t/tijera.png',
+    syllableAudio: '/audio/lecciones/t/silaba-ti.mp3',
+    wordAudio: '/audio/lecciones/t/tijera.mp3',
+  },
+  {
+    id: 'tomate',
+    word: 'tomate',
+    highlighted: 'to',
+    rest: 'mate',
+    image: '/images/lecciones/t/tomate.png',
+    syllableAudio: '/audio/lecciones/t/silaba-to.mp3',
+    wordAudio: '/audio/lecciones/t/tomate.mp3',
+  },
+]
+ 
+// Banco de sílabas para la fase "completar"
+export const tSyllableOptions = ['ta', 'te', 'ti', 'to', 'tu']
+ 
+// Audio de instrucción para la fase 4 (completar con patrón)
+export const tCompletionSyllableInstructionAudio =
+  '/audio/lecciones/t/instruccion-completar-t.mp3'
+ 
+// Completar la palabra con la sílaba que falta (se muestra el patrón)
+export const tWordCompletion = [
+  {
+    id: 'topo',
+    word: 'topo',
+    pattern: '__po',
+    image: '/images/lecciones/t/topo.png',
+    audio: '/audio/lecciones/t/topo.mp3',
+    answer: 'to',
+  },
+  {
+    id: 'tela',
+    word: 'tela',
+    pattern: '__la',
+    image: '/images/lecciones/t/tela.png',
+    audio: '/audio/lecciones/t/tela.mp3',
+    answer: 'te',
+  },
+  {
+    id: 'timon',
+    word: 'timón',
+    pattern: '__món',
+    image: '/images/lecciones/t/timon.png',
+    audio: '/audio/lecciones/t/timon.mp3',
+    answer: 'ti',
+  },
+  {
+    id: 'tusa',
+    word: 'tusa',
+    pattern: '__sa',
+    image: '/images/lecciones/t/tusa.png',
+    audio: '/audio/lecciones/t/tusa.mp3',
+    answer: 'tu',
+  },
+]
+ 

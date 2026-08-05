@@ -477,7 +477,7 @@ function ActividadTSonidosPage() {
         <Card className="selection-card">
           <div className="selection-instructions">
             <p className="text-instruction">
-              Di las palabras en voz alta y luego slecciona la que termina de forma diferente
+              Escucha las palabras y luego selecciona la que termina de forma diferente
             </p>
 
             <Button

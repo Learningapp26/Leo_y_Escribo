@@ -26,6 +26,7 @@ import ActividadMCompletarPage from '../pages/ActividadMCompletarPage'
 import ActividadMFinalPage from '../pages/ActividadMFinalPage'
 import LeccionTPage from '../pages/LeccionTPage'
 import ActividadTSonidosPage from '../pages/ActividadTSonidosPage'
+import ActividadTSilabasPage from '../pages/ActividadTSilabasPage'
 
 function AppRouter() {
   return (
@@ -77,6 +78,10 @@ function AppRouter() {
         />
 
 
+        <Route
+          path="/actividad/t-silabas"
+          element={<ActividadTSilabasPage />}
+        />
 
         <Route
           path="/lecciones/y-conjuncion"

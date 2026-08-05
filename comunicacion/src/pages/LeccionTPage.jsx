@@ -165,7 +165,7 @@ function LeccionTPage() {
             className="lesson-activity-menu__card"
             icon={ListMusic}
             title="Sílabas con T"
-            description="Reconoce y forma sílabas con la letra T"
+            description="Reconoce las sílabas de T para formar palabras y aprender a leerlas"
             footer={
               <Button
                 to="/actividad/t-silabas"
