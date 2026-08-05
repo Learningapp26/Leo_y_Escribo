@@ -183,7 +183,7 @@ function LeccionTPage() {
             className="lesson-activity-menu__card"
             icon={PenLine}
             title="Completar palabras"
-            description="Completa las palabras con las sílabas que faltan"
+            description="Completa las palabras con las sílabas que faltan y forma palabras con la letra T"
             footer={
               <Button
                 to="/actividad/t-completar"
