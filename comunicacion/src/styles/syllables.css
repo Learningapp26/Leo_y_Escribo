@@ -87,6 +87,16 @@
 }
 
 
+/* Variante para bancos grandes de sílabas (ej. 20 tarjetas para formar
+   palabras): columnas fijas para que las filas queden completas y parejas. */
+
+.syllables-options--pairs {
+
+    grid-template-columns: repeat(5, 1fr);
+
+}
+
+
 /* Para el botón de sílaba */
 
 .syllable-button {

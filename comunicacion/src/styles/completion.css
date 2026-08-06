@@ -60,6 +60,33 @@
 
 }
 
+/* Recuadro de referencia con la lista de palabras que se pueden formar,
+   igual que el recuadro del libro. Solo texto, no son botones. */
+.word-bank-reference {
+    width: 100%;
+    max-width: 760px;
+
+    padding: var(--space-md) var(--space-lg);
+
+    border: 2px solid var(--color-text);
+    border-radius: var(--radius-lg);
+
+    font-family: var(--font-content);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    text-align: center;
+}
+
+/* Palabra ya formada dentro del recuadro: se tacha para marcar el avance */
+.word-bank-reference__word--found {
+    text-decoration: line-through;
+    text-decoration-thickness: 3px;
+    color: var(--color-correct);
+    opacity: .6;
+}
+
+
 /* Área de contenido */
 .completion-content {
     display: flex;
