@@ -37,6 +37,12 @@ import ActividadNSilabasPage from '../pages/ActividadNSilabasPage'
 import ActividadNCompletarPage from '../pages/ActividadNCompletarPage'
 import ActividadNFinalPage from '../pages/ActividadNFinalPage'
 
+import LeccionPPage from '../pages/LeccionPPage'
+import ActividadPSonidosPage from '../pages/ActividadPSonidosPage'
+import ActividadPSilabasPage from '../pages/ActividadPSilabasPage'
+import ActividadPCompletarPage from '../pages/ActividadPCompletarPage'
+import ActividadPFinalPage from '../pages/ActividadPFinalPage'
+
 
 
 function AppRouter() {
@@ -158,6 +164,31 @@ function AppRouter() {
         <Route
           path="/actividad/n-final"
           element={<ActividadNFinalPage />}
+        />
+
+        <Route
+          path="/lecciones/p"
+          element={<LeccionPPage />}
+        />
+
+        <Route
+          path="/actividad/p-sonidos"
+          element={<ActividadPSonidosPage />}
+        />
+
+        <Route
+          path="/actividad/p-silabas"
+          element={<ActividadPSilabasPage />}
+        />
+
+        <Route
+          path="/actividad/p-completar"
+          element={<ActividadPCompletarPage />}
+        />
+
+        <Route
+          path="/actividad/p-final"
+          element={<ActividadPFinalPage />}
         />
 
         <Route
