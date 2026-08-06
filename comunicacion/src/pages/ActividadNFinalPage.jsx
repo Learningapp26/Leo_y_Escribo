@@ -100,7 +100,7 @@ function ActividadNFinalPage() {
       <main className={`page ${themeClass}`}>
         <Card className="selection-card">
           <span className="finish-icon" aria-hidden="true">
-            *
+            ⭐
           </span>
 
           <h1>¡Terminaste la lección de la letra N!</h1>
