@@ -29,12 +29,14 @@ import LeccionTPage from '../pages/LeccionTPage'
 import ActividadTSonidosPage from '../pages/ActividadTSonidosPage'
 import ActividadTSilabasPage from '../pages/ActividadTSilabasPage'
 import ActividadTCompletarPage from '../pages/ActividadTCompletarPage'
+import ActividadTFinalPage from '../pages/ActividadTFinalPage'
 
 import LeccionNPage from '../pages/LeccionNPage'
 import ActividadNImagenesPage from '../pages/ActividadNImagenesPage'
 import ActividadNSilabasPage from '../pages/ActividadNSilabasPage'
 import ActividadNCompletarPage from '../pages/ActividadNCompletarPage'
 import ActividadNFinalPage from '../pages/ActividadNFinalPage'
+
 
 
 function AppRouter() {
@@ -95,6 +97,13 @@ function AppRouter() {
           path="/actividad/t-silabas"
           element={<ActividadTSilabasPage />}
         />
+
+        <Route
+          path="/actividad/t-final"
+          element={<ActividadTFinalPage />}
+        />
+
+
 
         <Route
           path="/lecciones/y-conjuncion"

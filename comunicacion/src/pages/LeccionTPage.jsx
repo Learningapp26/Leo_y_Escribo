@@ -17,7 +17,6 @@ import { getLessonThemeClass } from '../data/lessonColors'
 import {
   tComprehensionQuestions,
   tOrderInstructionAudio,
-  tOrderOptions,
   tReading,
 } from '../data/tData'
 import { playAudio } from '../lib/audioPlayer'
@@ -28,50 +27,42 @@ import '../styles/reading.css'
 function LeccionTPage() {
   const themeClass = getLessonThemeClass('t')
 
-  // Actividad de comprensión: asignar 1, 2 o 3 a cada escena
-  const [selections, setSelections] = useState({})
+  // Actividad de comprensión: tocar las escenas en el orden correcto
+  const [orderedIds, setOrderedIds] = useState([])
   const [orderResult, setOrderResult] = useState('')
 
-  const allSelected = tComprehensionQuestions.every(
-    (item) => selections[item.id],
-  )
+  const allSelected = orderedIds.length === tComprehensionQuestions.length
 
-  const pickNumber = (item, number) => {
+  const pickScene = (item) => {
     if (orderResult === 'correct') return
 
     setOrderResult('')
 
-    setSelections((current) => {
-      const updated = { ...current }
-
-      // Ese número ya estaba en otra escena: se lo quitamos de ahí
-      Object.keys(updated).forEach((key) => {
-        if (updated[key] === number) delete updated[key]
-      })
-
-      // Tocar el mismo número que ya tenía esta escena lo deselecciona
-      if (current[item.id] === number) {
-        delete updated[item.id]
-        return updated
+    setOrderedIds((current) => {
+      // Tocar una escena ya elegida la quita del orden
+      if (current.includes(item.id)) {
+        return current.filter((id) => id !== item.id)
       }
 
-      updated[item.id] = number
-      return updated
+      if (current.length >= tComprehensionQuestions.length) return current
+
+      return [...current, item.id]
     })
   }
 
   const checkOrder = () => {
     if (!allSelected) return
 
-    const isCorrect = tComprehensionQuestions.every(
-      (item) => selections[item.id] === item.answer,
-    )
+    const isCorrect = orderedIds.every((id, index) => {
+      const item = tComprehensionQuestions.find((question) => question.id === id)
+      return item?.answer === String(index + 1)
+    })
 
     setOrderResult(isCorrect ? 'correct' : 'retry')
   }
 
   const retryOrder = () => {
-    setSelections({})
+    setOrderedIds([])
     setOrderResult('')
   }
 
@@ -137,6 +128,101 @@ function LeccionTPage() {
         <h2 id="t-comprehension-title">Conversemos sobre el cuento</h2>
 
         <Card className="selection-card">
+          <div className="selection-instructions">
+            <p className="text-instruction">
+              Observa las imágenes de las escenas. Luego seleccionalas
+              según el orden en que sucedieron en la historia.
+            </p>
+
+            <Button
+              variant="audio"
+              icon={Volume2}
+              onClick={() => playAudio(tOrderInstructionAudio)}
+            >
+              Escuchar instrucción
+            </Button>
+          </div>
+
+          <div className="selection-options">
+            {tComprehensionQuestions.map((item) => {
+              const position = orderedIds.indexOf(item.id) + 1
+              const isSelected = position > 0
+
+              const stateClass =
+                orderResult && isSelected
+                  ? orderResult === 'correct'
+                    ? 'selection-button--correct'
+                    : 'selection-button--incorrect'
+                  : isSelected
+                    ? 'selection-button--selected'
+                    : ''
+
+              return (
+                <button
+                  className={['selection-button', stateClass]
+                    .filter(Boolean)
+                    .join(' ')}
+                  type="button"
+                  key={item.id}
+                  aria-pressed={isSelected}
+                  onClick={() => pickScene(item)}
+                >
+                  <img
+                    className="selection-image"
+                    src={item.image}
+                    alt={`Escena ${item.scene}`}
+                    draggable={false}
+                  />
+
+                  <span className="selection-word">
+                    {isSelected ? ` ${position}` : 'Toca para ordenar'}
+                  </span>
+                </button>
+              )
+            })}
+          </div>
+
+          {orderResult === 'correct' && (
+            <p
+              className="selection-feedback selection-feedback--correct"
+              role="status"
+            >
+              ¡Muy bien! Ese es el orden correcto de la historia.
+            </p>
+          )}
+
+          {orderResult === 'retry' && (
+            <p
+              className="selection-feedback selection-feedback--retry"
+              role="status"
+            >
+              Ese no es el orden correcto. Revisa otra vez.
+            </p>
+          )}
+
+          {orderResult !== 'correct' && (
+            <Button
+              icon={Check}
+              size="large"
+              fullWidth
+              disabled={!allSelected}
+              onClick={checkOrder}
+            >
+              Comprobar
+            </Button>
+          )}
+
+          {orderResult === 'retry' && (
+            <Button
+              variant="retry"
+              icon={RotateCcw}
+              size="large"
+              fullWidth
+              onClick={retryOrder}
+            >
+              Intentar nuevamente
+            </Button>
+          )}
         </Card>
       </section>
 
