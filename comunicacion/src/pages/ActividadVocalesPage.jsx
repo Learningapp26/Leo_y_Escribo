@@ -16,21 +16,33 @@ import '../styles/vowels.css'
 const ejercicios = [
   {
     palabra: 'avion',
-    // imagen: '/images/lecciones/vocales/avion.png',
+    imagen: '/images/lecciones/n/nave.png',
     respuesta: 'a',
     audio: '/audio/lecciones/vocales/avion.mp3',
   },
   {
     palabra: 'elefante',
-    // imagen: '/images/lecciones/vocales/elefante.png',
+    imagen: '/images/lecciones/vocales/elefante.png',
     respuesta: 'e',
     audio: '/audio/lecciones/vocales/elefante.mp3',
   },
   {
+    palabra: 'iguana',
+    imagen: '/images/lecciones/vocales/iguana.png',
+    respuesta: 'i',
+    audio: '/audio/lecciones/vocales/iguana.mp3',
+  },
+  {
     palabra: 'oso',
-    // imagen: '/images/lecciones/vocales/oso.png',
+    imagen: '/images/lecciones/vocales/oso.png',
     respuesta: 'o',
     audio: '/audio/lecciones/vocales/oso.mp3',
+  },
+  {
+    palabra: 'uniforme',
+    imagen: '/images/lecciones/vocales/uniforme.png',
+    respuesta: 'u',
+    audio: '/audio/lecciones/vocales/uniforme.mp3',
   },
 ]
 
@@ -81,7 +93,7 @@ function ActividadVocalesPage() {
               className="vowels-result-card__icon"
               aria-hidden="true"
             >
-              *
+              ⭐
             </span>
 
             <h1>Terminaste la actividad</h1>
@@ -91,13 +103,13 @@ function ActividadVocalesPage() {
             </p>
 
             <Button
-              to="/lecciones/vocales"
+              to="/lecciones"
               icon={ArrowRight}
               iconPosition="right"
               size="large"
               fullWidth
             >
-              Volver a la leccion
+              Volver a la lecciones
             </Button>
           </Card>
         </section>
@@ -151,13 +163,11 @@ function ActividadVocalesPage() {
         />
 
         <Card className="vowels-exercise-card">
-          {/*
           <img
             className="vowels-exercise-card__image"
             src={ejercicio.imagen}
             alt={ejercicio.palabra}
           />
-          */}
 
           <h2 className="vowels-exercise-card__word">
             {ejercicio.palabra}

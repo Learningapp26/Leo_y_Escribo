@@ -13,7 +13,7 @@ export const nWordCompletion = [
     id: 'nena',
     word: 'nena',
     pattern: '__na',
-    image: '/images/lecciones/n/nati.png', // TODO: Reemplazar por imagen definitiva de una nena si se desea
+    image: '/images/lecciones/n/nati.png', 
     audio: null, // TODO: agregar audio_nena.mp3
     answer: 'ne',
   },
@@ -21,7 +21,7 @@ export const nWordCompletion = [
     id: 'nido',
     word: 'nido',
     pattern: '__do',
-    image: '/images/lecciones/n/nido.png', // TODO: Agregar imagen de un nido
+    image: '/images/lecciones/n/nido.png', 
     audio: null, // TODO: agregar audio_nido.mp3
     answer: 'ni',
   },
@@ -29,7 +29,7 @@ export const nWordCompletion = [
     id: 'nube',
     word: 'nube',
     pattern: '__be',
-    image: '/images/lecciones/n/nube.png', // TODO: Agregar imagen de una nube
+    image: '/images/lecciones/n/nube.png', 
     audio: null, // TODO: agregar audio_nube.mp3
     answer: 'nu',
   },

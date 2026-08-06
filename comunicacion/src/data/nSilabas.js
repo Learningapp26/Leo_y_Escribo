@@ -16,7 +16,7 @@ export const nSyllableWords = [
     word: 'nave',
     highlighted: 'na',
     rest: 've',
-    image: '/images/lecciones/n/nave.png', // TODO: Agregar imagen de una nave
+    image: '/images/lecciones/n/nave.png', 
     syllableAudio: null, // TODO: agregar audio_silaba_na.mp3
     wordAudio: null, // TODO: agregar audio_nave.mp3
   },
@@ -25,7 +25,7 @@ export const nSyllableWords = [
     word: 'nena',
     highlighted: 'ne',
     rest: 'na',
-    image: '/images/lecciones/n/nati.png', // TODO: Reemplazar por imagen definitiva de una nena si se desea
+    image: '/images/lecciones/n/nati.png', 
     syllableAudio: null, // TODO: agregar audio_silaba_ne.mp3
     wordAudio: null, // TODO: agregar audio_nena.mp3
   },
@@ -34,7 +34,7 @@ export const nSyllableWords = [
     word: 'naranja',
     highlighted: 'na',
     rest: 'ranja',
-    image: '/images/lecciones/n/naranja.png', // TODO: Agregar imagen de una naranja
+    image: '/images/lecciones/n/naranja.png', 
     syllableAudio: null, // TODO: agregar audio_silaba_na.mp3
     wordAudio: null, // TODO: agregar audio_naranja.mp3
   },
@@ -43,7 +43,7 @@ export const nSyllableWords = [
     word: 'nube',
     highlighted: 'nu',
     rest: 'be',
-    image: '/images/lecciones/n/nube.png', // TODO: Agregar imagen de una nube
+    image: '/images/lecciones/n/nube.png', 
     syllableAudio: null, // TODO: agregar audio_silaba_nu.mp3
     wordAudio: null, // TODO: agregar audio_nube.mp3
   },

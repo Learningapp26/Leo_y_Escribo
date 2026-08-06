@@ -7,7 +7,7 @@ export const nReading = {
     'Una vez, Nando escuchó que un niño le pedía permiso a su mamá para salir a jugar. La mamá le preguntó si había terminado sus tareas y el niño respondió que sí. ¿Qué crees que le pasó a Nando? Empezó a estornudar.',
     'La mamá escuchó los estornudos y le preguntó a su hijo: ¿Es cierto que ya terminaste? El niño, coloradito, le dijo: No, todavía me falta. En ese momento, Nando dejó de estornudar. Así funcionaba la nariz de Nando.',
   ],
-  image: '/images/lecciones/n/lectura-nariz-sorprendente.png', // TODO: Agregar imagen del cuento "Una nariz sorprendente"
+  image: '/images/lecciones/n/lectura-nariz-sorprendente.png', 
   imageAlt:
     'Nando estornuda en un patio mientras una mamá conversa con su hijo',
   instructionAudio: null, // TODO: agregar audio de instrucción de lectura
