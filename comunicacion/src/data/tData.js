@@ -401,4 +401,150 @@ export const tSyllableJoin = [
  
  
 
+
+ 
+// ============================================================
+
+// ACTIVIDAD FINAL
+
+// Audio de instrucción para la fase 1 (sílaba mayúscula/minúscula)
+export const tCaseSelectionInstructionAudio =
+  '/audio/lecciones/t/instruccion-mayuscula-minuscula-t.mp3'
+ 
+// Seleccionar sílaba de mayúscula o minúscula
+export const tSyllableCaseSelection = [
+  {
+    id: 'pata',
+    name: 'pata',
+    image: '/images/lecciones/t/pata.png',
+    wordAudio: '/audio/lecciones/t/pata.mp3',
+    pattern: 'pa__',
+    options: [
+      {
+        syllable: 'ta',
+        audio: '/audio/lecciones/t/silaba-ta.mp3',
+        isCorrect: true,
+      },
+      {
+        syllable: 'tu',
+        audio: '/audio/lecciones/t/silaba-tu.mp3',
+        isCorrect: false,
+      },
+    ],
+  },
+  {
+    id: 'tomas',
+    name: 'Tomás',
+    image: '/images/lecciones/t/tomas.png',
+    wordAudio: '/audio/lecciones/t/tomas.mp3',
+    pattern: '__más',
+    options: [
+      {
+        syllable: 'To',
+        audio: '/audio/lecciones/t/silaba-to.mp3',
+        isCorrect: true,
+      },
+      {
+        syllable: 'to',
+        audio: '/audio/lecciones/t/silaba-to.mp3',
+        isCorrect: false,
+      },
+    ],
+  },
+  {
+    id: 'toro',
+    name: 'toro',
+    image: '/images/lecciones/t/toro.png',
+    wordAudio: '/audio/lecciones/t/toro.mp3',
+    pattern: '__ro',
+    options: [
+      {
+        syllable: 'To',
+        audio: '/audio/lecciones/t/silaba-to.mp3',
+        isCorrect: false,
+      },
+      {
+        syllable: 'to',
+        audio: '/audio/lecciones/t/silaba-to.mp3',
+        isCorrect: true,
+      },
+    ],
+  },
+  {
+    id: 'mata',
+    name: 'mata',
+    image: '/images/lecciones/t/mata.png',
+    wordAudio: '/audio/lecciones/t/mata.mp3',
+    pattern: 'ma__',
+    options: [
+      {
+        syllable: 'ta',
+        audio: '/audio/lecciones/t/silaba-ta.mp3',
+        isCorrect: true,
+      },
+      {
+        syllable: 'ti',
+        audio: '/audio/lecciones/t/silaba-ti.mp3',
+        isCorrect: false,
+      },
+    ],
+  },
+  {
+    id: 'tele',
+    name: 'tele',
+    image: '/images/lecciones/t/tele.png',
+    wordAudio: '/audio/lecciones/t/tele.mp3',
+    pattern: '__le',
+    options: [
+      {
+        syllable: 'Te',
+        audio: '/audio/lecciones/t/silaba-te.mp3',
+        isCorrect: false,
+      },
+      {
+        syllable: 'te',
+        audio: '/audio/lecciones/t/silaba-te.mp3',
+        isCorrect: true,
+      },
+    ],
+  },
+  {
+    id: 'tita',
+    name: 'Tita',
+    image: '/images/lecciones/t/tita.png',
+    wordAudio: '/audio/lecciones/t/tita.mp3',
+    pattern: '__ta',
+    options: [
+      {
+        syllable: 'ti',
+        audio: '/audio/lecciones/t/silaba-ti.mp3',
+        isCorrect: false,
+      },
+      {
+        syllable: 'Ti',
+        audio: '/audio/lecciones/t/silaba-ti.mp3',
+        isCorrect: true,
+      },
+    ],
+  },
+]
+ 
+// Audio de instrucción para la fase 2 (formar oraciones)
+export const tSentenceFormation = {
+  instructionAudio: '/audio/lecciones/t/instruccion-formar-oraciones-t.mp3',
+}
+ 
+// Fase 2: formar la oración correcta con un banco de palabras desordenado
+export const tWordJoin = [
+  {
+    id: 'oracion1t',
+    sentence: 'Tati toma té.',
+    options: ['té.', 'toma', 'Tati'],
+  },
+  {
+    id: 'oracion2t',
+    sentence: 'Tere toma la sopa.',
+    options: ['toma', 'la', 'Tere', 'sopa.'],
+  },
+]
  
