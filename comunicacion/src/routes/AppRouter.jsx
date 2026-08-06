@@ -24,10 +24,18 @@ import ActividadMSonidosPage from '../pages/ActividadMSonidosPage'
 import ActividadMSilabasPage from '../pages/ActividadMSilabasPage'
 import ActividadMCompletarPage from '../pages/ActividadMCompletarPage'
 import ActividadMFinalPage from '../pages/ActividadMFinalPage'
+
 import LeccionTPage from '../pages/LeccionTPage'
 import ActividadTSonidosPage from '../pages/ActividadTSonidosPage'
 import ActividadTSilabasPage from '../pages/ActividadTSilabasPage'
 import ActividadTCompletarPage from '../pages/ActividadTCompletarPage'
+
+import LeccionNPage from '../pages/LeccionNPage'
+import ActividadNImagenesPage from '../pages/ActividadNImagenesPage'
+import ActividadNSilabasPage from '../pages/ActividadNSilabasPage'
+import ActividadNCompletarPage from '../pages/ActividadNCompletarPage'
+import ActividadNFinalPage from '../pages/ActividadNFinalPage'
+
 
 function AppRouter() {
   return (
@@ -116,6 +124,31 @@ function AppRouter() {
         <Route
           path="/actividad/l-final"
           element={<ActividadLFinalPage />}
+        />
+
+        <Route
+          path="/lecciones/n"
+          element={<LeccionNPage />}
+        />
+
+        <Route
+          path="/actividad/n-imagenes"
+          element={<ActividadNImagenesPage />}
+        />
+
+        <Route
+          path="/actividad/n-silabas"
+          element={<ActividadNSilabasPage />}
+        />
+
+        <Route
+          path="/actividad/n-completar"
+          element={<ActividadNCompletarPage />}
+        />
+
+        <Route
+          path="/actividad/n-final"
+          element={<ActividadNFinalPage />}
         />
 
         <Route
