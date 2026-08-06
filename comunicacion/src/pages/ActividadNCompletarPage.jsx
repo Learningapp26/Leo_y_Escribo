@@ -26,6 +26,10 @@ function playIfAvailable(audio) {
   if (audio) playAudio(audio)
 }
 
+function getWordEnding(pattern) {
+  return pattern.replace('__', '')
+}
+
 function ActividadNCompletarPage() {
   const [phaseIndex, setPhaseIndex] = useState(0)
   const phase = PHASES[phaseIndex]
@@ -37,6 +41,7 @@ function ActividadNCompletarPage() {
   const [completionResult, setCompletionResult] = useState('')
 
   const currentWord = nWordCompletion[wordIndex]
+  const currentWordEnding = getWordEnding(currentWord.pattern)
 
   const checkCompletion = () => {
     if (!selectedSyllable) return
@@ -138,7 +143,15 @@ function ActividadNCompletarPage() {
             {getAudioLabel(currentWord.word, currentWord.audio)}
           </Button>
 
-          <p className="completion-word-pattern">{currentWord.pattern}</p>
+          <div className="completion-bank" aria-live="polite">
+            <span className="completion-chip text-syllable">
+              {selectedSyllable || '__'}
+            </span>
+
+            <span className="completion-chip text-syllable">
+              {currentWordEnding}
+            </span>
+          </div>
 
           <div className="completion-bank">
             {nSyllableOptions.map((syllable) => (
@@ -224,6 +237,8 @@ function ActividadNCompletarPage() {
             Las sílabas que ya usaste se irán quitando.
           </p>
 
+          {!isJoinFinished && (
+            <>
           <div className="selection-columns">
             <section className="selection-options" aria-label="Primera sílaba">
               {leftOptions.filter((item) => !isMatched(item.id)).map((item) => {
@@ -276,10 +291,19 @@ function ActividadNCompletarPage() {
             </section>
           </div>
 
-          <p aria-live="polite" className="text-word">
-            {selectedLeft?.syllable ?? '__'}
-            {selectedRight?.syllable ?? '__'}
-          </p>
+          <div className="completion-bank" aria-live="polite">
+            <span className="completion-chip text-syllable">
+              {selectedLeft?.syllable ?? '__'}
+            </span>
+
+            <span className="text-word">+</span>
+
+            <span className="completion-chip text-syllable">
+              {selectedRight?.syllable ?? 'no'}
+            </span>
+          </div>
+            </>
+          )}
 
           {joinFeedback === 'correct' && !isJoinFinished && (
             <p
@@ -287,6 +311,15 @@ function ActividadNCompletarPage() {
               role="status"
             >
               ¡Muy bien! Formaste una palabra.
+            </p>
+          )}
+
+          {isJoinFinished && (
+            <p
+              className="selection-feedback selection-feedback--correct"
+              role="status"
+            >
+              ¡Muy bien! Usaste todas las sílabas.
             </p>
           )}
 
@@ -299,7 +332,7 @@ function ActividadNCompletarPage() {
             </p>
           )}
 
-          {!joinFeedback && (
+          {!joinFeedback && !isJoinFinished && (
             <Button
               icon={Check}
               size="large"

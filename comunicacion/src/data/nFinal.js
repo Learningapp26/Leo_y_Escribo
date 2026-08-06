@@ -90,7 +90,7 @@ export const nSentenceImageMatch = [
       },
       {
         name: 'Nati con una nave',
-        image: '/images/lecciones/n/nati-nave.png', 
+        image: '/images/lecciones/n/nati-nave .png', 
       },
       {
         name: 'Nati con una nube',

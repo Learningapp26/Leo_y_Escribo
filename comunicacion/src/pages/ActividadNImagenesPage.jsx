@@ -29,6 +29,8 @@ const targetIds = nImagePool
   .filter((item) => item.startsWithN)
   .map((item) => item.id)
 
+const initialPairTargetIds = ['nave', 'nariz']
+
 const finalPairCounts = nFinalPairMatching.items.reduce((counts, item) => {
   counts[item.pairId] = (counts[item.pairId] ?? 0) + 1
   return counts
@@ -121,7 +123,9 @@ function ActividadNImagenesPage() {
   const checkPair = () => {
     if (!firstPick || !secondPick) return
 
-    const isCorrect = firstPick.startsWithN && secondPick.startsWithN
+    const isCorrect =
+      initialPairTargetIds.includes(firstPick.id) &&
+      initialPairTargetIds.includes(secondPick.id)
 
     if (isCorrect) {
       setMatchedIds((current) => [...current, firstPick.id, secondPick.id])
@@ -138,7 +142,7 @@ function ActividadNImagenesPage() {
     setPairFeedback('')
   }
 
-  const isPairsFinished = matchedIds.length === targetIds.length
+  const isPairsFinished = matchedIds.length === initialPairTargetIds.length
 
   const isFinalMatched = (id) => matchedFinalIds.includes(id)
 
@@ -498,24 +502,23 @@ function ActividadNImagenesPage() {
           </div>
 
           <div className="selection-options selection-options--pairs">
-            {nFinalPairMatching.items.map((item) => {
+            {nFinalPairMatching.items
+              .filter((item) => !isFinalMatched(item.id))
+              .map((item) => {
               const selected =
                 finalFirstPick?.id === item.id ||
                 finalSecondPick?.id === item.id
-              const matched = isFinalMatched(item.id)
 
               return (
                 <button
                   className={[
                     'selection-button',
                     selected ? 'selection-button--selected' : '',
-                    matched ? 'selection-button--correct' : '',
                   ]
                     .filter(Boolean)
                     .join(' ')}
                   type="button"
                   key={item.id}
-                  disabled={matched}
                   aria-pressed={selected}
                   onClick={() => pickFinalCard(item)}
                 >
