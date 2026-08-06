@@ -1,8 +1,10 @@
-import { ArrowRight, BookOpen } from 'lucide-react'
+import { ArrowRight, BookOpen, Volume2 } from 'lucide-react'
 
 import Button from '../components/common/Button'
 import Card from '../components/common/Card'
 import BackButton from '../components/navigation/BackButton'
+import ProgressBar from '../components/progress/ProgressBar'
+import { playAudio } from '../lib/audioPlayer'
 import '../styles/vowels.css'
 
 const vocales = ['a', 'e', 'i', 'o', 'u']
@@ -28,10 +30,27 @@ function LeccionVocalesPage() {
             Repaso de las vocales
           </h1>
 
-          <p className="text-instruction">
+          <p className="text-instruction vowels-page__instruction">
             Recordemos las cinco vocales antes de comenzar la actividad.
           </p>
+
+          <Button
+            variant="audio"
+            size="large"
+            icon={Volume2}
+            onClick={() =>
+              playAudio('/audio/lecciones/vocales/instruccion-repaso.mp3')
+            }
+          >
+            Escuchar instrucción
+          </Button>
         </header>
+
+        <ProgressBar
+          value={1}
+          max={2}
+          label="Parte 1 de 2"
+        />
 
         <Card className="vowels-review-card">
           <BookOpen
@@ -58,6 +77,18 @@ function LeccionVocalesPage() {
           <p className="text-reading">
             Observa cada letra y pronuncia su sonido.
           </p>
+
+          <Button
+            variant="audio"
+            size="large"
+            icon={Volume2}
+            fullWidth
+            onClick={() =>
+              playAudio('/audio/lecciones/vocales/vocales.mp3')
+            }
+          >
+            Escuchar las vocales
+          </Button>
         </Card>
 
         <Card

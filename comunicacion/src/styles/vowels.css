@@ -1,203 +1,217 @@
-/* Estilos para la lección y actividad de repaso de vocales */
-
 .vowels-page {
-  min-height: 100vh;
-  padding: 24px 16px 110px;
-  background-color: var(--color-background, #f4f8fb);
-  color: var(--color-text, #243b53);
+  min-height: 100svh;
+  color: var(--lesson-text);
+  background-color: var(--lesson-background);
 }
 
 .vowels-page__content {
-  width: min(100%, 850px);
-  margin: 0 auto;
+  width: min(100%, 960px);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
 }
 
 .vowels-page__header {
-  margin: 24px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
   text-align: center;
 }
 
-.vowels-page__header h1 {
-  margin: 8px 0 12px;
-  color: var(--lesson-primary, var(--color-action, #1982c4));
-  font-size: clamp(2rem, 6vw, 3rem);
+.vowels-page__unit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: var(--space-xs) var(--space-lg);
+  color: var(--lesson-text);
+  background-color: var(--lesson-accent);
+  border-radius: var(--radius-full);
+  font-family: var(--font-content);
+  font-weight: var(--font-weight-bold);
 }
 
-.vowels-page__unit {
-  display: inline-block;
-  padding: 6px 14px;
-  border-radius: 999px;
-  background-color: var(--lesson-soft, #dcefff);
-  color: var(--lesson-primary, #1982c4);
-  font-weight: 700;
+.vowels-page__header h1 {
+  color: var(--lesson-primary);
+  font-family: var(--font-content);
+  text-align: center;
+}
+
+.vowels-page__instruction {
+  width: min(100%, 760px);
+  padding: var(--space-md) var(--space-lg);
+  color: var(--lesson-text);
+  background-color: var(--lesson-surface);
+  border: 3px solid var(--lesson-border);
+  border-left: 8px solid var(--lesson-secondary);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  font-family: var(--font-content);
+  text-align: center;
 }
 
 .vowels-review-card,
 .vowels-activity-summary,
 .vowels-exercise-card,
 .vowels-result-card {
-  margin-top: 24px;
-  padding: clamp(20px, 5vw, 36px);
-  border: 3px solid var(--lesson-primary, #1982c4);
-  border-radius: 24px;
-  background-color: var(--color-surface, #fffdf9);
+  border: 4px solid var(--lesson-border);
   text-align: center;
 }
 
 .vowels-review-card__icon {
-  width: 52px;
-  height: 52px;
-  color: var(--lesson-primary, #1982c4);
+  width: 56px;
+  height: 56px;
+  margin-inline: auto;
+  color: var(--lesson-primary);
 }
-
-/* Vocales de la pantalla de repaso */
 
 .vowels-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 14px;
-  margin: 24px 0;
+  gap: var(--space-md);
+  margin-block: var(--space-lg);
 }
 
 .vowels-list__item {
   display: grid;
-  width: 72px;
-  height: 72px;
+  width: 80px;
+  height: 80px;
   place-items: center;
-  border: 3px solid var(--lesson-primary, #1982c4);
-  border-radius: 50%;
-  background-color: var(--lesson-soft, #dcefff);
-  color: var(--lesson-primary, #1982c4);
-  font-size: 2.5rem;
-  font-weight: 700;
+  color: var(--color-surface);
+  background-color: var(--lesson-primary);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-btn);
+  font-family: var(--font-content);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
 }
 
-/* Tarjeta del ejercicio */
+.vowels-list__item:nth-child(2) {
+  background-color: var(--lesson-secondary);
+  color: var(--lesson-text);
+}
+
+.vowels-list__item:nth-child(3) {
+  background-color: var(--lesson-accent);
+  color: var(--lesson-text);
+}
+
+.vowels-list__item:nth-child(4) {
+  background-color: var(--color-reward);
+  color: var(--color-text);
+}
+
+.vowels-list__item:nth-child(5) {
+  background-color: var(--color-accent-soft);
+  color: var(--color-text);
+}
 
 .vowels-exercise-card__image {
-  margin-bottom: 12px;
-  font-size: clamp(5rem, 18vw, 8rem);
-  line-height: 1;
+  width: 100%;
+  max-width: 280px;
+  height: 220px;
+  object-fit: contain;
+  margin-inline: auto;
+  padding: var(--space-md);
+  background-color: var(--lesson-surface);
+  border: 4px solid var(--lesson-border);
+  border-radius: var(--radius-lg);
 }
 
 .vowels-exercise-card__word {
-  margin: 10px 0;
-  color: var(--color-text, #243b53);
-  font-size: clamp(1.8rem, 6vw, 2.6rem);
+  color: var(--lesson-primary);
+  font-family: var(--font-content);
+  font-size: var(--font-size-2xl);
+  text-align: center;
 }
 
 .vowels-options {
   display: grid;
-  grid-template-columns: repeat(5, minmax(60px, 1fr));
-  gap: 12px;
-  margin: 24px 0;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-md);
 }
 
 .vowels-options__button {
   min-width: 0;
-  min-height: 68px;
-  padding: 10px;
-  font-size: 2rem;
-  font-weight: 700;
+  min-height: 76px;
+  font-size: var(--font-size-xl);
 }
 
-/* Variante seleccionada usada por Button */
-
 .btn--selected {
-  border-color: var(--lesson-primary, #1982c4);
-  background-color: var(--lesson-primary, #1982c4);
-  color: #ffffff;
-  box-shadow: 0 0 0 4px var(--lesson-soft, #dcefff);
+  background-color: var(--lesson-primary);
+  color: var(--color-surface);
+  outline: 4px solid var(--lesson-accent);
+  outline-offset: 2px;
 }
 
 .vowels-exercise-card__actions {
-  margin-top: 20px;
+  display: grid;
+  gap: var(--space-md);
 }
 
-/* Retroalimentación */
-
 .feedback {
-  margin: 20px 0;
-  padding: 14px 18px;
-  border: 2px solid transparent;
-  border-radius: 14px;
-  font-weight: 700;
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-md);
+  font-family: var(--font-content);
+  font-weight: var(--font-weight-bold);
+  text-align: center;
 }
 
 .feedback--success {
-  border-color: var(--color-success, #1e8e4d);
-  background-color: #e6f5ec;
-  color: var(--color-success, #1e8e4d);
+  color: var(--color-surface);
+  background-color: var(--color-correct);
 }
 
 .feedback--retry {
-  border-color: var(--color-retry, #ff9500);
-  background-color: #fff1dc;
-  color: #a65f00;
+  color: var(--color-text);
+  background-color: var(--color-retry);
 }
 
-/* Pantalla de finalización */
-
 .vowels-result-card {
-  margin-top: 80px;
+  align-items: center;
+  margin-top: var(--space-2xl);
+  border-color: var(--lesson-accent);
 }
 
 .vowels-result-card__icon {
-  display: block;
-  margin-bottom: 16px;
-  font-size: 5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 88px;
+  height: 88px;
+  color: var(--color-text);
+  background-color: var(--color-reward);
+  border-radius: var(--radius-full);
+  font-family: var(--font-content);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
 }
 
-/* Barra de progreso */
-
-.progress-bar-wrapper {
-  margin: 22px 0;
+@media (max-width: 700px) {
+  .vowels-options {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
-.progress-bar-wrapper__header {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 8px;
-  font-weight: 700;
-}
-
-.progress-bar {
-  height: 16px;
-  overflow: hidden;
-  border-radius: 999px;
-  background-color: var(--lesson-soft, #dcefff);
-}
-
-.progress-bar__fill {
-  height: 100%;
-  border-radius: inherit;
-  background-color: var(--lesson-primary, #1982c4);
-  transition: width 0.3s ease;
-}
-
-/* Tema correspondiente a la Unidad 1 */
-
-.lesson-theme--unit-1 {
-  --lesson-primary: #1982c4;
-  --lesson-soft: #dcefff;
-}
-
-/* Adaptación para pantallas pequeñas */
-
-@media (max-width: 600px) {
-  .vowels-page {
-    padding: 16px 12px 100px;
+@media (max-width: 520px) {
+  .vowels-page__content {
+    gap: var(--space-lg);
   }
 
-  .vowels-options {
-    grid-template-columns: repeat(3, 1fr);
+  .vowels-page__instruction {
+    padding: var(--space-md);
   }
 
   .vowels-list__item {
-    width: 60px;
-    height: 60px;
-    font-size: 2rem;
+    width: 64px;
+    height: 64px;
+    font-size: var(--font-size-xl);
+  }
+
+  .vowels-options {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

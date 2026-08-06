@@ -1,27 +1,36 @@
 import { useState } from 'react'
-import { ArrowRight, Check } from 'lucide-react'
+import {
+  ArrowRight,
+  Check,
+  RotateCcw,
+  Volume2,
+} from 'lucide-react'
 
 import Button from '../components/common/Button'
 import Card from '../components/common/Card'
 import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
+import { playAudio } from '../lib/audioPlayer'
 import '../styles/vowels.css'
 
 const ejercicios = [
   {
-    palabra: 'avión',
-    imagen: '✈️',
+    palabra: 'avion',
+    // imagen: '/images/lecciones/vocales/avion.png',
     respuesta: 'a',
+    audio: '/audio/lecciones/vocales/avion.mp3',
   },
   {
     palabra: 'elefante',
-    imagen: '🐘',
+    // imagen: '/images/lecciones/vocales/elefante.png',
     respuesta: 'e',
+    audio: '/audio/lecciones/vocales/elefante.mp3',
   },
   {
     palabra: 'oso',
-    imagen: '🐻',
+    // imagen: '/images/lecciones/vocales/oso.png',
     respuesta: 'o',
+    audio: '/audio/lecciones/vocales/oso.mp3',
   },
 ]
 
@@ -30,7 +39,7 @@ const vocales = ['a', 'e', 'i', 'o', 'u']
 function ActividadVocalesPage() {
   const [ejercicioActual, setEjercicioActual] = useState(0)
   const [vocalSeleccionada, setVocalSeleccionada] = useState('')
-  const [resultado, setResultado] = useState(null)
+  const [resultado, setResultado] = useState('')
   const [actividadTerminada, setActividadTerminada] = useState(false)
 
   const ejercicio = ejercicios[ejercicioActual]
@@ -44,6 +53,11 @@ function ActividadVocalesPage() {
     setResultado(esCorrecta ? 'correcto' : 'reintento')
   }
 
+  const reintentarEjercicio = () => {
+    setVocalSeleccionada('')
+    setResultado('')
+  }
+
   const siguienteEjercicio = () => {
     const esUltimo =
       ejercicioActual === ejercicios.length - 1
@@ -53,9 +67,9 @@ function ActividadVocalesPage() {
       return
     }
 
-    setEjercicioActual(ejercicioActual + 1)
+    setEjercicioActual((actual) => actual + 1)
     setVocalSeleccionada('')
-    setResultado(null)
+    setResultado('')
   }
 
   if (actividadTerminada) {
@@ -67,10 +81,10 @@ function ActividadVocalesPage() {
               className="vowels-result-card__icon"
               aria-hidden="true"
             >
-              ⭐
+              *
             </span>
 
-            <h1>¡Actividad completada!</h1>
+            <h1>Terminaste la actividad</h1>
 
             <p className="text-instruction">
               Identificaste la vocal inicial de cada palabra.
@@ -78,11 +92,12 @@ function ActividadVocalesPage() {
 
             <Button
               to="/lecciones/vocales"
-              variant="primary"
+              icon={ArrowRight}
+              iconPosition="right"
               size="large"
               fullWidth
             >
-              Volver a la lección
+              Volver a la leccion
             </Button>
           </Card>
         </section>
@@ -91,29 +106,42 @@ function ActividadVocalesPage() {
   }
 
   return (
-    <main className="page vowels-page lesson-theme--unit-1">
-      <section
-        className="vowels-page__content"
-        aria-labelledby="titulo-actividad"
-      >
+    <main
+      className="page vowels-page lesson-theme--unit-1"
+      aria-labelledby="titulo-actividad"
+    >
+      <section className="vowels-page__content">
         <BackButton
-          label="Volver a la lección"
+          label="Volver a la leccion"
           to="/lecciones/vocales"
         />
 
         <header className="vowels-page__header">
           <span className="vowels-page__unit">
-            Repaso de las vocales
+            Actividad 1
           </span>
 
           <h1 id="titulo-actividad">
             Encuentra la vocal inicial
           </h1>
 
-          <p className="text-instruction">
-            Observa la imagen y selecciona la vocal con la que
+          <p className="text-instruction vowels-page__instruction">
+            Escucha la palabra y selecciona la vocal con la que
             comienza su nombre.
           </p>
+
+          <Button
+            variant="audio"
+            size="large"
+            icon={Volume2}
+            onClick={() =>
+              playAudio(
+                '/audio/lecciones/vocales/instruccion-vocal-inicial.mp3',
+              )
+            }
+          >
+            Escuchar instruccion
+          </Button>
         </header>
 
         <ProgressBar
@@ -123,45 +151,59 @@ function ActividadVocalesPage() {
         />
 
         <Card className="vowels-exercise-card">
-          <div
+          {/*
+          <img
             className="vowels-exercise-card__image"
-            role="img"
-            aria-label={ejercicio.palabra}
-          >
-            {ejercicio.imagen}
-          </div>
+            src={ejercicio.imagen}
+            alt={ejercicio.palabra}
+          />
+          */}
 
           <h2 className="vowels-exercise-card__word">
             {ejercicio.palabra}
           </h2>
 
+          <Button
+            variant="audio"
+            size="large"
+            icon={Volume2}
+            fullWidth
+            onClick={() => playAudio(ejercicio.audio)}
+          >
+            Escuchar palabra
+          </Button>
+
           <p className="text-reading">
-            ¿Con qué vocal comienza?
+            Con que vocal comienza?
           </p>
 
           <div
             className="vowels-options"
             aria-label="Opciones de vocales"
           >
-            {vocales.map((vocal) => (
-              <Button
-                key={vocal}
-                variant={
-                  vocalSeleccionada === vocal
-                    ? 'selected'
-                    : 'secondary'
-                }
-                size="large"
-                className="vowels-options__button text-letter"
-                aria-pressed={vocalSeleccionada === vocal}
-                onClick={() => {
-                  setVocalSeleccionada(vocal)
-                  setResultado(null)
-                }}
-              >
-                {vocal}
-              </Button>
-            ))}
+            {vocales.map((vocal) => {
+              const selected = vocalSeleccionada === vocal
+
+              return (
+                <Button
+                  key={vocal}
+                  variant={
+                    selected
+                      ? 'selected'
+                      : 'secondary'
+                  }
+                  size="large"
+                  className="vowels-options__button text-letter"
+                  aria-pressed={selected}
+                  onClick={() => {
+                    setVocalSeleccionada(vocal)
+                    setResultado('')
+                  }}
+                >
+                  {vocal}
+                </Button>
+              )
+            })}
           </div>
 
           {resultado === 'correcto' && (
@@ -169,7 +211,7 @@ function ActividadVocalesPage() {
               className="feedback feedback--success"
               role="status"
             >
-              ¡Muy bien! Elegiste la vocal correcta.
+              Muy bien! Elegiste la vocal correcta.
             </p>
           )}
 
@@ -178,28 +220,40 @@ function ActividadVocalesPage() {
               className="feedback feedback--retry"
               role="status"
             >
-              Casi lo logras. Escucha la palabra e inténtalo otra vez.
+              Casi lo logras. Escucha la palabra e intentalo otra vez.
             </p>
           )}
 
           <div className="vowels-exercise-card__actions">
-            {resultado !== 'correcto' ? (
+            {!resultado && (
               <Button
-                variant="primary"
-                size="large"
                 icon={Check}
+                size="large"
                 fullWidth
                 disabled={!vocalSeleccionada}
                 onClick={comprobarRespuesta}
               >
                 Comprobar respuesta
               </Button>
-            ) : (
+            )}
+
+            {resultado === 'reintento' && (
               <Button
-                variant="primary"
+                variant="retry"
+                icon={RotateCcw}
                 size="large"
+                fullWidth
+                onClick={reintentarEjercicio}
+              >
+                Intentar nuevamente
+              </Button>
+            )}
+
+            {resultado === 'correcto' && (
+              <Button
                 icon={ArrowRight}
                 iconPosition="right"
+                size="large"
                 fullWidth
                 onClick={siguienteEjercicio}
               >
