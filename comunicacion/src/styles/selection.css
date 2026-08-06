@@ -87,6 +87,16 @@
 
 }
 
+/* Variante para mostrar las imágenes de tres en tres (ej. "figura diferente"
+   con muchas tarjetas): en vez de una grilla completa que se auto-ajusta,
+   siempre 3 columnas fijas por fila. */
+ 
+.selection-options--trio {
+ 
+    grid-template-columns: repeat(3, 1fr);
+ 
+}
+
 
 /* ============================================================
    Botón de selección

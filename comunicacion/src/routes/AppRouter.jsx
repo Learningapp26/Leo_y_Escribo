@@ -24,6 +24,10 @@ import ActividadMSonidosPage from '../pages/ActividadMSonidosPage'
 import ActividadMSilabasPage from '../pages/ActividadMSilabasPage'
 import ActividadMCompletarPage from '../pages/ActividadMCompletarPage'
 import ActividadMFinalPage from '../pages/ActividadMFinalPage'
+import LeccionTPage from '../pages/LeccionTPage'
+import ActividadTSonidosPage from '../pages/ActividadTSonidosPage'
+import ActividadTSilabasPage from '../pages/ActividadTSilabasPage'
+import ActividadTCompletarPage from '../pages/ActividadTCompletarPage'
 
 function AppRouter() {
   return (
@@ -64,7 +68,25 @@ function AppRouter() {
           element={<ActividadMFinalPage />}
         />
 
+        <Route
+          path="/lecciones/t"
+          element={<LeccionTPage />}
+        />
 
+        <Route
+          path="/actividad/t-sonidos"
+          element={<ActividadTSonidosPage />}
+        />
+
+        <Route
+          path="/actividad/t-completar"
+          element={<ActividadTCompletarPage />}
+        />
+
+        <Route
+          path="/actividad/t-silabas"
+          element={<ActividadTSilabasPage />}
+        />
 
         <Route
           path="/lecciones/y-conjuncion"
