@@ -16,6 +16,7 @@ function WelcomePage() {
 
         <div className="landing-page__projects">
           <Card
+            variant = "project"
             className="project-card project-card--language"
             imageSrc="/images/lenguaje.png"
             imageAlt="Niños aprendiendo lenguaje y leyendo"
@@ -29,6 +30,7 @@ function WelcomePage() {
           />
 
           <Card
+            variant = "project"
             className="project-card project-card--math project-card--upcoming"
             imageSrc="/images/mate.png"
             imageAlt="Niños aprendiendo matemáticas"
