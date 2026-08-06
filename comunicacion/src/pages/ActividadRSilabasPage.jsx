@@ -150,23 +150,16 @@ function ActividadRSilabasPage() {
               feedback === 'retry' && selected
 
             return (
-              <button
-                className={[
-                  'selection-button',
-                  selected
-                    ? 'selection-button--selected'
-                    : '',
-                  correct
-                    ? 'selection-button--correct'
-                    : '',
-                  incorrect
-                    ? 'selection-button--incorrect'
-                    : '',
-                ]
-                  .filter(Boolean)
-                  .join(' ')}
-                type="button"
+              <Button
                 key={item.syllable}
+                variant={
+                  incorrect
+                    ? 'retry'
+                    : selected
+                      ? 'primary'
+                      : 'secondary'
+                }
+                className="selection-button"
                 aria-pressed={selected}
                 onClick={() =>
                   selectSyllable(item.syllable)
@@ -175,7 +168,7 @@ function ActividadRSilabasPage() {
                 <span className="selection-word">
                   {item.syllable}
                 </span>
-              </button>
+              </Button>
             )
           })}
         </div>

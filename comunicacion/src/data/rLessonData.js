@@ -13,12 +13,12 @@ export const rReading = {
     'Así descubrieron quién se estaba comiendo las rosas y resolvieron el misterio.',
   ],
 
-  image: '/images/r/misterio-rosas.png',
+  image: '/images/lecciones/r/misterio-rosas.png',
 
   imageAlt:
     'Una mamá cuidando un jardín de rosas mientras un caballo observa cerca',
 
-  instructionAudio:
+  instructionAudio: 
     '/audio/lecciones/r/instruccion-lectura.mp3',
 
   readingAudio:
@@ -69,7 +69,7 @@ export const rSyllables = [
     id: 'ra',
     syllable: 'ra',
     word: 'rama',
-    image: '/images/r/rama.png',
+    image: '/images/lecciones/r/rama.png',
     imageAlt: 'Una rama',
     syllableAudio: '/audio/lecciones/r/ra.mp3',
     wordAudio: '/audio/lecciones/r/rama.mp3',
@@ -78,7 +78,7 @@ export const rSyllables = [
     id: 're',
     syllable: 're',
     word: 'reloj',
-    image: '/images/r/reloj.png',
+    image: '/images/lecciones/r/reloj.png',
     imageAlt: 'Un reloj',
     syllableAudio: '/audio/lecciones/r/re.mp3',
     wordAudio: '/audio/lecciones/r/reloj.mp3',
@@ -87,7 +87,7 @@ export const rSyllables = [
     id: 'ri',
     syllable: 'ri',
     word: 'risa',
-    image: '/images/r/risa.png',
+    image: '/images/lecciones/r/risa.png',
     imageAlt: 'Un niño sonriendo',
     syllableAudio: '/audio/lecciones/r/ri.mp3',
     wordAudio: '/audio/lecciones/r/risa.mp3',
@@ -96,7 +96,7 @@ export const rSyllables = [
     id: 'ro',
     syllable: 'ro',
     word: 'rosa',
-    image: '/images/r/rosa.png',
+    image: '/images/lecciones/r/rosa.png',
     imageAlt: 'Una rosa',
     syllableAudio: '/audio/lecciones/r/ro.mp3',
     wordAudio: '/audio/lecciones/r/rosa.mp3',
@@ -105,7 +105,7 @@ export const rSyllables = [
     id: 'ru',
     syllable: 'ru',
     word: 'rubí',
-    image: '/images/r/rubi.png',
+    image: '/images/lecciones/r/rubi.png',
     imageAlt: 'Un rubí',
     syllableAudio: '/audio/lecciones/r/ru.mp3',
     wordAudio: '/audio/lecciones/r/rubi.mp3',
@@ -116,7 +116,7 @@ export const rSoundExercises = [
   {
     id: 'rosa',
     word: 'rosa',
-    image: '/images/r/rosa.png',
+    image: '/images/lecciones/r/rosa.png',
     imageAlt: 'Una rosa',
     answer: 'fuerte',
     audio: '/audio/lecciones/r/rosa.mp3',
@@ -124,7 +124,7 @@ export const rSoundExercises = [
   {
     id: 'rama',
     word: 'rama',
-    image: '/images/r/rama.png',
+    image: '/images/lecciones/r/rama.png',
     imageAlt: 'Una rama',
     answer: 'fuerte',
     audio: '/audio/lecciones/r/rama.mp3',
@@ -132,7 +132,7 @@ export const rSoundExercises = [
   {
     id: 'radio',
     word: 'radio',
-    image: '/images/r/radio.png',
+    image: '/images/lecciones/r/radio.png',
     imageAlt: 'Una radio',
     answer: 'fuerte',
     audio: '/audio/lecciones/r/radio.mp3',
@@ -140,7 +140,7 @@ export const rSoundExercises = [
   {
     id: 'reloj',
     word: 'reloj',
-    image: '/images/r/reloj.png',
+    image: '/images/lecciones/r/reloj.png',
     imageAlt: 'Un reloj',
     answer: 'fuerte',
     audio: '/audio/lecciones/r/reloj.mp3',
@@ -148,7 +148,7 @@ export const rSoundExercises = [
   {
     id: 'loro',
     word: 'loro',
-    image: '/images/r/loro.png',
+    image: '/images/lecciones/r/loro.png',
     imageAlt: 'Un loro',
     answer: 'suave',
     audio: '/audio/lecciones/r/loro.mp3',
@@ -156,7 +156,7 @@ export const rSoundExercises = [
   {
     id: 'toro',
     word: 'toro',
-    image: '/images/r/toro.png',
+    image: '/images/lecciones/r/toro.png',
     imageAlt: 'Un toro',
     answer: 'suave',
     audio: '/audio/lecciones/r/toro.mp3',
@@ -164,7 +164,7 @@ export const rSoundExercises = [
   {
     id: 'pera',
     word: 'pera',
-    image: '/images/r/pera.png',
+    image: '/images/lecciones/r/pera.png',
     imageAlt: 'Una pera',
     answer: 'suave',
     audio: '/audio/lecciones/r/pera.mp3',
@@ -172,7 +172,7 @@ export const rSoundExercises = [
   {
     id: 'mariposa',
     word: 'mariposa',
-    image: '/images/r/mariposa.png',
+    image: '/images/lecciones/r/mariposa.png',
     imageAlt: 'Una mariposa',
     answer: 'suave',
     audio: '/audio/lecciones/r/mariposa.mp3',
@@ -182,7 +182,7 @@ export const rSoundExercises = [
 export const rCompletionExercises = [
   {
     id: 'rosa',
-    image: '/images/r/rosa.png',
+    image: '/images/lecciones/r/rosa.png',
     imageAlt: 'Una rosa',
     prefix: '',
     suffix: 'sa',
@@ -195,7 +195,7 @@ export const rCompletionExercises = [
   },
   {
     id: 'risa',
-    image: '/images/r/risa.png',
+    image: '/images/lecciones/r/risa.png',
     imageAlt: 'Un niño sonriendo',
     prefix: '',
     suffix: 'sa',
@@ -208,7 +208,7 @@ export const rCompletionExercises = [
   },
   {
     id: 'mora',
-    image: '/images/r/mora.png',
+    image: '/images/lecciones/r/mora.png',
     imageAlt: 'Una mora',
     prefix: 'mo',
     suffix: '',
@@ -221,7 +221,7 @@ export const rCompletionExercises = [
   },
   {
     id: 'rulo',
-    image: '/images/r/rulo.png',
+    image: '/images/lecciones/r/rulo.png',
     imageAlt: 'Un rulo de cabello',
     prefix: '',
     suffix: 'lo',
@@ -234,7 +234,7 @@ export const rCompletionExercises = [
   },
   {
     id: 'mariposa',
-    image: '/images/r/mariposa.png',
+    image: '/images/lecciones/r/mariposa.png',
     imageAlt: 'Una mariposa',
     prefix: 'ma',
     suffix: 'posa',
@@ -248,7 +248,7 @@ export const rCompletionExercises = [
   },
   {
     id: 'repisa',
-    image: '/images/r/repisa.png',
+    image: '/images/lecciones/r/repisa.png',
     imageAlt: 'Una repisa',
     prefix: '',
     suffix: 'pisa',

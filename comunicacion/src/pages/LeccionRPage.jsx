@@ -162,35 +162,25 @@ function LeccionRPage() {
                       option !== question.answer
 
                     return (
-                      <button
-                        className={[
-                          'selection-button',
-                          selected
-                            ? 'selection-button--selected'
-                            : '',
-                          correct
-                            ? 'selection-button--correct'
-                            : '',
-                          incorrect
-                            ? 'selection-button--incorrect'
-                            : '',
-                        ]
-                          .filter(Boolean)
-                          .join(' ')}
-                        type="button"
+                      <Button
                         key={option}
+                        variant={
+                          incorrect
+                            ? 'retry'
+                            : selected
+                              ? 'primary'
+                              : 'secondary'
+                        }
+                        className="selection-button"
                         aria-pressed={selected}
                         onClick={() =>
-                          selectAnswer(
-                            question.id,
-                            option,
-                          )
+                          selectAnswer(question.id, option)
                         }
                       >
                         <span className="selection-word">
                           {option}
                         </span>
-                      </button>
+                      </Button>
                     )
                   })}
                 </div>

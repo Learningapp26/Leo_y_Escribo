@@ -152,23 +152,16 @@ function ActividadRSonidosPage() {
               feedback === 'retry' && selected
 
             return (
-              <button
-                className={[
-                  'selection-button',
-                  selected
-                    ? 'selection-button--selected'
-                    : '',
-                  correct
-                    ? 'selection-button--correct'
-                    : '',
-                  incorrect
-                    ? 'selection-button--incorrect'
-                    : '',
-                ]
-                  .filter(Boolean)
-                  .join(' ')}
-                type="button"
+              <Button
                 key={option.value}
+                variant={
+                  incorrect
+                    ? 'retry'
+                    : selected
+                      ? 'primary'
+                      : 'secondary'
+                }
+                className="selection-button"
                 aria-pressed={selected}
                 onClick={() =>
                   selectAnswer(option.value)
@@ -177,7 +170,7 @@ function ActividadRSonidosPage() {
                 <span className="selection-word">
                   {option.label}
                 </span>
-              </button>
+              </Button>
             )
           })}
         </div>
