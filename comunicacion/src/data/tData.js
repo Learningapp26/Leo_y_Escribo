@@ -321,4 +321,84 @@ export const tWordCompletion = [
     answer: 'tu',
   },
 ]
+
+
+// ============================================================
+// ACTIVIDAD DE COMPLETAR PALABRAS
+
+// Audio de instrucción para la fase 1
+export const tSyllableSelectionInstructionAudio =
+  '/audio/lecciones/t/instruccion-elegir-silaba-t.mp3'
+ 
+// Fase 1: imagen + audio, elegir la sílaba que está en la palabra
+// (sin importar la posición) contra el banco completo de 5 sílabas
+export const tSyllableSelection = [
+  {
+    id: 'pito',
+    name: 'pito',
+    image: '/images/lecciones/t/pito.png',
+    wordAudio: '/audio/lecciones/t/pito.mp3',
+    answer: 'to',
+  },
+  {
+    id: 'tinaja',
+    name: 'tinaja',
+    image: '/images/lecciones/t/tinaja.png',
+    wordAudio: '/audio/lecciones/t/tinaja.mp3',
+    answer: 'ti',
+  },
+  {
+    id: 'gato',
+    name: 'gato',
+    image: '/images/lecciones/t/gato.png',
+    wordAudio: '/audio/lecciones/t/gato.mp3',
+    answer: 'to',
+  },
+  {
+    id: 'pastel',
+    name: 'pastel',
+    image: '/images/lecciones/t/pastel.png',
+    wordAudio: '/audio/lecciones/t/pastel.mp3',
+    answer: 'te',
+  },
+  {
+    id: 'maleta',
+    name: 'maleta',
+    image: '/images/lecciones/t/maleta.png',
+    wordAudio: '/audio/lecciones/t/maleta.mp3',
+    answer: 'ta',
+  },
+
+  {
+    id: 'estufa',
+    name: 'estufa',
+    image: '/images/lecciones/t/estufa.png',
+    wordAudio: '/audio/lecciones/t/estufa.mp3',
+    answer: 'tu',
+  },
+
+]
+ 
+// Audio de instrucción para la fase 2 (formar 3 palabras con 3 sílabas)
+export const tJoinInstructionAudio =
+  '/audio/lecciones/t/instruccion-formar-tres-t.mp3'
+ 
+// Fase 2: formar palabras tocando sílabas (se reutilizan las mismas 3
+// sílabas para armar 3 palabras distintas; no se puede repetir una palabra ya encontrada).
+
+export const tSyllableJoin = [
+  {
+    id: 'palabra1t',
+    words: ['toma', 'pato', 'mapa'],
+    options: ['to', 'ma', 'pa'],
+  },
+  {
+    id: 'palabra2t',
+    words: ['taso', 'piso', 'pita'],
+    options: ['ta', 'so', 'pi'],
+  },
+]
+ 
+ 
+
  

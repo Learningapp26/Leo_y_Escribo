@@ -27,6 +27,7 @@ import ActividadMFinalPage from '../pages/ActividadMFinalPage'
 import LeccionTPage from '../pages/LeccionTPage'
 import ActividadTSonidosPage from '../pages/ActividadTSonidosPage'
 import ActividadTSilabasPage from '../pages/ActividadTSilabasPage'
+import ActividadTCompletarPage from '../pages/ActividadTCompletarPage'
 
 function AppRouter() {
   return (
@@ -77,6 +78,10 @@ function AppRouter() {
           element={<ActividadTSonidosPage />}
         />
 
+        <Route
+          path="/actividad/t-completar"
+          element={<ActividadTCompletarPage />}
+        />
 
         <Route
           path="/actividad/t-silabas"
