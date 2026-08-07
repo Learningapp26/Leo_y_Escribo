@@ -35,7 +35,7 @@ export const MComprehensionQuestions = [
 
 // Fase 1: solo escuchar la palabra mamá y el sonido /m/
 export const mSoundIntro = {
-  instructionAudio: '/audio/lecciones/m/instruccion-sonido-m.mp3',
+  instructionAudio: '/audio/lecciones/m/Iiiinstrucciones-m.mp3',
   mainWord: {
     name: 'mamá',
     image: '/images/lecciones/m/mama.png',
@@ -46,7 +46,7 @@ export const mSoundIntro = {
 
 // Audio de instrucción para la fase 2 (seleccionar las que empiezan con /m/)
 export const mSelectionInstructionAudio =
-  '/audio/lecciones/m/instruccion-seleccion-m.mp3'
+  '/audio/lecciones/m/instruccion-sonido-m.mp3'
 
 // Audio de instrucción para la fase 3 (parejas que empiezan con /m/)
 export const mPairsInstructionAudio =
@@ -198,7 +198,7 @@ export const mSyllableSearch = {
  
 // Audio de instrucción para la fase "asociar" (imagen + palabra + sílaba)
 export const mAssociationInstructionAudio =
-  '/audio/lecciones/m/instruccion-asociar-m.mp3'
+  '/audio/lecciones/m/Toca la silaba.mp3'
  
 // Asociar imagen, palabra y sílaba con M.
 export const mSyllableAssociation = [
