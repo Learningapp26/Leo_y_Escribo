@@ -86,7 +86,7 @@ export const lSoundPairMatching = {
       id: 'limon',
       name: 'limón',
       image: '/images/lecciones/l/limon.png',
-      audio: '/audio/lecciones/l/limon.mp3',
+      audio: '/audio/lecciones/m/limon.mp3',
       pairId: 'li',
     },
     {

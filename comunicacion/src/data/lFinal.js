@@ -29,7 +29,7 @@ export const lPracticeWords = [
     id: 'mula',
     word: 'mula',
     image: '/images/lecciones/l/mula.png',
-    audio: '/audio/lecciones/l/mula.mp3',
+    audio: '/audio/lecciones/m/mula.mp3',
   },
   {
     id: 'lalo',

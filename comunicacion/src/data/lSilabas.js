@@ -43,15 +43,15 @@ export const lSyllableSearch = {
   instructionAudio: '/audio/lecciones/l/instruccion-buscar-silabas.mp3',
   targetSyllables: ['la', 'le', 'li', 'lo', 'lu'],
   options: [
-    { syllable: 'la', audio: '/audio/lecciones/l/silaba-la.mp3' },
-    { syllable: 'ma', audio: '/audio/lecciones/l/silaba-ma.mp3' },
+    { syllable: 'la', audio: '/audio/lecciones/m/silaba-la.mp3' },
+    { syllable: 'ma', audio: '/audio/lecciones/m/silaba-ma.mp3' },
     { syllable: 'le', audio: '/audio/lecciones/l/silaba-le.mp3' },
-    { syllable: 'sa', audio: '/audio/lecciones/l/silaba-sa.mp3' },
+    { syllable: 'sa', audio: '/audio/lecciones/m/silaba-sa.mp3' },
     { syllable: 'li', audio: '/audio/lecciones/l/silaba-li.mp3' },
-    { syllable: 'ta', audio: '/audio/lecciones/l/silaba-ta.mp3' },
+    { syllable: 'ta', audio: '/audio/lecciones/m/silaba-ta.mp3' },
     { syllable: 'lo', audio: '/audio/lecciones/l/silaba-lo.mp3' },
-    { syllable: 'da', audio: '/audio/lecciones/l/silaba-da.mp3' },
-    { syllable: 'lu', audio: '/audio/lecciones/l/silaba-lu.mp3' },
+    { syllable: 'da', audio: '/audio/lecciones/m/silaba-da.mp3' },
+    { syllable: 'lu', audio: '/audio/lecciones/m/silaba-lu.mp3' },
     { syllable: 'pa', audio: '/audio/lecciones/l/silaba-pa.mp3' },
   ],
 }
@@ -60,11 +60,11 @@ export const lSyllableSearch = {
 export const lLetterPresentation = {
   soundAudio: '/audio/lecciones/l/sonido-l.mp3',
   combinations: [
-    { syllable: 'la', audio: '/audio/lecciones/l/silaba-la.mp3' },
+    { syllable: 'la', audio: '/audio/lecciones/m/silaba-la.mp3' },
     { syllable: 'le', audio: '/audio/lecciones/l/silaba-le.mp3' },
     { syllable: 'li', audio: '/audio/lecciones/l/silaba-li.mp3' },
     { syllable: 'lo', audio: '/audio/lecciones/l/silaba-lo.mp3' },
-    { syllable: 'lu', audio: '/audio/lecciones/l/silaba-lu.mp3' },
+    { syllable: 'lu', audio: '/audio/lecciones/m/silaba-lu.mp3' },
   ],
 }
 
@@ -76,7 +76,7 @@ export const lSyllableAssociation = [
     highlighted: 'lu',
     rest: 'na',
     image: '/images/lecciones/l/luna.png',
-    syllableAudio: '/audio/lecciones/l/silaba-lu.mp3',
+    syllableAudio: '/audio/lecciones/m/silaba-lu.mp3',
     wordAudio: '/audio/lecciones/l/luna.mp3',
   },
   {
@@ -85,7 +85,7 @@ export const lSyllableAssociation = [
     highlighted: 'la',
     rest: 'na',
     image: '/images/lecciones/l/lana.png',
-    syllableAudio: '/audio/lecciones/l/silaba-la.mp3',
+    syllableAudio: '/audio/lecciones/m/silaba-la.mp3',
     wordAudio: '/audio/lecciones/l/lana.mp3',
   },
   {
