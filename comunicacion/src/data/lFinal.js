@@ -40,6 +40,15 @@ export const lPracticeWords = [
   },
 ]
 
+export const lSentenceInstructionAudio =
+  '/audio/lecciones/l/instruccion-oraciones-l.mp3'
+
+export const lWordCountingInstructionAudio =
+  '/audio/lecciones/l/instruccion-contar-palabras-l.mp3'
+
+export const lWordImageMatchInstructionAudio =
+  '/audio/lecciones/l/instruccion-relacionar-imagenes-l.mp3'
+
 // Página 18 (actividad 2): completar oraciones con imágenes.
 export const lSentenceCompletion = [
   {
@@ -94,28 +103,28 @@ export const lWordCounting = [
   {
     id: 'lulu-hoja',
     words: ['Lulu', 'lee', 'la', 'hoja'],
-    audio: '/audio/lecciones/l/contar-lulu-hoja.mp3',
+    audio: '/audio/lecciones/l/oracion-lulu-hoja.mp3',
     answer: 4,
     options: [3, 4, 5],
   },
   {
     id: 'lalo-ventana',
     words: ['Lalo', 'limpia', 'la', 'ventana'],
-    audio: '/audio/lecciones/l/contar-lalo-ventana.mp3',
+    audio: '/audio/lecciones/l/oracion-lalo-ventana.mp3',
     answer: 4,
     options: [3, 4, 5],
   },
   {
     id: 'meme-lima',
     words: ['Meme', 'corta', 'la', 'lima'],
-    audio: '/audio/lecciones/l/contar-meme-lima.mp3',
+    audio: '/audio/lecciones/l/oracion-meme-lima.mp3',
     answer: 4,
     options: [3, 4, 5],
   },
   {
     id: 'lili-paleta',
     words: ['Lili', 'lame', 'la', 'paleta'],
-    audio: '/audio/lecciones/l/contar-lili-paleta.mp3',
+    audio: '/audio/lecciones/l/oracion-lili-paleta.mp3',
     answer: 4,
     options: [3, 4, 5],
   },

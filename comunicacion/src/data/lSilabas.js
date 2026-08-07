@@ -48,7 +48,7 @@ export const lSyllableSearch = {
     { syllable: 'le', audio: '/audio/lecciones/l/silaba-le.mp3' },
     { syllable: 'sa', audio: '/audio/lecciones/m/silaba-sa.mp3' },
     { syllable: 'li', audio: '/audio/lecciones/l/silaba-li.mp3' },
-    { syllable: 'ta', audio: '/audio/lecciones/m/silaba-ta.mp3' },
+    { syllable: 'ta', audio: '/audio/lecciones/l/silaba-ta.mp3' },
     { syllable: 'lo', audio: '/audio/lecciones/l/silaba-lo.mp3' },
     { syllable: 'da', audio: '/audio/lecciones/m/silaba-da.mp3' },
     { syllable: 'lu', audio: '/audio/lecciones/m/silaba-lu.mp3' },
@@ -67,6 +67,9 @@ export const lLetterPresentation = {
     { syllable: 'lu', audio: '/audio/lecciones/m/silaba-lu.mp3' },
   ],
 }
+
+export const lSyllableAssociationInstructionAudio =
+  '/audio/lecciones/l/instruccion-asociar-silabas-l.mp3'
 
 // Página 15 (actividad 3): asociar imagen, palabra y sílaba con L.
 export const lSyllableAssociation = [

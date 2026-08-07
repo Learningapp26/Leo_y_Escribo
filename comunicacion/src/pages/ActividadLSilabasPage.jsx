@@ -14,6 +14,7 @@ import ProgressBar from '../components/progress/ProgressBar'
 import { getLessonThemeClass } from '../data/lessonColors'
 import {
   lLetterPresentation,
+  lSyllableAssociationInstructionAudio,
   lSyllableAssociation,
   lSyllableCountWords,
   lSyllableSearch,
@@ -382,10 +383,20 @@ function ActividadLSilabasPage() {
 
       {phase === 'asociar' && (
         <Card className="selection-card">
-          <p className="text-instruction">
-            Toca la sílaba resaltada o la palabra completa para
-            escucharlas.
-          </p>
+          <div className="selection-instructions">
+            <p className="text-instruction">
+              Toca la sílaba resaltada o la palabra completa para
+              escucharlas.
+            </p>
+
+            <Button
+              variant="audio"
+              icon={Volume2}
+              onClick={() => playAudio(lSyllableAssociationInstructionAudio)}
+            >
+              Escuchar instrucción
+            </Button>
+          </div>
 
           <img
             className="selection-image selection-image--featured"

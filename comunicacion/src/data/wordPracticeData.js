@@ -40,7 +40,7 @@ export const wordPracticeGroups = [
     words: [
       { id: 'ala', word: 'ala', audio: '/audio/lecciones/l/ala.mp3' },
       { id: 'luna', word: 'luna', audio: '/audio/lecciones/l/luna.mp3' },
-      { id: 'limon', word: 'limón', audio: '/audio/lecciones/l/limon.mp3' },
+      { id: 'limon', word: 'limón', audio: '/audio/lecciones/m/limon.mp3' },
       { id: 'lechuga', word: 'lechuga', audio: '/audio/lecciones/l/lechuga.mp3' },
     ],
     find: {

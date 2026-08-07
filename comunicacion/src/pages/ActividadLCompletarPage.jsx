@@ -8,6 +8,7 @@ import ProgressBar from '../components/progress/ProgressBar'
 import { getLessonThemeClass } from '../data/lessonColors'
 import {
   lSyllableJoin,
+  lSyllableJoinInstructionAudio,
   lSyllableOptions,
   lWordCompletion,
 } from '../data/lCompletar'
@@ -221,9 +222,19 @@ function ActividadLCompletarPage() {
 
       {phase === 'unir' && (
         <Card className="selection-card">
-          <p className="text-instruction">
-            Une las sílabas para formar una palabra.
-          </p>
+          <div className="selection-instructions">
+            <p className="text-instruction">
+              Une las sílabas para formar una palabra.
+            </p>
+
+            <Button
+              variant="audio"
+              icon={Volume2}
+              onClick={() => playAudio(lSyllableJoinInstructionAudio)}
+            >
+              Escuchar instrucción
+            </Button>
+          </div>
 
           <div className="selection-columns">
             <section className="selection-options" aria-label="Primera sílaba">

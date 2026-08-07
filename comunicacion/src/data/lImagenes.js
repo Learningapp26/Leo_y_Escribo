@@ -1,4 +1,5 @@
 export const lSoundIntro = {
+  instructionAudio: '/audio/lecciones/l/instruccion-sonido-l.mp3',
   mainWord: {
     name: 'luna',
     image: '/images/lecciones/l/luna.png',
@@ -26,6 +27,12 @@ export const lSoundIntro = {
     },
   ],
 }
+
+export const lSelectionInstructionAudio =
+  '/audio/lecciones/l/instruccion-seleccion-imagenes-l.mp3'
+
+export const lPairsInstructionAudio =
+  '/audio/lecciones/l/instruccion-parejas-inicio-l.mp3'
 
 // Se reutiliza en la selección de imágenes que inician con /l/
 // y en la actividad de unir imágenes por sonido inicial parecido.

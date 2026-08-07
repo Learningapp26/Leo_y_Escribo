@@ -10,7 +10,10 @@ import { getLessonThemeClass } from '../data/lessonColors'
 import {
   lPracticeWords,
   lSentenceCompletion,
+  lSentenceInstructionAudio,
   lWordCounting,
+  lWordCountingInstructionAudio,
+  lWordImageMatchInstructionAudio,
   lWordImageMatch,
 } from '../data/lFinal'
 import { playAudio } from '../lib/audioPlayer'
@@ -259,9 +262,19 @@ function ActividadLFinalPage() {
 
       {phase === 'oraciones' && (
         <Card className="selection-card">
-          <p className="text-instruction">
-            Escucha la oración y elige la imagen que la completa.
-          </p>
+          <div className="selection-instructions">
+            <p className="text-instruction">
+              Escucha la oración y elige la imagen que la completa.
+            </p>
+
+            <Button
+              variant="audio"
+              icon={Volume2}
+              onClick={() => playAudio(lSentenceInstructionAudio)}
+            >
+              Escuchar instrucción
+            </Button>
+          </div>
 
           <Button
             variant="audio"
@@ -376,10 +389,20 @@ function ActividadLFinalPage() {
 
       {phase === 'contar' && (
         <Card className="selection-card">
-          <p className="text-instruction">
-            Toca cada palabra de la oración para contarla. Luego elige
-            cuántas palabras son.
-          </p>
+          <div className="selection-instructions">
+            <p className="text-instruction">
+              Toca cada palabra de la oración para contarla. Luego elige
+              cuántas palabras son.
+            </p>
+
+            <Button
+              variant="audio"
+              icon={Volume2}
+              onClick={() => playAudio(lWordCountingInstructionAudio)}
+            >
+              Escuchar instrucción
+            </Button>
+          </div>
 
           <Button
             variant="audio"
@@ -509,9 +532,19 @@ function ActividadLFinalPage() {
 
       {phase === 'relacionar' && (
         <Card className="selection-card">
-          <p className="text-instruction">
-            Escucha la palabra y selecciona la imagen que corresponde.
-          </p>
+          <div className="selection-instructions">
+            <p className="text-instruction">
+              Escucha la palabra y selecciona la imagen que corresponde.
+            </p>
+
+            <Button
+              variant="audio"
+              icon={Volume2}
+              onClick={() => playAudio(lWordImageMatchInstructionAudio)}
+            >
+              Escuchar instrucción
+            </Button>
+          </div>
 
           <span className="text-word">{matchItem.word}</span>
 

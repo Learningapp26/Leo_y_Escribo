@@ -1,6 +1,9 @@
 // Página 17 (actividad 1): completar la palabra con la sílaba que falta.
 export const lSyllableOptions = ['la', 'le', 'li', 'lo', 'lu']
 
+export const lSyllableJoinInstructionAudio =
+  '/audio/lecciones/l/instruccion-unir-silabas-l.mp3'
+
 export const lWordCompletion = [
   {
     id: 'luna',

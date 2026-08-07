@@ -6,7 +6,13 @@ import Card from '../components/common/Card'
 import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
 import { getLessonThemeClass } from '../data/lessonColors'
-import { lImagePool, lSoundIntro, lSoundPairMatching } from '../data/lImagenes'
+import {
+  lImagePool,
+  lPairsInstructionAudio,
+  lSelectionInstructionAudio,
+  lSoundIntro,
+  lSoundPairMatching,
+} from '../data/lImagenes'
 import { playAudio } from '../lib/audioPlayer'
 
 const PHASES = ['sonido', 'seleccion', 'parejas', 'unir-sonidos']
@@ -201,6 +207,14 @@ function ActividadLImagenesPage() {
             <p className="text-instruction">
               Escucha el sonido de la letra L y la palabra luna.
             </p>
+
+            <Button
+              variant="audio"
+              icon={Volume2}
+              onClick={() => playAudio(lSoundIntro.instructionAudio)}
+            >
+              Escuchar instrucción
+            </Button>
           </div>
 
           <img
@@ -264,6 +278,14 @@ function ActividadLImagenesPage() {
             <p className="text-instruction">
               Toca las imágenes cuyo nombre empieza con el sonido de luna.
             </p>
+
+            <Button
+              variant="audio"
+              icon={Volume2}
+              onClick={() => playAudio(lSelectionInstructionAudio)}
+            >
+              Escuchar instrucción
+            </Button>
           </div>
 
           <div className="selection-options">
@@ -353,6 +375,14 @@ function ActividadLImagenesPage() {
             <p className="text-instruction">
               Selecciona dos imágenes que empiecen con el mismo sonido.
             </p>
+
+            <Button
+              variant="audio"
+              icon={Volume2}
+              onClick={() => playAudio(lPairsInstructionAudio)}
+            >
+              Escuchar instrucción
+            </Button>
           </div>
 
           <div className="selection-options">
