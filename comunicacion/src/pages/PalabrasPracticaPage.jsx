@@ -36,6 +36,7 @@ function PalabrasPracticaPage() {
   const themeClass = getLessonThemeClass(group.lessonId)
   const allWordsRead = readWordIds.length === group.words.length
   const findTargets = group.find.options.filter((option) => option.isTarget)
+  const groupHasAudio = group.words.some((word) => word.audio)
 
   const resetPractice = (nextGroupId) => {
     setGroupId(nextGroupId)
@@ -54,7 +55,7 @@ function PalabrasPracticaPage() {
     setReadWordIds((current) =>
       current.includes(word.id) ? current : [...current, word.id],
     )
-    playAudio(word.audio)
+    if (word.audio) playAudio(word.audio)
   }
 
   const toggleFindWord = (id) => {
@@ -179,7 +180,8 @@ function PalabrasPracticaPage() {
             <BookOpen aria-hidden="true" />
             <h2>{group.title}</h2>
             <p className="text-instruction">
-              Toca cada palabra, léela en voz alta y escúchala.
+              Toca cada palabra y léela en voz alta.
+              {groupHasAudio && ' También puedes escucharla.'}
             </p>
           </div>
 
@@ -200,7 +202,9 @@ function PalabrasPracticaPage() {
                   aria-pressed={isRead}
                   onClick={() => markWordAsRead(word)}
                 >
-                  <Volume2 className="word-practice-word__icon" aria-hidden="true" />
+                  {word.audio && (
+                    <Volume2 className="word-practice-word__icon" aria-hidden="true" />
+                  )}
                   {word.word}
                 </Button>
               )

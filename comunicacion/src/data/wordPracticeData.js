@@ -66,6 +66,38 @@ export const wordPracticeGroups = [
     },
   },
   {
+    lessonId: 's',
+    label: 'S',
+    title: 'Palabras con S',
+    words: [
+      { id: 'sol', word: 'sol' },
+      { id: 'sopa', word: 'sopa' },
+      { id: 'sala', word: 'sala' },
+      { id: 'suma', word: 'suma' },
+    ],
+    find: {
+      prompt: 'Marca las palabras que empiezan con S.',
+      options: [
+        { id: 'sol', word: 'sol', isTarget: true },
+        { id: 'sopa', word: 'sopa', isTarget: true },
+        { id: 'mama', word: 'mamá', isTarget: false },
+        { id: 'sala', word: 'sala', isTarget: true },
+        { id: 'luna', word: 'luna', isTarget: false },
+        { id: 'suma', word: 'suma', isTarget: true },
+      ],
+    },
+    shortest: {
+      prompt: '¿Cuál es la palabra más corta?',
+      answer: 'sol',
+      options: ['sol', 'sopa', 'sala'],
+    },
+    syllables: {
+      word: 'sopa',
+      parts: ['so', 'pa'],
+      options: [2, 3, 4],
+    },
+  },
+  {
     lessonId: 'n',
     label: 'N',
     title: 'Palabras con N',
