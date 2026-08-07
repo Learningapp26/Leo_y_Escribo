@@ -3,6 +3,7 @@ import { ArrowRight, Check, RotateCcw } from 'lucide-react'
 
 import Button from '../components/common/Button'
 import Card from '../components/common/Card'
+import AudioPlaceholderButton from '../components/common/AudioPlaceholderButton'
 import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
 import StarsCounter from '../components/progress/StarsCounter'
@@ -83,6 +84,9 @@ function ActividadSFinalPage() {
             Practicaste el sonido /s/, las sílabas sa, se, si, so y su, y palabras sencillas.
           </p>
           <StarsCounter current={stars} total={PHASES.length} label="Estrellas" />
+          <AudioPlaceholderButton fullWidth>
+            Escuchar felicitación
+          </AudioPlaceholderButton>
           <Button to="/lecciones" icon={ArrowRight} iconPosition="right" size="large" fullWidth>
             Volver a las lecciones
           </Button>
@@ -97,6 +101,10 @@ function ActividadSFinalPage() {
         <p className="text-instruction">{activity.prompt}</p>
         {'pattern' in activity && <p className="completion-word-pattern">{activity.pattern}</p>}
         {'sentence' in activity && <p className="text-reading">{activity.sentence}</p>}
+        <AudioPlaceholderButton>Escuchar instrucción</AudioPlaceholderButton>
+        {'sentence' in activity && (
+          <AudioPlaceholderButton>Escuchar oración</AudioPlaceholderButton>
+        )}
       </div>
       <div className="selection-options">
         {activity.options.map((option) => {
@@ -171,6 +179,7 @@ function ActividadSFinalPage() {
         <Card className="selection-card">
           <div className="selection-instructions">
             <p className="text-instruction">{sFinalActivities.word.prompt}</p>
+            <AudioPlaceholderButton>Escuchar instrucción</AudioPlaceholderButton>
           </div>
           <p className="completion-word-pattern" aria-live="polite">
             {wordSlots[0]?.syllable ?? '__'} {wordSlots[1]?.syllable ?? '__'}

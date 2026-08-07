@@ -3,6 +3,7 @@ import { ArrowRight, Check, RotateCcw } from 'lucide-react'
 
 import Button from '../components/common/Button'
 import Card from '../components/common/Card'
+import AudioPlaceholderButton from '../components/common/AudioPlaceholderButton'
 import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
 import { getLessonThemeClass } from '../data/lessonColors'
@@ -67,6 +68,7 @@ function ActividadSCompletarPage() {
         <div className="selection-instructions">
           <p className="text-instruction">Toca dos sílabas en orden para formar una palabra.</p>
           <p>Si cambias de idea, toca nuevamente una sílaba para quitarla.</p>
+          <AudioPlaceholderButton>Escuchar instrucción</AudioPlaceholderButton>
         </div>
 
         <p className="completion-word-pattern" aria-live="polite" aria-label="Palabra formada">

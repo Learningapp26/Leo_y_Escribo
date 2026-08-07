@@ -2,6 +2,7 @@ import { ArrowRight, Images, ListMusic, PenLine, Sparkles } from 'lucide-react'
 
 import Button from '../components/common/Button'
 import Card from '../components/common/Card'
+import AudioPlaceholderButton from '../components/common/AudioPlaceholderButton'
 import BackButton from '../components/navigation/BackButton'
 import { getLessonThemeClass } from '../data/lessonColors'
 import { sComprehensionQuestions, sReading } from '../data/sData'
@@ -21,6 +22,9 @@ function LeccionSPage() {
         <p className="text-instruction">
           Conoce la letra S, lee una fábula y practica sus sonidos y sílabas.
         </p>
+        <AudioPlaceholderButton size="large">
+          Escuchar instrucción
+        </AudioPlaceholderButton>
       </header>
 
       <Card className="reading-card">
@@ -36,6 +40,11 @@ function LeccionSPage() {
           <p className="text-instruction">
             Lee despacio y busca las palabras que tengan la letra S.
           </p>
+          <div className="reading-audio">
+            <AudioPlaceholderButton size="large">
+              Escuchar la historia
+            </AudioPlaceholderButton>
+          </div>
         </div>
 
         <div className="reading-image">

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 import Button from '../components/common/Button'
 import Card from '../components/common/Card'
+import AudioPlaceholderButton from '../components/common/AudioPlaceholderButton'
 import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
 import { getLessonThemeClass } from '../data/lessonColors'
@@ -55,6 +56,7 @@ function SoundSelection({ choices, targetKey, instruction, onContinue, continueL
       <div className="selection-instructions">
         <p className="text-instruction">{instruction}</p>
         <p>Escoge todas las respuestas correctas y luego comprueba.</p>
+        <AudioPlaceholderButton>Escuchar instrucción</AudioPlaceholderButton>
       </div>
       <div className="selection-options">
         {choices.map((item) => (
@@ -121,7 +123,11 @@ function ActividadSSonidosPage() {
           <div className="selection-instructions">
             <p className="text-instruction">La palabra sapo empieza con el sonido /s/.</p>
             <p>Haz el sonido suavemente: sss. Mira la S mayúscula y la s minúscula.</p>
+            <AudioPlaceholderButton>Escuchar instrucción</AudioPlaceholderButton>
           </div>
+          <AudioPlaceholderButton size="large">
+            Escuchar el sonido /s/
+          </AudioPlaceholderButton>
           <div className="selection-options">
             <div className="selection-button" aria-label="S mayúscula">
               <span className="text-word">S</span>
@@ -130,6 +136,7 @@ function ActividadSSonidosPage() {
               <span className="text-word">s</span>
             </div>
           </div>
+          <AudioPlaceholderButton>Escuchar la palabra sapo</AudioPlaceholderButton>
           <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth onClick={() => setPhaseIndex(1)}>
             Practicar palabras
           </Button>

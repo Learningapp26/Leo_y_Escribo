@@ -25,7 +25,7 @@ export const wordPracticeGroups = [
     shortest: {
       prompt: '¿Cuál es la palabra más corta?',
       answer: 'miel',
-      options: ['miel', 'mamá', 'mariposa'],
+      options: ['miel', 'mañana', 'mariposa'],
     },
     syllables: {
       word: 'mariposa',

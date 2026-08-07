@@ -3,6 +3,7 @@ import { ArrowRight, Check, RotateCcw } from 'lucide-react'
 
 import Button from '../components/common/Button'
 import Card from '../components/common/Card'
+import AudioPlaceholderButton from '../components/common/AudioPlaceholderButton'
 import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
 import { getLessonThemeClass } from '../data/lessonColors'
@@ -57,7 +58,10 @@ function ActividadSSilabasPage() {
         <div className="syllables-instructions">
           <p className="text-instruction">Une la S con las vocales: sa, se, si, so y su.</p>
           <p>Elige la sílaba que completa la palabra.</p>
+          <AudioPlaceholderButton>Escuchar instrucción</AudioPlaceholderButton>
         </div>
+
+        <AudioPlaceholderButton>Escuchar las sílabas</AudioPlaceholderButton>
 
         <p className="completion-word-pattern" aria-label={`Completa ${challenge.word}`}>
           {challenge.pattern}

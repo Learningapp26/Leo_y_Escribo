@@ -55,9 +55,9 @@ export const sSoundEndChoices = [
     endsWithS: true,
   },
   {
-    id: 'lapiz',
-    word: 'lápiz',
-    image: '/images/lecciones/y/lapiz.png',
+    id: 'gafas',
+    word: 'gafas',
+    image: '/images/lecciones/p/gafas.png',
     endsWithS: true,
   },
   {
