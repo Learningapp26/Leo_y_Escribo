@@ -1,42 +1,36 @@
-// Contenido de la lección S. Las imágenes reutilizan recursos ya existentes.
+// Contenido de la lección S basado en las páginas de referencia del libro.
 // Los audios de esta letra todavía no forman parte del repositorio, por eso no
 // se declaran rutas de audio que puedan fallar al cargar.
 
 export const sReading = {
-  title: 'Susi y el sol',
+  title: 'El sapo que sopló más',
   paragraphs: [
-    'Susi sale temprano y mira el sol. Se sienta junto a la mesa del patio.',
-    'Sobre la mesa hay sal para la sopa. Susi sonríe y saluda a su mamá.',
-    'Susi sabe que, si observa con calma, puede encontrar muchas palabras con la letra S.',
+    'Un sapo pequeño era muy presumido. Cerca de él vivía un sapo grande, a quien molestaba diciendo que era mejor que él.',
+    'Cansado de escucharlo, el sapo grande le propuso una competencia para ver quién soplaba más. Cada uno infló un globo, pero el sapo grande lo hizo más rápido y ganó.',
+    'El sapo pequeño aprendió que no es bueno ser presumido y dejó de molestar al sapo grande.',
   ],
-  image: '/images/lecciones/y/susi.png',
-  imageAlt: 'Ilustración de Susi sonriendo y saludando.',
+  image: '/images/lecciones/s/sapos-globos.png',
+  imageAlt: 'Dos sapos inflan globos durante una competencia junto a un lago.',
 }
 
 export const sComprehensionQuestions = [
-  '¿Quién sale temprano?',
-  '¿Qué mira Susi?',
-  '¿Qué hay sobre la mesa?',
-  '¿Qué palabras con S recuerdas del cuento?',
+  '¿Cuál es el título de la fábula?',
+  '¿Qué competencia hicieron los sapos?',
+  '¿Quién ganó la competencia?',
+  '¿Qué aprendió el sapo pequeño?',
 ]
 
 export const sSoundStartChoices = [
   {
-    id: 'sol',
-    word: 'sol',
-    image: '/images/lecciones/y/sol.png',
+    id: 'sapo',
+    word: 'sapo',
+    image: '/images/lecciones/s/sapos-globos.png',
     startsWithS: true,
   },
   {
     id: 'sal',
     word: 'sal',
     image: '/images/lecciones/y/sal.png',
-    startsWithS: true,
-  },
-  {
-    id: 'sopa',
-    word: 'sopa',
-    image: '/images/lecciones/p/sopa.png',
     startsWithS: true,
   },
   {
@@ -90,16 +84,28 @@ export const sSyllableChallenges = [
     answer: 'sa',
   },
   {
-    id: 'suma',
-    word: 'suma',
-    pattern: '__ma',
-    answer: 'su',
+    id: 'seda',
+    word: 'seda',
+    pattern: '__da',
+    answer: 'se',
+  },
+  {
+    id: 'sillon',
+    word: 'sillón',
+    pattern: '__llón',
+    answer: 'si',
   },
   {
     id: 'sol-syllable',
     word: 'sol',
     pattern: '__l',
     answer: 'so',
+  },
+  {
+    id: 'suma',
+    word: 'suma',
+    pattern: '__ma',
+    answer: 'su',
   },
 ]
 
@@ -110,22 +116,22 @@ export const sWordBuilding = [
     options: ['sa', 'la', 'ma'],
   },
   {
+    id: 'masa',
+    word: 'masa',
+    options: ['ma', 'sa', 'la'],
+  },
+  {
     id: 'suma-build',
     word: 'suma',
     options: ['su', 'ma', 'la'],
-  },
-  {
-    id: 'sapo-build',
-    word: 'sapo',
-    options: ['sa', 'po', 'so'],
   },
 ]
 
 export const sFinalActivities = {
   sound: {
     prompt: 'Toca la palabra que empieza con el sonido /s/.',
-    options: ['sopa', 'luna', 'mamá'],
-    answer: 'sopa',
+    options: ['sal', 'oso', 'mesa'],
+    answer: 'sal',
   },
   syllable: {
     prompt: 'Completa la palabra con la sílaba correcta.',
@@ -136,12 +142,12 @@ export const sFinalActivities = {
   },
   word: {
     prompt: 'Toca las sílabas en orden para formar la palabra.',
-    word: 'suma',
-    options: ['su', 'ma', 'sa'],
+    word: 'sale',
+    options: ['sa', 'le', 'la'],
   },
   reading: {
     sentence: 'Susi usa la mesa.',
-    prompt: 'Lee la oración y toca la palabra que comienza con S.',
+    prompt: 'Lee la oración y toca el nombre propio.',
     options: ['Susi', 'usa', 'mesa'],
     answer: 'Susi',
   },

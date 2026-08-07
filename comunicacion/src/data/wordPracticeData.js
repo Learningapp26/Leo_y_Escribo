@@ -71,17 +71,17 @@ export const wordPracticeGroups = [
     title: 'Palabras con S',
     words: [
       { id: 'sol', word: 'sol' },
-      { id: 'sopa', word: 'sopa' },
-      { id: 'sala', word: 'sala' },
+      { id: 'seda', word: 'seda' },
+      { id: 'sillon', word: 'sillón' },
       { id: 'suma', word: 'suma' },
     ],
     find: {
       prompt: 'Marca las palabras que empiezan con S.',
       options: [
         { id: 'sol', word: 'sol', isTarget: true },
-        { id: 'sopa', word: 'sopa', isTarget: true },
+        { id: 'seda', word: 'seda', isTarget: true },
         { id: 'mama', word: 'mamá', isTarget: false },
-        { id: 'sala', word: 'sala', isTarget: true },
+        { id: 'sillon', word: 'sillón', isTarget: true },
         { id: 'luna', word: 'luna', isTarget: false },
         { id: 'suma', word: 'suma', isTarget: true },
       ],
@@ -89,11 +89,11 @@ export const wordPracticeGroups = [
     shortest: {
       prompt: '¿Cuál es la palabra más corta?',
       answer: 'sol',
-      options: ['sol', 'sopa', 'sala'],
+      options: ['sol', 'seda', 'sillón'],
     },
     syllables: {
-      word: 'sopa',
-      parts: ['so', 'pa'],
+      word: 'sillón',
+      parts: ['si', 'llón'],
       options: [2, 3, 4],
     },
   },

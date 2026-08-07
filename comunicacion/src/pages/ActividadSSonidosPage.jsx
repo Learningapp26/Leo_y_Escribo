@@ -119,7 +119,7 @@ function ActividadSSonidosPage() {
       {phase === 'conocer' && (
         <Card className="selection-card">
           <div className="selection-instructions">
-            <p className="text-instruction">La letra S representa el sonido /s/.</p>
+            <p className="text-instruction">La palabra sapo empieza con el sonido /s/.</p>
             <p>Haz el sonido suavemente: sss. Mira la S mayúscula y la s minúscula.</p>
           </div>
           <div className="selection-options">

@@ -199,7 +199,7 @@ function ActividadSFinalPage() {
           </div>
           {feedback === 'correct' && (
             <p className="selection-feedback selection-feedback--correct" role="status">
-              ¡Correcto! Formaste la palabra suma.
+              ¡Correcto! Formaste la palabra {sFinalActivities.word.word}.
             </p>
           )}
           {feedback === 'retry' && (

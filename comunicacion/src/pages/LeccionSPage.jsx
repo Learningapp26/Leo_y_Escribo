@@ -19,7 +19,7 @@ function LeccionSPage() {
         <span className="text-ui-label">Unidad 1</span>
         <h1 id="s-lesson-title">La letra S</h1>
         <p className="text-instruction">
-          Conoce la letra S, lee un cuento corto y practica sus sonidos y sílabas.
+          Conoce la letra S, lee una fábula y practica sus sonidos y sílabas.
         </p>
       </header>
 
