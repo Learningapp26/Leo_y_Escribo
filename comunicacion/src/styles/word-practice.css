@@ -1,0 +1,172 @@
+/* Palabras para leer y practicar: una adaptación digital de las listas del libro.
+   El color acompaña instrucciones y estados, pero el texto siempre explica la acción. */
+.word-practice-page {
+  gap: var(--space-lg);
+}
+
+.word-practice-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.word-practice-groups {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--space-sm);
+}
+
+.word-practice-group {
+  min-height: 3.5rem;
+  padding: var(--space-sm);
+  color: var(--lesson-text);
+  background-color: var(--lesson-surface);
+  border: 2px solid var(--lesson-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.word-practice-group--active {
+  color: #ffffff;
+  background-color: var(--lesson-primary);
+  border-color: var(--lesson-primary);
+}
+
+.word-practice-card {
+  align-items: center;
+  max-width: 780px;
+  width: 100%;
+  margin-inline: auto;
+  text-align: center;
+  background-color: var(--lesson-surface);
+}
+
+.word-practice-instructions {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-sm);
+}
+
+.word-practice-instructions > svg {
+  width: 2.25rem;
+  height: 2.25rem;
+  color: var(--lesson-primary);
+}
+
+.word-practice-word-list,
+.word-practice-options {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md);
+}
+
+.word-practice-options--three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.word-practice-word,
+.word-practice-option {
+  min-height: 5.5rem;
+  padding: var(--space-md);
+  font-family: var(--font-content);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--lesson-text);
+  background-color: var(--lesson-surface);
+  border: 2px solid var(--lesson-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.word-practice-word {
+  justify-content: flex-start;
+}
+
+.word-practice-word--read,
+.word-practice-option--selected {
+  color: var(--lesson-text);
+  background-color: var(--lesson-secondary);
+  outline: 3px solid var(--lesson-primary);
+  outline-offset: 2px;
+}
+
+.word-practice-word__icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--lesson-primary);
+}
+
+.word-practice-option--correct {
+  color: #ffffff;
+  background-color: var(--color-correct);
+  border-color: var(--color-correct);
+}
+
+.word-practice-option--retry {
+  color: var(--lesson-text);
+  background-color: var(--color-retry);
+  border-color: var(--color-retry);
+}
+
+.word-practice-status {
+  font-family: var(--font-ui);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--lesson-text);
+}
+
+.word-practice-syllable-word {
+  color: var(--lesson-primary);
+  font-size: clamp(2.5rem, 9vw, 4.5rem);
+}
+
+.word-practice-syllables {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+}
+
+.word-practice-syllables span {
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-md);
+  font-family: var(--font-content);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--lesson-text);
+  background-color: var(--lesson-secondary);
+}
+
+.word-practice-card--finished {
+  min-height: 28rem;
+  justify-content: center;
+}
+
+.word-practice-finish-icon {
+  width: 4.5rem;
+  height: 4.5rem;
+  color: var(--color-reward);
+}
+
+@media (max-width: 680px) {
+  .word-practice-groups {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .word-practice-options--three {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .word-practice-word-list,
+  .word-practice-options {
+    grid-template-columns: 1fr;
+  }
+
+  .word-practice-word,
+  .word-practice-option {
+    min-height: 4.5rem;
+    font-size: var(--font-size-lg);
+  }
+}

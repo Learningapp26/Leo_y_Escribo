@@ -47,6 +47,7 @@ import ActividadPSonidosPage from '../pages/ActividadPSonidosPage'
 import ActividadPSilabasPage from '../pages/ActividadPSilabasPage'
 import ActividadPCompletarPage from '../pages/ActividadPCompletarPage'
 import ActividadPFinalPage from '../pages/ActividadPFinalPage'
+import PalabrasPracticaPage from '../pages/PalabrasPracticaPage'
 
 
 
@@ -229,6 +230,11 @@ function AppRouter() {
         <Route
           path="/actividad/y-final"
           element={<ActividadYFinalPage />}
+        />
+
+        <Route
+          path="/actividad/palabras-practica"
+          element={<PalabrasPracticaPage />}
         />
 
         <Route
