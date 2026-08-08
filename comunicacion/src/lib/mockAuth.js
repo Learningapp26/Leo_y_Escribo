@@ -6,8 +6,24 @@
 const USERS_KEY = 'mock-auth-users'
 const SESSION_KEY = 'mock-auth-session'
 
+// Usuario de prueba que siempre existe en el mock, para no tener que
+// registrarse antes de poder probar el login.
+const DEFAULT_USER = {
+  email: 'demo@leoyescribo.com',
+  password: 'demo123',
+  fullName: 'Usuario de Prueba',
+}
+
 function readUsers() {
-  return JSON.parse(localStorage.getItem(USERS_KEY) || '[]')
+  const users = JSON.parse(localStorage.getItem(USERS_KEY) || '[]')
+
+  if (!users.some((user) => user.email === DEFAULT_USER.email)) {
+    const withDefault = [...users, DEFAULT_USER]
+    localStorage.setItem(USERS_KEY, JSON.stringify(withDefault))
+    return withDefault
+  }
+
+  return users
 }
 
 function writeUsers(users) {
