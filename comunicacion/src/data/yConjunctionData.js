@@ -59,7 +59,7 @@ export const page26Pairs = [
       id: 'camisa',
       name: 'camisa',
       image: '/images/lecciones/y/camisa.png',
-      audio: '/audio/lecciones/y/camisa.mp3',
+      audio: '/audio/lecciones/m/camisa.mp3',
     },
     second: {
       id: 'pantalon',
@@ -82,7 +82,7 @@ export const page26Pairs = [
       id: 'lapiz',
       name: 'lápiz',
       image: '/images/lecciones/y/lapiz.png',
-      audio: '/audio/lecciones/y/lapiz.mp3',
+      audio: '/audio/lecciones/l/lapiz.mp3',
     },
     phraseAudio:
       '/audio/lecciones/y/cuaderno-y-lapiz.mp3',

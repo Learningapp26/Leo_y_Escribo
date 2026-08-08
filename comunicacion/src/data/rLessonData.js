@@ -151,7 +151,7 @@ export const rSoundExercises = [
     image: '/images/lecciones/r/loro.png',
     imageAlt: 'Un loro',
     answer: 'suave',
-    audio: '/audio/lecciones/r/loro.mp3',
+    audio: '/audio/lecciones/l/loro.mp3',
   },
   {
     id: 'toro',
@@ -167,7 +167,7 @@ export const rSoundExercises = [
     image: '/images/lecciones/r/pera.png',
     imageAlt: 'Una pera',
     answer: 'suave',
-    audio: '/audio/lecciones/r/pera.mp3',
+    audio: '/audio/lecciones/l/pera.mp3',
   },
   {
     id: 'mariposa',
@@ -190,7 +190,7 @@ export const rCompletionExercises = [
     options: ['ro', 'ra', 'ri'],
     completedWord: 'rosa',
     audio:
-      '/audio/lecciones/r/ejercicio-completar-rosa.mp3',
+      '/audio/lecciones/r/instruccion-completar-r.mp3',
     completedAudio: '/audio/lecciones/r/rosa.mp3',
   },
   {
@@ -203,7 +203,7 @@ export const rCompletionExercises = [
     options: ['ra', 'ri', 'ru'],
     completedWord: 'risa',
     audio:
-      '/audio/lecciones/r/ejercicio-completar-risa.mp3',
+      '/audio/lecciones/r/instruccion-completar-r.mp3',
     completedAudio: '/audio/lecciones/r/risa.mp3',
   },
   {
@@ -216,7 +216,7 @@ export const rCompletionExercises = [
     options: ['ro', 're', 'ra'],
     completedWord: 'mora',
     audio:
-      '/audio/lecciones/r/ejercicio-completar-mora.mp3',
+      '/audio/lecciones/r/instruccion-completar-r.mp3',
     completedAudio: '/audio/lecciones/r/mora.mp3',
   },
   {
@@ -229,7 +229,7 @@ export const rCompletionExercises = [
     options: ['ri', 'ru', 'ro'],
     completedWord: 'rulo',
     audio:
-      '/audio/lecciones/r/ejercicio-completar-rulo.mp3',
+      '/audio/lecciones/r/instruccion-completar-r.mp3',
     completedAudio: '/audio/lecciones/r/rulo.mp3',
   },
   {
@@ -242,7 +242,7 @@ export const rCompletionExercises = [
     options: ['re', 'ri', 'ra'],
     completedWord: 'mariposa',
     audio:
-      '/audio/lecciones/r/ejercicio-completar-mariposa.mp3',
+      '/audio/lecciones/r/instruccion-completar-r.mp3',
     completedAudio:
       '/audio/lecciones/r/mariposa.mp3',
   },
@@ -256,7 +256,7 @@ export const rCompletionExercises = [
     options: ['re', 'ro', 'ru'],
     completedWord: 'repisa',
     audio:
-      '/audio/lecciones/r/ejercicio-completar-repisa.mp3',
+      '/audio/lecciones/r/instruccion-completar-r.mp3',
     completedAudio: '/audio/lecciones/r/repisa.mp3',
   },
 ]
@@ -295,3 +295,6 @@ export const rSentenceExercises = [
       '/audio/lecciones/r/mari-ama-a-la-rosa.mp3',
   },
 ]
+
+export const rCompletionInstructionAudio =
+  '/audio/lecciones/r/instruccion-completar-r.mp3'

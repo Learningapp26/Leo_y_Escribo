@@ -146,7 +146,7 @@ export const tOddOneOut = {
       id: 'gato',
       name: 'gato',
       image: '/images/lecciones/t/gaton.png',
-      audio: '/audio/lecciones/t/gato.mp3',
+      audio: '/audio/lecciones/m/gato.mp3',
       startsWithT: true,
     },
     {
@@ -219,7 +219,7 @@ export const tLetterPresentation = {
   instructionAudio: '/audio/lecciones/t/instruccion-letra-t.mp3',
   soundAudio: '/audio/lecciones/t/sonido-t.mp3',
   combinations: [
-    { syllable: 'ta', audio: '/audio/lecciones/t/silaba-ta.mp3' },
+    { syllable: 'ta', audio: '/audio/lecciones/l/silaba-ta.mp3' },
     { syllable: 'te', audio: '/audio/lecciones/t/silaba-te.mp3' },
     { syllable: 'ti', audio: '/audio/lecciones/t/silaba-ti.mp3' },
     { syllable: 'to', audio: '/audio/lecciones/t/silaba-to.mp3' },
@@ -232,15 +232,15 @@ export const tSyllableSearch = {
   instructionAudio: '/audio/lecciones/t/instruccion-buscar-silabas.mp3',
   targetSyllables: ['ta', 'te', 'ti', 'to', 'tu'],
   options: [
-    { syllable: 'ta', audio: '/audio/lecciones/t/silaba-ta.mp3' },
-    { syllable: 'la', audio: '/audio/lecciones/t/silaba-la.mp3' },
+    { syllable: 'ta', audio: '/audio/lecciones/l/silaba-ta.mp3' },
+    { syllable: 'la', audio: '/audio/lecciones/m/silaba-la.mp3' },
     { syllable: 'te', audio: '/audio/lecciones/t/silaba-te.mp3' },
-    { syllable: 'sa', audio: '/audio/lecciones/t/silaba-sa.mp3' },
+    { syllable: 'sa', audio: '/audio/lecciones/m/silaba-sa.mp3' },
     { syllable: 'ti', audio: '/audio/lecciones/t/silaba-ti.mp3' },
     { syllable: 'to', audio: '/audio/lecciones/t/silaba-to.mp3' },
     { syllable: 'tu', audio: '/audio/lecciones/t/silaba-tu.mp3' },
-    { syllable: 'da', audio: '/audio/lecciones/t/silaba-da.mp3' },
-    { syllable: 'mu', audio: '/audio/lecciones/t/silaba-mu.mp3' },
+    { syllable: 'da', audio: '/audio/lecciones/m/silaba-da.mp3' },
+    { syllable: 'mu', audio: '/audio/lecciones/m/silaba-mu.mp3' },
   ],
 }
  
@@ -256,7 +256,7 @@ export const tSyllableAssociation = [
     highlighted: 'ta',
     rest: 'mal',
     image: '/images/lecciones/t/tamal.png',
-    syllableAudio: '/audio/lecciones/t/silaba-ta.mp3',
+    syllableAudio: '/audio/lecciones/l/silaba-ta.mp3',
     wordAudio: '/audio/lecciones/t/tamal.mp3',
   },
   {
@@ -351,7 +351,7 @@ export const tSyllableSelection = [
     id: 'gato',
     name: 'gato',
     image: '/images/lecciones/t/gato.png',
-    wordAudio: '/audio/lecciones/t/gato.mp3',
+    wordAudio: '/audio/lecciones/m/gato.mp3',
     answer: 'to',
   },
   {
@@ -422,7 +422,7 @@ export const tSyllableCaseSelection = [
     options: [
       {
         syllable: 'ta',
-        audio: '/audio/lecciones/t/silaba-ta.mp3',
+        audio: '/audio/lecciones/l/silaba-ta.mp3',
         isCorrect: true,
       },
       {
@@ -455,7 +455,7 @@ export const tSyllableCaseSelection = [
     id: 'toro',
     name: 'toro',
     image: '/images/lecciones/t/toro.png',
-    wordAudio: '/audio/lecciones/t/toro.mp3',
+    wordAudio: '/audio/lecciones/r/toro.mp3',
     pattern: '__ro',
     options: [
       {
@@ -479,7 +479,7 @@ export const tSyllableCaseSelection = [
     options: [
       {
         syllable: 'ta',
-        audio: '/audio/lecciones/t/silaba-ta.mp3',
+        audio: '/audio/lecciones/l/silaba-ta.mp3',
         isCorrect: true,
       },
       {

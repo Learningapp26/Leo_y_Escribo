@@ -52,7 +52,7 @@ export const lSyllableSearch = {
     { syllable: 'lo', audio: '/audio/lecciones/l/silaba-lo.mp3' },
     { syllable: 'da', audio: '/audio/lecciones/m/silaba-da.mp3' },
     { syllable: 'lu', audio: '/audio/lecciones/m/silaba-lu.mp3' },
-    { syllable: 'pa', audio: '/audio/lecciones/l/silaba-pa.mp3' },
+    { syllable: 'pa', audio: '/audio/lecciones/p/silaba-pa.mp3' },
   ],
 }
 

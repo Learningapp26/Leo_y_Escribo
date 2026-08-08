@@ -13,6 +13,7 @@ import ProgressBar from '../components/progress/ProgressBar'
 import StarsCounter from '../components/progress/StarsCounter'
 import { getLessonThemeClass } from '../data/lessonColors'
 import {
+  rCompletionInstructionAudio,
   rCompletionExercises,
   rSentenceExercises,
 } from '../data/rLessonData'
@@ -177,6 +178,19 @@ function ActividadRFinalPage() {
               ? 'Selecciona la sílaba que completa la palabra.'
               : 'Selecciona la palabra que completa la oración.'}
           </p>
+
+          {exercise.type === 'word' && (
+            <Button
+              variant="audio"
+              icon={Volume2}
+              size="large"
+              onClick={() =>
+                playAudio(rCompletionInstructionAudio)
+              }
+            >
+              Escuchar instrucción
+            </Button>
+          )}
 
           <Button
             variant="audio"
