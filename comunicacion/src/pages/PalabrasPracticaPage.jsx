@@ -19,6 +19,13 @@ import { playAudio } from '../lib/audioPlayer'
 
 const STEPS = ['leer', 'buscar', 'corta', 'silabas']
 
+const STEP_LABELS = {
+  leer: '1. Leemos',
+  buscar: '2. Buscamos',
+  corta: '3. Comparamos',
+  silabas: '4. Separamos',
+}
+
 function PalabrasPracticaPage() {
   const [groupId, setGroupId] = useState(wordPracticeGroups[0].lessonId)
   const [stepIndex, setStepIndex] = useState(0)
@@ -93,6 +100,13 @@ function PalabrasPracticaPage() {
 
   const nextStep = () => setStepIndex((current) => current + 1)
 
+  const activityVisual = (
+    <figure className="word-practice-activity-visual">
+      <img src={group.coverImage} alt={group.coverAlt} />
+      <figcaption>{STEP_LABELS[step]}</figcaption>
+    </figure>
+  )
+
   if (stepIndex === STEPS.length) {
     return (
       <main className={`page word-practice-page ${themeClass}`}>
@@ -135,12 +149,19 @@ function PalabrasPracticaPage() {
     >
       <BackButton label="Volver a lecciones" to="/lecciones" />
 
-      <header className="text-center word-practice-header">
-        <span className="text-ui-label">Unidad 1 · Práctica de lectura</span>
-        <h1 id="word-practice-title">Palabras para leer y practicar</h1>
-        <p className="text-instruction">
-          Elige una letra. Lee las palabras y completa los retos.
-        </p>
+      <header className="word-practice-header">
+        <div className="word-practice-header__content">
+          <span className="text-ui-label">Unidad 1 · Práctica de lectura</span>
+          <h1 id="word-practice-title">Palabras para leer y practicar</h1>
+          <p className="text-instruction">
+            Elige una letra. Lee las palabras y completa los retos.
+          </p>
+        </div>
+        <img
+          className="word-practice-header__image"
+          src={group.coverImage}
+          alt={group.coverAlt}
+        />
       </header>
 
       <div className="word-practice-groups" aria-label="Grupos de palabras">
@@ -185,6 +206,8 @@ function PalabrasPracticaPage() {
             </p>
           </div>
 
+          {activityVisual}
+
           <div className="word-practice-word-list" aria-label={group.title}>
             {group.words.map((word) => {
               const isRead = readWordIds.includes(word.id)
@@ -202,6 +225,13 @@ function PalabrasPracticaPage() {
                   aria-pressed={isRead}
                   onClick={() => markWordAsRead(word)}
                 >
+                  {word.image && (
+                    <img
+                      className="word-practice-word__image"
+                      src={word.image}
+                      alt={word.imageAlt}
+                    />
+                  )}
                   {word.audio && (
                     <Volume2 className="word-practice-word__icon" aria-hidden="true" />
                   )}
@@ -235,6 +265,8 @@ function PalabrasPracticaPage() {
             <h2>Busca la letra</h2>
             <p className="text-instruction">{group.find.prompt}</p>
           </div>
+
+          {activityVisual}
 
           <div className="word-practice-options">
             {group.find.options.map((option) => {
@@ -324,6 +356,8 @@ function PalabrasPracticaPage() {
             <h2>Palabra corta</h2>
             <p className="text-instruction">{group.shortest.prompt}</p>
           </div>
+
+          {activityVisual}
 
           <div className="word-practice-options word-practice-options--three">
             {group.shortest.options.map((word) => {
@@ -415,6 +449,8 @@ function PalabrasPracticaPage() {
               Da palmas y elige cuántas sílabas tiene esta palabra.
             </p>
           </div>
+
+          {activityVisual}
 
           <span className="text-word word-practice-syllable-word">
             {group.syllables.word}
