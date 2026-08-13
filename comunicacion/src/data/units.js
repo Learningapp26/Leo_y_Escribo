@@ -1,4 +1,4 @@
-export const TEMPORARY_HIGHEST_UNLOCKED_UNIT = 1
+export const TEMPORARY_HIGHEST_UNLOCKED_UNIT = 2
 
 export const units = [
   {
