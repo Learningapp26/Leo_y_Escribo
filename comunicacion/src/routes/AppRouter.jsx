@@ -53,6 +53,7 @@ import ActividadPSilabasPage from '../pages/ActividadPSilabasPage'
 import ActividadPCompletarPage from '../pages/ActividadPCompletarPage'
 import ActividadPFinalPage from '../pages/ActividadPFinalPage'
 import PalabrasPracticaPage from '../pages/PalabrasPracticaPage'
+import RepasoUnidad2Page from '../pages/RepasoUnidad2Page'
 
 
 
@@ -265,6 +266,11 @@ function AppRouter() {
         <Route
           path="/actividad/palabras-practica"
           element={<PalabrasPracticaPage />}
+        />
+
+        <Route
+          path="/unidad-2/repaso"
+          element={<RepasoUnidad2Page />}
         />
 
         <Route

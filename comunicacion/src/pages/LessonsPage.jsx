@@ -13,20 +13,21 @@ const lessons = [
   { id: 'n', title: 'Letra N' },
 ]
 
+const unit2Lessons = [
+  { id: 'c', title: 'Letra C' },
+  { id: 'q', title: 'Letra Q' },
+  { id: 'd', title: 'Letra D' },
+  { id: 'silabas-inversas', title: 'Sílabas inversas' },
+  { id: 'pl', title: 'Sílabas pl' },
+  { id: 'pr', title: 'Sílabas pr' },
+]
+
 function LessonsPage() {
   return (
     <main className="page">
       <section className="card">
         <h1>Lecciones</h1>
         <p>Selecciona una lección para comenzar.</p>
-
-        <Link
-          className="lesson-card lesson-theme--unit-1"
-          to="/actividad/palabras-practica"
-        >
-          <span className="lesson-card__unit">Práctica</span>
-          <strong className="lesson-card__title">Palabras para leer y practicar</strong>
-        </Link>
 
         <div className="lesson-list">
           {lessons.map((lesson) => {
@@ -44,6 +45,36 @@ function LessonsPage() {
               </Link>
             )
           })}
+
+          <Link
+            className="lesson-card lesson-theme--unit-1"
+            to="/actividad/palabras-practica"
+          >
+            <span className="lesson-card__unit">Unidad 1 · Repaso</span>
+            <strong className="lesson-card__title">Repaso de la Unidad 1</strong>
+          </Link>
+        </div>
+
+        <h2>Unidad 2</h2>
+        <div className="lesson-list">
+          {unit2Lessons.map((lesson) => (
+            <Link
+              key={lesson.id}
+              className={`lesson-card ${getLessonThemeClass(lesson.id)}`}
+              to={`/lecciones/${lesson.id}`}
+            >
+              <span className="lesson-card__unit">Unidad 2</span>
+              <strong className="lesson-card__title">{lesson.title}</strong>
+            </Link>
+          ))}
+
+          <Link
+            className="lesson-card lesson-theme--unit-2"
+            to="/unidad-2/repaso"
+          >
+            <span className="lesson-card__unit">Unidad 2 · Repaso</span>
+            <strong className="lesson-card__title">Repaso de la Unidad 2</strong>
+          </Link>
         </div>
 
         <Link className="text-link" to="/home">

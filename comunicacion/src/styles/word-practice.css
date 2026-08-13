@@ -54,6 +54,20 @@
   filter: drop-shadow(0 0.65rem 0.75rem rgba(36, 59, 83, 0.14));
 }
 
+.word-practice-header__placeholder {
+  display: grid;
+  width: min(100%, 11rem);
+  min-height: 8rem;
+  place-items: center;
+  border: 2px solid var(--lesson-border);
+  border-radius: var(--radius-md);
+  color: var(--lesson-primary);
+  background: color-mix(in srgb, var(--lesson-secondary) 42%, var(--lesson-surface));
+  font-family: var(--font-ui);
+  font-size: clamp(2.5rem, 9vw, 4.5rem);
+  font-weight: var(--font-weight-black);
+}
+
 .word-practice-groups {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
@@ -116,6 +130,18 @@
   height: 4.5rem;
   object-fit: cover;
   background: var(--lesson-surface);
+}
+
+.word-practice-activity-visual__placeholder {
+  display: grid;
+  width: 4.5rem;
+  height: 4.5rem;
+  place-items: center;
+  color: var(--lesson-primary);
+  background: var(--lesson-surface);
+  font-family: var(--font-ui);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-black);
 }
 
 .word-practice-activity-visual figcaption {
@@ -273,6 +299,11 @@
     max-height: 8rem;
   }
 
+  .word-practice-header__placeholder {
+    max-width: 12rem;
+    min-height: 7rem;
+  }
+
   .word-practice-groups {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -304,6 +335,11 @@
   }
 
   .word-practice-activity-visual img {
+    width: 3.75rem;
+    height: 3.75rem;
+  }
+
+  .word-practice-activity-visual__placeholder {
     width: 3.75rem;
     height: 3.75rem;
   }
