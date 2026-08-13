@@ -4,6 +4,11 @@
   background-color: var(--lesson-background);
 }
 
+/* Fondo sutil con degradado para dar más vida a la lección */
+.vowels-page {
+  background: linear-gradient(180deg, var(--lesson-background) 0%, #fbfdff 100%);
+}
+
 .vowels-page__content {
   width: min(100%, 960px);
   margin-inline: auto;
@@ -60,6 +65,26 @@
   text-align: center;
 }
 
+/* Decorativo: ligera sombra/halo alrededor de la tarjeta de repaso */
+.vowels-review-card {
+  position: relative;
+  overflow: visible;
+  padding: var(--space-md);
+}
+
+.vowels-review-card::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -28px;
+  width: 220px;
+  height: 60px;
+  background: radial-gradient(closest-side, rgba(99,179,255,0.12), transparent 60%);
+  border-radius: 999px;
+  pointer-events: none;
+}
+
 .vowels-review-card__icon {
   width: 56px;
   height: 56px;
@@ -77,37 +102,66 @@
 
 .vowels-list__item {
   display: grid;
-  width: 80px;
-  height: 80px;
+  width: 96px;
+  height: 96px;
   place-items: center;
   color: var(--color-surface);
   background-color: var(--lesson-primary);
   border-radius: var(--radius-full);
-  box-shadow: var(--shadow-btn);
+  box-shadow: 0 8px 18px rgba(3,18,33,0.08);
   font-family: var(--font-content);
-  font-size: var(--font-size-2xl);
+  font-size: calc(var(--font-size-2xl) + 2px);
   font-weight: var(--font-weight-bold);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  background-image: radial-gradient(circle at 30% 25%, rgba(255,255,255,0.06), transparent 35%);
+  border: 3px solid rgba(255,255,255,0.06);
+  -webkit-font-smoothing: antialiased;
+  transform-origin: center bottom;
+  will-change: transform, box-shadow, opacity;
+  animation: popIn 420ms cubic-bezier(.2,.9,.25,1) both;
 }
 
-.vowels-list__item:nth-child(2) {
-  background-color: var(--lesson-secondary);
-  color: var(--lesson-text);
+@keyframes popIn {
+  from { transform: translateY(18px) scale(0.93); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
 }
 
-.vowels-list__item:nth-child(3) {
-  background-color: var(--lesson-accent);
-  color: var(--lesson-text);
+/* Staggered delays + background gradients por vocal (control central via variables) */
+.vowels-list__item:nth-child(1) { animation-delay: 0s;  background: var(--vowel-gradient-a); }
+.vowels-list__item:nth-child(2) { animation-delay: 0.06s; background: var(--vowel-gradient-e); }
+.vowels-list__item:nth-child(3) { animation-delay: 0.12s; background: var(--vowel-gradient-i); }
+.vowels-list__item:nth-child(4) { animation-delay: 0.18s; background: var(--vowel-gradient-o); }
+.vowels-list__item:nth-child(5) { animation-delay: 0.24s; background: var(--vowel-gradient-u); }
+
+.vowels-list__item:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 18px 30px rgba(13,38,59,0.12);
 }
 
-.vowels-list__item:nth-child(4) {
-  background-color: var(--color-reward);
-  color: var(--color-text);
+/* Pulso suave para atraer la vista (muy sutil) */
+.vowels-list__item .pulse {
+  display: none;
 }
 
-.vowels-list__item:nth-child(5) {
-  background-color: var(--color-accent-soft);
-  color: var(--color-text);
+.vowels-list__item:focus,
+.vowels-list__item:hover {
+  outline: none;
+  box-shadow: 0 22px 40px rgba(3,18,33,0.14), 0 0 18px rgba(255,255,255,0.02) inset;
 }
+
+/* Pequeña animación de latido en el foco/hover (accesible) */
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+  100% { transform: scale(1); }
+}
+
+.vowels-list__item:focus-visible {
+  animation: heartbeat 900ms ease-in-out;
+}
+
+/* Color personalizado para la vocal 'a' (primer círculo). Cambia aquí si prefieres otro color. */
+/* nota: los fondos ahora se controlan desde variables en lesson-themes.css */
 
 .vowels-exercise-card__image {
   width: 100%;
@@ -206,8 +260,8 @@
   }
 
   .vowels-list__item {
-    width: 64px;
-    height: 64px;
+    width: 72px;
+    height: 72px;
     font-size: var(--font-size-xl);
   }
 

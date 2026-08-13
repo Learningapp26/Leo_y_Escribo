@@ -287,3 +287,45 @@
     }
 
 }
+/* Opciones de comprensión lectora */
+.comprehension-options {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+
+.comprehension-option {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 2px solid var(--color-border, #d8d8d8);
+  border-radius: 12px;
+  background: white;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.comprehension-option:hover {
+  transform: translateY(-1px);
+}
+
+.comprehension-option--selected {
+  border-color: currentColor;
+  font-weight: 700;
+}
+
+.comprehension-feedback {
+  margin-top: 0.75rem;
+  font-weight: 700;
+}
+
+.comprehension-feedback--correct {
+  color: #287a3e;
+}
+
+.comprehension-feedback--incorrect {
+  color: #a53a3a;
+}

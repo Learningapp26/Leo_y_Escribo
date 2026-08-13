@@ -19,6 +19,21 @@
   --color-bg-card: var(--color-surface);
 }
 
+/* Paleta por vocales (editable centralmente) */
+:root {
+  --vowel-a: #ff6b6b;
+  --vowel-e: #2082c9;
+  --vowel-i: #6ad38a;
+  --vowel-o: #ffd166;
+  --vowel-u: #ffbe9e;
+
+  --vowel-gradient-a: linear-gradient(135deg, #ff8a7a 0%, #ff6b6b 100%);
+  --vowel-gradient-e: linear-gradient(135deg, #3aa0e8 0%, #2082c9 100%);
+  --vowel-gradient-i: linear-gradient(135deg, #82e7a6 0%, #6ad38a 100%);
+  --vowel-gradient-o: linear-gradient(135deg, #ffd966 0%, #ffd166 100%);
+  --vowel-gradient-u: linear-gradient(135deg, #ffc9a8 0%, #ffbe9e 100%);
+}
+
 /* Los componentes deben combinar color con texto, icono o audio para comunicar estados. */
 
 /* Tema seguro para identificadores desconocidos o lecciones aún no registradas. */

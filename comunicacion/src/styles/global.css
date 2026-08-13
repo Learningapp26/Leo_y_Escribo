@@ -217,6 +217,28 @@ p {
   color: var(--color-action);
   border: 2px solid var(--color-action);
   box-shadow: none;
+  position: relative;
+}
+
+/* Pulso visual para botón de audio (activa la clase .active) */
+.btn--audio.active::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 120%;
+  height: 120%;
+  border-radius: 9999px;
+  box-shadow: 0 0 0 6px rgba(34,150,243,0.12);
+  animation: audioPulse 1200ms ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes audioPulse {
+  0% { opacity: 0.9; transform: translate(-50%, -50%) scale(1); }
+  70% { opacity: 0; transform: translate(-50%, -50%) scale(1.25); }
+  100% { opacity: 0; }
 }
 
 /* Modificadores */
