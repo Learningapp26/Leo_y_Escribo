@@ -55,17 +55,24 @@ import ActividadPFinalPage from '../pages/ActividadPFinalPage'
 import PalabrasPracticaPage from '../pages/PalabrasPracticaPage'
 import RepasoUnidad2Page from '../pages/RepasoUnidad2Page'
 
+import UnitLessonsPage from '../pages/UnitLessonsPage'
 
 
 function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<WelcomePage />} />
+        <Route path="/" element={<LoginPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/welcome" element={<WelcomePage />} />
         <Route path="/home" element={<HomePage />} />
 
         <Route path="/lecciones" element={<LessonsPage />} />
+
+        <Route
+          path="/lecciones/unidad/:unitId"
+          element={<UnitLessonsPage />}
+        />
 
         <Route
           path="/lecciones/vocales"

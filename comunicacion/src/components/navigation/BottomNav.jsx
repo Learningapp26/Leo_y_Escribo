@@ -8,7 +8,7 @@ const defaultItems = [
     icon: Home,
   },
   {
-    label: 'Lecciones',
+    label: 'Unidades',
     to: '/lecciones',
     icon: BookOpen,
   },

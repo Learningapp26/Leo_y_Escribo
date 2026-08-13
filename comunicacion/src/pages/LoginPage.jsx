@@ -1,8 +1,8 @@
 // LoginPage — tarjeta deslizante inspirada en AsmrProg/Modern-Login,
 // conectada a Supabase Auth (crear cuenta / iniciar sesión + Gmail).
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { ArrowLeft, LogIn, Mail, UserPlus } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
+import { LogIn, Mail, UserPlus } from 'lucide-react'
 import Button from '../components/common/Button'
 import { signInWithEmail, signInWithGoogle, signUpWithEmail } from '../lib/auth'
 import '../styles/login.css'
@@ -47,13 +47,25 @@ function LoginPage() {
       return
     }
 
-    navigate('/home')
+    navigate('/welcome')
   }
 
   async function handleGoogleClick() {
     setError('')
-    const { error: authError } = await signInWithGoogle()
-    if (authError) setError(authError.message)
+
+    const {
+      data,
+      error: authError,
+    } = await signInWithGoogle()
+
+    if (authError) {
+      setError(authError.message)
+      return
+    }
+
+    if (!data?.url) {
+      navigate('/welcome')
+    }
   }
 
   return (
@@ -201,12 +213,6 @@ function LoginPage() {
         </div>
       </div>
 
-      <p className="text-center login-back-link">
-        <Link className="login-back-link__link" to="/">
-          <ArrowLeft size={16} />
-          Volver
-        </Link>
-      </p>
     </main>
   )
 }

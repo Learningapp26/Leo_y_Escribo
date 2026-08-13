@@ -1,17 +1,20 @@
-import { Link } from 'react-router-dom'
-import { getLessonThemeClass, getLessonUnit } from '../data/lessonColors'
+import {
+  ArrowRight,
+  LockKeyhole,
+  MapPinned,
+  Trees,
+} from 'lucide-react'
 
-const lessons = [
-  { id: 'vocales', title: 'Vocales' },
-  { id: 'm', title: 'Letra M' },
-  { id: 'l', title: 'Letra L' },
-  { id: 's', title: 'Letra S' },
-  { id: 'y-conjuncion', title: 'Y como conjunción' },
-  { id: 'r', title: 'Letra R' },
-  { id: 'p', title: 'Letra P' },
-  { id: 't', title: 'Letra T' },
-  { id: 'n', title: 'Letra N' },
-]
+import Button from '../components/common/Button'
+import Card from '../components/common/Card'
+import BackButton from '../components/navigation/BackButton'
+import BottomNav from '../components/navigation/BottomNav'
+import {
+  getUnitThemeClass,
+  isUnitUnlocked,
+  units,
+} from '../data/units'
+import '../styles/units-map.css'
 
 const unit2Lessons = [
   { id: 'c', title: 'Letra C' },
@@ -24,63 +27,152 @@ const unit2Lessons = [
 
 function LessonsPage() {
   return (
-    <main className="page">
-      <section className="card">
-        <h1>Lecciones</h1>
-        <p>Selecciona una lección para comenzar.</p>
+    <main className="page units-map-page">
+      <BackButton
+        label="Volver al inicio"
+        to="/home"
+      />
 
-        <div className="lesson-list">
-          {lessons.map((lesson) => {
-            const unit = getLessonUnit(lesson.id)
-            const themeClass = getLessonThemeClass(lesson.id)
+      <header className="units-map-header">
+        <Trees
+          className="units-map-header__icon"
+          aria-hidden="true"
+        />
 
-            return (
-              <Link
-                key={lesson.id}
-                className={`lesson-card ${themeClass}`}
-                to={`/lecciones/${lesson.id}`}
-              >
-                <span className="lesson-card__unit">Unidad {unit}</span>
-                <strong className="lesson-card__title">{lesson.title}</strong>
-              </Link>
-            )
-          })}
+        <h1>Mapa de unidades</h1>
 
-          <Link
-            className="lesson-card lesson-theme--unit-1"
-            to="/actividad/palabras-practica"
-          >
-            <span className="lesson-card__unit">Unidad 1 · Repaso</span>
-            <strong className="lesson-card__title">Repaso de la Unidad 1</strong>
-          </Link>
-        </div>
+        <p className="text-instruction">
+          Recorre el bosque y completa cada unidad para abrir
+          el siguiente tramo del camino.
+        </p>
+      </header>
 
-        <h2>Unidad 2</h2>
-        <div className="lesson-list">
-          {unit2Lessons.map((lesson) => (
-            <Link
-              key={lesson.id}
-              className={`lesson-card ${getLessonThemeClass(lesson.id)}`}
-              to={`/lecciones/${lesson.id}`}
+      <section
+        className="units-map"
+        aria-label="Camino de unidades"
+      >
+        {units.map((unit, index) => {
+          const unlocked = isUnitUnlocked(unit.id)
+          const isLeft = index % 2 === 0
+          const themeClass =
+            getUnitThemeClass(unit.id)
+
+          const unitCard = (
+            <Card
+              className={[
+                'unit-map-card',
+                themeClass,
+                unlocked
+                  ? ''
+                  : 'unit-map-card--locked',
+              ]
+                .filter(Boolean)
+                .join(' ')}
+              icon={
+                unlocked
+                  ? MapPinned
+                  : LockKeyhole
+              }
+              title={unit.title}
+              subtitle={
+                unlocked
+                  ? 'Disponible'
+                  : 'Bloqueada'
+              }
+              footer={
+                <Button
+                  to={
+                    unlocked
+                      ? `/lecciones/unidad/${unit.id}`
+                      : undefined
+                  }
+                  variant={
+                    unlocked
+                      ? 'primary'
+                      : 'secondary'
+                  }
+                  icon={
+                    unlocked
+                      ? ArrowRight
+                      : LockKeyhole
+                  }
+                  iconPosition="right"
+                  fullWidth
+                  disabled={!unlocked}
+                >
+                  {unlocked
+                    ? 'Explorar unidad'
+                    : 'Completa la anterior'}
+                </Button>
+              }
+            />
+          )
+
+          return (
+            <div
+              className="units-map__stop"
+              key={unit.id}
             >
-              <span className="lesson-card__unit">Unidad 2</span>
-              <strong className="lesson-card__title">{lesson.title}</strong>
-            </Link>
-          ))}
+              <div
+                className={[
+                  'units-map__side',
+                  isLeft
+                    ? 'units-map__side--card'
+                    : 'units-map__side--scenery',
+                ].join(' ')}
+              >
+                {isLeft ? (
+                  unitCard
+                ) : (
+                  <Trees
+                    className="units-map__forest-icon"
+                    aria-hidden="true"
+                  />
+                )}
+              </div>
 
-          <Link
-            className="lesson-card lesson-theme--unit-2"
-            to="/unidad-2/repaso"
-          >
-            <span className="lesson-card__unit">Unidad 2 · Repaso</span>
-            <strong className="lesson-card__title">Repaso de la Unidad 2</strong>
-          </Link>
-        </div>
+              <span
+                className={[
+                  'units-map__marker',
+                  unlocked
+                    ? 'units-map__marker--unlocked'
+                    : 'units-map__marker--locked',
+                ].join(' ')}
+                aria-hidden="true"
+              >
+                {unlocked
+                  ? unit.id
+                  : <LockKeyhole />}
+              </span>
 
-        <Link className="text-link" to="/home">
-          Volver al inicio
-        </Link>
+              <div
+                className={[
+                  'units-map__side',
+                  isLeft
+                    ? 'units-map__side--scenery'
+                    : 'units-map__side--card',
+                ].join(' ')}
+              >
+                {isLeft ? (
+                  <Trees
+                    className="units-map__forest-icon"
+                    aria-hidden="true"
+                  />
+                ) : (
+                  unitCard
+                )}
+              </div>
+            </div>
+          )
+        })}
       </section>
+
+      <p className="units-map__progress-note text-instruction">
+        Por ahora, la Unidad 1 está habilitada. Las demás se
+        conectarán al progreso real cuando esa lógica esté lista.
+      </p>
+
+      <BottomNav />
     </main>
   )
 }

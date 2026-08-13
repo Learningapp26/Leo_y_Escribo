@@ -1,0 +1,228 @@
+.units-map-page,
+.unit-lessons-page {
+  background:
+    radial-gradient(
+      circle at 10% 12%,
+      color-mix(
+        in srgb,
+        var(--color-support) 24%,
+        transparent
+      ),
+      transparent 20rem
+    ),
+    radial-gradient(
+      circle at 90% 32%,
+      color-mix(
+        in srgb,
+        var(--color-action-soft) 70%,
+        transparent
+      ),
+      transparent 24rem
+    ),
+    var(--color-background);
+}
+
+.units-map-header,
+.unit-lessons-header {
+  width: min(100%, 760px);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  text-align: center;
+}
+
+.units-map-header__icon,
+.unit-lessons-header__icon {
+  width: 4rem;
+  height: 4rem;
+  color: var(--color-support);
+}
+
+.units-map {
+  position: relative;
+  width: min(100%, 980px);
+  margin: var(--space-xl) auto 0;
+  padding-block: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xl);
+}
+
+.units-map::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 12px;
+  transform: translateX(-50%);
+  background-color:
+    color-mix(
+      in srgb,
+      var(--color-reward) 34%,
+      var(--color-bg-card)
+    );
+  border: 3px dashed
+    var(--color-action-secondary);
+  border-radius: var(--radius-full);
+}
+
+.units-map__stop {
+  position: relative;
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    96px
+    minmax(0, 1fr);
+  align-items: center;
+  min-height: 180px;
+}
+
+.units-map__side {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.units-map__side--card {
+  width: 100%;
+}
+
+.units-map__marker {
+  position: relative;
+  z-index: 2;
+  grid-column: 2;
+  display: inline-flex;
+  width: 64px;
+  height: 64px;
+  margin-inline: auto;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text);
+  background-color: var(--color-bg-card);
+  border: 4px solid var(--color-border);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-md);
+  font-family: var(--font-ui);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-black);
+}
+
+.units-map__marker svg {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.units-map__marker--unlocked {
+  color: #ffffff;
+  background-color: var(--color-action);
+  border-color: var(--color-action-secondary);
+}
+
+.units-map__marker--locked {
+  background-color: var(--color-disabled-bg);
+  color: var(--color-disabled-text);
+}
+
+.units-map__forest-icon {
+  width: 7rem;
+  height: 7rem;
+  color:
+    color-mix(
+      in srgb,
+      var(--color-support) 76%,
+      var(--color-action)
+    );
+  opacity: 0.55;
+}
+
+.unit-map-card {
+  width: min(100%, 360px);
+  border: 3px solid var(--lesson-border);
+  background-color: var(--lesson-surface);
+  text-align: center;
+}
+
+.unit-map-card .app-card__icon,
+.unit-lesson-card .app-card__icon {
+  margin-inline: auto;
+  color: var(--lesson-primary);
+}
+
+.unit-map-card .app-card__content,
+.unit-lesson-card .app-card__content {
+  align-items: center;
+}
+
+.unit-map-card--locked {
+  opacity: 0.72;
+  filter: saturate(0.65);
+}
+
+.units-map__progress-note {
+  width: min(100%, 720px);
+  margin: var(--space-lg) auto 0;
+  padding: var(--space-md) var(--space-lg);
+  text-align: center;
+  background-color: var(--color-bg-card);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+.unit-lessons-grid {
+  width: min(100%, 980px);
+  margin: var(--space-xl) auto 0;
+  display: grid;
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(240px, 1fr)
+    );
+  gap: var(--space-lg);
+}
+
+.unit-lesson-card {
+  height: 100%;
+  border: 3px solid var(--lesson-border);
+  background-color: var(--lesson-surface);
+  text-align: center;
+}
+
+@media (max-width: 720px) {
+  .units-map {
+    gap: var(--space-xl);
+  }
+
+  .units-map::before {
+    left: 30px;
+  }
+
+  .units-map__stop {
+    grid-template-columns:
+      60px minmax(0, 1fr);
+    min-height: auto;
+    gap: var(--space-md);
+  }
+
+  .units-map__marker {
+    grid-column: 1;
+    grid-row: 1;
+    width: 52px;
+    height: 52px;
+  }
+
+  .units-map__side--card {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .units-map__side--scenery {
+    display: none;
+  }
+
+  .unit-map-card {
+    width: 100%;
+  }
+}
