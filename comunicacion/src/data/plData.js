@@ -171,7 +171,7 @@ export const plSyllableSearch = {
   ],
 }
  
-// Fase 3: completar la palabra con la sílaba que falta (se muestra el patrón)
+// Fase 3: completar la palabra con la sílaba que falta
 export const plSyllableOptions = ['pla', 'ple', 'pli', 'plo', 'plu']
  
 export const plCompletionInstructionAudio =
@@ -212,8 +212,7 @@ export const plWordCompletion = [
   },
 ]
  
-// Fase 4: se muestra una sílaba y un banco de palabras
-// seleccionar las palabras que contienen esa sílaba
+// Fase 4: se muestra una sílaba y un banco de palabras, seleccionar las palabras que contienen esa sílaba
 export const plWordBankInstructionAudio =
   '/audio/lecciones/pl/instruccion-banco-pl.mp3'
  
@@ -292,7 +291,8 @@ export const plSyllableJoin = [
   },
 ]
  
-// Fase 2: completar la oración — se da un banco de palabras y hay que seleccionar la que completa la oración correctamente.
+// Fase 2: completar la oración 
+// Se da un banco de palabras y hay que seleccionar la que completa la oración correctamente.
 export const plSentenceCompletionInstructionAudio =
   '/audio/lecciones/pl/instruccion-completar-oracion-pl.mp3'
  
