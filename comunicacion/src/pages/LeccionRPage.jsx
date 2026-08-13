@@ -60,6 +60,7 @@ function LeccionRPage() {
           onClick={() =>
             playAudio(rReading.instructionAudio)
           }
+          data-audio-src={rReading.instructionAudio}
         >
           Escuchar instrucción
         </Button>
@@ -94,6 +95,7 @@ function LeccionRPage() {
               onClick={() =>
                 playAudio(rReading.readingAudio)
               }
+              data-audio-src={rReading.readingAudio}
             >
               Escuchar la historia
             </Button>
@@ -144,6 +146,7 @@ function LeccionRPage() {
                   onClick={() =>
                     playAudio(question.audio)
                   }
+                  data-audio-src={question.audio}
                 >
                   Escuchar pregunta
                 </Button>

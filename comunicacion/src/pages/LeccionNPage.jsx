@@ -44,6 +44,7 @@ function LeccionNPage() {
           icon={Volume2}
           disabled={!nReading.instructionAudio}
           onClick={() => playAudio(nReading.instructionAudio)}
+          data-audio-src={nReading.instructionAudio}
         >
           {getAudioLabel('Escuchar instrucción', nReading.instructionAudio)}
         </Button>
@@ -70,6 +71,7 @@ function LeccionNPage() {
               icon={Volume2}
               disabled={!nReading.readingAudio}
               onClick={() => playAudio(nReading.readingAudio)}
+              data-audio-src={nReading.readingAudio}
             >
               {getAudioLabel('Escuchar la historia', nReading.readingAudio)}
             </Button>

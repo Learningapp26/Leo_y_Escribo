@@ -43,6 +43,7 @@ function LeccionLPage() {
           size="large"
           icon={Volume2}
           onClick={() => playAudio(lReading.instructionAudio)}
+          data-audio-src={lReading.instructionAudio}
         >
           Escuchar instrucción
         </Button>
@@ -68,6 +69,7 @@ function LeccionLPage() {
               size="large"
               icon={Volume2}
               onClick={() => playAudio(lReading.readingAudio)}
+              data-audio-src={lReading.readingAudio}
             >
               Escuchar la historia
             </Button>

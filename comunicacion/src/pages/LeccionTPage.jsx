@@ -87,6 +87,7 @@ function LeccionTPage() {
           size="large"
           icon={Volume2}
           onClick={() => playAudio(tReading.instructionAudio)}
+          data-audio-src={tReading.instructionAudio}
         >
           Escuchar instrucción
         </Button>
@@ -110,6 +111,7 @@ function LeccionTPage() {
               size="large"
               icon={Volume2}
               onClick={() => playAudio(tReading.readingAudio)}
+              data-audio-src={tReading.readingAudio}
             >
               Escuchar la historia
             </Button>
@@ -138,6 +140,7 @@ function LeccionTPage() {
               variant="audio"
               icon={Volume2}
               onClick={() => playAudio(tOrderInstructionAudio)}
+              data-audio-src={tOrderInstructionAudio}
             >
               Escuchar instrucción
             </Button>

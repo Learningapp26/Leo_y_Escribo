@@ -47,6 +47,7 @@ function LeccionYPage() {
           onClick={() =>
             playAudio(yReading.instructionAudio)
           }
+          data-audio-src={yReading.instructionAudio}
         >
           Escuchar instrucción
         </Button>
@@ -81,6 +82,7 @@ function LeccionYPage() {
               onClick={() =>
                 playAudio(yReading.readingAudio)
               }
+              data-audio-src={yReading.readingAudio}
             >
               Escuchar la historia
             </Button>

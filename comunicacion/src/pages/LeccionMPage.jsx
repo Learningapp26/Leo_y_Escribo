@@ -40,6 +40,7 @@ function LeccionMPage() {
           size="large"
           icon={Volume2}
           onClick={() => playAudio(mReading.instructionAudio)}
+          data-audio-src={mReading.instructionAudio}
         >
           Escuchar instrucción
         </Button>
@@ -65,6 +66,7 @@ function LeccionMPage() {
               size="large"
               icon={Volume2}
               onClick={() => playAudio(mReading.readingAudio)}
+              data-audio-src={mReading.readingAudio}
             >
               Escuchar la historia
             </Button>
