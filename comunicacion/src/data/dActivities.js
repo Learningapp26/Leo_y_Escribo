@@ -50,8 +50,8 @@ export const dImagePool = [
     startsWithD: true,
   },
   {
-    id: 'muneca',
-    name: 'muneca',
+    id: 'muñeca',
+    name: 'muñeca',
     image: dImage('muneca'),
     audio: '/audio/lecciones/m/muñeca.mp3',
     startsWithD: false,
@@ -268,7 +268,7 @@ export const dPracticeWords = [
     audio: dAudio('dos'), // TODO: Agregar audio de "dos"
   },
   {
-    word: 'dia',
+    word: 'día',
     image: dImage('dia'),
     audio: dAudio('dia'), // TODO: Agregar audio de "dia"
   },
@@ -302,7 +302,7 @@ export const dSentenceCompletion = [
     answer: 'Dina',
   },
   {
-    sentence: '___ dona se mira.',
+    sentence: '___ dona se ve deliciosa.',
     options: ['La', 'la'],
     answer: 'La',
   },

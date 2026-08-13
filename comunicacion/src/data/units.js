@@ -83,7 +83,7 @@ export const units = [
         id: 'd',
         title: 'Letra D',
         route: '/lecciones/d',
-        available: false,
+        available: true,
       },
       {
         id: 'silabas-inversas',

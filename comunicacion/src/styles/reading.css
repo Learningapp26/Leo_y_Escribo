@@ -319,13 +319,17 @@
 
 .comprehension-feedback {
   margin-top: 0.75rem;
+  padding: 0.85rem 1rem;
+  border-radius: var(--radius-md);
   font-weight: 700;
 }
 
 .comprehension-feedback--correct {
-  color: #287a3e;
+  background: var(--color-correct);
+  color: white;
 }
 
 .comprehension-feedback--incorrect {
-  color: #a53a3a;
+  background: var(--color-retry);
+  color: var(--color-text);
 }
