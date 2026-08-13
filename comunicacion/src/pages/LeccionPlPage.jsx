@@ -2,7 +2,6 @@ import {
   ArrowRight,
   Images,
   ListMusic,
-  PenLine,
   Sparkles,
   Volume2,
 } from 'lucide-react'
@@ -128,24 +127,6 @@ function LeccionPlPage() {
               <Button
                 to="/actividad/pl-silabas"
                 variant="support"
-                icon={ArrowRight}
-                iconPosition="right"
-                fullWidth
-              >
-                Comenzar
-              </Button>
-            }
-          />
-
-          <Card
-            className="lesson-activity-menu__card"
-            icon={PenLine}
-            title="Completar palabras"
-            description="Completa las palabras con las sílabas que faltan"
-            footer={
-              <Button
-                to="/actividad/pl-completar"
-                variant="secondary"
                 icon={ArrowRight}
                 iconPosition="right"
                 fullWidth

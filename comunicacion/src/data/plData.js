@@ -256,8 +256,7 @@ export const plWordSyllableSelection = [
 
 // ACTIVIDAD FINAL
 
-// Fase 1: formar palabras tocando sílabas — se reutiliza siempre la misma
-// sílaba inicial "pla" y se completa con una terminación del banco.
+// Fase 1: formar palabras tocando sílabas
 // El banco es el mismo en las tres rondas.
 export const plJoinInstructionAudio =
   '/audio/lecciones/pl/instruccion-formar-pl.mp3'
