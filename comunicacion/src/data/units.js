@@ -28,7 +28,7 @@ export const units = [
         id: 's',
         title: 'Letra S',
         route: '/lecciones/s',
-        available: false,
+        available: true,
       },
       {
         id: 'y-conjuncion',
@@ -95,7 +95,7 @@ export const units = [
         id: 'pl',
         title: 'Combinación PL',
         route: '/lecciones/pl',
-        available: false,
+        available: true,
       },
       {
         id: 'pr',
