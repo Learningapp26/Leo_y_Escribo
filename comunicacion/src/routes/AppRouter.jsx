@@ -63,6 +63,11 @@ import ActividadCFinalPage from '../pages/ActividadCFinalPage'
 
 import UnitLessonsPage from '../pages/UnitLessonsPage'
 
+import LeccionPlPage from '../pages/LeccionPLPage'
+import ActividadPlSonidosPage from '../pages/ActividadPlSonidosPage'
+import ActividadPlSilabasPage from '../pages/ActividadPlSilabasPage'
+import ActividadPlFinalPage from '../pages/ActividadPlFinalPage'
+
 
 function AppRouter() {
   return (
@@ -310,6 +315,28 @@ function AppRouter() {
           path="/actividad/c-final"
           element={<ActividadCFinalPage />}
         />
+
+        <Route
+          path="/lecciones/pl"
+          element={<LeccionPlPage />}
+        />
+
+        <Route
+          path="/actividad/pl-sonidos"
+          element={<ActividadPlSonidosPage />}
+        />
+
+        <Route
+          path="/actividad/pl-silabas"
+          element={<ActividadPlSilabasPage />}
+        />
+
+        <Route
+          path="/actividad/pl-final"
+          element={<ActividadPlFinalPage />}
+        />
+
+
         <Route
           path="/lecciones/:lessonId"
           element={<LessonDetailPage />}

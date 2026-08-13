@@ -25,7 +25,9 @@ function LeccionPlPage() {
       <BackButton label="Volver a lecciones" to="/lecciones" />
 
       <header className="text-center">
-        <span className="text-ui-label">Unidad 2</span>
+        <span className="text-ui-label">
+          Unidad 2
+        </span>
 
         <h1 id="pl-lesson-title">Combinación de letras PL</h1>
 
