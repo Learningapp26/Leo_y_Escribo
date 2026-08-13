@@ -8,6 +8,13 @@ import { playAudio } from '../lib/audioPlayer'
 import '../styles/vowels.css'
 
 const vocales = ['a', 'e', 'i', 'o', 'u']
+const vowelAudioPaths = {
+  a: '/audio/lecciones/vocales/A.mp3',
+  e: '/audio/lecciones/vocales/E.mp3',
+  i: '/audio/lecciones/vocales/I.mp3',
+  o: '/audio/lecciones/vocales/O.mp3',
+  u: '/audio/lecciones/vocales/U.mp3',
+}
 
 function LeccionVocalesPage() {
   return (
@@ -31,7 +38,7 @@ function LeccionVocalesPage() {
           </h1>
 
           <p className="text-instruction vowels-page__instruction">
-            Recordemos las cinco vocales antes de comenzar la actividad.
+            Recordemos las  vocales antes de comenzar la actividad.
           </p>
 
           <Button
@@ -39,8 +46,9 @@ function LeccionVocalesPage() {
             size="large"
             icon={Volume2}
             onClick={() =>
-              playAudio('/audio/lecciones/vocales/instruccion-repaso.mp3')
+              playAudio('/audio/lecciones/vocales/Instruccion repaso.mp3')
             }
+            data-audio-src={'/audio/lecciones/vocales/instruccion-repaso.mp3'}
           >
             Escuchar instrucción
           </Button>
@@ -65,12 +73,15 @@ function LeccionVocalesPage() {
             aria-label="a, e, i, o, u"
           >
             {vocales.map((vocal) => (
-              <span
-                className="vowels-list__item text-letter"
+              <Button
                 key={vocal}
+                variant="audio"
+                size="large"
+                className="vowels-list__item text-letter"
+                onClick={() => playAudio(vowelAudioPaths[vocal])}
               >
                 {vocal}
-              </span>
+              </Button>
             ))}
           </div>
 
@@ -84,8 +95,9 @@ function LeccionVocalesPage() {
             icon={Volume2}
             fullWidth
             onClick={() =>
-              playAudio('/audio/lecciones/vocales/vocales.mp3')
+              playAudio('/audio/lecciones/vocales/Vocales.mp3')
             }
+            data-audio-src={'/audio/lecciones/vocales/Vocales.mp3'}
           >
             Escuchar las vocales
           </Button>

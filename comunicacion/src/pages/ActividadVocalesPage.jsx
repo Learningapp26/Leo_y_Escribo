@@ -36,7 +36,7 @@ const ejercicios = [
     palabra: 'oso',
     imagen: '/images/lecciones/vocales/oso.png',
     respuesta: 'o',
-    audio: '/audio/lecciones/vocales/oso.mp3',
+    audio: '/audio/lecciones/vocales/Oso.mp3',
   },
   {
     palabra: 'uniforme',
@@ -47,6 +47,13 @@ const ejercicios = [
 ]
 
 const vocales = ['a', 'e', 'i', 'o', 'u']
+const vowelAudioPaths = {
+  a: '/audio/lecciones/vocales/A.mp3',
+  e: '/audio/lecciones/vocales/E.mp3',
+  i: '/audio/lecciones/vocales/I.mp3',
+  o: '/audio/lecciones/vocales/O.mp3',
+  u: '/audio/lecciones/vocales/U.mp3',
+}
 
 function ActividadVocalesPage() {
   const [ejercicioActual, setEjercicioActual] = useState(0)
@@ -148,7 +155,7 @@ function ActividadVocalesPage() {
             icon={Volume2}
             onClick={() =>
               playAudio(
-                '/audio/lecciones/vocales/instruccion-vocal-inicial.mp3',
+                '/audio/lecciones/vocales/Encuentra la vocal inicial.mp3',
               )
             }
           >
@@ -208,6 +215,7 @@ function ActividadVocalesPage() {
                   onClick={() => {
                     setVocalSeleccionada(vocal)
                     setResultado('')
+                    playAudio(vowelAudioPaths[vocal])
                   }}
                 >
                   {vocal}
