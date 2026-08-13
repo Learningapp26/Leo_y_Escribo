@@ -71,7 +71,7 @@ export const units = [
         id: 'c',
         title: 'Letra C',
         route: '/lecciones/c',
-        available: false,
+        available: true,
       },
       {
         id: 'q',

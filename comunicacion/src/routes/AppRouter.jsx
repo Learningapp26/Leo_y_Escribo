@@ -55,6 +55,12 @@ import ActividadPFinalPage from '../pages/ActividadPFinalPage'
 import PalabrasPracticaPage from '../pages/PalabrasPracticaPage'
 import RepasoUnidad2Page from '../pages/RepasoUnidad2Page'
 
+import LeccionCPage from '../pages/LeccionCPage'
+import ActividadCSonidosPage from '../pages/ActividadCSonidosPage'
+import ActividadCSilabasPage from '../pages/ActividadCSilabasPage'
+import ActividadCCompletarPage from '../pages/ActividadCCompletarPage'
+import ActividadCFinalPage from '../pages/ActividadCFinalPage'
+
 import UnitLessonsPage from '../pages/UnitLessonsPage'
 
 
@@ -280,6 +286,30 @@ function AppRouter() {
           element={<RepasoUnidad2Page />}
         />
 
+        <Route
+          path="/lecciones/c"
+          element={<LeccionCPage />}
+        />
+
+        <Route
+          path="/actividad/c-sonidos"
+          element={<ActividadCSonidosPage />}
+        />
+
+        <Route
+          path="/actividad/c-silabas"
+          element={<ActividadCSilabasPage />}
+        />
+
+        <Route
+          path="/actividad/c-completar"
+          element={<ActividadCCompletarPage />}
+        />
+
+        <Route
+          path="/actividad/c-final"
+          element={<ActividadCFinalPage />}
+        />
         <Route
           path="/lecciones/:lessonId"
           element={<LessonDetailPage />}
