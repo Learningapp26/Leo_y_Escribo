@@ -40,6 +40,10 @@ function ActividadDCompletarPage() {
   const phase = PHASES[phaseIndex]
   const themeClass = getLessonThemeClass('d')
   const currentWord = dWordCompletion[wordIndex]
+  const visiblePattern = currentWord.pattern.replace(
+    '__',
+    selectedSyllable || '__',
+  )
   const isJoinFinished = matchedPairs.length === dSyllableJoin.length
 
   const checkCompletion = () => {
@@ -99,8 +103,8 @@ function ActividadDCompletarPage() {
         <Card className="completion-card">
           <p className="text-instruction">Escucha la palabra y elige la sílaba que falta.</p>
           <img className="completion-word-image" src={currentWord.image} alt={currentWord.word} />
-          <Button variant="audio" icon={Volume2} onClick={() => playIfAvailable(currentWord.audio)}>Escuchar palabra</Button>
-          <p className="completion-word-pattern">{currentWord.pattern}</p>
+          <Button variant="audio" icon={Volume2} onClick={() => playIfAvailable(currentWord.audio)}>Escuchar {currentWord.word}</Button>
+          <p className="completion-word-pattern">{visiblePattern}</p>
           <div className="completion-bank">
             {dSyllableOptions.map((syllable) => (
               <button className={['completion-chip', 'text-syllable', selectedSyllable === syllable ? 'completion-active' : '', completionResult === 'correct' && selectedSyllable === syllable ? 'completion-correct' : '', completionResult === 'retry' && selectedSyllable === syllable ? 'completion-incorrect' : ''].filter(Boolean).join(' ')} type="button" key={syllable} aria-pressed={selectedSyllable === syllable} onClick={() => { setSelectedSyllable(syllable); setCompletionResult('') }}>

@@ -83,6 +83,14 @@ function ActividadDFinalPage() {
           <h1>¡Terminaste la lección de la letra D!</h1>
           <p className="text-instruction">Aprendiste el sonido /d/, sus sílabas da, de, di, do, du y palabras nuevas.</p>
           <StarsCounter current={stars} total={totalExercises} label="Estrellas" />
+          <Button
+            variant="audio"
+            icon={Volume2}
+            fullWidth
+            onClick={() => playAudio('/audio/lecciones/d/felicitacion-final.mp3')}
+          >
+            Escuchar felicitación
+          </Button>
           <Button to="/lecciones" icon={ArrowRight} iconPosition="right" size="large" fullWidth>Volver a las lecciones</Button>
         </Card>
       </main>
@@ -106,7 +114,7 @@ function ActividadDFinalPage() {
           {practiceWord.isProperNoun && <p className="text-instruction">Recuerda: los nombres propios se escriben con mayúscula.</p>}
           <img className="selection-image selection-image--featured" src={practiceWord.image} alt={practiceWord.word} />
           <span className="text-word">{practiceWord.word}</span>
-          <Button variant="audio" size="large" icon={Volume2} onClick={() => playIfAvailable(practiceWord.audio)}>Escuchar palabra</Button>
+          <Button variant="audio" size="large" icon={Volume2} onClick={() => playIfAvailable(practiceWord.audio)}>Escuchar {practiceWord.word}</Button>
           <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth onClick={() => {
             if (practiceIndex === dPracticeWords.length - 1) {
               setPhaseIndex(1)
@@ -142,7 +150,7 @@ function ActividadDFinalPage() {
         <Card className="selection-card">
           <p className="text-instruction">Escucha la palabra y selecciona la imagen que corresponde.</p>
           <span className="text-word">{matchItem.word}</span>
-          <Button variant="audio" icon={Volume2} onClick={() => playIfAvailable(matchItem.audio)}>Escuchar palabra</Button>
+          <Button variant="audio" icon={Volume2} onClick={() => playIfAvailable(matchItem.audio)}>Escuchar {matchItem.word}</Button>
           <div className="selection-options">
             {matchItem.options.map((option) => {
               const selected = selectedImage === option.image

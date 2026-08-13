@@ -193,7 +193,7 @@ function ActividadDImagenesPage() {
 
           <img className="selection-image selection-image--featured" src={syllableItem.image} alt={syllableItem.word} />
           <span className="text-word">{syllableItem.word}</span>
-          <Button variant="audio" icon={Volume2} onClick={() => playIfAvailable(syllableItem.audio)}>Escuchar palabra</Button>
+          <Button variant="audio" icon={Volume2} onClick={() => playIfAvailable(syllableItem.audio)}>Escuchar {syllableItem.word}</Button>
           <div className="syllables-options">
             {syllableItem.syllables.map((syllable) => {
               const selected = selectedSyllables.includes(syllable)

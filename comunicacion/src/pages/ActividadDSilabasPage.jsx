@@ -31,6 +31,8 @@ function ActividadDSilabasPage() {
   const [searchSelected, setSearchSelected] = useState([])
   const [searchResult, setSearchResult] = useState('')
   const [assocIndex, setAssocIndex] = useState(0)
+  const [selectedVowels, setSelectedVowels] = useState([])
+  const [vowelResult, setVowelResult] = useState('')
 
   const phase = PHASES[phaseIndex]
   const themeClass = getLessonThemeClass('d')
@@ -71,6 +73,25 @@ function ActividadDSilabasPage() {
     setSearchResult(isCorrect ? 'correct' : 'retry')
   }
 
+  const toggleVowel = (vowel) => {
+    if (vowelResult === 'correct') return
+    setVowelResult('')
+    setSelectedVowels((current) =>
+      current.includes(vowel)
+        ? current.filter((item) => item !== vowel)
+        : [...current, vowel],
+    )
+  }
+
+  const checkVowels = () => {
+    const targetVowels = ['a', 'e', 'i', 'o', 'u']
+    const isCorrect =
+      selectedVowels.length === targetVowels.length &&
+      targetVowels.every((vowel) => selectedVowels.includes(vowel))
+
+    setVowelResult(isCorrect ? 'correct' : 'retry')
+  }
+
   return (
     <main className={`page ${themeClass}`} aria-labelledby="d-silabas-title">
       <BackButton label="Volver a la lección" to="/lecciones/d" />
@@ -86,7 +107,7 @@ function ActividadDSilabasPage() {
           <p className="text-instruction">Escucha la palabra y cuenta sus sílabas.</p>
           <img className="completion-word-image" src={countWord.image} alt={countWord.name} />
           <span className="text-word">{countWord.name}</span>
-          <Button variant="audio" icon={Volume2} onClick={() => playIfAvailable(countWord.audio)}>Escuchar palabra</Button>
+          <Button variant="audio" icon={Volume2} onClick={() => playIfAvailable(countWord.audio)}>Escuchar {countWord.name}</Button>
           <div className="completion-bank">
             {countWord.syllables.map((syllable) => <span className="completion-chip text-syllable" key={syllable}>{syllable}</span>)}
           </div>
@@ -125,16 +146,51 @@ function ActividadDSilabasPage() {
 
       {phase === 'letra' && (
         <Card className="syllables-card">
-          <p className="text-instruction">Conoce la letra D. Toca cada combinación para escucharla.</p>
+          <p className="text-instruction">Toca las vocales para unirlas con la D y formar sílabas.</p>
           <div className="selection-options">
             <span className="text-letter">D</span>
             <span className="text-letter">d</span>
           </div>
           <Button variant="audio" size="large" icon={Volume2} onClick={() => playIfAvailable(dLetterPresentation.soundAudio)}>Escuchar el sonido de la D</Button>
+
           <div className="syllables-options">
-            {dLetterPresentation.combinations.map((item) => <button className="syllable-button" type="button" key={item.syllable} onClick={() => playIfAvailable(item.audio)}>{item.syllable}</button>)}
+            {dLetterPresentation.combinations.map((item) => {
+              const vowel = item.syllable.slice(1)
+              const selected = selectedVowels.includes(vowel)
+              const stateClass =
+                vowelResult && selected
+                  ? vowelResult === 'correct'
+                    ? 'syllable-button--correct'
+                    : 'syllable-button--incorrect'
+                  : selected
+                    ? 'syllable-button--selected'
+                    : ''
+
+              return (
+              <button className={['syllable-button', stateClass].filter(Boolean).join(' ')} type="button" key={item.syllable} aria-pressed={selected} onClick={() => { toggleVowel(vowel); playIfAvailable(item.audio) }}>
+                {vowel}
+              </button>
+              )
+            })}
           </div>
-          <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth onClick={() => setPhaseIndex(3)}>Continuar</Button>
+
+          <div className="completion-bank" aria-live="polite">
+            {selectedVowels.length === 0 ? (
+              <span className="completion-chip text-syllable">D + vocal</span>
+            ) : (
+              selectedVowels.map((vowel) => (
+                <span className="completion-chip text-syllable" key={vowel}>
+                  D + {vowel} = d{vowel}
+                </span>
+              ))
+            )}
+          </div>
+
+          {vowelResult === 'correct' && <p className="syllables-feedback syllables-feedback--correct" role="status">¡Muy bien! Formaste da, de, di, do y du.</p>}
+          {vowelResult === 'retry' && <p className="syllables-feedback syllables-feedback--retry" role="status">Toca todas las vocales: a, e, i, o, u.</p>}
+          {vowelResult !== 'correct' && <Button icon={Check} size="large" fullWidth disabled={selectedVowels.length === 0} onClick={checkVowels}>Comprobar</Button>}
+          {vowelResult === 'retry' && <Button variant="retry" icon={RotateCcw} size="large" fullWidth onClick={() => { setSelectedVowels([]); setVowelResult('') }}>Intentar nuevamente</Button>}
+          {vowelResult === 'correct' && <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth onClick={() => setPhaseIndex(3)}>Continuar</Button>}
         </Card>
       )}
 
@@ -144,8 +200,8 @@ function ActividadDSilabasPage() {
           <img className="selection-image selection-image--featured" src={assocItem.image} alt={assocItem.word} />
           <p className="text-word" aria-label={assocItem.word}><span className="text-syllable">{assocItem.highlighted}</span>{assocItem.rest}</p>
           <div className="selection-options">
-            <Button variant="audio" icon={Volume2} onClick={() => playIfAvailable(assocItem.syllableAudio)}>Escuchar sílaba</Button>
-            <Button variant="audio" icon={Volume2} onClick={() => playIfAvailable(assocItem.wordAudio)}>Escuchar palabra</Button>
+            <Button variant="audio" icon={Volume2} onClick={() => playIfAvailable(assocItem.syllableAudio)}>Escuchar {assocItem.highlighted}</Button>
+            <Button variant="audio" icon={Volume2} onClick={() => playIfAvailable(assocItem.wordAudio)}>Escuchar {assocItem.word}</Button>
           </div>
           <div className="activity-navigation">
             <Button variant="secondary" icon={ArrowLeft} fullWidth disabled={assocIndex === 0} onClick={() => setAssocIndex((current) => current - 1)}>Anterior</Button>
