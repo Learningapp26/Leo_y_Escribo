@@ -10,6 +10,7 @@ import './styles/completion.css'
 import './styles/word-practice.css'
 import './styles/themes.css'
 import App from './App.jsx'
+import './lib/audioEvents'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

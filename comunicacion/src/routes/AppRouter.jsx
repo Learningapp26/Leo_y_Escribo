@@ -61,13 +61,18 @@ import ActividadCSilabasPage from '../pages/ActividadCSilabasPage'
 import ActividadCCompletarPage from '../pages/ActividadCCompletarPage'
 import ActividadCFinalPage from '../pages/ActividadCFinalPage'
 
-import UnitLessonsPage from '../pages/UnitLessonsPage'
+import LeccionDPage from '../pages/LeccionDPage'
+import ActividadDImagenesPage from '../pages/ActividadDImagenesPage'
+import ActividadDSilabasPage from '../pages/ActividadDSilabasPage'
+import ActividadDCompletarPage from '../pages/ActividadDCompletarPage'
+import ActividadDFinalPage from '../pages/ActividadDFinalPage'
 
 import LeccionPlPage from '../pages/LeccionPLPage'
 import ActividadPlSonidosPage from '../pages/ActividadPlSonidosPage'
 import ActividadPlSilabasPage from '../pages/ActividadPlSilabasPage'
 import ActividadPlFinalPage from '../pages/ActividadPlFinalPage'
 
+import UnitLessonsPage from '../pages/UnitLessonsPage'
 
 function AppRouter() {
   return (
@@ -289,6 +294,30 @@ function AppRouter() {
         <Route
           path="/unidad-2/repaso"
           element={<RepasoUnidad2Page />}
+        />
+        <Route
+          path="/lecciones/d"
+          element={<LeccionDPage />}
+        />
+
+        <Route
+          path="/actividad/d-imagenes"
+          element={<ActividadDImagenesPage />}
+        />
+
+        <Route
+          path="/actividad/d-silabas"
+          element={<ActividadDSilabasPage />}
+        />
+
+        <Route
+          path="/actividad/d-completar"
+          element={<ActividadDCompletarPage />}
+        />
+
+        <Route
+          path="/actividad/d-final"
+          element={<ActividadDFinalPage />}
         />
 
         <Route
