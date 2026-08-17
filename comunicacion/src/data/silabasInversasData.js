@@ -112,18 +112,21 @@ export const siLSentences = [
     template: '___ toro come ___ pasto.',
     blanks: ['El', 'el'],
     audio: '/audio/silabas-inversas/l/oracion-toro-pasto.mp3',
+    image: '/images/lecciones/silabasInversas/l/toro.png',
   },
   {
     id: 'comal-piso',
     template: '___ comal está en ___ piso.',
     blanks: ['El', 'el'],
     audio: '/audio/silabas-inversas/l/oracion-comal-piso.mp3',
+    image: '/images/lecciones/silabasInversas/l/comal.png',
   },
   {
     id: 'loro-mar',
     template: 'Tere y su loro salen ___ mar.',
     blanks: ['al'],
     audio: '/audio/silabas-inversas/l/oracion-loro-mar.mp3',
+    image: '/images/lecciones/silabasInversas/l/tere-loro.png',
   },
 ]
 

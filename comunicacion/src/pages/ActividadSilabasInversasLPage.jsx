@@ -519,6 +519,12 @@ function ActividadSilabasInversasLPage() {
             Escuchar oración
           </Button>
 
+          <img
+            className="selection-image selection-image--featured"
+            src={sentence.image}
+            alt=""
+          />
+
           <p className="text-sentence">{renderedSentence}</p>
 
           <div className="selection-options">
