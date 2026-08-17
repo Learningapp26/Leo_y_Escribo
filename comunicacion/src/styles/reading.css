@@ -21,7 +21,7 @@
 
 .reading-card {
     display:grid;
-    grid-template-columns:1.4fr 1fr;
+    grid-template-columns:1.1fr 1fr;
 
     gap:var(--space-2xl);
 
@@ -78,17 +78,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    height: 100%;
 }
 
 .reading-image img {
     width: 100%;
-    max-width: 360px;
-
-    border-radius: var(--radius-lg);
+    height: 100%;
+    max-width: 100%;
+    max-height: 480px;
 
     object-fit: contain;
-
-    box-shadow: var(--shadow-md);
 }
 
 /* Sección "Conversemos sobre el cuento" */
@@ -244,10 +244,14 @@
 
     .reading-image {
         order: 1;
+
+        height: auto;
     }
 
     .reading-image img {
-        max-width: 260px;
+        height: auto;
+        max-width: 380px;
+        max-height: 380px;
     }
 
     .reading-audio {
@@ -283,7 +287,8 @@
     }
 
     .reading-image img {
-        max-width: 220px;
+        max-width: 280px;
+        max-height: 280px;
     }
 
 }

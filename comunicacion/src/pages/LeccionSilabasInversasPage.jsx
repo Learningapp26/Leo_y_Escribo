@@ -4,13 +4,14 @@ import Button from '../components/common/Button'
 import Card from '../components/common/Card'
 import BackButton from '../components/navigation/BackButton'
 import { getLessonThemeClass } from '../data/lessonColors'
+import '../styles/reading.css'
 
 function LeccionSilabasInversasPage() {
   const themeClass = getLessonThemeClass('silabas-inversas')
 
   return (
     <main
-      className={`page ${themeClass}`}
+      className={`page reading-page ${themeClass}`}
       aria-labelledby="silabas-inversas-title"
     >
       <BackButton label="Volver a lecciones" to="/lecciones" />
