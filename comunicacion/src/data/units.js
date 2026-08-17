@@ -89,7 +89,7 @@ export const units = [
         id: 'silabas-inversas',
         title: 'Sílabas inversas',
         route: '/lecciones/silabas-inversas',
-        available: false,
+        available: true,
       },
       {
         id: 'pl',

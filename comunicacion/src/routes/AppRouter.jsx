@@ -72,6 +72,11 @@ import ActividadPlSonidosPage from '../pages/ActividadPlSonidosPage'
 import ActividadPlSilabasPage from '../pages/ActividadPlSilabasPage'
 import ActividadPlFinalPage from '../pages/ActividadPlFinalPage'
 
+import LeccionSilabasInversasPage from '../pages/LeccionSilabasInversasPage'
+import ActividadSilabasInversasLPage from '../pages/ActividadSilabasInversasLPage'
+import ActividadSilabasInversasSPage from '../pages/ActividadSilabasInversasSPage'
+import ActividadSilabasInversasNPage from '../pages/ActividadSilabasInversasNPage'
+
 import UnitLessonsPage from '../pages/UnitLessonsPage'
 
 function AppRouter() {
@@ -363,6 +368,26 @@ function AppRouter() {
         <Route
           path="/actividad/pl-final"
           element={<ActividadPlFinalPage />}
+        />
+
+        <Route
+          path="/lecciones/silabas-inversas"
+          element={<LeccionSilabasInversasPage />}
+        />
+
+        <Route
+          path="/actividad/silabas-inversas-l"
+          element={<ActividadSilabasInversasLPage />}
+        />
+
+        <Route
+          path="/actividad/silabas-inversas-s"
+          element={<ActividadSilabasInversasSPage />}
+        />
+
+        <Route
+          path="/actividad/silabas-inversas-n"
+          element={<ActividadSilabasInversasNPage />}
         />
 
 
