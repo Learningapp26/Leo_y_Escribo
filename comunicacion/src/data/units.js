@@ -103,6 +103,12 @@ export const units = [
         route: '/lecciones/pr',
         available: false,
       },
+      {
+        id: 'repaso-unidad-2',
+        title: 'Repaso de la Unidad 2',
+        route: '/unidad-2/repaso',
+        available: true,
+      },
     ],
   },
   {
