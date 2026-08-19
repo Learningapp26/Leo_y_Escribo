@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
 import Button from '../components/common/Button'
@@ -13,6 +13,7 @@ import {
   pSentenceCompletion,
 } from '../data/pData'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 
 const PHASES = ['palabras', 'oraciones']
@@ -51,6 +52,12 @@ function ActividadPFinalPage() {
     setSentenceResult(isCorrect ? 'correct' : 'retry')
 
     if (isCorrect) setStars((current) => current + 1)
+
+    registrarProgreso({
+      actividad: 'p-final',
+      correcto: isCorrect,
+      detalle: { leccionId: 'p', fase: 'oraciones', ejercicioId: sentence.id },
+    })
   }
 
   const nextSentence = () => {
@@ -64,6 +71,10 @@ function ActividadPFinalPage() {
 
     setSentenceIndex((current) => current + 1)
   }
+
+  useEffect(() => {
+    if (finished) registrarLeccionCompletada('p')
+  }, [finished])
 
   if (finished) {
     return (

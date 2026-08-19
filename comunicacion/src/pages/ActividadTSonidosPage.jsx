@@ -14,6 +14,7 @@ import {
   tSoundIntro,
 } from '../data/tData'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarProgreso } from '../lib/progreso'
 
 import '../styles/selection.css'
 
@@ -87,6 +88,12 @@ function ActividadTSonidosPage() {
       selectedIds.every((id) => targetIds.includes(id))
 
     setSelectionFeedback(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 't-sonidos',
+      correcto: isCorrect,
+      detalle: { leccionId: 't', fase: 'seleccion' },
+    })
   }
 
   const retrySelection = () => {
@@ -122,6 +129,12 @@ function ActividadTSonidosPage() {
     if (!firstPick || !secondPick) return
 
     const isCorrect = firstPick.startsWithT && secondPick.startsWithT
+
+    registrarProgreso({
+      actividad: 't-sonidos',
+      correcto: isCorrect,
+      detalle: { leccionId: 't', fase: 'parejas' },
+    })
 
     if (isCorrect) {
       playAudio(secondPick.audio)
@@ -168,6 +181,12 @@ function ActividadTSonidosPage() {
       oddSelectedIds.every((id) => currentOddTargetIds.includes(id))
 
     setOddFeedback(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 't-sonidos',
+      correcto: isCorrect,
+      detalle: { leccionId: 't', fase: 'diferente' },
+    })
   }
 
   const retryOddSelection = () => {

@@ -13,6 +13,7 @@ import ProgressBar from '../components/progress/ProgressBar'
 import { getLessonThemeClass } from '../data/lessonColors'
 import { page27Pairs } from '../data/yConjunctionData'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarProgreso } from '../lib/progreso'
 
 const leftOptions = page27Pairs.map(
   (pair) => pair.first,
@@ -74,6 +75,12 @@ function ActividadYUnirImagenesPage() {
 
     if (!matchingPair) {
       setFeedback('retry')
+
+      registrarProgreso({
+        actividad: 'y-unir-imagenes',
+        correcto: false,
+        detalle: { leccionId: 'y-conjuncion' },
+      })
       return
     }
 
@@ -84,6 +91,12 @@ function ActividadYUnirImagenesPage() {
 
     setFeedback('correct')
     playAudio(matchingPair.phraseAudio)
+
+    registrarProgreso({
+      actividad: 'y-unir-imagenes',
+      correcto: true,
+      detalle: { leccionId: 'y-conjuncion', ejercicioId: matchingPair.id },
+    })
   }
 
   const clearSelection = () => {

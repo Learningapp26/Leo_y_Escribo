@@ -15,6 +15,7 @@ import {
   mSyllableSelection,
 } from '../data/mData'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 import '../styles/syllables.css'
 
@@ -53,6 +54,12 @@ function ActividadMSilabasPage() {
       searchSelected.every((syllable) => targetSyllables.includes(syllable))
 
     setSearchResult(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'm-silabas',
+      correcto: isCorrect,
+      detalle: { leccionId: 'm', fase: 'buscar' },
+    })
   }
 
   const retrySearch = () => {
@@ -89,7 +96,15 @@ function ActividadMSilabasPage() {
       (item) => item.syllable === selectedSyllable,
     )
 
-    setSelectFeedback(option?.isCorrect ? 'correct' : 'retry')
+    const isCorrect = Boolean(option?.isCorrect)
+
+    setSelectFeedback(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'm-silabas',
+      correcto: isCorrect,
+      detalle: { leccionId: 'm', fase: 'seleccionar', ejercicioId: selectItem.id },
+    })
   }
 
   const retrySelect = () => {

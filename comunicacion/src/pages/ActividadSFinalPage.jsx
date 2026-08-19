@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw } from 'lucide-react'
 
 import Button from '../components/common/Button'
@@ -9,6 +9,7 @@ import ProgressBar from '../components/progress/ProgressBar'
 import StarsCounter from '../components/progress/StarsCounter'
 import { getLessonThemeClass } from '../data/lessonColors'
 import { sFinalActivities } from '../data/sData'
+import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 
 import '../styles/completion.css'
 import '../styles/selection.css'
@@ -37,6 +38,12 @@ function ActividadSFinalPage() {
     const isCorrect = selected === answer
     setFeedback(isCorrect ? 'correct' : 'retry')
     if (isCorrect) setStars((current) => current + 1)
+
+    registrarProgreso({
+      actividad: 's-final',
+      correcto: isCorrect,
+      detalle: { leccionId: 's', fase: phase, ejercicioId: answer },
+    })
   }
 
   const next = () => {
@@ -72,7 +79,17 @@ function ActividadSFinalPage() {
     const isCorrect = formed === sFinalActivities.word.word
     setFeedback(isCorrect ? 'correct' : 'retry')
     if (isCorrect) setStars((current) => current + 1)
+
+    registrarProgreso({
+      actividad: 's-final',
+      correcto: isCorrect,
+      detalle: { leccionId: 's', fase: 'palabra', ejercicioId: sFinalActivities.word.word },
+    })
   }
+
+  useEffect(() => {
+    if (finished) registrarLeccionCompletada('s')
+  }, [finished])
 
   if (finished) {
     return (

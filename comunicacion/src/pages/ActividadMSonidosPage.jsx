@@ -14,6 +14,7 @@ import {
   mSoundMatching,
 } from '../data/mData'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarProgreso } from '../lib/progreso'
 
 import '../styles/selection.css'
 
@@ -83,6 +84,12 @@ function ActividadMSonidosPage() {
       selectedIds.every((id) => targetIds.includes(id))
 
     setSelectionFeedback(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'm-sonidos',
+      correcto: isCorrect,
+      detalle: { leccionId: 'm', fase: 'seleccion' },
+    })
   }
 
   const retrySelection = () => {
@@ -118,6 +125,12 @@ function ActividadMSonidosPage() {
     if (!firstPick || !secondPick) return
 
     const isCorrect = firstPick.startsWithM && secondPick.startsWithM
+
+    registrarProgreso({
+      actividad: 'm-sonidos',
+      correcto: isCorrect,
+      detalle: { leccionId: 'm', fase: 'parejas' },
+    })
 
     if (isCorrect) {
       playAudio(secondPick.audio)
@@ -157,6 +170,12 @@ function ActividadMSonidosPage() {
       containsSelectedIds.every((id) => containsMIds.includes(id))
 
     setContainsFeedback(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'm-sonidos',
+      correcto: isCorrect,
+      detalle: { leccionId: 'm', fase: 'contiene' },
+    })
   }
 
   const retryContainsSelection = () => {

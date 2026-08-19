@@ -16,6 +16,7 @@ import {
   tWordCompletion,
 } from '../data/tData'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 import '../styles/syllables.css'
 import '../styles/completion.css'
@@ -55,6 +56,12 @@ function ActividadTSilabasPage() {
       searchSelected.every((syllable) => targetSyllables.includes(syllable))
 
     setSearchResult(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 't-silabas',
+      correcto: isCorrect,
+      detalle: { leccionId: 't', fase: 'buscar' },
+    })
   }
 
   const retrySearch = () => {
@@ -82,6 +89,12 @@ function ActividadTSilabasPage() {
     const isCorrect = selectedSyllable === currentWord.answer
 
     setCompletionResult(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 't-silabas',
+      correcto: isCorrect,
+      detalle: { leccionId: 't', fase: 'completar', ejercicioId: currentWord.id },
+    })
   }
 
   const nextWord = () => {

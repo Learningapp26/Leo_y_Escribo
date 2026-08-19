@@ -13,6 +13,7 @@ import {
 } from '../data/dActivities'
 import { getLessonThemeClass } from '../data/lessonColors'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 import '../styles/syllables.css'
 import '../styles/completion.css'
@@ -41,7 +42,14 @@ function ActividadDSilabasPage() {
 
   const checkCount = () => {
     if (countSelected === null) return
-    setCountResult(countSelected === countWord.syllables.length ? 'correct' : 'retry')
+    const isCorrect = countSelected === countWord.syllables.length
+    setCountResult(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'd-silabas',
+      correcto: isCorrect,
+      detalle: { leccionId: 'd', fase: 'contar', ejercicioId: countWord.id },
+    })
   }
 
   const nextCountWord = () => {
@@ -71,6 +79,12 @@ function ActividadDSilabasPage() {
       searchSelected.length === targetIds.length &&
       searchSelected.every((id) => targetIds.includes(id))
     setSearchResult(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'd-silabas',
+      correcto: isCorrect,
+      detalle: { leccionId: 'd', fase: 'buscar' },
+    })
   }
 
   const toggleVowel = (vowel) => {
@@ -90,6 +104,12 @@ function ActividadDSilabasPage() {
       targetVowels.every((vowel) => selectedVowels.includes(vowel))
 
     setVowelResult(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'd-silabas',
+      correcto: isCorrect,
+      detalle: { leccionId: 'd', fase: 'letra' },
+    })
   }
 
   return (

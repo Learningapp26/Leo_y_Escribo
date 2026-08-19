@@ -14,6 +14,7 @@ import {
   tSyllableSelectionInstructionAudio,
 } from '../data/tData'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 import '../styles/syllables.css'
 import '../styles/completion.css'
@@ -42,6 +43,12 @@ function ActividadTCompletarPage() {
     const isCorrect = selectedSyllable === currentWord.answer
 
     setSelectResult(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 't-completar',
+      correcto: isCorrect,
+      detalle: { leccionId: 't', fase: 'seleccionar', ejercicioId: currentWord.id },
+    })
   }
 
   const nextWord = () => {
@@ -102,16 +109,34 @@ function ActividadTCompletarPage() {
 
     if (foundWords.includes(formedWord)) {
       setJoinFeedback('repeated')
+
+      registrarProgreso({
+        actividad: 't-completar',
+        correcto: false,
+        detalle: { leccionId: 't', fase: 'formar', ejercicioId: joinGroup.id },
+      })
       return
     }
 
     if (joinGroup.words.includes(formedWord)) {
       setFoundWords((current) => [...current, formedWord])
       setJoinFeedback('correct')
+
+      registrarProgreso({
+        actividad: 't-completar',
+        correcto: true,
+        detalle: { leccionId: 't', fase: 'formar', ejercicioId: joinGroup.id },
+      })
       return
     }
 
     setJoinFeedback('retry')
+
+    registrarProgreso({
+      actividad: 't-completar',
+      correcto: false,
+      detalle: { leccionId: 't', fase: 'formar', ejercicioId: joinGroup.id },
+    })
   }
 
   const retryJoin = () => {

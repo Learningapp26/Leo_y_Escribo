@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
 import Button from '../components/common/Button'
@@ -13,6 +13,7 @@ import {
   nSentenceImageMatch,
 } from '../data/nFinal'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 
 const PHASES = ['palabras', 'oraciones', 'relacionar']
 
@@ -49,6 +50,12 @@ function ActividadNFinalPage() {
     setSentenceResult(isCorrect ? 'correct' : 'retry')
 
     if (isCorrect) setStars((current) => current + 1)
+
+    registrarProgreso({
+      actividad: 'n-final',
+      correcto: isCorrect,
+      detalle: { leccionId: 'n', fase: 'oraciones', ejercicioId: sentenceChoice.id },
+    })
   }
 
   const nextSentence = () => {
@@ -79,6 +86,12 @@ function ActividadNFinalPage() {
     setMatchResult(isCorrect ? 'correct' : 'retry')
 
     if (isCorrect) setStars((current) => current + 1)
+
+    registrarProgreso({
+      actividad: 'n-final',
+      correcto: isCorrect,
+      detalle: { leccionId: 'n', fase: 'relacionar', ejercicioId: matchItem.id },
+    })
   }
 
   const nextMatch = () => {
@@ -94,6 +107,10 @@ function ActividadNFinalPage() {
 
     setMatchIndex((current) => current + 1)
   }
+
+  useEffect(() => {
+    if (finished) registrarLeccionCompletada('n')
+  }, [finished])
 
   if (finished) {
     return (

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
 import Button from '../components/common/Button'
@@ -20,6 +20,7 @@ import {
   siSTraceWords,
 } from '../data/silabasInversasData'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 import '../styles/syllables.css'
 import '../styles/reading.css'
@@ -76,6 +77,12 @@ function ActividadSilabasInversasSPage() {
       soundSelected.every((id) => targetSoundIds.includes(id))
 
     setSoundFeedback(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'silabas-inversas-s',
+      correcto: isCorrect,
+      detalle: { leccionId: 'silabas-inversas', fase: 'sonidos' },
+    })
   }
 
   const [readingSelected, setReadingSelected] = useState([])
@@ -99,6 +106,12 @@ function ActividadSilabasInversasSPage() {
       readingSelected.every((word) => targetReadingWords.includes(word))
 
     setReadingFeedback(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'silabas-inversas-s',
+      correcto: isCorrect,
+      detalle: { leccionId: 'silabas-inversas', fase: 'lectura' },
+    })
   }
 
   const [traceIndex, setTraceIndex] = useState(0)
@@ -119,8 +132,19 @@ function ActividadSilabasInversasSPage() {
     const option = sentenceItem.options.find(
       (item) => item.id === selectedOptionId,
     )
+    const isCorrect = Boolean(option?.isCorrect)
 
-    setSentenceFeedback(option?.isCorrect ? 'correct' : 'retry')
+    setSentenceFeedback(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'silabas-inversas-s',
+      correcto: isCorrect,
+      detalle: {
+        leccionId: 'silabas-inversas',
+        fase: 'oraciones',
+        ejercicioId: sentenceItem.id,
+      },
+    })
   }
 
   const nextSentence = () => {
@@ -128,6 +152,12 @@ function ActividadSilabasInversasSPage() {
     setSentenceFeedback('')
     setSentenceIndex((current) => current + 1)
   }
+
+  useEffect(() => {
+    if (isLastSentence && sentenceFeedback === 'correct') {
+      registrarLeccionCompletada('silabas-inversas', 's')
+    }
+  }, [isLastSentence, sentenceFeedback])
 
   return (
     <main

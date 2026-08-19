@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   ArrowRight,
   Check,
@@ -19,6 +19,7 @@ import {
   cSentenceInstructionAudio,
 } from '../data/cData'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 import '../styles/completion.css'
 
@@ -70,6 +71,16 @@ function ActividadCFinalPage() {
       isCorrect ? 'correct' : 'retry',
     )
 
+    registrarProgreso({
+      actividad: 'c-final',
+      correcto: isCorrect,
+      detalle: {
+        leccionId: 'c',
+        fase: 'oraciones',
+        ejercicioId: sentence.id,
+      },
+    })
+
     if (isCorrect) {
       setStars(
         (current) => current + 1,
@@ -92,6 +103,10 @@ function ActividadCFinalPage() {
       (current) => current + 1,
     )
   }
+
+  useEffect(() => {
+    if (finished) registrarLeccionCompletada('c')
+  }, [finished])
 
   if (finished) {
     return (

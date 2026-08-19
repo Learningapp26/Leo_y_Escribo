@@ -12,6 +12,7 @@ import {
 } from '../data/dActivities'
 import { getLessonThemeClass } from '../data/lessonColors'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 import '../styles/completion.css'
 
@@ -48,7 +49,14 @@ function ActividadDCompletarPage() {
 
   const checkCompletion = () => {
     if (!selectedSyllable) return
-    setCompletionResult(selectedSyllable === currentWord.answer ? 'correct' : 'retry')
+    const isCorrect = selectedSyllable === currentWord.answer
+    setCompletionResult(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'd-completar',
+      correcto: isCorrect,
+      detalle: { leccionId: 'd', fase: 'completar', ejercicioId: currentWord.word },
+    })
   }
 
   const nextWord = () => {
@@ -74,6 +82,17 @@ function ActividadDCompletarPage() {
         item.first.id === selectedLeft.id &&
         item.second.id === selectedRight.id,
     )
+
+    registrarProgreso({
+      actividad: 'd-completar',
+      correcto: Boolean(pair),
+      detalle: {
+        leccionId: 'd',
+        fase: 'unir',
+        ejercicioId: pair?.id ?? `${selectedLeft.syllable}${selectedRight.syllable}`,
+      },
+    })
+
     if (!pair) {
       setJoinFeedback('retry')
       return

@@ -15,6 +15,7 @@ import {
   pTraceWords,
 } from '../data/pData'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 import '../styles/syllables.css'
 import '../styles/completion.css'
@@ -49,6 +50,12 @@ function ActividadPSilabasPage() {
     const isCorrect = selectedSyllable === findItem.answer
 
     setFindResult(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'p-silabas',
+      correcto: isCorrect,
+      detalle: { leccionId: 'p', fase: 'encontrar', ejercicioId: findItem.id },
+    })
   }
 
   const nextFindItem = () => {

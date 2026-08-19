@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
 import Button from '../components/common/Button'
@@ -13,6 +13,7 @@ import {
 } from '../data/dActivities'
 import { getLessonThemeClass } from '../data/lessonColors'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 import '../styles/completion.css'
 
@@ -46,6 +47,12 @@ function ActividadDFinalPage() {
     const isCorrect = selectedOption === sentence.answer
     setSentenceResult(isCorrect ? 'correct' : 'retry')
     if (isCorrect) setStars((current) => Math.min(current + 1, totalExercises))
+
+    registrarProgreso({
+      actividad: 'd-final',
+      correcto: isCorrect,
+      detalle: { leccionId: 'd', fase: 'oraciones', ejercicioId: sentence.answer },
+    })
   }
 
   const nextSentence = () => {
@@ -63,6 +70,12 @@ function ActividadDFinalPage() {
     const isCorrect = selectedImage === matchItem.answerImage
     setMatchResult(isCorrect ? 'correct' : 'retry')
     if (isCorrect) setStars((current) => Math.min(current + 1, totalExercises))
+
+    registrarProgreso({
+      actividad: 'd-final',
+      correcto: isCorrect,
+      detalle: { leccionId: 'd', fase: 'relacionar', ejercicioId: matchItem.word },
+    })
   }
 
   const nextMatch = () => {
@@ -74,6 +87,10 @@ function ActividadDFinalPage() {
     }
     setMatchIndex((current) => current + 1)
   }
+
+  useEffect(() => {
+    if (finished) registrarLeccionCompletada('d')
+  }, [finished])
 
   if (finished) {
     return (

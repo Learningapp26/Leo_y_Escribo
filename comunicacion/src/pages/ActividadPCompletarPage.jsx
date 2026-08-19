@@ -15,6 +15,7 @@ import {
   pWordCompletionInstructionAudio,
 } from '../data/pData'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 import '../styles/syllables.css'
 import '../styles/completion.css'
@@ -48,6 +49,12 @@ function ActividadPCompletarPage() {
     const isCorrect = selectedSyllable === expected
 
     setCompletionResult(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'p-completar',
+      correcto: isCorrect,
+      detalle: { leccionId: 'p', fase: 'completar', ejercicioId: currentWord.id },
+    })
   }
 
   const nextWord = () => {
@@ -101,13 +108,20 @@ function ActividadPCompletarPage() {
     if (!slots[0] || !slots[1]) return
 
     const formedWord = slots[0].syllable + slots[1].syllable
+    const isCorrect = pWordBuildTargets.includes(formedWord)
+
+    registrarProgreso({
+      actividad: 'p-completar',
+      correcto: isCorrect,
+      detalle: { leccionId: 'p', fase: 'formar', ejercicioId: formedWord },
+    })
 
     if (foundWords.includes(formedWord)) {
       setJoinFeedback('repeated')
       return
     }
 
-    if (pWordBuildTargets.includes(formedWord)) {
+    if (isCorrect) {
       setFoundWords((current) => [...current, formedWord])
       setJoinFeedback('correct')
       return

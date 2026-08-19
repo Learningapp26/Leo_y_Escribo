@@ -8,6 +8,7 @@ import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
 import { getLessonThemeClass } from '../data/lessonColors'
 import { sWordBuilding } from '../data/sData'
+import { registrarProgreso } from '../lib/progreso'
 
 import '../styles/completion.css'
 import '../styles/selection.css'
@@ -42,7 +43,16 @@ function ActividadSCompletarPage() {
 
   const check = () => {
     if (!slots[0] || !slots[1]) return
-    setFeedback(slots.map((slot) => slot.syllable).join('') === item.word ? 'correct' : 'retry')
+
+    const isCorrect = slots.map((slot) => slot.syllable).join('') === item.word
+
+    setFeedback(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 's-completar',
+      correcto: isCorrect,
+      detalle: { leccionId: 's', ejercicioId: item.id },
+    })
   }
 
   const retry = () => {

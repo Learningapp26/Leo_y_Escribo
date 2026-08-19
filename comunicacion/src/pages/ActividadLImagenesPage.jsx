@@ -14,6 +14,7 @@ import {
   lSoundPairMatching,
 } from '../data/lImagenes'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarProgreso } from '../lib/progreso'
 
 const PHASES = ['sonido', 'seleccion', 'parejas', 'unir-sonidos']
 
@@ -82,6 +83,12 @@ function ActividadLImagenesPage() {
       selectedIds.every((id) => targetIds.includes(id))
 
     setSelectionFeedback(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'l-imagenes',
+      correcto: isCorrect,
+      detalle: { leccionId: 'l', fase: 'seleccion' },
+    })
   }
 
   const retrySelection = () => {
@@ -114,6 +121,12 @@ function ActividadLImagenesPage() {
     if (!firstPick || !secondPick) return
 
     const isCorrect = firstPick.startsWithL && secondPick.startsWithL
+
+    registrarProgreso({
+      actividad: 'l-imagenes',
+      correcto: isCorrect,
+      detalle: { leccionId: 'l', fase: 'parejas' },
+    })
 
     if (isCorrect) {
       playAudio(secondPick.audio)
@@ -160,6 +173,12 @@ function ActividadLImagenesPage() {
     if (!soundFirstPick || !soundSecondPick) return
 
     const isCorrect = soundFirstPick.pairId === soundSecondPick.pairId
+
+    registrarProgreso({
+      actividad: 'l-imagenes',
+      correcto: isCorrect,
+      detalle: { leccionId: 'l', fase: 'unir-sonidos' },
+    })
 
     if (isCorrect) {
       setMatchedSoundIds((current) => [

@@ -16,6 +16,7 @@ import {
   plTrabalenguasInstructionAudio,
 } from '../data/plData'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarProgreso } from '../lib/progreso'
 
 import '../styles/selection.css'
 
@@ -79,6 +80,12 @@ function ActividadPlSonidosPage() {
       selectedIds.every((id) => targetIds.includes(id))
 
     setSelectionFeedback(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'pl-sonidos',
+      correcto: isCorrect,
+      detalle: { leccionId: 'pl', fase: 'seleccion' },
+    })
   }
 
   const retrySelection = () => {
@@ -106,6 +113,12 @@ function ActividadPlSonidosPage() {
       containsSelectedIds.every((id) => containsPlIds.includes(id))
 
     setContainsFeedback(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'pl-sonidos',
+      correcto: isCorrect,
+      detalle: { leccionId: 'pl', fase: 'contiene' },
+    })
   }
 
   const retryContainsSelection = () => {

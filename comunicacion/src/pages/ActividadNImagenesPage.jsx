@@ -13,6 +13,7 @@ import {
   nSoundIntro,
 } from '../data/nImagenes'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 
 const PHASES = ['sonido', 'seleccion', 'parejas-inicio', 'parejas-final']
@@ -92,6 +93,12 @@ function ActividadNImagenesPage() {
       selectedIds.every((id) => targetIds.includes(id))
 
     setSelectionFeedback(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'n-imagenes',
+      correcto: isCorrect,
+      detalle: { leccionId: 'n', fase: 'seleccion' },
+    })
   }
 
   const retrySelection = () => {
@@ -126,6 +133,12 @@ function ActividadNImagenesPage() {
     const isCorrect =
       initialPairTargetIds.includes(firstPick.id) &&
       initialPairTargetIds.includes(secondPick.id)
+
+    registrarProgreso({
+      actividad: 'n-imagenes',
+      correcto: isCorrect,
+      detalle: { leccionId: 'n', fase: 'parejas-inicio' },
+    })
 
     if (isCorrect) {
       setMatchedIds((current) => [...current, firstPick.id, secondPick.id])
@@ -169,6 +182,12 @@ function ActividadNImagenesPage() {
     if (!finalFirstPick || !finalSecondPick) return
 
     const isCorrect = finalFirstPick.pairId === finalSecondPick.pairId
+
+    registrarProgreso({
+      actividad: 'n-imagenes',
+      correcto: isCorrect,
+      detalle: { leccionId: 'n', fase: 'parejas-final' },
+    })
 
     if (isCorrect) {
       setMatchedFinalIds((current) => [

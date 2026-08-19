@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
 import Button from '../components/common/Button'
@@ -14,6 +14,7 @@ import {
   mWordCountingInstructionAudio,
 } from '../data/mData'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 import '../styles/syllables.css'
 import '../styles/completion.css'
@@ -58,6 +59,12 @@ function ActividadMFinalPage() {
     setCaseResult(isCorrect ? 'correct' : 'retry')
 
     if (isCorrect) setStars((current) => current + 1)
+
+    registrarProgreso({
+      actividad: 'm-final',
+      correcto: isCorrect,
+      detalle: { leccionId: 'm', fase: 'silaba', ejercicioId: caseItem.id },
+    })
   }
 
   const retryCase = () => {
@@ -108,6 +115,12 @@ function ActividadMFinalPage() {
     setCountResult(isCorrect ? 'correct' : 'retry')
 
     if (isCorrect) setStars((current) => current + 1)
+
+    registrarProgreso({
+      actividad: 'm-final',
+      correcto: isCorrect,
+      detalle: { leccionId: 'm', fase: 'contar', ejercicioId: countSentence.id },
+    })
   }
 
   const nextCountSentence = () => {
@@ -124,6 +137,10 @@ function ActividadMFinalPage() {
 
     setCountIndex((current) => current + 1)
   }
+
+  useEffect(() => {
+    if (finished) registrarLeccionCompletada('m')
+  }, [finished])
 
   if (finished) {
     return (

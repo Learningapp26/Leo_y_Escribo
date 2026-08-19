@@ -19,6 +19,7 @@ import {
   cSyllableSearchInstructionAudio,
 } from '../data/cData'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 
 const PHASES = ['imagenes', 'buscar']
@@ -71,12 +72,23 @@ function ActividadCSilabasPage() {
   const checkImageSyllable = () => {
     if (!selectedSyllable) return
 
-    setImageFeedback(
+    const isCorrect =
       selectedSyllable ===
-        imageExercise.syllable
-        ? 'correct'
-        : 'retry',
+      imageExercise.syllable
+
+    setImageFeedback(
+      isCorrect ? 'correct' : 'retry',
     )
+
+    registrarProgreso({
+      actividad: 'c-silabas',
+      correcto: isCorrect,
+      detalle: {
+        leccionId: 'c',
+        fase: 'imagenes',
+        ejercicioId: imageExercise.id,
+      },
+    })
   }
 
   const nextImageExercise = () => {
@@ -120,6 +132,16 @@ function ActividadCSilabasPage() {
     setSearchFeedback(
       isCorrect ? 'correct' : 'retry',
     )
+
+    registrarProgreso({
+      actividad: 'c-silabas',
+      correcto: isCorrect,
+      detalle: {
+        leccionId: 'c',
+        fase: 'buscar',
+        ejercicioId: searchExercise.target,
+      },
+    })
   }
 
   const resetSearchWords = () => {

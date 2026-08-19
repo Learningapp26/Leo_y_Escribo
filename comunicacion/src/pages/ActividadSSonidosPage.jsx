@@ -9,6 +9,7 @@ import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
 import { getLessonThemeClass } from '../data/lessonColors'
 import { sSoundEndChoices, sSoundStartChoices } from '../data/sData'
+import { registrarProgreso } from '../lib/progreso'
 
 import '../styles/selection.css'
 
@@ -26,7 +27,7 @@ function getSelectionClass(id, selectedIds, feedback) {
     : 'selection-button--incorrect'
 }
 
-function SoundSelection({ choices, targetKey, instruction, onContinue, continueLabel }) {
+function SoundSelection({ choices, targetKey, instruction, onContinue, continueLabel, fase }) {
   const [selectedIds, setSelectedIds] = useState([])
   const [feedback, setFeedback] = useState('')
   const targetIds = choices.filter((item) => item[targetKey]).map((item) => item.id)
@@ -44,6 +45,12 @@ function SoundSelection({ choices, targetKey, instruction, onContinue, continueL
       selectedIds.length === targetIds.length &&
       selectedIds.every((id) => targetIds.includes(id))
     setFeedback(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 's-sonidos',
+      correcto: isCorrect,
+      detalle: { leccionId: 's', fase },
+    })
   }
 
   const retry = () => {
@@ -150,6 +157,7 @@ function ActividadSSonidosPage() {
           instruction="Toca las palabras que empiezan con el sonido /s/."
           continueLabel="Buscar el sonido final"
           onContinue={() => setPhaseIndex(2)}
+          fase="inicio"
         />
       )}
 
@@ -160,6 +168,7 @@ function ActividadSSonidosPage() {
           instruction="Ahora toca las palabras que terminan con el sonido /s/."
           continueLabel="Siguiente actividad"
           onContinue={() => navigate('/actividad/s-silabas')}
+          fase="final"
         />
       )}
     </main>

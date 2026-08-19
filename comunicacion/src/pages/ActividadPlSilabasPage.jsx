@@ -16,6 +16,7 @@ import {
   plWordSyllableSelection,
 } from '../data/plData'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 import '../styles/syllables.css'
 import '../styles/completion.css'
@@ -55,6 +56,12 @@ function ActividadPlSilabasPage() {
       searchSelected.every((syllable) => targetSyllables.includes(syllable))
 
     setSearchResult(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'pl-silabas',
+      correcto: isCorrect,
+      detalle: { leccionId: 'pl', fase: 'buscar' },
+    })
   }
 
   const retrySearch = () => {
@@ -76,6 +83,12 @@ function ActividadPlSilabasPage() {
     const isCorrect = selectedSyllable === currentWord.answer
 
     setCompletionResult(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'pl-silabas',
+      correcto: isCorrect,
+      detalle: { leccionId: 'pl', fase: 'completar', ejercicioId: currentWord.id },
+    })
   }
 
   const nextWord = () => {
@@ -118,6 +131,12 @@ function ActividadPlSilabasPage() {
       bankSelected.every((word) => bankItem.answer.includes(word))
 
     setBankFeedback(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'pl-silabas',
+      correcto: isCorrect,
+      detalle: { leccionId: 'pl', fase: 'banco', ejercicioId: bankItem.id },
+    })
   }
 
   const retryBankSelection = () => {

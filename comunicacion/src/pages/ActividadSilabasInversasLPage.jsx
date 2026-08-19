@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
 import Button from '../components/common/Button'
@@ -21,6 +21,7 @@ import {
   siLWordOptions,
 } from '../data/silabasInversasData'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 import '../styles/syllables.css'
 import '../styles/completion.css'
@@ -79,6 +80,12 @@ function ActividadSilabasInversasLPage() {
       soundSelected.every((id) => targetSoundIds.includes(id))
 
     setSoundFeedback(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'silabas-inversas-l',
+      correcto: isCorrect,
+      detalle: { leccionId: 'silabas-inversas', fase: 'sonidos' },
+    })
   }
 
   // Fase 3: encontrar las palabras del texto con sonido al/el/il/ol/ul
@@ -103,6 +110,12 @@ function ActividadSilabasInversasLPage() {
       readingSelected.every((word) => targetReadingWords.includes(word))
 
     setReadingFeedback(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'silabas-inversas-l',
+      correcto: isCorrect,
+      detalle: { leccionId: 'silabas-inversas', fase: 'lectura' },
+    })
   }
 
   // Fase 4: repasar palabras
@@ -139,6 +152,16 @@ function ActividadSilabasInversasLPage() {
     )
 
     setSentenceFeedback(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'silabas-inversas-l',
+      correcto: isCorrect,
+      detalle: {
+        leccionId: 'silabas-inversas',
+        fase: 'oraciones',
+        ejercicioId: sentence.id,
+      },
+    })
   }
 
   const nextSentence = () => {
@@ -155,6 +178,12 @@ function ActividadSilabasInversasLPage() {
       const value = filledBlanks[index - 1] ?? '___'
       return `${rendered}${value}${part}`
     }, '')
+
+  useEffect(() => {
+    if (isLastSentence && sentenceFeedback === 'correct') {
+      registrarLeccionCompletada('silabas-inversas', 'l')
+    }
+  }, [isLastSentence, sentenceFeedback])
 
   return (
     <main

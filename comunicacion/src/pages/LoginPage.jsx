@@ -11,6 +11,7 @@ function LoginPage() {
   const navigate = useNavigate()
   const [isSignUp, setIsSignUp] = useState(false)
   const [name, setName] = useState('')
+  const [codigoAula, setCodigoAula] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -30,7 +31,7 @@ function LoginPage() {
     setLoading(true)
 
     const { error: authError } = isSignUp
-      ? await signUpWithEmail(email, password, name)
+      ? await signUpWithEmail(email, password, name, codigoAula)
       : await signInWithEmail(email, password)
 
     setLoading(false)
@@ -94,6 +95,18 @@ function LoginPage() {
               value={name}
               onChange={(event) => setName(event.target.value)}
               autoComplete="name"
+              tabIndex={isSignUp ? 0 : -1}
+              required
+            />
+
+            <label className="login-sr-only" htmlFor="signup-codigo-aula">Código de aula</label>
+            <input
+              id="signup-codigo-aula"
+              type="text"
+              placeholder="Código de aula (te lo da tu maestra o maestro)"
+              value={codigoAula}
+              onChange={(event) => setCodigoAula(event.target.value)}
+              autoComplete="off"
               tabIndex={isSignUp ? 0 : -1}
               required
             />

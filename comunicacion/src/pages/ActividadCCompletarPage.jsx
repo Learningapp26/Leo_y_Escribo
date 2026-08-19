@@ -19,6 +19,7 @@ import {
   cSyllableAudios,
 } from '../data/cData'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarProgreso } from '../lib/progreso'
 import '../styles/completion.css'
 import '../styles/selection.css'
 
@@ -87,6 +88,16 @@ function ActividadCCompletarPage() {
       isCorrect ? 'correct' : 'retry',
     )
 
+    registrarProgreso({
+      actividad: 'c-completar',
+      correcto: isCorrect,
+      detalle: {
+        leccionId: 'c',
+        fase: 'completar',
+        ejercicioId: completionExercise.id,
+      },
+    })
+
     if (isCorrect) {
       playAudio(completionExercise.audio)
     }
@@ -115,6 +126,16 @@ function ActividadCCompletarPage() {
     setJoinFeedback(
       isCorrect ? 'correct' : 'retry',
     )
+
+    registrarProgreso({
+      actividad: 'c-completar',
+      correcto: isCorrect,
+      detalle: {
+        leccionId: 'c',
+        fase: 'unir',
+        ejercicioId: joinExercise.id,
+      },
+    })
 
     if (isCorrect) {
       playAudio(joinExercise.audio)

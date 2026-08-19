@@ -22,6 +22,7 @@ import {
   cSoundIntro,
 } from '../data/cData'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 import '../styles/completion.css'
 
@@ -137,6 +138,12 @@ function ActividadCSonidosPage() {
     setInitialFeedback(
       isCorrect ? 'correct' : 'retry',
     )
+
+    registrarProgreso({
+      actividad: 'c-sonidos',
+      correcto: isCorrect,
+      detalle: { leccionId: 'c', fase: 'inicio' },
+    })
   }
 
   const retryInitialImages = () => {
@@ -147,12 +154,23 @@ function ActividadCSonidosPage() {
   const checkMiddleSound = () => {
     if (selectedMiddleIndex === null) return
 
-    setMiddleFeedback(
+    const isCorrect =
       selectedMiddleIndex ===
-        middleExercise.answerIndex
-        ? 'correct'
-        : 'retry',
+      middleExercise.answerIndex
+
+    setMiddleFeedback(
+      isCorrect ? 'correct' : 'retry',
     )
+
+    registrarProgreso({
+      actividad: 'c-sonidos',
+      correcto: isCorrect,
+      detalle: {
+        leccionId: 'c',
+        fase: 'segunda-silaba',
+        ejercicioId: middleExercise.id,
+      },
+    })
   }
 
   const nextMiddleWord = () => {
@@ -178,6 +196,16 @@ function ActividadCSonidosPage() {
     setRhymeFeedback(
       isCorrect ? 'correct' : 'retry',
     )
+
+    registrarProgreso({
+      actividad: 'c-sonidos',
+      correcto: isCorrect,
+      detalle: {
+        leccionId: 'c',
+        fase: 'rimas',
+        ejercicioId: rhymeExercise.id,
+      },
+    })
 
     if (isCorrect) {
       const answer =

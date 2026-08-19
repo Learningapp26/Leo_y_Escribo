@@ -14,6 +14,7 @@ import StarsCounter from '../components/progress/StarsCounter'
 import { getLessonThemeClass } from '../data/lessonColors'
 import { rSoundExercises } from '../data/rLessonData'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarProgreso } from '../lib/progreso'
 
 function ActividadRSonidosPage() {
   const [exerciseIndex, setExerciseIndex] = useState(0)
@@ -48,6 +49,12 @@ function ActividadRSonidosPage() {
           : '/audio/lecciones/r/respuesta-r-suave.mp3',
       )
     }
+
+    registrarProgreso({
+      actividad: 'r-sonidos',
+      correcto: correct,
+      detalle: { leccionId: 'r', ejercicioId: exercise.id },
+    })
   }
 
   const resetAnswer = () => {

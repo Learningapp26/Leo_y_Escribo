@@ -16,6 +16,7 @@ import {
   mWordSyllableSelection,
 } from '../data/mData'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 import '../styles/syllables.css'
 import '../styles/completion.css'
@@ -43,6 +44,12 @@ function ActividadMCompletarPage() {
     const isCorrect = selectedSyllable === currentWord.answer
 
     setCompletionResult(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'm-completar',
+      correcto: isCorrect,
+      detalle: { leccionId: 'm', fase: 'completar', ejercicioId: currentWord.id },
+    })
   }
 
   const nextWord = () => {
@@ -72,6 +79,12 @@ function ActividadMCompletarPage() {
     const isCorrect = selectedSoundSyllable === currentSoundWord.answer
 
     setSoundResult(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'm-completar',
+      correcto: isCorrect,
+      detalle: { leccionId: 'm', fase: 'sonido', ejercicioId: currentSoundWord.id },
+    })
   }
 
   const nextSoundWord = () => {
@@ -130,6 +143,12 @@ function ActividadMCompletarPage() {
 
     const formedWord = slots[0].syllable + slots[1].syllable
     const isCorrect = formedWord === joinItem.word
+
+    registrarProgreso({
+      actividad: 'm-completar',
+      correcto: isCorrect,
+      detalle: { leccionId: 'm', fase: 'formar', ejercicioId: joinItem.id },
+    })
 
     if (isCorrect) {
       if (joinItem.wordAudio) playAudio(joinItem.wordAudio)

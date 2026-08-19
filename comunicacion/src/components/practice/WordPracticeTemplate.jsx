@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   ArrowRight,
   BookOpen,
@@ -10,6 +10,7 @@ import {
 
 import { getLessonThemeClass } from '../../data/lessonColors'
 import { playAudio } from '../../lib/audioPlayer'
+import { registrarLeccionCompletada, registrarProgreso } from '../../lib/progreso'
 import Button from '../common/Button'
 import Card from '../common/Card'
 import BackButton from '../navigation/BackButton'
@@ -87,6 +88,12 @@ function WordPracticeTemplate({
 
     setFindFeedback(isCorrect ? 'correct' : 'retry')
     if (isCorrect) setStars((current) => current + 1)
+
+    registrarProgreso({
+      actividad: `${practiceId}-buscar`,
+      correcto: isCorrect,
+      detalle: { leccionId: practiceId, fase: 'buscar', grupo: group.lessonId },
+    })
   }
 
   const checkShortestWord = () => {
@@ -94,6 +101,12 @@ function WordPracticeTemplate({
 
     setShortFeedback(isCorrect ? 'correct' : 'retry')
     if (isCorrect) setStars((current) => current + 1)
+
+    registrarProgreso({
+      actividad: `${practiceId}-corta`,
+      correcto: isCorrect,
+      detalle: { leccionId: practiceId, fase: 'corta', grupo: group.lessonId },
+    })
   }
 
   const checkSyllableCount = () => {
@@ -101,9 +114,19 @@ function WordPracticeTemplate({
 
     setSyllableFeedback(isCorrect ? 'correct' : 'retry')
     if (isCorrect) setStars((current) => current + 1)
+
+    registrarProgreso({
+      actividad: `${practiceId}-silabas`,
+      correcto: isCorrect,
+      detalle: { leccionId: practiceId, fase: 'silabas', grupo: group.lessonId },
+    })
   }
 
   const nextStep = () => setStepIndex((current) => current + 1)
+
+  useEffect(() => {
+    if (stepIndex === STEPS.length) registrarLeccionCompletada(practiceId)
+  }, [stepIndex, practiceId])
 
   const activityVisual = (
     <figure className="word-practice-activity-visual">

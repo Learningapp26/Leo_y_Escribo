@@ -13,6 +13,7 @@ import {
   lWordCompletion,
 } from '../data/lCompletar'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarProgreso } from '../lib/progreso'
 
 const PHASES = ['completar', 'unir']
 
@@ -44,6 +45,12 @@ function ActividadLCompletarPage() {
     const isCorrect = selectedSyllable === currentWord.answer
 
     setCompletionResult(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'l-completar',
+      correcto: isCorrect,
+      detalle: { leccionId: 'l', fase: 'completar', ejercicioId: currentWord.id },
+    })
   }
 
   const nextWord = () => {
@@ -88,12 +95,24 @@ function ActividadLCompletarPage() {
 
     if (!matchingPair) {
       setJoinFeedback('retry')
+
+      registrarProgreso({
+        actividad: 'l-completar',
+        correcto: false,
+        detalle: { leccionId: 'l', fase: 'unir' },
+      })
       return
     }
 
     setMatchedPairs((current) => [...current, matchingPair.id])
     setJoinFeedback('correct')
     playAudio(matchingPair.wordAudio)
+
+    registrarProgreso({
+      actividad: 'l-completar',
+      correcto: true,
+      detalle: { leccionId: 'l', fase: 'unir', ejercicioId: matchingPair.id },
+    })
   }
 
   const continueJoin = () => {

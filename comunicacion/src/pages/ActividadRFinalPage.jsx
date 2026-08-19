@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   ArrowRight,
   Check,
@@ -18,6 +18,7 @@ import {
   rSentenceExercises,
 } from '../data/rLessonData'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 
 const exercises = [
   ...rCompletionExercises.map((exercise) => ({
@@ -66,6 +67,12 @@ function ActividadRFinalPage() {
           : exercise.completedAudio,
       )
     }
+
+    registrarProgreso({
+      actividad: 'r-final',
+      correcto: correct,
+      detalle: { leccionId: 'r', fase: exercise.type, ejercicioId: exercise.id },
+    })
   }
 
   const resetAnswer = () => {
@@ -82,6 +89,10 @@ function ActividadRFinalPage() {
     setExerciseIndex((current) => current + 1)
     resetAnswer()
   }
+
+  useEffect(() => {
+    if (finished) registrarLeccionCompletada('r')
+  }, [finished])
 
   if (finished) {
     return (

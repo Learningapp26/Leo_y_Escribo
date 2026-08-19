@@ -15,6 +15,7 @@ import {
   pSyllablePositionExample,
 } from '../data/pData'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 import '../styles/completion.css'
 
@@ -67,6 +68,12 @@ function ActividadPSonidosPage() {
       selectedIds.every((id) => targetIds.includes(id))
 
     setSelectionFeedback(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'p-sonidos',
+      correcto: isCorrect,
+      detalle: { leccionId: 'p', fase: 'seleccion' },
+    })
   }
 
   const retrySelection = () => {
@@ -88,6 +95,12 @@ function ActividadPSonidosPage() {
     const isCorrect = selectedSyllableIndex === positionItem.answerIndex
 
     setPositionResult(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'p-sonidos',
+      correcto: isCorrect,
+      detalle: { leccionId: 'p', fase: 'posicion', ejercicioId: positionItem.id },
+    })
   }
 
   const nextPositionItem = () => {

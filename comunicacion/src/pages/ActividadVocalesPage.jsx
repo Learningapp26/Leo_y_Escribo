@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   ArrowRight,
   Check,
@@ -11,6 +11,7 @@ import Card from '../components/common/Card'
 import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 import '../styles/vowels.css'
 
 const ejercicios = [
@@ -70,6 +71,12 @@ function ActividadVocalesPage() {
       vocalSeleccionada === ejercicio.respuesta
 
     setResultado(esCorrecta ? 'correcto' : 'reintento')
+
+    registrarProgreso({
+      actividad: 'vocales-inicial',
+      correcto: esCorrecta,
+      detalle: { leccionId: 'vocales', ejercicioId: ejercicio.palabra },
+    })
   }
 
   const reintentarEjercicio = () => {
@@ -90,6 +97,10 @@ function ActividadVocalesPage() {
     setVocalSeleccionada('')
     setResultado('')
   }
+
+  useEffect(() => {
+    if (actividadTerminada) registrarLeccionCompletada('vocales')
+  }, [actividadTerminada])
 
   if (actividadTerminada) {
     return (

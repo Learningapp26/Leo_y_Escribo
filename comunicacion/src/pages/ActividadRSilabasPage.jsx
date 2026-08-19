@@ -12,6 +12,7 @@ import ProgressBar from '../components/progress/ProgressBar'
 import { getLessonThemeClass } from '../data/lessonColors'
 import { rSyllables } from '../data/rLessonData'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarProgreso } from '../lib/progreso'
 
 function ActividadRSilabasPage() {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -37,15 +38,19 @@ function ActividadRSilabasPage() {
   const checkAnswer = () => {
     if (!selectedSyllable) return
 
-    setFeedback(
-      selectedSyllable === currentExercise.syllable
-        ? 'correct'
-        : 'retry',
-    )
+    const isCorrect = selectedSyllable === currentExercise.syllable
 
-    if (selectedSyllable === currentExercise.syllable) {
+    setFeedback(isCorrect ? 'correct' : 'retry')
+
+    if (isCorrect) {
       playAudio(currentExercise.wordAudio)
     }
+
+    registrarProgreso({
+      actividad: 'r-silabas',
+      correcto: isCorrect,
+      detalle: { leccionId: 'r', ejercicioId: currentExercise.id },
+    })
   }
 
   const resetAnswer = () => {

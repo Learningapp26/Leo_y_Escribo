@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
 import Button from '../components/common/Button'
@@ -21,6 +21,7 @@ import {
   siNTraceWords,
 } from '../data/silabasInversasData'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 import '../styles/syllables.css'
 import '../styles/reading.css'
@@ -77,6 +78,12 @@ function ActividadSilabasInversasNPage() {
       soundSelected.every((id) => targetSoundIds.includes(id))
 
     setSoundFeedback(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'silabas-inversas-n',
+      correcto: isCorrect,
+      detalle: { leccionId: 'silabas-inversas', fase: 'sonidos' },
+    })
   }
 
   const [readingSelected, setReadingSelected] = useState([])
@@ -100,6 +107,12 @@ function ActividadSilabasInversasNPage() {
       readingSelected.every((word) => targetReadingWords.includes(word))
 
     setReadingFeedback(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'silabas-inversas-n',
+      correcto: isCorrect,
+      detalle: { leccionId: 'silabas-inversas', fase: 'lectura' },
+    })
   }
 
   const [traceIndex, setTraceIndex] = useState(0)
@@ -120,6 +133,16 @@ function ActividadSilabasInversasNPage() {
     const isCorrect = selectedOption === sentenceItem.answer
 
     setSentenceFeedback(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'silabas-inversas-n',
+      correcto: isCorrect,
+      detalle: {
+        leccionId: 'silabas-inversas',
+        fase: 'oraciones',
+        ejercicioId: sentenceItem.id,
+      },
+    })
   }
 
   const nextSentence = () => {
@@ -145,7 +168,19 @@ function ActividadSilabasInversasNPage() {
   const checkPicture = () => {
     if (!selectedWord) return
 
-    setPictureFeedback(selectedWord === pictureItem.answer ? 'correct' : 'retry')
+    const isCorrect = selectedWord === pictureItem.answer
+
+    setPictureFeedback(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'silabas-inversas-n',
+      correcto: isCorrect,
+      detalle: {
+        leccionId: 'silabas-inversas',
+        fase: 'nombrar',
+        ejercicioId: pictureItem.id,
+      },
+    })
   }
 
   const nextPicture = () => {
@@ -153,6 +188,12 @@ function ActividadSilabasInversasNPage() {
     setPictureFeedback('')
     setPictureIndex((current) => current + 1)
   }
+
+  useEffect(() => {
+    if (isLastPicture && pictureFeedback === 'correct') {
+      registrarLeccionCompletada('silabas-inversas', 'n')
+    }
+  }, [isLastPicture, pictureFeedback])
 
   return (
     <main

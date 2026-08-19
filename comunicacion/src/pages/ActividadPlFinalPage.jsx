@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
 import Button from '../components/common/Button'
@@ -16,6 +16,7 @@ import {
   plWordBank,
 } from '../data/plData'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 import '../styles/syllables.css'
 import '../styles/completion.css'
@@ -59,6 +60,12 @@ function ActividadPlFinalPage() {
     }
 
     setJoinFeedback(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'pl-final',
+      correcto: isCorrect,
+      detalle: { leccionId: 'pl', fase: 'formar', ejercicioId: joinItem.id },
+    })
   }
 
   const retryJoin = () => {
@@ -102,6 +109,12 @@ function ActividadPlFinalPage() {
     setSentenceFeedback(isCorrect ? 'correct' : 'retry')
 
     if (isCorrect) setStars((current) => current + 1)
+
+    registrarProgreso({
+      actividad: 'pl-final',
+      correcto: isCorrect,
+      detalle: { leccionId: 'pl', fase: 'oracion', ejercicioId: sentenceItem.id },
+    })
   }
 
   const retrySentence = () => {
@@ -120,6 +133,10 @@ function ActividadPlFinalPage() {
 
     setSentenceIndex((current) => current + 1)
   }
+
+  useEffect(() => {
+    if (finished) registrarLeccionCompletada('pl')
+  }, [finished])
 
   if (finished) {
     return (

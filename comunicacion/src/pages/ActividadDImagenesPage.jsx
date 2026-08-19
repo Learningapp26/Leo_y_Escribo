@@ -17,6 +17,7 @@ import {
   dSyllableHearingInstructionAudio,
 } from '../data/dActivities'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 import '../styles/syllables.css'
 
@@ -64,6 +65,12 @@ function ActividadDImagenesPage() {
       selectedIds.length === dSoundSelectionAnswerIds.length &&
       dSoundSelectionAnswerIds.every((id) => selectedIds.includes(id))
     setSelectionFeedback(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'd-imagenes',
+      correcto: isCorrect,
+      detalle: { leccionId: 'd', fase: 'seleccion' },
+    })
   }
 
   const toggleSyllable = (syllable) => {
@@ -81,6 +88,12 @@ function ActividadDImagenesPage() {
       selectedSyllables.length === syllableItem.answers.length &&
       selectedSyllables.every((item) => syllableItem.answers.includes(item))
     setSyllableFeedback(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'd-imagenes',
+      correcto: isCorrect,
+      detalle: { leccionId: 'd', fase: 'silabas', ejercicioId: syllableItem.id },
+    })
   }
 
   const nextSyllable = () => {
@@ -109,7 +122,15 @@ function ActividadDImagenesPage() {
 
   const checkPair = () => {
     if (!firstPick || !secondPick) return
-    if (firstPick.pairId === secondPick.pairId) {
+    const isCorrect = firstPick.pairId === secondPick.pairId
+
+    registrarProgreso({
+      actividad: 'd-imagenes',
+      correcto: isCorrect,
+      detalle: { leccionId: 'd', fase: 'parejas' },
+    })
+
+    if (isCorrect) {
       setMatchedIds((current) => [...current, firstPick.id, secondPick.id])
       setPairFeedback('correct')
       return

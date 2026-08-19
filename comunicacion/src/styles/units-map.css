@@ -190,6 +190,35 @@
   text-align: center;
 }
 
+.progress-lesson-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  width: 100%;
+  margin-top: var(--space-sm);
+  text-align: left;
+}
+
+.progress-lesson-list__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--color-text-muted);
+}
+
+.progress-lesson-list__item--completada {
+  color: var(--color-text);
+  font-weight: var(--font-weight-bold);
+}
+
+.progress-lesson-list__item--completada svg {
+  color: var(--color-action);
+}
+
+.progress-lesson-list__item--en-progreso svg {
+  color: var(--color-reward);
+}
+
 @media (max-width: 720px) {
   .units-map {
     gap: var(--space-xl);

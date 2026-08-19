@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   ArrowRight,
   Check,
@@ -14,6 +14,7 @@ import StarsCounter from '../components/progress/StarsCounter'
 import { getLessonThemeClass } from '../data/lessonColors'
 import { finalExercises } from '../data/yConjunctionData'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 
 function getOptionAudioPath(optionName) {
   const normalizedName = optionName
@@ -54,6 +55,12 @@ function ActividadYFinalPage() {
       setStars((current) => current + 1)
       playAudio(exercise.phraseAudio)
     }
+
+    registrarProgreso({
+      actividad: 'y-final',
+      correcto: isCorrect,
+      detalle: { leccionId: 'y-conjuncion', ejercicioId: exercise.id },
+    })
   }
 
   const retryExercise = () => {
@@ -74,6 +81,10 @@ function ActividadYFinalPage() {
     setSelectedAnswer('')
     setResult('')
   }
+
+  useEffect(() => {
+    if (finished) registrarLeccionCompletada('y-conjuncion')
+  }, [finished])
 
   if (finished) {
     return (

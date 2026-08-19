@@ -20,6 +20,7 @@ import {
   lSyllableSearch,
 } from '../data/lSilabas'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarProgreso } from '../lib/progreso'
 
 const PHASES = ['contar', 'buscar', 'letra', 'asociar']
 
@@ -42,6 +43,12 @@ function ActividadLSilabasPage() {
     const isCorrect = countSelected === countWord.syllables.length
 
     setCountResult(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'l-silabas',
+      correcto: isCorrect,
+      detalle: { leccionId: 'l', fase: 'contar', ejercicioId: countWord.id },
+    })
   }
 
   const nextCountWord = () => {
@@ -83,6 +90,12 @@ function ActividadLSilabasPage() {
       searchSelected.every((syllable) => targetSyllables.includes(syllable))
 
     setSearchResult(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'l-silabas',
+      correcto: isCorrect,
+      detalle: { leccionId: 'l', fase: 'buscar' },
+    })
   }
 
   const retrySearch = () => {

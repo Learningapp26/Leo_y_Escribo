@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
 import Button from '../components/common/Button'
@@ -14,6 +14,7 @@ import {
   tWordJoin,
 } from '../data/tData'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 import '../styles/syllables.css'
 import '../styles/completion.css'
@@ -59,6 +60,12 @@ function ActividadTFinalPage() {
     setCaseResult(isCorrect ? 'correct' : 'retry')
 
     if (isCorrect) setStars((current) => current + 1)
+
+    registrarProgreso({
+      actividad: 't-final',
+      correcto: isCorrect,
+      detalle: { leccionId: 't', fase: 'silaba', ejercicioId: caseItem.id },
+    })
   }
 
   const retryCase = () => {
@@ -117,6 +124,12 @@ function ActividadTFinalPage() {
     setSentenceResult(isCorrect ? 'correct' : 'retry')
 
     if (isCorrect) setStars((current) => current + 1)
+
+    registrarProgreso({
+      actividad: 't-final',
+      correcto: isCorrect,
+      detalle: { leccionId: 't', fase: 'formar', ejercicioId: sentenceItem.id },
+    })
   }
 
   const retrySentence = () => {
@@ -135,6 +148,10 @@ function ActividadTFinalPage() {
 
     setSentenceIndex((current) => current + 1)
   }
+
+  useEffect(() => {
+    if (finished) registrarLeccionCompletada('t')
+  }, [finished])
 
   if (finished) {
     return (

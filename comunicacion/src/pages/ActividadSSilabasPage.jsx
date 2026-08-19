@@ -8,6 +8,7 @@ import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
 import { getLessonThemeClass } from '../data/lessonColors'
 import { sSyllableChallenges, sSyllables } from '../data/sData'
+import { registrarProgreso } from '../lib/progreso'
 
 import '../styles/syllables.css'
 import '../styles/selection.css'
@@ -27,7 +28,15 @@ function ActividadSSilabasPage() {
   }
 
   const check = () => {
-    setFeedback(selectedSyllable === challenge.answer ? 'correct' : 'retry')
+    const isCorrect = selectedSyllable === challenge.answer
+
+    setFeedback(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 's-silabas',
+      correcto: isCorrect,
+      detalle: { leccionId: 's', ejercicioId: challenge.id },
+    })
   }
 
   const retry = () => {

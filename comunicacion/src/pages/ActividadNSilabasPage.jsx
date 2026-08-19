@@ -12,6 +12,7 @@ import {
   nSyllableWords,
 } from '../data/nSilabas'
 import { playAudio } from '../lib/audioPlayer'
+import { registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 import '../styles/syllables.css'
 
@@ -62,6 +63,12 @@ function ActividadNSilabasPage() {
       searchSelected.every((syllable) => targetSyllables.includes(syllable))
 
     setSearchResult(isCorrect ? 'correct' : 'retry')
+
+    registrarProgreso({
+      actividad: 'n-silabas',
+      correcto: isCorrect,
+      detalle: { leccionId: 'n', fase: 'buscar' },
+    })
   }
 
   const retrySearch = () => {
