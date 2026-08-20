@@ -27,7 +27,7 @@ const targetIds = prImagePool
   .filter((item) => item.startsWithPr)
   .map((item) => item.id)
 
-// Fase 3: imágenes que contienen el sonido /pr/ (no importa la posición)
+// Fase 3: imágenes que contienen el sonido /pl/ (no importa la posición)
 const containsPrIds = prSoundMatching.items
   .filter((item) => item.containsPr)
   .map((item) => item.id)
@@ -93,7 +93,7 @@ function ActividadPrSonidosPage() {
     setSelectionFeedback('')
   }
 
-  // Fase 3: seleccionar las que contienen /pr/
+  // Fase 3: seleccionar las que contienen /pl/
   const toggleContainsSelected = (item) => {
     if (containsFeedback === 'correct') return
 
@@ -136,7 +136,7 @@ function ActividadPrSonidosPage() {
       <header className="text-center">
         <span className="text-ui-label">Actividad 1</span>
 
-        <h1 id="pr-sonidos-title">Reconozcamos el sonido pr</h1>
+        <h1 id="pl-sonidos-title">Reconozcamos el sonido pr</h1>
       </header>
 
       <ProgressBar
@@ -429,14 +429,10 @@ function ActividadPrSonidosPage() {
                 <img
                   className="selection-image"
                   src={item.image}
-                  alt={item.text.join(' ')}
+                  alt={item.text}
                 />
 
-                {item.text.map((line) => (
-                  <span className="selection-word" key={line}>
-                    {line}
-                  </span>
-                ))}
+                <span className="selection-word">{item.text}</span>
 
                 <Button
                   variant="audio"
