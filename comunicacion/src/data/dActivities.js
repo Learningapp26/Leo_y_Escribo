@@ -348,16 +348,27 @@ export const dWordCompletion = [
 }))
 
 export const dSyllableJoin = [
-  ['di', 'me', 'dime'],
-  ['do', 'na', 'dona'],
-  ['da', 'ma', 'dama'],
-  ['to', 'do', 'todo'],
-].map(([first, second, word]) => ({
+  ['da', 'to', 'dato', 'dato'],
+  ['de', 'dal', 'dedal', 'dedal'],
+  ['di', 'go', 'digo', 'digo'],
+  ['do', 'sis', 'dosis', 'dosis'],
+  ['du', 'dar', 'dudar', 'dudar'],
+].map(([first, second, word, fileName]) => ({
   id: word,
-  first: { id: `${word}-first`, syllable: first },
-  second: { id: `${word}-second`, syllable: second },
+
+  first: {
+    id: `${word}-first`,
+    syllable: first,
+  },
+
+  second: {
+    id: `${word}-second`,
+    syllable: second,
+  },
+
   word,
-  wordAudio: dAudio(word), // TODO: Agregar audio correspondiente
+  image: dImage(fileName),
+  wordAudio: dAudio(fileName),
 }))
 
 export const dPracticeWords = [
