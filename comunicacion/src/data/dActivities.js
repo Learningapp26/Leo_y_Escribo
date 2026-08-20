@@ -109,27 +109,73 @@ export const dSyllableHearing = [
 ]
 
 export const dSoundPairMatching = [
-  ['dado', 'dama', 'da'],
-  ['dedo', 'delfin', 'de'],
-  ['dinero', 'dinosaurio', 'di'],
-  ['dona', 'dos', 'do'],
-  ['dulce', 'ducha', 'du'],
-].flatMap(([first, second, pairId]) => [
   {
-    id: first,
-    name: first,
-    pairId,
-    image: dImage(first),
-    audio: dAudio(first), // TODO: Agregar audio correspondiente
+    id: 'dado',
+    name: 'dado',
+    pairId: 'da',
+    fileName: 'dado',
   },
   {
-    id: second,
-    name: second,
-    pairId,
-    image: dImage(second),
-    audio: dAudio(second), // TODO: Agregar audio correspondiente
+    id: 'dedo',
+    name: 'dedo',
+    pairId: 'de',
+    fileName: 'dedo',
   },
-])
+  {
+    id: 'dinero',
+    name: 'dinero',
+    pairId: 'di',
+    fileName: 'dinero',
+  },
+  {
+    id: 'dona',
+    name: 'dona',
+    pairId: 'do',
+    fileName: 'dona',
+  },
+  {
+    id: 'dulce',
+    name: 'dulce',
+    pairId: 'du',
+    fileName: 'dulce',
+  },
+  {
+    id: 'ducha',
+    name: 'ducha',
+    pairId: 'du',
+    fileName: 'ducha',
+  },
+  {
+    id: 'dinosaurio',
+    name: 'dinosaurio',
+    pairId: 'di',
+    fileName: 'dinosaurio',
+  },
+  {
+    id: 'dama',
+    name: 'dama',
+    pairId: 'da',
+    fileName: 'dama',
+  },
+  {
+    id: 'delfin',
+    name: 'delfín',
+    pairId: 'de',
+    fileName: 'delfin',
+  },
+  {
+    id: 'dos',
+    name: 'dos',
+    pairId: 'do',
+    fileName: 'dos',
+  },
+].map((item) => ({
+  id: item.id,
+  name: item.name,
+  pairId: item.pairId,
+  image: dImage(item.fileName),
+  audio: dAudio(item.fileName),
+}))
 
 export const dSyllableCountWords = [
   {
@@ -175,15 +221,68 @@ export const dSyllableCountWords = [
 ]
 
 export const dSyllableSearch = {
-  options: ['da', 'de', 'di', 'do', 'du'].map((syllable, index) => ({
-    id: `${syllable}-${index}`,
-    syllable,
-    isTarget: true,
-    audio:
-      syllable === 'da'
-        ? '/audio/lecciones/m/silaba-da.mp3'
-        : dAudio(`silaba-${syllable}`), // TODO: Agregar audios de silabas D faltantes
-  })),
+  options: [
+    {
+      id: 'da',
+      syllable: 'da',
+      isTarget: true,
+      audio: dAudio('silaba-da'),
+    },
+    {
+      id: 'me',
+      syllable: 'me',
+      isTarget: false,
+      audio: null,
+    },
+    {
+      id: 'di',
+      syllable: 'di',
+      isTarget: true,
+      audio: dAudio('silaba-di'),
+    },
+    {
+      id: 'lo',
+      syllable: 'lo',
+      isTarget: false,
+      audio: null,
+    },
+    {
+      id: 'du',
+      syllable: 'du',
+      isTarget: true,
+      audio: dAudio('silaba-du'),
+    },
+    {
+      id: 'se',
+      syllable: 'se',
+      isTarget: false,
+      audio: null,
+    },
+    {
+      id: 'do',
+      syllable: 'do',
+      isTarget: true,
+      audio: dAudio('silaba-do'),
+    },
+    {
+      id: 'pa',
+      syllable: 'pa',
+      isTarget: false,
+      audio: null,
+    },
+    {
+      id: 'de',
+      syllable: 'de',
+      isTarget: true,
+      audio: dAudio('silaba-de'),
+    },
+    {
+      id: 'nu',
+      syllable: 'nu',
+      isTarget: false,
+      audio: null,
+    },
+  ],
 }
 
 export const dLetterPresentation = {
@@ -249,16 +348,27 @@ export const dWordCompletion = [
 }))
 
 export const dSyllableJoin = [
-  ['di', 'me', 'dime'],
-  ['do', 'na', 'dona'],
-  ['da', 'ma', 'dama'],
-  ['to', 'do', 'todo'],
-].map(([first, second, word]) => ({
+  ['da', 'to', 'dato', 'dato'],
+  ['de', 'dal', 'dedal', 'dedal'],
+  ['di', 'go', 'digo', 'digo'],
+  ['do', 'sis', 'dosis', 'dosis'],
+  ['du', 'dar', 'dudar', 'dudar'],
+].map(([first, second, word, fileName]) => ({
   id: word,
-  first: { id: `${word}-first`, syllable: first },
-  second: { id: `${word}-second`, syllable: second },
+
+  first: {
+    id: `${word}-first`,
+    syllable: first,
+  },
+
+  second: {
+    id: `${word}-second`,
+    syllable: second,
+  },
+
   word,
-  wordAudio: dAudio(word), // TODO: Agregar audio correspondiente
+  image: dImage(fileName),
+  wordAudio: dAudio(fileName),
 }))
 
 export const dPracticeWords = [
