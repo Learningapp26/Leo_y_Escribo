@@ -95,9 +95,9 @@ function LeccionVocalesPage() {
             icon={Volume2}
             fullWidth
             onClick={() =>
-              playAudio('/audio/lecciones/vocales/Vocales.mp3')
+              playAudio('/audio/lecciones/vocales/vocales.mp3')
             }
-            data-audio-src={'/audio/lecciones/vocales/Vocales.mp3'}
+            data-audio-src={'/audio/lecciones/vocales/vocales.mp3'}
           >
             Escuchar las vocales
           </Button>

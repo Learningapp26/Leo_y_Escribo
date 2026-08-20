@@ -161,6 +161,11 @@
   filter: saturate(0.65);
 }
 
+.unit-lesson-card--locked {
+  opacity: 0.72;
+  filter: saturate(0.65);
+}
+
 .units-map__progress-note {
   width: min(100%, 720px);
   margin: var(--space-lg) auto 0;

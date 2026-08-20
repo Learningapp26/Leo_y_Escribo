@@ -18,15 +18,18 @@ import {
 import {
   getUnitById,
   getUnitThemeClass,
+  isLessonUnlocked,
   isUnitUnlocked,
 } from '../data/units'
+import useStudentProgress from '../hooks/useStudentProgress'
 import '../styles/units-map.css'
 
 function UnitLessonsPage() {
   const { unitId } = useParams()
   const unit = getUnitById(unitId)
+  const { completedLessons, loadingProgress } = useStudentProgress()
 
-  if (!unit || !isUnitUnlocked(unit.id)) {
+  if (!unit || (!loadingProgress && !isUnitUnlocked(unit.id, completedLessons))) {
     return (
       <Navigate
         to="/lecciones"
@@ -74,46 +77,62 @@ function UnitLessonsPage() {
         {unit.lessons.map((lesson) => {
           const lessonThemeClass =
             getLessonThemeClass(lesson.id)
+          const completed = completedLessons.has(lesson.id)
+          const unlocked = lesson.available && !loadingProgress &&
+            isLessonUnlocked(lesson.id, completedLessons)
 
           return (
             <Card
-              className={`unit-lesson-card ${lessonThemeClass}`}
+              className={[
+                'unit-lesson-card',
+                lessonThemeClass,
+                unlocked ? '' : 'unit-lesson-card--locked',
+              ].filter(Boolean).join(' ')}
               key={lesson.id}
+              aria-disabled={!unlocked}
               icon={
-                lesson.available
+                unlocked
                   ? BookOpen
                   : LockKeyhole
               }
               title={lesson.title}
               subtitle={
-                lesson.available
-                  ? 'Disponible'
-                  : 'Próximamente'
+                completed
+                  ? 'Completada'
+                  : unlocked
+                    ? 'Disponible'
+                    : lesson.available
+                      ? 'Bloqueada'
+                      : 'Próximamente'
               }
               footer={
                 <Button
                   to={
-                    lesson.available
+                    unlocked
                       ? lesson.route
                       : undefined
                   }
                   variant={
-                    lesson.available
+                    unlocked
                       ? 'primary'
                       : 'secondary'
                   }
                   icon={
-                    lesson.available
+                    unlocked
                       ? ArrowRight
                       : LockKeyhole
                   }
                   iconPosition="right"
                   fullWidth
-                  disabled={!lesson.available}
+                  disabled={!unlocked}
                 >
-                  {lesson.available
-                    ? 'Comenzar'
-                    : 'No disponible'}
+                  {completed
+                    ? 'Volver a entrar'
+                    : unlocked
+                      ? 'Comenzar'
+                      : lesson.available
+                        ? 'Completa la anterior'
+                        : 'No disponible'}
                 </Button>
               }
             />

@@ -90,11 +90,13 @@ import ActividadPrSilabasPage from '../pages/ActividadPrSilabasPage'
 import ActividadPrFinalPage from '../pages/ActividadPrFinalPage'
 
 import UnitLessonsPage from '../pages/UnitLessonsPage'
+import LessonAccessGuard from '../components/navigation/LessonAccessGuard'
 
 function AppRouter() {
   return (
     <BrowserRouter>
-      <Routes>
+      <LessonAccessGuard>
+        <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/welcome" element={<WelcomePage />} />
@@ -467,7 +469,8 @@ function AppRouter() {
 
         <Route path="/progreso" element={<ProgressPage />} />
         <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+        </Routes>
+      </LessonAccessGuard>
     </BrowserRouter>
   )
 }

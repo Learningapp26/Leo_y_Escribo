@@ -1,5 +1,3 @@
-export const TEMPORARY_HIGHEST_UNLOCKED_UNIT = 2
-
 export const units = [
   {
     id: 1,
@@ -335,8 +333,36 @@ export function getUnitThemeClass(unitId) {
 
 export function isUnitUnlocked(
   unitId,
-  highestUnlockedUnit =
-    TEMPORARY_HIGHEST_UNLOCKED_UNIT,
+  completedLessonIds = new Set(),
 ) {
-  return Number(unitId) <= highestUnlockedUnit
+  const unit = getUnitById(unitId)
+  if (!unit) return false
+
+  const firstAvailableLesson = unit.lessons.find((lesson) => lesson.available)
+
+  return firstAvailableLesson
+    ? isLessonUnlocked(firstAvailableLesson.id, completedLessonIds)
+    : false
+}
+
+export const availableLessons = units.flatMap((unit) =>
+  unit.lessons.filter((lesson) => lesson.available),
+)
+
+export function getLessonById(lessonId) {
+  return availableLessons.find((lesson) => lesson.id === lessonId) ?? null
+}
+
+export function isLessonUnlocked(
+  lessonId,
+  completedLessonIds = new Set(),
+) {
+  const lessonIndex = availableLessons.findIndex(
+    (lesson) => lesson.id === lessonId,
+  )
+
+  if (lessonIndex < 0) return false
+  if (lessonIndex === 0 || completedLessonIds.has(lessonId)) return true
+
+  return completedLessonIds.has(availableLessons[lessonIndex - 1].id)
 }

@@ -14,18 +14,12 @@ import {
   isUnitUnlocked,
   units,
 } from '../data/units'
+import useStudentProgress from '../hooks/useStudentProgress'
 import '../styles/units-map.css'
 
-const unit2Lessons = [
-  { id: 'c', title: 'Letra C' },
-  { id: 'q', title: 'Letra Q' },
-  { id: 'd', title: 'Letra D' },
-  { id: 'silabas-inversas', title: 'Sílabas inversas' },
-  { id: 'pl', title: 'Sílabas pl' },
-  { id: 'pr', title: 'Sílabas pr' },
-]
-
 function LessonsPage() {
+  const { completedLessons, loadingProgress } = useStudentProgress()
+
   return (
     <main className="page units-map-page">
       <BackButton
@@ -52,7 +46,10 @@ function LessonsPage() {
         aria-label="Camino de unidades"
       >
         {units.map((unit, index) => {
-          const unlocked = isUnitUnlocked(unit.id)
+          const unlocked = !loadingProgress && isUnitUnlocked(
+            unit.id,
+            completedLessons,
+          )
           const isLeft = index % 2 === 0
           const themeClass =
             getUnitThemeClass(unit.id)
@@ -166,12 +163,6 @@ function LessonsPage() {
           )
         })}
       </section>
-
-      <p className="units-map__progress-note text-instruction">
-        Por ahora, la Unidad 1 está habilitada. Las demás se
-        conectarán al progreso real cuando esa lógica esté lista.
-      </p>
-
       <BottomNav />
     </main>
   )

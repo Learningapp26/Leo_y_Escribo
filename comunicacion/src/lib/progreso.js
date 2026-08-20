@@ -91,6 +91,15 @@ export async function registrarProgreso({
     return { error: null, skipped: true }
   }
 
+  // La creación inicial desde App.jsx es asíncrona. Antes de insertar el
+  // progreso, confirma que la fila referenciada ya existe para evitar un 409
+  // por la llave foránea estudiantes.id.
+  const { error: estudianteError } = await ensureEstudiante(usuario)
+
+  if (estudianteError) {
+    return { error: estudianteError, skipped: false }
+  }
+
   const { error } = await supabase.from('progreso').insert({
     modulo: MODULO,
     estudiante_id: usuario.id,

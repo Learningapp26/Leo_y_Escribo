@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import {
   ArrowRight,
   Check,
@@ -37,7 +37,7 @@ const ejercicios = [
     palabra: 'oso',
     imagen: '/images/lecciones/vocales/oso.png',
     respuesta: 'o',
-    audio: '/audio/lecciones/vocales/Oso.mp3',
+    audio: '/audio/lecciones/vocales/oso.mp3',
   },
   {
     palabra: 'uniforme',
@@ -61,6 +61,8 @@ function ActividadVocalesPage() {
   const [vocalSeleccionada, setVocalSeleccionada] = useState('')
   const [resultado, setResultado] = useState('')
   const [actividadTerminada, setActividadTerminada] = useState(false)
+  const [guardandoProgreso, setGuardandoProgreso] = useState(false)
+  const [errorGuardado, setErrorGuardado] = useState('')
 
   const ejercicio = ejercicios[ejercicioActual]
 
@@ -84,11 +86,27 @@ function ActividadVocalesPage() {
     setResultado('')
   }
 
-  const siguienteEjercicio = () => {
+  const siguienteEjercicio = async () => {
     const esUltimo =
       ejercicioActual === ejercicios.length - 1
 
     if (esUltimo) {
+      if (guardandoProgreso) return
+
+      setGuardandoProgreso(true)
+      setErrorGuardado('')
+      const { error, skipped } = await registrarLeccionCompletada('vocales')
+
+      if (error || skipped) {
+        setGuardandoProgreso(false)
+        setErrorGuardado(
+          skipped
+            ? 'No hay una sesión activa. Inicia sesión para guardar tu progreso.'
+            : 'No se pudo guardar el progreso. Intenta nuevamente.',
+        )
+        return
+      }
+
       setActividadTerminada(true)
       return
     }
@@ -97,10 +115,6 @@ function ActividadVocalesPage() {
     setVocalSeleccionada('')
     setResultado('')
   }
-
-  useEffect(() => {
-    if (actividadTerminada) registrarLeccionCompletada('vocales')
-  }, [actividadTerminada])
 
   if (actividadTerminada) {
     return (
@@ -254,6 +268,12 @@ function ActividadVocalesPage() {
           )}
 
           <div className="vowels-exercise-card__actions">
+            {errorGuardado && (
+              <p className="feedback feedback--retry" role="alert">
+                {errorGuardado}
+              </p>
+            )}
+
             {!resultado && (
               <Button
                 icon={Check}
@@ -284,11 +304,14 @@ function ActividadVocalesPage() {
                 iconPosition="right"
                 size="large"
                 fullWidth
+                disabled={guardandoProgreso}
                 onClick={siguienteEjercicio}
               >
-                {ejercicioActual === ejercicios.length - 1
-                  ? 'Finalizar actividad'
-                  : 'Siguiente ejercicio'}
+                {guardandoProgreso
+                  ? 'Guardando progreso...'
+                  : ejercicioActual === ejercicios.length - 1
+                    ? 'Finalizar actividad'
+                    : 'Siguiente ejercicio'}
               </Button>
             )}
           </div>
