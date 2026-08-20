@@ -61,6 +61,12 @@ import ActividadCSilabasPage from '../pages/ActividadCSilabasPage'
 import ActividadCCompletarPage from '../pages/ActividadCCompletarPage'
 import ActividadCFinalPage from '../pages/ActividadCFinalPage'
 
+import LeccionQPage from '../pages/LeccionQPage'
+import ActividadQSonidosPage from '../pages/ActividadQSonidosPage'
+import ActividadQSilabasPage from '../pages/ActividadQSilabasPage'
+import ActividadQCompletarPage from '../pages/ActividadQCompletarPage'
+import ActividadQFinalPage from '../pages/ActividadQFinalPage'
+
 import LeccionDPage from '../pages/LeccionDPage'
 import ActividadDImagenesPage from '../pages/ActividadDImagenesPage'
 import ActividadDSilabasPage from '../pages/ActividadDSilabasPage'
@@ -353,6 +359,31 @@ function AppRouter() {
         <Route
           path="/actividad/c-final"
           element={<ActividadCFinalPage />}
+        />
+
+        <Route
+          path="/lecciones/q"
+          element={<LeccionQPage />}
+        />
+
+        <Route
+          path="/actividad/q-sonidos"
+          element={<ActividadQSonidosPage />}
+        />
+
+        <Route
+          path="/actividad/q-silabas"
+          element={<ActividadQSilabasPage />}
+        />
+
+        <Route
+          path="/actividad/q-completar"
+          element={<ActividadQCompletarPage />}
+        />
+
+        <Route
+          path="/actividad/q-final"
+          element={<ActividadQFinalPage />}
         />
 
         <Route
