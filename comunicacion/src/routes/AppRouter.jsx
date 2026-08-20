@@ -54,6 +54,7 @@ import ActividadPCompletarPage from '../pages/ActividadPCompletarPage'
 import ActividadPFinalPage from '../pages/ActividadPFinalPage'
 import PalabrasPracticaPage from '../pages/PalabrasPracticaPage'
 import RepasoUnidad2Page from '../pages/RepasoUnidad2Page'
+import SubidasResbalonesPage from '../pages/SubidasResbalonesPage'
 
 import LeccionCPage from '../pages/LeccionCPage'
 import ActividadCSonidosPage from '../pages/ActividadCSonidosPage'
@@ -310,6 +311,10 @@ function AppRouter() {
         <Route
           path="/unidad-2/repaso"
           element={<RepasoUnidad2Page />}
+        />
+        <Route
+          path="/unidad-2/subidas-resbalones"
+          element={<SubidasResbalonesPage />}
         />
         <Route
           path="/lecciones/d"

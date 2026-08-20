@@ -109,6 +109,12 @@ export const units = [
         route: '/unidad-2/repaso',
         available: true,
       },
+      {
+        id: 'subidas-resbalones',
+        title: 'Subidas y resbalones de palabras',
+        route: '/unidad-2/subidas-resbalones',
+        available: true,
+      },
     ],
   },
   {

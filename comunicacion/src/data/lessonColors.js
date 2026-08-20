@@ -17,6 +17,7 @@ export const LESSON_UNIT_MAP = {
   pl: 2,
   pr: 2,
   'repaso-unidad-2': 2,
+  'subidas-resbalones': 2,
   b: 3,
   j: 3,
   tr: 3,

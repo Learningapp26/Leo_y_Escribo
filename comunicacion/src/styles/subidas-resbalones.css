@@ -1,0 +1,262 @@
+.board-game-page {
+  gap: var(--space-lg);
+  background: var(--lesson-background);
+}
+
+.board-game-header {
+  padding: var(--space-lg) var(--space-xl);
+  border: 2px solid var(--lesson-border);
+  border-radius: var(--radius-lg);
+  background: var(--lesson-surface);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+
+.board-game-header h1,
+.board-game-header p {
+  max-width: 50rem;
+  margin-inline: auto;
+}
+
+.board-game-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(15rem, 19rem);
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+.board-game-board {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(4.35rem, 1fr));
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  border: 3px solid var(--lesson-border);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(circle at 14% 12%, color-mix(in srgb, var(--color-reward) 36%, transparent) 0 0.35rem, transparent 0.42rem),
+    radial-gradient(circle at 84% 88%, color-mix(in srgb, var(--lesson-primary) 25%, transparent) 0 0.3rem, transparent 0.38rem),
+    linear-gradient(135deg, color-mix(in srgb, var(--lesson-secondary) 54%, var(--lesson-surface)), color-mix(in srgb, var(--lesson-accent) 24%, var(--lesson-surface)));
+  background-size: 2.25rem 2.25rem, 2.7rem 2.7rem, auto;
+  box-shadow: var(--shadow-sm);
+}
+
+.board-square {
+  position: relative;
+  display: flex;
+  min-height: clamp(5.7rem, 10vw, 8rem);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+  padding: var(--space-sm);
+  overflow: visible;
+  border: 2px solid color-mix(in srgb, var(--lesson-primary) 65%, var(--lesson-border));
+  border-radius: var(--radius-md);
+  color: var(--lesson-text);
+  background: color-mix(in srgb, var(--lesson-surface) 94%, var(--lesson-secondary));
+  box-shadow: 0 0.2rem 0 color-mix(in srgb, var(--lesson-primary) 22%, transparent);
+  text-align: center;
+}
+
+.board-square:nth-child(5n + 1) { background: color-mix(in srgb, var(--lesson-secondary) 32%, var(--lesson-surface)); }
+.board-square:nth-child(5n + 2) { background: color-mix(in srgb, var(--lesson-accent) 48%, var(--lesson-surface)); }
+.board-square:nth-child(5n + 3) { background: color-mix(in srgb, var(--color-support) 42%, var(--lesson-surface)); }
+.board-square:nth-child(5n + 4) { background: color-mix(in srgb, var(--color-reward) 57%, var(--lesson-surface)); }
+.board-square:nth-child(5n + 5) { background: color-mix(in srgb, var(--lesson-primary) 18%, var(--lesson-surface)); }
+
+.board-square--task { border-color: var(--lesson-primary); }
+.board-square--ladder { border-color: var(--color-success); background: color-mix(in srgb, var(--color-support) 56%, var(--lesson-surface)); }
+.board-square--slide { border-color: var(--color-retry); background: color-mix(in srgb, var(--color-accent-soft) 65%, var(--lesson-surface)); }
+.board-square--current { outline: 3px solid var(--lesson-primary); outline-offset: 2px; }
+
+.board-square__number {
+  display: grid;
+  width: 1.9rem;
+  height: 1.9rem;
+  place-items: center;
+  border-radius: 50%;
+  color: #ffffff;
+  background: var(--lesson-primary);
+  font-family: var(--font-ui);
+  font-weight: var(--font-weight-black);
+}
+
+.board-square__label,
+.board-square__destination {
+  font-family: var(--font-ui);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-black);
+  line-height: 1.1;
+}
+
+.board-square__destination { color: var(--lesson-text); }
+.board-square__effect { width: 1.5rem; height: 1.5rem; color: var(--color-success); }
+.board-square--slide .board-square__effect { color: var(--color-retry); }
+.board-square__task { width: 1.35rem; height: 1.35rem; color: var(--lesson-primary); }
+
+.board-square__token {
+  position: absolute;
+  top: -0.8rem;
+  right: -0.45rem;
+  width: 2rem;
+  height: 2rem;
+  padding: 0.25rem;
+  border: 2px solid var(--lesson-surface);
+  border-radius: 50%;
+  color: #ffffff;
+  background: var(--color-action);
+  box-shadow: var(--shadow-sm);
+  animation: board-token-arrive 400ms ease-out;
+}
+
+.board-game-turn {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-xl);
+  border: 2px solid var(--lesson-border);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, var(--lesson-surface), color-mix(in srgb, var(--lesson-secondary) 20%, var(--lesson-surface)));
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+
+.board-game-turn--slide {
+  border-color: var(--color-retry);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--color-accent-soft) 42%, var(--lesson-surface)), var(--lesson-surface));
+}
+
+.board-game-turn--ladder {
+  border-color: var(--color-success);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--color-support) 46%, var(--lesson-surface)), var(--lesson-surface));
+}
+
+.board-game-turn--challenge {
+  border-color: var(--lesson-primary);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--lesson-accent) 20%, var(--lesson-surface)), var(--lesson-surface));
+}
+
+.board-game-turn p { min-height: 4.8rem; }
+
+.board-die {
+  display: grid;
+  width: 8.4rem;
+  height: 8.4rem;
+  place-items: center;
+  border: 3px solid var(--lesson-primary);
+  border-radius: var(--radius-md);
+  color: var(--lesson-primary);
+  background: color-mix(in srgb, var(--lesson-secondary) 28%, var(--lesson-surface));
+}
+
+.board-die svg { width: 3rem; height: 3rem; }
+.board-die strong { margin-top: -1.8rem; font-family: var(--font-ui); font-size: var(--font-size-2xl); }
+.board-die--rolling { animation: board-die-roll 550ms ease-in-out; }
+
+.board-game-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-md);
+  padding: var(--space-sm);
+}
+
+.board-game-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-full);
+  color: var(--lesson-text);
+  background: var(--lesson-surface);
+  box-shadow: var(--shadow-sm);
+  font-family: var(--font-ui);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+.board-game-legend svg { width: 1.15rem; height: 1.15rem; }
+.board-game-legend span:nth-child(1) svg { color: var(--color-success); }
+.board-game-legend span:nth-child(2) svg { color: var(--color-retry); }
+.board-game-legend span:nth-child(3) svg { color: var(--lesson-primary); }
+
+.board-game-challenge {
+  align-items: center;
+  gap: var(--space-lg);
+  border: 2px solid var(--lesson-border);
+  background: var(--lesson-surface);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+}
+
+.board-game-challenge__heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.board-game-challenge__heading > svg { width: 2.5rem; height: 2.5rem; color: var(--lesson-primary); }
+.board-game-challenge__heading h2 { margin-top: var(--space-xs); }
+.board-game-challenge__image { width: min(13rem, 100%); height: 10rem; object-fit: contain; }
+.board-game-challenge__hint { max-width: 40rem; color: var(--lesson-text); }
+
+.board-game-inputs {
+  display: grid;
+  width: min(100%, 42rem);
+  gap: var(--space-md);
+}
+
+.board-game-inputs--two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+.board-game-inputs label {
+  display: grid;
+  gap: var(--space-xs);
+  font-family: var(--font-ui);
+  font-weight: var(--font-weight-bold);
+  text-align: left;
+}
+
+.board-game-inputs input {
+  min-height: 3.5rem;
+  border-color: var(--lesson-border);
+  font-size: var(--font-size-lg);
+}
+
+.board-game-finish-card {
+  align-items: center;
+  max-width: 44rem;
+  margin: auto;
+  border: 2px solid var(--lesson-border);
+  text-align: center;
+}
+
+.board-game-finish-card > svg { width: 5rem; height: 5rem; color: var(--color-reward); }
+
+@keyframes board-die-roll {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  35% { transform: rotate(-15deg) scale(0.88); }
+  70% { transform: rotate(18deg) scale(1.08); }
+}
+
+@keyframes board-token-arrive {
+  0% { transform: translateY(-0.85rem) scale(0.75); }
+  75% { transform: translateY(0.2rem) scale(1.12); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+@media (max-width: 820px) {
+  .board-game-layout { grid-template-columns: 1fr; }
+  .board-game-turn { min-height: auto; }
+}
+
+@media (max-width: 520px) {
+  .board-game-page { padding-inline: var(--space-sm); }
+  .board-game-board { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .board-square { min-height: 5.25rem; }
+  .board-square__destination { font-size: 0.7rem; }
+  .board-game-inputs--two { grid-template-columns: 1fr; }
+}
