@@ -22,7 +22,7 @@ export const qOrderScenes = [
   {
     id: 'escena-rio',
     scene: '3',
-    image: '/images/lecciones/q/escena-rio.png',
+    image: '/images/lecciones/q/lectura-queso-viajero.png',
     answer: '3',
   },
   {
