@@ -109,27 +109,73 @@ export const dSyllableHearing = [
 ]
 
 export const dSoundPairMatching = [
-  ['dado', 'dama', 'da'],
-  ['dedo', 'delfin', 'de'],
-  ['dinero', 'dinosaurio', 'di'],
-  ['dona', 'dos', 'do'],
-  ['dulce', 'ducha', 'du'],
-].flatMap(([first, second, pairId]) => [
   {
-    id: first,
-    name: first,
-    pairId,
-    image: dImage(first),
-    audio: dAudio(first), // TODO: Agregar audio correspondiente
+    id: 'dado',
+    name: 'dado',
+    pairId: 'da',
+    fileName: 'dado',
   },
   {
-    id: second,
-    name: second,
-    pairId,
-    image: dImage(second),
-    audio: dAudio(second), // TODO: Agregar audio correspondiente
+    id: 'dedo',
+    name: 'dedo',
+    pairId: 'de',
+    fileName: 'dedo',
   },
-])
+  {
+    id: 'dinero',
+    name: 'dinero',
+    pairId: 'di',
+    fileName: 'dinero',
+  },
+  {
+    id: 'dona',
+    name: 'dona',
+    pairId: 'do',
+    fileName: 'dona',
+  },
+  {
+    id: 'dulce',
+    name: 'dulce',
+    pairId: 'du',
+    fileName: 'dulce',
+  },
+  {
+    id: 'ducha',
+    name: 'ducha',
+    pairId: 'du',
+    fileName: 'ducha',
+  },
+  {
+    id: 'dinosaurio',
+    name: 'dinosaurio',
+    pairId: 'di',
+    fileName: 'dinosaurio',
+  },
+  {
+    id: 'dama',
+    name: 'dama',
+    pairId: 'da',
+    fileName: 'dama',
+  },
+  {
+    id: 'delfin',
+    name: 'delfín',
+    pairId: 'de',
+    fileName: 'delfin',
+  },
+  {
+    id: 'dos',
+    name: 'dos',
+    pairId: 'do',
+    fileName: 'dos',
+  },
+].map((item) => ({
+  id: item.id,
+  name: item.name,
+  pairId: item.pairId,
+  image: dImage(item.fileName),
+  audio: dAudio(item.fileName),
+}))
 
 export const dSyllableCountWords = [
   {
