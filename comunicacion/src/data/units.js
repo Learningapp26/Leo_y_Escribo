@@ -101,7 +101,7 @@ export const units = [
         id: 'pr',
         title: 'Combinación PR',
         route: '/lecciones/pr',
-        available: false,
+        available: true,
       },
       {
         id: 'repaso-unidad-2',
