@@ -221,15 +221,68 @@ export const dSyllableCountWords = [
 ]
 
 export const dSyllableSearch = {
-  options: ['da', 'de', 'di', 'do', 'du'].map((syllable, index) => ({
-    id: `${syllable}-${index}`,
-    syllable,
-    isTarget: true,
-    audio:
-      syllable === 'da'
-        ? '/audio/lecciones/m/silaba-da.mp3'
-        : dAudio(`silaba-${syllable}`), // TODO: Agregar audios de silabas D faltantes
-  })),
+  options: [
+    {
+      id: 'da',
+      syllable: 'da',
+      isTarget: true,
+      audio: dAudio('silaba-da'),
+    },
+    {
+      id: 'me',
+      syllable: 'me',
+      isTarget: false,
+      audio: null,
+    },
+    {
+      id: 'di',
+      syllable: 'di',
+      isTarget: true,
+      audio: dAudio('silaba-di'),
+    },
+    {
+      id: 'lo',
+      syllable: 'lo',
+      isTarget: false,
+      audio: null,
+    },
+    {
+      id: 'du',
+      syllable: 'du',
+      isTarget: true,
+      audio: dAudio('silaba-du'),
+    },
+    {
+      id: 'se',
+      syllable: 'se',
+      isTarget: false,
+      audio: null,
+    },
+    {
+      id: 'do',
+      syllable: 'do',
+      isTarget: true,
+      audio: dAudio('silaba-do'),
+    },
+    {
+      id: 'pa',
+      syllable: 'pa',
+      isTarget: false,
+      audio: null,
+    },
+    {
+      id: 'de',
+      syllable: 'de',
+      isTarget: true,
+      audio: dAudio('silaba-de'),
+    },
+    {
+      id: 'nu',
+      syllable: 'nu',
+      isTarget: false,
+      audio: null,
+    },
+  ],
 }
 
 export const dLetterPresentation = {
