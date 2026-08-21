@@ -545,6 +545,7 @@ function ActividadSilabasInversasSPage() {
                   type="button"
                   key={option.id}
                   aria-pressed={selected}
+                  aria-label={option.label}
                   onClick={() => {
                     if (sentenceFeedback === 'correct') return
                     setSelectedOptionId(option.id)

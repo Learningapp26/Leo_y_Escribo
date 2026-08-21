@@ -674,7 +674,7 @@ function ActividadSilabasInversasNPage() {
           <img
             className="selection-image selection-image--featured"
             src={pictureItem.image}
-            alt=""
+            alt="Dibujo para adivinar y nombrar"
           />
 
           <Button

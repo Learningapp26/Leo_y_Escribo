@@ -238,8 +238,8 @@ export const siSSentenceMatch = [
     sentence: 'La rosa es rosada.',
     audio: '/audio/silabas-inversas/s/oracion-rosa.mp3',
     options: [
-      { id: 'rosa-roja', image: '/images/lecciones/silabasInversas/s/rosa-roja.png', isCorrect: false },
-      { id: 'rosa-rosada', image: '/images/lecciones/silabasInversas/s/rosa-rosada.png', isCorrect: true },
+      { id: 'rosa-roja', label: 'Rosa roja', image: '/images/lecciones/silabasInversas/s/rosa-roja.png', isCorrect: false },
+      { id: 'rosa-rosada', label: 'Rosa rosada', image: '/images/lecciones/silabasInversas/s/rosa-rosada.png', isCorrect: true },
     ],
   },
   {
@@ -247,8 +247,8 @@ export const siSSentenceMatch = [
     sentence: 'La cama es de Ester.',
     audio: '/audio/silabas-inversas/s/oracion-cama-ester.mp3',
     options: [
-      { id: 'nina-cama', image: '/images/lecciones/silabasInversas/s/nina-cama.png', isCorrect: true },
-      { id: 'nino-banco', image: '/images/lecciones/silabasInversas/s/nino-banco.png', isCorrect: false },
+      { id: 'nina-cama', label: 'Niña en la cama', image: '/images/lecciones/silabasInversas/s/nina-cama.png', isCorrect: true },
+      { id: 'nino-banco', label: 'Niño en el banco', image: '/images/lecciones/silabasInversas/s/nino-banco.png', isCorrect: false },
     ],
   },
   {
@@ -256,8 +256,8 @@ export const siSSentenceMatch = [
     sentence: 'El comal está roto.',
     audio: '/audio/silabas-inversas/s/oracion-comal-roto.mp3',
     options: [
-      { id: 'comal-entero', image: '/images/lecciones/silabasInversas/s/comal-entero.png', isCorrect: false },
-      { id: 'comal-roto', image: '/images/lecciones/silabasInversas/s/comal-roto.png', isCorrect: true },
+      { id: 'comal-entero', label: 'Comal entero', image: '/images/lecciones/silabasInversas/s/comal-entero.png', isCorrect: false },
+      { id: 'comal-roto', label: 'Comal roto', image: '/images/lecciones/silabasInversas/s/comal-roto.png', isCorrect: true },
     ],
   },
   {
@@ -265,8 +265,8 @@ export const siSSentenceMatch = [
     sentence: 'La isla está desierta.',
     audio: '/audio/silabas-inversas/s/oracion-isla-desierta.mp3',
     options: [
-      { id: 'isla', image: '/images/lecciones/silabasInversas/s/isla.png', isCorrect: true },
-      { id: 'asno', image: '/images/lecciones/silabasInversas/s/asno.png', isCorrect: false },
+      { id: 'isla', label: 'Isla desierta', image: '/images/lecciones/silabasInversas/s/isla.png', isCorrect: true },
+      { id: 'asno', label: 'Asno', image: '/images/lecciones/silabasInversas/s/asno.png', isCorrect: false },
     ],
   },
 ]
