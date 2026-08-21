@@ -16,6 +16,7 @@ import {
   cCompletionInstructionAudio,
   cJoinExercises,
   cJoinInstructionAudio,
+  cJoinSyllableAudios,
   cSyllableAudios,
 } from '../data/cData'
 import { playAudio } from '../lib/audioPlayer'
@@ -432,6 +433,12 @@ function ActividadCCompletarPage() {
                           syllable,
                         )
                         setJoinFeedback('')
+
+                        playAudio(
+                          cJoinSyllableAudios[
+                            syllable
+                          ],
+                        )
                       }}
                     >
                       {syllable}

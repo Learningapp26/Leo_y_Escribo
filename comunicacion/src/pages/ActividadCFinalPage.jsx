@@ -144,7 +144,7 @@ function ActividadCFinalPage() {
             fullWidth
             onClick={() =>
               playAudio(
-                '/audio/lecciones/c/felicitacion-final.mp3',
+                '/audio/lecciones/c/Felicitación leccion c.mp3',
               )
             }
           >
