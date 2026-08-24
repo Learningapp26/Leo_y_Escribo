@@ -23,24 +23,29 @@ export const qOrderScenes = [
     id: 'escena-rio',
     scene: '3',
     image: '/images/lecciones/q/lectura-queso-viajero.png',
+    imageAlt:
+      'El queso cae al río y el agua lo arrastra hasta la orilla',
     answer: '3',
   },
   {
     id: 'escena-ardilla',
     scene: '2',
     image: '/images/lecciones/q/escena-ardilla.png',
+    imageAlt: 'La ardilla se lleva el queso del nido del zope',
     answer: '2',
   },
   {
     id: 'escena-nina',
     scene: '4',
     image: '/images/lecciones/q/escena-nina.png',
+    imageAlt: 'La niña recoge el queso que llegó a la orilla del río',
     answer: '4',
   },
   {
     id: 'escena-zope',
     scene: '1',
     image: '/images/lecciones/q/escena-zope.png',
+    imageAlt: 'El zope se lleva el queso de la ventana hasta su nido',
     answer: '1',
   },
 ]

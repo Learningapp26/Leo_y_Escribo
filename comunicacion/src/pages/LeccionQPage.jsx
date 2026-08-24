@@ -175,7 +175,7 @@ function LeccionQPage() {
                   <img
                     className="selection-image"
                     src={item.image}
-                    alt={`Escena de la historia`}
+                    alt={item.imageAlt}
                     draggable={false}
                   />
 
