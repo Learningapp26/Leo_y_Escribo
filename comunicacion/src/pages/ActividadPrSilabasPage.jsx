@@ -74,6 +74,10 @@ function ActividadPrSilabasPage() {
 
   const currentWord = prWordCompletion[wordIndex]
   const isLastWord = wordIndex === prWordCompletion.length - 1
+  const visiblePattern = currentWord.pattern.replace(
+    '___',
+    selectedSyllable || '___',
+  )
 
   const checkCompletion = () => {
     if (!selectedSyllable) return
@@ -303,7 +307,7 @@ function ActividadPrSilabasPage() {
             Escuchar palabra
           </Button>
 
-          <p className="completion-word-pattern">{currentWord.pattern}</p>
+          <p className="completion-word-pattern">{visiblePattern}</p>
 
           <div className="completion-bank">
             {prSyllableOptions.map((syllable) => (

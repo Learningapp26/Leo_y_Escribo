@@ -39,6 +39,10 @@ function ActividadPrFinalPage() {
 
   const joinItem = prSyllableJoin[joinIndex]
   const isLastJoin = joinIndex === prSyllableJoin.length - 1
+  const visiblePattern = joinItem.pattern.replace(
+    '___',
+    selectedSyllable || '___',
+  )
 
   const pickJoinSyllable = (option) => {
     if (joinResult === 'correct') return
@@ -241,6 +245,11 @@ function ActividadPrFinalPage() {
             </Button>
           </div>
 
+          <img
+            className="selection-image selection-image--featured"
+            src={joinItem.image}
+            alt={joinItem.word}
+          />
 
           <Button
             variant="audio"
@@ -250,7 +259,7 @@ function ActividadPrFinalPage() {
             Escuchar palabra
           </Button>
 
-          <p className="completion-word-pattern">{joinItem.pattern}</p>
+          <p className="completion-word-pattern">{visiblePattern}</p>
 
           <div className="syllables-options">
             {joinItem.options.map((option) => {
