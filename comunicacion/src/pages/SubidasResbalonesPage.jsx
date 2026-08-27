@@ -13,6 +13,7 @@ import {
 } from 'lucide-react'
 
 import Button from '../components/common/Button'
+import AudioPlaceholderButton from '../components/common/AudioPlaceholderButton'
 import Card from '../components/common/Card'
 import BackButton from '../components/navigation/BackButton'
 import { getLessonThemeClass } from '../data/lessonColors'
@@ -35,7 +36,7 @@ function SubidasResbalonesPage() {
   const [eventTone, setEventTone] = useState('neutral')
   const [pendingSquare, setPendingSquare] = useState(null)
   const [eventMessage, setEventMessage] = useState('Lanza el dado para comenzar.')
-  const [answers, setAnswers] = useState(['', ''])
+  const [answers, setAnswers] = useState([])
   const [feedback, setFeedback] = useState('')
   const [finished, setFinished] = useState(false)
   const completedRef = useRef(false)
@@ -55,7 +56,7 @@ function SubidasResbalonesPage() {
 
     if (task) {
       setPendingSquare(square)
-      setAnswers(['', ''])
+      setAnswers([])
       setFeedback('')
       setTurnState('pending')
       setEventTone('challenge')
@@ -77,25 +78,7 @@ function SubidasResbalonesPage() {
 
     window.setTimeout(() => {
       moveTo(effect.destination)
-      window.setTimeout(() => {
-        const destinationTask = isSlide
-          ? SQUARE_TASKS[effect.destination]
-          : null
-
-        if (destinationTask) {
-          setPendingSquare(effect.destination)
-          setAnswers(['', ''])
-          setFeedback('')
-          setTurnState('pending')
-          setEventTone('challenge')
-          setEventMessage(`¡Cuidado! Resbalaste hasta la casilla ${effect.destination}. Ahora completa su reto.`)
-          return
-        }
-
-        setTurnState('ready')
-        setEventTone('neutral')
-        setEventMessage(`Ahora estás en la casilla ${effect.destination}. Lanza el dado.`)
-      }, MOVE_DELAY)
+      window.setTimeout(() => resolveLanding(effect.destination), MOVE_DELAY)
     }, EFFECT_DELAY)
   }
 
@@ -119,10 +102,18 @@ function SubidasResbalonesPage() {
     }, MOVE_DELAY)
   }
 
-  const updateAnswer = (index, value) => {
-    setAnswers((current) => current.map((answer, answerIndex) => (
-      answerIndex === index ? value : answer
-    )))
+  const toggleAnswer = (optionId) => {
+    if (!currentTask || feedback === 'correct') return
+
+    setAnswers((current) => {
+      if (current.includes(optionId)) {
+        return current.filter((answer) => answer !== optionId)
+      }
+
+      if (current.length >= currentTask.selectionCount) return current
+
+      return [...current, optionId]
+    })
     setFeedback('')
   }
 
@@ -162,9 +153,7 @@ function SubidasResbalonesPage() {
       window.setTimeout(() => {
         setPosition(effect.destination)
         setPendingSquare(null)
-        setTurnState('ready')
-        setEventTone('neutral')
-        setEventMessage(`Ahora estás en la casilla ${effect.destination}. Lanza el dado.`)
+        window.setTimeout(() => resolveLanding(effect.destination), MOVE_DELAY)
       }, MOVE_DELAY)
       return
     }
@@ -187,7 +176,7 @@ function SubidasResbalonesPage() {
     setEventTone('neutral')
     setPendingSquare(null)
     setEventMessage('Lanza el dado para comenzar.')
-    setAnswers(['', ''])
+    setAnswers([])
     setFeedback('')
     setFinished(false)
   }
@@ -220,6 +209,9 @@ function SubidasResbalonesPage() {
         <span className="text-ui-label">Unidad 2 · Juego de palabras</span>
         <h1 id="board-game-title">Subidas y resbalones de palabras</h1>
         <p className="text-instruction">Lanza el dado, avanza con tu ficha y supera los retos de cada casilla.</p>
+        <AudioPlaceholderButton>
+          Escuchar instrucciones
+        </AudioPlaceholderButton>
       </header>
 
       <section className="board-game-layout" aria-label="Tablero de Subidas y resbalones de palabras">
@@ -290,42 +282,51 @@ function SubidasResbalonesPage() {
 
           <p className="board-game-challenge__hint">{currentTask.hint}</p>
 
-          <div className={currentTask.type === 'two-words' ? 'board-game-inputs board-game-inputs--two' : 'board-game-inputs'}>
-            <label>
-              {currentTask.type === 'two-words' ? 'Primera palabra' : 'Tu respuesta'}
-              <input
-                type="text"
-                value={answers[0]}
-                onChange={(event) => updateAnswer(0, event.target.value)}
-                disabled={feedback === 'correct'}
-                autoComplete="off"
-              />
-            </label>
-            {currentTask.type === 'two-words' && (
-              <label>
-                Segunda palabra
-                <input
-                  type="text"
-                  value={answers[1]}
-                  onChange={(event) => updateAnswer(1, event.target.value)}
+          <AudioPlaceholderButton>
+            Escuchar reto
+          </AudioPlaceholderButton>
+
+          <div
+            className="board-game-choices"
+            role="group"
+            aria-label={`Opciones para el reto de la casilla ${pendingSquare}`}
+          >
+            {currentTask.options.map((option) => {
+              const isSelected = answers.includes(option.id)
+              const stateClass = feedback && isSelected
+                ? feedback === 'correct'
+                  ? 'board-game-choice--correct'
+                  : 'board-game-choice--incorrect'
+                : isSelected
+                  ? 'board-game-choice--selected'
+                  : ''
+
+              return (
+                <Button
+                  key={option.id}
+                  variant="secondary"
+                  className={['board-game-choice', stateClass].filter(Boolean).join(' ')}
+                  aria-pressed={isSelected}
                   disabled={feedback === 'correct'}
-                  autoComplete="off"
-                />
-              </label>
-            )}
+                  onClick={() => toggleAnswer(option.id)}
+                >
+                  {option.label}
+                </Button>
+              )
+            })}
           </div>
 
           {feedback === 'correct' && <p className="selection-feedback selection-feedback--correct" role="status">{currentTask.success}</p>}
           {feedback === 'retry' && <p className="selection-feedback selection-feedback--retry" role="status">{currentTask.retry}</p>}
 
           {feedback !== 'correct' && (
-            <Button icon={Check} size="large" fullWidth disabled={!answers[0].trim() || (currentTask.type === 'two-words' && !answers[1].trim())} onClick={checkTask}>
+            <Button icon={Check} size="large" fullWidth disabled={answers.length !== currentTask.selectionCount} onClick={checkTask}>
               Revisar respuesta
             </Button>
           )}
 
           {feedback === 'retry' && (
-            <Button variant="retry" icon={RotateCcw} size="large" fullWidth onClick={() => { setAnswers(['', '']); setFeedback('') }}>
+            <Button variant="retry" icon={RotateCcw} size="large" fullWidth onClick={() => { setAnswers([]); setFeedback('') }}>
               Intentar nuevamente
             </Button>
           )}

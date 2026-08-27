@@ -204,26 +204,31 @@
 .board-game-challenge__image { width: min(13rem, 100%); height: 10rem; object-fit: contain; }
 .board-game-challenge__hint { max-width: 40rem; color: var(--lesson-text); }
 
-.board-game-inputs {
+.board-game-choices {
   display: grid;
   width: min(100%, 42rem);
-  gap: var(--space-md);
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: var(--space-sm);
 }
 
-.board-game-inputs--two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-
-.board-game-inputs label {
-  display: grid;
-  gap: var(--space-xs);
-  font-family: var(--font-ui);
-  font-weight: var(--font-weight-bold);
-  text-align: left;
-}
-
-.board-game-inputs input {
+.board-game-choice {
   min-height: 3.5rem;
-  border-color: var(--lesson-border);
-  font-size: var(--font-size-lg);
+  white-space: normal;
+}
+
+.board-game-choice--selected {
+  outline: 3px solid var(--color-action);
+  outline-offset: 2px;
+}
+
+.board-game-choice--correct {
+  background: var(--color-success);
+  color: #ffffff;
+}
+
+.board-game-choice--incorrect {
+  background: var(--color-retry);
+  color: var(--lesson-text);
 }
 
 .board-game-finish-card {
@@ -258,5 +263,5 @@
   .board-game-board { grid-template-columns: repeat(5, minmax(0, 1fr)); }
   .board-square { min-height: 5.25rem; }
   .board-square__destination { font-size: 0.7rem; }
-  .board-game-inputs--two { grid-template-columns: 1fr; }
+  .board-game-choices { grid-template-columns: 1fr; }
 }
