@@ -142,7 +142,7 @@ export const units = [
         id: 'bl',
         title: 'Combinación BL',
         route: '/lecciones/bl',
-        available: false,
+        available: true,
       },
       {
         id: 'br',

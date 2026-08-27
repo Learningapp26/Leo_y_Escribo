@@ -79,7 +79,7 @@ import ActividadDSilabasPage from '../pages/ActividadDSilabasPage'
 import ActividadDCompletarPage from '../pages/ActividadDCompletarPage'
 import ActividadDFinalPage from '../pages/ActividadDFinalPage'
 
-import LeccionPlPage from '../pages/LeccionPLPage'
+import LeccionPlPage from '../pages/LeccionPlPage'
 import ActividadPlSonidosPage from '../pages/ActividadPlSonidosPage'
 import ActividadPlSilabasPage from '../pages/ActividadPlSilabasPage'
 import ActividadPlFinalPage from '../pages/ActividadPlFinalPage'
@@ -96,6 +96,10 @@ import ActividadPrFinalPage from '../pages/ActividadPrFinalPage'
 
 import UnitLessonsPage from '../pages/UnitLessonsPage'
 import LessonAccessGuard from '../components/navigation/LessonAccessGuard'
+
+
+import LeccionBlPage from '../pages/LeccionBlPage'
+
 
 function AppRouter() {
   return (
@@ -474,6 +478,12 @@ function AppRouter() {
         <Route
           path="/actividad/pr-final"
           element={<ActividadPrFinalPage />}
+        />
+
+
+        <Route
+          path="/lecciones/bl"
+          element={<LeccionBlPage />}
         />
 
 
