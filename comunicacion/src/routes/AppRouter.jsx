@@ -68,6 +68,11 @@ import ActividadQSilabasPage from '../pages/ActividadQSilabasPage'
 import ActividadQCompletarPage from '../pages/ActividadQCompletarPage'
 import ActividadQFinalPage from '../pages/ActividadQFinalPage'
 
+import LeccionTrPage from '../pages/LeccionTrPage'
+import ActividadTrSonidosPage from '../pages/ActividadTrSonidosPage'
+import ActividadTrSilabasPage from '../pages/ActividadTrSilabasPage'
+import ActividadTrCompletarPage from '../pages/ActividadTrCompletarPage'
+
 import LeccionDPage from '../pages/LeccionDPage'
 import ActividadDImagenesPage from '../pages/ActividadDImagenesPage'
 import ActividadDSilabasPage from '../pages/ActividadDSilabasPage'
@@ -391,6 +396,26 @@ function AppRouter() {
         <Route
           path="/actividad/q-final"
           element={<ActividadQFinalPage />}
+        />
+
+        <Route
+          path="/lecciones/tr"
+          element={<LeccionTrPage />}
+        />
+
+        <Route
+          path="/actividad/tr-sonidos"
+          element={<ActividadTrSonidosPage />}
+        />
+
+        <Route
+          path="/actividad/tr-silabas"
+          element={<ActividadTrSilabasPage />}
+        />
+
+        <Route
+          path="/actividad/tr-completar"
+          element={<ActividadTrCompletarPage />}
         />
 
         <Route

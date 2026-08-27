@@ -136,7 +136,7 @@ export const units = [
         id: 'tr',
         title: 'Combinación TR',
         route: '/lecciones/tr',
-        available: false,
+        available: true,
       },
       {
         id: 'bl',
