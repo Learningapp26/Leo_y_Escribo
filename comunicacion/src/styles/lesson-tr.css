@@ -1,0 +1,207 @@
+/* lesson-tr.css — más espacio y tamaño para la lección TR, a modo de
+   prueba (pidió la usuaria). Todo va dentro de .lesson-tr para no tocar
+   selection.css/completion.css/syllables.css, que usan las demás
+   lecciones. Si funciona bien, se puede llevar a los estilos
+   compartidos más adelante. */
+
+.lesson-tr .selection-card,
+.lesson-tr .completion-card,
+.lesson-tr .syllables-card {
+  gap: var(--space-2xl);
+}
+
+.lesson-tr .selection-options {
+  gap: var(--space-xl);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.lesson-tr .selection-button {
+  min-height: 250px;
+  padding: var(--space-xl);
+  gap: var(--space-lg);
+}
+
+.lesson-tr .selection-image {
+  max-width: 210px;
+  height: 210px;
+}
+
+.lesson-tr .selection-image--featured {
+  max-width: 300px;
+  height: 300px;
+}
+
+.lesson-tr .selection-word,
+.lesson-tr .text-word {
+  font-size: var(--font-size-xl);
+}
+
+.lesson-tr .text-instruction {
+  font-size: var(--font-size-md);
+}
+
+.lesson-tr .syllables-options {
+  gap: var(--space-lg);
+}
+
+.lesson-tr .syllable-button {
+  min-width: 90px;
+  padding: var(--space-lg) var(--space-xl);
+  font-size: var(--font-size-xl);
+}
+
+.lesson-tr .completion-bank {
+  gap: var(--space-lg);
+}
+
+.lesson-tr .completion-chip {
+  padding: var(--space-md) var(--space-xl);
+  font-size: var(--font-size-lg);
+}
+
+/* Actividad "¿al inicio o después?" — grilla de palabras con círculos de
+   color, como en el libro (rojo = inicio, azul = después). */
+
+/* Colores tomados de la paleta global: rojo del libro -> color-retry,
+   azul del libro -> color-action (ya se usan así en el resto de la app). */
+
+.tr-position-key {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-lg);
+  padding: var(--space-sm) var(--space-md);
+}
+
+.tr-position-key__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--font-ui);
+  font-weight: var(--font-weight-bold);
+}
+
+.tr-position-examples {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-action-soft);
+}
+
+.tr-position-examples__title {
+  font-family: var(--font-ui);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-alt);
+}
+
+.tr-position-example-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  font-family: var(--font-content);
+  font-size: var(--font-size-md);
+}
+
+.tr-position-example-row__explanation {
+  color: var(--color-text-alt);
+  font-size: var(--font-size-sm);
+}
+
+.tr-position-grid {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.tr-position-grid__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding-inline: var(--space-lg);
+  font-family: var(--font-ui);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-alt);
+  text-transform: uppercase;
+}
+
+.tr-position-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-card);
+  border: 2px solid var(--color-border);
+  box-shadow: var(--shadow-btn);
+}
+
+.tr-position-row__word {
+  font-family: var(--font-content);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
+}
+
+.tr-position-dots {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.tr-position-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 3px solid;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    transform var(--transition),
+    box-shadow var(--transition);
+}
+
+.tr-position-dot--inicio {
+  border-color: var(--color-retry);
+}
+
+.tr-position-dot--despues {
+  border-color: var(--color-action);
+}
+
+.tr-position-dot--selected.tr-position-dot--inicio {
+  background: var(--color-retry);
+}
+
+.tr-position-dot--selected.tr-position-dot--despues {
+  background: var(--color-action);
+}
+
+.tr-position-row--correct {
+  border-color: var(--color-correct);
+}
+
+.tr-position-row--incorrect {
+  border-color: var(--color-text-alt);
+}
+
+.tr-position-row--incorrect .tr-position-dot--selected {
+  animation: selection-shake .35s ease;
+}
+
+@media (max-width: 768px) {
+  .lesson-tr .selection-button {
+    min-height: 200px;
+  }
+
+  .lesson-tr .selection-image {
+    max-width: 160px;
+    height: 160px;
+  }
+}
