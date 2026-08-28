@@ -63,7 +63,7 @@ export const bSoundSearchImages = [
   ['escoba', true],
   ['abuelo', true],
   ['abeja', true],
-  ['tomate', false],
+  ['tapir', false],
   ['pastel', false],
 ].map(([name, hasB]) => ({
   id: name,
@@ -107,7 +107,7 @@ export const bWordSyllableExercises = [
   ['boca', 'bo'],
   ['nube', 'be'],
   ['bisonte', 'bi'],
-  ['buzo', 'bu'],
+  ['buso', 'bu'],
   ['buque', 'bu'],
   ['débil', 'bi'],
   ['beso', 'be'],
