@@ -425,3 +425,18 @@ Sirve para sílabas, palabras, letras*/
         height: 150px;
     }
 }
+.sentence-word-bank {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.sentence-word-chip {
+  min-width: 90px;
+  padding: var(--space-md) var(--space-lg);
+  font-family: var(--font-content);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+}

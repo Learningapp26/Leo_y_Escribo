@@ -105,436 +105,483 @@ import LessonAccessGuard from '../components/navigation/LessonAccessGuard'
 
 
 import LeccionBlPage from '../pages/LeccionBlPage'
+import ActividadBlSonidosPage from '../pages/ActividadBlSonidosPage'
+import ActividadBlSilabasPage from '../pages/ActividadBlSilabasPage'
+import ActividadBlFinalPage from '../pages/ActividadBlFinalPage'
 
+import LeccionJPage from '../pages/LeccionJPage'
+import ActividadJImagenesPage from '../pages/ActividadJImagenesPage'
+import ActividadJSilabasPage from '../pages/ActividadJSilabasPage'
+import ActividadJCompletarPage from '../pages/ActividadJCompletarPage'
+import ActividadJFinalPage from '../pages/ActividadJFinalPage'
 
 function AppRouter() {
   return (
     <BrowserRouter>
       <LessonAccessGuard>
         <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/welcome" element={<WelcomePage />} />
-        <Route path="/home" element={<HomePage />} />
-
-        <Route path="/lecciones" element={<LessonsPage />} />
-
-        <Route
-          path="/lecciones/unidad/:unitId"
-          element={<UnitLessonsPage />}
-        />
-
-        <Route
-          path="/lecciones/vocales"
-          element={<LeccionVocalesPage />}
-        />
-        <Route
-          path="/lecciones/m"
-          element={<LeccionMPage />}
-        />
-
-        <Route
-          path="/actividad/m-sonidos"
-          element={<ActividadMSonidosPage />}
-        />
-
-        <Route
-          path="/actividad/m-silabas"
-          element={<ActividadMSilabasPage />}
-        />
-
-        <Route
-          path="/actividad/m-completar"
-          element={<ActividadMCompletarPage />}
-        />
-
-        <Route
-          path="/actividad/m-final"
-          element={<ActividadMFinalPage />}
-        />
-
-        <Route
-          path="/lecciones/s"
-          element={<LeccionSPage />}
-        />
-
-        <Route
-          path="/actividad/s-sonidos"
-          element={<ActividadSSonidosPage />}
-        />
-
-        <Route
-          path="/actividad/s-silabas"
-          element={<ActividadSSilabasPage />}
-        />
-
-        <Route
-          path="/actividad/s-completar"
-          element={<ActividadSCompletarPage />}
-        />
-
-        <Route
-          path="/actividad/s-final"
-          element={<ActividadSFinalPage />}
-        />
-
-         <Route
-          path="/lecciones/r"
-          element={<LeccionRPage />}
-        />
-
-        <Route
-          path="/actividad/r-silabas"
-          element={<ActividadRSilabasPage />}
-        />
-
-        <Route
-          path="/actividad/r-sonidos"
-          element={<ActividadRSonidosPage />}
-        />
-
-        <Route
-          path="/actividad/r-final"
-          element={<ActividadRFinalPage />}
-        />
-
-        <Route
-          path="/lecciones/t"
-          element={<LeccionTPage />}
-        />
-
-        <Route
-          path="/actividad/t-sonidos"
-          element={<ActividadTSonidosPage />}
-        />
-
-        <Route
-          path="/actividad/t-completar"
-          element={<ActividadTCompletarPage />}
-        />
-
-        <Route
-          path="/actividad/t-silabas"
-          element={<ActividadTSilabasPage />}
-        />
-
-        <Route
-          path="/actividad/t-final"
-          element={<ActividadTFinalPage />}
-        />
-
-
-
-        <Route
-          path="/lecciones/y-conjuncion"
-          element={<LeccionYPage />}
-        />
-
-        <Route
-          path="/lecciones/l"
-          element={<LeccionLPage />}
-        />
-
-        <Route
-          path="/actividad/l-imagenes"
-          element={<ActividadLImagenesPage />}
-        />
-
-        <Route
-          path="/actividad/l-silabas"
-          element={<ActividadLSilabasPage />}
-        />
-
-        <Route
-          path="/actividad/l-completar"
-          element={<ActividadLCompletarPage />}
-        />
-
-        <Route
-          path="/actividad/l-final"
-          element={<ActividadLFinalPage />}
-        />
-
-        <Route
-          path="/lecciones/n"
-          element={<LeccionNPage />}
-        />
-
-        <Route
-          path="/actividad/n-imagenes"
-          element={<ActividadNImagenesPage />}
-        />
-
-        <Route
-          path="/actividad/n-silabas"
-          element={<ActividadNSilabasPage />}
-        />
-
-        <Route
-          path="/actividad/n-completar"
-          element={<ActividadNCompletarPage />}
-        />
-
-        <Route
-          path="/actividad/n-final"
-          element={<ActividadNFinalPage />}
-        />
-
-        <Route
-          path="/lecciones/p"
-          element={<LeccionPPage />}
-        />
-
-        <Route
-          path="/actividad/p-sonidos"
-          element={<ActividadPSonidosPage />}
-        />
-
-        <Route
-          path="/actividad/p-silabas"
-          element={<ActividadPSilabasPage />}
-        />
-
-        <Route
-          path="/actividad/p-completar"
-          element={<ActividadPCompletarPage />}
-        />
-
-        <Route
-          path="/actividad/p-final"
-          element={<ActividadPFinalPage />}
-        />
-
-        <Route
-          path="/actividad/y-formar-parejas"
-          element={<ActividadYParejasPage />}
-        />
-
-        <Route
-          path="/actividad/y-unir-imagenes"
-          element={<ActividadYUnirImagenesPage />}
-        />
-
-        <Route
-          path="/actividad/y-final"
-          element={<ActividadYFinalPage />}
-        />
-
-        <Route
-          path="/actividad/palabras-practica"
-          element={<PalabrasPracticaPage />}
-        />
-
-        <Route
-          path="/unidad-2/repaso"
-          element={<RepasoUnidad2Page />}
-        />
-        <Route
-          path="/unidad-2/subidas-resbalones"
-          element={<SubidasResbalonesPage />}
-        />
-        <Route
-          path="/lecciones/d"
-          element={<LeccionDPage />}
-        />
-
-        <Route
-          path="/actividad/d-imagenes"
-          element={<ActividadDImagenesPage />}
-        />
-
-        <Route
-          path="/actividad/d-silabas"
-          element={<ActividadDSilabasPage />}
-        />
-
-        <Route
-          path="/actividad/d-completar"
-          element={<ActividadDCompletarPage />}
-        />
-
-        <Route
-          path="/actividad/d-final"
-          element={<ActividadDFinalPage />}
-        />
-
-        <Route
-          path="/lecciones/c"
-          element={<LeccionCPage />}
-        />
-
-        <Route
-          path="/actividad/c-sonidos"
-          element={<ActividadCSonidosPage />}
-        />
-
-        <Route
-          path="/actividad/c-silabas"
-          element={<ActividadCSilabasPage />}
-        />
-
-        <Route
-          path="/actividad/c-completar"
-          element={<ActividadCCompletarPage />}
-        />
-
-        <Route
-          path="/actividad/c-final"
-          element={<ActividadCFinalPage />}
-        />
-
-        <Route
-          path="/lecciones/q"
-          element={<LeccionQPage />}
-        />
-
-        <Route
-          path="/actividad/q-sonidos"
-          element={<ActividadQSonidosPage />}
-        />
-
-        <Route
-          path="/actividad/q-silabas"
-          element={<ActividadQSilabasPage />}
-        />
-
-        <Route
-          path="/actividad/q-completar"
-          element={<ActividadQCompletarPage />}
-        />
-
-        <Route
-          path="/actividad/q-final"
-          element={<ActividadQFinalPage />}
-        />
-
-        <Route
-          path="/lecciones/b"
-          element={<LeccionBPage />}
-        />
-
-        <Route
-          path="/actividad/b-sonidos"
-          element={<ActividadBSonidosPage />}
-        />
-
-        <Route
-          path="/actividad/b-silabas"
-          element={<ActividadBSilabasPage />}
-        />
-
-        <Route
-          path="/actividad/b-completar"
-          element={<ActividadBCompletarPage />}
-        />
-
-        <Route
-          path="/actividad/b-final"
-          element={<ActividadBFinalPage />}
-        />
-
-        <Route
-          path="/lecciones/tr"
-          element={<LeccionTrPage />}
-        />
-
-        <Route
-          path="/actividad/tr-sonidos"
-          element={<ActividadTrSonidosPage />}
-        />
-
-        <Route
-          path="/actividad/tr-silabas"
-          element={<ActividadTrSilabasPage />}
-        />
-
-        <Route
-          path="/actividad/tr-completar"
-          element={<ActividadTrCompletarPage />}
-        />
-
-        <Route
-          path="/lecciones/pl"
-          element={<LeccionPlPage />}
-        />
-
-        <Route
-          path="/actividad/pl-sonidos"
-          element={<ActividadPlSonidosPage />}
-        />
-
-        <Route
-          path="/actividad/pl-silabas"
-          element={<ActividadPlSilabasPage />}
-        />
-
-        <Route
-          path="/actividad/pl-final"
-          element={<ActividadPlFinalPage />}
-        />
-
-        <Route
-          path="/lecciones/silabas-inversas"
-          element={<LeccionSilabasInversasPage />}
-        />
-
-        <Route
-          path="/actividad/silabas-inversas-l"
-          element={<ActividadSilabasInversasLPage />}
-        />
-
-        <Route
-          path="/actividad/silabas-inversas-s"
-          element={<ActividadSilabasInversasSPage />}
-        />
-
-        <Route
-          path="/actividad/silabas-inversas-n"
-          element={<ActividadSilabasInversasNPage />}
-        />
-
-        
-        <Route
-          path="/lecciones/pr"
-          element={<LeccionPrPage />}
-        />
-        <Route
-          path="/actividad/pr-sonidos"
-          element={<ActividadPrSonidosPage />}
-        />
-        <Route
-          path="/actividad/pr-silabas"
-          element={<ActividadPrSilabasPage />}
-        />
-        <Route
-          path="/actividad/pr-final"
-          element={<ActividadPrFinalPage />}
-        />
-
-
-        <Route
-          path="/lecciones/bl"
-          element={<LeccionBlPage />}
-        />
-
-
-        <Route
-          path="/lecciones/:lessonId"
-          element={<LessonDetailPage />}
-        />
-
-        <Route
-          path="/actividad/vocales-inicial"
-          element={<ActividadVocalesPage />}
-        />
-
-        <Route
-          path="/actividad/:activityId"
-          element={<ActivityPage />}
-        />
-
-        <Route path="/progreso" element={<ProgressPage />} />
-        <Route path="*" element={<NotFoundPage />} />
+          <Route path="/" element={<LoginPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/welcome" element={<WelcomePage />} />
+          <Route path="/home" element={<HomePage />} />
+
+          <Route path="/lecciones" element={<LessonsPage />} />
+
+          <Route
+            path="/lecciones/unidad/:unitId"
+            element={<UnitLessonsPage />}
+          />
+
+          <Route
+            path="/lecciones/vocales"
+            element={<LeccionVocalesPage />}
+          />
+          <Route
+            path="/lecciones/m"
+            element={<LeccionMPage />}
+          />
+
+          <Route
+            path="/actividad/m-sonidos"
+            element={<ActividadMSonidosPage />}
+          />
+
+          <Route
+            path="/actividad/m-silabas"
+            element={<ActividadMSilabasPage />}
+          />
+
+          <Route
+            path="/actividad/m-completar"
+            element={<ActividadMCompletarPage />}
+          />
+
+          <Route
+            path="/actividad/m-final"
+            element={<ActividadMFinalPage />}
+          />
+
+          <Route
+            path="/lecciones/s"
+            element={<LeccionSPage />}
+          />
+
+          <Route
+            path="/actividad/s-sonidos"
+            element={<ActividadSSonidosPage />}
+          />
+
+          <Route
+            path="/actividad/s-silabas"
+            element={<ActividadSSilabasPage />}
+          />
+
+          <Route
+            path="/actividad/s-completar"
+            element={<ActividadSCompletarPage />}
+          />
+
+          <Route
+            path="/actividad/s-final"
+            element={<ActividadSFinalPage />}
+          />
+
+          <Route
+            path="/lecciones/r"
+            element={<LeccionRPage />}
+          />
+
+          <Route
+            path="/actividad/r-silabas"
+            element={<ActividadRSilabasPage />}
+          />
+
+          <Route
+            path="/actividad/r-sonidos"
+            element={<ActividadRSonidosPage />}
+          />
+
+          <Route
+            path="/actividad/r-final"
+            element={<ActividadRFinalPage />}
+          />
+
+          <Route
+            path="/lecciones/t"
+            element={<LeccionTPage />}
+          />
+
+          <Route
+            path="/actividad/t-sonidos"
+            element={<ActividadTSonidosPage />}
+          />
+
+          <Route
+            path="/actividad/t-completar"
+            element={<ActividadTCompletarPage />}
+          />
+
+          <Route
+            path="/actividad/t-silabas"
+            element={<ActividadTSilabasPage />}
+          />
+
+          <Route
+            path="/actividad/t-final"
+            element={<ActividadTFinalPage />}
+          />
+
+
+
+          <Route
+            path="/lecciones/y-conjuncion"
+            element={<LeccionYPage />}
+          />
+
+          <Route
+            path="/lecciones/l"
+            element={<LeccionLPage />}
+          />
+
+          <Route
+            path="/actividad/l-imagenes"
+            element={<ActividadLImagenesPage />}
+          />
+
+          <Route
+            path="/actividad/l-silabas"
+            element={<ActividadLSilabasPage />}
+          />
+
+          <Route
+            path="/actividad/l-completar"
+            element={<ActividadLCompletarPage />}
+          />
+
+          <Route
+            path="/actividad/l-final"
+            element={<ActividadLFinalPage />}
+          />
+
+          <Route
+            path="/lecciones/n"
+            element={<LeccionNPage />}
+          />
+
+          <Route
+            path="/actividad/n-imagenes"
+            element={<ActividadNImagenesPage />}
+          />
+
+          <Route
+            path="/actividad/n-silabas"
+            element={<ActividadNSilabasPage />}
+          />
+
+          <Route
+            path="/actividad/n-completar"
+            element={<ActividadNCompletarPage />}
+          />
+
+          <Route
+            path="/actividad/n-final"
+            element={<ActividadNFinalPage />}
+          />
+
+          <Route
+            path="/lecciones/p"
+            element={<LeccionPPage />}
+          />
+
+          <Route
+            path="/actividad/p-sonidos"
+            element={<ActividadPSonidosPage />}
+          />
+
+          <Route
+            path="/actividad/p-silabas"
+            element={<ActividadPSilabasPage />}
+          />
+
+          <Route
+            path="/actividad/p-completar"
+            element={<ActividadPCompletarPage />}
+          />
+
+          <Route
+            path="/actividad/p-final"
+            element={<ActividadPFinalPage />}
+          />
+
+          <Route
+            path="/actividad/y-formar-parejas"
+            element={<ActividadYParejasPage />}
+          />
+
+          <Route
+            path="/actividad/y-unir-imagenes"
+            element={<ActividadYUnirImagenesPage />}
+          />
+
+          <Route
+            path="/actividad/y-final"
+            element={<ActividadYFinalPage />}
+          />
+
+          <Route
+            path="/actividad/palabras-practica"
+            element={<PalabrasPracticaPage />}
+          />
+
+          <Route
+            path="/unidad-2/repaso"
+            element={<RepasoUnidad2Page />}
+          />
+          <Route
+            path="/unidad-2/subidas-resbalones"
+            element={<SubidasResbalonesPage />}
+          />
+          <Route
+            path="/lecciones/d"
+            element={<LeccionDPage />}
+          />
+
+          <Route
+            path="/actividad/d-imagenes"
+            element={<ActividadDImagenesPage />}
+          />
+
+          <Route
+            path="/actividad/d-silabas"
+            element={<ActividadDSilabasPage />}
+          />
+
+          <Route
+            path="/actividad/d-completar"
+            element={<ActividadDCompletarPage />}
+          />
+
+          <Route
+            path="/actividad/d-final"
+            element={<ActividadDFinalPage />}
+          />
+
+          <Route
+            path="/lecciones/c"
+            element={<LeccionCPage />}
+          />
+
+          <Route
+            path="/actividad/c-sonidos"
+            element={<ActividadCSonidosPage />}
+          />
+
+          <Route
+            path="/actividad/c-silabas"
+            element={<ActividadCSilabasPage />}
+          />
+
+          <Route
+            path="/actividad/c-completar"
+            element={<ActividadCCompletarPage />}
+          />
+
+          <Route
+            path="/actividad/c-final"
+            element={<ActividadCFinalPage />}
+          />
+
+          <Route
+            path="/lecciones/q"
+            element={<LeccionQPage />}
+          />
+
+          <Route
+            path="/actividad/q-sonidos"
+            element={<ActividadQSonidosPage />}
+          />
+
+          <Route
+            path="/actividad/q-silabas"
+            element={<ActividadQSilabasPage />}
+          />
+
+          <Route
+            path="/actividad/q-completar"
+            element={<ActividadQCompletarPage />}
+          />
+
+          <Route
+            path="/actividad/q-final"
+            element={<ActividadQFinalPage />}
+          />
+
+          <Route
+            path="/lecciones/b"
+            element={<LeccionBPage />}
+          />
+
+          <Route
+            path="/actividad/b-sonidos"
+            element={<ActividadBSonidosPage />}
+          />
+
+          <Route
+            path="/actividad/b-silabas"
+            element={<ActividadBSilabasPage />}
+          />
+
+          <Route
+            path="/actividad/b-completar"
+            element={<ActividadBCompletarPage />}
+          />
+
+          <Route
+            path="/actividad/b-final"
+            element={<ActividadBFinalPage />}
+          />
+
+          <Route
+            path="/lecciones/tr"
+            element={<LeccionTrPage />}
+          />
+
+          <Route
+            path="/actividad/tr-sonidos"
+            element={<ActividadTrSonidosPage />}
+          />
+
+          <Route
+            path="/actividad/tr-silabas"
+            element={<ActividadTrSilabasPage />}
+          />
+
+          <Route
+            path="/actividad/tr-completar"
+            element={<ActividadTrCompletarPage />}
+          />
+
+          <Route
+            path="/lecciones/pl"
+            element={<LeccionPlPage />}
+          />
+
+          <Route
+            path="/actividad/pl-sonidos"
+            element={<ActividadPlSonidosPage />}
+          />
+
+          <Route
+            path="/actividad/pl-silabas"
+            element={<ActividadPlSilabasPage />}
+          />
+
+          <Route
+            path="/actividad/pl-final"
+            element={<ActividadPlFinalPage />}
+          />
+
+          <Route
+            path="/lecciones/silabas-inversas"
+            element={<LeccionSilabasInversasPage />}
+          />
+
+          <Route
+            path="/actividad/silabas-inversas-l"
+            element={<ActividadSilabasInversasLPage />}
+          />
+
+          <Route
+            path="/actividad/silabas-inversas-s"
+            element={<ActividadSilabasInversasSPage />}
+          />
+
+          <Route
+            path="/actividad/silabas-inversas-n"
+            element={<ActividadSilabasInversasNPage />}
+          />
+
+
+          <Route
+            path="/lecciones/pr"
+            element={<LeccionPrPage />}
+          />
+          <Route
+            path="/actividad/pr-sonidos"
+            element={<ActividadPrSonidosPage />}
+          />
+          <Route
+            path="/actividad/pr-silabas"
+            element={<ActividadPrSilabasPage />}
+          />
+          <Route
+            path="/actividad/pr-final"
+            element={<ActividadPrFinalPage />}
+          />
+
+
+          <Route
+            path="/lecciones/bl"
+            element={<LeccionBlPage />}
+          />
+
+          <Route
+            path="/actividad/bl-sonidos"
+            element={<ActividadBlSonidosPage />}
+          />
+          <Route
+            path="/actividad/bl-silabas"
+            element={<ActividadBlSilabasPage />}
+          />
+
+          <Route
+            path="/actividad/bl-final"
+            element={<ActividadBlFinalPage />}
+          />
+
+          <Route
+            path="/lecciones/j"
+            element={<LeccionJPage />}
+          />
+
+          <Route
+            path="/actividad/j-imagenes"
+            element={<ActividadJImagenesPage />}
+          />
+
+          <Route
+            path="/actividad/j-silabas"
+            element={<ActividadJSilabasPage />}
+          />
+
+          <Route
+            path="/actividad/j-completar"
+            element={<ActividadJCompletarPage />}
+          />
+
+          <Route
+            path="/actividad/j-final"
+            element={<ActividadJFinalPage />}
+          />
+
+
+          <Route
+            path="/lecciones/:lessonId"
+            element={<LessonDetailPage />}
+          />
+
+          <Route
+            path="/actividad/vocales-inicial"
+            element={<ActividadVocalesPage />}
+          />
+
+          <Route
+            path="/actividad/:activityId"
+            element={<ActivityPage />}
+          />
+
+          <Route path="/progreso" element={<ProgressPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </LessonAccessGuard>
     </BrowserRouter>
