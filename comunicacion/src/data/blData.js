@@ -139,6 +139,122 @@ export const blTrabalenguas = [
 // ============================================================
 // ACTIVIDAD DE SÍLABAS
 
+// Fase 1: conocer la combinación BL y sus sílabas
+export const blLetterPresentation = {
+  instructionAudio: '/audio/lecciones/bl/instruccion-letra-bl.mp3',
+  soundAudio: '/audio/lecciones/bl/sonido-bl.mp3',
+  combinations: [
+    { syllable: 'bla', audio: '/audio/lecciones/bl/silaba-bla.mp3' },
+    { syllable: 'ble', audio: '/audio/lecciones/bl/silaba-ble.mp3' },
+    { syllable: 'bli', audio: '/audio/lecciones/bl/silaba-bli.mp3' },
+    { syllable: 'blo', audio: '/audio/lecciones/bl/silaba-blo.mp3' },
+    { syllable: 'blu', audio: '/audio/lecciones/bl/silaba-blu.mp3' },
+  ],
+}
+ 
+// Fase 2: buscar sílabas que contengan la combinación BL
+export const blSyllableSearch = {
+  instructionAudio: '/audio/lecciones/bl/instruccion-buscar-silabas.mp3',
+  targetSyllables: ['bla', 'ble', 'bli', 'blo', 'blu'],
+  options: [
+    { syllable: 'pa', audio: '/audio/lecciones/bl/silaba-pa.mp3' },
+    { syllable: 'bla', audio: '/audio/lecciones/bl/silaba-bla.mp3' },
+    { syllable: 'la', audio: '/audio/lecciones/bl/silaba-la.mp3' },
+    { syllable: 'ble', audio: '/audio/lecciones/bl/silaba-ble.mp3' },
+    { syllable: 'ta', audio: '/audio/lecciones/bl/silaba-ta.mp3' },
+    { syllable: 'bli', audio: '/audio/lecciones/bl/silaba-bli.mp3' },
+    { syllable: 'da', audio: '/audio/lecciones/bl/silaba-da.mp3' },
+    { syllable: 'blo', audio: '/audio/lecciones/bl/silaba-blo.mp3' },
+    { syllable: 'ca', audio: '/audio/lecciones/bl/silaba-ca.mp3' },
+    { syllable: 'blu', audio: '/audio/lecciones/bl/silaba-blu.mp3' },
+    { syllable: 'pla', audio: '/audio/lecciones/bl/silaba-pla.mp3' },
+    { syllable: 'plu', audio: '/audio/lecciones/bl/silaba-plu.mp3' },
+  ],
+}
+ 
+// Fase 3: completar la palabra con la sílaba que falta
+export const blSyllableOptions = ['bla', 'ble', 'bli', 'blo', 'blu']
+ 
+export const blCompletionInstructionAudio =
+  '/audio/lecciones/bl/instruccion-completar-bl.mp3'
+ 
+export const blWordCompletion = [
+  {
+    id: 'bledo',
+    word: 'bledo',
+    pattern: '___do',
+    image: '/images/lecciones/bl/bledo.png',
+    audio: '/audio/lecciones/bl/bledo.mp3',
+    answer: 'ble',
+  },
+  {
+    id: 'blando',
+    word: 'blando',
+    pattern: '___ndo',
+    image: '/images/lecciones/bl/blando.png',
+    audio: '/audio/lecciones/bl/blando.mp3',
+    answer: 'bla',
+  },
+  {
+    id: 'bloque',
+    word: 'bloque',
+    pattern: '___que',
+    image: '/images/lecciones/bl/bloque.png',
+    audio: '/audio/lecciones/bl/bloque.mp3',
+    answer: 'blo',
+  },
+  {
+    id: 'bluson',
+    word: 'blusón',
+    pattern: '___són',
+    image: '/images/lecciones/bl/bluson.png',
+    audio: '/audio/lecciones/bl/bluson.mp3',
+    answer: 'blu',
+  },
+]
+ 
+// Fase 4: el banco de palabras es SIEMPRE el mismo; lo que cambia en cada
+// ronda es la sílaba objetivo y, por lo tanto, qué palabras son correctas
+export const blWordBankInstructionAudio =
+  '/audio/lecciones/bl/instruccion-banco-bl.mp3'
+ 
+export const blWordOptions = [
+  { word: 'pueblo', audio: '/audio/lecciones/bl/pueblo.mp3' },
+  { word: 'roble', audio: '/audio/lecciones/bl/roble.mp3' },
+  { word: 'temblor', audio: '/audio/lecciones/bl/temblor.mp3' },
+  { word: 'doblado', audio: '/audio/lecciones/bl/doblado.mp3' },
+  { word: 'neblina', audio: '/audio/lecciones/bl/neblina.mp3' },
+  { word: 'noble', audio: '/audio/lecciones/bl/noble.mp3' },
+  { word: 'establo', audio: '/audio/lecciones/bl/establo.mp3' },
+]
+ 
+export const blWordSyllableSelection = [
+  {
+    id: 'bla',
+    syllable: 'bla',
+    syllableAudio: '/audio/lecciones/bl/silaba-bla.mp3',
+    answer: ['doblado'],
+  },
+  {
+    id: 'ble',
+    syllable: 'ble',
+    syllableAudio: '/audio/lecciones/bl/silaba-ble.mp3',
+    answer: ['roble', 'noble'],
+  },
+  {
+    id: 'bli',
+    syllable: 'bli',
+    syllableAudio: '/audio/lecciones/bl/silaba-bli.mp3',
+    answer: ['neblina'],
+  },
+  {
+    id: 'blo',
+    syllable: 'blo',
+    syllableAudio: '/audio/lecciones/bl/silaba-blo.mp3',
+    answer: ['pueblo', 'temblor', 'establo'],
+  },
+]
+ 
 
 // ACTIVIDAD FINAL
  

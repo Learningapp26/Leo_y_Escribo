@@ -100,6 +100,7 @@ import LessonAccessGuard from '../components/navigation/LessonAccessGuard'
 
 import LeccionBlPage from '../pages/LeccionBlPage'
 import ActividadBlSonidosPage from '../pages/ActividadBlSonidosPage'
+import ActividadBlSilabasPage from '../pages/ActividadBlSilabasPage'
 
 function AppRouter() {
   return (
@@ -489,6 +490,10 @@ function AppRouter() {
         <Route
           path="/actividad/bl-sonidos"
           element={<ActividadBlSonidosPage />}
+        />
+        <Route
+          path="/actividad/bl-silabas"
+          element={<ActividadBlSilabasPage />}
         />
 
 
