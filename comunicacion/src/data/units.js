@@ -124,7 +124,7 @@ export const units = [
         id: 'b',
         title: 'Letra B',
         route: '/lecciones/b',
-        available: false,
+        available: true,
       },
       {
         id: 'j',
