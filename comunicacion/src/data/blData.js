@@ -302,37 +302,37 @@ export const blSyllableJoin = [
   },
   {
     id: 'estable',
-    word: 'primer',
-    pattern: '___mer',
-    wordAudio: '/audio/lecciones/pr/primer.mp3',
+    word: 'estable',
+    pattern: 'esta___',
+    wordAudio: '/audio/lecciones/bl/estable.mp3',
     options: [
       {
-        syllable: 'pri',
-        audio: '/audio/lecciones/pr/silaba-pri.mp3',
-        isCorrect: true,
+        syllable: 'bli',
+        audio: '/audio/lecciones/bl/silaba-bli.mp3',
+        isCorrect: false,
       },
       {
-        syllable: 'pre',
-        audio: '/audio/lecciones/pr/silaba-pre.mp3',
-        isCorrect: false,
+        syllable: 'ble',
+        audio: '/audio/lecciones/bl/silaba-ble.mp3',
+        isCorrect: true,
       },
     ],
   },
   {
     id: 'mueble',
     word: 'mueble',
-    pattern: '___mer',
-    wordAudio: '/audio/lecciones/pr/primer.mp3',
+    pattern: 'mue___',
+    wordAudio: '/audio/lecciones/pr/mueble.mp3',
     options: [
       {
-        syllable: 'pri',
-        audio: '/audio/lecciones/pr/silaba-pri.mp3',
-        isCorrect: true,
+        syllable: 'bli',
+        audio: '/audio/lecciones/bl/silaba-bli.mp3',
+        isCorrect: false,
       },
       {
-        syllable: 'pre',
-        audio: '/audio/lecciones/pr/silaba-pre.mp3',
-        isCorrect: false,
+        syllable: 'ble',
+        audio: '/audio/lecciones/bl/silaba-ble.mp3',
+        isCorrect: true,
       },
     ],
   },
@@ -348,7 +348,7 @@ export const blWordJoin = [
   {
     id: 'oracion1bl',
     sentence: 'Pablo está en el pueblo.',
-    options: ['el.', 'pueblo.', 'en', 'Pablo', 'está'],
+    options: ['el', 'pueblo.', 'en', 'Pablo', 'está'],
   },
   {
     id: 'oracion2bl',
@@ -358,6 +358,6 @@ export const blWordJoin = [
   {
     id: 'oracion3bl',
     sentence: 'Beto dobla el cable.',
-    options: ['el.', 'Beto', 'dobla', 'cable.'],
+    options: ['el', 'Beto', 'dobla', 'cable.'],
   },
 ]
