@@ -1,8 +1,10 @@
-/* lesson-tr.css — más espacio y tamaño para la lección TR, a modo de
-   prueba (pidió la usuaria). Todo va dentro de .lesson-tr para no tocar
-   selection.css/completion.css/syllables.css, que usan las demás
-   lecciones. Si funciona bien, se puede llevar a los estilos
-   compartidos más adelante. */
+/* lesson-tr.css — decisión intencional, ya validada con la usuaria (no es
+   deuda técnica pendiente): TR necesitaba más espacio/tamaño e íconos de
+   color (naranja/celeste) que ninguna otra lección usa todavía. En vez
+   de tocar selection.css/completion.css/syllables.css (que sí usan
+   todas las demás lecciones), se probó primero solo en TR. Si el
+   resultado se aprueba para el resto del proyecto, ahí sí se lleva a
+   los estilos compartidos; hasta entonces, se queda aparte a propósito. */
 
 .lesson-tr .selection-card,
 .lesson-tr .completion-card,
@@ -100,6 +102,7 @@
 
 .tr-position-example-row {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: var(--space-md);
   font-family: var(--font-content);

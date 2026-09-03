@@ -252,7 +252,7 @@ function ActividadTrCompletarPage() {
             className="selection-feedback selection-feedback--retry"
             role="status"
           >
-            Esas sílabas no forman {exercise.word}. Inténtalo de nuevo.
+            Ese orden no forma la palabra correcta. Inténtalo de nuevo.
           </p>
         )}
 
