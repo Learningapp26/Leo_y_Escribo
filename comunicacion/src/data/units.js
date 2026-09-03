@@ -145,6 +145,12 @@ export const units = [
         available: true,
       },
       {
+        id: 'domino-palabras',
+        title: 'Dominó de palabras',
+        route: '/unidad-3/domino-palabras',
+        available: true,
+      },
+      {
         id: 'br',
         title: 'Combinación BR',
         route: '/lecciones/br',

@@ -1,0 +1,78 @@
+.domino-page {
+  gap: var(--space-lg);
+  background:
+    radial-gradient(circle at 8% 20%, color-mix(in srgb, var(--lesson-secondary) 24%, transparent) 0 0.45rem, transparent 0.5rem),
+    radial-gradient(circle at 92% 82%, color-mix(in srgb, var(--lesson-accent) 34%, transparent) 0 0.35rem, transparent 0.4rem),
+    var(--lesson-background);
+  background-size: 3rem 3rem, 2.4rem 2.4rem, auto;
+}
+
+.domino-header,
+.domino-progress,
+.domino-chain-card,
+.domino-bank-card,
+.domino-finish-card { width: min(100%, 74rem); margin-inline: auto; }
+
+.domino-header {
+  padding: var(--space-xl);
+  border: 2px solid var(--lesson-border);
+  border-radius: var(--radius-lg);
+  background: var(--lesson-surface);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+
+.domino-header h1 { margin-block: var(--space-xs) var(--space-sm); }
+.domino-progress { padding: var(--space-sm) var(--space-md); border-radius: var(--radius-md); background: color-mix(in srgb, var(--lesson-surface) 88%, var(--lesson-secondary)); }
+.domino-progress .progress-bar__fill { background: var(--lesson-primary); }
+.domino-chain-card, .domino-bank-card, .domino-finish-card { border: 2px solid var(--lesson-border); }
+.domino-chain-card { background: linear-gradient(135deg, var(--lesson-surface), color-mix(in srgb, var(--lesson-secondary) 22%, var(--lesson-surface))); }
+
+.domino-chain-card__heading,
+.domino-bank-card__heading { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); }
+.domino-chain-card__heading > svg { width: 2.5rem; height: 2.5rem; color: var(--lesson-primary); }
+.domino-chain-card__heading h2, .domino-bank-card__heading h2 { margin-top: var(--space-xs); }
+
+.domino-chain,
+.domino-bank { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: var(--space-md); width: 100%; }
+.domino-chain { padding: var(--space-sm); }
+
+.domino-tile {
+  display: grid;
+  min-width: 0;
+  min-height: 8.5rem;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  border: 3px solid var(--lesson-primary);
+  border-radius: var(--radius-md);
+  background: var(--lesson-surface);
+  box-shadow: 0 0.25rem 0 color-mix(in srgb, var(--lesson-primary) 25%, transparent);
+}
+
+.domino-tile__image-side,
+.domino-tile__word-side { display: flex; align-items: center; justify-content: center; min-width: 0; padding: var(--space-sm); }
+.domino-tile__image-side { border-right: 2px dashed color-mix(in srgb, var(--lesson-primary) 55%, var(--lesson-surface)); background: color-mix(in srgb, var(--lesson-secondary) 38%, var(--lesson-surface)); }
+.domino-tile__image-side img { width: 100%; height: 6.2rem; object-fit: contain; }
+.domino-tile__word-side { color: var(--lesson-text); font-family: var(--font-content); font-size: clamp(1.2rem, 3vw, 1.65rem); font-weight: var(--font-weight-black); overflow-wrap: anywhere; text-align: center; }
+
+.domino-tile--available { cursor: pointer; transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition); }
+.domino-tile--available:hover, .domino-tile--available:focus-visible { border-color: var(--lesson-text); transform: translateY(-0.25rem); box-shadow: 0 0.5rem 0 color-mix(in srgb, var(--lesson-primary) 28%, transparent); }
+.domino-tile--incorrect { border-color: var(--color-retry); animation: domino-tile-shake 360ms ease-in-out; }
+
+.domino-feedback { display: flex; align-items: center; justify-content: center; gap: var(--space-sm); min-height: 3.6rem; padding: var(--space-sm) var(--space-md); border-radius: var(--radius-md); color: var(--lesson-text); background: color-mix(in srgb, var(--lesson-secondary) 26%, var(--lesson-surface)); font-family: var(--font-ui); font-weight: var(--font-weight-bold); text-align: center; }
+.domino-feedback--correct { color: #ffffff; background: var(--color-success); }
+.domino-feedback--retry { background: var(--color-retry); }
+.domino-feedback svg { width: 1.4rem; height: 1.4rem; flex-shrink: 0; }
+
+.domino-finish-card { align-items: center; max-width: 44rem; margin-block: auto; text-align: center; }
+.domino-finish-card > svg { width: 5rem; height: 5rem; color: var(--color-reward); }
+
+@keyframes domino-tile-shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-0.35rem); } 75% { transform: translateX(0.35rem); } }
+
+@media (max-width: 620px) {
+  .domino-page { padding-inline: var(--space-sm); }
+  .domino-header { padding: var(--space-lg) var(--space-md); }
+  .domino-chain-card__heading, .domino-bank-card__heading { align-items: flex-start; flex-direction: column; }
+  .domino-bank-card__heading .btn { width: 100%; }
+  .domino-chain, .domino-bank { grid-template-columns: 1fr; }
+}

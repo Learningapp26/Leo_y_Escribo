@@ -55,6 +55,7 @@ import ActividadPFinalPage from '../pages/ActividadPFinalPage'
 import PalabrasPracticaPage from '../pages/PalabrasPracticaPage'
 import RepasoUnidad2Page from '../pages/RepasoUnidad2Page'
 import SubidasResbalonesPage from '../pages/SubidasResbalonesPage'
+import DominoPalabrasPage from '../pages/DominoPalabrasPage'
 
 import LeccionCPage from '../pages/LeccionCPage'
 import ActividadCSonidosPage from '../pages/ActividadCSonidosPage'
@@ -340,6 +341,10 @@ function AppRouter() {
           <Route
             path="/unidad-2/subidas-resbalones"
             element={<SubidasResbalonesPage />}
+          />
+          <Route
+            path="/unidad-3/domino-palabras"
+            element={<DominoPalabrasPage />}
           />
           <Route
             path="/lecciones/d"

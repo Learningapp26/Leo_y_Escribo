@@ -22,6 +22,7 @@ export const LESSON_UNIT_MAP = {
   j: 3,
   tr: 3,
   bl: 3,
+  'domino-palabras': 3,
   br: 3,
   ch: 3,
   cl: 4,

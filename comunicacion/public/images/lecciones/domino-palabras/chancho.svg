@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" role="img" aria-labelledby="title desc">
+  <title id="title">Chancho rosado</title><desc id="desc">Ilustración de un chancho rosado sonriente.</desc>
+  <rect width="240" height="180" rx="28" fill="#FFE1E8"/>
+  <path d="M46 104c0-37 33-61 83-61 42 0 73 21 73 56 0 30-24 49-63 49H82c-21 0-36-18-36-44Z" fill="#F38BA8" stroke="#C95B7C" stroke-width="6"/>
+  <path d="M61 70 39 48c-8 17-1 35 15 42M173 65l22-22c7 18-1 34-16 41" fill="#F38BA8" stroke="#C95B7C" stroke-linejoin="round" stroke-width="6"/>
+  <ellipse cx="193" cy="103" rx="30" ry="23" fill="#FFB5C5" stroke="#C95B7C" stroke-width="5"/><circle cx="183" cy="103" r="4" fill="#7C3653"/><circle cx="204" cy="103" r="4" fill="#7C3653"/>
+  <circle cx="156" cy="72" r="7" fill="#243B53"/><circle cx="158" cy="70" r="2" fill="#FFFDF9"/><path d="M151 90c6 8 16 9 23 2" fill="none" stroke="#7C3653" stroke-linecap="round" stroke-width="4"/>
+  <path d="M78 140v17M117 143v14M157 139v18" stroke="#C95B7C" stroke-linecap="round" stroke-width="10"/><path d="m46 108-17 11 18 9" fill="none" stroke="#C95B7C" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"/>
+</svg>
