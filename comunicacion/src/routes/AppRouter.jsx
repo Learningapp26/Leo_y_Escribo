@@ -117,6 +117,12 @@ import ActividadJSilabasPage from '../pages/ActividadJSilabasPage'
 import ActividadJCompletarPage from '../pages/ActividadJCompletarPage'
 import ActividadJFinalPage from '../pages/ActividadJFinalPage'
 
+import LeccionChPage from '../pages/LeccionChPage'
+import ActividadChSonidosPage from '../pages/ActividadChSonidosPage'
+import ActividadChSilabasPage from '../pages/ActividadChSilabasPage'
+import ActividadChCompletarPage from '../pages/ActividadChCompletarPage'
+import ActividadChFinalPage from '../pages/ActividadChFinalPage'
+
 function AppRouter() {
   return (
     <BrowserRouter>
@@ -572,6 +578,31 @@ function AppRouter() {
           <Route
             path="/actividad/j-final"
             element={<ActividadJFinalPage />}
+          />
+
+          <Route
+            path="/lecciones/ch"
+            element={<LeccionChPage />}
+          />
+
+          <Route
+            path="/actividad/ch-sonidos"
+            element={<ActividadChSonidosPage />}
+          />
+
+          <Route
+            path="/actividad/ch-silabas"
+            element={<ActividadChSilabasPage />}
+          />
+
+          <Route
+            path="/actividad/ch-completar"
+            element={<ActividadChCompletarPage />}
+          />
+
+          <Route
+            path="/actividad/ch-final"
+            element={<ActividadChFinalPage />}
           />
 
 

@@ -166,7 +166,7 @@ export const units = [
         id: 'ch',
         title: 'Combinación CH',
         route: '/lecciones/ch',
-        available: false,
+        available: true,
       },
     ],
   },
