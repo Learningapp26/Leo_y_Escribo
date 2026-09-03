@@ -12,8 +12,10 @@ import {
   trInitialSoundImages,
   trInitialSoundInstructionAudio,
   trSoundExamples,
+  trSoundExamplesInstructionAudio,
   trSoundIntro,
   trTongueTwisters,
+  trTongueTwistersInstructionAudio,
 } from '../data/trData'
 import { playAudio } from '../lib/audioPlayer'
 import { registrarProgreso } from '../lib/progreso'
@@ -190,9 +192,19 @@ function ActividadTrSonidosPage() {
 
       {phase === 'palabras' && (
         <Card className="selection-card">
-          <p className="text-instruction">
-            Escucha y repite: trabajo, trenza y tripa.
-          </p>
+          <div className="selection-instructions">
+            <p className="text-instruction">
+              Escucha y repite: trabajo, trenza y tripa.
+            </p>
+
+            <Button
+              variant="audio"
+              icon={Volume2}
+              onClick={() => playAudio(trSoundExamplesInstructionAudio)}
+            >
+              Escuchar instrucción
+            </Button>
+          </div>
 
           <div className="selection-options">
             {trSoundExamples.map((example) => (
@@ -229,9 +241,19 @@ function ActividadTrSonidosPage() {
 
       {phase === 'trabalenguas' && (
         <Card className="selection-card">
-          <p className="text-instruction">
-            Ahora escucha estos trabalenguas con tu maestra o maestro.
-          </p>
+          <div className="selection-instructions">
+            <p className="text-instruction">
+              Ahora escucha estos trabalenguas con tu maestra o maestro.
+            </p>
+
+            <Button
+              variant="audio"
+              icon={Volume2}
+              onClick={() => playAudio(trTongueTwistersInstructionAudio)}
+            >
+              Escuchar instrucción
+            </Button>
+          </div>
 
           <div className="selection-options">
             {trTongueTwisters.map((item) => (

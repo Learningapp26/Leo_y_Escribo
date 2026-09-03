@@ -34,6 +34,9 @@ export const trSoundIntro = {
   soundAudio: '/audio/lecciones/tr/sonido-tr.mp3',
 }
 
+export const trSoundExamplesInstructionAudio =
+  '/audio/lecciones/tr/instruccion-palabras-tr.mp3'
+
 export const trSoundExamples = [
   {
     word: 'trabajo',
@@ -54,6 +57,9 @@ export const trSoundExamples = [
 
 // Trabalenguas de la página 110, solo para escuchar y repetir con la
 // maestra (no se califican).
+export const trTongueTwistersInstructionAudio =
+  '/audio/lecciones/tr/instruccion-trabalenguas-tr.mp3'
+
 export const trTongueTwisters = [
   {
     id: 'tigres',
@@ -148,9 +154,11 @@ export const trAnywhereSoundImages = [
 // ACTIVIDAD 2 — SÍLABAS tra, tre, tri, tro, tru (página 111)
 
 export const trLetterPresentation = {
+  instructionAudio: '/audio/lecciones/tr/instruccion-letra-tr.mp3',
   soundAudio: '/audio/lecciones/tr/sonido-tr.mp3',
   word: {
     name: 'tren',
+    instructionAudio: '/audio/lecciones/tr/instruccion-palabra-tren.mp3',
     image: '/images/lecciones/tr/tren.png',
     audio: '/audio/lecciones/tr/tren.mp3',
   },
@@ -210,10 +218,19 @@ export const trPositionInstructionAudio =
   '/audio/lecciones/tr/instruccion-posicion-tr.mp3'
 
 // Los dos ejemplos ya resueltos en el libro (círculo relleno), se
-// muestran fijos y no se responden.
+// muestran fijos y no se responden. explanationAudio explica en voz por
+// qué ese color, para reforzar el texto (pedido en QA).
 export const trPositionExamples = [
-  { word: 'trapo', answer: 'inicio' },
-  { word: 'controla', answer: 'despues' },
+  {
+    word: 'trapo',
+    answer: 'inicio',
+    explanationAudio: '/audio/lecciones/tr/explicacion-trapo-naranja.mp3',
+  },
+  {
+    word: 'controla',
+    answer: 'despues',
+    explanationAudio: '/audio/lecciones/tr/explicacion-controla-celeste.mp3',
+  },
 ]
 
 export const trPositionWords = [

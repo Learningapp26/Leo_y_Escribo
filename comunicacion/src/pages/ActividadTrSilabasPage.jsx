@@ -123,10 +123,20 @@ function ActividadTrSilabasPage() {
 
       {phase === 'letra' && (
         <Card className="syllables-card">
-          <p className="text-instruction">
-            Conoce las letras t y r juntas. Toca cada combinación para
-            escucharla.
-          </p>
+          <div className="selection-instructions">
+            <p className="text-instruction">
+              Conoce las letras t y r juntas. Toca cada combinación para
+              escucharla.
+            </p>
+
+            <Button
+              variant="audio"
+              icon={Volume2}
+              onClick={() => playAudio(trLetterPresentation.instructionAudio)}
+            >
+              Escuchar instrucción
+            </Button>
+          </div>
 
           <div className="selection-options">
             <span className="text-letter">Tr</span>
@@ -169,9 +179,19 @@ function ActividadTrSilabasPage() {
 
       {phase === 'palabra' && (
         <Card className="syllables-card">
-          <p className="text-instruction">
-            Ahora escucha esta palabra con tr.
-          </p>
+          <div className="selection-instructions">
+            <p className="text-instruction">
+              Ahora escucha esta palabra con tr.
+            </p>
+
+            <Button
+              variant="audio"
+              icon={Volume2}
+              onClick={() => playAudio(trLetterPresentation.word.instructionAudio)}
+            >
+              Escuchar instrucción
+            </Button>
+          </div>
 
           <img
             className="selection-image selection-image--featured"
@@ -331,10 +351,9 @@ function ActividadTrSilabasPage() {
         <Card className="selection-card">
           <div className="selection-instructions">
             <p className="text-instruction">
-              Lee cada palabra despacio. Si la palabra <strong>empieza</strong>{' '}
-              con tr, toca el círculo naranja. Si tr está en{' '}
-              <strong>medio o al final</strong> de la palabra (no al
-              principio), toca el círculo celeste. Mira los ejemplos.
+              Lee la palabra. ¿Empieza con <strong>tr</strong>? Toca
+              naranja. ¿Está en <strong>medio o al final</strong>? Toca
+              celeste.
             </p>
 
             <Button
@@ -387,6 +406,14 @@ function ActividadTrSilabasPage() {
                     ? '— la palabra empieza con tr, por eso es naranja'
                     : '— tr está en medio de la palabra, no al principio, por eso es celeste'}
                 </span>
+
+                <Button
+                  variant="audio"
+                  icon={Volume2}
+                  onClick={() => playAudio(example.explanationAudio)}
+                >
+                  Escuchar
+                </Button>
               </p>
             ))}
           </div>
