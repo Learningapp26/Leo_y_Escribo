@@ -240,3 +240,199 @@ export const wordPracticeGroups = [
     },
   },
 ]
+
+export const unit1WordPracticeConfig = {
+  groups: wordPracticeGroups,
+  practiceId: 'repaso-unidad-1',
+  title: 'Repaso de la Unidad 1',
+  unitLabel: 'Unidad 1 · Práctica de lectura',
+  intro: 'Elige una letra. Lee las palabras y completa los retos.',
+}
+
+export const unit3WordPracticeId = 'repaso-unidad-3'
+
+const unit3WordLists = [
+  {
+    lessonId: 'b',
+    label: 'B b',
+    title: 'Palabras con B b',
+    coverImage: '/images/lecciones/b/lectura-bananos-balu.png',
+    coverAlt: 'Balú junto a unos bananos.',
+    words: [
+      'beso', 'bate', 'barco', 'bajo', 'banca', 'bebida', 'bomba', 'burla',
+      'búsqueda', 'burbuja', 'Benito', 'boca', 'balón', 'bonito', 'balsa',
+      'banda', 'bombero', 'borde', 'bulto', 'barato', 'bicho', 'banano',
+    ],
+    find: {
+      prompt: 'Marca las palabras que empiezan con B.',
+      options: [
+        ['beso', true], ['barco', true], ['burbuja', true],
+        ['noble', false], ['tren', false], ['jalea', false],
+      ],
+    },
+    shortest: { answer: 'bajo', options: ['bajo', 'bonito', 'búsqueda'] },
+    syllables: { word: 'burbuja', parts: ['bur', 'bu', 'ja'], options: [2, 3, 4] },
+  },
+  {
+    lessonId: 'bl',
+    label: 'bl',
+    title: 'Palabras con bl',
+    coverImage: '/images/lecciones/bl/regalo-misterioso.png',
+    coverAlt: 'Una blusa como regalo misterioso.',
+    words: [
+      'noble', 'blusa', 'tabla', 'potable', 'temblor', 'posible', 'público',
+      'bloque', 'bledo', 'blando', 'doblar', 'blanco', 'neblina', 'blancura',
+    ],
+    find: {
+      prompt: 'Marca las palabras que empiezan con bl.',
+      options: [
+        ['blusa', true], ['bloque', true], ['blanco', true],
+        ['tabla', false], ['noble', false], ['doblar', false],
+      ],
+    },
+    shortest: { answer: 'blusa', options: ['blusa', 'posible', 'temblor'] },
+    syllables: { word: 'neblina', parts: ['ne', 'bli', 'na'], options: [2, 3, 4] },
+  },
+  {
+    lessonId: 'br',
+    label: 'br',
+    title: 'Palabras con br',
+    words: [
+      'brisa', 'brasa', 'brócoli', 'bruja', 'abril', 'sabroso', 'sombra',
+      'brecha', 'broma', 'sobra', 'libre', 'alumbrar', 'palabra', 'nombre',
+    ],
+    find: {
+      prompt: 'Marca las palabras que empiezan con br.',
+      options: [
+        ['brisa', true], ['brócoli', true], ['broma', true],
+        ['abril', false], ['sombra', false], ['alumbrar', false],
+      ],
+    },
+    shortest: { answer: 'brisa', options: ['brisa', 'brócoli', 'alumbrar'] },
+    syllables: { word: 'brócoli', parts: ['bró', 'co', 'li'], options: [2, 3, 4] },
+  },
+  {
+    lessonId: 'j',
+    label: 'J j',
+    title: 'Palabras con J j',
+    coverImage: '/images/lecciones/j/jirafa.png',
+    coverAlt: 'Una jirafa.',
+    words: [
+      'jamás', 'jalón', 'juntar', 'jinete', 'joroba', 'mojar', 'encajar',
+      'plumaje', 'tarjeta', 'rajado', 'jabón', 'justo', 'Julia', 'jerarca',
+      'caja', 'dejar', 'mejorar', 'sujetar', 'tejado', 'cajero',
+    ],
+    find: {
+      prompt: 'Marca las palabras que empiezan con J.',
+      options: [
+        ['jamás', true], ['juntar', true], ['jinete', true],
+        ['mojar', false], ['encajar', false], ['tejado', false],
+      ],
+    },
+    shortest: { answer: 'justo', options: ['justo', 'tarjeta', 'sujetar'] },
+    syllables: { word: 'tarjeta', parts: ['tar', 'je', 'ta'], options: [2, 3, 4] },
+  },
+  {
+    lessonId: 'ch',
+    label: 'Ch ch',
+    title: 'Palabras con Ch ch',
+    words: [
+      'chico', 'chapa', 'chivo', 'chucho', 'chulo', 'mucho', 'champú',
+      'charla', 'chancla', 'rancho', 'Chepe', 'chicle', 'choque', 'chupar',
+      'chile', 'chiste', 'charco', 'chispa', 'chinche', 'pecho',
+    ],
+    find: {
+      prompt: 'Marca las palabras que empiezan con Ch.',
+      options: [
+        ['chico', true], ['chapa', true], ['chivo', true],
+        ['mucho', false], ['rancho', false], ['pecho', false],
+      ],
+    },
+    shortest: { answer: 'chico', options: ['chico', 'chancla', 'choque'] },
+    syllables: { word: 'chinche', parts: ['chin', 'che'], options: [2, 3, 4] },
+  },
+  {
+    lessonId: 'tr',
+    label: 'tr',
+    title: 'Palabras con tr',
+    coverImage: '/images/lecciones/tr/lectura.png',
+    coverAlt: 'Una familia junto a un tren.',
+    words: [
+      'trapo', 'tren', 'tratar', 'trepar', 'trono', 'tropa', 'triste',
+      'trasto', 'trompeta', 'sastre', 'tripa', 'trotar', 'trabar', 'traje',
+      'truco', 'tronco', 'tres', 'tranquilo', 'trabajo', 'maestra',
+    ],
+    find: {
+      prompt: 'Marca las palabras que empiezan con tr.',
+      options: [
+        ['trapo', true], ['tren', true], ['trompeta', true],
+        ['sastre', false], ['maestra', false], ['bruja', false],
+      ],
+    },
+    shortest: { answer: 'tren', options: ['tren', 'trapo', 'trompeta'] },
+    syllables: { word: 'trompeta', parts: ['trom', 'pe', 'ta'], options: [2, 3, 4] },
+  },
+  {
+    lessonId: 'otras',
+    label: 'Otras palabras',
+    title: 'Otras palabras',
+    coverImage: '/images/lecciones/j/conejo.png',
+    coverAlt: 'Un conejo.',
+    words: [
+      'macho', 'buche', 'rabo', 'mecha', 'entre', 'cajones', 'espejo',
+      'conejo', 'subida', 'entrada', 'reja', 'techo', 'ducha', 'tajada',
+      'paja', 'queja', 'tachado', 'sábado', 'estrecho', 'machucar',
+    ],
+    find: {
+      prompt: 'Marca las palabras que tienen ch.',
+      options: [
+        ['macho', true], ['buche', true], ['mecha', true],
+        ['rabo', false], ['entre', false], ['cajones', false],
+      ],
+    },
+    shortest: { answer: 'rabo', options: ['rabo', 'subida', 'cajones'] },
+    syllables: { word: 'entrada', parts: ['en', 'tra', 'da'], options: [2, 3, 4] },
+  },
+]
+
+const unit3WordsFor = (group) => group.words.map((word, index) => ({
+  id: `${group.lessonId}-${index}`,
+  word,
+}))
+
+export const unit3PracticeGroups = unit3WordLists.map((group) => ({
+  lessonId: group.lessonId,
+  themeId: unit3WordPracticeId,
+  label: group.label,
+  title: group.title,
+  coverImage: group.coverImage,
+  coverAlt: group.coverAlt,
+  words: unit3WordsFor(group),
+  find: {
+    ...group.find,
+    options: group.find.options.map(([word, isTarget], index) => ({
+      id: `${group.lessonId}-find-${index}`,
+      word,
+      isTarget,
+    })),
+  },
+  shortest: group.shortest,
+  syllables: group.syllables,
+}))
+
+export const unit3WordCount = unit3WordLists.reduce(
+  (total, group) => total + group.words.length,
+  0,
+)
+
+export const unit3UniqueWordCount = new Set(
+  unit3WordLists.flatMap((group) => group.words),
+).size
+
+export const unit3WordPracticeConfig = {
+  groups: unit3PracticeGroups,
+  practiceId: unit3WordPracticeId,
+  title: 'Palabras para leer y practicar',
+  unitLabel: 'Unidad 3 · Práctica de lectura',
+  intro: 'Elige un grupo. Lee las palabras y completa los retos.',
+}

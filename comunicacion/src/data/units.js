@@ -151,6 +151,12 @@ export const units = [
         available: true,
       },
       {
+        id: 'repaso-unidad-3',
+        title: 'Palabras para leer y practicar',
+        route: '/unidad-3/palabras-practica',
+        available: true,
+      },
+      {
         id: 'br',
         title: 'Combinación BR',
         route: '/lecciones/br',
