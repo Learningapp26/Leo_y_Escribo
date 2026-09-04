@@ -290,36 +290,45 @@ export const brWordSyllableSelection = [
   },
 
 ]
- 
-// ACTIVIDAD FINAL
- 
-
-// Fase 1: del banco de sílabas tendra que elegir las dos que formen la palabra mostrada
+ // Actividad final
+ // Fase 1: del banco de sílabas hay que elegir las dos que forman la palabra
+// mostrada. El banco es fijo e incluye sílabas que no se usan (distractores).
 export const brJoinInstructionAudio =
   '/audio/lecciones/br/instruccion-formar-br.mp3'
-
-export const brSyllableJoinBank = ['bra', 'li', 'pe' , 'bre', 'nco', 'bri', 'le', 'bro', 'bru', 'pu']
+ 
+export const brSyllableJoinBank = [
+  { syllable: 'bra', audio: '/audio/lecciones/br/silaba-bra.mp3' },
+  { syllable: 'li', audio: '/audio/lecciones/br/silaba-li.mp3' },
+  { syllable: 'pe', audio: '/audio/lecciones/br/silaba-pe.mp3' },
+  { syllable: 'po', audio: '/audio/lecciones/br/silaba-po.mp3' },
+  { syllable: 'bre', audio: '/audio/lecciones/br/silaba-bre.mp3' },
+  { syllable: 'nco', audio: '/audio/lecciones/br/silaba-nco.mp3' },
+  { syllable: 'bri', audio: '/audio/lecciones/br/silaba-bri.mp3' },
+  { syllable: 'le', audio: '/audio/lecciones/br/silaba-le.mp3' },
+  { syllable: 'bro', audio: '/audio/lecciones/br/silaba-bro.mp3' },
+  { syllable: 'bru', audio: '/audio/lecciones/br/silaba-bru.mp3' },
+  { syllable: 'pu', audio: '/audio/lecciones/br/silaba-pu.mp3' },
+]
  
 export const brSyllableJoin = [
   {
     id: 'libro',
     word: 'libro',
     wordAudio: '/audio/lecciones/br/libro.mp3',
-    answers: [ 'li', 'bro'],
+    answers: ['li', 'bro'],
   },
   {
     id: 'pobre',
     word: 'pobre',
     wordAudio: '/audio/lecciones/br/pobre.mp3',
-    answers: [ 'po', 'bre'],
+    answers: ['po', 'bre'],
   },
   {
     id: 'brinco',
     word: 'brinco',
     wordAudio: '/audio/lecciones/br/brinco.mp3',
-    answers: [ 'bri', 'nco'],
+    answers: ['bri', 'nco'],
   },
-
 ]
  
 // Audio de instrucción para la fase 2 (formar oraciones)
@@ -345,3 +354,4 @@ export const brWordJoin = [
     options: ['es', 'brócoli', 'rico.', 'El'],
   },
 ]
+ 
