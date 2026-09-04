@@ -6,11 +6,7 @@ import Card from '../components/common/Card'
 import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
 import StarsCounter from '../components/progress/StarsCounter'
-import {
-  dPracticeWords,
-  dSentenceCompletion,
-  dWordImageMatch,
-} from '../data/dActivities'
+import {dPracticeWords,dSentenceCompletion,dWordImageMatch, } from '../data/dActivities'
 import { getLessonThemeClass } from '../data/lessonColors'
 import { playAudio } from '../lib/audioPlayer'
 import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
@@ -108,7 +104,7 @@ function ActividadDFinalPage() {
           >
             Escuchar felicitación
           </Button>
-          <Button to="/lecciones" icon={ArrowRight} iconPosition="right" size="large" fullWidth>Volver a las lecciones</Button>
+          <Button to="/lecciones/unidad/2" icon={ArrowRight} iconPosition="right" size="large" fullWidth>Volver a las lecciones</Button>
         </Card>
       </main>
     )

@@ -28,7 +28,7 @@ function LeccionCPage() {
     >
       <BackButton
         label="Volver a lecciones"
-        to="/lecciones"
+        to="/lecciones/unidad/2"
       />
 
       <header className="text-center">

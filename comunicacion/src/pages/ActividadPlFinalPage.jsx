@@ -171,7 +171,7 @@ function ActividadPlFinalPage() {
           </Button>
 
           <Button
-            to="/lecciones"
+            to="/lecciones/unidad/2"
             icon={ArrowRight}
             iconPosition="right"
             size="large"

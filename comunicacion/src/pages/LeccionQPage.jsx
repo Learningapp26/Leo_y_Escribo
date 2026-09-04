@@ -1,25 +1,11 @@
 import { useState } from 'react'
-import {
-  ArrowRight,
-  Check,
-  Images,
-  ListMusic,
-  PenLine,
-  RotateCcw,
-  Sparkles,
-  Volume2,
-} from 'lucide-react'
+import {ArrowRight,Check,Images,ListMusic,PenLine,RotateCcw,Sparkles,Volume2,} from 'lucide-react'
 
 import Button from '../components/common/Button'
 import Card from '../components/common/Card'
 import BackButton from '../components/navigation/BackButton'
 import { getLessonThemeClass } from '../data/lessonColors'
-import {
-  qComprehensionQuestions,
-  qOrderInstructionAudio,
-  qOrderScenes,
-  qReading,
-} from '../data/qData'
+import {qComprehensionQuestions,qOrderInstructionAudio,qOrderScenes,qReading,} from '../data/qData'
 import { playAudio } from '../lib/audioPlayer'
 import '../styles/selection.css'
 import '../styles/completion.css'
@@ -72,7 +58,7 @@ function LeccionQPage() {
       className={`page reading-page ${themeClass}`}
       aria-labelledby="q-lesson-title"
     >
-      <BackButton label="Volver a lecciones" to="/lecciones" />
+      <BackButton label="Volver a lecciones" to="/lecciones/unidad/2" />
 
       <header className="text-center">
         <span className="text-ui-label">Unidad 2</span>

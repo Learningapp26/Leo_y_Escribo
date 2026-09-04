@@ -7,12 +7,7 @@ import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
 import StarsCounter from '../components/progress/StarsCounter'
 import { getLessonThemeClass } from '../data/lessonColors'
-import {
-  prJoinInstructionAudio,
-  prSentenceFormation,
-  prSyllableJoin,
-  prWordJoin,
-} from '../data/prData'
+import {prJoinInstructionAudio, prSentenceFormation, prSyllableJoin, prWordJoin,} from '../data/prData'
 import { playAudio } from '../lib/audioPlayer'
 import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
@@ -197,7 +192,7 @@ function ActividadPrFinalPage() {
           </Button>
 
           <Button
-            to="/lecciones"
+            to="/lecciones/unidad/2"
             icon={ArrowRight}
             iconPosition="right"
             size="large"

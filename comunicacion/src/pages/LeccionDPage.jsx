@@ -1,22 +1,11 @@
 import { useState } from 'react'
-import {
-  ArrowRight,
-  Images,
-  ListMusic,
-  PenLine,
-  Sparkles,
-  Volume2,
-} from 'lucide-react'
+import {ArrowRight,Images,ListMusic,PenLine,Sparkles,Volume2,} from 'lucide-react'
 
 import Button from '../components/common/Button'
 import Card from '../components/common/Card'
 import BackButton from '../components/navigation/BackButton'
 import { getLessonThemeClass } from '../data/lessonColors'
-import {
-  dComprehensionQuestions,
-  dOralQuestion,
-  dReading,
-} from '../data/dLectura'
+import {dComprehensionQuestions,dOralQuestion,dReading,} from '../data/dLectura'
 import { playAudio } from '../lib/audioPlayer'
 import '../styles/reading.css'
 
@@ -52,7 +41,7 @@ function LeccionDPage() {
       className={`page reading-page ${themeClass}`}
       aria-labelledby="d-lesson-title"
     >
-      <BackButton label="Volver a lecciones" to="/lecciones" />
+      <BackButton label="Volver a lecciones" to="/lecciones/unidad/2" />
 
       <header className="text-center">
         <span className="text-ui-label">Unidad 2</span>

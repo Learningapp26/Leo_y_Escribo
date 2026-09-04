@@ -1,10 +1,4 @@
-import {
-  ArrowRight,
-  Images,
-  ListMusic,
-  Sparkles,
-  Volume2,
-} from 'lucide-react'
+import {ArrowRight,Images,ListMusic,Sparkles,Volume2,} from 'lucide-react'
 
 import Button from '../components/common/Button'
 import Card from '../components/common/Card'
@@ -22,7 +16,7 @@ function LeccionPlPage() {
       className={`page reading-page ${themeClass}`}
       aria-labelledby="pl-lesson-title"
     >
-      <BackButton label="Volver a lecciones" to="/lecciones" />
+      <BackButton label="Volver a lecciones" to="/lecciones/unidad/2" />
 
       <header className="text-center">
         <span className="text-ui-label">
