@@ -137,7 +137,7 @@ function ActividadRFinalPage() {
           </Button>
 
           <Button
-            to="/lecciones"
+            to="/lecciones/unidad/1"
             icon={ArrowRight}
             iconPosition="right"
             size="large"

@@ -1,20 +1,10 @@
-import {
-  ArrowRight,
-  Images,
-  ListMusic,
-  PenLine,
-  Sparkles,
-  Volume2,
-} from 'lucide-react'
+import {ArrowRight, Images, ListMusic, PenLine, Sparkles, Volume2, } from 'lucide-react'
 
 import Button from '../components/common/Button'
 import Card from '../components/common/Card'
 import BackButton from '../components/navigation/BackButton'
 import { getLessonThemeClass } from '../data/lessonColors'
-import {
-  lComprehensionQuestions,
-  lReading,
-} from '../data/lLectura'
+import { lComprehensionQuestions, lReading,} from '../data/lLectura'
 import { playAudio } from '../lib/audioPlayer'
 import '../styles/reading.css'
 
@@ -26,7 +16,7 @@ function LeccionLPage() {
       className={`page reading-page ${themeClass}`}
       aria-labelledby="l-lesson-title"
     >
-      <BackButton label="Volver a lecciones" to="/lecciones" />
+      <BackButton label="Volver a lecciones" to="/lecciones/unidad/1" />
 
       <header className="text-center">
         <span className="text-ui-label">Unidad 1</span>

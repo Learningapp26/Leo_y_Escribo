@@ -7,12 +7,7 @@ import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
 import StarsCounter from '../components/progress/StarsCounter'
 import { getLessonThemeClass } from '../data/lessonColors'
-import {
-  tCaseSelectionInstructionAudio,
-  tSentenceFormation,
-  tSyllableCaseSelection,
-  tWordJoin,
-} from '../data/tData'
+import {tCaseSelectionInstructionAudio, tSentenceFormation, tSyllableCaseSelection, tWordJoin, } from '../data/tData'
 import { playAudio } from '../lib/audioPlayer'
 import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
@@ -186,7 +181,7 @@ function ActividadTFinalPage() {
           </Button>
 
           <Button
-            to="/lecciones"
+            to="/lecciones/unidad/1"
             icon={ArrowRight}
             iconPosition="right"
             size="large"

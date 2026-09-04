@@ -1,20 +1,11 @@
 import { useState } from 'react'
-import {
-  ArrowRight,
-  BookOpen,
-  MessageCircleQuestion,
-  Puzzle,
-  Volume2,
-} from 'lucide-react'
+import {ArrowRight,BookOpen,MessageCircleQuestion,Puzzle,Volume2, } from 'lucide-react'
 
 import Button from '../components/common/Button'
 import Card from '../components/common/Card'
 import BackButton from '../components/navigation/BackButton'
 import { getLessonThemeClass } from '../data/lessonColors'
-import {
-  rReading,
-  rReadingQuestions,
-} from '../data/rLessonData'
+import {rReading,rReadingQuestions,} from '../data/rLessonData'
 import { playAudio } from '../lib/audioPlayer'
 
 function LeccionRPage() {
@@ -36,7 +27,7 @@ function LeccionRPage() {
     >
       <BackButton
         label="Volver a lecciones"
-        to="/lecciones"
+        to="/lecciones/unidad/1"
       />
 
       <header className="text-center">

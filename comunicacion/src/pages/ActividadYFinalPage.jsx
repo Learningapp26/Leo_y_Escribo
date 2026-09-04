@@ -1,10 +1,5 @@
 import { useEffect, useState } from 'react'
-import {
-  ArrowRight,
-  Check,
-  RotateCcw,
-  Volume2,
-} from 'lucide-react'
+import {ArrowRight,Check,RotateCcw,Volume2, } from 'lucide-react'
 
 import Button from '../components/common/Button'
 import Card from '../components/common/Card'
@@ -129,7 +124,7 @@ function ActividadYFinalPage() {
           </Button>
 
           <Button
-            to="/lecciones"
+            to="/lecciones/unidad/1"
             icon={ArrowRight}
             iconPosition="right"
             size="large"

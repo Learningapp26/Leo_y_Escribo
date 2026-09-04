@@ -7,11 +7,7 @@ import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
 import StarsCounter from '../components/progress/StarsCounter'
 import { getLessonThemeClass } from '../data/lessonColors'
-import {
-  nPracticeWords,
-  nSentenceChoice,
-  nSentenceImageMatch,
-} from '../data/nFinal'
+import {nPracticeWords, nSentenceChoice, nSentenceImageMatch,} from '../data/nFinal'
 import { playAudio } from '../lib/audioPlayer'
 import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 
@@ -146,7 +142,7 @@ function ActividadNFinalPage() {
           </Button>
 
           <Button
-            to="/lecciones"
+            to="/lecciones/unidad/1"
             icon={ArrowRight}
             iconPosition="right"
             size="large"

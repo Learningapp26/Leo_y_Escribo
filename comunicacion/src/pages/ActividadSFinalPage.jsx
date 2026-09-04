@@ -104,7 +104,7 @@ function ActividadSFinalPage() {
           <AudioPlaceholderButton fullWidth>
             Escuchar felicitación
           </AudioPlaceholderButton>
-          <Button to="/lecciones" icon={ArrowRight} iconPosition="right" size="large" fullWidth>
+          <Button to="/lecciones/unidad/1" icon={ArrowRight} iconPosition="right" size="large" fullWidth>
             Volver a las lecciones
           </Button>
         </Card>

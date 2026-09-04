@@ -8,22 +8,27 @@ import LessonDetailPage from '../pages/LessonDetailPage'
 import ActivityPage from '../pages/ActivityPage'
 import ProgressPage from '../pages/ProgressPage'
 import NotFoundPage from '../pages/NotFoundPage'
+
 import LeccionVocalesPage from '../pages/LeccionVocalesPage'
 import ActividadVocalesPage from '../pages/ActividadVocalesPage'
+
 import LeccionYPage from '../pages/LeccionYPage'
 import ActividadYParejasPage from '../pages/ActividadYParejasPage'
 import ActividadYUnirImagenesPage from '../pages/ActividadYUnirImagenesPage'
 import ActividadYFinalPage from '../pages/ActividadYFinalPage'
+
 import LeccionLPage from '../pages/LeccionLPage'
 import ActividadLImagenesPage from '../pages/ActividadLImagenesPage'
 import ActividadLSilabasPage from '../pages/ActividadLSilabasPage'
 import ActividadLCompletarPage from '../pages/ActividadLCompletarPage'
 import ActividadLFinalPage from '../pages/ActividadLFinalPage'
+
 import LeccionMPage from '../pages/LeccionMPage'
 import ActividadMSonidosPage from '../pages/ActividadMSonidosPage'
 import ActividadMSilabasPage from '../pages/ActividadMSilabasPage'
 import ActividadMCompletarPage from '../pages/ActividadMCompletarPage'
 import ActividadMFinalPage from '../pages/ActividadMFinalPage'
+
 import LeccionSPage from '../pages/LeccionSPage'
 import ActividadSSonidosPage from '../pages/ActividadSSonidosPage'
 import ActividadSSilabasPage from '../pages/ActividadSSilabasPage'

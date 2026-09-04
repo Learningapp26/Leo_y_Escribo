@@ -25,7 +25,7 @@ function LeccionVocalesPage() {
       >
         <BackButton
           label="Volver a lecciones"
-          to="/lecciones"
+          to="/lecciones/unidad/1"
         />
 
         <header className="vowels-page__header">

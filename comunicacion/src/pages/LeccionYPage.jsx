@@ -1,10 +1,4 @@
-import {
-  ArrowRight,
-  Images,
-  Link2,
-  Sparkles,
-  Volume2,
-} from 'lucide-react'
+import {ArrowRight,Images,Link2,Sparkles,Volume2, } from 'lucide-react'
 
 import Button from '../components/common/Button'
 import Card from '../components/common/Card'
@@ -23,7 +17,7 @@ function LeccionYPage() {
     >
       <BackButton
         label="Volver a lecciones"
-        to="/lecciones"
+        to="/lecciones/unidad/1"
       />
 
       <header className="text-center">
