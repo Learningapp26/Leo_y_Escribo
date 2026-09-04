@@ -18,7 +18,7 @@ function LeccionTrPage() {
       className={`page reading-page lesson-tr ${themeClass}`}
       aria-labelledby="tr-lesson-title"
     >
-      <BackButton label="Volver a lecciones" to="/lecciones" />
+      <BackButton label="Volver a la Unidad 3" to="/lecciones/unidad/3" />
 
       <header className="text-center">
         <span className="text-ui-label">Unidad 3</span>

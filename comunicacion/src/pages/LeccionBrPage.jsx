@@ -16,7 +16,7 @@ function LeccionBrPage() {
       className={`page reading-page ${themeClass}`}
       aria-labelledby="br-lesson-title"
     >
-      <BackButton label="Volver a lecciones" to="/lecciones" />
+      <BackButton label="Volver a la Unidad 3" to="/lecciones/unidad/3" />
 
       <header className="text-center">
         <span className="text-ui-label">

@@ -1,27 +1,15 @@
 import { useEffect, useState } from 'react'
-import {
-    ArrowRight,
-    Check,
-    RotateCcw,
-    Volume2,
-} from 'lucide-react'
+import {ArrowRight,Check,RotateCcw,Volume2,} from 'lucide-react'
 
 import Button from '../components/common/Button'
 import Card from '../components/common/Card'
 import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
 import StarsCounter from '../components/progress/StarsCounter'
-import {
-    jPracticeWords,
-    jSentenceCompletion,
-    jWordImageMatch,
-} from '../data/jActivities'
+import {jPracticeWords,jSentenceCompletion,jWordImageMatch,} from '../data/jActivities'
 import { getLessonThemeClass } from '../data/lessonColors'
 import { playAudio } from '../lib/audioPlayer'
-import {
-    registrarLeccionCompletada,
-    registrarProgreso,
-} from '../lib/progreso'
+import {registrarLeccionCompletada,registrarProgreso,} from '../lib/progreso'
 import '../styles/selection.css'
 import '../styles/completion.css'
 
@@ -274,7 +262,7 @@ function ActividadJFinalPage() {
                     </Button>
 
                     <Button
-                        to="/lecciones"
+                        to="/lecciones/unidad/3"
                         icon={ArrowRight}
                         iconPosition="right"
                         size="large"

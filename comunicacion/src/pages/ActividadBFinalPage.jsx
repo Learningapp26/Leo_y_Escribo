@@ -69,7 +69,7 @@ function ActividadBFinalPage() {
           <p className="text-instruction">Reconociste la B y la b, practicaste bo, ba, be, bi y bu, formaste palabras y leíste oraciones.</p>
           <StarsCounter current={stars} total={bSentenceExercises.length} label="Estrellas" />
           <Button variant="audio" icon={Volume2} fullWidth onClick={() => playAudio(bFinalCongratulationsAudio)}>Escuchar felicitación</Button>
-          <Button to="/lecciones" icon={ArrowRight} iconPosition="right" size="large" fullWidth>Volver a las lecciones</Button>
+          <Button to="/lecciones/unidad/3" icon={ArrowRight} iconPosition="right" size="large" fullWidth>Volver a las lecciones</Button>
         </Card>
       </main>
     )

@@ -3,11 +3,7 @@ import { ArrowRight, Images, ListMusic, PenLine, Sparkles, Volume2 } from 'lucid
 import Button from '../components/common/Button'
 import Card from '../components/common/Card'
 import BackButton from '../components/navigation/BackButton'
-import {
-  bComprehensionQuestions,
-  bConversationInstructionAudio,
-  bReading,
-} from '../data/bData'
+import {bComprehensionQuestions,bConversationInstructionAudio,bReading,} from '../data/bData'
 import { getLessonThemeClass } from '../data/lessonColors'
 import { playAudio } from '../lib/audioPlayer'
 import '../styles/reading.css'
@@ -17,7 +13,7 @@ function LeccionBPage() {
 
   return (
     <main className={`page reading-page ${themeClass}`} aria-labelledby="b-lesson-title">
-      <BackButton label="Volver a lecciones" to="/lecciones" />
+      <BackButton label="Volver a la Unidad 3" to="/lecciones/unidad/3" />
 
       <header className="text-center">
         <span className="text-ui-label">Unidad 3</span>

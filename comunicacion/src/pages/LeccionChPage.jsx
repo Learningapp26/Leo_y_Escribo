@@ -17,7 +17,7 @@ function LeccionChPage() {
       className={`page reading-page ${themeClass}`}
       aria-labelledby="ch-lesson-title"
     >
-      <BackButton label="Volver a lecciones" to="/lecciones" />
+      <BackButton label="Volver a la Unidad 3" to="/lecciones/unidad/3" />
 
       <header className="text-center">
         <span className="text-ui-label">Unidad 3</span>

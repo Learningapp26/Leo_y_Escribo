@@ -1,20 +1,10 @@
-import {
-  ArrowRight,
-  Images,
-  ListMusic,
-  PenLine,
-  Sparkles,
-  Volume2,
-} from 'lucide-react'
+import {ArrowRight,Images,ListMusic,PenLine,Sparkles,Volume2,} from 'lucide-react'
 
 import Button from '../components/common/Button'
 import Card from '../components/common/Card'
 import BackButton from '../components/navigation/BackButton'
 import { getLessonThemeClass } from '../data/lessonColors'
-import {
-  jOralQuestions,
-  jReading,
-} from '../data/jLectura'
+import {jOralQuestions,jReading,} from '../data/jLectura'
 import { playAudio } from '../lib/audioPlayer'
 import '../styles/reading.css'
 
@@ -27,8 +17,8 @@ function LeccionJPage() {
       aria-labelledby="j-lesson-title"
     >
       <BackButton
-        label="Volver a lecciones"
-        to="/lecciones"
+        label="Volver a la Unidad 3"
+        to="/lecciones/unidad/3"
       />
 
       <header className="text-center">

@@ -145,18 +145,6 @@ export const units = [
         available: true,
       },
       {
-        id: 'domino-palabras',
-        title: 'Dominó de palabras',
-        route: '/unidad-3/domino-palabras',
-        available: true,
-      },
-      {
-        id: 'repaso-unidad-3',
-        title: 'Palabras para leer y practicar',
-        route: '/unidad-3/palabras-practica',
-        available: true,
-      },
-      {
         id: 'br',
         title: 'Combinación BR',
         route: '/lecciones/br',
@@ -166,6 +154,18 @@ export const units = [
         id: 'ch',
         title: 'Combinación CH',
         route: '/lecciones/ch',
+        available: true,
+      },
+      {
+        id: 'domino-palabras',
+        title: 'Dominó de palabras',
+        route: '/unidad-3/domino-palabras',
+        available: true,
+      },
+      {
+        id: 'repaso-unidad-3',
+        title: 'Palabras para leer y practicar',
+        route: '/unidad-3/palabras-practica',
         available: true,
       },
     ],

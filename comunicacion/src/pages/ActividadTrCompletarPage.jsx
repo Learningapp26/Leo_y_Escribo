@@ -139,7 +139,7 @@ function ActividadTrCompletarPage() {
           </Button>
 
           <Button
-            to="/lecciones"
+            to="/lecciones/unidad/3"
             icon={ArrowRight}
             iconPosition="right"
             size="large"

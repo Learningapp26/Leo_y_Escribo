@@ -89,7 +89,7 @@ function ActividadChFinalPage() {
             Escuchar felicitación
           </Button>
 
-          <Button to="/lecciones" icon={ArrowRight} iconPosition="right" size="large" fullWidth>
+          <Button to="/lecciones/unidad/3" icon={ArrowRight} iconPosition="right" size="large" fullWidth>
             Volver a las lecciones
           </Button>
         </Card>
