@@ -160,7 +160,7 @@ export const units = [
         id: 'br',
         title: 'Combinación BR',
         route: '/lecciones/br',
-        available: false,
+        available: true,
       },
       {
         id: 'ch',

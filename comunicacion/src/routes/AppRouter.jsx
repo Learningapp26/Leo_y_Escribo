@@ -123,6 +123,8 @@ import ActividadChSilabasPage from '../pages/ActividadChSilabasPage'
 import ActividadChCompletarPage from '../pages/ActividadChCompletarPage'
 import ActividadChFinalPage from '../pages/ActividadChFinalPage'
 
+import LeccionBrPage from '../pages/LeccionBrPage'
+
 function AppRouter() {
   return (
     <BrowserRouter>
@@ -603,6 +605,11 @@ function AppRouter() {
           <Route
             path="/actividad/ch-final"
             element={<ActividadChFinalPage />}
+          />
+
+          <Route
+            path="/lecciones/br"
+            element={<LeccionBrPage />}
           />
 
 
