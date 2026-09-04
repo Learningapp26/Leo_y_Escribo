@@ -16,7 +16,7 @@ function LeccionMPage() {
       className={`page reading-page ${themeClass}`}
       aria-labelledby="m-lesson-title"
     >
-      <BackButton label="Volver a lecciones" to="/lecciones/unidad/1" />
+      <BackButton label="Volver a la Unidad 1" to="/lecciones/unidad/1" />
 
       <header className="text-center">
         <span className="text-ui-label">Unidad 1</span>

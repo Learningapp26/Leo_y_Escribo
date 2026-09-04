@@ -58,7 +58,7 @@ function LeccionQPage() {
       className={`page reading-page ${themeClass}`}
       aria-labelledby="q-lesson-title"
     >
-      <BackButton label="Volver a lecciones" to="/lecciones/unidad/2" />
+      <BackButton label="Volver a la Unidad 2" to="/lecciones/unidad/2" />
 
       <header className="text-center">
         <span className="text-ui-label">Unidad 2</span>

@@ -27,7 +27,7 @@ function LeccionCPage() {
       aria-labelledby="c-lesson-title"
     >
       <BackButton
-        label="Volver a lecciones"
+        label="Volver a la Unidad 2"
         to="/lecciones/unidad/2"
       />
 

@@ -24,7 +24,7 @@ function LeccionVocalesPage() {
         aria-labelledby="titulo-vocales"
       >
         <BackButton
-          label="Volver a lecciones"
+          label="Volver a la Unidad 1"
           to="/lecciones/unidad/1"
         />
 
