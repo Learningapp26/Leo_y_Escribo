@@ -1,9 +1,9 @@
 // Para la parte del cuento
 export const brReading = {
-  title: 'El regalo misterioso',
+  title: 'La brocha de Braulio',
   paragraphs: [
-    'Насe mucho tiempo, existió un pintor muy famoso, llamado Braulio. Era famoso porque creaba pinturas muy hermosas con su brocha de madera y pelos de cabra.',
-    'Braulio cuidaba mucho su brocha porque su papá se la regaló cuando era niño. Él mismo cortó y lijó un pedazo de madera. También cortó el pelo de unas cabras que tenían en la casa. Con eso fabricó una brocha de gran calidad. ',
+    'Hace mucho tiempo, existió un pintor muy famoso, llamado Braulio. Era famoso porque creaba pinturas muy hermosas con su brocha de madera y pelos de cabra.',
+    'Braulio cuidaba mucho su brocha porque su papá se la regaló cuando era niño. Él mismo cortó y lijó un pedazo de madera. También cortó el pelo de unas cabras que tenían en la casa. Con eso fabricó una brocha de gran calidad.',
     '¡Fue el mejor regalo que Braulio recibió!',
     'Desde entonces Braulio pintó mejor. Cuando no pintaba con la brocha especial, la pintura no le salía tan bonita. Él decía que esto pasaba porque cuando la usaba, sentía el cariño de su papá.',
   ],
@@ -18,7 +18,7 @@ export const brComprehensionQuestions = [
   '¿Por qué Braulio era un pintor famoso?',
   '¿Cómo es la brocha de Braulio? ¿Por qué la cuidaba mucho?',
   '¿Cómo crees que se sentiría Braulio si perdiera su brocha?',
-  'Si tuvieras una brocha como la de Braulio ¿qué pintarías? ',
+  '¿Si tuvieras una brocha como la de Braulio, qué pintarías?',
 ]
 
 // ACTIVIDAD DE RECONOCER SONIDOS
@@ -49,7 +49,7 @@ export const brImagePool = [
   },
   {
     id: 'brocoli',
-    name: 'brocoli',
+    name: 'brócoli',
     image: '/images/lecciones/br/brocoli.png',
     audio: '/audio/lecciones/br/brocoli.mp3',
     startsWithBr: true,

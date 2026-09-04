@@ -14,7 +14,7 @@ function LeccionBrPage() {
   return (
     <main
       className={`page reading-page ${themeClass}`}
-      aria-labelledby="bl-lesson-title"
+      aria-labelledby="br-lesson-title"
     >
       <BackButton label="Volver a lecciones" to="/lecciones" />
 
@@ -23,7 +23,7 @@ function LeccionBrPage() {
           Unidad 3
         </span>
 
-        <h1 id="bl-lesson-title">Combinación de letras BR</h1>
+        <h1 id="br-lesson-title">Combinación de letras BR</h1>
 
         <p className="text-instruction">
           Ahora aprenderás la combinación de dos letras: la be y la erre.

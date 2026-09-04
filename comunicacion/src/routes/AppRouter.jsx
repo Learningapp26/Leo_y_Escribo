@@ -124,6 +124,7 @@ import ActividadChCompletarPage from '../pages/ActividadChCompletarPage'
 import ActividadChFinalPage from '../pages/ActividadChFinalPage'
 
 import LeccionBrPage from '../pages/LeccionBrPage'
+import ActividadBrSonidosPage from '../pages/ActividadBrSonidosPage'
 
 function AppRouter() {
   return (
@@ -612,6 +613,10 @@ function AppRouter() {
             element={<LeccionBrPage />}
           />
 
+          <Route
+            path="/actividad/br-sonidos"
+            element={<ActividadBrSonidosPage />}
+          />
 
           <Route
             path="/lecciones/:lessonId"
