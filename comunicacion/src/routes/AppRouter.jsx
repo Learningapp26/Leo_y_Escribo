@@ -109,6 +109,7 @@ import ActividadPrFinalPage from '../pages/ActividadPrFinalPage'
 
 import UnitLessonsPage from '../pages/UnitLessonsPage'
 import LessonAccessGuard from '../components/navigation/LessonAccessGuard'
+import ScrollToTop from '../components/navigation/ScrollToTop'
 
 
 import LeccionBlPage from '../pages/LeccionBlPage'
@@ -136,6 +137,7 @@ import ActividadBrFinalPage from '../pages/ActividadBrFinalPage'
 function AppRouter() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <LessonAccessGuard>
         <Routes>
           <Route path="/" element={<LoginPage />} />
