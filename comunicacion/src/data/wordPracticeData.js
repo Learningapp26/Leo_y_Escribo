@@ -45,7 +45,7 @@ export const wordPracticeGroups = [
       { id: 'ala', word: 'ala', image: '/images/lecciones/l/ala.png', imageAlt: 'Un ala', audio: '/audio/lecciones/l/ala.mp3' },
       { id: 'luna', word: 'luna', image: '/images/lecciones/l/luna.png', imageAlt: 'La luna', audio: '/audio/lecciones/l/luna.mp3' },
       { id: 'limon', word: 'limón', image: '/images/lecciones/l/limon.png', imageAlt: 'Un limón', audio: '/audio/lecciones/m/limon.mp3' },
-      { id: 'lechuga', word: 'lechuga', image: '/images/lecciones/l/lechuga.png', imageAlt: 'Una lechuga', audio: '/audio/lecciones/l/lechuga.mp3' },
+      { id: 'loma', word: 'loma', image: '/images/lecciones/l/loma.png', imageAlt: 'Una loma', audio: '/audio/lecciones/l/loma.mp3' },
     ],
     find: {
       prompt: 'Marca las palabras que empiezan con L.',
@@ -53,7 +53,7 @@ export const wordPracticeGroups = [
         { id: 'luna', word: 'luna', isTarget: true },
         { id: 'limon', word: 'limón', isTarget: true },
         { id: 'mesa', word: 'mesa', isTarget: false },
-        { id: 'lechuga', word: 'lechuga', isTarget: true },
+        { id: 'loma', word: 'loma', isTarget: true },
         { id: 'nube', word: 'nube', isTarget: false },
         { id: 'puma', word: 'puma', isTarget: false },
       ],
@@ -61,11 +61,11 @@ export const wordPracticeGroups = [
     shortest: {
       prompt: '¿Cuál es la palabra más corta?',
       answer: 'ala',
-      options: ['ala', 'luna', 'lechuga'],
+      options: ['ala', 'luna', 'loma'],
     },
     syllables: {
-      word: 'lechuga',
-      parts: ['le', 'chu', 'ga'],
+      word: 'loma',
+      parts: ['lo', 'ma'],
       options: [2, 3, 4],
     },
   },
@@ -77,17 +77,17 @@ export const wordPracticeGroups = [
     coverAlt: 'Dos sapos inflan globos junto a un lago.',
     words: [
       { id: 'sol', word: 'sol', image: '/images/lecciones/y/sol.png', imageAlt: 'El sol' },
-      { id: 'seda', word: 'seda' },
-      { id: 'sillon', word: 'sillón' },
+      { id: 'sala', word: 'sala' },
+      { id: 'sapo', word: 'sapo' },
       { id: 'suma', word: 'suma' },
     ],
     find: {
       prompt: 'Marca las palabras que empiezan con S.',
       options: [
         { id: 'sol', word: 'sol', isTarget: true },
-        { id: 'seda', word: 'seda', isTarget: true },
+        { id: 'sala', word: 'sala', isTarget: true },
         { id: 'mama', word: 'mamá', isTarget: false },
-        { id: 'sillon', word: 'sillón', isTarget: true },
+        { id: 'sapo', word: 'sapo', isTarget: true },
         { id: 'luna', word: 'luna', isTarget: false },
         { id: 'suma', word: 'suma', isTarget: true },
       ],
@@ -95,25 +95,26 @@ export const wordPracticeGroups = [
     shortest: {
       prompt: '¿Cuál es la palabra más corta?',
       answer: 'sol',
-      options: ['sol', 'seda', 'sillón'],
+      options: ['sol', 'sala', 'sapo'],
     },
     syllables: {
-      word: 'sillón',
-      parts: ['si', 'llón'],
+      word: 'sapo',
+      parts: ['sa', 'po'],
       options: [2, 3, 4],
     },
   },
   {
     lessonId: 'n',
+    showAudio: true,
     label: 'N',
     title: 'Palabras con N',
     coverImage: '/images/lecciones/n/lectura-nariz-sorprendente.png',
     coverAlt: 'Una ilustración infantil de la lectura de la letra N.',
     words: [
-      { id: 'nube', word: 'nube', image: '/images/lecciones/n/nube.png', imageAlt: 'Una nube', audio: '/audio/lecciones/n/nube.mp3' },
-      { id: 'nido', word: 'nido', image: '/images/lecciones/n/nido.png', imageAlt: 'Un nido', audio: '/audio/lecciones/n/nido.mp3' },
-      { id: 'nariz', word: 'nariz', image: '/images/lecciones/n/nariz.png', imageAlt: 'Una nariz', audio: '/audio/lecciones/n/nariz.mp3' },
-      { id: 'naranja', word: 'naranja', image: '/images/lecciones/n/naranja.png', imageAlt: 'Una naranja', audio: '/audio/lecciones/n/naranja.mp3' },
+      { id: 'nube', word: 'nube', image: '/images/lecciones/n/nube.png', imageAlt: 'Una nube' },
+      { id: 'nido', word: 'nido', image: '/images/lecciones/n/nido.png', imageAlt: 'Un nido' },
+      { id: 'nariz', word: 'nariz', image: '/images/lecciones/n/nariz.png', imageAlt: 'Una nariz' },
+      { id: 'naranja', word: 'naranja', image: '/images/lecciones/n/naranja.png', imageAlt: 'Una naranja' },
     ],
     find: {
       prompt: 'Marca las palabras que empiezan con N.',
@@ -139,15 +140,16 @@ export const wordPracticeGroups = [
   },
   {
     lessonId: 'p',
+    showAudio: true,
     label: 'P',
     title: 'Palabras con P',
     coverImage: '/images/lecciones/p/lectura-papa-puma.png',
     coverAlt: 'Una ilustración infantil de la lectura de la letra P.',
     words: [
-      { id: 'pie', word: 'pie', image: '/images/lecciones/p/pie.png', imageAlt: 'Un pie', audio: '/audio/lecciones/p/pie.mp3' },
-      { id: 'puma', word: 'puma', image: '/images/lecciones/p/puma.png', imageAlt: 'Un puma', audio: '/audio/lecciones/p/puma.mp3' },
-      { id: 'pelota', word: 'pelota', image: '/images/lecciones/p/pelota.png', imageAlt: 'Una pelota', audio: '/audio/lecciones/p/pelota.mp3' },
-      { id: 'pollito', word: 'pollito', image: '/images/lecciones/p/pollito.png', imageAlt: 'Un pollito', audio: '/audio/lecciones/p/pollito.mp3' },
+      { id: 'pie', word: 'pie', image: '/images/lecciones/p/pie.png', imageAlt: 'Un pie' },
+      { id: 'puma', word: 'puma', image: '/images/lecciones/p/puma.png', imageAlt: 'Un puma' },
+      { id: 'pelota', word: 'pelota', image: '/images/lecciones/p/pelota.png', imageAlt: 'Una pelota' },
+      { id: 'pala', word: 'pala', image: '/images/lecciones/p/pala.png', imageAlt: 'Una pala' },
     ],
     find: {
       prompt: 'Marca las palabras que empiezan con P.',
@@ -163,7 +165,7 @@ export const wordPracticeGroups = [
     shortest: {
       prompt: '¿Cuál es la palabra más corta?',
       answer: 'pie',
-      options: ['pie', 'puma', 'pollito'],
+      options: ['pie', 'puma', 'pala'],
     },
     syllables: {
       word: 'pelota',
@@ -180,14 +182,14 @@ export const wordPracticeGroups = [
     words: [
       { id: 'rosa', word: 'rosa', image: '/images/lecciones/r/rosa.png', imageAlt: 'Una rosa', audio: '/audio/lecciones/r/rosa.mp3' },
       { id: 'rama', word: 'rama', image: '/images/lecciones/r/rama.png', imageAlt: 'Una rama', audio: '/audio/lecciones/r/rama.mp3' },
-      { id: 'reloj', word: 'reloj', image: '/images/lecciones/r/reloj.png', imageAlt: 'Un reloj', audio: '/audio/lecciones/r/reloj.mp3' },
+      { id: 'risa', word: 'risa', image: '/images/lecciones/r/risa.png', imageAlt: 'Un niño sonriendo', audio: '/audio/lecciones/r/risa.mp3' },
       { id: 'mariposa', word: 'mariposa', image: '/images/lecciones/r/mariposa.png', imageAlt: 'Una mariposa', audio: '/audio/lecciones/r/mariposa.mp3' },
     ],
     find: {
       prompt: 'Marca las palabras que empiezan con R.',
       options: [
         { id: 'rosa', word: 'rosa', isTarget: true },
-        { id: 'reloj', word: 'reloj', isTarget: true },
+        { id: 'risa', word: 'risa', isTarget: true },
         { id: 'pato', word: 'pato', isTarget: false },
         { id: 'rama', word: 'rama', isTarget: true },
         { id: 'nube', word: 'nube', isTarget: false },
@@ -197,7 +199,7 @@ export const wordPracticeGroups = [
     shortest: {
       prompt: '¿Cuál es la palabra más corta?',
       answer: 'sol',
-      options: ['sol', 'rosa', 'reloj'],
+      options: ['sol', 'rosa', 'risa'],
     },
     syllables: {
       word: 'mariposa',
@@ -207,21 +209,22 @@ export const wordPracticeGroups = [
   },
   {
     lessonId: 't',
+    showAudio: true,
     label: 'T',
     title: 'Palabras con T',
     coverImage: '/images/lecciones/t/El-tamal-perdido.png',
     coverAlt: 'Una ilustración infantil del cuento El tamal perdido.',
     words: [
-      { id: 'tamal', word: 'tamal', image: '/images/lecciones/t/tamal.png', imageAlt: 'Un tamal', audio: '/audio/lecciones/t/tamal.mp3' },
-      { id: 'tela', word: 'tela', image: '/images/lecciones/t/tela.png', imageAlt: 'Un trozo de tela', audio: '/audio/lecciones/t/tela.mp3' },
-      { id: 'tijera', word: 'tijera', image: '/images/lecciones/t/tijera.png', imageAlt: 'Una tijera', audio: '/audio/lecciones/t/tijera.mp3' },
-      { id: 'tomate', word: 'tomate', image: '/images/lecciones/t/tomate.png', imageAlt: 'Un tomate', audio: '/audio/lecciones/t/tomate.mp3' },
+      { id: 'tamal', word: 'tamal', image: '/images/lecciones/t/tamal.png', imageAlt: 'Un tamal' },
+      { id: 'tela', word: 'tela', image: '/images/lecciones/t/tela.png', imageAlt: 'Un trozo de tela' },
+      { id: 'toro', word: 'toro', image: '/images/lecciones/t/toro.png', imageAlt: 'Un toro', audio: '/audio/lecciones/r/toro.mp3' },
+      { id: 'tomate', word: 'tomate', image: '/images/lecciones/t/tomate.png', imageAlt: 'Un tomate' },
     ],
     find: {
       prompt: 'Marca las palabras que empiezan con T.',
       options: [
         { id: 'tamal', word: 'tamal', isTarget: true },
-        { id: 'tijera', word: 'tijera', isTarget: true },
+        { id: 'toro', word: 'toro', isTarget: true },
         { id: 'mano', word: 'mano', isTarget: false },
         { id: 'tela', word: 'tela', isTarget: true },
         { id: 'nube', word: 'nube', isTarget: false },

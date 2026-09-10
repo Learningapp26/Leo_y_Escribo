@@ -12,40 +12,40 @@ export const nLetterPresentation = {
 
 export const nSyllableWords = [
   {
-    id: 'nave',
-    word: 'nave',
+    id: 'nati',
+    word: 'Nati',
     highlighted: 'na',
-    rest: 've',
-    image: '/images/lecciones/n/nave.png', 
+    rest: 'ti',
+    image: '/images/lecciones/n/nati.png',
     syllableAudio: null, // TODO: agregar audio_silaba_na.mp3
-    wordAudio: null, // TODO: agregar audio_nave.mp3
+    wordAudio: null, // TODO: agregar audio_nati.mp3
   },
   {
     id: 'nena',
     word: 'nena',
     highlighted: 'ne',
     rest: 'na',
-    image: '/images/lecciones/n/nati.png', 
+    image: '/images/lecciones/n/nena.png',
     syllableAudio: null, // TODO: agregar audio_silaba_ne.mp3
     wordAudio: null, // TODO: agregar audio_nena.mp3
   },
   {
-    id: 'naranja',
-    word: 'naranja',
-    highlighted: 'na',
-    rest: 'ranja',
-    image: '/images/lecciones/n/naranja.png', 
-    syllableAudio: null, // TODO: agregar audio_silaba_na.mp3
-    wordAudio: null, // TODO: agregar audio_naranja.mp3
+    id: 'nene',
+    word: 'nene',
+    highlighted: 'ne',
+    rest: 'ne',
+    image: '/images/lecciones/n/nene.png',
+    syllableAudio: null, // TODO: agregar audio_silaba_ne.mp3
+    wordAudio: null, // TODO: agregar audio_nene.mp3
   },
   {
-    id: 'nube',
-    word: 'nube',
-    highlighted: 'nu',
-    rest: 'be',
-    image: '/images/lecciones/n/nube.png', 
-    syllableAudio: null, // TODO: agregar audio_silaba_nu.mp3
-    wordAudio: null, // TODO: agregar audio_nube.mp3
+    id: 'nati-repeat',
+    word: 'Nati',
+    highlighted: 'na',
+    rest: 'ti',
+    image: '/images/lecciones/n/nati.png',
+    syllableAudio: null, // TODO: agregar audio_silaba_na.mp3
+    wordAudio: null, // TODO: agregar audio_nati.mp3
   },
 ]
 

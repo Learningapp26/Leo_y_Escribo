@@ -1,73 +1,73 @@
 export const nSoundIntro = {
   mainWord: {
-    name: 'nariz',
-    image: '/images/lecciones/n/nariz.png', 
-    audio: null, // TODO: agregar audio_nariz.mp3
+    name: 'nena',
+    image: '/images/lecciones/n/nena.png',
+    audio: null, // TODO: agregar audio_nena.mp3
   },
   soundAudio: null, // TODO: agregar audio del sonido /n/
   exampleWords: [
     {
-      id: 'nido',
-      name: 'nido',
-      image: '/images/lecciones/n/nido.png', 
-      audio: null, // TODO: agregar audio_nido.mp3
+      id: 'nena',
+      name: 'nena',
+      image: '/images/lecciones/n/nena.png',
+      audio: null, // TODO: agregar audio_nena.mp3
     },
     {
-      id: 'nave',
-      name: 'nave',
-      image: '/images/lecciones/n/nave.png', 
-      audio: null, // TODO: agregar audio_nave.mp3
+      id: 'nene',
+      name: 'nene',
+      image: '/images/lecciones/n/nene.png',
+      audio: null, // TODO: agregar audio_nene.mp3
     },
     {
-      id: 'nudo',
-      name: 'nudo',
-      image: '/images/lecciones/n/nudo.png', 
-      audio: null, // TODO: agregar audio_nudo.mp3
+      id: 'nati',
+      name: 'Nati',
+      image: '/images/lecciones/n/nati.png',
+      audio: null, // TODO: agregar audio_nati.mp3
     },
   ],
 }
 
 export const nImagePool = [
   {
-    id: 'nido',
-    name: 'nido',
-    image: '/images/lecciones/n/nido.png', 
-    audio: null, // TODO: agregar audio_nido.mp3
+    id: 'nena',
+    name: 'nena',
+    image: '/images/lecciones/n/nena.png',
+    audio: null, // TODO: agregar audio_nena.mp3
     startsWithN: true,
   },
   {
-    id: 'nave',
-    name: 'nave',
-    image: '/images/lecciones/n/nave.png', 
-    audio: null, // TODO: agregar audio_nave.mp3
+    id: 'nene',
+    name: 'nene',
+    image: '/images/lecciones/n/nene.png',
+    audio: null, // TODO: agregar audio_nene.mp3
     startsWithN: true,
   },
   {
-    id: 'nudo',
-    name: 'nudo',
-    image: '/images/lecciones/n/nudo.png', 
-    audio: null, // TODO: agregar audio_nudo.mp3
+    id: 'nati',
+    name: 'Nati',
+    image: '/images/lecciones/n/nati.png',
+    audio: null, // TODO: agregar audio_nati.mp3
     startsWithN: true,
   },
   {
-    id: 'nariz',
-    name: 'nariz',
-    image: '/images/lecciones/n/nariz.png', 
-    audio: null, // TODO: agregar audio_nariz.mp3
-    startsWithN: true,
-  },
-  {
-    id: 'carro',
-    name: 'carro',
-    image: '/images/lecciones/n/carro.png', 
-    audio: null, // TODO: agregar audio_carro.mp3
+    id: 'pino',
+    name: 'pino',
+    image: '/images/lecciones/n/pino.png',
+    audio: null, // TODO: agregar audio_pino.mp3
     startsWithN: false,
   },
   {
-    id: 'cuerda',
-    name: 'cuerda',
-    image: '/images/lecciones/n/cuerda.png', 
-    audio: null, // TODO: agregar audio_cuerda.mp3
+    id: 'mono',
+    name: 'mono',
+    image: '/images/lecciones/n/mono.png',
+    audio: null, // TODO: agregar audio_mono.mp3
+    startsWithN: false,
+  },
+  {
+    id: 'mano',
+    name: 'mano',
+    image: '/images/lecciones/n/mano.png',
+    audio: null, // TODO: agregar audio_mano.mp3
     startsWithN: false,
   },
 ]

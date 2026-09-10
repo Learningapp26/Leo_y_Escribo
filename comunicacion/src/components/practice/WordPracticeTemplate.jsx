@@ -49,7 +49,7 @@ function WordPracticeTemplate({
   const themeClass = getLessonThemeClass(group.themeId ?? group.lessonId)
   const allWordsRead = readWordIds.length === group.words.length
   const findTargets = group.find.options.filter((option) => option.isTarget)
-  const groupHasAudio = group.words.some((word) => word.audio)
+  const groupHasAudio = group.showAudio || group.words.some((word) => word.audio)
 
   const resetPractice = (nextGroupId) => {
     setGroupId(nextGroupId)
@@ -271,7 +271,7 @@ function WordPracticeTemplate({
                       alt={word.imageAlt}
                     />
                   )}
-                  {word.audio && (
+                  {(word.audio || group.showAudio) && (
                     <Volume2 className="word-practice-word__icon" aria-hidden="true" />
                   )}
                   {word.word}

@@ -49,15 +49,15 @@ export const sSoundStartChoices = [
 
 export const sSoundEndChoices = [
   {
-    id: 'panes',
-    word: 'panes',
-    image: '/images/lecciones/y/panes.png',
+    id: 'sal-end',
+    word: 'sal',
+    image: '/images/lecciones/y/sal.png',
     endsWithS: true,
   },
   {
-    id: 'gafas',
-    word: 'gafas',
-    image: '/images/lecciones/p/gafas.png',
+    id: 'olas',
+    word: 'olas',
+    image: '/images/lecciones/l/ola.png',
     endsWithS: true,
   },
   {
@@ -84,15 +84,15 @@ export const sSyllableChallenges = [
     answer: 'sa',
   },
   {
-    id: 'seda',
-    word: 'seda',
-    pattern: '__da',
-    answer: 'se',
+    id: 'mesa',
+    word: 'mesa',
+    pattern: 'me__',
+    answer: 'sa',
   },
   {
-    id: 'sillon',
-    word: 'sillón',
-    pattern: '__llón',
+    id: 'simio',
+    word: 'simio',
+    pattern: '__mio',
     answer: 'si',
   },
   {

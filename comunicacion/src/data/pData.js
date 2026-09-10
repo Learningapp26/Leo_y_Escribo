@@ -43,24 +43,24 @@ export const pSelectionInstructionAudio =
 // Fase 2: marcar las figuras que empiezan con el mismo sonido que "papá"
 export const pImagePool = [
   {
-    id: 'pozo',
-    name: 'pozo',
-    image: '/images/lecciones/p/pozo.png',
-    audio: '/audio/lecciones/p/pozo.mp3',
+    id: 'puma',
+    name: 'puma',
+    image: '/images/lecciones/p/puma.png',
+    audio: null,
     startsWithP: true,
   },
   {
-    id: 'pez',
-    name: 'pez',
-    image: '/images/lecciones/p/pez.png',
-    audio: '/audio/lecciones/p/pez.mp3',
+    id: 'pala',
+    name: 'pala',
+    image: '/images/lecciones/p/pala.png',
+    audio: null,
     startsWithP: true,
   },
   {
-    id: 'gafas',
-    name: 'gafas',
-    image: '/images/lecciones/p/gafas.png',
-    audio: '/audio/lecciones/p/gafas.mp3',
+    id: 'mano',
+    name: 'mano',
+    image: '/images/lecciones/m/mano.png',
+    audio: '/audio/lecciones/m/mano.mp3',
     startsWithP: false,
   },
   {
@@ -89,21 +89,21 @@ export const pSyllablePositionExample = {
 
 export const pSyllablePosition = [
   {
-    id: 'lapiz',
-    word: 'lápiz',
-    image: '/images/lecciones/p/lapiz.png',
-    wordAudio: '/audio/lecciones/l/lapiz.mp3',
-    syllableAudio: '/audio/lecciones/l/lapiz-silabas.mp3',
-    syllables: ['lá', 'piz'],
+    id: 'pala',
+    word: 'pala',
+    image: '/images/lecciones/p/pala.png',
+    wordAudio: null,
+    syllableAudio: null,
+    syllables: ['pa', 'la'],
     answerIndex: 1,
   },
   {
-    id: 'pino',
-    word: 'pino',
-    image: '/images/lecciones/p/pino.png',
-    wordAudio: '/audio/lecciones/p/pino.mp3',
-    syllableAudio: '/audio/lecciones/p/pino-silabas.mp3',
-    syllables: ['pi', 'no'],
+    id: 'puma-position',
+    word: 'puma',
+    image: '/images/lecciones/p/puma.png',
+    wordAudio: null,
+    syllableAudio: null,
+    syllables: ['pu', 'ma'],
     answerIndex: 0,
   },
   {
@@ -217,16 +217,16 @@ export const pFindSyllableInstructionAudio =
 // Palabras (algunas inventadas, como en el libro) donde hay que encontrar
 // cuál de las sílabas po, pa, pe, pi, pu aparece.
 export const pFindSyllableWords = [
-  { id: 'mipa', word: 'mipa', audio: '/audio/lecciones/p/palabra-mipa.mp3', answer: 'pa' },
-  { id: 'pesu', word: 'pesu', audio: '/audio/lecciones/p/palabra-pesu.mp3', answer: 'pe' },
-  { id: 'pilu', word: 'pilu', audio: '/audio/lecciones/p/palabra-pilu.mp3', answer: 'pi' },
-  { id: 'repa', word: 'repa', audio: '/audio/lecciones/p/palabra-repa.mp3', answer: 'pa' },
-  { id: 'mopo', word: 'mopo', audio: '/audio/lecciones/p/palabra-mopo.mp3', answer: 'po' },
-  { id: 'pesi', word: 'pesi', audio: '/audio/lecciones/p/palabra-pesi.mp3', answer: 'pe' },
-  { id: 'supi', word: 'supi', audio: '/audio/lecciones/p/palabra-supi.mp3', answer: 'pi' },
-  { id: 'pama', word: 'pama', audio: '/audio/lecciones/p/palabra-pama.mp3', answer: 'pa' },
-  { id: 'puri', word: 'puri', audio: '/audio/lecciones/p/palabra-puri.mp3', answer: 'pu' },
-  { id: 'lapo', word: 'lapo', audio: '/audio/lecciones/p/palabra-lapo.mp3', answer: 'po' },
+  { id: 'mapa', word: 'mapa', audio: null, answer: 'pa' },
+  { id: 'peso', word: 'peso', audio: null, answer: 'pe' },
+  { id: 'piso', word: 'piso', audio: null, answer: 'pi' },
+  { id: 'ropa', word: 'ropa', audio: null, answer: 'pa' },
+  { id: 'sapo', word: 'sapo', audio: null, answer: 'po' },
+  { id: 'pera', word: 'pera', audio: null, answer: 'pe' },
+  { id: 'pipa', word: 'pipa', audio: null, answer: 'pi' },
+  { id: 'pala-find', word: 'pala', audio: null, answer: 'pa' },
+  { id: 'puma-find', word: 'puma', audio: null, answer: 'pu' },
+  { id: 'topo-find', word: 'topo', audio: null, answer: 'po' },
 ]
 
 export const pSyllableOptions = ['po', 'pa', 'pe', 'pi', 'pu']
@@ -241,11 +241,11 @@ export const pWordCompletionInstructionAudio =
 // Fase 1: escuchar la palabra y elegir la sílaba con P que le falta
 export const pWordCompletion = [
   {
-    id: 'payaso',
-    word: 'payaso',
-    pattern: '___yaso',
-    image: '/images/lecciones/p/payaso.png',
-    audio: '/audio/lecciones/p/payaso.mp3',
+    id: 'pala-completion',
+    word: 'pala',
+    pattern: '___la',
+    image: '/images/lecciones/p/pala.png',
+    audio: null,
     answer: 'pa',
   },
   {
@@ -257,22 +257,22 @@ export const pWordCompletion = [
     answer: 'pe',
   },
   {
-    id: 'camiseta',
-    word: 'camiseta',
+    id: 'tamal-no-p',
+    word: 'tamal',
     // No tiene ninguna sílaba con p: es la figura "trampa" del ejercicio,
     // igual que en el libro.
-    pattern: 'camiseta',
-    image: '/images/lecciones/p/camiseta.png',
-    audio: '/audio/lecciones/p/camiseta.mp3',
+    pattern: 'tamal',
+    image: '/images/lecciones/t/tamal.png',
+    audio: null,
     answer: null,
   },
   {
-    id: 'pollito',
-    word: 'pollito',
-    pattern: '___llito',
-    image: '/images/lecciones/p/pollito.png',
-    audio: '/audio/lecciones/p/pollito.mp3',
-    answer: 'po',
+    id: 'puma-completion',
+    word: 'puma',
+    pattern: '___ma',
+    image: '/images/lecciones/p/puma.png',
+    audio: null,
+    answer: 'pu',
   },
 ]
 

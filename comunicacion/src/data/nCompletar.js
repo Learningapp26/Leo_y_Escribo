@@ -2,36 +2,36 @@ export const nSyllableOptions = ['na', 'ne', 'ni', 'no', 'nu']
 
 export const nWordCompletion = [
   {
-    id: 'nave',
-    word: 'nave',
-    pattern: '__ve',
-    image: '/images/lecciones/n/nave.png',
-    audio: null, // TODO: agregar audio_nave.mp3
+    id: 'nati',
+    word: 'Nati',
+    pattern: '__ti',
+    image: '/images/lecciones/n/nati.png',
+    audio: null, // TODO: agregar audio_nati.mp3
     answer: 'na',
   },
   {
     id: 'nena',
     word: 'nena',
     pattern: '__na',
-    image: '/images/lecciones/n/nati.png', 
+    image: '/images/lecciones/n/nena.png',
     audio: null, // TODO: agregar audio_nena.mp3
     answer: 'ne',
   },
   {
-    id: 'nido',
-    word: 'nido',
-    pattern: '__do',
-    image: '/images/lecciones/n/nido.png', 
-    audio: null, // TODO: agregar audio_nido.mp3
-    answer: 'ni',
+    id: 'pino',
+    word: 'pino',
+    pattern: 'pi__',
+    image: '/images/lecciones/n/pino.png',
+    audio: null, // TODO: agregar audio_pino.mp3
+    answer: 'no',
   },
   {
-    id: 'nube',
-    word: 'nube',
-    pattern: '__be',
-    image: '/images/lecciones/n/nube.png', 
-    audio: null, // TODO: agregar audio_nube.mp3
-    answer: 'nu',
+    id: 'mono',
+    word: 'mono',
+    pattern: 'mo__',
+    image: '/images/lecciones/n/mono.png',
+    audio: null, // TODO: agregar audio_mono.mp3
+    answer: 'no',
   },
 ]
 

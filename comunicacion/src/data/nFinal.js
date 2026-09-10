@@ -1,10 +1,9 @@
 export const nPracticeWords = [
   {
-    id: 'nati',
-    word: 'Nati',
+    id: 'nena',
+    word: 'nena',
     image: '/images/lecciones/n/nena.png', 
-    audio: null, // TODO: agregar audio_nati.mp3
-    isProperNoun: true,
+    audio: null, // TODO: agregar audio_nena.mp3
   },
   {
     id: 'nene',
@@ -13,10 +12,11 @@ export const nPracticeWords = [
     audio: null, // TODO: agregar audio_nene.mp3
   },
   {
-    id: 'nina',
-    word: 'niña',
-    image: '/images/lecciones/n/nina.png', 
-    audio: null, // TODO: agregar audio_nina.mp3
+    id: 'nati',
+    word: 'Nati',
+    image: '/images/lecciones/n/nati.png',
+    audio: null, // TODO: agregar audio_nati.mp3
+    isProperNoun: true,
   },
   {
     id: 'mono',

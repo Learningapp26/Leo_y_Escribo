@@ -144,10 +144,10 @@ export const mSoundMatching = {
       containsM: false,
     },
     {
-      id: 'pluma',
-      name: 'pluma',
-      image: '/images/lecciones/m/pluma.png',
-      audio: '/audio/lecciones/m/pluma.mp3',
+      id: 'mula',
+      name: 'mula',
+      image: '/images/lecciones/m/mula.png',
+      audio: '/audio/lecciones/m/mula.mp3',
       containsM: true,
     },
     {
