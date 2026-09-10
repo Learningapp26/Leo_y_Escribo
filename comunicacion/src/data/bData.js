@@ -1,5 +1,61 @@
 const bImage = (name) => `/images/lecciones/b/${name}.png`
-const bAudio = (name) => `/audio/lecciones/b/${name}.mp3`
+const bAudioFiles = {
+  abeja: 'Abeja.mp3',
+  abuelo: 'Abuelo.mp3',
+  banano: 'Banano.mp3',
+  banco: 'Banco.mp3',
+  barba: 'Barba.mp3',
+  barco: 'Barco.mp3',
+  bebe: 'Bebe.mp3',
+  berta: 'Berta.mp3',
+  beso: 'Beso.mp3',
+  bicicleta: 'Bicicleta.mp3',
+  boca: 'Boca.mp3',
+  boda: 'Boda.mp3',
+  bola: 'Bola.mp3',
+  bota: 'Bota.mp3',
+  bote: 'Bote.mp3',
+  boton: 'Botón.mp3',
+  burro: 'Burro.mp3',
+  bus: 'Bus.mp3',
+  'el-barco-sube-la-ola': 'El-barco-sube-la-ola.mp3',
+  escoba: 'Escoba.mp3',
+  'felicitacion-final': 'Felicitación-final-b.mp3',
+  globo: 'Globo.mp3',
+  'instruccion-buscar-letra-b': 'Instruccion-buscar-letra-b.mp3',
+  'instruccion-completar-palabras-b': 'Instruccion-formar-palabra-b.mp3',
+  'instruccion-conversemos': 'Instruccion-conversemos-b.mp3',
+  'instruccion-formar-palabras-b': 'Instruccion-formar-palabras-b.mp3',
+  'instruccion-lectura': 'Instruccion-lecturab.mp3',
+  'instruccion-leer-palabras-b': 'Instruccion-leer-palabras-b.mp3',
+  'instruccion-oraciones-b': 'Instruccion-oraciones-b.mp3',
+  'instruccion-seleccion-inicial-b': 'Instruccion-seleccion-inicial-b.mp3',
+  'instruccion-silaba-en-palabra-b': 'Instruccion-silaba-en-palabra-b.mp3',
+  'instruccion-silabas-b': 'Instruccion-silabas-b.mp3',
+  'la-bota-esta-rota': 'La-bota-esta-rota.mp3',
+  'letra-b': 'Letra-b.mp3',
+  lobo: 'Lob.mp3',
+  nabo: 'Nabo.mp3',
+  nube: 'Nube.mp3',
+  'oracion-beti-banano': 'Oracion-beti-banano.mp3',
+  'beti-se-come-el-banano': 'Oracion-beti-banano.mp3',
+  'oracion-el-barco': 'El-barco-sube-la-ola.mp3',
+  'oracion-la-bota': 'La-bota-esta-rota.mp3',
+  pastel: 'Pastel.mp3',
+  'silaba-ba': 'Ba.mp3',
+  'silaba-be': 'Be.mp3',
+  'silaba-bi': 'Bi.mp3',
+  'silaba-bo': 'Bo.mp3',
+  'silaba-bu': 'Bu.mp3',
+  tapir: 'Tapir.mp3',
+  tomate: 'Tomate.mp3',
+  tubos: 'Tubos.mp3',
+}
+const bAudio = (name) => (
+  bAudioFiles[name]
+    ? `/audio/lecciones/b/${bAudioFiles[name]}`
+    : `/audio/lecciones/b/${name}.mp3`
+)
 
 export const bReading = {
   title: 'Los bananos de Balú',
