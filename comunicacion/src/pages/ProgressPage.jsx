@@ -5,6 +5,7 @@ import Card from '../components/common/Card'
 import BackButton from '../components/navigation/BackButton'
 import BottomNav from '../components/navigation/BottomNav'
 import ProgressBar from '../components/progress/ProgressBar'
+import '../styles/progress.css'
 import { getUnitThemeClass, units } from '../data/units'
 import { obtenerResumenProgreso } from '../lib/progreso'
 import '../styles/units-map.css'
@@ -75,7 +76,7 @@ function ProgressPage() {
   ).length
 
   return (
-    <main className="page units-map-page">
+    <main className="page units-map-page progress-page">
       <BackButton label="Volver al inicio" to="/home" />
 
       <header className="units-map-header">
