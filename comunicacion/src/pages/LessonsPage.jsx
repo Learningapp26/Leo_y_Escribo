@@ -1,7 +1,12 @@
 import {
   ArrowRight,
+  Bean,
+  Flower2,
   LockKeyhole,
   MapPinned,
+  Shrub,
+  Sprout,
+  TreeDeciduous,
   Trees,
 } from 'lucide-react'
 
@@ -9,20 +14,37 @@ import Button from '../components/common/Button'
 import Card from '../components/common/Card'
 import BackButton from '../components/navigation/BackButton'
 import BottomNav from '../components/navigation/BottomNav'
+
 import {
   getUnitThemeClass,
   isUnitUnlocked,
   units,
 } from '../data/units'
+
 import useStudentProgress from '../hooks/useStudentProgress'
 import '../styles/units-map.css'
 
+const UNIT_GROWTH_ICONS = [
+  Bean,
+  Sprout,
+  Flower2,
+  Shrub,
+  TreeDeciduous,
+  Trees,
+]
+
+
+
 function LessonsPage() {
-  const { completedLessons, loadingProgress } = useStudentProgress()
+  const {
+    completedLessons,
+    loadingProgress,
+  } = useStudentProgress()
 
   return (
     <main className="page units-map-page">
       <BackButton
+        className="units-map-back"
         label="Volver al inicio"
         to="/home"
       />
@@ -50,9 +72,28 @@ function LessonsPage() {
             unit.id,
             completedLessons,
           )
+
           const isLeft = index % 2 === 0
+
           const themeClass =
             getUnitThemeClass(unit.id)
+
+          const GrowthIcon =
+            UNIT_GROWTH_ICONS[index] ?? Trees
+
+          const growthIcon = (
+            <GrowthIcon
+              className={[
+                'units-map__growth-icon',
+                themeClass,
+                `units-map__growth-icon--stage-${unit.id}`,
+                unlocked
+                  ? 'units-map__growth-icon--unlocked'
+                  : 'units-map__growth-icon--locked',
+              ].join(' ')}
+              aria-hidden="true"
+            />
+          )
 
           const unitCard = (
             <Card
@@ -118,19 +159,15 @@ function LessonsPage() {
                     : 'units-map__side--scenery',
                 ].join(' ')}
               >
-                {isLeft ? (
-                  unitCard
-                ) : (
-                  <Trees
-                    className="units-map__forest-icon"
-                    aria-hidden="true"
-                  />
-                )}
+                {isLeft
+                  ? unitCard
+                  : growthIcon}
               </div>
 
               <span
                 className={[
                   'units-map__marker',
+                  themeClass,
                   unlocked
                     ? 'units-map__marker--unlocked'
                     : 'units-map__marker--locked',
@@ -150,19 +187,15 @@ function LessonsPage() {
                     : 'units-map__side--card',
                 ].join(' ')}
               >
-                {isLeft ? (
-                  <Trees
-                    className="units-map__forest-icon"
-                    aria-hidden="true"
-                  />
-                ) : (
-                  unitCard
-                )}
+                {isLeft
+                  ? growthIcon
+                  : unitCard}
               </div>
             </div>
           )
         })}
       </section>
+
       <BottomNav />
     </main>
   )
