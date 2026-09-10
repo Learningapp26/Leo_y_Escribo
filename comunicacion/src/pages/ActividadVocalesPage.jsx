@@ -5,51 +5,18 @@ import Button from '../components/common/Button'
 import Card from '../components/common/Card'
 import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
+import {
+  vowelAudioPaths,
+  vowelInitialActivity,
+  vowelInitialExercises,
+  vowelOptions,
+} from '../data/vocalesData'
 import { playAudio } from '../lib/audioPlayer'
-import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
+import {
+  registrarLeccionCompletada,
+  registrarProgreso,
+} from '../lib/progreso'
 import '../styles/vowels.css'
-
-const ejercicios = [
-  {
-    palabra: 'avion',
-    imagen: '/images/lecciones/n/nave.png',
-    respuesta: 'a',
-    audio: '/audio/lecciones/vocales/avion.mp3',
-  },
-  {
-    palabra: 'elefante',
-    imagen: '/images/lecciones/vocales/elefante.png',
-    respuesta: 'e',
-    audio: '/audio/lecciones/vocales/elefante.mp3',
-  },
-  {
-    palabra: 'iguana',
-    imagen: '/images/lecciones/vocales/iguana.png',
-    respuesta: 'i',
-    audio: '/audio/lecciones/vocales/iguana.mp3',
-  },
-  {
-    palabra: 'oso',
-    imagen: '/images/lecciones/vocales/oso.png',
-    respuesta: 'o',
-    audio: '/audio/lecciones/vocales/oso.mp3',
-  },
-  {
-    palabra: 'uniforme',
-    imagen: '/images/lecciones/vocales/uniforme.png',
-    respuesta: 'u',
-    audio: '/audio/lecciones/vocales/uniforme.mp3',
-  },
-]
-
-const vocales = ['a', 'e', 'i', 'o', 'u']
-const vowelAudioPaths = {
-  a: '/audio/lecciones/vocales/A.mp3',
-  e: '/audio/lecciones/vocales/E.mp3',
-  i: '/audio/lecciones/vocales/I.mp3',
-  o: '/audio/lecciones/vocales/O.mp3',
-  u: '/audio/lecciones/vocales/U.mp3',
-}
 
 function ActividadVocalesPage() {
   const [ejercicioActual, setEjercicioActual] = useState(0)
@@ -59,7 +26,7 @@ function ActividadVocalesPage() {
   const [guardandoProgreso, setGuardandoProgreso] = useState(false)
   const [errorGuardado, setErrorGuardado] = useState('')
 
-  const ejercicio = ejercicios[ejercicioActual]
+  const ejercicio = vowelInitialExercises[ejercicioActual]
 
   const comprobarRespuesta = () => {
     if (!vocalSeleccionada) return
@@ -70,9 +37,12 @@ function ActividadVocalesPage() {
     setResultado(esCorrecta ? 'correcto' : 'reintento')
 
     registrarProgreso({
-      actividad: 'vocales-inicial',
+      actividad: vowelInitialActivity.activityId,
       correcto: esCorrecta,
-      detalle: { leccionId: 'vocales', ejercicioId: ejercicio.palabra },
+      detalle: {
+        leccionId: vowelInitialActivity.lessonId,
+        ejercicioId: ejercicio.palabra,
+      },
     })
   }
 
@@ -83,21 +53,23 @@ function ActividadVocalesPage() {
 
   const siguienteEjercicio = async () => {
     const esUltimo =
-      ejercicioActual === ejercicios.length - 1
+      ejercicioActual === vowelInitialExercises.length - 1
 
     if (esUltimo) {
       if (guardandoProgreso) return
 
       setGuardandoProgreso(true)
       setErrorGuardado('')
-      const { error, skipped } = await registrarLeccionCompletada('vocales')
+      const { error, skipped } = await registrarLeccionCompletada(
+        vowelInitialActivity.lessonId,
+      )
 
       if (error || skipped) {
         setGuardandoProgreso(false)
         setErrorGuardado(
           skipped
-            ? 'No hay una sesión activa. Inicia sesión para guardar tu progreso.'
-            : 'No se pudo guardar el progreso. Intenta nuevamente.',
+            ? vowelInitialActivity.saveSessionError
+            : vowelInitialActivity.saveGenericError,
         )
         return
       }
@@ -120,13 +92,13 @@ function ActividadVocalesPage() {
               className="vowels-result-card__icon"
               aria-hidden="true"
             >
-              ⭐
+              *
             </span>
 
-            <h1>Terminaste la actividad</h1>
+            <h1>{vowelInitialActivity.completionTitle}</h1>
 
             <p className="text-instruction">
-              Identificaste la vocal inicial de cada palabra.
+              {vowelInitialActivity.completionMessage}
             </p>
 
             <Button
@@ -152,21 +124,20 @@ function ActividadVocalesPage() {
       <section className="vowels-page__content">
         <BackButton
           label="Volver a la leccion"
-          to="/lecciones/vocales"
+          to={vowelInitialActivity.lessonRoute}
         />
 
         <header className="vowels-page__header">
           <span className="vowels-page__unit">
-            Actividad 1
+            {vowelInitialActivity.unitLabel}
           </span>
 
           <h1 id="titulo-actividad">
-            Encuentra la vocal inicial
+            {vowelInitialActivity.title}
           </h1>
 
           <p className="text-instruction vowels-page__instruction">
-            Escucha la palabra y selecciona la vocal con la que
-            comienza su nombre.
+            {vowelInitialActivity.instruction}
           </p>
 
           <Button
@@ -174,9 +145,7 @@ function ActividadVocalesPage() {
             size="large"
             icon={Volume2}
             onClick={() =>
-              playAudio(
-                '/audio/lecciones/vocales/Encuentra la vocal inicial.mp3',
-              )
+              playAudio(vowelInitialActivity.instructionAudio)
             }
           >
             Escuchar instruccion
@@ -185,8 +154,8 @@ function ActividadVocalesPage() {
 
         <ProgressBar
           value={ejercicioActual + 1}
-          max={ejercicios.length}
-          label={`Ejercicio ${ejercicioActual + 1} de ${ejercicios.length}`}
+          max={vowelInitialExercises.length}
+          label={`Ejercicio ${ejercicioActual + 1} de ${vowelInitialExercises.length}`}
         />
 
         <Card className="vowels-exercise-card">
@@ -211,14 +180,14 @@ function ActividadVocalesPage() {
           </Button>
 
           <p className="text-reading">
-            Con que vocal comienza?
+            {vowelInitialActivity.prompt}
           </p>
 
           <div
             className="vowels-options"
             aria-label="Opciones de vocales"
           >
-            {vocales.map((vocal) => {
+            {vowelOptions.map((vocal) => {
               const selected = vocalSeleccionada === vocal
 
               return (
@@ -249,7 +218,7 @@ function ActividadVocalesPage() {
               className="feedback feedback--success"
               role="status"
             >
-              Muy bien! Elegiste la vocal correcta.
+              {vowelInitialActivity.successFeedback}
             </p>
           )}
 
@@ -258,7 +227,7 @@ function ActividadVocalesPage() {
               className="feedback feedback--retry"
               role="status"
             >
-              Casi lo logras. Escucha la palabra e intentalo otra vez.
+              {vowelInitialActivity.retryFeedback}
             </p>
           )}
 
@@ -304,7 +273,7 @@ function ActividadVocalesPage() {
               >
                 {guardandoProgreso
                   ? 'Guardando progreso...'
-                  : ejercicioActual === ejercicios.length - 1
+                  : ejercicioActual === vowelInitialExercises.length - 1
                     ? 'Finalizar actividad'
                     : 'Siguiente ejercicio'}
               </Button>
