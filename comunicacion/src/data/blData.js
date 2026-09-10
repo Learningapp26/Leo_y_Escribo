@@ -130,6 +130,7 @@ export const blTrabalenguas = [
       'la tabla se ablanda.',
     ],
     image: '/images/lecciones/bl/pablo-tabla.png',
+    imageAlt: 'pablo hablando al pueblo',
     audio: '/audio/lecciones/bl/trabalenguas.mp3',
   },
 ]
@@ -286,16 +287,16 @@ export const blSyllableJoin = [
     id: 'doblada',
     word: 'doblada',
     pattern: 'do___da',
-    wordAudio: '/audio/lecciones/pr/prado.mp3',
+    wordAudio: '/audio/lecciones/bl/doblada.mp3',
     options: [
       {
         syllable: 'bli',
-        audio: '/audio/lecciones/pr/silaba-pri.mp3',
+        audio: '/audio/lecciones/bl/silaba-bli.mp3',
         isCorrect: false,
       },
       {
         syllable: 'bla',
-        audio: '/audio/lecciones/pr/silaba-pra.mp3',
+        audio: '/audio/lecciones/bl/silaba-bla.mp3',
         isCorrect: true,
       },
     ],
@@ -322,7 +323,7 @@ export const blSyllableJoin = [
     id: 'mueble',
     word: 'mueble',
     pattern: 'mue___',
-    wordAudio: '/audio/lecciones/pr/mueble.mp3',
+    wordAudio: '/audio/lecciones/bl/mueble.mp3',
     options: [
       {
         syllable: 'bli',

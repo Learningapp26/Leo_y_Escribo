@@ -429,7 +429,7 @@ function ActividadBlSonidosPage() {
                 <img
                   className="selection-image"
                   src={item.image}
-                  alt={item.text.join(' ')}
+                  alt={item.imageAlt}
                 />
 
                 {item.text.map((line) => (
