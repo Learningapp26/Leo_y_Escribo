@@ -37,15 +37,14 @@ function BookLessonReading({ lesson }) {
           <img src={reading.image} alt={reading.imageAlt} onError={() => setImageMissing(true)} />
         </div>}
       </Card>
-      <section className="comprehension-section" aria-labelledby="questions-title">
+      <section className="comprehension-section text-center" aria-labelledby="questions-title">
         <h2 id="questions-title">Conversemos sobre el cuento</h2>
-        <p className="text-instruction">Escucha y conversa con tu maestra.</p>
-        <div className="comprehension-grid">
+        <p className="text-instruction">Tu maestra leerá las preguntas. Conversen sobre el cuento.</p>
+        <div className="comprehension-grid comprehension-grid--discussion">
           {reading.questions.map((question, index) => (
             <Card className="comprehension-grid__item" key={question.text}>
               <span className="comprehension-list__number" aria-hidden="true">{index + 1}</span>
               <p className="text-reading">{question.text}</p>
-              <LessonAudioButton audio={question.audio}>Escuchar pregunta {index + 1}</LessonAudioButton>
             </Card>
           ))}
         </div>

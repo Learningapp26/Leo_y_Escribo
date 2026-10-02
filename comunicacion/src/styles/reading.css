@@ -115,6 +115,24 @@
     gap: var(--space-md);
 }
 
+.comprehension-grid--discussion {
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+    max-width: 900px;
+    margin-inline: auto;
+}
+
+.comprehension-grid--discussion > .comprehension-grid__item {
+    flex-direction: row;
+    align-items: flex-start;
+    padding: var(--space-lg);
+    text-align: left;
+}
+
+.comprehension-grid--discussion .text-reading {
+    margin: 0;
+}
+
 .comprehension-list__number {
     display: flex;
     align-items: center;

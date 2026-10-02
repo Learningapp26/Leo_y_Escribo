@@ -97,6 +97,23 @@
  
 }
 
+/* Equal-width cards with every row centered, including incomplete rows. */
+.selection-options.selection-options--centered {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.selection-options--centered > .app-card {
+    flex: 0 1 210px;
+    max-width: 100%;
+}
+
+.selection-options--centered > .app-card > .btn:first-child {
+    flex: 1;
+}
+
 
 /* ============================================================
    Botón de selección

@@ -24,7 +24,7 @@ export const fLesson = {
     audio: audio('la-foto-familiar', `La foto familiar\n\n${paragraphs.join('\n\n')}`, 'Historia'),
     image: '/images/lecciones/f/lectura-f.png',
     imageAlt: 'Felipe y su familia reunidos debajo del árbol para la foto familiar.',
-    questions: questions.map((text, index) => ({ text, audio: audio(`pregunta-cuento-${index + 1}`, text) })),
+    questions: questions.map((text) => ({ text })),
   },
   feedback: {
     correct: audio('respuesta-correcta', '¡Correcto! Puedes continuar.'),
@@ -40,7 +40,7 @@ export const fLesson = {
         words(['falda', 'fuego', 'pie', 'flecha', 'mochila', 'flor'], true), ['falda', 'fuego', 'flecha', 'flor'], { multiple: true }),
       select('juego-sonidos', 140, 'Escucha las palabras. Selecciona todas las que tienen el sonido de la letra F.',
         words(['feo', 'Fabiola', 'Luna', 'finca', 'famoso', 'pelo', 'chorizo', 'forma', 'fuerte', 'fino', 'jarra', 'faja', 'fútbol']),
-        words(['feo', 'Fabiola', 'finca', 'famoso', 'forma', 'fuerte', 'fino', 'faja', 'fútbol']).map((item) => item.id), { multiple: true, hideOptions: true }),
+        words(['feo', 'Fabiola', 'finca', 'famoso', 'forma', 'fuerte', 'fino', 'faja', 'fútbol']).map((item) => item.id), { multiple: true }),
       ...[['foca', 'foto'], ['faro', 'fantasma'], ['fideos', 'fila']].map(([source, answer]) => select(
         `pareja-${source}`, 140, 'Escucha los nombres y elige el dibujo que comienza con los mismos dos sonidos.',
         words(['fantasma', 'fila', 'foto'], true), [answer], { prompt: word(source, true), hideWord: true })),

@@ -23,7 +23,7 @@ export const enieLesson = {
     audio: audio('la-ninia-y-el-niandu', `La niña y el ñandú\n\n${paragraphs.join('\n\n')}`, 'Historia'),
     image: '/images/lecciones/enie/lectura-enie.png',
     imageAlt: 'Sami pasea por el campo sobre su amigo el ñandú, en Perú.',
-    questions: questions.map((text, index) => ({ text, audio: audio(`pregunta-cuento-${index + 1}`, text) })),
+    questions: questions.map((text) => ({ text })),
   },
   feedback: {
     correct: audio('respuesta-correcta', '¡Correcto! Puedes continuar.'),
@@ -40,7 +40,7 @@ export const enieLesson = {
         words(['sueño', 'uña', 'niño', 'muñeca']).map((item) => item.id), { multiple: true }),
       select('juego-sonidos', 160, 'Escucha las palabras. Selecciona todas las que tienen el sonido de la letra Ñ.',
         words(['pañuelo', 'cuaderno', 'sueño', 'pita', 'Toño', 'árbol', 'paño', 'caña', 'canasta', 'año', 'España', 'mañana', 'lento', 'daño', 'cabaña']),
-        words(['pañuelo', 'sueño', 'Toño', 'paño', 'caña', 'año', 'España', 'mañana', 'daño', 'cabaña']).map((item) => item.id), { multiple: true, hideOptions: true }),
+        words(['pañuelo', 'sueño', 'Toño', 'paño', 'caña', 'año', 'España', 'mañana', 'daño', 'cabaña']).map((item) => item.id), { multiple: true }),
       ...['puño', 'piña', 'caña', 'leña', 'moño', 'araña'].map((text) => position(text, 160, 'ñ')),
       ...[['pestaña', 'araña'], ['pañal', 'señal'], ['piña', 'niña']].map(([source, answer]) => select(
         `rima-${word(source).id}`, 161, 'Escucha los nombres. Selecciona el dibujo cuyo nombre rima con el de arriba.',

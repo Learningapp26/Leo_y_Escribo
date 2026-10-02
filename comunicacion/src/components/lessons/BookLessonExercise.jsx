@@ -64,7 +64,7 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
       {ordered && <div className="completion-target" aria-live="polite" aria-label="Tu respuesta">
         <p className="text-word">{answerText || '…'}</p>
       </div>}
-      {!passive && <div className={ordered ? 'completion-bank' : `selection-options ${options.length % 3 === 0 ? 'selection-options--trio' : ''}`}>
+      {!passive && <div className={ordered ? 'completion-bank' : 'selection-options selection-options--centered'}>
         {options.map((option, index) => {
           const active = selected.includes(index)
           return <Card key={`${option.id}-${index}`} selected={active}>
@@ -72,11 +72,11 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
               aria-pressed={active} aria-disabled={feedback === 'correct'} disabled={ordered && active}
               onClick={() => pick(index)}>
               {option.image ? <img className="selection-image" src={option.image} alt={option.label} />
-                : exercise.hideOptions ? `Palabra ${index + 1}` : option.label}
+                : option.label}
               {active && <Check aria-label="Seleccionado" size={20} />}
             </Button>
             {option.audio && <LessonAudioButton audio={option.audio} fullWidth
-              aria-label={exercise.hideOptions ? `Escuchar palabra ${index + 1}` : `Escuchar ${option.label}`}>
+              aria-label={`Escuchar ${option.label}`}>
               Escuchar
             </LessonAudioButton>}
           </Card>
