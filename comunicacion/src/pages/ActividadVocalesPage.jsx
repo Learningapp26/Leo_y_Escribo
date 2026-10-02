@@ -85,9 +85,9 @@ function ActividadVocalesPage() {
 
   if (actividadTerminada) {
     return (
-      <main className="page vowels-page lesson-theme--unit-1">
+      <main className="page selection-page vowels-page lesson-theme--unit-1">
         <section className="vowels-page__content">
-          <Card className="vowels-result-card">
+          <Card className="selection-card vowels-result-card">
             <span
               className="vowels-result-card__icon"
               aria-hidden="true"
@@ -118,7 +118,7 @@ function ActividadVocalesPage() {
 
   return (
     <main
-      className="page vowels-page lesson-theme--unit-1"
+      className="page selection-page vowels-page lesson-theme--unit-1"
       aria-labelledby="titulo-actividad"
     >
       <section className="vowels-page__content">
@@ -127,8 +127,8 @@ function ActividadVocalesPage() {
           to={vowelInitialActivity.lessonRoute}
         />
 
-        <header className="vowels-page__header">
-          <span className="vowels-page__unit">
+        <header className="text-center vowels-page__header">
+          <span className="text-ui-label">
             {vowelInitialActivity.unitLabel}
           </span>
 
@@ -158,7 +158,7 @@ function ActividadVocalesPage() {
           label={`Ejercicio ${ejercicioActual + 1} de ${vowelInitialExercises.length}`}
         />
 
-        <Card className="vowels-exercise-card">
+        <Card className="selection-card vowels-exercise-card">
           <img
             className="vowels-exercise-card__image"
             src={ejercicio.imagen}
@@ -184,7 +184,7 @@ function ActividadVocalesPage() {
           </p>
 
           <div
-            className="vowels-options"
+            className="selection-options vowels-options"
             aria-label="Opciones de vocales"
           >
             {vowelOptions.map((vocal) => {
@@ -193,13 +193,16 @@ function ActividadVocalesPage() {
               return (
                 <Button
                   key={vocal}
-                  variant={
-                    selected
-                      ? 'selected'
-                      : 'secondary'
-                  }
+                  variant="secondary"
                   size="large"
-                  className="vowels-options__button text-letter"
+                  className={[
+                    'selection-button',
+                    'vowels-options__button',
+                    'text-letter',
+                    selected ? 'selection-button--selected' : '',
+                  ]
+                    .filter(Boolean)
+                    .join(' ')}
                   aria-pressed={selected}
                   onClick={() => {
                     setVocalSeleccionada(vocal)

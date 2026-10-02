@@ -14,7 +14,7 @@ import '../styles/vowels.css'
 
 function LeccionVocalesPage() {
   return (
-    <main className="page vowels-page lesson-theme--unit-1">
+    <main className="page selection-page vowels-page lesson-theme--unit-1">
       <section
         className="vowels-page__content"
         aria-labelledby="titulo-vocales"
@@ -24,8 +24,8 @@ function LeccionVocalesPage() {
           to="/lecciones/unidad/1"
         />
 
-        <header className="vowels-page__header">
-          <span className="vowels-page__unit">
+        <header className="text-center vowels-page__header">
+          <span className="text-ui-label">
             {vowelLesson.unitLabel}
           </span>
 
@@ -56,7 +56,7 @@ function LeccionVocalesPage() {
           label={vowelLesson.progressLabel}
         />
 
-        <Card className="vowels-review-card">
+        <Card className="selection-card vowels-review-card">
           <BookOpen
             className="vowels-review-card__icon"
             aria-hidden="true"
@@ -100,7 +100,7 @@ function LeccionVocalesPage() {
         </Card>
 
         <Card
-          className="vowels-activity-summary"
+          className="lesson-activity-menu__card"
           title={vowelLesson.activityTitle}
           description={vowelLesson.activityDescription}
           footer={

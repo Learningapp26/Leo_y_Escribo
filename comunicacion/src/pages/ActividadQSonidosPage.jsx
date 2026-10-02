@@ -5,6 +5,7 @@ import Button from '../components/common/Button'
 import Card from '../components/common/Card'
 import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
+import StarsCounter from '../components/progress/StarsCounter'
 import { getLessonThemeClass } from '../data/lessonColors'
 import {
   qInitialSoundImages,
@@ -35,6 +36,7 @@ function getSelectionState(isSelected, feedback) {
 function ActividadQSonidosPage() {
   const [phaseIndex, setPhaseIndex] = useState(0)
   const phase = PHASES[phaseIndex]
+  const [stars, setStars] = useState(0)
 
   const themeClass = getLessonThemeClass('q')
 
@@ -75,6 +77,8 @@ function ActividadQSonidosPage() {
       correcto: isCorrect,
       detalle: { leccionId: 'q', fase: 'inicio' },
     })
+
+    if (isCorrect) setStars((current) => current + 1)
   }
 
   const retryInitialImages = () => {
@@ -98,6 +102,8 @@ function ActividadQSonidosPage() {
         ejercicioId: middleExercise.id,
       },
     })
+
+    if (isCorrect) setStars((current) => current + 1)
   }
 
   const nextMiddleWord = () => {
@@ -123,6 +129,12 @@ function ActividadQSonidosPage() {
         value={phaseIndex + 1}
         max={PHASES.length}
         label={`Parte ${phaseIndex + 1} de ${PHASES.length}`}
+      />
+
+      <StarsCounter
+        current={stars}
+        total={1 + qMiddleSoundWords.length}
+        label="Estrellas"
       />
 
       {phase === 'sonido' && (

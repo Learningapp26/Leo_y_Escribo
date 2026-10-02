@@ -13,9 +13,13 @@ function LessonAccessGuard({ children, lessonId }) {
   const { completedLessons, loadingProgress } = useStudentProgress(pathname)
 
   if (!lesson) return children
-  if (loadingProgress) return null
+  // TEMP_UNBLOCK_START
+  const temporarilyUnlocked = true
+  // TEMP_UNBLOCK_END
 
-  return isLessonUnlocked(lesson.id, completedLessons)
+  if (!temporarilyUnlocked && loadingProgress) return null
+
+  return temporarilyUnlocked || isLessonUnlocked(lesson.id, completedLessons)
     ? children
     : <Navigate to="/lecciones" replace />
 }

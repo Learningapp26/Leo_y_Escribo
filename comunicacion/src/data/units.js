@@ -52,19 +52,25 @@ export const units = [
         route: '/lecciones/t',
         available: true,
       },
-      {
-        id: 'n',
-        title: 'Letra N',
-        route: '/lecciones/n',
-        available: true,
-      },
-    ],
-  },
-  {
-    id: 2,
-    title: 'Unidad 2',
-    pageRange: 'Páginas 59–96',
-    lessons: [
+{
+  id: 'n',
+  title: 'Letra N',
+  route: '/lecciones/n',
+  available: true,
+},
+{
+  id: 'juguemos-palabras',
+  title: 'Juguemos con las palabras',
+  route: '/unidad-1/juguemos-palabras',
+  available: true,
+},
+],
+},
+{
+  id: 2,
+  title: 'Unidad 2',
+  pageRange: 'Páginas 59–96',
+  lessons: [
       {
         id: 'c',
         title: 'Letra C',
@@ -180,7 +186,7 @@ export const units = [
         id: 'cl',
         title: 'Combinación CL',
         route: '/lecciones/cl',
-        available: false,
+        available: true,
       },
       {
         id: 'cr',
@@ -361,6 +367,10 @@ export function isUnitUnlocked(
   unitId,
   completedLessonIds = new Set(),
 ) {
+  // TEMP_UNBLOCK_START
+  if (getUnitById(unitId)) return true
+  // TEMP_UNBLOCK_END
+
   const unit = getUnitById(unitId)
   if (!unit) return false
 
@@ -383,6 +393,12 @@ export function isLessonUnlocked(
   lessonId,
   completedLessonIds = new Set(),
 ) {
+  // TEMP_UNBLOCK_START
+  if (units.some((unit) => unit.lessons.some((lesson) => lesson.id === lessonId))) {
+    return true
+  }
+  // TEMP_UNBLOCK_END
+
   const lessonIndex = availableLessons.findIndex(
     (lesson) => lesson.id === lessonId,
   )

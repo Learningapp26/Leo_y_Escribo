@@ -62,6 +62,7 @@ import { unit3WordPracticeConfig, unit4WordPracticeConfig } from '../data/wordPr
 import RepasoUnidad2Page from '../pages/RepasoUnidad2Page'
 import SubidasResbalonesPage from '../pages/SubidasResbalonesPage'
 import DominoPalabrasPage from '../pages/DominoPalabrasPage'
+import JuguemosPalabras from '../pages/JuguemosPalabras'
 
 import LeccionCPage from '../pages/LeccionCPage'
 import ActividadCSonidosPage from '../pages/ActividadCSonidosPage'
@@ -151,6 +152,10 @@ import ActividadCrSilabasPage from '../pages/ActividadCrSilabasPage'
 import ActividadCrFinalPage from '../pages/ActividadCrFinalPage'
 
 import MemoriaJuegoPage from '../pages/MemoriaJuegoPage'
+import LeccionClPage from '../pages/LeccionClPage'
+import ActividadClSonidosPage from '../pages/ActividadClSonidosPage'
+import ActividadClSilabasPage from '../pages/ActividadClSilabasPage'
+import ActividadClFinalPage from '../pages/ActividadClFinalPage'
 
 function AppRouter() {
   return (
@@ -379,6 +384,11 @@ function AppRouter() {
           <Route
             path="/actividad/palabras-practica"
             element={<PalabrasPracticaPage />}
+          />
+
+          <Route
+            path="/unidad-1/juguemos-palabras"
+            element={<JuguemosPalabras />}
           />
 
           <Route
@@ -714,10 +724,35 @@ function AppRouter() {
             element={<ActividadCrFinalPage />}
           />
 
-          <Route 
+          <Route
             path="/lecciones/juego-memoria"
             element={<MemoriaJuegoPage />}
           />
+          <Route
+            path="/lecciones/cl"
+            element={<LeccionClPage />}
+          />
+          <Route
+            path="/lecciones/cl"
+            element={<LeccionClPage />}
+          />
+
+          <Route
+            path="/actividad/cl-sonidos"
+            element={<ActividadClSonidosPage />}
+          />
+
+          <Route
+            path="/actividad/cl-silabas"
+            element={<ActividadClSilabasPage />}
+          />
+
+          <Route
+            path="/actividad/cl-final"
+            element={<ActividadClFinalPage />}
+          />
+
+
 
           <Route
             path="/lecciones/:lessonId"
