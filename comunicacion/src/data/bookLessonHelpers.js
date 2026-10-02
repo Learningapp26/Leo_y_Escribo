@@ -27,7 +27,10 @@ export function createBookContent(lessonId) {
     instruction: instruction(sentence ? 'ordenar-oracion' : 'ordenar-silabas', sentence
       ? 'Selecciona las palabras en orden para formar una oración. Comienza con mayúscula y termina con punto. Puedes quitar la última palabra para corregir.'
       : 'Selecciona las sílabas en orden para formar la palabra. Puedes quitar la última sílaba para corregir.'),
-    options: pieces.map(sentence ? (text) => word(text) : syllable),
+    options: pieces.map(sentence ? (text) => ({
+      ...word(text.replace(/[.!?]+$/, '').replace(/^(La|El)$/, (article) => article.toLowerCase())),
+      label: text,
+    }) : syllable),
     answer, separator: sentence ? ' ' : '',
     resultAudio: audio(sentence ? `oracion-${id}` : slug(answer), answer, sentence ? 'Oraciones' : 'Palabras'),
   })
