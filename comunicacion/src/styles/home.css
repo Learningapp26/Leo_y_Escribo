@@ -28,7 +28,9 @@
   align-items: center;
   gap: clamp(2rem, 4vw, 4rem);
   padding: clamp(2rem, 4vw, 3.5rem);
-  background-color: var(--color-surface);
+  background:
+    radial-gradient(ellipse at 0% 0%, color-mix(in srgb, var(--color-support) 14%, transparent), transparent 60%),
+    var(--color-surface);
 
 border: 3px solid
   color-mix(
@@ -45,6 +47,7 @@ box-shadow:
     transparent
   );
 overflow: hidden;
+border-top-color: var(--color-reward);
 }
 
 /* Ilustración */
@@ -53,6 +56,8 @@ overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: var(--radius-full);
+  background: radial-gradient(ellipse, color-mix(in srgb, var(--color-reward) 24%, transparent), transparent 70%);
 }
 
 .home-card__image {
@@ -61,6 +66,7 @@ overflow: hidden;
   max-width: 470px;
   height: auto;
   object-fit: contain;
+  mix-blend-mode: multiply;
 }
 
 /* Contenido */
@@ -87,9 +93,14 @@ overflow: hidden;
   margin: var(--space-lg) auto 0;
 }
 
+.home-card .btn {
+  white-space: normal;
+  line-height: var(--line-height-tight);
+}
+
 /* Tableta vertical */
 
-@media (max-width: 768px) {
+@media (max-width: 960px) {
   .home-page__content {
     max-width: 620px;
   }
