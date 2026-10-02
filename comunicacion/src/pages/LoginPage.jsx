@@ -76,7 +76,7 @@ function LoginPage() {
           <span className="login-brand"><BookOpen aria-hidden="true" /> Leo y Escribo</span>
           <img className="login-welcome__image" src="/images/login-reading.png" alt="" aria-hidden="true" draggable={false} />
           <h2>Aprender es una aventura</h2>
-          <p>Lee, descubre y aprende a tu ritmo.</p>
+          <p>Lee, calcula y descubre a tu ritmo.</p>
           <div className="login-letters" aria-hidden="true"><span>A</span><span>B</span><span>C</span></div>
         </aside>
 
