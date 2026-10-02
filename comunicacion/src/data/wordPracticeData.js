@@ -506,8 +506,6 @@ const unit4WordLists = [
     lessonId: 'v',
     label: 'V v',
     title: 'Palabras con V v',
-    coverImage: '/images/lecciones/v/vaca-rana-lomo.png',
-    coverAlt: 'Una vaca con manchas cafés y una rana sobre su lomo en una granja.',
     words: [
       'volver', 'volar', 'valer', 'valor', 'vapor', 'vender', 'viaje',
       'visual', 'vuelta', 'viejo', 'Víctor', 'Vanesa', 'vasija', 'verdura',
