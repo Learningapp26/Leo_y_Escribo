@@ -33,10 +33,6 @@ const UNIT_GROWTH_ICONS = [
   Trees,
 ]
 
-// TEMP_UNBLOCK_START
-const tempUnlockAllLessons = () => true
-// TEMP_UNBLOCK_END
-
 function LessonsPage() {
   const {
     completedLessons,
@@ -70,14 +66,10 @@ function LessonsPage() {
         aria-label="Camino de unidades"
       >
         {units.map((unit, index) => {
-          // TEMP_UNBLOCK_START
-          const unlocked = tempUnlockAllLessons() || (
-            !loadingProgress && isUnitUnlocked(
-              unit.id,
-              completedLessons,
-            )
+          const unlocked = !loadingProgress && isUnitUnlocked(
+            unit.id,
+            completedLessons,
           )
-          // TEMP_UNBLOCK_END
 
           const isLeft = index % 2 === 0
 

@@ -367,10 +367,6 @@ export function isUnitUnlocked(
   unitId,
   completedLessonIds = new Set(),
 ) {
-  // TEMP_UNBLOCK_START
-  if (getUnitById(unitId)) return true
-  // TEMP_UNBLOCK_END
-
   const unit = getUnitById(unitId)
   if (!unit) return false
 
@@ -393,12 +389,6 @@ export function isLessonUnlocked(
   lessonId,
   completedLessonIds = new Set(),
 ) {
-  // TEMP_UNBLOCK_START
-  if (units.some((unit) => unit.lessons.some((lesson) => lesson.id === lessonId))) {
-    return true
-  }
-  // TEMP_UNBLOCK_END
-
   const lessonIndex = availableLessons.findIndex(
     (lesson) => lesson.id === lessonId,
   )

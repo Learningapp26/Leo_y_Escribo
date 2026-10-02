@@ -24,18 +24,12 @@ import {
 import useStudentProgress from '../hooks/useStudentProgress'
 import '../styles/units-map.css'
 
-// TEMP_UNBLOCK_START
-const tempUnlockAllLessons = () => true
-// TEMP_UNBLOCK_END
-
 function UnitLessonsPage() {
   const { unitId } = useParams()
   const unit = getUnitById(unitId)
   const { completedLessons, loadingProgress } = useStudentProgress()
 
-  // TEMP_UNBLOCK_START
-  if (!unit || (!tempUnlockAllLessons() && !loadingProgress && !isUnitUnlocked(unit.id, completedLessons))) {
-  // TEMP_UNBLOCK_END
+  if (!unit || (!loadingProgress && !isUnitUnlocked(unit.id, completedLessons))) {
     return (
       <Navigate
         to="/lecciones"
@@ -84,12 +78,8 @@ function UnitLessonsPage() {
           const lessonThemeClass =
             getLessonThemeClass(lesson.id)
           const completed = completedLessons.has(lesson.id)
-          // TEMP_UNBLOCK_START
-          const unlocked = tempUnlockAllLessons() || (
-            lesson.available && !loadingProgress &&
+          const unlocked = lesson.available && !loadingProgress &&
             isLessonUnlocked(lesson.id, completedLessons)
-          )
-          // TEMP_UNBLOCK_END
 
           return (
             <Card
