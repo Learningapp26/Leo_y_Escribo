@@ -134,6 +134,12 @@ import ActividadBrSonidosPage from '../pages/ActividadBrSonidosPage'
 import ActividadBrSilabasPage from '../pages/ActividadBrSilabasPage'
 import ActividadBrFinalPage from '../pages/ActividadBrFinalPage'
 
+import LeccionVPage from '../pages/LeccionVPage'
+import ActividadVSonidosPage from '../pages/ActividadVSonidosPage'
+import ActividadVSilabasPage from '../pages/ActividadVSilabasPage'
+import ActividadVCompletarPage from '../pages/ActividadVCompletarPage'
+import ActividadVFinalPage from '../pages/ActividadVFinalPage'
+
 function AppRouter() {
   return (
     <BrowserRouter>
@@ -635,6 +641,31 @@ function AppRouter() {
           <Route
             path="/actividad/br-final"
             element={<ActividadBrFinalPage />}
+          />
+
+          <Route
+            path="/lecciones/v"
+            element={<LeccionVPage />}
+          />
+
+          <Route
+            path="/actividad/v-sonidos"
+            element={<ActividadVSonidosPage />}
+          />
+
+          <Route
+            path="/actividad/v-silabas"
+            element={<ActividadVSilabasPage />}
+          />
+
+          <Route
+            path="/actividad/v-completar"
+            element={<ActividadVCompletarPage />}
+          />
+
+          <Route
+            path="/actividad/v-final"
+            element={<ActividadVFinalPage />}
           />
 
           <Route

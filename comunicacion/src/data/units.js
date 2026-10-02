@@ -197,7 +197,7 @@ export const units = [
         id: 'v',
         title: 'Letra V',
         route: '/lecciones/v',
-        available: false,
+        available: true,
       },
       {
         id: 'rr',
