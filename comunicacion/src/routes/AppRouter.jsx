@@ -144,6 +144,12 @@ import BookLessonActivity from '../components/lessons/BookLessonActivity'
 import { fLesson } from '../data/fData'
 import { enieLesson } from '../data/enieData'
 
+
+import LeccionCrPage from '../pages/LeccionCrPage'
+import ActividadCrSonidosPage from '../pages/ActividadCrSonidosPage'
+import ActividadCrSilabasPage from '../pages/ActividadCrSilabasPage'
+import ActividadCrFinalPage from '../pages/ActividadCrFinalPage'
+
 function AppRouter() {
   return (
     <BrowserRouter>
@@ -680,6 +686,26 @@ function AppRouter() {
           <Route
             path="/actividad/v-final"
             element={<ActividadVFinalPage />}
+          />
+
+          <Route
+            path="/lecciones/cr"
+            element={<LeccionCrPage />}
+          />
+
+          <Route
+            path="/actividad/cr-sonidos"
+            element={<ActividadCrSonidosPage />}
+          />
+
+          <Route
+            path="/actividad/cr-silabas"
+            element={<ActividadCrSilabasPage />}
+          />
+
+          <Route
+            path="/actividad/cr-final"
+            element={<ActividadCrFinalPage />}
           />
 
           <Route
