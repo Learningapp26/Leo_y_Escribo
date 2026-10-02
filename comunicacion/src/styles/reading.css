@@ -61,6 +61,12 @@
     margin: 0;
 }
 
+/* Preserve the complete story layout while an owner-supplied image is absent. */
+.reading-card--text-only {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: auto;
+}
+
 
 /* Para el audio */
 

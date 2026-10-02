@@ -695,6 +695,47 @@ input::placeholder {
   margin-inline: auto;
 }
 
+/* Shared opt-in layout for lessons with long instructions and option cards. */
+.lesson-page--contained {
+  width: min(100%, 1120px);
+  margin-inline: auto;
+}
+
+.lesson-page--contained > .btn,
+.lesson-page--contained > .stars-counter {
+  align-self: flex-start;
+}
+
+.lesson-page--contained .btn {
+  white-space: normal;
+  max-width: 100%;
+}
+
+.lesson-page--contained .btn__label {
+  line-height: var(--line-height-tight);
+}
+
+.lesson-page--contained .selection-options > .app-card {
+  min-width: 0;
+  align-items: center;
+  padding: var(--space-md);
+}
+
+.lesson-page--contained .selection-options > .app-card > .text-reading {
+  white-space: pre-line;
+}
+
+.lesson-page--contained .selection-options .btn:not(.btn--audio) .btn__label {
+  flex-direction: column;
+  gap: var(--space-sm);
+  width: 100%;
+}
+
+.lesson-page--contained .completion-bank > .app-card {
+  min-width: 0;
+  padding: var(--space-md);
+}
+
 /* ── 14. Accesibilidad ─────────────────────────────────────── */
 :focus-visible {
   outline: 3px solid var(--color-action);

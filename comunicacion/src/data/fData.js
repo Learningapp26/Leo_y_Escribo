@@ -34,8 +34,8 @@ export const fLesson = {
   activities: [
     { id: 'sonidos', title: 'Reconozcamos el sonido de F', exercises: [
       present('sonido-f', 140, 'Escucha el sonido de la letra F. Pronúncialo y repite las palabras.',
-        [word('familia', true), ...words(['Felipe', 'fila', 'feliz', 'fácil'])],
-        { sound: audio('sonido-f', '/f/ (sonido sostenido, sin decir «efe»)', 'Sonidos') }),
+        words(['Felipe', 'fila', 'feliz', 'fácil']),
+        { prompt: word('familia', true), sound: audio('sonido-f', '/f/ (sonido sostenido, sin decir «efe»)', 'Sonidos') }),
       select('sonido-inicial', 140, 'Escucha los nombres. Selecciona los dibujos que empiezan con el mismo sonido que familia.',
         words(['falda', 'fuego', 'pie', 'flecha', 'mochila', 'flor'], true), ['falda', 'fuego', 'flecha', 'flor'], { multiple: true }),
       select('juego-sonidos', 140, 'Escucha las palabras. Selecciona todas las que tienen el sonido de la letra F.',

@@ -33,8 +33,8 @@ export const enieLesson = {
   activities: [
     { id: 'sonidos', title: 'Reconozcamos el sonido de Ñ', exercises: [
       present('sonido-enie', 160, 'Escucha el sonido de la letra Ñ. Pronúncialo y repite las palabras.',
-        [word('ñandú', true), ...words(['niña', 'baño', 'dueño', 'pañal', 'sueño'])],
-        { sound: audio('sonido-enie', '/ñ/ (sonido sostenido, sin decir «eñe»)', 'Sonidos') }),
+        words(['niña', 'baño', 'dueño', 'pañal', 'sueño']),
+        { prompt: word('ñandú', true), sound: audio('sonido-enie', '/ñ/ (sonido sostenido, sin decir «eñe»)', 'Sonidos') }),
       select('reconocer-sonido', 160, 'Escucha los nombres. Selecciona los dibujos que tienen el sonido de Ñ, como ñandú.',
         words(['sueño', 'banano', 'uña', 'borrador', 'niño', 'muñeca'], true),
         words(['sueño', 'uña', 'niño', 'muñeca']).map((item) => item.id), { multiple: true }),
