@@ -202,7 +202,7 @@ export const unit2PracticeGroups = unit2WordPracticeGroups.map((group) => {
         id: `${group.id}-find-${index}`,
       })),
     },
-    shortest: details.shortest,
+    shortest: { prompt: '¿Cuál es la palabra más corta?', ...details.shortest },
     syllables: details.syllables,
   }
 })

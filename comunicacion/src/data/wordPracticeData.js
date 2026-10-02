@@ -419,7 +419,7 @@ export const unit3PracticeGroups = unit3WordLists.map((group) => ({
       isTarget,
     })),
   },
-  shortest: group.shortest,
+  shortest: { prompt: '¿Cuál es la palabra más corta?', ...group.shortest },
   syllables: group.syllables,
 }))
 
