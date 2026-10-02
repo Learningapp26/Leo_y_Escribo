@@ -1,9 +1,9 @@
-// LoginPage — tarjeta deslizante inspirada en AsmrProg/Modern-Login,
-// conectada a Supabase Auth (crear cuenta / iniciar sesión + Gmail).
+// Login and registration use the shared Supabase Auth helpers.
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { LogIn, Mail, UserPlus } from 'lucide-react'
+import { BookOpen, LogIn, Mail, UserPlus } from 'lucide-react'
 import Button from '../components/common/Button'
+import Card from '../components/common/Card'
 import { signInWithEmail, signInWithGoogle, signUpWithEmail } from '../lib/auth'
 import '../styles/login.css'
 
@@ -71,161 +71,64 @@ function LoginPage() {
 
   return (
     <main className="page login-page">
-      <div className={`login-shell${isSignUp ? ' login-shell--active' : ''}`}>
-        <div className="login-form-panel login-form-panel--signup" aria-hidden={!isSignUp}>
+      <Card className="login-shell">
+        <aside className="login-welcome" aria-label="Leo y Escribo">
+          <span className="login-brand"><BookOpen aria-hidden="true" /> Leo y Escribo</span>
+          <img className="login-welcome__image" src="/images/home-reading.png" alt="" aria-hidden="true" draggable={false} />
+          <h2>¡Cada letra es una aventura!</h2>
+          <p>Lee, descubre y aprende a tu ritmo.</p>
+          <div className="login-letters" aria-hidden="true"><span>A</span><span>B</span><span>C</span></div>
+        </aside>
+
+        <div className="login-content">
+          <header className="login-heading">
+            <span className="login-heading__icon" aria-hidden="true">{isSignUp ? <UserPlus /> : <LogIn />}</span>
+            <h1>{isSignUp ? 'Crear cuenta' : '¡Hola de nuevo!'}</h1>
+            <p>{isSignUp ? 'Tu aventura de aprendizaje comienza aquí.' : 'Inicia sesión para seguir aprendiendo.'}</p>
+          </header>
+
           <form className="login-form" onSubmit={handleSubmit}>
-            <h1>Crear cuenta</h1>
-
-            <button
-              type="button"
-              className="login-social-icon"
-              onClick={handleGoogleClick}
-              aria-label="Continuar con Gmail"
-              tabIndex={isSignUp ? 0 : -1}
-            >
-              <Mail size={18} />
-            </button>
-            {/* * Google: pendiente de activar en Supabase */}
-
-            <label className="login-sr-only" htmlFor="signup-name">Nombre</label>
-            <input
-              id="signup-name"
-              type="text"
-              placeholder="Nombre"
-              value={name}
-              onChange={(event) => setName(event.target.value)}
-              autoComplete="name"
-              tabIndex={isSignUp ? 0 : -1}
-              required
-            />
-
-            <label className="login-sr-only" htmlFor="signup-codigo-aula">Código de aula</label>
-            <input
-              id="signup-codigo-aula"
-              type="text"
-              placeholder="Código de aula (te lo da tu maestra o maestro)"
-              value={codigoAula}
-              onChange={(event) => setCodigoAula(event.target.value)}
-              autoComplete="off"
-              tabIndex={isSignUp ? 0 : -1}
-              required
-            />
-
-            <label className="login-sr-only" htmlFor="signup-email">Correo</label>
-            <input
-              id="signup-email"
-              type="email"
-              placeholder="Correo"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              autoComplete="email"
-              tabIndex={isSignUp ? 0 : -1}
-              required
-            />
-
-            <label className="login-sr-only" htmlFor="signup-password">Contraseña</label>
-            <input
-              id="signup-password"
-              type="password"
-              placeholder="Contraseña"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              autoComplete="new-password"
-              minLength={6}
-              tabIndex={isSignUp ? 0 : -1}
-              required
-            />
-
-            {isSignUp && error && <p className="feedback-retry login-form__feedback">{error}</p>}
-
-            <Button
-              type="submit"
-              variant="accent"
-              icon={UserPlus}
-              disabled={loading}
-              tabIndex={isSignUp ? 0 : -1}
-            >
-              {loading ? 'Un momento...' : 'Crear cuenta'}
-            </Button>
-          </form>
-        </div>
-
-        <div className="login-form-panel login-form-panel--signin" aria-hidden={isSignUp}>
-          <form className="login-form" onSubmit={handleSubmit}>
-            <h1>Iniciar sesión</h1>
-
-            <button
-              type="button"
-              className="login-social-icon"
-              onClick={handleGoogleClick}
-              aria-label="Continuar con Gmail"
-              tabIndex={isSignUp ? -1 : 0}
-            >
-              <Mail size={18} />
-            </button>
-            {/* * Google: pendiente de activar en Supabase */}
-
-            <label className="login-sr-only" htmlFor="signin-email">Correo</label>
-            <input
-              id="signin-email"
-              type="email"
-              placeholder="Correo"
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              autoComplete="email"
-              tabIndex={isSignUp ? -1 : 0}
-              required
-            />
-
-            <label className="login-sr-only" htmlFor="signin-password">Contraseña</label>
-            <input
-              id="signin-password"
-              type="password"
-              placeholder="Contraseña"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
-              autoComplete="current-password"
-              minLength={6}
-              tabIndex={isSignUp ? -1 : 0}
-              required
-            />
-
-            {!isSignUp && error && <p className="feedback-retry login-form__feedback">{error}</p>}
-            {!isSignUp && notice && <p className="feedback-correct login-form__feedback">{notice}</p>}
-
-            <Button
-              type="submit"
-              variant="accent"
-              icon={LogIn}
-              disabled={loading}
-              tabIndex={isSignUp ? -1 : 0}
-            >
-              {loading ? 'Un momento...' : 'Ingresar'}
-            </Button>
-          </form>
-        </div>
-
-        <div className="login-toggle-container">
-          <div className="login-toggle">
-            <div className="login-toggle-panel login-toggle-panel--left">
-              <h1>¡Bienvenido de nuevo!</h1>
-              <p>Inicia sesión con tu cuenta para continuar.</p>
-              <button type="button" className="login-toggle__button" onClick={() => switchMode(false)}>
-                Iniciar sesión
-              </button>
+            {isSignUp && (
+              <>
+                <div className="login-field">
+                  <label htmlFor="signup-name">Nombre</label>
+                  <input id="signup-name" type="text" placeholder="Tu nombre" value={name} onChange={(event) => setName(event.target.value)} autoComplete="name" required />
+                </div>
+                <div className="login-field">
+                  <label htmlFor="signup-codigo-aula">Código de aula</label>
+                  <input id="signup-codigo-aula" type="text" placeholder="Código de tu aula" value={codigoAula} onChange={(event) => setCodigoAula(event.target.value)} autoComplete="off" aria-describedby="classroom-help" required />
+                  <p id="classroom-help" className="login-field__help">Te lo da tu maestra o maestro.</p>
+                </div>
+              </>
+            )}
+            <div className="login-field">
+              <label htmlFor="login-email">Correo electrónico</label>
+              <input id="login-email" type="email" placeholder="tu@correo.com" value={email} onChange={(event) => setEmail(event.target.value)} autoComplete="email" required />
+            </div>
+            <div className="login-field">
+              <label htmlFor="login-password">Contraseña</label>
+              <input id="login-password" type="password" placeholder={isSignUp ? 'Al menos 6 caracteres' : 'Tu contraseña'} value={password} onChange={(event) => setPassword(event.target.value)} autoComplete={isSignUp ? 'new-password' : 'current-password'} minLength={6} required />
             </div>
 
-            <div className="login-toggle-panel login-toggle-panel--right">
-              <h1>¡Hola!</h1>
-              <p>Regístrate con tus datos para empezar a usar Leo y Escribo.</p>
-              <button type="button" className="login-toggle__button" onClick={() => switchMode(true)}>
-                Crear cuenta
-              </button>
-            </div>
+            {error && <p role="alert" className="feedback-retry login-form__feedback">{error}</p>}
+            {notice && <p role="status" className="feedback-correct login-form__feedback">{notice}</p>}
+
+            <Button type="submit" icon={isSignUp ? UserPlus : LogIn} disabled={loading} fullWidth>
+              {loading ? 'Un momento...' : isSignUp ? 'Crear cuenta' : 'Ingresar'}
+            </Button>
+          </form>
+
+          <div className="login-divider"><span>o continúa con</span></div>
+          <Button variant="secondary" icon={Mail} onClick={handleGoogleClick} disabled={loading} fullWidth>Gmail</Button>
+
+          <div className="login-switch">
+            <p>{isSignUp ? '¿Ya tienes una cuenta?' : '¿Es tu primera aventura?'}</p>
+            <Button variant="secondary" className="login-switch__button" onClick={() => switchMode(!isSignUp)} disabled={loading}>
+              {isSignUp ? 'Iniciar sesión' : 'Crear cuenta'}
+            </Button>
           </div>
         </div>
-      </div>
-
+      </Card>
     </main>
   )
 }
