@@ -38,14 +38,14 @@ Se usan exclusivamente registrarProgreso y registrarLeccionCompletada. Cada regi
 
 units.js activa ambas lecciones en el orden existente. LessonAccessGuard protege también sus actividades. useStudentProgress admite una clave de actualización para releer el progreso al cambiar de ruta, evitando una lista de completadas desactualizada. ProgressPage consume el mismo resumen existente, sin cambios de esquema ni una segunda lógica de persistencia.
 
-## Multimedia pendiente
+## Multimedia
 
-Las dos ilustraciones de cuento se entregarán por separado. Sus rutas están definidas y no se generaron sustitutos:
+Las dos ilustraciones de cuento fueron aportadas por la propietaria e incorporadas en estas rutas:
 
 - `public/images/lecciones/f/lectura-f.png`
 - `public/images/lecciones/enie/lectura-enie.png`
 
-Los 286 MP3 necesitan grabación humana. El guion privado `AUDIOS_F_ENIE.md`, en la raíz del repositorio, enumera exactamente los archivos referenciados, sus textos y usos; deliberadamente no se versiona. La aplicación ya usa el helper y los botones de audio existentes. Hasta recibir los MP3, los botones no podrán reproducir las grabaciones.
+Los 277 MP3 necesitan grabación humana. El guion privado `AUDIOS_F_ENIE.md`, en la raíz del repositorio, enumera exactamente los archivos referenciados, sus textos y usos; deliberadamente no se versiona. La aplicación ya usa el helper y los botones de audio existentes. Hasta recibir los MP3, los botones no podrán reproducir las grabaciones.
 
 ## Validación
 
