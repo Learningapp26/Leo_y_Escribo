@@ -139,6 +139,10 @@ import ActividadVSonidosPage from '../pages/ActividadVSonidosPage'
 import ActividadVSilabasPage from '../pages/ActividadVSilabasPage'
 import ActividadVCompletarPage from '../pages/ActividadVCompletarPage'
 import ActividadVFinalPage from '../pages/ActividadVFinalPage'
+import BookLessonReading from '../components/lessons/BookLessonReading'
+import BookLessonActivity from '../components/lessons/BookLessonActivity'
+import { fLesson } from '../data/fData'
+import { enieLesson } from '../data/enieData'
 
 function AppRouter() {
   return (
@@ -146,6 +150,16 @@ function AppRouter() {
       <ScrollToTop />
       <LessonAccessGuard>
         <Routes>
+          {[fLesson, enieLesson].flatMap((lesson) => [
+            <Route key={lesson.id} path={`/lecciones/${lesson.id}`}
+              element={<BookLessonReading lesson={lesson} />} />,
+            ...lesson.activities.map((activity) => (
+              <Route key={`${lesson.id}-${activity.id}`} path={`/actividad/${lesson.id}-${activity.id}`}
+                element={<LessonAccessGuard lessonId={lesson.id}>
+                  <BookLessonActivity key={`${lesson.id}-${activity.id}`} lesson={lesson} activityId={activity.id} />
+                </LessonAccessGuard>} />
+            )),
+          ])}
           <Route path="/" element={<LoginPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/welcome" element={<WelcomePage />} />

@@ -3,14 +3,14 @@ import { Navigate, useLocation } from 'react-router-dom'
 import { getLessonById, isLessonUnlocked } from '../../data/units'
 import useStudentProgress from '../../hooks/useStudentProgress'
 
-function LessonAccessGuard({ children }) {
+function LessonAccessGuard({ children, lessonId }) {
   const { pathname } = useLocation()
   const lesson = getLessonById(
-    pathname.startsWith('/lecciones/')
+    lessonId ?? (pathname.startsWith('/lecciones/')
       ? pathname.slice('/lecciones/'.length)
-      : '',
+      : ''),
   )
-  const { completedLessons, loadingProgress } = useStudentProgress()
+  const { completedLessons, loadingProgress } = useStudentProgress(pathname)
 
   if (!lesson) return children
   if (loadingProgress) return null
