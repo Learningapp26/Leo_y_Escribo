@@ -147,10 +147,6 @@ function ActividadRSilabasPage() {
             const selected =
               selectedSyllable === item.syllable
 
-            const correct =
-              feedback === 'correct' &&
-              item.syllable === currentExercise.syllable
-
             const incorrect =
               feedback === 'retry' && selected
 

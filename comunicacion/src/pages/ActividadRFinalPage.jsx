@@ -276,9 +276,6 @@ function ActividadRFinalPage() {
               const selected =
                 selectedAnswer === option
 
-              const correct =
-                feedback === 'correct' && selected
-
               const incorrect =
                 feedback === 'retry' && selected
 

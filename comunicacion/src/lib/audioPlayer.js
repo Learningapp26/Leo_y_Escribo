@@ -18,10 +18,10 @@ export function playAudio(source) {
       if (!currentAudio.paused) {
         currentAudio.pause()
         // notificar cambio de estado
-        try { window.dispatchEvent(new CustomEvent('audio:state', { detail: { src: currentSrc, playing: false } })) } catch (e) {}
+        try { window.dispatchEvent(new CustomEvent('audio:state', { detail: { src: currentSrc, playing: false } })) } catch { /* El estado visual del audio es opcional. */ }
       } else {
         currentAudio.play().catch(() => {})
-        try { window.dispatchEvent(new CustomEvent('audio:state', { detail: { src: currentSrc, playing: true } })) } catch (e) {}
+        try { window.dispatchEvent(new CustomEvent('audio:state', { detail: { src: currentSrc, playing: true } })) } catch { /* El estado visual del audio es opcional. */ }
       }
     } catch (err) {
       console.error('Error al toggle audio', err)
@@ -35,7 +35,7 @@ export function playAudio(source) {
     try {
       currentAudio.pause()
       currentAudio.currentTime = 0
-    } catch (e) {
+    } catch {
       // ignore
     }
   }
@@ -46,13 +46,13 @@ export function playAudio(source) {
   currentAudio.addEventListener('ended', () => {
     currentAudio = null
     currentSrc = null
-    try { window.dispatchEvent(new CustomEvent('audio:state', { detail: { src: source, playing: false } })) } catch (e) {}
+    try { window.dispatchEvent(new CustomEvent('audio:state', { detail: { src: source, playing: false } })) } catch { /* El estado visual del audio es opcional. */ }
   })
 
   currentAudio.play().catch((error) => {
     console.error(`No se pudo reproducir el audio: ${source}`, error)
   })
-  try { window.dispatchEvent(new CustomEvent('audio:state', { detail: { src: source, playing: true } })) } catch (e) {}
+  try { window.dispatchEvent(new CustomEvent('audio:state', { detail: { src: source, playing: true } })) } catch { /* El estado visual del audio es opcional. */ }
   return currentAudio
 }
 
@@ -62,11 +62,11 @@ export function stopAudio() {
   try {
     currentAudio.pause()
     currentAudio.currentTime = 0
-  } catch (e) {
+  } catch {
     // ignore
   }
 
   currentAudio = null
   currentSrc = null
-  try { window.dispatchEvent(new CustomEvent('audio:state', { detail: { src: null, playing: false } })) } catch (e) {}
+  try { window.dispatchEvent(new CustomEvent('audio:state', { detail: { src: null, playing: false } })) } catch { /* El estado visual del audio es opcional. */ }
 }

@@ -73,7 +73,7 @@ function ActividadNCompletarPage() {
   }
 
   const [selectedLeft, setSelectedLeft] = useState(null)
-  const [selectedRight, setSelectedRight] = useState(rightOptions[0])
+  const [selectedRight] = useState(rightOptions[0])
   const [matchedPairs, setMatchedPairs] = useState([])
   const [joinFeedback, setJoinFeedback] = useState('')
 

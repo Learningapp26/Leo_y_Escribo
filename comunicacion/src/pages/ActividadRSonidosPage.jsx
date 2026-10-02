@@ -152,9 +152,6 @@ function ActividadRSonidosPage() {
             const selected =
               selectedAnswer === option.value
 
-            const correct =
-              feedback === 'correct' && selected
-
             const incorrect =
               feedback === 'retry' && selected
 

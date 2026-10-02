@@ -147,10 +147,6 @@ function LeccionRPage() {
                     const selected =
                       selectedAnswer === option
 
-                    const correct =
-                      selected &&
-                      option === question.answer
-
                     const incorrect =
                       selected &&
                       option !== question.answer

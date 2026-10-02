@@ -17,7 +17,7 @@ function handleAudioState(e) {
         el.classList.remove('active')
         el.setAttribute('aria-pressed', 'false')
       }
-    } catch (err) {
+    } catch {
       // ignore
     }
   })
