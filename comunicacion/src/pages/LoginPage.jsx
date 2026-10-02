@@ -74,7 +74,7 @@ function LoginPage() {
       <Card className="login-shell">
         <aside className="login-welcome" aria-label="Leo y Escribo">
           <span className="login-brand"><BookOpen aria-hidden="true" /> Leo y Escribo</span>
-          <img className="login-welcome__image" src="/images/home-reading.png" alt="" aria-hidden="true" draggable={false} />
+          <img className="login-welcome__image" src="/images/login-reading.png" alt="" aria-hidden="true" draggable={false} />
           <h2>¡Cada letra es una aventura!</h2>
           <p>Lee, descubre y aprende a tu ritmo.</p>
           <div className="login-letters" aria-hidden="true"><span>A</span><span>B</span><span>C</span></div>
@@ -122,7 +122,7 @@ function LoginPage() {
           <Button variant="secondary" icon={Mail} onClick={handleGoogleClick} disabled={loading} fullWidth>Gmail</Button>
 
           <div className="login-switch">
-            <p>{isSignUp ? '¿Ya tienes una cuenta?' : '¿Es tu primera aventura?'}</p>
+            <p>{isSignUp ? '¿Ya tienes una cuenta?' : '¿Eres nuevo?'}</p>
             <Button variant="secondary" className="login-switch__button" onClick={() => switchMode(!isSignUp)} disabled={loading}>
               {isSignUp ? 'Iniciar sesión' : 'Crear cuenta'}
             </Button>
