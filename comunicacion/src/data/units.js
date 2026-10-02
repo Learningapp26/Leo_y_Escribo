@@ -211,6 +211,12 @@ export const units = [
         route: '/lecciones/enie',
         available: true,
       },
+      {
+        id: 'repaso-unidad-4',
+        title: 'Palabras para leer y practicar',
+        route: '/unidad-4/palabras-practica',
+        available: true,
+      },
     ],
   },
   {
