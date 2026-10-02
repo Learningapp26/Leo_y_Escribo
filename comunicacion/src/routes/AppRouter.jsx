@@ -150,6 +150,8 @@ import ActividadCrSonidosPage from '../pages/ActividadCrSonidosPage'
 import ActividadCrSilabasPage from '../pages/ActividadCrSilabasPage'
 import ActividadCrFinalPage from '../pages/ActividadCrFinalPage'
 
+import MemoriaJuegoPage from '../pages/MemoriaJuegoPage'
+
 function AppRouter() {
   return (
     <BrowserRouter>
@@ -710,6 +712,11 @@ function AppRouter() {
           <Route
             path="/actividad/cr-final"
             element={<ActividadCrFinalPage />}
+          />
+
+          <Route 
+            path="/lecciones/juego-memoria"
+            element={<MemoriaJuegoPage />}
           />
 
           <Route

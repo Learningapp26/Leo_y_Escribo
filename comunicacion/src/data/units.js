@@ -175,6 +175,7 @@ export const units = [
     title: 'Unidad 4',
     pageRange: 'Páginas 131–170',
     lessons: [
+    
       {
         id: 'cl',
         title: 'Combinación CL',
@@ -217,7 +218,12 @@ export const units = [
         route: '/unidad-4/palabras-practica',
         available: true,
       },
-
+      {
+        id: 'juego-memoria',
+        title: 'Juego de memoria',
+        route: '/lecciones/juego-memoria',
+        available: true,
+      },
 
     ],
   },
