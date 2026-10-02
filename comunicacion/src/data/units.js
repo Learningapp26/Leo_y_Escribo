@@ -185,7 +185,7 @@ export const units = [
         id: 'cr',
         title: 'Combinación CR',
         route: '/lecciones/cr',
-        available: false,
+        available: true,
       },
       {
         id: 'f',
