@@ -439,3 +439,162 @@ export const unit3WordPracticeConfig = {
   unitLabel: 'Unidad 3 · Práctica de lectura',
   intro: 'Elige un grupo. Lee las palabras y completa los retos.',
 }
+
+// Unidad 4 (página 167-168 del libro). cl, cr, f, rr y Ñ ñ todavía no
+// tienen lección/pantalla propia, así que sus grupos no llevan coverImage
+// (se ve la insignia con la letra, igual que "br" y "ch" en la Unidad 3).
+export const unit4WordPracticeId = 'repaso-unidad-4'
+
+const unit4WordLists = [
+  {
+    lessonId: 'f',
+    label: 'F f',
+    title: 'Palabras con F f',
+    words: [
+      'feo', 'falta', 'fila', 'fin', 'foca', 'Fabi', 'ficha', 'falso',
+      'forma', 'fondo', 'funda', 'fuerte', 'filete', 'fábula', 'familia',
+      'factura',
+    ],
+    find: {
+      prompt: 'Marca las palabras que empiezan con F.',
+      options: [
+        ['foca', true], ['falta', true], ['familia', true],
+        ['luna', false], ['pato', false], ['tela', false],
+      ],
+    },
+    shortest: { answer: 'fin', options: ['fin', 'foca', 'familia'] },
+    syllables: { word: 'fábula', parts: ['fá', 'bu', 'la'], options: [2, 3, 4] },
+  },
+  {
+    lessonId: 'cl',
+    label: 'cl',
+    title: 'Palabras con cl',
+    words: [
+      'claro', 'clan', 'cloro', 'clon', 'clima', 'club', 'clara', 'clamar',
+      'Clarisa', 'clásico', 'recluta', 'clínica', 'claridad', 'conclusión',
+    ],
+    find: {
+      prompt: 'Marca las palabras que empiezan con cl.',
+      options: [
+        ['claro', true], ['clima', true], ['club', true],
+        ['recluta', false], ['conclusión', false], ['tabla', false],
+      ],
+    },
+    shortest: { answer: 'clan', options: ['clan', 'clima', 'conclusión'] },
+    syllables: { word: 'clínica', parts: ['clí', 'ni', 'ca'], options: [2, 3, 4] },
+  },
+  {
+    lessonId: 'cr',
+    label: 'cr',
+    title: 'Palabras con cr',
+    words: [
+      'creo', 'crear', 'cruel', 'crudo', 'credo', 'crema', 'crimen',
+      'crisis', 'crítica', 'Cristina', 'crédito', 'croqueta', 'cretino',
+      'cremoso',
+    ],
+    find: {
+      prompt: 'Marca las palabras que empiezan con cr.',
+      options: [
+        ['creo', true], ['crema', true], ['crisis', true],
+        ['mesa', false], ['pato', false], ['luna', false],
+      ],
+    },
+    shortest: { answer: 'creo', options: ['creo', 'crema', 'cretino'] },
+    syllables: { word: 'croqueta', parts: ['cro', 'que', 'ta'], options: [2, 3, 4] },
+  },
+  {
+    lessonId: 'v',
+    label: 'V v',
+    title: 'Palabras con V v',
+    coverImage: '/images/lecciones/v/vaca-rana-lomo.png',
+    coverAlt: 'Una vaca con manchas cafés y una rana sobre su lomo en una granja.',
+    words: [
+      'volver', 'volar', 'valer', 'valor', 'vapor', 'vender', 'viaje',
+      'visual', 'vuelta', 'viejo', 'Víctor', 'Vanesa', 'vasija', 'verdura',
+    ],
+    find: {
+      prompt: 'Marca las palabras que empiezan con V.',
+      options: [
+        ['volar', true], ['valor', true], ['vender', true],
+        ['nube', false], ['luna', false], ['sapo', false],
+      ],
+    },
+    shortest: { answer: 'valor', options: ['valor', 'vuelta', 'verdura'] },
+    syllables: { word: 'verdura', parts: ['ver', 'du', 'ra'], options: [2, 3, 4] },
+  },
+  {
+    lessonId: 'enie',
+    label: 'Ñ ñ',
+    title: 'Palabras con Ñ ñ',
+    words: [
+      'uña', 'dañar', 'leña', 'sueño', 'señor', 'señal', 'cuñado', 'mañana',
+      'otoño', 'rebaño', 'pequeño', 'pestaña', 'tacaño', 'piraña',
+    ],
+    // La ñ no aparece al inicio de estas palabras, por eso se busca "tiene
+    // ñ" en vez de "empieza con ñ" (igual que "otras palabras" en la U3).
+    find: {
+      prompt: 'Marca las palabras que tienen ñ.',
+      options: [
+        ['uña', true], ['señor', true], ['mañana', true],
+        ['sala', false], ['cama', false], ['pato', false],
+      ],
+    },
+    shortest: { answer: 'uña', options: ['uña', 'leña', 'mañana'] },
+    syllables: { word: 'rebaño', parts: ['re', 'ba', 'ño'], options: [2, 3, 4] },
+  },
+  {
+    lessonId: 'rr',
+    label: 'rr',
+    title: 'Palabras con rr',
+    words: [
+      'perro', 'carro', 'burro', 'correr', 'borrar', 'error', 'barrer',
+      'barril', 'puerro', 'terrón', 'morral', 'terreno', 'socorro',
+      'matorral', 'derrota', 'corredor', 'arropar', 'carrera', 'perrera',
+      'cachorro',
+    ],
+    // La rr nunca va al inicio de una palabra en español, por eso también
+    // se busca "tiene rr" en vez de "empieza con rr".
+    find: {
+      prompt: 'Marca las palabras que tienen rr.',
+      options: [
+        ['perro', true], ['carro', true], ['correr', true],
+        ['pera', false], ['caro', false], ['toro', false],
+      ],
+    },
+    shortest: { answer: 'carro', options: ['carro', 'terreno', 'cachorro'] },
+    syllables: { word: 'cachorro', parts: ['ca', 'cho', 'rro'], options: [2, 3, 4] },
+  },
+]
+
+const unit4WordsFor = (group) => group.words.map((word, index) => ({
+  id: `${group.lessonId}-${index}`,
+  word,
+}))
+
+export const unit4PracticeGroups = unit4WordLists.map((group) => ({
+  lessonId: group.lessonId,
+  themeId: unit4WordPracticeId,
+  label: group.label,
+  title: group.title,
+  coverImage: group.coverImage,
+  coverAlt: group.coverAlt,
+  words: unit4WordsFor(group),
+  find: {
+    ...group.find,
+    options: group.find.options.map(([word, isTarget], index) => ({
+      id: `${group.lessonId}-find-${index}`,
+      word,
+      isTarget,
+    })),
+  },
+  shortest: { prompt: '¿Cuál es la palabra más corta?', ...group.shortest },
+  syllables: group.syllables,
+}))
+
+export const unit4WordPracticeConfig = {
+  groups: unit4PracticeGroups,
+  practiceId: unit4WordPracticeId,
+  title: 'Palabras para leer y practicar',
+  unitLabel: 'Unidad 4 · Práctica de lectura',
+  intro: 'Elige un grupo. Lee las palabras y completa los retos.',
+}
