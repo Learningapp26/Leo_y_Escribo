@@ -58,7 +58,7 @@ import ActividadPSilabasPage from '../pages/ActividadPSilabasPage'
 import ActividadPCompletarPage from '../pages/ActividadPCompletarPage'
 import ActividadPFinalPage from '../pages/ActividadPFinalPage'
 import PalabrasPracticaPage from '../pages/PalabrasPracticaPage'
-import { unit3WordPracticeConfig, unit4WordPracticeConfig } from '../data/wordPracticeData'
+import { unit1WordPracticeConfig, unit3WordPracticeConfig, unit4WordPracticeConfig } from '../data/wordPracticeData'
 import RepasoUnidad2Page from '../pages/RepasoUnidad2Page'
 import SubidasResbalonesPage from '../pages/SubidasResbalonesPage'
 import DominoPalabrasPage from '../pages/DominoPalabrasPage'
@@ -385,6 +385,11 @@ function AppRouter() {
           <Route
             path="/actividad/palabras-practica"
             element={<PalabrasPracticaPage />}
+          />
+
+          <Route
+            path="/unidad-1/palabras-practica"
+            element={<PalabrasPracticaPage config={unit1WordPracticeConfig} />}
           />
 
           <Route

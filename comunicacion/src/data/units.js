@@ -64,6 +64,12 @@ export const units = [
   route: '/unidad-1/juguemos-palabras',
   available: true,
 },
+{
+  id: 'repaso-unidad-1',
+  title: 'Palabras para leer y practicar',
+  route: '/unidad-1/palabras-practica',
+  available: true,
+},
 ],
 },
 {

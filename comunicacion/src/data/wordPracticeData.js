@@ -247,7 +247,7 @@ export const wordPracticeGroups = [
 export const unit1WordPracticeConfig = {
   groups: wordPracticeGroups,
   practiceId: 'repaso-unidad-1',
-  title: 'Repaso de la Unidad 1',
+  title: 'Palabras para leer y practicar',
   unitLabel: 'Unidad 1 · Práctica de lectura',
   intro: 'Elige una letra. Lee las palabras y completa los retos.',
 }

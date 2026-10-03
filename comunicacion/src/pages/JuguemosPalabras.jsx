@@ -56,6 +56,8 @@ function JuguemosPalabras() {
     useState([])
   const [finished, setFinished] =
     useState(false)
+  const [saveState, setSaveState] =
+    useState('idle')
 
   const [feedback, setFeedback] = useState({
     tone: 'neutral',
@@ -181,7 +183,7 @@ function JuguemosPalabras() {
     })
   }
 
-  function nextRound() {
+  async function nextRound() {
     if (!answeredCorrectly) return
 
     if (
@@ -218,14 +220,28 @@ function JuguemosPalabras() {
       return
     }
 
-    if (!completedRef.current) {
-      completedRef.current = true
+    if (completedRef.current) return
 
-      registrarLeccionCompletada(
-        JUGUEMOS_PALABRAS_ID,
-      )
+    completedRef.current = true
+    setSaveState('saving')
+
+    const result = await registrarLeccionCompletada(
+      JUGUEMOS_PALABRAS_ID,
+    )
+
+    if (result.error || result.skipped) {
+      completedRef.current = false
+      setSaveState('error')
+      setFeedback({
+        tone: 'retry',
+        message: result.skipped
+          ? 'Inicia sesión para guardar el juego y desbloquear el repaso.'
+          : 'No pudimos guardar el juego. Inténtalo nuevamente.',
+      })
+      return
     }
 
+    setSaveState('saved')
     setFinished(true)
   }
 
@@ -242,6 +258,7 @@ function JuguemosPalabras() {
     setSelectedId(null)
     setIncorrectIds([])
     setFinished(false)
+    setSaveState('idle')
 
     setFeedback({
       tone: 'neutral',
@@ -462,6 +479,7 @@ function JuguemosPalabras() {
             iconPosition="right"
             size="large"
             fullWidth
+            disabled={saveState === 'saving'}
             onClick={nextRound}
           >
             {isPictureStage &&
@@ -471,7 +489,9 @@ function JuguemosPalabras() {
               : !isPictureStage &&
                   roundIndex ===
                     ROUNDS_PER_STAGE - 1
-                ? 'Terminar juego'
+                ? saveState === 'saving'
+                  ? 'Guardando juego...'
+                  : 'Terminar juego'
                 : 'Siguiente palabra'}
           </Button>
         )}

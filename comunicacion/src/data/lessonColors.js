@@ -10,6 +10,7 @@ export const LESSON_UNIT_MAP = {
   p: 1,
   t: 1,
   n: 1,
+  'repaso-unidad-1': 1,
   c: 2,
   q: 2,
   d: 2,
