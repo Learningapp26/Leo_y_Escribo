@@ -144,6 +144,7 @@ import BookLessonReading from '../components/lessons/BookLessonReading'
 import BookLessonActivity from '../components/lessons/BookLessonActivity'
 import { fLesson } from '../data/fData'
 import { enieLesson } from '../data/enieData'
+import { rrLesson } from '../data/rrData'
 
 
 import LeccionCrPage from '../pages/LeccionCrPage'
@@ -163,7 +164,7 @@ function AppRouter() {
       <ScrollToTop />
       <LessonAccessGuard>
         <Routes>
-          {[fLesson, enieLesson].flatMap((lesson) => [
+          {[fLesson, rrLesson, enieLesson].flatMap((lesson) => [
             <Route key={lesson.id} path={`/lecciones/${lesson.id}`}
               element={<BookLessonReading lesson={lesson} />} />,
             ...lesson.activities.map((activity) => (

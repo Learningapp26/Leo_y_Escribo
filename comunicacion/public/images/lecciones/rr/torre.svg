@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" role="img" aria-labelledby="title desc">
+  <title id="title">Una torre</title>
+  <desc id="desc">Una torre de piedra con una bandera al atardecer.</desc>
+  <rect width="240" height="180" rx="24" fill="#fff3df"/>
+  <circle cx="188" cy="42" r="18" fill="#ffca3a"/>
+  <path d="M57 152h126L163 54H77z" fill="#d7c4aa" stroke="#6a4c93" stroke-width="5"/>
+  <path d="M75 54h18V39h16v15h23V39h16v15h18" fill="none" stroke="#6a4c93" stroke-width="7" stroke-linejoin="round"/>
+  <path d="M111 152v-38c0-14 18-14 18 0v38zm-25-66h17v24H86zm51 0h17v24h-17z" fill="#fffdf9" stroke="#6a4c93" stroke-width="4"/>
+  <path d="M93 39V17l34 10-34 9z" fill="#ffb088"/>
+</svg>

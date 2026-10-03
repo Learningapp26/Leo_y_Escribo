@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 180" role="img" aria-labelledby="title desc">
+  <title id="title">El planeta Tierra</title>
+  <desc id="desc">Una ilustración sencilla del planeta Tierra con océanos azules y continentes verdes.</desc>
+  <rect width="240" height="180" rx="24" fill="#e6f5ff"/>
+  <circle cx="120" cy="90" r="64" fill="#2e86c7"/>
+  <path d="M75 51c17-15 35-20 48-14l-4 28-22 11-17-8zm65 22 37 4-7 25-21 6-15-18zm-51 43 29 2 17 22-14 17-28-11z" fill="#6fcf97"/>
+  <path d="M64 90a56 56 0 0 0 112 0" fill="none" stroke="#fffdf9" stroke-opacity=".45" stroke-width="5"/>
+</svg>

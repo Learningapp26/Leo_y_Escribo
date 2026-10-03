@@ -208,9 +208,9 @@ export const units = [
       },
       {
         id: 'rr',
-        title: 'Doble RR',
+        title: 'Doble rr',
         route: '/lecciones/rr',
-        available: false,
+        available: true,
       },
       {
         id: 'enie',
