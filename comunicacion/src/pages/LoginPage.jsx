@@ -5,6 +5,7 @@ import { BookOpen, LogIn, Mail, UserPlus } from 'lucide-react'
 import Button from '../components/common/Button'
 import Card from '../components/common/Card'
 import { signInWithEmail, signInWithGoogle, signUpWithEmail } from '../lib/auth'
+import { URL_REGISTRO_DOCENTE } from '../lib/irAMatematica'
 import '../styles/login.css'
 
 function LoginPage() {
@@ -126,6 +127,10 @@ function LoginPage() {
             <Button variant="secondary" className="login-switch__button" onClick={() => switchMode(!isSignUp)} disabled={loading}>
               {isSignUp ? 'Iniciar sesión' : 'Crear cuenta'}
             </Button>
+            {/* El registro de docentes vive en el módulo de Matemática, junto al panel. */}
+            <p>
+              ¿Eres docente? <a href={URL_REGISTRO_DOCENTE}>Regístrate aquí</a>
+            </p>
           </div>
         </div>
       </Card>
