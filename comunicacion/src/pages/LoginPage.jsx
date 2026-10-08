@@ -5,7 +5,7 @@ import { BookOpen, LogIn, Mail, UserPlus } from 'lucide-react'
 import Button from '../components/common/Button'
 import Card from '../components/common/Card'
 import { signInWithEmail, signInWithGoogle, signUpWithEmail } from '../lib/auth'
-import { URL_REGISTRO_DOCENTE } from '../lib/irAMatematica'
+import { registrarDocente } from '../lib/irAMatematica'
 import '../styles/login.css'
 
 function LoginPage() {
@@ -13,16 +13,22 @@ function LoginPage() {
   const [isSignUp, setIsSignUp] = useState(false)
   const [name, setName] = useState('')
   const [codigoAula, setCodigoAula] = useState('')
+  // Registro de docente (SCRUM-90): mismo formulario de «Crear cuenta», con
+  // el nombre del aula en vez del código de aula. El código del aula se
+  // genera solo y la docente lo ve en «Mis cursos» del panel de Matemática.
+  const [isTeacher, setIsTeacher] = useState(false)
+  const [nombreAula, setNombreAula] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [notice, setNotice] = useState('')
 
-  function switchMode(nextIsSignUp) {
+  function switchMode(nextIsSignUp, nextIsTeacher = false) {
     setError('')
     setNotice('')
     setIsSignUp(nextIsSignUp)
+    setIsTeacher(nextIsSignUp && nextIsTeacher)
   }
 
   async function handleSubmit(event) {
@@ -31,9 +37,16 @@ function LoginPage() {
     setNotice('')
     setLoading(true)
 
-    const { error: authError } = isSignUp
-      ? await signUpWithEmail(email, password, name, codigoAula)
-      : await signInWithEmail(email, password)
+    const { error: authError } = !isSignUp
+      ? await signInWithEmail(email, password)
+      : isTeacher
+        ? await registrarDocente({
+            email,
+            password,
+            nombre: name.trim(),
+            nombreAula: nombreAula.trim(),
+          })
+        : await signUpWithEmail(email, password, name, codigoAula)
 
     setLoading(false)
 
@@ -84,7 +97,7 @@ function LoginPage() {
         <div className="login-content">
           <header className="login-heading">
             <span className="login-heading__icon" aria-hidden="true">{isSignUp ? <UserPlus /> : <LogIn />}</span>
-            <h1>{isSignUp ? 'Crear cuenta' : '¡Hola de nuevo!'}</h1>
+            <h1>{isSignUp ? (isTeacher ? 'Registro de docente' : 'Crear cuenta') : '¡Hola de nuevo!'}</h1>
             <p>{isSignUp ? 'Tu aventura de aprendizaje comienza aquí.' : 'Inicia sesión para seguir aprendiendo.'}</p>
           </header>
 
@@ -95,11 +108,19 @@ function LoginPage() {
                   <label htmlFor="signup-name">Nombre</label>
                   <input id="signup-name" type="text" placeholder="Tu nombre" value={name} onChange={(event) => setName(event.target.value)} autoComplete="name" required />
                 </div>
-                <div className="login-field">
-                  <label htmlFor="signup-codigo-aula">Código de aula</label>
-                  <input id="signup-codigo-aula" type="text" placeholder="Código de tu aula" value={codigoAula} onChange={(event) => setCodigoAula(event.target.value)} autoComplete="off" aria-describedby="classroom-help" required />
-                  <p id="classroom-help" className="login-field__help">Te lo da tu maestra o maestro.</p>
-                </div>
+                {isTeacher ? (
+                  <div className="login-field">
+                    <label htmlFor="signup-nombre-aula">Nombre del aula</label>
+                    <input id="signup-nombre-aula" type="text" placeholder="1.° Primaria B" value={nombreAula} onChange={(event) => setNombreAula(event.target.value)} autoComplete="off" aria-describedby="aula-help" required />
+                    <p id="aula-help" className="login-field__help">El código para tus alumnos se crea solo; lo verás en tu panel.</p>
+                  </div>
+                ) : (
+                  <div className="login-field">
+                    <label htmlFor="signup-codigo-aula">Código de aula</label>
+                    <input id="signup-codigo-aula" type="text" placeholder="Código de tu aula" value={codigoAula} onChange={(event) => setCodigoAula(event.target.value)} autoComplete="off" aria-describedby="classroom-help" required />
+                    <p id="classroom-help" className="login-field__help">Te lo da tu maestra o maestro.</p>
+                  </div>
+                )}
               </>
             )}
             <div className="login-field">
@@ -128,9 +149,14 @@ function LoginPage() {
               {isSignUp ? 'Iniciar sesión' : 'Crear cuenta'}
             </Button>
             {/* El registro de docentes vive en el módulo de Matemática, junto al panel. */}
-            <p>
-              ¿Eres docente? <a href={URL_REGISTRO_DOCENTE}>Regístrate aquí</a>
-            </p>
+            {!isTeacher && (
+              <p>
+                ¿Eres docente?{' '}
+                <button type="button" className="login-switch__link" onClick={() => switchMode(true, true)} disabled={loading}>
+                  Regístrate aquí
+                </button>
+              </p>
+            )}
           </div>
         </div>
       </Card>

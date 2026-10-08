@@ -58,3 +58,28 @@ export async function irAMatematica(ruta = '/') {
   window.location.assign(`${MATE_URL}${ruta}#${hash.toString()}`)
   return { error: null }
 }
+
+// Alta de docente desde este login (SCRUM-90). Solo crea la cuenta de Auth
+// y deja en user_metadata lo que necesita el RPC registrar_docente. El
+// perfil y el aula se crean la primera vez que la docente entra al panel de
+// Matemática (completarRegistroDocente en frontend_math/src/lib/docentes.js):
+// esta pantalla no escribe `perfiles` ni `aulas`.
+//
+// El formato de registro_docente tiene que ser IGUAL al que lee
+// frontend_math; si se cambia aquí, se cambia allá.
+export function registrarDocente({ email, password, nombre, nombreAula }) {
+  return supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      emailRedirectTo: `${window.location.origin}/login`,
+      data: {
+        full_name: nombre,
+        registro_docente: {
+          pendiente: true,
+          nombre_aula: nombreAula,
+        },
+      },
+    },
+  })
+}
