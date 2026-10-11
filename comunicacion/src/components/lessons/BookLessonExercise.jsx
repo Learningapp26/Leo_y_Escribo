@@ -110,7 +110,7 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
       {!passive && feedback !== 'correct' && <Button icon={Check} size="large" disabled={!selected.length || (ordered && selected.length !== options.length)} onClick={check}>Comprobar respuesta</Button>}
       {type === 'oral' && <Button variant="secondary" aria-pressed={practiced} disabled={!groupsReady} icon={Check} onClick={() => setPracticed(!practiced)}>Ya dije mi oración</Button>}
       {(feedback === 'correct' || (passive && (type !== 'oral' || practiced))) && <Button size="large" icon={ArrowRight} iconPosition="right" onClick={onNext}>
-        {last ? 'Terminar actividad' : 'Continuar'}
+        {last || 'Continuar'}
       </Button>}
     </Card>
   )

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { ArrowRight, RotateCcw } from 'lucide-react'
 import Button from '../common/Button'
 import Card from '../common/Card'
@@ -7,6 +8,7 @@ import BackButton from '../navigation/BackButton'
 import ProgressBar from '../progress/ProgressBar'
 import StarsCounter from '../progress/StarsCounter'
 import BookLessonExercise from './BookLessonExercise'
+import BookLessonSoundBoxes from './BookLessonSoundBoxes'
 import { getLessonThemeClass } from '../../data/lessonColors'
 import { playAudio, stopAudio } from '../../lib/audioPlayer'
 import { registrarLeccionCompletada, registrarProgreso } from '../../lib/progreso'
@@ -21,10 +23,12 @@ function BookLessonActivity({ lesson, activityId }) {
   const [stars, setStars] = useState(0)
   const [saveState, setSaveState] = useState('')
   const saving = useRef(false)
+  const navigate = useNavigate()
   const exercise = activity.exercises[index]
   const done = index === activity.exercises.length
+  const Exercise = exercise?.type === 'boxes' ? BookLessonSoundBoxes : BookLessonExercise
   const final = activityIndex === lesson.activities.length - 1
-  const totalStars = activity.exercises.filter((item) => ['select', 'order'].includes(item.type)).length
+  const totalStars = activity.exercises.filter((item) => ['select', 'order', 'boxes'].includes(item.type)).length
   useEffect(() => () => stopAudio(), [])
 
   const finish = async () => {
@@ -48,8 +52,13 @@ function BookLessonActivity({ lesson, activityId }) {
       registrarProgreso({ actividad: `${lesson.id}-${activityId}`, correcto: false,
         detalle: { leccionId: lesson.id, ejercicioId: exercise.id, practica: true } })
     }
-    setIndex((current) => current + 1)
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    // Only the whole lesson gets a congratulations screen; activities chain directly.
+    if (!final && index === activity.exercises.length - 1) {
+      navigate(`/actividad/${lesson.id}-${lesson.activities[activityIndex + 1].id}`)
+      return
+    }
+    setIndex((current) => current + 1)
     if (final && index === activity.exercises.length - 1) finish()
   }
 
@@ -62,8 +71,8 @@ function BookLessonActivity({ lesson, activityId }) {
       </header>
       <ProgressBar value={index} max={activity.exercises.length} label={`Ejercicios completados: ${index} de ${activity.exercises.length}`} />
       {totalStars > 0 && <StarsCounter current={stars} total={totalStars} />}
-      {!done ? <BookLessonExercise key={exercise.id} exercise={exercise} lesson={lesson}
-        activityId={activityId} onNext={next} onCorrect={() => setStars((current) => current + 1)} last={index === activity.exercises.length - 1} />
+      {!done ? <Exercise key={exercise.id} exercise={exercise} lesson={lesson}
+        activityId={activityId} onNext={next} onCorrect={() => setStars((current) => current + 1)} last={index === activity.exercises.length - 1 && (final ? 'Terminar lección' : 'Siguiente actividad')} />
         : <Card className="completion-card">
           <span className="text-letter">{lesson.letter} {lesson.letter.toLowerCase()}</span>
           <h2>{final ? (lesson.completionTitle ?? `¡Terminaste la lección de la letra ${lesson.letter}!`) : '¡Terminaste esta actividad!'}</h2>

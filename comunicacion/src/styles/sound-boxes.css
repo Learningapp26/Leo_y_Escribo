@@ -1,0 +1,159 @@
+/* Dibujo en un círculo con un cuadrito por sonido, como en el libro */
+.sound-boxes {
+
+    --sound-boxes-color-0: #4fb3e8;
+    --sound-boxes-color-1: #e58fb5;
+    --sound-boxes-color-2: #8fcf8f;
+    --sound-boxes-color-3: #c79ad6;
+    --sound-boxes-color-4: #5fcfb8;
+    --sound-boxes-color-5: #7a6fc0;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: 28px 20px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+}
+
+.sound-boxes__item {
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+
+}
+
+.sound-boxes__circle {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 180px;
+    height: 180px;
+    border: 3px solid var(--sound-boxes-color);
+    border-radius: 50%;
+    background: #fff;
+    overflow: hidden;
+
+}
+
+.sound-boxes__circle .selection-image {
+
+    width: 140px;
+    max-width: 140px;
+    height: 140px;
+
+}
+
+/* Los cuadritos montan sobre el borde inferior del círculo */
+.sound-boxes__row {
+
+    display: flex;
+    margin-top: -34px;
+    background: #fff;
+
+}
+
+.sound-boxes__box {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin-left: -2px;
+    padding: 0;
+    border: 2px solid #2b2b2b;
+    background: #fff;
+    cursor: pointer;
+
+}
+
+.sound-boxes__box:first-child {
+
+    margin-left: 0;
+
+}
+
+.sound-boxes__box:hover:not(:disabled),
+.sound-boxes__box:focus-visible {
+
+    background: #f1f6fc;
+    outline: none;
+
+}
+
+.sound-boxes__box:disabled {
+
+    cursor: default;
+
+}
+
+.sound-boxes__dot {
+
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #1f1f1f;
+
+}
+
+.sound-boxes__tag {
+
+    position: absolute;
+    top: 0;
+    left: 50%;
+    z-index: 1;
+    transform: translate(-50%, -50%);
+    padding: 2px 12px;
+    border-radius: 999px;
+    background: var(--sound-boxes-color);
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 700;
+
+}
+
+.sound-boxes__item--correct .sound-boxes__box {
+
+    border-color: #2e9e5b;
+
+}
+
+.sound-boxes__item--wrong .sound-boxes__circle,
+.sound-boxes__item--wrong .sound-boxes__box {
+
+    border-color: #d64545;
+
+}
+
+@media (max-width: 480px) {
+
+    .sound-boxes__circle {
+
+        width: 150px;
+        height: 150px;
+
+    }
+
+    .sound-boxes__circle .selection-image {
+
+        width: 115px;
+        max-width: 115px;
+        height: 115px;
+
+    }
+
+    .sound-boxes__box {
+
+        width: 34px;
+        height: 34px;
+
+    }
+
+}
