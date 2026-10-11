@@ -161,6 +161,7 @@ import ActividadClSonidosPage from '../pages/ActividadClSonidosPage'
 import ActividadClSilabasPage from '../pages/ActividadClSilabasPage'
 import ActividadClFinalPage from '../pages/ActividadClFinalPage'
 
+
 function AppRouter() {
   return (
     <BrowserRouter>
@@ -760,8 +761,6 @@ function AppRouter() {
             path="/actividad/cl-final"
             element={<ActividadClFinalPage />}
           />
-
-
 
           <Route
             path="/lecciones/:lessonId"
