@@ -260,7 +260,7 @@ export const units = [
         id: 'h',
         title: 'Letra H',
         route: '/lecciones/h',
-        available: false,
+        available: true,
       },
       {
         id: 'z',
