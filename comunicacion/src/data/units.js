@@ -266,7 +266,7 @@ export const units = [
         id: 'z',
         title: 'Letra Z',
         route: '/lecciones/z',
-        available: false,
+        available: true,
       },
       {
         id: 'll',
