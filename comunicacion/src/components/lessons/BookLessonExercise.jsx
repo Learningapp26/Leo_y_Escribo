@@ -3,6 +3,7 @@ import { ArrowRight, Check, RotateCcw, Undo2 } from 'lucide-react'
 import Button from '../common/Button'
 import Card from '../common/Card'
 import LessonAudioButton from '../common/LessonAudioButton'
+import BookLessonImage from './BookLessonImage'
 import { playAudio } from '../../lib/audioPlayer'
 import { registrarProgreso } from '../../lib/progreso'
 
@@ -52,14 +53,14 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
       {exercise.sound && <LessonAudioButton audio={exercise.sound} size="large">Escuchar el sonido de {lesson.letter}</LessonAudioButton>}
       {exercise.extraAudios?.map((audio) => <LessonAudioButton key={audio.src} audio={audio}>Escuchar los sonidos despacio</LessonAudioButton>)}
       {prompt && <>
-        {prompt.image && <img className="selection-image selection-image--featured" src={prompt.image} alt={prompt.label} />}
+        {prompt.image && <BookLessonImage key={prompt.image} featured src={prompt.image} alt={prompt.label} />}
         {!exercise.hideWord && <p className="text-word">{prompt.label}</p>}
         <LessonAudioButton audio={prompt.audio}>Escuchar {exercise.hideWord ? 'la palabra' : prompt.label}</LessonAudioButton>
       </>}
       {exercise.pattern && <p className="completion-word-pattern">{exercise.pattern}</p>}
       {type === 'present' && <div className="selection-options">
         {exercise.items.map((item) => <Card key={item.id}>
-          {item.image && <img className="selection-image" src={item.image} alt={item.label} />}
+          {item.image && <BookLessonImage key={item.image} src={item.image} alt={item.label} />}
           <p className="text-reading">{item.label}</p>
           <LessonAudioButton audio={item.audio} aria-label={`Escuchar ${item.label}`}>Escuchar</LessonAudioButton>
         </Card>)}
@@ -74,7 +75,7 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
             <Button variant={active && feedback === 'correct' ? 'correct' : 'secondary'} size="large" fullWidth
               aria-pressed={active} aria-disabled={feedback === 'correct'} disabled={ordered && active}
               onClick={() => pick(index)}>
-              {option.image ? <><img className="selection-image" src={option.image} alt={option.label} />{exercise.showOptionLabels && <span>{option.label}</span>}</>
+              {option.image ? <><BookLessonImage key={option.image} src={option.image} alt={option.label} />{exercise.showOptionLabels && <span>{option.label}</span>}</>
                 : option.label}
               {active && <Check aria-label="Seleccionado" size={20} />}
             </Button>

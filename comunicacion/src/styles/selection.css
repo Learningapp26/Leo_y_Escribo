@@ -250,6 +250,26 @@
 
 }
 
+/* Espacio reservado para una ilustración del libro que aún no existe */
+.selection-image--pending {
+
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    margin-inline: auto;
+
+    border: 2px dashed currentColor;
+    border-radius: 16px;
+    opacity: 0.35;
+
+    font-size: 0.85rem;
+    text-align: center;
+    overflow-wrap: anywhere;
+
+}
+
 
 /* Círculo de color, cuando la palabra no necesita una foto (ej. "lila") */
 /* También se muestra sola, así que usa el mismo tamaño destacado */
