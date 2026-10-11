@@ -19,6 +19,20 @@
 /* ============================================================ */
 
 /* Contendeor */
+.completion-bank.completion-bank--letters {
+    padding: var(--space-md);
+}
+
+.lesson-page--contained .completion-bank--letters > .app-card {
+    flex: 0 1 92px;
+    padding: var(--space-sm);
+    gap: var(--space-sm);
+}
+
+.completion-bank--letters .btn {
+    padding: var(--space-sm);
+}
+
 .completion-page {
     display: flex;
     flex-direction: column;

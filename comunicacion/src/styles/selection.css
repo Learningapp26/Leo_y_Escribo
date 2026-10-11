@@ -114,6 +114,34 @@
     flex: 1;
 }
 
+/* Reusable word banks for open oral composition. */
+.word-choice-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    width: 100%;
+}
+
+.word-choice-group h2 {
+    font-size: var(--font-size-lg);
+}
+
+.lesson-page--contained .word-choice-option {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--space-sm);
+    flex-basis: 260px;
+}
+
+.word-choice-option .btn {
+    padding: var(--space-sm);
+}
+
+.selection-options--labeled .btn:not(.btn--audio) {
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+}
+
 
 /* ============================================================
    Botón de selección

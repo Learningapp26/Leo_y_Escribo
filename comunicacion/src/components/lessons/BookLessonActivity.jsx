@@ -57,7 +57,7 @@ function BookLessonActivity({ lesson, activityId }) {
     <main className={`page completion-page lesson-page--contained ${getLessonThemeClass(lesson.id)}`} aria-labelledby="activity-title">
       <BackButton label="Volver a la lección" to={`/lecciones/${lesson.id}`} />
       <header className="text-center">
-        <span className="text-ui-label">Unidad 4 · Actividad {activityIndex + 1}</span>
+        <span className="text-ui-label">Unidad {lesson.unitId} · Actividad {activityIndex + 1}</span>
         <h1 id="activity-title">{activity.title}</h1>
       </header>
       <ProgressBar value={index} max={activity.exercises.length} label={`Ejercicios completados: ${index} de ${activity.exercises.length}`} />
@@ -66,7 +66,7 @@ function BookLessonActivity({ lesson, activityId }) {
         activityId={activityId} onNext={next} onCorrect={() => setStars((current) => current + 1)} last={index === activity.exercises.length - 1} />
         : <Card className="completion-card">
           <span className="text-letter">{lesson.letter} {lesson.letter.toLowerCase()}</span>
-          <h2>{final ? `¡Terminaste la lección de la letra ${lesson.letter}!` : '¡Terminaste esta actividad!'}</h2>
+          <h2>{final ? (lesson.completionTitle ?? `¡Terminaste la lección de la letra ${lesson.letter}!`) : '¡Terminaste esta actividad!'}</h2>
           {final ? <>
             <LessonAudioButton audio={lesson.feedback.completed}>Escuchar felicitación</LessonAudioButton>
             {saveState === 'saving' && <p role="status">Guardando tu progreso…</p>}
@@ -75,7 +75,7 @@ function BookLessonActivity({ lesson, activityId }) {
               <Button variant="retry" icon={RotateCcw} onClick={finish}>Volver a guardar</Button>
             </>}
             {saveState === 'saved' && <p role="status">Tu progreso está guardado.</p>}
-            <Button to="/lecciones/unidad/4" size="large" icon={ArrowRight} disabled={saveState === 'saving'}>Volver a la Unidad 4</Button>
+            <Button to={`/lecciones/unidad/${lesson.unitId}`} size="large" icon={ArrowRight} disabled={saveState === 'saving'}>Volver a la Unidad {lesson.unitId}</Button>
           </> : <Button to={`/actividad/${lesson.id}-${lesson.activities[activityIndex + 1].id}`} size="large" icon={ArrowRight}>Siguiente actividad</Button>}
         </Card>}
     </main>
