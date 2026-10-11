@@ -161,6 +161,13 @@ import ActividadClSonidosPage from '../pages/ActividadClSonidosPage'
 import ActividadClSilabasPage from '../pages/ActividadClSilabasPage'
 import ActividadClFinalPage from '../pages/ActividadClFinalPage'
 
+import LeccionGPage from '../pages/LeccionGPage'
+import ActividadGSonidosPage from '../pages/ActividadGSonidosPage'
+import ActividadGSilabasPage from '../pages/ActividadGSilabasPage'
+import ActividadGCompletarPage from '../pages/ActividadGCompletarPage'
+import ActividadGFinalPage from '../pages/ActividadGFinalPage'
+
+
 
 function AppRouter() {
   return (
@@ -761,6 +768,29 @@ function AppRouter() {
             path="/actividad/cl-final"
             element={<ActividadClFinalPage />}
           />
+          
+
+          <Route
+            path="/lecciones/g"
+            element={<LeccionGPage />}
+          />
+          <Route
+            path="/actividad/g-sonidos"
+            element={<ActividadGSonidosPage />}
+          />
+          <Route
+            path="/actividad/g-silabas"
+            element={<ActividadGSilabasPage />}
+          />
+          <Route
+            path="/actividad/g-completar"
+            element={<ActividadGCompletarPage />}
+          />
+          <Route
+            path="/actividad/g-final"
+            element={<ActividadGFinalPage />}
+          />
+
 
           <Route
             path="/lecciones/:lessonId"

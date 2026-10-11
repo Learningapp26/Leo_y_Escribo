@@ -34,8 +34,8 @@ function ActividadGCompletarPage() {
   const syllableItem = gSyllableCompletion[syllableIndex]
   const isLastSyllable = syllableIndex === gSyllableCompletion.length - 1
   const visiblePattern = syllableItem.pattern.replace(
-    '___',
-    selectedSyllable || '___',
+    /_+/,
+    (placeholder) => selectedSyllable || placeholder,
   )
 
   const pickSyllable = (option) => {
@@ -93,6 +93,10 @@ function ActividadGCompletarPage() {
   const [sentenceResult, setSentenceResult] = useState('')
   const sentenceItem = gSentenceCompletion[sentenceIndex]
   const isLastSentence = sentenceIndex === gSentenceCompletion.length - 1
+  const visibleSentence = sentenceItem.sentence.replace(
+    /_+/,
+    (placeholder) => selectedAnswer || placeholder,
+  )
 
   const checkSentence = () => {
     if (!selectedAnswer) return
@@ -276,10 +280,7 @@ function ActividadGCompletarPage() {
           />
 
           <p className="completion-words-sentence">
-            {sentenceItem.sentence.replace(
-              '___',
-              selectedAnswer || '________',
-            )}
+            {visibleSentence}
           </p>
 
           <div className="selection-options">
@@ -319,10 +320,7 @@ function ActividadGCompletarPage() {
               className="selection-feedback selection-feedback--correct"
               role="status"
             >
-              ¡Correcto! {sentenceItem.sentence.replace(
-                '___',
-                selectedAnswer,
-              )}
+              ¡Correcto! {visibleSentence}
             </p>
           )}
 

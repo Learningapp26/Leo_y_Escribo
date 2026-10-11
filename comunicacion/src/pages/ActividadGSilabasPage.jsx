@@ -99,8 +99,8 @@ function ActividadGSilabasPage() {
   const currentWord = gWordCompletion[wordIndex]
   const isLastWord = wordIndex === gWordCompletion.length - 1
   const visiblePattern = currentWord.pattern.replace(
-    '___',
-    selectedSyllable || '___',
+    /_+/,
+    (placeholder) => selectedSyllable || placeholder,
   )
 
   const checkCompletion = () => {

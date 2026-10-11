@@ -127,11 +127,11 @@ export const gPairPool = [
     audio: '/audio/lecciones/g/guinda.mp3',
   },
   {
-    id: 'gorra',
+    id: 'gorro',
     pairId: 'go',
-    name: 'gorra',
-    image: '/images/lecciones/g/gorra.png',
-    audio: '/audio/lecciones/g/gorra.mp3',
+    name: 'gorro',
+    image: '/images/lecciones/g/gorro.png',
+    audio: '/audio/lecciones/g/gorro.mp3',
   },
   {
     id: 'gaviota',
@@ -287,6 +287,7 @@ export const gWordCompletion = [
 
  
 // Fase 4: emparejar palabras que contienen la misma sílaba con G.
+// Con ga, go y gu
 export const gSyllablePairsInstructionAudio =
   '/audio/lecciones/g/instruccion-parejas-silabas.mp3'
 
@@ -313,11 +314,11 @@ export const gSyllablePairPool = [
     audio: '/audio/lecciones/g/goma.mp3',
   },
   {
-    id: 'gorra',
+    id: 'gorro',
     pairId: 'go',
-    name: 'gorra',
-    image: '/images/lecciones/g/gorra.png',
-    audio: '/audio/lecciones/g/gorra.mp3',
+    name: 'gorro',
+    image: '/images/lecciones/g/gorro.png',
+    audio: '/audio/lecciones/g/gorro.mp3',
   },
   {
     id: 'guante',
