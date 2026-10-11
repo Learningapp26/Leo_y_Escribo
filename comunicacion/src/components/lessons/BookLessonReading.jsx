@@ -17,7 +17,7 @@ function BookLessonReading({ lesson }) {
     <main className={`page reading-page lesson-page--contained ${getLessonThemeClass(lesson.id)}`} aria-labelledby="lesson-title">
       <BackButton label={`Volver a la Unidad ${lesson.unitId}`} to={`/lecciones/unidad/${lesson.unitId}`} />
       <header className="text-center">
-        <span className="text-ui-label">Unidad {lesson.unitId} · Páginas {lesson.pages}</span>
+        {lesson.showReadingSource !== false && <span className="text-ui-label">Unidad {lesson.unitId} · Páginas {lesson.pages}</span>}
         <h1 id="lesson-title">{lesson.title ?? `La letra ${lesson.letter} ${lesson.letter.toLowerCase()}`}</h1>
         <p className="text-instruction">{reading.instruction.text}</p>
         <LessonAudioButton audio={reading.instruction}>Escuchar instrucción</LessonAudioButton>

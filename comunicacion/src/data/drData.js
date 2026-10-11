@@ -16,6 +16,7 @@ const tongueTwisters = [
 
 export const drLesson = {
   id: 'dr', letter: 'Dr', title: 'Combinación Dr', unitId: 5, pages: '171–174',
+  showReadingSource: false,
   completionTitle: '¡Terminaste la lección de Dr!',
   reading: {
     title: 'El dragón volador', paragraphs,
