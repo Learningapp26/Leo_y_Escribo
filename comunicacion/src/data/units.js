@@ -246,9 +246,9 @@ export const units = [
     lessons: [
       {
         id: 'dr',
-        title: 'Combinación DR',
+        title: 'Combinación Dr',
         route: '/lecciones/dr',
-        available: false,
+        available: true,
       },
       {
         id: 'g',
