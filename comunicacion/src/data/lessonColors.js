@@ -34,6 +34,7 @@ export const LESSON_UNIT_MAP = {
   rr: 4,
   enie: 4,
   'repaso-unidad-4': 4,
+  'juego-memoria': 4,
   dr: 5,
   g: 5,
   h: 5,

@@ -11,7 +11,7 @@ import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 import '../styles/memoria.css'
 
 // TODO: ajustar al id real del juego en units.js / lessonColors.js
-const MEMORIA_ID = 'memoria'
+const MEMORIA_ID = 'juego-memoria'
 const UNIT_PATH = '/lecciones/unidad/4'
 const TOTAL_PAIRS = tarjetas.items.length
 const FLIP_BACK_DELAY = 1200
