@@ -6,54 +6,63 @@ export const units = [
     lessons: [
       {
         id: 'vocales',
+        bookPage: 5,
         title: 'Vocales',
         route: '/lecciones/vocales',
         available: true,
       },
       {
         id: 'm',
+        bookPage: 7,
         title: 'Letra M',
         route: '/lecciones/m',
         available: true,
       },
       {
         id: 'l',
+        bookPage: 13,
         title: 'Letra L',
         route: '/lecciones/l',
         available: true,
       },
       {
         id: 's',
+        bookPage: 19,
         title: 'Letra S',
         route: '/lecciones/s',
         available: true,
       },
       {
         id: 'y-conjuncion',
+        bookPage: 25,
         title: 'Y como conjunción',
         route: '/lecciones/y-conjuncion',
         available: true,
       },
       {
         id: 'r',
+        bookPage: 29,
         title: 'Letra R',
         route: '/lecciones/r',
         available: true,
       },
       {
         id: 'p',
+        bookPage: 37,
         title: 'Letra P',
         route: '/lecciones/p',
         available: true,
       },
       {
         id: 't',
+        bookPage: 43,
         title: 'Letra T',
         route: '/lecciones/t',
         available: true,
       },
 {
   id: 'n',
+  bookPage: 49,
   title: 'Letra N',
   route: '/lecciones/n',
   available: true,
@@ -79,36 +88,42 @@ export const units = [
   lessons: [
       {
         id: 'c',
+        bookPage: 59,
         title: 'Letra C',
         route: '/lecciones/c',
         available: true,
       },
       {
         id: 'q',
+        bookPage: 65,
         title: 'Letra Q',
         route: '/lecciones/q',
         available: true,
       },
       {
         id: 'd',
+        bookPage: 71,
         title: 'Letra D',
         route: '/lecciones/d',
         available: true,
       },
       {
         id: 'silabas-inversas',
+        bookPage: 79,
         title: 'Sílabas inversas',
         route: '/lecciones/silabas-inversas',
         available: true,
       },
       {
         id: 'pl',
+        bookPage: 85,
         title: 'Combinación PL',
         route: '/lecciones/pl',
         available: true,
       },
       {
         id: 'pr',
+        bookPage: 89,
         title: 'Combinación PR',
         route: '/lecciones/pr',
         available: true,
@@ -134,36 +149,42 @@ export const units = [
     lessons: [
       {
         id: 'b',
+        bookPage: 97,
         title: 'Letra B',
         route: '/lecciones/b',
         available: true,
       },
       {
         id: 'j',
+        bookPage: 103,
         title: 'Letra J',
         route: '/lecciones/j',
         available: true,
       },
       {
         id: 'tr',
+        bookPage: 109,
         title: 'Combinación TR',
         route: '/lecciones/tr',
         available: true,
       },
       {
         id: 'bl',
+        bookPage: 113,
         title: 'Combinación BL',
         route: '/lecciones/bl',
         available: true,
       },
       {
         id: 'br',
+        bookPage: 117,
         title: 'Combinación BR',
         route: '/lecciones/br',
         available: true,
       },
       {
         id: 'ch',
+        bookPage: 121,
         title: 'Combinación CH',
         route: '/lecciones/ch',
         available: true,
@@ -190,6 +211,7 @@ export const units = [
     
       {
         id: 'cl',
+        bookPage: 131,
         title: 'Combinación CL',
         route: '/lecciones/cl',
         available: true,
@@ -202,24 +224,28 @@ export const units = [
       },
       {
         id: 'f',
+        bookPage: 139,
         title: 'Letra F',
         route: '/lecciones/f',
         available: true,
       },
       {
         id: 'v',
+        bookPage: 147,
         title: 'Letra V',
         route: '/lecciones/v',
         available: true,
       },
       {
         id: 'rr',
+        bookPage: 153,
         title: 'Doble rr',
         route: '/lecciones/rr',
         available: true,
       },
       {
         id: 'enie',
+        bookPage: 159,
         title: 'Letra Ñ',
         route: '/lecciones/enie',
         available: true,
@@ -246,6 +272,7 @@ export const units = [
     lessons: [
       {
         id: 'dr',
+        bookPage: 171,
         title: 'Combinación Dr',
         route: '/lecciones/dr',
         available: true,
@@ -258,12 +285,14 @@ export const units = [
       },
       {
         id: 'h',
+        bookPage: 183,
         title: 'Letra H',
         route: '/lecciones/h',
         available: true,
       },
       {
         id: 'z',
+        bookPage: 189,
         title: 'Letra Z',
         route: '/lecciones/z',
         available: true,
@@ -371,9 +400,9 @@ export function getUnitById(unitId) {
 export function getUnitThemeClass(unitId) {
   const parsedUnitId = Number(unitId)
 
-  return parsedUnitId >= 1 && parsedUnitId <= 6
-    ? `lesson-theme--unit-${parsedUnitId}`
-    : 'lesson-theme--default'
+  return parsedUnitId >= 0 && parsedUnitId <= 7
+    ? `planet--${parsedUnitId}`
+    : 'planet--default'
 }
 
 export function isUnitUnlocked(
@@ -388,6 +417,13 @@ export function isUnitUnlocked(
   return firstAvailableLesson
     ? isLessonUnlocked(firstAvailableLesson.id, completedLessonIds)
     : false
+}
+
+// ¿El planeta (0–7) tiene al menos una lección hecha en la app? El 0 son las
+// vocales (dentro de la unidad 1); los planetas sin lecciones van bloqueados.
+export function planetHasLessons(planetId) {
+  if (planetId === 0) return Boolean(getLessonById('vocales'))
+  return getUnitById(planetId)?.lessons.some((lesson) => lesson.available && lesson.id !== 'vocales') ?? false
 }
 
 export const availableLessons = units.flatMap((unit) =>
@@ -410,4 +446,16 @@ export function isLessonUnlocked(
   if (lessonIndex === 0 || completedLessonIds.has(lessonId)) return true
 
   return completedLessonIds.has(availableLessons[lessonIndex - 1].id)
+}
+
+// Siguiente lección por hacer (la "misión de hoy") con su unidad.
+export function getCurrentLesson(completedLessonIds = new Set()) {
+  for (const unit of units) {
+    for (const lesson of unit.lessons) {
+      if (lesson.available && !completedLessonIds.has(lesson.id) && isLessonUnlocked(lesson.id, completedLessonIds)) {
+        return { lesson, unit }
+      }
+    }
+  }
+  return null
 }

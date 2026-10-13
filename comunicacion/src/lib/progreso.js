@@ -197,5 +197,19 @@ export async function obtenerResumenProgreso() {
     }
   }
 
-  return { estrellas, completadas, iniciadas }
+  return { estrellas, completadas, iniciadas, diasSeguidos: contarDiasSeguidos(registros) }
+}
+
+// Días seguidos con actividad, contando hacia atrás desde hoy (o desde ayer
+// si hoy todavía no hay registros). Solo usa las fechas ya leídas.
+function contarDiasSeguidos(registros) {
+  const dias = new Set(registros.map((registro) => new Date(registro.creado_en).toDateString()))
+  const dia = new Date()
+  if (!dias.has(dia.toDateString())) dia.setDate(dia.getDate() - 1)
+  let total = 0
+  while (dias.has(dia.toDateString())) {
+    total += 1
+    dia.setDate(dia.getDate() - 1)
+  }
+  return total
 }
