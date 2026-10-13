@@ -5,6 +5,7 @@ import {
   ArrowUp,
   Check,
   Dice5,
+  Flag,
   Footprints,
   PencilLine,
   RotateCcw,
@@ -25,6 +26,7 @@ import {
 } from '../data/subidasResbalonesData'
 import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 import '../styles/subidas-resbalones.css'
+import { RewardBurst } from '../components/space/Reward'
 
 const MOVE_DELAY = 550
 const EFFECT_DELAY = 800
@@ -185,7 +187,7 @@ function SubidasResbalonesPage() {
     return (
       <main className={`page board-game-page ${themeClass}`} aria-labelledby="board-finished-title">
         <Card className="board-game-finish-card">
-          <Trophy aria-hidden="true" />
+          <RewardBurst lessonId="subidas-resbalones" />
           <h1 id="board-finished-title">¡Llegaste a la meta!</h1>
           <p className="text-instruction">
             Completaste Subidas y resbalones de palabras. ¡Tu lección fue registrada!
@@ -236,8 +238,8 @@ function SubidasResbalonesPage() {
                 aria-label={`Casilla ${square}${effect ? `. ${effect.label}` : task ? '. Tiene un reto de palabras.' : ''}${hasToken ? '. Tu ficha está aquí.' : ''}`}
               >
                 <span className="board-square__number">{square}</span>
-                {square === 1 && <span className="board-square__label">🚩 Salida</span>}
-                {square === 20 && <span className="board-square__label">🏆 Meta</span>}
+                {square === 1 && <span className="board-square__label"><Flag aria-hidden="true" size={16} /> Salida</span>}
+                {square === 20 && <span className="board-square__label"><Trophy aria-hidden="true" size={16} /> Meta</span>}
                 {effect?.type === 'slide' && <ArrowDown className="board-square__effect" aria-hidden="true" />}
                 {effect && effect.type !== 'slide' && <ArrowUp className="board-square__effect" aria-hidden="true" />}
                 {task && !effect && <PencilLine className="board-square__task" aria-hidden="true" />}

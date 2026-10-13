@@ -7,7 +7,7 @@ import { getLessonThemeClass } from '../src/data/lessonColors.js'
 test('Z follows H and uses the existing Unit 5 unlock rules', () => {
   assert.equal(getLessonById('z').title, 'Letra Z')
   assert.equal(getLessonById('z').route, '/lecciones/z')
-  assert.equal(getLessonThemeClass('z'), 'lesson-theme--unit-5')
+  assert.equal(getLessonThemeClass('z'), 'planet--5')
   assert.equal(isLessonUnlocked('z', new Set(['dr'])), false)
   assert.equal(isLessonUnlocked('z', new Set(['h'])), true)
   assert.equal(isLessonUnlocked('z', new Set(['z'])), true)

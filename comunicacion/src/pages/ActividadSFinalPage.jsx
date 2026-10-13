@@ -13,6 +13,7 @@ import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 
 import '../styles/completion.css'
 import '../styles/selection.css'
+import { RewardBurst } from '../components/space/Reward'
 
 const PHASES = ['sonido', 'silaba', 'palabra', 'lectura']
 
@@ -95,7 +96,7 @@ function ActividadSFinalPage() {
     return (
       <main className={`page ${themeClass}`}>
         <Card className="selection-card">
-          <span className="finish-icon" aria-hidden="true">⭐</span>
+          <RewardBurst lessonId="s" />
           <h1>¡Terminaste la lección de la letra S!</h1>
           <p className="text-instruction">
             Practicaste el sonido /s/, las sílabas sa, se, si, so y su, y palabras sencillas.

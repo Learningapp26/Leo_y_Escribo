@@ -7,6 +7,7 @@ import { getLessonThemeClass } from '../data/lessonColors'
 import {mReading, MComprehensionQuestions} from '../data/mData'
 import { playAudio } from '../lib/audioPlayer'
 import '../styles/reading.css'
+import StoryCard from '../components/lessons/StoryCard'
 
 function LeccionMPage() {
   const themeClass = getLessonThemeClass('m')
@@ -40,36 +41,7 @@ function LeccionMPage() {
       </header>
 
    
-      <Card className="reading-card">
-        <div className="reading-content">
-          <h2 className="reading-title">{mReading.title}</h2>
-
-          <div className="reading-story">
-
-            {mReading.paragraphs.map((paragraph) => (
-              <p className="text-reading" key={paragraph}>
-                {paragraph}
-              </p>
-            ))}
-          </div>
-
-          <div className="reading-audio">
-            <Button
-              variant="audio"
-              size="large"
-              icon={Volume2}
-              onClick={() => playAudio(mReading.readingAudio)}
-              data-audio-src={mReading.readingAudio}
-            >
-              Escuchar la historia
-            </Button>
-          </div>
-        </div>
-
-        <div className="reading-image">
-          <img src={mReading.image} alt={mReading.imageAlt} />
-        </div>
-      </Card>
+      <StoryCard lessonId="m" title={mReading.title} paragraphs={mReading.paragraphs} image={mReading.image} imageAlt={mReading.imageAlt} audio={mReading.readingAudio} />
 
         
       <section

@@ -18,6 +18,7 @@ import {
 } from '../data/lFinal'
 import { playAudio } from '../lib/audioPlayer'
 import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
+import { RewardBurst } from '../components/space/Reward'
 
 const PHASES = ['palabras', 'oraciones', 'contar', 'relacionar']
 
@@ -167,9 +168,7 @@ function ActividadLFinalPage() {
     return (
       <main className={`page ${themeClass}`}>
         <Card className="selection-card">
-          <span className="finish-icon" aria-hidden="true">
-            ⭐
-          </span>
+          <RewardBurst lessonId="l" />
 
           <h1>¡Terminaste la lección de la letra L!</h1>
 

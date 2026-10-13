@@ -10,6 +10,7 @@ import { getLessonThemeClass } from '../data/lessonColors'
 import { finalExercises } from '../data/yConjunctionData'
 import { playAudio } from '../lib/audioPlayer'
 import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
+import { RewardBurst } from '../components/space/Reward'
 
 function getOptionAudioPath(optionName) {
   const normalizedName = optionName
@@ -88,12 +89,7 @@ function ActividadYFinalPage() {
         aria-labelledby="finished-title"
       >
         <Card className="completion-card">
-          <span
-            className="text-letter"
-            aria-hidden="true"
-          >
-            ⭐
-          </span>
+          <RewardBurst lessonId="y-conjuncion" />
 
           <h1 id="finished-title">
             ¡Terminaste la lección!

@@ -18,6 +18,7 @@ import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 import '../styles/syllables.css'
 import '../styles/completion.css'
+import { RewardBurst } from '../components/space/Reward'
 
 const PHASES = ['silaba', 'contar']
 
@@ -146,9 +147,7 @@ function ActividadMFinalPage() {
     return (
       <main className={`page ${themeClass}`}>
         <Card className="selection-card">
-          <span className="finish-icon" aria-hidden="true">
-            ⭐
-          </span>
+          <RewardBurst lessonId="m" />
 
           <h1>¡Terminaste la lección de la letra M!</h1>
 

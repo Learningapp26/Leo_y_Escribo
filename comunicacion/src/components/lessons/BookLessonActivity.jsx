@@ -7,6 +7,8 @@ import LessonAudioButton from '../common/LessonAudioButton'
 import BackButton from '../navigation/BackButton'
 import ProgressBar from '../progress/ProgressBar'
 import StarsCounter from '../progress/StarsCounter'
+import { RewardScreen } from '../space/Reward'
+import '../../styles/solar.css'
 import BookLessonExercise from './BookLessonExercise'
 import BookLessonSoundBoxes from './BookLessonSoundBoxes'
 import { getLessonThemeClass } from '../../data/lessonColors'
@@ -64,28 +66,30 @@ function BookLessonActivity({ lesson, activityId }) {
 
   return (
     <main className={`page completion-page lesson-page--contained ${getLessonThemeClass(lesson.id)}`} aria-labelledby="activity-title">
-      <BackButton label="Volver a la lección" to={`/lecciones/${lesson.id}`} />
-      <header className="text-center">
-        <span className="text-ui-label">Unidad {lesson.unitId} · Actividad {activityIndex + 1}</span>
-        <h1 id="activity-title">{activity.title}</h1>
+      <header className="space-header activity-header">
+        <BackButton label="Volver a la lección" to={`/lecciones/${lesson.id}`} />
+        <div>
+          <span className="space-header__label">Actividad {activityIndex + 1} de {lesson.activities.length}</span>
+          <h1 id="activity-title" className="space-header__title">{activity.title}</h1>
+        </div>
+        {totalStars > 0 && <span className="space-header__end"><StarsCounter current={stars} total={totalStars} /></span>}
       </header>
-      <ProgressBar value={index} max={activity.exercises.length} label={`Ejercicios completados: ${index} de ${activity.exercises.length}`} />
-      {totalStars > 0 && <StarsCounter current={stars} total={totalStars} />}
+      {!done && <ProgressBar value={index} max={activity.exercises.length} label={`Ejercicios completados: ${index} de ${activity.exercises.length}`} />}
       {!done ? <Exercise key={exercise.id} exercise={exercise} lesson={lesson}
         activityId={activityId} onNext={next} onCorrect={() => setStars((current) => current + 1)} last={index === activity.exercises.length - 1 && (final ? 'Terminar lección' : 'Siguiente actividad')} />
+        : final ? <RewardScreen lessonId={lesson.id} continueTo={`/lecciones/unidad/${lesson.unitId}`} continueDisabled={saveState === 'saving'}>
+          <p className="reward-screen__lesson">{lesson.completionTitle ?? `¡Terminaste la lección de la letra ${lesson.letter}!`}</p>
+          <LessonAudioButton audio={lesson.feedback.completed}>Escuchar felicitación</LessonAudioButton>
+          {saveState === 'saving' && <p role="status">Guardando tu progreso…</p>}
+          {saveState === 'error' && <>
+            <p role="alert">No pudimos guardar tu progreso. Comprueba tu conexión y que hayas iniciado sesión.</p>
+            <Button variant="retry" icon={RotateCcw} onClick={finish}>Volver a guardar</Button>
+          </>}
+          {saveState === 'saved' && <p role="status">Tu progreso está guardado.</p>}
+        </RewardScreen>
         : <Card className="completion-card">
-          <span className="text-letter">{lesson.letter} {lesson.letter.toLowerCase()}</span>
-          <h2>{final ? (lesson.completionTitle ?? `¡Terminaste la lección de la letra ${lesson.letter}!`) : '¡Terminaste esta actividad!'}</h2>
-          {final ? <>
-            <LessonAudioButton audio={lesson.feedback.completed}>Escuchar felicitación</LessonAudioButton>
-            {saveState === 'saving' && <p role="status">Guardando tu progreso…</p>}
-            {saveState === 'error' && <>
-              <p role="alert">No pudimos guardar tu progreso. Comprueba tu conexión y que hayas iniciado sesión.</p>
-              <Button variant="retry" icon={RotateCcw} onClick={finish}>Volver a guardar</Button>
-            </>}
-            {saveState === 'saved' && <p role="status">Tu progreso está guardado.</p>}
-            <Button to={`/lecciones/unidad/${lesson.unitId}`} size="large" icon={ArrowRight} disabled={saveState === 'saving'}>Volver a la Unidad {lesson.unitId}</Button>
-          </> : <Button to={`/actividad/${lesson.id}-${lesson.activities[activityIndex + 1].id}`} size="large" icon={ArrowRight}>Siguiente actividad</Button>}
+          <h2>¡Terminaste esta actividad!</h2>
+          <Button to={`/actividad/${lesson.id}-${lesson.activities[activityIndex + 1].id}`} size="large" icon={ArrowRight}>Siguiente actividad</Button>
         </Card>}
     </main>
   )

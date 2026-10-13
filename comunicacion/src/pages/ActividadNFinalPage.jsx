@@ -10,6 +10,7 @@ import { getLessonThemeClass } from '../data/lessonColors'
 import {nPracticeWords, nSentenceChoice, nSentenceImageMatch,} from '../data/nFinal'
 import { playAudio } from '../lib/audioPlayer'
 import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
+import { RewardBurst } from '../components/space/Reward'
 
 const PHASES = ['palabras', 'oraciones', 'relacionar']
 
@@ -112,9 +113,7 @@ function ActividadNFinalPage() {
     return (
       <main className={`page ${themeClass}`}>
         <Card className="selection-card">
-          <span className="finish-icon" aria-hidden="true">
-            ⭐
-          </span>
+          <RewardBurst lessonId="n" />
 
           <h1>¡Terminaste la lección de la letra N!</h1>
 

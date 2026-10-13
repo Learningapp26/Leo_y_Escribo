@@ -7,6 +7,7 @@ import {bComprehensionQuestions,bConversationInstructionAudio,bReading,} from '.
 import { getLessonThemeClass } from '../data/lessonColors'
 import { playAudio } from '../lib/audioPlayer'
 import '../styles/reading.css'
+import StoryCard from '../components/lessons/StoryCard'
 
 function LeccionBPage() {
   const themeClass = getLessonThemeClass('b')
@@ -33,31 +34,7 @@ function LeccionBPage() {
         </Button>
       </header>
 
-      <Card className="reading-card">
-        <div className="reading-content">
-          <h2 className="reading-title">{bReading.title}</h2>
-          <div className="reading-story">
-            {bReading.paragraphs.map((paragraph) => (
-              <p className="text-reading" key={paragraph}>{paragraph}</p>
-            ))}
-          </div>
-          <div className="reading-audio">
-            <Button
-              variant="audio"
-              size="large"
-              icon={Volume2}
-              onClick={() => playAudio(bReading.readingAudio)}
-              data-audio-src={bReading.readingAudio}
-            >
-              Escuchar la historia
-            </Button>
-          </div>
-        </div>
-
-        <div className="reading-image">
-          <img src={bReading.image} alt={bReading.imageAlt} />
-        </div>
-      </Card>
+      <StoryCard lessonId="b" title={bReading.title} paragraphs={bReading.paragraphs} image={bReading.image} imageAlt={bReading.imageAlt} audio={bReading.readingAudio} />
 
       <section className="comprehension-section" aria-labelledby="b-conversation-title">
         <h2 id="b-conversation-title">Conversemos</h2>

@@ -7,6 +7,7 @@ import { getLessonThemeClass } from '../data/lessonColors'
 import { blComprehensionQuestions, blReading } from '../data/blData'
 import { playAudio } from '../lib/audioPlayer'
 import '../styles/reading.css'
+import StoryCard from '../components/lessons/StoryCard'
 
 function LeccionBlPage() {
   const themeClass = getLessonThemeClass('bl')
@@ -40,34 +41,7 @@ function LeccionBlPage() {
         </Button>
       </header>
 
-      <Card className="reading-card">
-        <div className="reading-content">
-          <h2 className="reading-title">{blReading.title}</h2>
-
-          <div className="reading-story">
-            {blReading.paragraphs.map((paragraph) => (
-              <p className="text-reading" key={paragraph}>
-                {paragraph}
-              </p>
-            ))}
-          </div>
-
-          <div className="reading-audio">
-            <Button
-              variant="audio"
-              size="large"
-              icon={Volume2}
-              onClick={() => playAudio(blReading.readingAudio)}
-            >
-              Escuchar la historia
-            </Button>
-          </div>
-        </div>
-
-        <div className="reading-image">
-          <img src={blReading.image} alt={blReading.imageAlt} />
-        </div>
-      </Card>
+      <StoryCard lessonId="bl" title={blReading.title} paragraphs={blReading.paragraphs} image={blReading.image} imageAlt={blReading.imageAlt} audio={blReading.readingAudio} />
 
       <section
         className="comprehension-section"

@@ -7,6 +7,7 @@ import BackButton from '../components/navigation/BackButton'
 import { getLessonThemeClass } from '../data/lessonColors'
 import {rReading,rReadingQuestions,} from '../data/rLessonData'
 import { playAudio } from '../lib/audioPlayer'
+import StoryCard from '../components/lessons/StoryCard'
 
 function LeccionRPage() {
   const [selectedAnswers, setSelectedAnswers] = useState({})
@@ -57,49 +58,7 @@ function LeccionRPage() {
         </Button>
       </header>
 
-      <Card className="reading-card">
-        <div className="reading-content">
-          <h2 className="reading-title">
-            {rReading.title}
-          </h2>
-
-          <div className="reading-story">
-            <p className="text-reading">
-              {rReading.introduction}
-            </p>
-
-            {rReading.paragraphs.map((paragraph) => (
-              <p
-                className="text-reading"
-                key={paragraph}
-              >
-                {paragraph}
-              </p>
-            ))}
-          </div>
-
-          <div className="reading-audio">
-            <Button
-              variant="audio"
-              size="large"
-              icon={Volume2}
-              onClick={() =>
-                playAudio(rReading.readingAudio)
-              }
-              data-audio-src={rReading.readingAudio}
-            >
-              Escuchar la historia
-            </Button>
-          </div>
-        </div>
-
-        <div className="reading-image">
-          <img
-            src={rReading.image}
-            alt={rReading.imageAlt}
-          />
-        </div>
-      </Card>
+      <StoryCard lessonId="r" title={rReading.title} paragraphs={rReading.paragraphs} image={rReading.image} imageAlt={rReading.imageAlt} audio={rReading.readingAudio} />
 
       <section
         className="comprehension-section"

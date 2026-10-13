@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { ArrowRight, CheckCircle2, RotateCcw, Trophy } from 'lucide-react'
+import { ArrowRight, CheckCircle2, RotateCcw } from 'lucide-react'
 
 import Button from '../components/common/Button'
 import Card from '../components/common/Card'
@@ -9,6 +9,7 @@ import { getLessonThemeClass } from '../data/lessonColors'
 import { crearMazoMemoria, tarjetas } from '../data/memoria'
 import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 import '../styles/memoria.css'
+import { RewardBurst } from '../components/space/Reward'
 
 // TODO: ajustar al id real del juego en units.js / lessonColors.js
 const MEMORIA_ID = 'juego-memoria'
@@ -158,7 +159,7 @@ function MemoriaJuegoPage() {
     return (
       <main className={`page memory-page ${themeClass}`} aria-labelledby="memoria-finished-title">
         <Card className="memory-finish-card">
-          <Trophy aria-hidden="true" />
+          <RewardBurst lessonId="juego-memoria" />
           <h1 id="memoria-finished-title">¡Completaste el juego de memoria!</h1>
           <p className="text-instruction">
             Encontraste las {TOTAL_PAIRS} parejas. ¡Excelente trabajo!

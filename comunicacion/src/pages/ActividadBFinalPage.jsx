@@ -18,6 +18,7 @@ import { playAudio } from '../lib/audioPlayer'
 import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 import '../styles/completion.css'
+import { RewardBurst } from '../components/space/Reward'
 
 const PHASES = ['palabras', 'oraciones']
 
@@ -64,6 +65,7 @@ function ActividadBFinalPage() {
     return (
       <main className={`page completion-page ${themeClass}`} aria-labelledby="b-finished-title">
         <Card className="completion-card">
+          <RewardBurst lessonId="b" />
           <span className="text-letter" aria-hidden="true">B b</span>
           <h1 id="b-finished-title">¡Terminaste la lección de la letra B!</h1>
           <p className="text-instruction">Reconociste la B y la b, practicaste bo, ba, be, bi y bu, formaste palabras y leíste oraciones.</p>

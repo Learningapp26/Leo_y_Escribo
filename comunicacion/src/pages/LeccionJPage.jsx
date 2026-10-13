@@ -7,6 +7,7 @@ import { getLessonThemeClass } from '../data/lessonColors'
 import {jOralQuestions,jReading,} from '../data/jLectura'
 import { playAudio } from '../lib/audioPlayer'
 import '../styles/reading.css'
+import StoryCard from '../components/lessons/StoryCard'
 
 function LeccionJPage() {
   const themeClass = getLessonThemeClass('j')
@@ -45,48 +46,7 @@ function LeccionJPage() {
         </Button>
       </header>
 
-      <Card className="reading-card">
-        <div className="reading-content">
-          <h2 className="reading-title">
-            {jReading.title}
-          </h2>
-
-          <div className="reading-story">
-            <p className="text-reading">
-              {jReading.introduction}
-            </p>
-
-            {jReading.paragraphs.map((paragraph) => (
-              <p
-                className="text-reading"
-                key={paragraph}
-              >
-                {paragraph}
-              </p>
-            ))}
-          </div>
-
-          <div className="reading-audio">
-            <Button
-              variant="audio"
-              size="large"
-              icon={Volume2}
-              onClick={() =>
-                playAudio(jReading.readingAudio)
-              }
-            >
-              Escuchar la fábula
-            </Button>
-          </div>
-        </div>
-
-        <div className="reading-image">
-          <img
-            src={jReading.image}
-            alt={jReading.imageAlt}
-          />
-        </div>
-      </Card>
+      <StoryCard lessonId="j" title={jReading.title} paragraphs={jReading.paragraphs} image={jReading.image} imageAlt={jReading.imageAlt} audio={jReading.readingAudio} />
 
       <section
         className="comprehension-section"

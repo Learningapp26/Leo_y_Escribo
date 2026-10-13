@@ -16,6 +16,7 @@ import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 import '../styles/completion.css'
 import '../styles/lesson-tr.css'
+import { RewardBurst } from '../components/space/Reward'
 
 // Mezcla las sílabas para que no aparezcan siempre en el orden correcto.
 // (sort(() => Math.random() - 0.5) no mezcla bien, por eso Fisher-Yates.)
@@ -110,9 +111,7 @@ function ActividadTrCompletarPage() {
     return (
       <main className={`page lesson-tr ${themeClass}`}>
         <Card className="completion-card">
-          <span className="finish-icon" aria-hidden="true">
-            ⭐
-          </span>
+          <RewardBurst lessonId="tr" />
 
           <h1>¡Terminaste la lección de TR!</h1>
 

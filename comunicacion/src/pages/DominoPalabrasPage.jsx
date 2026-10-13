@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { ArrowRight, CheckCircle2, RotateCcw, Sparkles, Trophy } from 'lucide-react'
+import { ArrowRight, CheckCircle2, RotateCcw, Sparkles } from 'lucide-react'
 
 import Button from '../components/common/Button'
 import Card from '../components/common/Card'
@@ -14,6 +14,7 @@ import {
 } from '../data/dominoPalabrasData'
 import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 import '../styles/domino-palabras.css'
+import { RewardBurst } from '../components/space/Reward'
 
 function createGameState() {
   return {
@@ -133,7 +134,7 @@ function DominoPalabrasPage() {
     return (
       <main className={`page domino-page ${themeClass}`} aria-labelledby="domino-finished-title">
         <Card className="domino-finish-card">
-          <Trophy aria-hidden="true" />
+          <RewardBurst lessonId="domino-palabras" />
           <h1 id="domino-finished-title">¡Completaste el dominó!</h1>
           <p className="text-instruction">
             Formaste una cadena con las 10 fichas. ¡Excelente lectura!

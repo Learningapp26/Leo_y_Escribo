@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 
 import WelcomePage from '../pages/WelcomePage'
 import LoginPage from '../pages/LoginPage'
@@ -7,6 +7,7 @@ import LessonsPage from '../pages/LessonsPage'
 import LessonDetailPage from '../pages/LessonDetailPage'
 import ActivityPage from '../pages/ActivityPage'
 import ProgressPage from '../pages/ProgressPage'
+import StampAlbumPage from '../pages/StampAlbumPage'
 import NotFoundPage from '../pages/NotFoundPage'
 
 import LeccionVocalesPage from '../pages/LeccionVocalesPage'
@@ -142,6 +143,7 @@ import ActividadVCompletarPage from '../pages/ActividadVCompletarPage'
 import ActividadVFinalPage from '../pages/ActividadVFinalPage'
 import BookLessonReading from '../components/lessons/BookLessonReading'
 import BookLessonActivity from '../components/lessons/BookLessonActivity'
+import Starfield from '../components/space/Starfield'
 import { fLesson } from '../data/fData'
 import { enieLesson } from '../data/enieData'
 import { rrLesson } from '../data/rrData'
@@ -169,10 +171,20 @@ import ActividadGFinalPage from '../pages/ActividadGFinalPage'
 
 import { unit5WordPracticeConfig } from '../data/Unit5WordPracticeData'
 
+// En Cuento (/lecciones/:id) y Actividad los planetas de las esquinas se
+// encogen para no quedar detrás del encabezado ni de los botones.
+function AppSky({ children }) {
+  const { pathname } = useLocation()
+  const isStoryOrActivity = /^\/(actividad|unidad-\d+)\//.test(pathname)
+    || (/^\/lecciones\/[^/]+\/?$/.test(pathname) && !pathname.startsWith('/lecciones/unidad'))
+  return <Starfield cornerScale={isStoryOrActivity ? 0.7 : 1}>{children}</Starfield>
+}
+
 function AppRouter() {
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <AppSky>
       <LessonAccessGuard>
         <Routes>
           {[fLesson, rrLesson, enieLesson, drLesson, hLesson, zLesson].flatMap((lesson) => [
@@ -815,9 +827,11 @@ function AppRouter() {
           />
 
           <Route path="/progreso" element={<ProgressPage />} />
+          <Route path="/sellos" element={<StampAlbumPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </LessonAccessGuard>
+      </AppSky>
     </BrowserRouter>
   )
 }

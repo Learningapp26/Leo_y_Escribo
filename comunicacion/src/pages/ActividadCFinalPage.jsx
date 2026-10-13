@@ -17,6 +17,7 @@ import { playAudio } from '../lib/audioPlayer'
 import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 import '../styles/completion.css'
+import { RewardBurst } from '../components/space/Reward'
 
 const PHASES = [
   'palabras',
@@ -110,6 +111,7 @@ function ActividadCFinalPage() {
         aria-labelledby="c-finished-title"
       >
         <Card className="completion-card">
+          <RewardBurst lessonId="c" />
           <span
             className="text-letter"
             aria-hidden="true"

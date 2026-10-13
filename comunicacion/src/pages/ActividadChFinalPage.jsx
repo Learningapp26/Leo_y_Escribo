@@ -18,6 +18,7 @@ import { playAudio } from '../lib/audioPlayer'
 import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 import '../styles/completion.css'
+import { RewardBurst } from '../components/space/Reward'
 
 const PHASES = ['palabras', 'oraciones']
 
@@ -74,6 +75,7 @@ function ActividadChFinalPage() {
     return (
       <main className={`page completion-page ${themeClass}`} aria-labelledby="ch-finished-title">
         <Card className="completion-card">
+          <RewardBurst lessonId="ch" />
           <span className="text-letter" aria-hidden="true">Ch</span>
 
           <h1 id="ch-finished-title">¡Terminaste la lección de la combinación CH!</h1>

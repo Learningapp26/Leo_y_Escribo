@@ -8,6 +8,7 @@ import { getLessonThemeClass } from '../data/lessonColors'
 import {dComprehensionQuestions,dOralQuestion,dReading,} from '../data/dLectura'
 import { playAudio } from '../lib/audioPlayer'
 import '../styles/reading.css'
+import StoryCard from '../components/lessons/StoryCard'
 
 function LeccionDPage() {
   const themeClass = getLessonThemeClass('d')
@@ -62,36 +63,7 @@ function LeccionDPage() {
         </Button>
       </header>
 
-      <Card className="reading-card">
-        <div className="reading-content">
-          <h2 className="reading-title">{dReading.title}</h2>
-
-          <div className="reading-story">
-            <p className="text-reading">{dReading.introduction}</p>
-
-            {dReading.paragraphs.map((paragraph) => (
-              <p className="text-reading" key={paragraph}>
-                {paragraph}
-              </p>
-            ))}
-          </div>
-
-          <div className="reading-audio">
-            <Button
-              variant="audio"
-              size="large"
-              icon={Volume2}
-              onClick={() => playAudio(dReading.readingAudio)}
-            >
-              Escuchar la historia
-            </Button>
-          </div>
-        </div>
-
-        <div className="reading-image">
-          <img src={dReading.image} alt={dReading.imageAlt} />
-        </div>
-      </Card>
+      <StoryCard lessonId="d" title={dReading.title} paragraphs={dReading.paragraphs} image={dReading.image} imageAlt={dReading.imageAlt} audio={dReading.readingAudio} />
 
       <section
         className="comprehension-section"

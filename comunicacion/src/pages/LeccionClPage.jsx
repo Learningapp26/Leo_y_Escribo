@@ -15,6 +15,7 @@ import {
   clReading,
 } from '../data/clData'
 import '../styles/reading.css'
+import StoryCard from '../components/lessons/StoryCard'
 
 function LeccionClPage() {
   const themeClass =
@@ -55,41 +56,7 @@ function LeccionClPage() {
         </AudioPlaceholderButton>
       </header>
 
-      <Card className="reading-card">
-        <div className="reading-content">
-          <h2 className="reading-title">
-            {clReading.title}
-          </h2>
-
-          <div className="reading-story">
-            {clReading.paragraphs.map(
-              (paragraph) => (
-                <p
-                  className="text-reading"
-                  key={paragraph}
-                >
-                  {paragraph}
-                </p>
-              ),
-            )}
-          </div>
-
-          <div className="reading-audio">
-            <AudioPlaceholderButton
-              size="large"
-            >
-              Escuchar la historia
-            </AudioPlaceholderButton>
-          </div>
-        </div>
-
-        <div className="reading-image">
-          <img
-            src={clReading.image}
-            alt={clReading.imageAlt}
-          />
-        </div>
-      </Card>
+      <StoryCard lessonId="cl" title={clReading.title} paragraphs={clReading.paragraphs} image={clReading.image} imageAlt={clReading.imageAlt} />
 
       <section
         className="comprehension-section"

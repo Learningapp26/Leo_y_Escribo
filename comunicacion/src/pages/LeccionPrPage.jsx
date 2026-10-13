@@ -8,6 +8,7 @@ import { getLessonThemeClass } from '../data/lessonColors'
 import { prComprehensionQuestions, prReading } from '../data/prData'
 import { playAudio } from '../lib/audioPlayer'
 import '../styles/reading.css'
+import StoryCard from '../components/lessons/StoryCard'
 
 function LeccionPrPage() {
   const themeClass = getLessonThemeClass('pr')
@@ -41,34 +42,7 @@ function LeccionPrPage() {
         </Button>
       </header>
 
-      <Card className="reading-card">
-        <div className="reading-content">
-          <h2 className="reading-title">{prReading.title}</h2>
-
-          <div className="reading-story">
-            {prReading.paragraphs.map((paragraph) => (
-              <p className="text-reading" key={paragraph}>
-                {paragraph}
-              </p>
-            ))}
-          </div>
-
-          <div className="reading-audio">
-            <Button
-              variant="audio"
-              size="large"
-              icon={Volume2}
-              onClick={() => playAudio(prReading.readingAudio)}
-            >
-              Escuchar la historia
-            </Button>
-          </div>
-        </div>
-
-        <div className="reading-image">
-          <img src={prReading.image} alt={prReading.imageAlt} />
-        </div>
-      </Card>
+      <StoryCard lessonId="pr" title={prReading.title} paragraphs={prReading.paragraphs} image={prReading.image} imageAlt={prReading.imageAlt} audio={prReading.readingAudio} />
 
       <section
         className="comprehension-section"

@@ -15,6 +15,7 @@ import {
 import { playAudio } from '../lib/audioPlayer'
 import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
+import { RewardBurst } from '../components/space/Reward'
 
 const PHASES = ['palabras', 'oraciones']
 
@@ -80,9 +81,7 @@ function ActividadPFinalPage() {
     return (
       <main className={`page ${themeClass}`}>
         <Card className="selection-card">
-          <span className="finish-icon" aria-hidden="true">
-            ⭐
-          </span>
+          <RewardBurst lessonId="p" />
 
           <h1>¡Terminaste la lección de la letra P!</h1>
 

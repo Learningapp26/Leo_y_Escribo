@@ -10,6 +10,7 @@ import { playAudio } from '../lib/audioPlayer'
 import '../styles/selection.css'
 import '../styles/completion.css'
 import '../styles/reading.css'
+import StoryCard from '../components/lessons/StoryCard'
 
 function LeccionQPage() {
   const themeClass = getLessonThemeClass('q')
@@ -81,35 +82,7 @@ function LeccionQPage() {
         </Button>
       </header>
 
-      <Card className="reading-card">
-        <div className="reading-content">
-          <h2 className="reading-title">{qReading.title}</h2>
-
-          <div className="reading-story">
-            {qReading.paragraphs.map((paragraph) => (
-              <p className="text-reading" key={paragraph}>
-                {paragraph}
-              </p>
-            ))}
-          </div>
-
-          <div className="reading-audio">
-            <Button
-              variant="audio"
-              size="large"
-              icon={Volume2}
-              onClick={() => playAudio(qReading.readingAudio)}
-              data-audio-src={qReading.readingAudio}
-            >
-              Escuchar la historia
-            </Button>
-          </div>
-        </div>
-
-        <div className="reading-image">
-          <img src={qReading.image} alt={qReading.imageAlt} />
-        </div>
-      </Card>
+      <StoryCard lessonId="q" title={qReading.title} paragraphs={qReading.paragraphs} image={qReading.image} imageAlt={qReading.imageAlt} audio={qReading.readingAudio} />
 
       <section
         className="comprehension-section"

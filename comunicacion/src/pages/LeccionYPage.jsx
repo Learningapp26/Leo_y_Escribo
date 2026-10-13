@@ -6,6 +6,7 @@ import BackButton from '../components/navigation/BackButton'
 import { getLessonThemeClass } from '../data/lessonColors'
 import { yReading } from '../data/yConjunctionData'
 import { playAudio } from '../lib/audioPlayer'
+import StoryCard from '../components/lessons/StoryCard'
 
 function LeccionYPage() {
   const themeClass = getLessonThemeClass('y-conjuncion')
@@ -47,49 +48,7 @@ function LeccionYPage() {
         </Button>
       </header>
 
-      <Card className="reading-card">
-        <div className="reading-content">
-          <h2 className="reading-title">
-            {yReading.title}
-          </h2>
-
-          <div className="reading-story">
-            <p className="text-reading">
-              {yReading.introduction}
-            </p>
-
-            {yReading.paragraphs.map((paragraph) => (
-              <p
-                className="text-reading"
-                key={paragraph}
-              >
-                {paragraph}
-              </p>
-            ))}
-          </div>
-
-          <div className="reading-audio">
-            <Button
-              variant="audio"
-              size="large"
-              icon={Volume2}
-              onClick={() =>
-                playAudio(yReading.readingAudio)
-              }
-              data-audio-src={yReading.readingAudio}
-            >
-              Escuchar la historia
-            </Button>
-          </div>
-        </div>
-
-        <div className="reading-image">
-          <img
-            src={yReading.image}
-            alt={yReading.imageAlt}
-          />
-        </div>
-      </Card>
+      <StoryCard lessonId="y-conjuncion" title={yReading.title} paragraphs={yReading.paragraphs} image={yReading.image} imageAlt={yReading.imageAlt} audio={yReading.readingAudio} />
 
       <section
         className="comprehension-section"

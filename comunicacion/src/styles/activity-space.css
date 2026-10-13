@@ -1,0 +1,254 @@
+/* ============================================================
+   activity-space.css — piel "Viaje al espacio" para TODAS las
+   actividades (sección 4.5). Se carga después de selection.css,
+   completion.css y syllables.css, y solo cambia la presentación.
+   ============================================================ */
+
+/* ── Encabezado de la actividad sobre la noche ──────────────── */
+.selection-page > header,
+.completion-page > header,
+.syllables-page > header {
+  color: #fff;
+}
+
+.selection-page > header h1,
+.completion-page > header h1,
+.syllables-page > header h1 {
+  font-size: 32px;
+}
+
+/* ── Leo + burbuja blanca + audio redondo ───────────────────── */
+.selection-instructions,
+.completion-instructions,
+.syllables-instructions {
+  display: grid;
+  grid-template-columns: 84px minmax(0, 1fr) 76px;
+  align-items: center;
+  column-gap: 18px;
+  row-gap: 10px;
+  width: 100%;
+  max-width: 880px;
+  text-align: left;
+}
+
+.selection-instructions::before,
+.completion-instructions::before,
+.syllables-instructions::before {
+  content: '';
+  grid-column: 1;
+  grid-row: 1 / span 6;
+  align-self: end;
+  width: 84px;
+  height: 107px;
+  background: url('/images/leo.svg') center / contain no-repeat;
+}
+
+.selection-instructions > p,
+.completion-instructions > p,
+.syllables-instructions > p {
+  grid-column: 2;
+  margin: 0;
+  padding: 18px 26px;
+  border-radius: 26px 26px 26px 6px;
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 0 6px 0 #DCD5F3;
+  font-family: var(--font-content);
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.selection-instructions p.text-instruction:first-of-type {
+  font-size: 24px;
+  color: var(--ink);
+}
+
+/* El botón de audio de la instrucción: círculo sol de 76 px;
+   la etiqueta queda para lectores de pantalla. */
+.selection-instructions > .btn--audio,
+.completion-instructions > .btn--audio,
+.syllables-instructions > .btn--audio {
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: center;
+  width: 76px;
+  height: 76px;
+  min-height: 76px;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.selection-instructions > .btn--audio .btn__icon,
+.completion-instructions > .btn--audio .btn__icon,
+.syllables-instructions > .btn--audio .btn__icon {
+  width: 32px;
+  height: 32px;
+}
+
+.selection-instructions > .btn--audio .btn__label,
+.completion-instructions > .btn--audio .btn__label,
+.syllables-instructions > .btn--audio .btn__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+/* ── Opciones: tarjeta clara; al elegir, pastel + halo + estrellita ── */
+.selection-button {
+  position: relative;
+  background: var(--space-card-light);
+  color: var(--ink);
+  border-radius: var(--radius-option);
+  box-shadow: 0 6px 0 var(--space-night-ink);
+}
+
+.selection-button:nth-child(n) {
+  background: var(--space-card-light);
+  color: var(--ink);
+}
+
+.app-card .selection-button:nth-child(n) {
+  background: #fff;
+  box-shadow: 0 6px 0 #CFC6EE;
+}
+
+.selection-word {
+  font-family: var(--font-content);
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.selection-options > :nth-child(6n + 1) { --pick: var(--sky); }
+.selection-options > :nth-child(6n + 2) { --pick: var(--sun); }
+.selection-options > :nth-child(6n + 3) { --pick: var(--mint); }
+.selection-options > :nth-child(6n + 4) { --pick: var(--lilac); }
+.selection-options > :nth-child(6n + 5) { --pick: var(--peach); }
+.selection-options > :nth-child(6n + 6) { --pick: var(--pink); }
+
+.selection-button--selected,
+.selection-button--selected:nth-child(n),
+.app-card .selection-button--selected:nth-child(n) {
+  outline: none;
+  background: var(--pick, var(--sun));
+  color: var(--ink);
+  box-shadow: 0 0 0 6px color-mix(in srgb, var(--pick, var(--sun)) 40%, transparent), 0 0 30px var(--pick, var(--sun));
+  transform: translateY(-8px) scale(1.04);
+}
+
+/* Estrellita sol girada en la esquina (el estado no depende solo del color) */
+.selection-button--selected::after,
+.selection-button--correct::after {
+  content: '';
+  position: absolute;
+  top: -12px;
+  right: -10px;
+  width: 34px;
+  height: 34px;
+  background: var(--sun);
+  clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  transform: rotate(14deg);
+  filter: drop-shadow(0 2px 0 var(--sun-shadow));
+}
+
+.selection-button--correct,
+.selection-button--correct:nth-child(n),
+.app-card .selection-button--correct:nth-child(n) {
+  background: var(--mint);
+  color: var(--ink);
+}
+
+/* Reintento: nunca rojo; pastel durazno y la burbuja explica */
+.selection-button--incorrect,
+.selection-button--incorrect:nth-child(n),
+.app-card .selection-button--incorrect:nth-child(n) {
+  background: var(--peach);
+  color: var(--ink);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .selection-button {
+    transition: transform 180ms ease-out, box-shadow 180ms ease-out, background-color 180ms ease-out;
+  }
+}
+
+/* ── Retroalimentación como burbuja ─────────────────────────── */
+.selection-feedback {
+  border-radius: 26px 26px 26px 6px;
+  font-family: var(--font-content);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.selection-feedback--correct {
+  background: var(--mint);
+  color: var(--ink);
+}
+
+.selection-feedback--retry {
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 0 6px 0 #DCD5F3;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .selection-instructions,
+  .completion-instructions,
+  .syllables-instructions {
+    grid-template-columns: minmax(0, 1fr) 76px;
+  }
+
+  .selection-instructions::before,
+  .completion-instructions::before,
+  .syllables-instructions::before {
+    display: none;
+  }
+
+  .selection-instructions > p,
+  .completion-instructions > p,
+  .syllables-instructions > p {
+    grid-column: 1;
+    font-size: 20px;
+  }
+
+  .selection-instructions > .btn--audio,
+  .completion-instructions > .btn--audio,
+  .syllables-instructions > .btn--audio {
+    grid-column: 2;
+  }
+}
+
+/* Celular: menos relleno para que la burbuja tenga espacio */
+@media (max-width: 480px) {
+  .lesson-page--contained .app-card,
+  .selection-card,
+  .completion-card {
+    padding: 18px 14px;
+  }
+
+  .selection-instructions,
+  .completion-instructions,
+  .syllables-instructions {
+    grid-template-columns: minmax(0, 1fr) 60px;
+    column-gap: 10px;
+  }
+
+  .selection-instructions > p,
+  .completion-instructions > p,
+  .syllables-instructions > p {
+    padding: 14px 16px;
+    font-size: 19px;
+  }
+
+  .selection-instructions > .btn--audio,
+  .completion-instructions > .btn--audio,
+  .syllables-instructions > .btn--audio {
+    width: 60px;
+    height: 60px;
+    min-height: 60px;
+  }
+}

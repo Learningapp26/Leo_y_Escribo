@@ -16,6 +16,7 @@ import Card from '../common/Card'
 import BackButton from '../navigation/BackButton'
 import ProgressBar from '../progress/ProgressBar'
 import StarsCounter from '../progress/StarsCounter'
+import { RewardBurst } from '../space/Reward'
 
 const STEPS = ['leer', 'buscar', 'corta', 'silabas']
 
@@ -147,7 +148,7 @@ function WordPracticeTemplate({
         <BackButton label="Volver a lecciones" to="/lecciones" />
 
         <Card className="word-practice-card word-practice-card--finished">
-          <Sparkles className="word-practice-finish-icon" aria-hidden="true" />
+          <RewardBurst lessonId={practiceId} />
           <h1>¡Muy bien!</h1>
           <p className="text-instruction">
             Leíste, buscaste y separaste palabras con la letra {group.label}.

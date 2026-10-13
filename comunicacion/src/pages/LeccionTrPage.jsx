@@ -9,6 +9,7 @@ import { playAudio } from '../lib/audioPlayer'
 import '../styles/selection.css'
 import '../styles/reading.css'
 import '../styles/lesson-tr.css'
+import StoryCard from '../components/lessons/StoryCard'
 
 function LeccionTrPage() {
   const themeClass = getLessonThemeClass('tr')
@@ -40,34 +41,7 @@ function LeccionTrPage() {
         </Button>
       </header>
 
-      <Card className="reading-card">
-        <div className="reading-content">
-          <h2 className="reading-title">{trReading.title}</h2>
-
-          <div className="reading-story">
-            {trReading.paragraphs.map((paragraph) => (
-              <p className="text-reading" key={paragraph}>
-                {paragraph}
-              </p>
-            ))}
-          </div>
-
-          <div className="reading-audio">
-            <Button
-              variant="audio"
-              size="large"
-              icon={Volume2}
-              onClick={() => playAudio(trReading.readingAudio)}
-            >
-              Escuchar la historia
-            </Button>
-          </div>
-        </div>
-
-        <div className="reading-image">
-          <img src={trReading.image} alt={trReading.imageAlt} />
-        </div>
-      </Card>
+      <StoryCard lessonId="tr" title={trReading.title} paragraphs={trReading.paragraphs} image={trReading.image} imageAlt={trReading.imageAlt} audio={trReading.readingAudio} />
 
       <section
         className="comprehension-section"

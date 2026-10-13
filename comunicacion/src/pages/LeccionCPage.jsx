@@ -17,6 +17,7 @@ import {
 } from '../data/cData'
 import { playAudio } from '../lib/audioPlayer'
 import '../styles/reading.css'
+import StoryCard from '../components/lessons/StoryCard'
 
 function LeccionCPage() {
   const themeClass = getLessonThemeClass('c')
@@ -57,44 +58,7 @@ function LeccionCPage() {
         </Button>
       </header>
 
-      <Card className="reading-card">
-        <div className="reading-content">
-          <h2 className="reading-title">
-            {cReading.title}
-          </h2>
-
-          <div className="reading-story">
-            {cReading.paragraphs.map((paragraph) => (
-              <p
-                className="text-reading"
-                key={paragraph}
-              >
-                {paragraph}
-              </p>
-            ))}
-          </div>
-
-          <div className="reading-audio">
-            <Button
-              variant="audio"
-              size="large"
-              icon={Volume2}
-              onClick={() =>
-                playAudio(cReading.readingAudio)
-              }
-            >
-              Escuchar la historia
-            </Button>
-          </div>
-        </div>
-
-        <div className="reading-image">
-          <img
-            src={cReading.image}
-            alt={cReading.imageAlt}
-          />
-        </div>
-      </Card>
+      <StoryCard lessonId="c" title={cReading.title} paragraphs={cReading.paragraphs} image={cReading.image} imageAlt={cReading.imageAlt} audio={cReading.readingAudio} />
 
       <section
         className="comprehension-section"

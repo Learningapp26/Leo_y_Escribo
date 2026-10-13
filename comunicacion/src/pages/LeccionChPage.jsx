@@ -8,6 +8,7 @@ import { chComprehensionQuestions, chReading } from '../data/chData'
 import { playAudio } from '../lib/audioPlayer'
 import '../styles/selection.css'
 import '../styles/reading.css'
+import StoryCard from '../components/lessons/StoryCard'
 
 function LeccionChPage() {
   const themeClass = getLessonThemeClass('ch')
@@ -39,34 +40,7 @@ function LeccionChPage() {
         </Button>
       </header>
 
-      <Card className="reading-card">
-        <div className="reading-content">
-          <h2 className="reading-title">{chReading.title}</h2>
-
-          <div className="reading-story">
-            {chReading.paragraphs.map((paragraph) => (
-              <p className="text-reading" key={paragraph}>
-                {paragraph}
-              </p>
-            ))}
-          </div>
-
-          <div className="reading-audio">
-            <Button
-              variant="audio"
-              size="large"
-              icon={Volume2}
-              onClick={() => playAudio(chReading.readingAudio)}
-            >
-              Escuchar la historia
-            </Button>
-          </div>
-        </div>
-
-        <div className="reading-image">
-          <img src={chReading.image} alt={chReading.imageAlt} />
-        </div>
-      </Card>
+      <StoryCard lessonId="ch" title={chReading.title} paragraphs={chReading.paragraphs} image={chReading.image} imageAlt={chReading.imageAlt} audio={chReading.readingAudio} />
 
       <section
         className="comprehension-section"

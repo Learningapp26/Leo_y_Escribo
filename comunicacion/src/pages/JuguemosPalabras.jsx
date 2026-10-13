@@ -7,7 +7,7 @@ import {
   ArrowRight,
   CheckCircle2,
   RotateCcw,
-  Trophy,
+  
   Volume2,
 } from 'lucide-react'
 
@@ -27,6 +27,7 @@ import {
   registrarProgreso,
 } from '../lib/progreso'
 import '../styles/selection.css'
+import { RewardBurst } from '../components/space/Reward'
 
 const ROUNDS_PER_STAGE = 5
 const TOTAL_ROUNDS = ROUNDS_PER_STAGE * 2
@@ -276,10 +277,7 @@ function JuguemosPalabras() {
         aria-labelledby="word-game-finished-title"
       >
         <Card className="selection-card">
-          <Trophy
-            className="finish-icon"
-            aria-hidden="true"
-          />
+          <RewardBurst lessonId="juguemos-palabras" />
 
           <h1 id="word-game-finished-title">
             ¡Completaste el juego!

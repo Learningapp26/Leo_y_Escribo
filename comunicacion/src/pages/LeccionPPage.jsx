@@ -7,6 +7,7 @@ import { getLessonThemeClass } from '../data/lessonColors'
 import { pComprehensionQuestions, pReading } from '../data/pData'
 import { playAudio } from '../lib/audioPlayer'
 import '../styles/reading.css'
+import StoryCard from '../components/lessons/StoryCard'
 
 function LeccionPPage() {
   const themeClass = getLessonThemeClass('p')
@@ -39,35 +40,7 @@ function LeccionPPage() {
         </Button>
       </header>
 
-      <Card className="reading-card">
-        <div className="reading-content">
-          <h2 className="reading-title">{pReading.title}</h2>
-
-          <div className="reading-story">
-            {pReading.paragraphs.map((paragraph) => (
-              <p className="text-reading" key={paragraph}>
-                {paragraph}
-              </p>
-            ))}
-          </div>
-
-          <div className="reading-audio">
-            <Button
-              variant="audio"
-              size="large"
-              icon={Volume2}
-              onClick={() => playAudio(pReading.readingAudio)}
-              data-audio-src={pReading.readingAudio}
-            >
-              Escuchar la historia
-            </Button>
-          </div>
-        </div>
-
-        <div className="reading-image">
-          <img src={pReading.image} alt={pReading.imageAlt} />
-        </div>
-      </Card>
+      <StoryCard lessonId="p" title={pReading.title} paragraphs={pReading.paragraphs} image={pReading.image} imageAlt={pReading.imageAlt} audio={pReading.readingAudio} />
 
       <section
         className="comprehension-section"

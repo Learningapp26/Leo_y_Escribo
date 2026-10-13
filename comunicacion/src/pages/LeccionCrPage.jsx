@@ -13,6 +13,7 @@ import { getLessonThemeClass } from '../data/lessonColors'
 import { crComprehensionQuestions, crReading } from '../data/crData'
 import { playAudio } from '../lib/audioPlayer'
 import '../styles/reading.css'
+import StoryCard from '../components/lessons/StoryCard'
 
 function LeccionCrPage() {
   const themeClass = getLessonThemeClass('cr')
@@ -44,34 +45,7 @@ function LeccionCrPage() {
         </Button>
       </header>
 
-      <Card className="reading-card">
-        <div className="reading-content">
-          <h2 className="reading-title">{crReading.title}</h2>
-
-          <div className="reading-story">
-            {crReading.paragraphs.map((paragraph) => (
-              <p className="text-reading" key={paragraph}>
-                {paragraph}
-              </p>
-            ))}
-          </div>
-
-          <div className="reading-audio">
-            <Button
-              variant="audio"
-              size="large"
-              icon={Volume2}
-              onClick={() => playAudio(crReading.readingAudio)}
-            >
-              Escuchar la historia
-            </Button>
-          </div>
-        </div>
-
-        <div className="reading-image">
-          <img src={crReading.image} alt={crReading.imageAlt} />
-        </div>
-      </Card>
+      <StoryCard lessonId="cr" title={crReading.title} paragraphs={crReading.paragraphs} image={crReading.image} imageAlt={crReading.imageAlt} audio={crReading.readingAudio} />
 
       <section
         className="comprehension-section"

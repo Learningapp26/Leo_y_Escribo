@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { ArrowRight, BookOpen } from 'lucide-react'
 import Button from '../common/Button'
 import Card from '../common/Card'
 import LessonAudioButton from '../common/LessonAudioButton'
+import StoryCard from './StoryCard'
 import BackButton from '../navigation/BackButton'
 import { getLessonThemeClass } from '../../data/lessonColors'
 import { stopAudio } from '../../lib/audioPlayer'
@@ -11,7 +12,6 @@ import '../../styles/selection.css'
 
 function BookLessonReading({ lesson }) {
   const { reading } = lesson
-  const [imageMissing, setImageMissing] = useState(false)
   useEffect(() => () => stopAudio(), [])
   return (
     <main className={`page reading-page lesson-page--contained ${getLessonThemeClass(lesson.id)}`} aria-labelledby="lesson-title">
@@ -22,21 +22,8 @@ function BookLessonReading({ lesson }) {
         <p className="text-instruction">{reading.instruction.text}</p>
         <LessonAudioButton audio={reading.instruction}>Escuchar instrucción</LessonAudioButton>
       </header>
-      <Card className={`reading-card ${imageMissing ? 'reading-card--text-only' : ''}`}>
-        <div className="reading-content">
-          <h2 className="reading-title">{reading.title}</h2>
-          <div className="reading-story">
-            {reading.paragraphs.map((paragraph) => <p className="text-reading" key={paragraph}>{paragraph}</p>)}
-          </div>
-          <div className="reading-audio">
-            <LessonAudioButton audio={reading.audio} size="large">Escuchar la historia completa</LessonAudioButton>
-          </div>
-        </div>
-        {!imageMissing && <div className="reading-image">
-          {/* The story illustration is supplied by the book owner; no substitute. */}
-          <img src={reading.image} alt={reading.imageAlt} onError={() => setImageMissing(true)} />
-        </div>}
-      </Card>
+      <StoryCard lessonId={lesson.id} title={reading.title} paragraphs={reading.paragraphs}
+        image={reading.image} imageAlt={reading.imageAlt} audio={reading.audio.src} />
       <section className="comprehension-section text-center" aria-labelledby="questions-title">
         <h2 id="questions-title">Conversemos sobre el cuento</h2>
         <p className="text-instruction">Tu maestra leerá las preguntas. Conversen sobre el cuento.</p>

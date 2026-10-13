@@ -17,6 +17,7 @@ import { playAudio } from '../lib/audioPlayer'
 import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 import '../styles/completion.css'
+import { RewardBurst } from '../components/space/Reward'
 
 // Mezcla las sílabas para que no aparezcan siempre en el orden correcto.
 // (sort(() => Math.random() - 0.5) no mezcla bien, por eso Fisher-Yates.)
@@ -188,9 +189,7 @@ function ActividadCrFinalPage() {
     return (
       <main className={`page ${themeClass}`}>
         <Card className="selection-card">
-          <span className="finish-icon" aria-hidden="true">
-            ⭐
-          </span>
+          <RewardBurst lessonId="cr" />
 
           <h1>¡Terminaste la lección de la combinación CR!</h1>
 

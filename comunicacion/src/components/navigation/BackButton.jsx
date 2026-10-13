@@ -16,12 +16,13 @@ function BackButton({ label = 'Volver', to, className = '' }) {
 
   return (
     <Button
-      variant="secondary"
+      variant="back"
       icon={ArrowLeft}
       className={className}
       onClick={handleBack}
+      title={label}
     >
-      {label}
+      <span className="visually-hidden">{label}</span>
     </Button>
   )
 }

@@ -19,6 +19,7 @@ import {
 } from '../data/rLessonData'
 import { playAudio } from '../lib/audioPlayer'
 import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
+import { RewardBurst } from '../components/space/Reward'
 
 const exercises = [
   ...rCompletionExercises.map((exercise) => ({
@@ -101,6 +102,7 @@ function ActividadRFinalPage() {
         aria-labelledby="r-finished-title"
       >
         <Card className="completion-card">
+          <RewardBurst lessonId="r" />
           <span
             className="text-letter"
             aria-hidden="true"

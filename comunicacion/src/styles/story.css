@@ -1,0 +1,163 @@
+/* ============================================================
+   story.css — el cuento en UN recuadro (sección 4.4)
+   ============================================================ */
+
+.story-card {
+  display: flex;
+  gap: 28px;
+  width: 100%;
+  padding: 22px;
+  border-radius: 32px;
+  background: var(--space-card-light);
+  color: var(--ink);
+  box-shadow: var(--shadow-3d-light);
+}
+
+/* Columna de imagen: 290 px fijos, imagen al alto disponible */
+.story-card__media {
+  display: flex;
+  flex: 0 0 290px;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.story-card__image {
+  flex: 1;
+  width: 100%;
+  min-height: 260px;
+  border: 6px solid var(--lilac);
+  border-radius: 24px;
+  object-fit: cover;
+}
+
+.story-card__media .btn--audio {
+  min-height: 62px;
+}
+
+.story-card--text-only .story-card__media {
+  flex-basis: auto;
+  justify-content: flex-end;
+}
+
+.story-card__text {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.story-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.story-card__label {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  color: var(--planet-ink, var(--ink));
+}
+
+.story-card__title {
+  font-family: var(--font-ui);
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+.story-card__page {
+  flex-shrink: 0;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: var(--planet-soft, #E4EEFF);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Todo el cuento en --ink; la letra solo en negrita del mismo color */
+.story-card__story {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.story-card__paragraph {
+  margin: 0 0 0 -12px;
+  padding: 4px 12px;
+  border-radius: 14px;
+  color: var(--ink);
+  font-family: var(--font-content);
+  font-size: 23px;
+  font-weight: 400;
+  line-height: 1.55;
+  white-space: pre-line;
+  transition: background-color .3s;
+}
+
+.story-card__paragraph--speaking {
+  background: var(--space-reading-hl);
+}
+
+.story-letter {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* Paginación: (‹)  ━ • •  [Seguir ›] */
+.story-card__pager {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: auto;
+}
+
+.story-card__prev {
+  width: 56px;
+  padding: 0;
+}
+
+.story-card__prev:disabled { visibility: hidden; }
+
+.story-card__dots {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 8px;
+}
+
+.story-card__dots span {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-pill);
+  background: #C9C3EC;
+}
+
+.story-card__dots .is-current {
+  width: 28px;
+  background: var(--ink);
+}
+
+@media (max-width: 768px) {
+  .story-card {
+    flex-direction: column;
+    padding: 18px;
+  }
+
+  .story-card__media { flex-basis: auto; }
+
+  .story-card__image {
+    min-height: 0;
+    max-height: 320px;
+  }
+
+  .story-card__paragraph { font-size: 21px; }
+}

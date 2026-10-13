@@ -6,7 +6,7 @@ import {
     ArrowRight,
     Check,
     RotateCcw,
-    Trophy,
+    
 } from 'lucide-react'
 
 import AudioPlaceholderButton from '../components/common/AudioPlaceholderButton'
@@ -25,6 +25,7 @@ import {
 } from '../lib/progreso'
 import '../styles/completion.css'
 import '../styles/selection.css'
+import { RewardBurst } from '../components/space/Reward'
 
 function ActividadClFinalPage() {
     const [phase, setPhase] =
@@ -242,10 +243,7 @@ function ActividadClFinalPage() {
                 aria-labelledby="cl-finished-title"
             >
                 <Card className="completion-card">
-                    <Trophy
-                        className="finish-icon"
-                        aria-hidden="true"
-                    />
+                    <RewardBurst lessonId="cl" />
 
                     <h1 id="cl-finished-title">
                         ¡Completaste la lección CL!

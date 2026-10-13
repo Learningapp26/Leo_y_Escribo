@@ -85,7 +85,7 @@ function ActividadVocalesPage() {
 
   if (actividadTerminada) {
     return (
-      <main className="page selection-page vowels-page lesson-theme--unit-1">
+      <main className="page selection-page vowels-page planet--0">
         <section className="vowels-page__content">
           <Card className="selection-card vowels-result-card">
             <span
@@ -118,7 +118,7 @@ function ActividadVocalesPage() {
 
   return (
     <main
-      className="page selection-page vowels-page lesson-theme--unit-1"
+      className="page selection-page vowels-page planet--0"
       aria-labelledby="titulo-actividad"
     >
       <section className="vowels-page__content">

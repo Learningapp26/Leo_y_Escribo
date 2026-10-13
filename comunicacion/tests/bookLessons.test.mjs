@@ -10,7 +10,7 @@ const lessons = [fLesson, enieLesson]
 test('F and Ñ use the existing Unit 4 order, theme and unlock rules', () => {
   for (const lesson of lessons) {
     assert.equal(getLessonById(lesson.id).route, `/lecciones/${lesson.id}`)
-    assert.equal(getLessonThemeClass(lesson.id), 'lesson-theme--unit-4')
+    assert.equal(getLessonThemeClass(lesson.id), 'planet--4')
     assert.equal(isLessonUnlocked(lesson.id, new Set()), false)
   }
   const progress = new Set(['repaso-unidad-3'])

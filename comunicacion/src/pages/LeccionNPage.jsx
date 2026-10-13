@@ -7,6 +7,7 @@ import { getLessonThemeClass } from '../data/lessonColors'
 import { nComprehensionQuestions, nReading } from '../data/nLectura'
 import { playAudio } from '../lib/audioPlayer'
 import '../styles/reading.css'
+import StoryCard from '../components/lessons/StoryCard'
 
 function getAudioLabel(label, audio) {
   return audio ? label : `${label} pendiente`
@@ -43,38 +44,7 @@ function LeccionNPage() {
         </Button>
       </header>
 
-      <Card className="reading-card">
-        <div className="reading-content">
-          <h2 className="reading-title">{nReading.title}</h2>
-
-          <div className="reading-story">
-            <p className="text-reading">{nReading.introduction}</p>
-
-            {nReading.paragraphs.map((paragraph) => (
-              <p className="text-reading" key={paragraph}>
-                {paragraph}
-              </p>
-            ))}
-          </div>
-
-          <div className="reading-audio">
-            <Button
-              variant="audio"
-              size="large"
-              icon={Volume2}
-              disabled={!nReading.readingAudio}
-              onClick={() => playAudio(nReading.readingAudio)}
-              data-audio-src={nReading.readingAudio}
-            >
-              {getAudioLabel('Escuchar la historia', nReading.readingAudio)}
-            </Button>
-          </div>
-        </div>
-
-        <div className="reading-image">
-          <img src={nReading.image} alt={nReading.imageAlt} />
-        </div>
-      </Card>
+      <StoryCard lessonId="n" title={nReading.title} paragraphs={nReading.paragraphs} image={nReading.image} imageAlt={nReading.imageAlt} audio={nReading.readingAudio} />
 
       <section
         className="comprehension-section"

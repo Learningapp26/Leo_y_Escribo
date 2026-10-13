@@ -14,7 +14,7 @@ import '../styles/vowels.css'
 
 function LeccionVocalesPage() {
   return (
-    <main className="page selection-page vowels-page lesson-theme--unit-1">
+    <main className="page selection-page vowels-page planet--0">
       <section
         className="vowels-page__content"
         aria-labelledby="titulo-vocales"

@@ -8,6 +8,7 @@ import { getLessonThemeClass } from '../data/lessonColors'
 import { sComprehensionQuestions, sReading } from '../data/sData'
 
 import '../styles/reading.css'
+import StoryCard from '../components/lessons/StoryCard'
 
 function LeccionSPage() {
   const themeClass = getLessonThemeClass('s')
@@ -27,30 +28,11 @@ function LeccionSPage() {
         </AudioPlaceholderButton>
       </header>
 
-      <Card className="reading-card">
-        <div className="reading-content">
-          <h2 className="reading-title">{sReading.title}</h2>
-          <div className="reading-story">
-            {sReading.paragraphs.map((paragraph) => (
-              <p className="text-reading" key={paragraph}>
-                {paragraph}
-              </p>
-            ))}
-          </div>
-          <p className="text-instruction">
+      <StoryCard lessonId="s" title={sReading.title} paragraphs={sReading.paragraphs} image={sReading.image} imageAlt={sReading.imageAlt}>
+        <p className="text-instruction">
             Lee despacio y busca las palabras que tengan la letra S.
           </p>
-          <div className="reading-audio">
-            <AudioPlaceholderButton size="large">
-              Escuchar la historia
-            </AudioPlaceholderButton>
-          </div>
-        </div>
-
-        <div className="reading-image">
-          <img src={sReading.image} alt={sReading.imageAlt} />
-        </div>
-      </Card>
+      </StoryCard>
 
       <section className="comprehension-section" aria-labelledby="s-comprehension-title">
         <h2 id="s-comprehension-title">Conversemos sobre el cuento</h2>
