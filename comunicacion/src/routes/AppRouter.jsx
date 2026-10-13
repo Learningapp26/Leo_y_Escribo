@@ -167,7 +167,7 @@ import ActividadGSilabasPage from '../pages/ActividadGSilabasPage'
 import ActividadGCompletarPage from '../pages/ActividadGCompletarPage'
 import ActividadGFinalPage from '../pages/ActividadGFinalPage'
 
-
+import { unit5WordPracticeConfig } from '../data/Unit5WordPracticeData'
 
 function AppRouter() {
   return (
@@ -427,6 +427,14 @@ function AppRouter() {
           <Route
             path="/unidad-4/palabras-practica"
             element={<PalabrasPracticaPage config={unit4WordPracticeConfig} />}
+          />
+          <Route
+            path="/unidad-5/palabras-practica"
+            element={
+              <LessonAccessGuard lessonId="repaso-unidad-5">
+                <PalabrasPracticaPage config={unit5WordPracticeConfig} />
+              </LessonAccessGuard>
+            }
           />
           <Route
             path="/lecciones/d"
@@ -768,7 +776,7 @@ function AppRouter() {
             path="/actividad/cl-final"
             element={<ActividadClFinalPage />}
           />
-          
+
 
           <Route
             path="/lecciones/g"
@@ -790,7 +798,6 @@ function AppRouter() {
             path="/actividad/g-final"
             element={<ActividadGFinalPage />}
           />
-
 
           <Route
             path="/lecciones/:lessonId"

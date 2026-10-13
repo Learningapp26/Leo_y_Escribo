@@ -286,6 +286,13 @@ export const units = [
         route: '/lecciones/gl',
         available: false,
       },
+
+      {
+        id: 'repaso-unidad-5',
+        title: 'Palabras para leer y practicar',
+        route: '/unidad-5/palabras-practica',
+        available: true,
+      },
     ],
   },
   {
