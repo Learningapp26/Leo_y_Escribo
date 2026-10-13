@@ -60,7 +60,7 @@
 .domino-tile--incorrect { border-color: var(--color-retry); animation: domino-tile-shake 360ms ease-in-out; }
 
 .domino-feedback { display: flex; align-items: center; justify-content: center; gap: var(--space-sm); min-height: 3.6rem; padding: var(--space-sm) var(--space-md); border-radius: var(--radius-md); color: var(--lesson-text); background: color-mix(in srgb, var(--lesson-secondary) 26%, var(--lesson-surface)); font-family: var(--font-ui); font-weight: var(--font-weight-bold); text-align: center; }
-.domino-feedback--correct { color: #ffffff; background: var(--color-success); }
+.domino-feedback--correct { color: var(--ink); background: var(--color-success); }
 .domino-feedback--retry { background: var(--color-retry); }
 .domino-feedback svg { width: 1.4rem; height: 1.4rem; flex-shrink: 0; }
 

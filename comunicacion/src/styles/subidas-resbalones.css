@@ -76,7 +76,7 @@
   height: 1.9rem;
   place-items: center;
   border-radius: 50%;
-  color: #ffffff;
+  color: var(--planet-on, var(--ink));
   background: var(--lesson-primary);
   font-family: var(--font-ui);
   font-weight: var(--font-weight-black);
@@ -104,7 +104,7 @@
   padding: 0.25rem;
   border: 2px solid var(--lesson-surface);
   border-radius: 50%;
-  color: #ffffff;
+  color: var(--ink);
   background: var(--color-action);
   box-shadow: var(--shadow-sm);
   animation: board-token-arrive 400ms ease-out;
@@ -223,7 +223,7 @@
 
 .board-game-choice--correct {
   background: var(--color-success);
-  color: #ffffff;
+  color: var(--ink);
 }
 
 .board-game-choice--incorrect {

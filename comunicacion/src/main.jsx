@@ -9,6 +9,8 @@ import './styles/selection.css'
 import './styles/completion.css'
 import './styles/word-practice.css'
 import './styles/themes.css'
+import './styles/space.css'
+import './styles/activity-space.css'
 import App from './App.jsx'
 import './lib/audioEvents'
 

@@ -14,7 +14,7 @@
   font-weight: var(--font-weight-bold);
   line-height: 1;
   letter-spacing: 0.02em;
-  color: var(--color-text);
+  color: inherit;
 }
 
 /* ── Sílaba ────────────────────────────────────────────────── */
@@ -25,7 +25,7 @@
   font-weight: var(--font-weight-bold);
   line-height: 1;
   letter-spacing: 0.02em;
-  color: var(--color-text);
+  color: inherit;
 }
 
 /* ── Palabra ───────────────────────────────────────────────── */
@@ -35,7 +35,7 @@
   font-size: var(--font-size-xl);        /* 32px */
   font-weight: var(--font-weight-bold);
   line-height: 1.2;
-  color: var(--color-text);
+  color: inherit;
 }
 
 /* ── Oración ───────────────────────────────────────────────── */
@@ -45,7 +45,7 @@
   font-size: var(--font-size-lg);        /* 24px */
   font-weight: var(--font-weight-normal);
   line-height: 1.9;                      /* espaciado amplio para lectura inicial */
-  color: var(--color-text);
+  color: inherit;
 }
 
 /* ── Texto de lectura general ──────────────────────────────── */
@@ -55,17 +55,17 @@
   font-size: var(--font-size-md);        /* 20px */
   font-weight: var(--font-weight-normal);
   line-height: var(--line-height);
-  color: var(--color-text);
+  color: inherit;
 }
 
 /* ── Instrucción ───────────────────────────────────────────── */
 /* Para instrucciones de actividad — Lexend por claridad */
 .text-instruction {
-  font-family: var(--font-alt);
-  font-size: var(--font-size-md);        /* 20px */
-  font-weight: var(--font-weight-normal);
+  font-family: var(--font-content);
+  font-size: 22px;
+  font-weight: var(--font-weight-bold);
   line-height: var(--line-height);
-  color: var(--color-text-alt);
+  color: inherit;
 }
 
 /* ── Instrucción destacada ─────────────────────────────────── */
@@ -75,7 +75,7 @@
   font-size: var(--font-size-lg);        /* 24px */
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height);
-  color: var(--color-text);
+  color: inherit;
 }
 
 /* ── Etiqueta de botón ─────────────────────────────────────── */
@@ -91,17 +91,25 @@
 /* Títulos de pantalla, menús y navegación */
 .text-ui-title {
   font-family: var(--font-ui);
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-black);
+  font-size: 32px;
+  font-weight: 800;
   line-height: var(--line-height-tight);
-  color: var(--color-text);
+  color: inherit;
 }
 
 /* ── Etiqueta UI pequeña ───────────────────────────────────── */
 /* Para labels, badges, contadores y nav */
 .text-ui-label {
   font-family: var(--font-ui);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-bold);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   line-height: 1;
+}
+
+/* Etiquetas superiores sobre la noche: azul suave */
+.page > header .text-ui-label,
+header > .text-ui-label {
+  color: var(--space-soft-text);
 }

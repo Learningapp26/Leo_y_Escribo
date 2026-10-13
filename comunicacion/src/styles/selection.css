@@ -188,7 +188,7 @@
 
 .selection-button:nth-child(5n + 1) {
     background: var(--lesson-primary);
-    color: white;
+    color: var(--planet-on, var(--ink));
 }
 
 .selection-button:nth-child(5n + 2) {
@@ -320,7 +320,7 @@
 
     background: var(--color-correct);
 
-    color: white;
+    color: var(--ink);
 
     animation: selection-correct .35s ease;
 
@@ -367,7 +367,7 @@
 
     background: var(--color-correct);
 
-    color: white;
+    color: var(--ink);
 
 }
 

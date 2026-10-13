@@ -9,7 +9,7 @@
     --sound-boxes-color-5: #7a6fc0;
 
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
     gap: 28px 20px;
     width: 100%;
     margin: 0;
@@ -54,7 +54,7 @@
 .sound-boxes__row {
 
     display: flex;
-    margin-top: -34px;
+    margin-top: -40px;
     background: #fff;
 
 }
@@ -64,8 +64,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
     margin-left: -2px;
     padding: 0;
     border: 2px solid #2b2b2b;
@@ -113,7 +113,7 @@
     padding: 2px 12px;
     border-radius: 999px;
     background: var(--sound-boxes-color);
-    color: #fff;
+    color: var(--ink);
     font-size: 0.8rem;
     font-weight: 700;
 

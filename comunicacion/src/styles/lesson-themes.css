@@ -1,17 +1,57 @@
-/* Paleta semántica global de Leo y Escribo.
+/* Viaje al espacio: fondo de noche, pasteles de interfaz y sombras 3D.
+   Los pasteles y la noche son iguales en todas las unidades; solo
+   --planet* cambia por unidad (ver .planet--N más abajo). */
+:root {
+  --space-night:      #2B2D6E;
+  --space-night-2:    #3A3C8A;
+  --space-night-deep: #1E1F52;
+  --space-night-ink:  #14154A;
+  --space-muted:      #7A7DC4;
+  --space-soft-text:  #C9D6FF;
+  --space-card-light: #F4F1FF;
+  --space-reading-hl: #E6E0FA;
+  --ink:              #2B2D6E;
+
+  --sun:   #FFD166; --sun-shadow:   #D9A53A;
+  --mint:  #9BE3C3; --mint-shadow:  #5FB896;
+  --peach: #FFB4A2; --peach-shadow: #D98A78;
+  --sky:   #A0C4FF; --sky-shadow:   #6E92D6;
+  --lilac: #CDB4DB; --lilac-shadow: #9D82B0;
+  --pink:  #FFC8DD; --pink-shadow:  #D993B0;
+
+  /* Nebulosas suaves; estrellas y planetas de las esquinas los dibuja <Starfield />.
+     Opacidades al 70 % de .45/.40/.30: con las originales el texto lavanda
+     (--space-soft-text) de los encabezados bajaba de 4.5:1 en móvil. */
+  --nebula:
+    radial-gradient(circle at 15% 20%, rgba(205,180,219,.32), transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(160,196,255,.28), transparent 42%),
+    radial-gradient(circle at 75% 15%, rgba(255,200,221,.21), transparent 30%),
+    #2B2D6E;
+  --starfield: var(--nebula);
+  --corner-planet-a: #CDB4DB;
+  --corner-planet-b: #A0C4FF;
+
+  --radius-card: 28px;
+  --radius-option: 30px;
+  --radius-pill: 999px;
+  --shadow-3d-dark:  0 8px 0 var(--space-night-deep);
+  --shadow-3d-light: 0 8px 0 var(--space-night-ink);
+}
+
+/* Paleta semántica global de Leo y Escribo, ahora sobre los tokens del espacio.
    Los colores de acierto, reintento y premio conservan siempre su significado. */
 :root {
-  --color-action: #1982C4;
-  --color-action-secondary: #2E86C7;
-  --color-success: #1E8E4D;
-  --color-support: #6FCF97;
-  --color-retry: #FF9500;
-  --color-reward: #FFCA3A;
-  --color-accent: #6A4C93;
-  --color-accent-soft: #FFB088;
-  --color-background: #F4F8FB;
-  --color-surface: #FFFDF9;
-  --color-text: #243B53;
+  --color-action: var(--mint);
+  --color-action-secondary: var(--sky);
+  --color-success: var(--mint);
+  --color-support: var(--mint);
+  --color-retry: var(--peach);
+  --color-reward: var(--sun);
+  --color-accent: var(--lilac);
+  --color-accent-soft: var(--peach);
+  --color-background: var(--space-night);
+  --color-surface: var(--space-card-light);
+  --color-text: var(--ink);
 
   /* Alias compatibles con los estilos globales existentes. */
   --color-correct: var(--color-success);
@@ -36,49 +76,29 @@
 
 /* Los componentes deben combinar color con texto, icono o audio para comunicar estados. */
 
-/* Tema seguro para identificadores desconocidos o lecciones aún no registradas. */
-.lesson-theme--default {
-  --lesson-primary: var(--color-action);
-  --lesson-secondary: var(--color-action-secondary);
-  --lesson-accent: var(--color-accent);
-  --lesson-surface: var(--color-surface);
-  --lesson-border: var(--color-action-secondary);
-  --lesson-text: var(--color-text);
-  --lesson-background: var(--color-background);
-}
+/* ── Los 8 planetas: el único switch de color por unidad ─────────────
+   --planet-on es el texto sobre --planet: blanco solo donde alcanza 4.5:1
+   (Cristal, Dulce, Escritor); --ink en el resto. Sobre Burbuja y Volcán ni
+   --ink llega a 4.5:1, así que encima del color del planeta solo va texto
+   grande (letras de 44 px o más); el texto pequeño va sobre --planet-soft. */
+.planet--0{--planet:#2BAA8C;--planet-soft:#D5F2EA;--planet-ink:#1F7F68;--alien:#B8F0E0;--planet-on:var(--ink);--corner-planet-b:var(--planet)}
+.planet--1{--planet:#3DA9E8;--planet-soft:#DCEFFB;--planet-ink:#2A8BC8;--alien:#BFE3FA;--planet-on:var(--ink);--corner-planet-b:var(--planet)}
+.planet--2{--planet:#EC6E3A;--planet-soft:#FCE2D6;--planet-ink:#C9531F;--alien:#FFC2A6;--planet-on:var(--ink);--corner-planet-b:var(--planet)}
+.planet--3{--planet:#63B046;--planet-soft:#E2F2DA;--planet-ink:#4A8E30;--alien:#C3EBB0;--planet-on:var(--ink);--corner-planet-b:var(--planet)}
+.planet--4{--planet:#F5BC45;--planet-soft:#FDF0D2;--planet-ink:#B5841A;--alien:#FFE3A0;--planet-on:var(--ink);--corner-planet-b:var(--planet)}
+.planet--5{--planet:#B5559E;--planet-soft:#F3DDEE;--planet-ink:#97407F;--alien:#EBC6E3;--planet-on:#fff;--corner-planet-b:var(--planet)}
+.planet--6{--planet:#E6007E;--planet-soft:#FCD6EA;--planet-ink:#C2006A;--alien:#FFB8DA;--planet-on:#fff;--corner-planet-b:var(--planet)}
+.planet--7{--planet:#2C5FB3;--planet-soft:#DCE5F5;--planet-ink:#2C5FB3;--alien:#B9CDF2;--planet-on:#fff;--corner-planet-b:var(--planet)}
+.planet--default{--planet:var(--sky);--planet-soft:#E4EEFF;--planet-ink:var(--sky-shadow);--alien:#D6E4FF;--planet-on:var(--ink)}
 
-/* Unidades 1 y 4 comparten el tema azul. Los colores se repiten intencionalmente. */
-.lesson-theme--unit-1,
-.lesson-theme--unit-4 {
-  --lesson-primary: var(--color-action);
-  --lesson-secondary: var(--color-action-secondary);
-  --lesson-accent: var(--color-support);
-  --lesson-surface: var(--color-surface);
-  --lesson-border: var(--color-action-secondary);
-  --lesson-text: var(--color-text);
-  --lesson-background: var(--color-background);
-}
-
-/* Unidades 2 y 5 comparten el tema morado; la acción principal sigue siendo azul. */
-.lesson-theme--unit-2,
-.lesson-theme--unit-5 {
-  --lesson-primary: var(--color-accent);
-  --lesson-secondary: var(--color-accent-soft);
-  --lesson-accent: var(--color-action);
-  --lesson-surface: var(--color-surface);
-  --lesson-border: var(--color-accent-soft);
-  --lesson-text: var(--color-text);
-  --lesson-background: var(--color-background);
-}
-
-/* Unidades 3 y 6 comparten el tema cielo y menta. */
-.lesson-theme--unit-3,
-.lesson-theme--unit-6 {
-  --lesson-primary: var(--color-action-secondary);
-  --lesson-secondary: var(--color-support);
-  --lesson-accent: var(--color-accent-soft);
-  --lesson-surface: var(--color-surface);
-  --lesson-border: var(--color-support);
-  --lesson-text: var(--color-text);
-  --lesson-background: var(--color-background);
+/* Alias para los estilos de lección existentes: los fondos, botones y la
+   tarjeta del cuento NO cambian con el planeta, solo los acentos. */
+[class*="planet--"] {
+  --lesson-primary: var(--planet);
+  --lesson-secondary: var(--planet-soft);
+  --lesson-accent: var(--sun);
+  --lesson-border: var(--planet);
+  --lesson-text: var(--ink);
+  --lesson-surface: var(--space-card-light);
+  --lesson-background: var(--space-night);
 }

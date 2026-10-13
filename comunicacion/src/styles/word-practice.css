@@ -84,7 +84,7 @@
 }
 
 .word-practice-group--active {
-  color: #ffffff;
+  color: var(--planet-on, var(--ink));
   background-color: var(--lesson-primary);
   border-color: var(--lesson-primary);
 }
@@ -227,7 +227,7 @@
 }
 
 .word-practice-option--correct {
-  color: #ffffff;
+  color: var(--ink);
   background-color: var(--color-correct);
   border-color: var(--color-correct);
 }

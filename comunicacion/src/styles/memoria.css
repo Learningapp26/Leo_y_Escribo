@@ -88,7 +88,7 @@
 /* Carta boca abajo */
 .memory-card:not(.memory-card--flipped):not(.memory-card--matched) {
   background: var(--lesson-primary);
-  color: #ffffff;
+  color: var(--planet-on, var(--ink));
 }
 
 .memory-card:not(:disabled):hover,
@@ -151,7 +151,7 @@
   height: 1.4rem;
   border-radius: var(--radius-full);
   background: var(--color-success);
-  color: #ffffff;
+  color: var(--ink);
   font-family: var(--font-ui);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-black);
@@ -182,7 +182,7 @@
   text-align: center;
 }
 
-.memory-feedback--correct { color: #ffffff; background: var(--color-success); }
+.memory-feedback--correct { color: var(--ink); background: var(--color-success); }
 .memory-feedback--retry   { color: var(--color-text); background: var(--color-retry); }
 .memory-feedback svg      { width: 1.4rem; height: 1.4rem; flex-shrink: 0; }
 
