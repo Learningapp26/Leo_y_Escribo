@@ -313,7 +313,7 @@ export const units = [
         id: 'gl',
         title: 'Combinación GL',
         route: '/lecciones/gl',
-        available: false,
+        available: true,
       },
 
       {

@@ -150,6 +150,7 @@ import { rrLesson } from '../data/rrData'
 import { drLesson } from '../data/drData'
 import { hLesson } from '../data/hData'
 import { zLesson } from '../data/zData'
+import { glLesson } from '../data/glData'
 
 
 import LeccionCrPage from '../pages/LeccionCrPage'
@@ -187,7 +188,7 @@ function AppRouter() {
       <AppSky>
       <LessonAccessGuard>
         <Routes>
-          {[fLesson, rrLesson, enieLesson, drLesson, hLesson, zLesson].flatMap((lesson) => [
+          {[fLesson, rrLesson, enieLesson, drLesson, hLesson, zLesson, glLesson].flatMap((lesson) => [
             <Route key={lesson.id} path={`/lecciones/${lesson.id}`}
               element={<BookLessonReading lesson={lesson} />} />,
             ...lesson.activities.map((activity) => (
