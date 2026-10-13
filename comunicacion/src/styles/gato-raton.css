@@ -1,0 +1,716 @@
+/* ============================================================
+   gato-raton.css — ¡El gato y el ratón! (juego final, Unidad 5)
+   Tablero en anillo alrededor de la META, dado 3D y tarjetas de reto.
+   ============================================================ */
+
+.gato-page {
+  gap: 20px;
+  width: min(100%, 1120px);
+  margin-inline: auto;
+}
+
+/* ── Elegir jugadores ─────────────────────────────────────── */
+.gato-setup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 28px 20px;
+  border-radius: var(--radius-card);
+  background: var(--space-card-light);
+  color: var(--ink);
+  box-shadow: var(--shadow-3d-dark);
+  text-align: center;
+}
+
+.gato-setup h2 { font-size: 28px; }
+
+.gato-setup__hint {
+  font-family: var(--font-ui);
+  font-size: 18px;
+  font-weight: 700;
+  color: #5A5DA6;
+}
+
+.gato-setup__options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 16px;
+  width: 100%;
+  max-width: 820px;
+}
+
+.gato-setup__option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-height: 150px;
+  padding: 18px 12px 16px;
+  border: 0;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 6px 0 #D9D2F5;
+  cursor: pointer;
+  transition: transform .15s, box-shadow .15s;
+}
+
+.gato-setup__option:hover { transform: translateY(-3px); }
+.gato-setup__option:active { transform: translateY(4px); box-shadow: 0 2px 0 #D9D2F5; }
+.gato-setup__option:focus-visible { outline: 4px solid var(--sky-shadow); outline-offset: 3px; }
+
+.gato-setup__aliens {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: 64px;
+}
+
+.gato-setup__aliens .alien + .alien { margin-left: -12px; }
+
+.gato-setup__count {
+  font-family: var(--font-ui);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--ink);
+}
+
+/* ── Tablero + panel ──────────────────────────────────────── */
+.gato-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  align-items: start;
+  gap: 20px;
+}
+
+.board {
+  --gap: 8px;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-rows: repeat(5, minmax(0, 1fr));
+  gap: var(--gap);
+  aspect-ratio: 6 / 5;
+  margin: 0;
+  padding: 14px;
+  border-radius: 32px;
+  list-style: none;
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, .06) 0 26px, transparent 26px 52px),
+    var(--space-night-2);
+  box-shadow: var(--shadow-3d-dark);
+}
+
+.board-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+  padding: 6px 4px;
+  border-radius: 16px;
+  background: var(--tile, #fff);
+  color: var(--ink);
+  box-shadow: inset 0 -5px 0 rgba(0, 0, 0, .12);
+  text-align: center;
+}
+
+.board-tile--pink  { --tile: var(--pink); }
+.board-tile--sky   { --tile: var(--sky); }
+.board-tile--lilac { --tile: var(--lilac); }
+.board-tile--sun   { --tile: var(--sun); }
+.board-tile--mint  { --tile: var(--mint); }
+.board-tile--peach { --tile: var(--peach); }
+
+.board-tile--cat {
+  --tile: var(--space-night-deep);
+  color: #fff;
+  border: 3px dashed var(--space-muted);
+}
+
+.board-tile--mouse { box-shadow: inset 0 -5px 0 rgba(0, 0, 0, .12), 0 0 0 3px #fff; }
+
+.board-tile--start {
+  --tile: #fff;
+  border: 3px solid var(--pink-shadow);
+}
+
+.board-tile__letter {
+  font-family: var(--font-content);
+  font-size: clamp(26px, 4.4vw, 46px);
+  font-weight: 700;
+  line-height: 1;
+}
+
+.board-tile__icon {
+  width: clamp(18px, 3vw, 30px);
+  height: clamp(18px, 3vw, 30px);
+  flex-shrink: 0;
+}
+
+.board-tile__label {
+  max-width: 100%;
+  font-family: var(--font-ui);
+  font-size: clamp(10px, 1.45vw, 16px);
+  font-weight: 800;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
+}
+
+/* Flechita del camino, sobre el espacio entre casillas */
+.board-tile__arrow {
+  position: absolute;
+  z-index: 3;
+  width: 20px;
+  height: 20px;
+  padding: 2px;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--ink);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, .2);
+}
+
+.board-tile__arrow--right { right: -14px; top: calc(50% - 10px); }
+.board-tile__arrow--left  { left: -14px; top: calc(50% - 10px); transform: rotate(180deg); }
+.board-tile__arrow--up    { top: -14px; left: calc(50% - 10px); transform: rotate(-90deg); }
+.board-tile__arrow--down  { bottom: -14px; left: calc(50% - 10px); transform: rotate(90deg); }
+
+/* META: centro del anillo, con el gato persiguiendo al ratón */
+.board-goal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  overflow: hidden;
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(255, 209, 102, .35), transparent 60%),
+    var(--space-night-deep);
+  color: var(--sun);
+}
+
+.board-goal__trophy {
+  width: clamp(40px, 8vw, 84px);
+  height: clamp(40px, 8vw, 84px);
+  filter: drop-shadow(0 0 18px rgba(255, 209, 102, .55));
+}
+
+.board-goal__label {
+  font-family: var(--font-ui);
+  font-size: clamp(22px, 4vw, 40px);
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+
+.board-goal__chase {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  height: 32px;
+  pointer-events: none;
+}
+
+.board-goal__rat,
+.board-goal__cat {
+  position: absolute;
+  bottom: 0;
+  width: 30px;
+  height: 30px;
+  color: var(--space-soft-text);
+}
+
+.board-goal__rat { left: 58%; width: 24px; height: 24px; color: var(--pink); }
+.board-goal__cat { left: 28%; }
+
+/* Fichas */
+.board-tile__tokens {
+  position: absolute;
+  inset: auto 0 -10px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2px;
+  z-index: 2;
+}
+
+.board-goal .board-tile__tokens { position: static; margin-top: 4px; }
+
+.token {
+  display: inline-grid;
+  place-items: center;
+  width: clamp(20px, 2.8vw, 30px);
+  height: clamp(20px, 2.8vw, 30px);
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: var(--token);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: clamp(11px, 1.4vw, 15px);
+  font-weight: 900;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, .25);
+}
+
+.token--active { outline: 3px solid var(--sun); outline-offset: 1px; }
+
+/* ── Panel lateral: turno y dado ──────────────────────────── */
+.gato-panel {
+  position: sticky;
+  top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 18px;
+  border-radius: var(--radius-card);
+  background: var(--space-card-light);
+  color: var(--ink);
+  box-shadow: var(--shadow-3d-dark);
+}
+
+.gato-panel__turn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--token) 35%, #fff);
+}
+
+.gato-panel__label {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 700;
+  color: #4B4E96;
+}
+
+.gato-panel__name {
+  font-family: var(--font-ui);
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.gato-panel__message {
+  min-height: 2.6em;
+  font-family: var(--font-ui);
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.gato-panel__players {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gato-panel__players li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 14px;
+  font-family: var(--font-ui);
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.gato-panel__players li.is-active { background: color-mix(in srgb, var(--token) 30%, #fff); }
+
+.gato-panel__stars,
+.gato-panel__roll {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-left: auto;
+}
+
+.gato-panel__stars svg { width: 18px; height: 18px; color: var(--sun-shadow); fill: var(--sun); }
+
+.gato-panel__roll {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 0 #D9D2F5;
+}
+
+.gato-panel__skip { width: 20px; height: 20px; color: var(--space-muted); }
+
+/* ── Dado 3D ──────────────────────────────────────────────── */
+.die {
+  --size: 96px;
+  width: var(--size);
+  height: var(--size);
+  margin: 6px 0;
+  perspective: 600px;
+}
+
+.die__cube {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform .9s cubic-bezier(.2, .8, .3, 1.15);
+}
+
+.die__face {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-areas: 'c1 c2 c3' 'c4 c5 c6' 'c7 c8 c9';
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  place-items: center;
+  padding: 12px;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: inset 0 0 0 3px #E4DEFA, inset 0 -6px 0 #E4DEFA;
+  backface-visibility: hidden;
+}
+
+.die__face i {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+
+.die__face--1 i { background: var(--peach-shadow); width: 22px; height: 22px; }
+
+.die__face--1 { transform: translateZ(calc(var(--size) / 2)); }
+.die__face--6 { transform: rotateY(180deg) translateZ(calc(var(--size) / 2)); }
+.die__face--3 { transform: rotateY(90deg) translateZ(calc(var(--size) / 2)); }
+.die__face--4 { transform: rotateY(-90deg) translateZ(calc(var(--size) / 2)); }
+.die__face--5 { transform: rotateX(90deg) translateZ(calc(var(--size) / 2)); }
+.die__face--2 { transform: rotateX(-90deg) translateZ(calc(var(--size) / 2)); }
+
+/* ── Tarjetas de reto ─────────────────────────────────────── */
+.challenge-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(20, 21, 74, .72);
+  overflow-y: auto;
+}
+
+.challenge {
+  --accent: var(--sky);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: min(100%, 520px);
+  padding: 26px 22px 22px;
+  border-top: 14px solid var(--accent);
+  border-radius: 30px;
+  background: var(--space-card-light);
+  color: var(--ink);
+  box-shadow: 0 10px 0 var(--space-night-ink);
+  text-align: center;
+}
+
+.challenge--pink  { --accent: var(--pink); }
+.challenge--sky   { --accent: var(--sky); }
+.challenge--lilac { --accent: var(--lilac); }
+.challenge--sun   { --accent: var(--sun); }
+.challenge--mint  { --accent: var(--mint); }
+.challenge--peach { --accent: var(--peach); }
+.challenge--mouse { --accent: var(--pink); }
+.challenge--cat   { --accent: var(--space-muted); }
+
+.challenge__title {
+  font-family: var(--font-ui);
+  font-size: 22px;
+  font-weight: 900;
+  color: #4B4E96;
+}
+
+.challenge__text {
+  font-family: var(--font-content);
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.challenge__text--rules { font-size: 20px; text-align: left; }
+
+.challenge__hero { width: 96px; height: 96px; color: var(--ink); }
+.challenge__hero--mouse { color: var(--pink-shadow); }
+.challenge__hero--cat,
+.challenge__hero--sleep { color: var(--space-muted); }
+
+.challenge__picture {
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+}
+
+.challenge__syllables {
+  font-family: var(--font-content);
+  font-size: 44px;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+
+.challenge__example {
+  padding: 8px 16px;
+  border-radius: 14px;
+  background: #fff;
+  font-family: var(--font-content);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.challenge__hints {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.challenge__hints li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 104px;
+  padding: 10px 6px;
+  border-radius: 18px;
+  background: #fff;
+  font-family: var(--font-content);
+  font-size: 19px;
+  font-weight: 700;
+  box-shadow: 0 4px 0 #E4DEFA;
+}
+
+.challenge__hints img { width: 64px; height: 64px; object-fit: contain; }
+
+.challenge__hint-dot {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 60%, #fff);
+  font-size: 34px;
+}
+
+.challenge__row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.challenge__feedback {
+  font-family: var(--font-ui);
+  font-size: 19px;
+  font-weight: 800;
+}
+
+.challenge__feedback--correct { color: #23795A; }
+.challenge__feedback--retry   { color: #A4472F; }
+
+/* Deletrear */
+.spell { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+
+.spell__slots,
+.spell__letters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.spell__slot,
+.spell__letter {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 64px;
+  border-radius: 16px;
+  font-family: var(--font-content);
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.spell__slot {
+  border: 3px dashed #C9C2EE;
+  background: #fff;
+}
+
+.spell__slot--correct { border: 3px solid var(--mint-shadow); background: #E5F8EF; }
+.spell__slot--retry   { border: 3px solid var(--peach-shadow); background: #FDEBE6; }
+
+.spell__letter {
+  border: 0;
+  background: var(--sun);
+  color: var(--ink);
+  box-shadow: 0 5px 0 var(--sun-shadow);
+  cursor: pointer;
+}
+
+.spell__letter:disabled { opacity: .35; cursor: default; box-shadow: none; transform: translateY(5px); }
+.spell__letter:focus-visible { outline: 4px solid var(--sky-shadow); outline-offset: 2px; }
+
+/* ── Ganador ──────────────────────────────────────────────── */
+.gato-won {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.gato-won__scores {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gato-won__scores li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--token) 35%, #fff);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.gato-won__stars { display: inline-flex; align-items: center; gap: 3px; }
+.gato-won__stars svg { width: 18px; height: 18px; color: var(--sun-shadow); fill: var(--sun); }
+
+.gato-won__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
+/* ── Animación ────────────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .token { animation: token-hop .35s ease-out; }
+  .token--active { animation: token-hop .35s ease-out, token-pulse 1.2s ease-in-out .35s infinite alternate; }
+
+  .board-goal__rat { animation: chase-rat 3.2s ease-in-out infinite; }
+  .board-goal__cat { animation: chase-cat 3.2s ease-in-out infinite; }
+  .board-goal__trophy { animation: trophy-shine 2.4s ease-in-out infinite alternate; }
+
+  .challenge { animation: card-in .35s cubic-bezier(.34, 1.56, .64, 1); }
+  .challenge__hero--mouse { animation: hero-wiggle .9s ease-in-out infinite alternate; }
+  .challenge__hero--sleep { animation: hero-sleep 2.4s ease-in-out infinite alternate; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .die__cube { transition: none; }
+}
+
+@keyframes token-hop {
+  0%   { transform: translateY(0) scale(1); }
+  45%  { transform: translateY(-14px) scale(1.12); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+@keyframes token-pulse {
+  from { outline-color: rgba(255, 209, 102, .4); }
+  to   { outline-color: var(--sun); }
+}
+
+@keyframes chase-rat {
+  0%   { left: 50%; transform: scaleX(1); }
+  45%  { left: 78%; transform: scaleX(1); }
+  50%  { left: 78%; transform: scaleX(-1); }
+  95%  { left: 50%; transform: scaleX(-1); }
+  100% { left: 50%; transform: scaleX(1); }
+}
+
+@keyframes chase-cat {
+  0%   { left: 14%; transform: scaleX(-1); }
+  45%  { left: 50%; transform: scaleX(-1); }
+  50%  { left: 50%; transform: scaleX(1); }
+  95%  { left: 14%; transform: scaleX(1); }
+  100% { left: 14%; transform: scaleX(-1); }
+}
+
+@keyframes trophy-shine {
+  from { transform: rotate(-6deg) scale(.96); }
+  to   { transform: rotate(6deg) scale(1.04); }
+}
+
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(24px) scale(.94); }
+  to   { opacity: 1; transform: none; }
+}
+
+@keyframes hero-wiggle {
+  from { transform: rotate(-8deg); }
+  to   { transform: rotate(8deg) translateX(6px); }
+}
+
+@keyframes hero-sleep {
+  from { transform: translateY(0); opacity: .7; }
+  to   { transform: translateY(-6px); opacity: 1; }
+}
+
+/* ── Móvil ────────────────────────────────────────────────── */
+@media (max-width: 860px) {
+  .gato-layout { grid-template-columns: 1fr; }
+
+  .gato-panel {
+    position: static;
+    order: -1;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas: 'die turn' 'die button' 'message message' 'players players';
+    align-items: center;
+    gap: 10px 14px;
+    padding: 14px;
+  }
+
+  .gato-panel .die { grid-area: die; --size: 76px; }
+  .gato-panel__turn { grid-area: turn; padding: 4px 10px; }
+  .gato-panel__turn .alien { display: none; }
+  .gato-panel > .btn { grid-area: button; }
+  .gato-panel__message { grid-area: message; min-height: 0; margin: 0; }
+  .gato-panel__players { grid-area: players; flex-direction: row; flex-wrap: wrap; }
+  .gato-panel__players li { flex: 1 1 140px; }
+}
+
+@media (max-width: 480px) {
+  .board { --gap: 4px; padding: 8px; border-radius: 22px; }
+  .board-tile { border-radius: 10px; padding: 3px 2px; }
+  .board-tile--cat { border-width: 2px; }
+  .board-tile__arrow { width: 14px; height: 14px; padding: 1px; }
+  .board-tile__arrow--right { right: -9px; top: calc(50% - 7px); }
+  .board-tile__arrow--left  { left: -9px; top: calc(50% - 7px); }
+  .board-tile__arrow--up    { top: -9px; left: calc(50% - 7px); }
+  .board-tile__arrow--down  { bottom: -9px; left: calc(50% - 7px); }
+  .challenge__text { font-size: 24px; }
+  .die__face i { width: 12px; height: 12px; }
+}
