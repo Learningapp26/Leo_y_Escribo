@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { Home, BookOpen, BarChart3 } from 'lucide-react'
+import { Home, Orbit, BarChart3, Stamp } from 'lucide-react'
 
 const defaultItems = [
   {
@@ -8,12 +8,17 @@ const defaultItems = [
     icon: Home,
   },
   {
-    label: 'Unidades',
+    label: 'Mi galaxia',
     to: '/lecciones',
-    icon: BookOpen,
+    icon: Orbit,
   },
   {
-    label: 'Progreso',
+    label: 'Sellos',
+    to: '/sellos',
+    icon: Stamp,
+  },
+  {
+    label: 'Mi progreso',
     to: '/progreso',
     icon: BarChart3,
   },
