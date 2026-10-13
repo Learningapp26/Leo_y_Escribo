@@ -55,7 +55,7 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
       {prompt && <>
         {prompt.image && <BookLessonImage key={prompt.image} featured src={prompt.image} alt={prompt.label} />}
         {!exercise.hideWord && <p className="text-word">{prompt.label}</p>}
-        <LessonAudioButton audio={prompt.audio}>Escuchar {exercise.hideWord ? 'la palabra' : prompt.label}</LessonAudioButton>
+        <LessonAudioButton audio={prompt.audio}>Escuchar {prompt.listenLabel ?? (exercise.hideWord ? 'la palabra' : prompt.label)}</LessonAudioButton>
       </>}
       {exercise.pattern && <p className="completion-word-pattern">{exercise.pattern}</p>}
       {type === 'present' && <div className="selection-options">
