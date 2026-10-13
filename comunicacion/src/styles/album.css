@@ -1,0 +1,104 @@
+/* ============================================================
+   album.css — Álbum de sellos (sección 4.8)
+   ============================================================ */
+
+.album-page {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  width: min(100%, 1040px);
+  margin-inline: auto;
+  padding: 22px 36px 120px;
+}
+
+.album-count {
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  background: var(--pink);
+  color: var(--ink);
+  box-shadow: 0 4px 0 var(--pink-shadow);
+  font-family: var(--font-ui);
+  font-size: 20px;
+  font-weight: 800;
+}
+
+/* Pestañas: una por planeta, cada una de su color */
+.album-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.album-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 56px;
+  padding: 0 18px;
+  border: 3px solid var(--planet);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: #fff;
+  font-family: var(--font-ui);
+  font-size: 18px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.album-tab__dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--planet);
+}
+
+.album-tab--active {
+  background: var(--planet-soft);
+  color: var(--ink);
+  box-shadow: 0 5px 0 var(--planet-ink);
+}
+
+.album-panel__title {
+  margin-bottom: 14px;
+  font-size: 24px;
+}
+
+/* Grilla de 6 columnas; celda: círculo blanco de 120 px */
+.album-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.album-grid__cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.album-grid__name {
+  font-family: var(--font-ui);
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.album-grid__cell .stamp--locked + .album-grid__name {
+  color: var(--space-soft-text);
+}
+
+@media (max-width: 960px) {
+  .album-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .album-page { padding: 22px 16px 120px; }
+
+  .album-grid { grid-template-columns: repeat(3, 1fr); }
+
+  .album-grid .stamp { --stamp-size: 96px !important; }
+}

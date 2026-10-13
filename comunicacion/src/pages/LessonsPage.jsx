@@ -1,197 +1,64 @@
-import {
-  ArrowRight,
-  Bean,
-  Flower2,
-  LockKeyhole,
-  MapPinned,
-  Shrub,
-  Sprout,
-  TreeDeciduous,
-  Trees,
-} from 'lucide-react'
-
-import Button from '../components/common/Button'
-import Card from '../components/common/Card'
 import BackButton from '../components/navigation/BackButton'
 import BottomNav from '../components/navigation/BottomNav'
-
-import {
-  getUnitThemeClass,
-  isUnitUnlocked,
-  units,
-} from '../data/units'
-
+import Alien from '../components/space/Alien'
+import Planet from '../components/space/Planet'
+import StarCounter from '../components/space/StarCounter'
+import { PLANETS, getLessonPlanet } from '../data/planets'
+import { getCurrentLesson, isUnitUnlocked, planetHasLessons } from '../data/units'
 import useStudentProgress from '../hooks/useStudentProgress'
-import '../styles/units-map.css'
+import '../styles/solar.css'
 
-const UNIT_GROWTH_ICONS = [
-  Bean,
-  Sprout,
-  Flower2,
-  Shrub,
-  TreeDeciduous,
-  Trees,
-]
+// Camino en S de abajo a la izquierda (Vocales) a arriba a la derecha
+// (Escritor), en % del lienzo de 960×640.
+const PATH = [[9, 84], [33, 88], [58, 82], [84, 60], [58, 50], [32, 47], [44, 16], [78, 14]]
 
 function LessonsPage() {
-  const {
-    completedLessons,
-    loadingProgress,
-  } = useStudentProgress()
+  const { completedLessons, loadingProgress, stars } = useStudentProgress()
+  const current = loadingProgress ? null : getCurrentLesson(completedLessons)
+  const currentPlanet = current ? getLessonPlanet(current.lesson, current.unit.id) : null
+
+  const planets = PLANETS.map((planet) => {
+    const unlocked = !loadingProgress && (planet.id === 0 || (planet.id <= 6 && isUnitUnlocked(planet.id, completedLessons)))
+    const state = loadingProgress ? undefined : !unlocked || !planetHasLessons(planet.id) ? 'locked'
+      : planet.id === currentPlanet ? 'current'
+        : currentPlanet === null || planet.id < currentPlanet ? 'done' : undefined
+    const route = planet.id === 0 ? '/lecciones/vocales' : `/lecciones/unidad/${planet.id}`
+    return { ...planet, state, route }
+  })
+  const target = planets.find((planet) => planet.state === 'current')
 
   return (
-    <main className="page units-map-page">
-      <BackButton
-        className="units-map-back"
-        label="Volver al inicio"
-        to="/home"
-      />
-
-      <header className="units-map-header">
-        <Trees
-          className="units-map-header__icon"
-          aria-hidden="true"
-        />
-
-        <h1>Mapa de unidades</h1>
-
-        <p className="text-instruction">
-          Recorre el bosque y completa cada unidad para abrir
-          el siguiente tramo del camino.
-        </p>
+    <main className="page solar-page" aria-labelledby="solar-title">
+      <header className="space-header">
+        <BackButton label="Volver al inicio" to="/home" />
+        <h1 id="solar-title" className="space-header__title">Mi sistema solar</h1>
+        <span className="space-header__end"><StarCounter value={stars} /></span>
       </header>
 
-      <section
-        className="units-map"
-        aria-label="Camino de unidades"
-      >
-        {units.map((unit, index) => {
-          const unlocked = !loadingProgress && isUnitUnlocked(
-            unit.id,
-            completedLessons,
-          )
+      <section className="solar-map" aria-label="Planetas del viaje">
+        <svg className="solar-map__path" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <polyline points={PATH.map(([x, y]) => `${x},${y}`).join(' ')} />
+        </svg>
 
-          const isLeft = index % 2 === 0
+        <ol className="solar-map__list">
+          {planets.map((planet) => {
+            const [x, y] = PATH[planet.id]
+            return (
+              <li key={planet.id} className={`solar-map__stop planet--${planet.id}`} style={{ '--x': `${x}%`, '--y': `${y}%` }}>
+                <Planet size={planet.state === 'current' ? 136 : 100} state={planet.state} ring={planet.id % 3 === 1}
+                  label={`Planeta ${planet.name}`} to={planet.state === 'locked' ? undefined : planet.route}
+                  aria-label={`Planeta ${planet.name}${planet.state === 'locked' ? ', bloqueado' : planet.state === 'done' ? ', completado' : ''}`}>
+                  {planet.id}
+                </Planet>
+              </li>
+            )
+          })}
+        </ol>
 
-          const themeClass =
-            getUnitThemeClass(unit.id)
-
-          const GrowthIcon =
-            UNIT_GROWTH_ICONS[index] ?? Trees
-
-          const growthIcon = (
-            <GrowthIcon
-              className={[
-                'units-map__growth-icon',
-                themeClass,
-                `units-map__growth-icon--stage-${unit.id}`,
-                unlocked
-                  ? 'units-map__growth-icon--unlocked'
-                  : 'units-map__growth-icon--locked',
-              ].join(' ')}
-              aria-hidden="true"
-            />
-          )
-
-          const unitCard = (
-            <Card
-              className={[
-                'unit-map-card',
-                themeClass,
-                unlocked
-                  ? ''
-                  : 'unit-map-card--locked',
-              ]
-                .filter(Boolean)
-                .join(' ')}
-              icon={
-                unlocked
-                  ? MapPinned
-                  : LockKeyhole
-              }
-              title={unit.title}
-              subtitle={
-                unlocked
-                  ? 'Disponible'
-                  : 'Bloqueada'
-              }
-              footer={
-                <Button
-                  to={
-                    unlocked
-                      ? `/lecciones/unidad/${unit.id}`
-                      : undefined
-                  }
-                  variant={
-                    unlocked
-                      ? 'primary'
-                      : 'secondary'
-                  }
-                  icon={
-                    unlocked
-                      ? ArrowRight
-                      : LockKeyhole
-                  }
-                  iconPosition="right"
-                  fullWidth
-                  disabled={!unlocked}
-                >
-                  {unlocked
-                    ? 'Explorar unidad'
-                    : 'Completa la anterior'}
-                </Button>
-              }
-            />
-          )
-
-          return (
-            <div
-              className="units-map__stop"
-              key={unit.id}
-            >
-              <div
-                className={[
-                  'units-map__side',
-                  isLeft
-                    ? 'units-map__side--card'
-                    : 'units-map__side--scenery',
-                ].join(' ')}
-              >
-                {isLeft
-                  ? unitCard
-                  : growthIcon}
-              </div>
-
-              <span
-                className={[
-                  'units-map__marker',
-                  themeClass,
-                  unlocked
-                    ? 'units-map__marker--unlocked'
-                    : 'units-map__marker--locked',
-                ].join(' ')}
-                aria-hidden="true"
-              >
-                {unlocked
-                  ? unit.id
-                  : <LockKeyhole />}
-              </span>
-
-              <div
-                className={[
-                  'units-map__side',
-                  isLeft
-                    ? 'units-map__side--scenery'
-                    : 'units-map__side--card',
-                ].join(' ')}
-              >
-                {isLeft
-                  ? growthIcon
-                  : unitCard}
-              </div>
-            </div>
-          )
-        })}
+        {target && <div className="solar-map__leo">
+          <span className="solar-map__bubble">¡Vamos al Planeta {target.name}!</span>
+          <Alien mood="talking" scale={0.7} />
+        </div>}
       </section>
 
       <BottomNav />
