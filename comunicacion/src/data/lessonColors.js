@@ -1,7 +1,8 @@
-// Relación central entre los identificadores de ruta y sus unidades.
-// Los colores se definen exclusivamente en lesson-themes.css.
+// Relación central entre los identificadores de ruta y su planeta (unidad
+// del libro). Las vocales son el Planeta Burbuja (0). Los colores se definen
+// exclusivamente en lesson-themes.css (.planet--N).
 export const LESSON_UNIT_MAP = {
-  vocales: 1,
+  vocales: 0,
   m: 1,
   l: 1,
   s: 1,
@@ -10,6 +11,7 @@ export const LESSON_UNIT_MAP = {
   p: 1,
   t: 1,
   n: 1,
+  'juguemos-palabras': 1,
   'repaso-unidad-1': 1,
   c: 2,
   q: 2,
@@ -63,5 +65,5 @@ export function getLessonUnit(lessonId) {
 export function getLessonThemeClass(lessonId) {
   const unit = getLessonUnit(lessonId)
 
-  return unit ? `lesson-theme--unit-${unit}` : 'lesson-theme--default'
+  return unit === null ? 'planet--default' : `planet--${unit}`
 }

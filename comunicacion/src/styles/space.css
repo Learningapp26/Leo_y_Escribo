@@ -1,0 +1,701 @@
+/* ============================================================
+   space.css — componentes del "Viaje al espacio"
+   Planet, Alien, SpeechBubble, StarCounter, PhaseDots,
+   LetterChips y Stamp. Colores: tokens de lesson-themes.css.
+   ============================================================ */
+
+/* ── Starfield ─────────────────────────────────────────────── */
+.starfield {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 100svh;
+  background: var(--starfield);
+  background-repeat: no-repeat;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* Capa decorativa: detrás del contenido y nunca recibe clics */
+.starfield__sky {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.starfield__corner,
+.starfield__moon,
+.starfield__star,
+.starfield__dot {
+  position: absolute;
+  display: block;
+}
+
+.starfield__corner {
+  --corner-scale: 1;
+  border-radius: 50%;
+  box-shadow: inset -30px -24px 0 rgba(0, 0, 0, .1);
+}
+
+.starfield__corner--a {
+  top: calc(-110px * var(--corner-scale));
+  left: calc(-110px * var(--corner-scale));
+  width: calc(280px * var(--corner-scale));
+  height: calc(280px * var(--corner-scale));
+  background: var(--corner-planet-a);
+}
+
+.starfield__corner--b {
+  right: calc(-110px * var(--corner-scale));
+  bottom: calc(-120px * var(--corner-scale));
+  width: calc(300px * var(--corner-scale));
+  height: calc(300px * var(--corner-scale));
+  background: var(--corner-planet-b);
+}
+
+.starfield__moon {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #FFB4A2;
+}
+
+.starfield__star {
+  clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.starfield__dot {
+  border-radius: 50%;
+  background: #fff;
+  opacity: .7;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .starfield {
+    animation: starfield-drift 30s ease-in-out infinite alternate;
+  }
+
+  .starfield__star--twinkle {
+    animation: starfield-twinkle 3s ease-in-out infinite alternate;
+  }
+
+  .starfield__corner {
+    animation: starfield-float 6s ease-in-out infinite alternate;
+  }
+
+  .starfield__corner--b {
+    animation-delay: -3s;
+  }
+}
+
+@keyframes starfield-drift {
+  from { background-position: 0 0; }
+  to   { background-position: 20px 0; }
+}
+
+@keyframes starfield-twinkle {
+  from { opacity: .5; }
+  to   { opacity: .9; }
+}
+
+@keyframes starfield-float {
+  from { transform: translateY(-6px); }
+  to   { transform: translateY(6px); }
+}
+
+/* ── Planet ────────────────────────────────────────────────── */
+.planet {
+  --planet-size: 110px;
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.planet:hover { text-decoration: none; }
+
+.planet__body {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--planet-size);
+  height: var(--planet-size);
+  border-radius: 50%;
+  background: var(--planet);
+  color: var(--planet-on);
+  box-shadow: inset -12px -10px 0 rgba(0, 0, 0, .15);
+  font-family: var(--font-content);
+  font-weight: 700;
+  font-size: calc(var(--planet-size) * .42);
+  line-height: 1;
+}
+
+/* Anillo: elipse completa cruzada. La mitad de arriba pasa por detrás del
+   planeta (z-index -1 dentro del .planet aislado) y la de abajo por delante. */
+.planet__ring {
+  position: absolute;
+  left: -24%;
+  top: 38%;
+  width: 148%;
+  height: 28%;
+  border: 6px solid color-mix(in srgb, var(--planet-soft) 85%, #fff);
+  border-radius: 50%;
+  transform: rotate(-14deg);
+  pointer-events: none;
+}
+
+.planet__ring--back {
+  z-index: -1;
+  clip-path: inset(-10px -10px 50% -10px);
+}
+
+.planet__ring--front {
+  clip-path: inset(50% -10px -10px -10px);
+}
+
+.planet__label {
+  font-family: var(--font-ui);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.1;
+  text-align: center;
+}
+
+.planet--done .planet__body::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 30px;
+  height: 30px;
+  background: var(--sun);
+  clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.planet--current .planet__body {
+  background: var(--sun);
+  color: var(--ink);
+  box-shadow: inset -12px -10px 0 rgba(0, 0, 0, .12), 0 0 0 10px rgba(255, 209, 102, .28), 0 0 42px rgba(255, 209, 102, .55);
+}
+
+.planet--locked {
+  opacity: .55;
+}
+
+.planet--locked .planet__body {
+  background: var(--space-night-2);
+  color: var(--space-soft-text);
+  border: 3px dashed var(--space-muted);
+  box-shadow: none;
+}
+
+.planet__lock {
+  position: absolute;
+  bottom: -6px;
+  right: -6px;
+  width: 30px;
+  height: 30px;
+  padding: 6px;
+  border-radius: 50%;
+  background: var(--space-night-2);
+  color: #fff;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Los planetas flotan, cada uno con su propio ritmo; los bloqueados quedan quietos */
+  .planet:not(.planet--locked) {
+    animation: planet-bob 3.2s ease-in-out infinite alternate;
+  }
+
+  li:nth-child(3n + 2) > .planet:not(.planet--current) { animation-duration: 3.8s; animation-delay: -1.2s; }
+  li:nth-child(3n) > .planet:not(.planet--current) { animation-duration: 2.9s; animation-delay: -2s; }
+
+  .planet__ring {
+    animation: planet-ring 4s ease-in-out infinite alternate;
+  }
+
+  /* El amarillo "llega" a la lección que toca: salta al aparecer y luego brilla */
+  .planet--current {
+    animation:
+      planet-arrive .7s cubic-bezier(.34, 1.56, .64, 1),
+      planet-bob 3.2s ease-in-out infinite alternate;
+  }
+
+  .planet--current .planet__body {
+    animation: planet-halo 2s ease-in-out infinite alternate;
+  }
+
+  /* La estrella de "hecho" aparece de golpe y luego titila */
+  .planet--done .planet__body::after {
+    animation:
+      planet-badge-in .5s cubic-bezier(.34, 1.56, .64, 1),
+      planet-badge 2.4s ease-in-out .5s infinite alternate;
+  }
+}
+
+@keyframes planet-bob {
+  from { transform: translateY(-4px); }
+  to   { transform: translateY(4px); }
+}
+
+@keyframes planet-ring {
+  from { transform: rotate(-17deg); }
+  to   { transform: rotate(-11deg); }
+}
+
+/* Usa la propiedad scale (no transform) para sumarse a la flotación */
+@keyframes planet-arrive {
+  from { scale: .6; }
+  to   { scale: 1; }
+}
+
+@keyframes planet-badge-in {
+  from { transform: scale(0) rotate(-90deg); }
+  to   { transform: scale(1) rotate(0); }
+}
+
+@keyframes planet-badge {
+  from { transform: scale(1) rotate(-8deg); }
+  to   { transform: scale(1.15) rotate(8deg); }
+}
+
+@keyframes planet-halo {
+  from { box-shadow: inset -12px -10px 0 rgba(0, 0, 0, .12), 0 0 0 10px rgba(255, 209, 102, .22), 0 0 30px rgba(255, 209, 102, .4); }
+  to   { box-shadow: inset -12px -10px 0 rgba(0, 0, 0, .12), 0 0 0 14px rgba(255, 209, 102, .4), 0 0 52px rgba(255, 209, 102, .6); }
+}
+
+/* ── Alien (marcianito provisional, hecho con divs) ────────── */
+.alien {
+  --alien-color: var(--mint);
+  --alien-scale: 1;
+  position: relative;
+  width: calc(110px * var(--alien-scale));
+  height: calc(140px * var(--alien-scale));
+  flex-shrink: 0;
+}
+
+.alien__antenna {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: calc(6px * var(--alien-scale));
+  height: calc(34px * var(--alien-scale));
+  background: var(--alien-color);
+  border-radius: 3px;
+  transform: translateX(-50%) rotate(8deg);
+  transform-origin: bottom center;
+}
+
+.alien__antenna::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: calc(-12px * var(--alien-scale));
+  width: calc(18px * var(--alien-scale));
+  height: calc(18px * var(--alien-scale));
+  border-radius: 50%;
+  background: var(--sun);
+  transform: translateX(-50%);
+}
+
+.alien__body {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: calc(98px * var(--alien-scale));
+  border-radius: 48% 48% 42% 42%;
+  background: var(--alien-color);
+  box-shadow: inset calc(-10px * var(--alien-scale)) calc(-8px * var(--alien-scale)) 0 rgba(0, 0, 0, .1);
+}
+
+.alien__eye {
+  position: absolute;
+  top: calc(26px * var(--alien-scale));
+  width: calc(30px * var(--alien-scale));
+  height: calc(30px * var(--alien-scale));
+  border-radius: 50%;
+  background: #fff;
+}
+
+.alien__eye::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 52%;
+  height: 52%;
+  border-radius: 50%;
+  background: var(--ink);
+  transform: translate(-40%, -45%);
+}
+
+.alien__eye--left { left: calc(18px * var(--alien-scale)); }
+.alien__eye--right { right: calc(18px * var(--alien-scale)); }
+
+.alien__cheek {
+  position: absolute;
+  top: calc(60px * var(--alien-scale));
+  width: calc(16px * var(--alien-scale));
+  height: calc(10px * var(--alien-scale));
+  border-radius: 50%;
+  background: var(--peach);
+}
+
+.alien__cheek--left { left: calc(12px * var(--alien-scale)); }
+.alien__cheek--right { right: calc(12px * var(--alien-scale)); }
+
+.alien__mouth {
+  position: absolute;
+  left: 50%;
+  top: calc(62px * var(--alien-scale));
+  width: calc(22px * var(--alien-scale));
+  height: calc(10px * var(--alien-scale));
+  border: calc(4px * var(--alien-scale)) solid var(--ink);
+  border-top: 0;
+  border-radius: 0 0 20px 20px;
+  transform: translateX(-50%);
+}
+
+.alien--happy .alien__mouth {
+  height: calc(16px * var(--alien-scale));
+  background: var(--ink);
+}
+
+.alien--happy .alien__eye::after {
+  height: 30%;
+  border-radius: 10px 10px 0 0;
+}
+
+.alien--talking .alien__mouth {
+  width: calc(14px * var(--alien-scale));
+  height: calc(14px * var(--alien-scale));
+  border-radius: 50%;
+  border-top: calc(4px * var(--alien-scale)) solid var(--ink);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .alien { animation: alien-float 3s ease-in-out infinite alternate; }
+}
+
+@keyframes alien-float {
+  from { transform: translateY(-4px); }
+  to   { transform: translateY(4px); }
+}
+
+/* ── SpeechBubble ──────────────────────────────────────────── */
+.speech {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+}
+
+.speech__bubble {
+  flex: 1;
+  min-width: 0;
+  padding: 18px 26px;
+  border-radius: 26px 26px 26px 6px;
+  background: #fff;
+  color: var(--ink);
+  box-shadow: var(--shadow-3d-light);
+  font-family: var(--font-content);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+/* ── StarCounter ───────────────────────────────────────────── */
+.star-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 6px 18px 6px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--sun);
+  color: var(--ink);
+  box-shadow: 0 4px 0 var(--sun-shadow);
+  font-family: var(--font-ui);
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.star-counter__icon {
+  width: 34px;
+  height: 34px;
+  padding: 6px;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--sun-shadow);
+  fill: var(--sun);
+}
+
+/* ── PhaseDots ─────────────────────────────────────────────── */
+.phase-dots {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.phase-dots__dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 3px dashed var(--space-muted);
+  color: var(--space-soft-text);
+  font-family: var(--font-ui);
+  font-weight: 800;
+}
+
+.phase-dots__dot--done {
+  border: 0;
+  background: var(--mint);
+  color: var(--ink);
+}
+
+.phase-dots__dot--current {
+  width: 48px;
+  height: 48px;
+  border: 0;
+  background: var(--sun);
+  color: var(--ink);
+  font-size: 22px;
+  box-shadow: 0 0 0 6px rgba(255, 209, 102, .3);
+}
+
+/* ── LetterChips ───────────────────────────────────────────── */
+.letter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.letter-chips__chip {
+  padding: 1px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--planet-soft);
+  color: var(--ink);
+  font-family: var(--font-content);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+/* ── Stamp (sello de goma) ─────────────────────────────────── */
+/* Cada sello lleva el --planet-ink de la unidad donde se gana,
+   sin importar en qué planeta se muestre. */
+:root {
+  --stamp-ink-0: #1F7F68;
+  --stamp-ink-1: #2A8BC8;
+  --stamp-ink-2: #C9531F;
+  --stamp-ink-3: #4A8E30;
+  --stamp-ink-4: #B5841A;
+  --stamp-ink-5: #97407F;
+  --stamp-ink-6: #C2006A;
+  --stamp-ink-7: #2C5FB3;
+}
+
+.stamp {
+  --stamp-size: 120px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--stamp-size);
+  height: var(--stamp-size);
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 36px rgba(255, 200, 221, .55);
+}
+
+.stamp__art {
+  width: 70%;
+  height: 70%;
+  opacity: .9;
+}
+
+.stamp--locked {
+  background: transparent;
+  border: 3px dashed var(--space-muted);
+  box-shadow: none;
+  color: var(--space-muted);
+  font-family: var(--font-ui);
+  font-size: calc(var(--stamp-size) * .38);
+  font-weight: 800;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .stamp--pressed .stamp__art {
+    animation: stamp-press 300ms ease-out both;
+  }
+}
+
+@keyframes stamp-press {
+  from { transform: scale(1.4) rotate(-20deg); opacity: 0; }
+  to   { transform: scale(1) rotate(var(--stamp-rotate, 0deg)); opacity: .9; }
+}
+
+/* ── Premio (sección 4.6) ──────────────────────────────────── */
+.reward-screen {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 32px 16px 40px;
+  border-radius: 32px;
+  background: radial-gradient(circle at 50% 42%, rgba(255, 209, 102, .35), transparent 42%);
+  color: #fff;
+  text-align: center;
+  overflow: hidden;
+}
+
+.reward-screen__planet {
+  position: absolute;
+  z-index: -1;
+  border-radius: 50%;
+  box-shadow: inset -18px -14px 0 rgba(0, 0, 0, .12);
+  pointer-events: none;
+}
+
+.reward-screen__planet--lilac {
+  top: -60px;
+  left: -60px;
+  width: 180px;
+  height: 180px;
+  background: var(--lilac);
+}
+
+.reward-screen__planet--sky {
+  right: -50px;
+  bottom: -50px;
+  width: 150px;
+  height: 150px;
+  background: var(--sky);
+}
+
+.reward-screen__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 6px;
+}
+
+.reward-burst {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.reward-burst__stars {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.reward-burst__star {
+  color: var(--sun-shadow);
+  fill: var(--sun);
+  filter: drop-shadow(0 4px 0 var(--sun-shadow));
+}
+
+.reward-burst__star--left,
+.reward-burst__star--right {
+  width: 74px;
+  height: 74px;
+}
+
+.reward-burst__star--left { transform: rotate(-14deg); }
+.reward-burst__star--right { transform: rotate(14deg); }
+
+.reward-burst__star--center {
+  width: 110px;
+  height: 110px;
+}
+
+.reward-burst__title {
+  font-family: var(--font-ui);
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.reward-burst__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+}
+
+.reward-burst__stamp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+.reward-burst__stamp figcaption {
+  font-family: var(--font-ui);
+  font-size: 18px;
+  font-weight: 800;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reward-burst__star { animation: reward-star-in 300ms ease-out both; }
+  .reward-burst__star--center { animation-delay: 120ms; }
+  .reward-burst__star--right { animation-delay: 240ms; }
+}
+
+@keyframes reward-star-in {
+  from { scale: 0; }
+  to { scale: 1; }
+}
+
+@media (max-width: 600px) {
+  .reward-burst__title { font-size: 44px; }
+}
+
+.reward-screen__lesson {
+  font-family: var(--font-content);
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* Encabezado de actividad: [volver] [título] ··· [estrellas] */
+.activity-header {
+  width: 100%;
+}
+
+/* Cambios de estado suaves (al cargar el progreso no hay saltos bruscos) */
+@media (prefers-reduced-motion: no-preference) {
+  .planet__body {
+    transition: width .3s ease-out, height .3s ease-out, background-color .3s, box-shadow .3s, font-size .3s;
+  }
+
+  .planet {
+    transition: opacity .3s;
+  }
+}
