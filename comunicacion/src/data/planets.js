@@ -21,7 +21,7 @@ export function getPlanetClass(unit) {
 }
 
 // Juegos finales de cada unidad: se muestran como la caja "Premio".
-export const FINAL_GAME_IDS = new Set(['juguemos-palabras', 'subidas-resbalones', 'domino-palabras', 'juego-memoria'])
+export const FINAL_GAME_IDS = new Set(['juguemos-palabras', 'subidas-resbalones', 'domino-palabras', 'juego-memoria', 'gato-raton'])
 
 const GLYPHS = {
   vocales: 'a e i o u',

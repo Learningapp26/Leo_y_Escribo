@@ -159,6 +159,7 @@ import ActividadCrSilabasPage from '../pages/ActividadCrSilabasPage'
 import ActividadCrFinalPage from '../pages/ActividadCrFinalPage'
 
 import MemoriaJuegoPage from '../pages/MemoriaJuegoPage'
+import GatoRatonPage from '../pages/GatoRatonPage'
 import LeccionClPage from '../pages/LeccionClPage'
 import ActividadClSonidosPage from '../pages/ActividadClSonidosPage'
 import ActividadClSilabasPage from '../pages/ActividadClSilabasPage'
@@ -765,6 +766,10 @@ function AppRouter() {
           <Route
             path="/lecciones/juego-memoria"
             element={<MemoriaJuegoPage />}
+          />
+          <Route
+            path="/lecciones/gato-raton"
+            element={<GatoRatonPage />}
           />
           <Route
             path="/lecciones/cl"

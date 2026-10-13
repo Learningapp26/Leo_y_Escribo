@@ -45,6 +45,7 @@ export const LESSON_UNIT_MAP = {
   gr: 5,
   gl: 5,
   'repaso-unidad-5': 5,
+  'gato-raton': 5,
   x: 6,
   'y-letra': 6,
   k: 6,

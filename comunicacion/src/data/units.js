@@ -322,6 +322,12 @@ export const units = [
         route: '/unidad-5/palabras-practica',
         available: true,
       },
+      {
+        id: 'gato-raton',
+        title: '¡El gato y el ratón!',
+        route: '/lecciones/gato-raton',
+        available: true,
+      },
     ],
   },
   {
