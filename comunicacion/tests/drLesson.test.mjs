@@ -13,7 +13,7 @@ test('Dr follows Unit 4 memory and uses the existing Unit 5 unlock rules', () =>
   assert.equal(isUnitUnlocked(5, new Set(['juego-memoria'])), true)
   assert.equal(isLessonUnlocked('dr', new Set(['juego-memoria'])), true)
   assert.equal(isLessonUnlocked('dr', new Set(['dr'])), true)
-  assert.equal(isLessonUnlocked('g', new Set(['dr'])), false)
+  assert.equal(isLessonUnlocked('g', new Set(['dr'])), true)
 })
 
 test('Dr keeps the full open-ended story and three compact activities', () => {

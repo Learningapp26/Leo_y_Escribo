@@ -299,15 +299,17 @@ export const units = [
       },
       {
         id: 'll',
-        title: 'Doble LL',
+        bookPage: 195,
+        title: 'Doble Ll',
         route: '/lecciones/ll',
-        available: false,
+        available: true,
       },
       {
         id: 'gr',
-        title: 'Combinación GR',
+        bookPage: 201,
+        title: 'Combinación Gr',
         route: '/lecciones/gr',
-        available: false,
+        available: true,
       },
       {
         id: 'gl',
