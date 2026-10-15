@@ -115,6 +115,41 @@
 }
 
 /* Reusable word banks for open oral composition. */
+.book-choice-groups {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-lg);
+    width: 100%;
+}
+
+.book-choice-groups > .word-choice-group {
+    align-items: center;
+    flex: 1 1 300px;
+    max-width: 360px;
+    min-width: 0;
+}
+
+.book-choice-groups .selection-options {
+    gap: var(--space-sm);
+}
+
+.book-choice-groups .selection-options > .word-choice-option {
+    flex: 0 1 112px;
+    padding: var(--space-xs);
+    gap: var(--space-xs);
+}
+
+.book-choice-groups .word-choice-group--images .word-choice-option {
+    flex-basis: 100%;
+    padding: var(--space-sm);
+}
+
+.book-choice-groups .word-choice-option .selection-image {
+    width: 80px;
+    height: 80px;
+}
+
 .word-choice-group {
     display: flex;
     flex-direction: column;

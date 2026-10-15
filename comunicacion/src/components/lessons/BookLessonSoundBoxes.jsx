@@ -61,15 +61,16 @@ function BookLessonSoundBoxes({ exercise, lesson, activityId, onNext, onCorrect,
             <div className="sound-boxes__circle">
               <BookLessonImage src={item.image} alt={item.label} />
             </div>
-            <div className="sound-boxes__row" role="group" aria-label={`Sonidos de ${item.example ? item.label : 'este dibujo'}`}>
+            <div className="sound-boxes__row" role="group" aria-label={`${exercise.boxLabel ?? 'Sonido'} de ${exercise.showLabels || item.example ? item.label : 'este dibujo'}`}>
               {Array.from({ length: item.boxes }, (_, box) => (
                 <button key={box} type="button" className="sound-boxes__box" aria-pressed={value === box}
-                  aria-label={`Sonido ${box + 1} de ${item.boxes}`} disabled={item.example || feedback === 'correct'}
+                  aria-label={`${exercise.boxLabel ?? 'Sonido'} ${box + 1} de ${item.boxes}`} disabled={item.example || feedback === 'correct'}
                   onClick={() => mark(item, box)}>
                   {value === box && <span className="sound-boxes__dot" aria-hidden="true" />}
                 </button>
               ))}
             </div>
+            {exercise.showLabels && <p className="text-reading">{item.label}</p>}
             <LessonAudioButton audio={item.audio} aria-label={item.example ? `Escuchar ${item.label}` : 'Escuchar el nombre del dibujo'}>Escuchar</LessonAudioButton>
           </li>
         })}

@@ -30,7 +30,7 @@ function BookLessonActivity({ lesson, activityId }) {
   const done = index === activity.exercises.length
   const Exercise = exercise?.type === 'boxes' ? BookLessonSoundBoxes : BookLessonExercise
   const final = activityIndex === lesson.activities.length - 1
-  const totalStars = activity.exercises.filter((item) => ['select', 'order', 'boxes'].includes(item.type)).length
+  const totalStars = activity.exercises.filter((item) => ['select', 'order', 'boxes', 'match'].includes(item.type)).length
   useEffect(() => () => stopAudio(), [])
 
   const finish = async () => {

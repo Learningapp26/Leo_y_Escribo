@@ -16,12 +16,15 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
   const { type, prompt, options = [] } = exercise
   const ordered = type === 'order'
   const passive = type === 'present' || type === 'oral'
+  const Group = type === 'match' ? Card : 'section'
   const answerText = selected.map((index) => options[index].label).join(exercise.separator ?? '')
-  const groupsReady = !exercise.groups || exercise.groups.every((group) => groupChoices[group.id])
+  const groupsReady = (!exercise.groups || exercise.groups.every((group) => groupChoices[group.id]))
+    && (!exercise.selectionCount || selected.length === exercise.selectionCount)
 
   const pick = (index) => {
     if (checked.current) return
     setFeedback('')
+    setPracticed(false)
     setSelected((current) => {
       if (ordered) return current.includes(index) ? current : [...current, index]
       if (!exercise.multiple) return [index]
@@ -31,9 +34,12 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
   }
 
   const check = () => {
-    if (checked.current || !selected.length) return
+    if (checked.current || (type === 'match' ? !groupsReady : !selected.length)) return
     const expected = exercise.answersByIndex ?? options.flatMap((option, index) => exercise.answers?.includes(option.id) ? [index] : [])
-    const correct = ordered ? answerText === exercise.answer
+    const correct = type === 'match' ? exercise.groups.every((group) => groupChoices[group.id] === group.answer)
+      : ordered ? (exercise.answerIds
+        ? selected.map((index) => options[index].id).join('|') === exercise.answerIds.join('|')
+        : answerText === exercise.answer)
       : selected.length === expected.length && selected.every((index) => expected.includes(index))
     checked.current = correct
     setFeedback(correct ? 'correct' : 'retry')
@@ -58,7 +64,7 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
         <LessonAudioButton audio={prompt.audio}>Escuchar {prompt.listenLabel ?? (exercise.hideWord ? 'la palabra' : prompt.label)}</LessonAudioButton>
       </>}
       {exercise.pattern && <p className="completion-word-pattern">{exercise.pattern}</p>}
-      {type === 'present' && <div className="selection-options">
+      {exercise.items && <div className={`selection-options${lesson.centeredItems && exercise.items.length > 1 ? ' selection-options--centered' : ''}`}>
         {exercise.items.map((item) => <Card key={item.id}>
           {item.image && <BookLessonImage key={item.image} src={item.image} alt={item.label} />}
           <p className="text-reading">{item.label}</p>
@@ -68,12 +74,12 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
       {ordered && <div className="completion-target" aria-live="polite" aria-label="Tu respuesta">
         <p className="text-word">{answerText || '…'}</p>
       </div>}
-      {!passive && <div className={ordered ? `completion-bank${exercise.compactOptions ? ' completion-bank--letters' : ''}` : `selection-options selection-options--centered${exercise.showOptionLabels ? ' selection-options--labeled' : ''}`}>
+      {options.length > 0 && <div className={ordered ? `completion-bank${exercise.compactOptions ? ' completion-bank--letters' : ''}${exercise.answerIds ? ' completion-bank--images' : ''}` : `selection-options selection-options--centered${exercise.showOptionLabels ? ' selection-options--labeled' : ''}`}>
         {options.map((option, index) => {
           const active = selected.includes(index)
-          return <Card key={`${option.id}-${index}`} selected={active}>
+          return <Card key={`${option.id}-${index}`} className={type === 'oral' ? 'word-choice-option' : ''} selected={active}>
             <Button variant={active && feedback === 'correct' ? 'correct' : 'secondary'} size="large" fullWidth
-              aria-pressed={active} aria-disabled={feedback === 'correct'} disabled={ordered && active}
+              aria-pressed={active} aria-disabled={feedback === 'correct' || (ordered && active)} disabled={ordered && active && !exercise.answerIds}
               onClick={() => pick(index)}>
               {option.image ? <><BookLessonImage key={option.image} src={option.image} alt={option.label} />{exercise.showOptionLabels && <span>{option.label}</span>}</>
                 : option.label}
@@ -81,24 +87,31 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
             </Button>
             {option.audio && <LessonAudioButton audio={option.audio} fullWidth
               aria-label={`Escuchar ${option.label}`}>
-              {exercise.compactOptions ? null : 'Escuchar'}
+              {exercise.compactOptions || type === 'oral' ? null : 'Escuchar'}
             </LessonAudioButton>}
           </Card>
         })}
       </div>}
-      {type === 'oral' && exercise.groups?.map((group) => <section className="word-choice-group" key={group.id} aria-labelledby={`group-${group.id}`}>
+      {exercise.groups && <div className={type === 'match' ? 'book-choice-groups' : 'completion-content'}>
+      {exercise.groups.map((group) => <Group className={`word-choice-group${group.options.some((option) => option.image) ? ' word-choice-group--images' : ''}`} key={group.id} aria-labelledby={`group-${group.id}`}>
         <h2 id={`group-${group.id}`}>{group.label}</h2>
+        {group.image && <BookLessonImage src={group.image} alt={group.label} />}
+        {group.audio && <LessonAudioButton audio={group.audio} aria-label={`Escuchar ${group.label}`}>Escuchar palabra</LessonAudioButton>}
         <div className="selection-options selection-options--centered">
           {group.options.map((option) => <Card className="word-choice-option" key={option.id} selected={groupChoices[group.id] === option.id}>
             <Button variant="secondary" fullWidth aria-pressed={groupChoices[group.id] === option.id}
-              onClick={() => { setGroupChoices((current) => ({ ...current, [group.id]: option.id })); setPracticed(false) }}>
+              aria-disabled={feedback === 'correct'}
+              onClick={() => { if (checked.current) return; setGroupChoices((current) => ({ ...current, [group.id]: option.id })); setPracticed(false); setFeedback('') }}>
+              {option.image && <BookLessonImage src={option.image} alt={option.label} />}
               {option.label}{groupChoices[group.id] === option.id && <Check aria-label="Seleccionado" size={20} />}
             </Button>
             <LessonAudioButton audio={option.audio} aria-label={`Escuchar ${option.label}`}>{null}</LessonAudioButton>
           </Card>)}
         </div>
-      </section>)}
-      {exercise.groups && groupsReady && <p className="text-instruction" aria-live="polite">
+        {type === 'match' && feedback === 'retry' && groupChoices[group.id] !== group.answer && <p role="status">Revisa esta respuesta.</p>}
+      </Group>)}
+      </div>}
+      {type === 'oral' && exercise.groups && groupsReady && <p className="text-instruction" aria-live="polite">
         Forma tu oración con: {exercise.groups.map((group) => group.options.find((option) => option.id === groupChoices[group.id]).label).join(' · ')}.
       </p>}
       {ordered && feedback !== 'correct' && <Button variant="secondary" icon={Undo2} disabled={!selected.length}
@@ -107,8 +120,9 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
         {feedback === 'correct' ? '¡Correcto! Puedes continuar.' : 'Escucha de nuevo e inténtalo otra vez.'}
       </p>}
       {feedback === 'retry' && <Button variant="retry" icon={RotateCcw} onClick={() => { setSelected([]); setFeedback('') }}>Intentar nuevamente</Button>}
-      {!passive && feedback !== 'correct' && <Button icon={Check} size="large" disabled={!selected.length || (ordered && selected.length !== options.length)} onClick={check}>Comprobar respuesta</Button>}
-      {type === 'oral' && <Button variant="secondary" aria-pressed={practiced} disabled={!groupsReady} icon={Check} onClick={() => setPracticed(!practiced)}>Ya dije mi oración</Button>}
+      {!passive && feedback !== 'correct' && <Button icon={Check} size="large" disabled={type === 'match' ? !groupsReady : !selected.length || (ordered && selected.length !== (exercise.answerLength ?? options.length))} onClick={check}>Comprobar respuesta</Button>}
+      {exercise.selectionCount && <p role="status">Palabras elegidas: {selected.length} de {exercise.selectionCount}</p>}
+      {type === 'oral' && <Button variant="secondary" aria-pressed={practiced} disabled={!groupsReady} icon={Check} onClick={() => setPracticed(!practiced)}>{exercise.practiceLabel ?? 'Ya dije mi oración'}</Button>}
       {(feedback === 'correct' || (passive && (type !== 'oral' || practiced))) && <Button size="large" icon={ArrowRight} iconPosition="right" onClick={onNext}>
         {last || 'Continuar'}
       </Button>}
