@@ -1,3 +1,5 @@
+import { getLessonLetters } from './lessonLabels'
+
 // Cada unidad del libro es un planeta del "Viaje al espacio". El color de
 // cada planeta vive en lesson-themes.css (.planet--N) y coincide con el
 // color de esa unidad en el índice del libro.
@@ -23,23 +25,9 @@ export function getPlanetClass(unit) {
 // Juegos finales de cada unidad: se muestran como la caja "Premio".
 export const FINAL_GAME_IDS = new Set(['juguemos-palabras', 'subidas-resbalones', 'domino-palabras', 'juego-memoria', 'gato-raton'])
 
-const GLYPHS = {
-  vocales: 'a e i o u',
-  'silabas-inversas': 'l · s · n',
-  'y-conjuncion': 'y',
-  'y-letra': 'y',
-  enie: 'ñ',
-  'ge-gi': 'ge gi',
-  'ce-ci': 'ce ci',
-  'gue-con-dieresis': 'gü',
-}
-
 // Letra o grupo de letras que se escribe dentro del planeta de una lección.
 export function getLessonGlyph(lesson) {
-  if (GLYPHS[lesson.id]) return GLYPHS[lesson.id]
-  if (lesson.id.startsWith('repaso-')) return null
-  if (FINAL_GAME_IDS.has(lesson.id)) return null
-  return lesson.id.length <= 2 ? lesson.id : null
+  return getLessonLetters(lesson.id, true)
 }
 
 // Planeta (0–7) de una unidad de la app; las vocales son el Planeta Burbuja.
