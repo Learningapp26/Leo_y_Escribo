@@ -1,3 +1,4 @@
+import { getLessonHeading } from '../data/lessonLabels'
 import { useState } from 'react'
 import {
   ArrowRight,
@@ -77,7 +78,7 @@ function LeccionTPage() {
       <header className="text-center">
         <span className="text-ui-label">Unidad 1</span>
 
-        <h1 id="t-lesson-title">La letra T</h1>
+        <h1 id="t-lesson-title">{getLessonHeading('t')}</h1>
 
         <p className="text-instruction">
           Hoy aprenderemos la letra t. Escucha la siguiente historia.

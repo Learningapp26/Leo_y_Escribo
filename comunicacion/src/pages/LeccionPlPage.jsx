@@ -1,3 +1,4 @@
+import { getLessonHeading } from '../data/lessonLabels'
 import {ArrowRight,Images,ListMusic,Sparkles,Volume2,} from 'lucide-react'
 
 import Button from '../components/common/Button'
@@ -24,7 +25,7 @@ function LeccionPlPage() {
           Unidad 2
         </span>
 
-        <h1 id="pl-lesson-title">Combinación de letras PL</h1>
+        <h1 id="pl-lesson-title">{getLessonHeading('pl')}</h1>
 
         <p className="text-instruction">
           Ahora aprenderás la combinación de dos letras: la pe y la ele.

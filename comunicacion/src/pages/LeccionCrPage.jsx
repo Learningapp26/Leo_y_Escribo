@@ -1,3 +1,4 @@
+import { getLessonHeading } from '../data/lessonLabels'
 import {
   ArrowRight,
   Images,
@@ -28,7 +29,7 @@ function LeccionCrPage() {
       <header className="text-center">
         <span className="text-ui-label">Unidad 4</span>
 
-        <h1 id="cr-lesson-title">Combinación de letras CR</h1>
+        <h1 id="cr-lesson-title">{getLessonHeading('cr')}</h1>
 
         <p className="text-instruction">
           Ahora aprenderás la combinación de dos letras: la ce y la erre.

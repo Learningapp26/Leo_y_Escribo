@@ -1,3 +1,4 @@
+import { getLessonHeading } from '../data/lessonLabels'
 import { ArrowRight, Ear, ListMusic, PenLine, Sparkles, Volume2 } from 'lucide-react'
 
 import Button from '../components/common/Button'
@@ -23,7 +24,7 @@ function LeccionChPage() {
       <header className="text-center">
         <span className="text-ui-label">Unidad 3</span>
 
-        <h1 id="ch-lesson-title">Combinación CH</h1>
+        <h1 id="ch-lesson-title">{getLessonHeading('ch')}</h1>
 
         <p className="text-instruction">
           Aprenderás una nueva letra, la che. Pero antes, escucha la

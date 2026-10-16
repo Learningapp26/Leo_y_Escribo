@@ -1,3 +1,4 @@
+import { getLessonHeading } from '../data/lessonLabels'
 import { ArrowRight, Images, ListMusic, PenLine, Sparkles, Volume2 } from 'lucide-react'
 
 import Button from '../components/common/Button'
@@ -18,7 +19,7 @@ function LeccionBPage() {
 
       <header className="text-center">
         <span className="text-ui-label">Unidad 3</span>
-        <h1 id="b-lesson-title">La letra B b</h1>
+        <h1 id="b-lesson-title">{getLessonHeading('b')}</h1>
         <p className="text-instruction">
           Ha llegado el momento de aprender la letra B. Mira bien cómo se ven la B
           mayúscula y la b minúscula. Escucha la siguiente historia.

@@ -1,3 +1,4 @@
+import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -127,8 +128,7 @@ function ActividadVSilabasPage() {
           </div>
 
           <div className="selection-options">
-            <span className="text-letter">V</span>
-            <span className="text-letter">v</span>
+            <span className="text-letter">{formatLetterGroup('v')}</span>
           </div>
 
           <Button variant="audio" size="large" icon={Volume2} onClick={() => playAudio(vLetterPresentation.soundAudio)}>

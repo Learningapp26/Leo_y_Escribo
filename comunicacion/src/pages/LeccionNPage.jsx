@@ -1,3 +1,4 @@
+import { getLessonHeading } from '../data/lessonLabels'
 import {ArrowRight,Images,ListMusic,PenLine,Sparkles, Volume2, } from 'lucide-react'
 
 import Button from '../components/common/Button'
@@ -26,7 +27,7 @@ function LeccionNPage() {
       <header className="text-center">
         <span className="text-ui-label">Unidad 1</span>
 
-        <h1 id="n-lesson-title">La letra N</h1>
+        <h1 id="n-lesson-title">{getLessonHeading('n')}</h1>
 
         <p className="text-instruction">
           Escucha la historia con atención y descubre el sonido de la letra N.

@@ -1,3 +1,4 @@
+import { getLessonHeading } from '../data/lessonLabels'
 import {ArrowRight,Images,Link2,Sparkles,Volume2, } from 'lucide-react'
 
 import Button from '../components/common/Button'
@@ -26,9 +27,7 @@ function LeccionYPage() {
           Unidad 1
         </span>
 
-        <h1 id="y-lesson-title">
-          La Y une palabras
-        </h1>
+        <h1 id="y-lesson-title">{getLessonHeading('y-conjuncion')}</h1>
 
         <p className="text-instruction">
           Escucha la historia y descubre cómo usamos la

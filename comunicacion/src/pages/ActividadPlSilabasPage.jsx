@@ -1,3 +1,4 @@
+import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -183,8 +184,7 @@ function ActividadPlSilabasPage() {
           </div>
 
           <div className="selection-options">
-            <span className="text-letter">PL</span>
-            <span className="text-letter">pl</span>
+            <span className="text-letter">{formatLetterGroup('pl')}</span>
           </div>
 
           <Button

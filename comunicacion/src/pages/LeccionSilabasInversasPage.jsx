@@ -1,3 +1,4 @@
+import { getLessonHeading } from '../data/lessonLabels'
 import { ArrowRight, Wind, Waves, Flame } from 'lucide-react'
 
 import Button from '../components/common/Button'
@@ -19,7 +20,7 @@ function LeccionSilabasInversasPage() {
       <header className="text-center">
         <span className="text-ui-label">Unidad 2</span>
 
-        <h1 id="silabas-inversas-title">Sílabas inversas</h1>
+        <h1 id="silabas-inversas-title">{getLessonHeading('silabas-inversas')}</h1>
 
         <p className="text-instruction">
           Ya conoces las sílabas donde primero va la consonante, como{' '}

@@ -1,3 +1,4 @@
+import { getLessonHeading } from '../data/lessonLabels'
 import {ArrowRight,Images,ListMusic,PenLine,Sparkles,Volume2,} from 'lucide-react'
 
 import Button from '../components/common/Button'
@@ -27,7 +28,7 @@ function LeccionJPage() {
           Unidad 3
         </span>
 
-        <h1 id="j-lesson-title">La letra J</h1>
+        <h1 id="j-lesson-title">{getLessonHeading('j')}</h1>
 
         <p className="text-instruction">
           Escucha la fábula con atención y descubre el

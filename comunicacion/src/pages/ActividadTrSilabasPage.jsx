@@ -1,3 +1,4 @@
+import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -139,8 +140,7 @@ function ActividadTrSilabasPage() {
           </div>
 
           <div className="selection-options">
-            <span className="text-letter">Tr</span>
-            <span className="text-letter">tr</span>
+            <span className="text-letter">{formatLetterGroup('tr')}</span>
           </div>
 
           <Button

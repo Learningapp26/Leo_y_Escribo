@@ -1,3 +1,4 @@
+import { getLessonHeading } from '../data/lessonLabels'
 import { ArrowRight, Ear, ListMusic, PenLine, Sparkles, Volume2 } from 'lucide-react'
 
 import Button from '../components/common/Button'
@@ -23,7 +24,7 @@ function LeccionVPage() {
       <header className="text-center">
         <span className="text-ui-label">Unidad 4</span>
 
-        <h1 id="v-lesson-title">La letra V v</h1>
+        <h1 id="v-lesson-title">{getLessonHeading('v')}</h1>
 
         <p className="text-instruction">
           Ahora es tiempo de aprender la letra uve. Para empezar, escucha

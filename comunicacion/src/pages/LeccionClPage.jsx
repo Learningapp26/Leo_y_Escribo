@@ -1,3 +1,4 @@
+import { getLessonHeading } from '../data/lessonLabels'
 import {
   ArrowRight,
   Images,
@@ -38,9 +39,7 @@ function LeccionClPage() {
           Unidad 4
         </span>
 
-        <h1 id="cl-lesson-title">
-          Combinación de letras CL
-        </h1>
+        <h1 id="cl-lesson-title">{getLessonHeading('cl')}</h1>
 
         <p className="text-instruction">
           Ahora aprenderás la combinación

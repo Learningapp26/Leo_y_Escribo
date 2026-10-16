@@ -1,3 +1,4 @@
+import { formatLetterGroup } from '../../data/lessonLabels'
 import { useRef, useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Undo2 } from 'lucide-react'
 import Button from '../common/Button'
@@ -55,7 +56,7 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
         <p className="text-instruction">{exercise.instruction.text}</p>
         <LessonAudioButton audio={exercise.instruction}>Escuchar instrucción</LessonAudioButton>
       </div>
-      {exercise.letter && <p className="text-letter">{exercise.letter}</p>}
+      {exercise.letter && <p className="text-letter">{formatLetterGroup(exercise.letter.trim().split(/\s+/)[0])}</p>}
       {exercise.sound && <LessonAudioButton audio={exercise.sound} size="large">Escuchar el sonido de {lesson.letter}</LessonAudioButton>}
       {exercise.extraAudios?.map((audio) => <LessonAudioButton key={audio.src} audio={audio}>Escuchar los sonidos despacio</LessonAudioButton>)}
       {prompt && <>

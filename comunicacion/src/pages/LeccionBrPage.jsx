@@ -1,3 +1,4 @@
+import { getLessonHeading } from '../data/lessonLabels'
 import {ArrowRight, Images, ListMusic, Sparkles, Volume2, } from 'lucide-react'
 
 import Button from '../components/common/Button'
@@ -24,7 +25,7 @@ function LeccionBrPage() {
           Unidad 3
         </span>
 
-        <h1 id="br-lesson-title">Combinación de letras BR</h1>
+        <h1 id="br-lesson-title">{getLessonHeading('br')}</h1>
 
         <p className="text-instruction">
           Ahora aprenderás la combinación de dos letras: la be y la erre.

@@ -1,3 +1,4 @@
+import { formatLetterGroup, getLessonHeading } from '../data/lessonLabels'
 import { ArrowRight, BookOpen, Volume2 } from 'lucide-react'
 
 import Button from '../components/common/Button'
@@ -29,9 +30,7 @@ function LeccionVocalesPage() {
             {vowelLesson.unitLabel}
           </span>
 
-          <h1 id="titulo-vocales">
-            {vowelLesson.title}
-          </h1>
+          <h1 id="titulo-vocales">{getLessonHeading('vocales')}</h1>
 
           <p className="text-instruction vowels-page__instruction">
             {vowelLesson.instruction}
@@ -70,13 +69,13 @@ function LeccionVocalesPage() {
           >
             {vowelOptions.map((vocal) => (
               <Button
-                key={vocal}
+                key={formatLetterGroup(vocal)}
                 variant="audio"
                 size="large"
                 className="vowels-list__item text-letter"
                 onClick={() => playAudio(vowelAudioPaths[vocal])}
               >
-                {vocal}
+                {formatLetterGroup(vocal)}
               </Button>
             ))}
           </div>

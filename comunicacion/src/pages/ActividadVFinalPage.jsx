@@ -1,3 +1,4 @@
+import { formatLetterGroup } from '../data/lessonLabels'
 import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -76,7 +77,7 @@ function ActividadVFinalPage() {
       <main className={`page completion-page ${themeClass}`} aria-labelledby="v-finished-title">
         <Card className="completion-card">
           <RewardBurst lessonId="v" />
-          <span className="text-letter" aria-hidden="true">V v</span>
+          <span className="text-letter" aria-hidden="true">{formatLetterGroup('v')}</span>
 
           <h1 id="v-finished-title">¡Terminaste la lección de la letra V!</h1>
 

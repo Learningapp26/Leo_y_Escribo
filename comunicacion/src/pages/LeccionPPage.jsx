@@ -1,3 +1,4 @@
+import { getLessonHeading } from '../data/lessonLabels'
 import {ArrowRight,Images,ListMusic,PenLine,Sparkles,Volume2, } from 'lucide-react'
 
 import Button from '../components/common/Button'
@@ -22,7 +23,7 @@ function LeccionPPage() {
       <header className="text-center">
         <span className="text-ui-label">Unidad 1</span>
 
-        <h1 id="p-lesson-title">La letra P</h1>
+        <h1 id="p-lesson-title">{getLessonHeading('p')}</h1>
 
         <p className="text-instruction">
           Llegó el momento de aprender la letra pe. Presta atención a la

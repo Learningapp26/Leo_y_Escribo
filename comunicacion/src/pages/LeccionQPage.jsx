@@ -1,3 +1,4 @@
+import { getLessonHeading } from '../data/lessonLabels'
 import { useState } from 'react'
 import {ArrowRight,Check,Images,ListMusic,PenLine,RotateCcw,Sparkles,Volume2,} from 'lucide-react'
 
@@ -64,7 +65,7 @@ function LeccionQPage() {
       <header className="text-center">
         <span className="text-ui-label">Unidad 2</span>
 
-        <h1 id="q-lesson-title">La letra Q</h1>
+        <h1 id="q-lesson-title">{getLessonHeading('q')}</h1>
 
         <p className="text-instruction">
           Hoy aprenderás una letra con la que escribirás muchas palabras: la

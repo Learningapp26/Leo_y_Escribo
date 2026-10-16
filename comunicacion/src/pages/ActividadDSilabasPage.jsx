@@ -1,3 +1,4 @@
+import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
 import { ArrowLeft, ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -174,8 +175,7 @@ function ActividadDSilabasPage() {
             className="selection-options"
             aria-label="Letra D"
           >
-            <span className="text-letter">D</span>
-            <span className="text-letter">d</span>
+            <span className="text-letter">{formatLetterGroup('d')}</span>
           </div>
 
           <Button

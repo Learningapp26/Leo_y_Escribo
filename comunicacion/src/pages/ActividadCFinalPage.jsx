@@ -1,3 +1,4 @@
+import { formatLetterGroup } from '../data/lessonLabels'
 import { useEffect, useState } from 'react'
 import {ArrowRight,Check,RotateCcw,Volume2,} from 'lucide-react'
 
@@ -115,9 +116,7 @@ function ActividadCFinalPage() {
           <span
             className="text-letter"
             aria-hidden="true"
-          >
-            C
-          </span>
+          >{formatLetterGroup('c')}</span>
 
           <h1 id="c-finished-title">
             ¡Terminaste la lección de la letra C!

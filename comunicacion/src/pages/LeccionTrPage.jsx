@@ -1,3 +1,4 @@
+import { getLessonHeading } from '../data/lessonLabels'
 import { ArrowRight, Ear, ListMusic, PenLine, Volume2 } from 'lucide-react'
 
 import Button from '../components/common/Button'
@@ -24,7 +25,7 @@ function LeccionTrPage() {
       <header className="text-center">
         <span className="text-ui-label">Unidad 3</span>
 
-        <h1 id="tr-lesson-title">Combinación TR</h1>
+        <h1 id="tr-lesson-title">{getLessonHeading('tr')}</h1>
 
         <p className="text-instruction">
           Hoy aprenderás dos letras juntas: la te y la erre. Escucha la

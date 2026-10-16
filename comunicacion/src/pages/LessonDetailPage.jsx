@@ -1,3 +1,4 @@
+import { getLessonHeading } from '../data/lessonLabels'
 import { Link, useParams } from 'react-router-dom'
 import { getLessonThemeClass } from '../data/lessonColors'
 
@@ -8,7 +9,7 @@ function LessonDetailPage() {
   return (
     <main className={`page lesson-detail-page ${themeClass}`}>
       <section className="card">
-        <h1>Lección: {lessonId?.toUpperCase()}</h1>
+        <h1>{getLessonHeading(lessonId, 'Lección')}</h1>
         <p>Aquí irá la información de la lección seleccionada.</p>
 
         <div className="card small">

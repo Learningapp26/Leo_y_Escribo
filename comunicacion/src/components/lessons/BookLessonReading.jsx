@@ -1,3 +1,4 @@
+import { getLessonHeading } from '../../data/lessonLabels'
 import { useEffect } from 'react'
 import { ArrowRight, BookOpen } from 'lucide-react'
 import Button from '../common/Button'
@@ -18,7 +19,7 @@ function BookLessonReading({ lesson }) {
       <BackButton label={`Volver a la Unidad ${lesson.unitId}`} to={`/lecciones/unidad/${lesson.unitId}`} />
       <header className="text-center">
         {lesson.showReadingSource !== false && <span className="text-ui-label">Unidad {lesson.unitId} · Páginas {lesson.pages}</span>}
-        <h1 id="lesson-title">{lesson.title ?? `La letra ${lesson.letter} ${lesson.letter.toLowerCase()}`}</h1>
+        <h1 id="lesson-title">{getLessonHeading(lesson.id, lesson.title)}</h1>
         <p className="text-instruction">{reading.instruction.text}</p>
         <LessonAudioButton audio={reading.instruction}>Escuchar instrucción</LessonAudioButton>
       </header>

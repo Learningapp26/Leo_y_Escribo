@@ -1,3 +1,4 @@
+import { formatLetterGroup } from '../data/lessonLabels'
 import { useEffect, useState } from 'react'
 import {
   ArrowRight,
@@ -106,9 +107,7 @@ function ActividadRFinalPage() {
           <span
             className="text-letter"
             aria-hidden="true"
-          >
-            R
-          </span>
+          >{formatLetterGroup('r')}</span>
 
           <h1 id="r-finished-title">
             ¡Terminaste la lección de la R!

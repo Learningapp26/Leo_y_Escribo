@@ -1,3 +1,4 @@
+import { getLessonHeading } from '../data/lessonLabels'
 import {ArrowRight, Images, ListMusic, PenLine, Sparkles, Volume2, } from 'lucide-react'
 
 import Button from '../components/common/Button'
@@ -22,7 +23,7 @@ function LeccionMPage() {
       <header className="text-center">
         <span className="text-ui-label">Unidad 1</span>
 
-        <h1 id="m-lesson-title">La letra M</h1>
+        <h1 id="m-lesson-title">{getLessonHeading('m')}</h1>
 
         <p className="text-instruction">
           Durante estos días conocerás la letra m. Para empezar, escucha con atención 

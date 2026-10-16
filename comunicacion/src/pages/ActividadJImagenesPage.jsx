@@ -1,3 +1,4 @@
+import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
 import {
   ArrowRight,
@@ -313,8 +314,7 @@ function ActividadJImagenesPage() {
           </Button>
 
           <div className="selection-options">
-            <span className="text-letter">J</span>
-            <span className="text-letter">j</span>
+            <span className="text-letter">{formatLetterGroup('j')}</span>
           </div>
 
           <img

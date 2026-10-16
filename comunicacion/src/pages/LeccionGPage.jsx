@@ -1,3 +1,4 @@
+import { getLessonHeading } from '../data/lessonLabels'
 import {
   ArrowRight,
   Images,
@@ -28,7 +29,7 @@ function LeccionGPage() {
       <header className="text-center">
         <span className="text-ui-label">Unidad 5</span>
 
-        <h1 id="g-lesson-title">La letra G</h1>
+        <h1 id="g-lesson-title">{getLessonHeading('g')}</h1>
 
         <p className="text-instruction">
           Durante estos días conocerás la letra g. Para empezar, escucha con

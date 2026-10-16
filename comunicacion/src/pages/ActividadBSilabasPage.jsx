@@ -1,3 +1,4 @@
+import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -120,7 +121,7 @@ function ActividadBSilabasPage() {
             <p className="text-instruction">Fíjate bien en la B mayúscula y la b minúscula. Después, escucha cómo se combina la b con cada vocal.</p>
             <Button variant="audio" icon={Volume2} onClick={() => playAudio(bSyllableInstructionAudio)} data-audio-src={bSyllableInstructionAudio}>Escuchar instrucción</Button>
           </div>
-          <p className="text-letter" aria-label="B mayúscula y b minúscula">B b</p>
+          <p className="text-letter" aria-label="B mayúscula y b minúscula">{formatLetterGroup('b')}</p>
           <Button variant="audio" icon={Volume2} onClick={() => playAudio(bSoundIntro.letterAudio)}>Escuchar la letra B</Button>
           <div className="completion-bank">
             {bSyllables.map((item) => <Button key={item.syllable} variant="secondary" className="completion-chip text-syllable" onClick={() => playAudio(item.audio)}>{item.syllable}</Button>)}

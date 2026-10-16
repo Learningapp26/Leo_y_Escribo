@@ -1,3 +1,4 @@
+import { getLessonHeading } from '../data/lessonLabels'
 import {ArrowRight, Images, ListMusic, Sparkles, Volume2,
 } from 'lucide-react'
 
@@ -25,7 +26,7 @@ function LeccionPrPage() {
           Unidad 2
         </span>
 
-        <h1 id="pr-lesson-title">Combinación de letras Pr</h1>
+        <h1 id="pr-lesson-title">{getLessonHeading('pr')}</h1>
 
         <p className="text-instruction">
           Aprende otra combinación de letras: la pe y la erre.

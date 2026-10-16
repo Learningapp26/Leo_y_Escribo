@@ -1,3 +1,4 @@
+import { getLessonHeading } from '../data/lessonLabels'
 import {
   ArrowRight,
   Images,
@@ -37,9 +38,7 @@ function LeccionCPage() {
           Unidad 2
         </span>
 
-        <h1 id="c-lesson-title">
-          La letra C
-        </h1>
+        <h1 id="c-lesson-title">{getLessonHeading('c')}</h1>
 
         <p className="text-instruction">
           Hoy aprenderás la letra ce. Escucha la siguiente

@@ -1,3 +1,4 @@
+import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -122,7 +123,7 @@ function ActividadBSonidosPage() {
             <p className="text-instruction">Mira el dibujo y di su nombre despacio. Escucha la palabra banano y presta atención a la letra con la que empieza.</p>
             <Button variant="audio" icon={Volume2} onClick={() => playAudio(bSoundIntro.instructionAudio)} data-audio-src={bSoundIntro.instructionAudio}>Escuchar instrucción</Button>
           </div>
-          <p className="text-letter" aria-label="B mayúscula y b minúscula">B b</p>
+          <p className="text-letter" aria-label="B mayúscula y b minúscula">{formatLetterGroup('b')}</p>
           <img className="selection-image selection-image--featured" src={bSoundIntro.mainWord.image} alt="Un banano pelado" />
           <p className="text-word">banano</p>
           <Button variant="audio" icon={Volume2} size="large" onClick={() => playAudio(bSoundIntro.mainWord.audio)}>Escuchar banano</Button>

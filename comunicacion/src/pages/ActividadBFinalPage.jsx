@@ -1,3 +1,4 @@
+import { formatLetterGroup } from '../data/lessonLabels'
 import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -66,7 +67,7 @@ function ActividadBFinalPage() {
       <main className={`page completion-page ${themeClass}`} aria-labelledby="b-finished-title">
         <Card className="completion-card">
           <RewardBurst lessonId="b" />
-          <span className="text-letter" aria-hidden="true">B b</span>
+          <span className="text-letter" aria-hidden="true">{formatLetterGroup('b')}</span>
           <h1 id="b-finished-title">¡Terminaste la lección de la letra B!</h1>
           <p className="text-instruction">Reconociste la B y la b, practicaste bo, ba, be, bi y bu, formaste palabras y leíste oraciones.</p>
           <StarsCounter current={stars} total={bSentenceExercises.length} label="Estrellas" />

@@ -1,3 +1,4 @@
+import { formatLetterGroup } from '../data/lessonLabels'
 import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -73,9 +74,7 @@ function ActividadQFinalPage() {
       >
         <Card className="completion-card">
           <RewardBurst lessonId="q" />
-          <span className="text-letter" aria-hidden="true">
-            Q
-          </span>
+          <span className="text-letter" aria-hidden="true">{formatLetterGroup('q')}</span>
 
           <h1 id="q-finished-title">¡Terminaste la lección de la letra Q!</h1>
 

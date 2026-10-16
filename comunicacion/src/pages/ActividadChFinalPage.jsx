@@ -1,3 +1,4 @@
+import { formatLetterGroup } from '../data/lessonLabels'
 import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -76,7 +77,7 @@ function ActividadChFinalPage() {
       <main className={`page completion-page ${themeClass}`} aria-labelledby="ch-finished-title">
         <Card className="completion-card">
           <RewardBurst lessonId="ch" />
-          <span className="text-letter" aria-hidden="true">Ch</span>
+          <span className="text-letter" aria-hidden="true">{formatLetterGroup('ch')}</span>
 
           <h1 id="ch-finished-title">¡Terminaste la lección de la combinación CH!</h1>
 

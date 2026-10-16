@@ -1,3 +1,4 @@
+import { getLessonHeading } from '../data/lessonLabels'
 import { useState } from 'react'
 import {ArrowRight,BookOpen,MessageCircleQuestion,Puzzle,Volume2, } from 'lucide-react'
 
@@ -36,9 +37,7 @@ function LeccionRPage() {
           Letra R
         </span>
 
-        <h1 id="r-lesson-title">
-          Aprendemos la letra R
-        </h1>
+        <h1 id="r-lesson-title">{getLessonHeading('r')}</h1>
 
         <p className="text-instruction">
           Escucha la historia y presta atención a las

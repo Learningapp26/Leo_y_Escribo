@@ -1,3 +1,4 @@
+import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
 import {
   ArrowLeft,
@@ -452,8 +453,7 @@ function ActividadJSilabasPage() {
             className="selection-options"
             aria-label="Letra J"
           >
-            <span className="text-letter">J</span>
-            <span className="text-letter">j</span>
+            <span className="text-letter">{formatLetterGroup('j')}</span>
           </div>
 
           <Button
