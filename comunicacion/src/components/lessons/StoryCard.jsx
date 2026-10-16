@@ -1,9 +1,10 @@
+import { getLessonTargets } from '../../data/lessonLabels'
 import { useEffect, useRef, useState } from 'react'
 import { ChevronLeft, ChevronRight, Volume2 } from 'lucide-react'
 import AudioPlaceholderButton from '../common/AudioPlaceholderButton'
 import Button from '../common/Button'
 import { getLessonUnit } from '../../data/lessonColors'
-import { getLessonGlyph, getPlanet } from '../../data/planets'
+import { getPlanet } from '../../data/planets'
 import { getLessonById } from '../../data/units'
 import { playAudio } from '../../lib/audioPlayer'
 import { highlightLetter } from '../../lib/highlightLetter'
@@ -33,7 +34,7 @@ function StoryCard({ lessonId, title, paragraphs = [], image, imageAlt = '', aud
   const audioRef = useRef(null)
   const lesson = getLessonById(lessonId)
   const planet = getPlanet(getLessonUnit(lessonId))
-  const glyph = lesson ? getLessonGlyph(lesson) : null
+  const glyph = getLessonTargets(lessonId)?.join(' ') ?? null
   const pages = Math.max(1, Math.ceil(paragraphs.length / PER_PAGE))
   const visible = paragraphs.slice(page * PER_PAGE, page * PER_PAGE + PER_PAGE)
 
