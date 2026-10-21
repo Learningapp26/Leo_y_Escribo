@@ -3,7 +3,7 @@
 // comunicacion/, así que aquí se compila y se publica su dist.
 // Explicación completa en comunicacion/docs/deploy-cloudflare.md.
 {
-  "name": "leo-y-escribo",
+  "name": "aprende-facil",
   "compatibility_date": "2025-01-01",
   "build": {
     "command": "cd comunicacion && npm ci && npm run build"

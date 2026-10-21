@@ -1,7 +1,7 @@
-// Configuración del deploy en Cloudflare (Worker «leo-y-escribo»).
+// Configuración del deploy en Cloudflare (Worker «aprende-facil»).
 // Explicación completa en docs/deploy-cloudflare.md.
 {
-  "name": "leo-y-escribo",
+  "name": "aprende-facil",
   "compatibility_date": "2025-01-01",
   "assets": {
     // Lo que genera `npm run build`, no la carpeta del código.

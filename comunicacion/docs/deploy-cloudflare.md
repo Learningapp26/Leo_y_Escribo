@@ -1,6 +1,6 @@
 # Arreglo del deploy en Cloudflare
 
-El deploy de Comunicación en Cloudflare (Worker `leo-y-escribo`) fallaba
+El deploy de Comunicación en Cloudflare (Worker `aprende-facil`) fallaba
 con este error:
 
 ```
@@ -45,7 +45,7 @@ así que la vista previa funciona sin depender del panel.
 
 ## Configuración en el panel de Cloudflare
 
-En el Worker `leo-y-escribo` → **Settings** → **Build**:
+En el Worker `aprende-facil` → **Settings** → **Build**:
 
 | Campo | Valor |
 |---|---|
