@@ -1,0 +1,16 @@
+// Configuración del deploy en Cloudflare cuando el build corre desde la raíz
+// del repo (las vistas previas de ramas lo hacen así). La app vive en
+// comunicacion/, así que aquí se compila y se publica su dist.
+// Explicación completa en comunicacion/docs/deploy-cloudflare.md.
+{
+  "name": "leo-y-escribo",
+  "compatibility_date": "2025-01-01",
+  "build": {
+    "command": "cd comunicacion && npm ci && npm run build"
+  },
+  "assets": {
+    "directory": "./comunicacion/dist",
+    "not_found_handling": "single-page-application"
+  },
+  "previews": {}
+}

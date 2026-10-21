@@ -36,6 +36,13 @@ cual (el log decía «Read 1392 files from the assets directory
   ramas que no son `main`. Sin él, el deploy de la rama fallaba con «Your
   Wrangler configuration is missing a `previews` block».
 
+### 3. Se agregó otro `wrangler.jsonc` en la raíz del repo
+
+Las vistas previas de ramas corren desde la raíz del repo y sin build
+command, aunque el panel diga otra cosa. Este archivo compila la app
+(`cd comunicacion && npm ci && npm run build`) y publica `comunicacion/dist`,
+así que la vista previa funciona sin depender del panel.
+
 ## Configuración en el panel de Cloudflare
 
 En el Worker `leo-y-escribo` → **Settings** → **Build**:
