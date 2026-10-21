@@ -15,18 +15,25 @@ import { supabase } from './supabaseClient'
 const MATE_URL = (import.meta.env.VITE_MATE_URL || 'http://localhost:5174').replace(/\/$/, '')
 
 export const RUTA_PANEL_DOCENTE = '/maestra/estudiantes'
+export const RUTA_PANEL_COORDINACION = '/coordinacion'
 export const URL_REGISTRO_DOCENTE = `${MATE_URL}/registro-docente`
 
-// true si la cuenta con sesión es de docente. También cuenta como docente
-// quien se registró como tal y todavía no entró al panel: el rol se escribe
-// en `perfiles` la primera vez que entra (ver registrar_docente en el repo
-// de Matemática), y sin esto quedaría atrapada en la bienvenida.
-export async function esDocente() {
+const PANEL_POR_ROL = {
+  docente: RUTA_PANEL_DOCENTE,
+  coordinacion: RUTA_PANEL_COORDINACION,
+}
+
+// Ruta de Matemática a la que va la cuenta con sesión si es docente o
+// coordinación; null si es estudiante o no hay sesión. También cuenta como
+// docente quien se registró como tal y todavía no entró al panel: el rol se
+// escribe en `perfiles` la primera vez que entra (ver registrar_docente en
+// el repo de Matemática), y sin esto quedaría atrapada en la bienvenida.
+export async function rutaDelPanel() {
   const { data: userData } = await supabase.auth.getUser()
   const user = userData?.user
-  if (!user) return false
+  if (!user) return null
 
-  if (user.user_metadata?.registro_docente?.pendiente) return true
+  if (user.user_metadata?.registro_docente?.pendiente) return RUTA_PANEL_DOCENTE
 
   const { data, error } = await supabase
     .from('perfiles')
@@ -36,10 +43,10 @@ export async function esDocente() {
 
   if (error) {
     console.error('No se pudo leer el rol del usuario:', error)
-    return false
+    return null
   }
 
-  return data?.rol === 'docente'
+  return PANEL_POR_ROL[data?.rol] ?? null
 }
 
 // Abre Matemática con la sesión actual. Devuelve { error } si no hay
