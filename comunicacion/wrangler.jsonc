@@ -1,0 +1,14 @@
+// Configuración del deploy en Cloudflare (Worker «leo-y-escribo»).
+// Explicación completa en docs/deploy-cloudflare.md.
+{
+  "name": "leo-y-escribo",
+  "compatibility_date": "2025-01-01",
+  "assets": {
+    // Lo que genera `npm run build`, no la carpeta del código.
+    "directory": "./dist",
+    // Cualquier ruta (/home, /welcome…) carga la app en vez de dar 404.
+    "not_found_handling": "single-page-application"
+  },
+  // Necesario para las vistas previas de las ramas que no son main.
+  "previews": {}
+}

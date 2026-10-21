@@ -1,15 +1,12 @@
 # Arreglo del deploy en Cloudflare
 
-El deploy de Comunicación en Cloudflare falla con este error:
+El deploy de Comunicación en Cloudflare (Worker `leo-y-escribo`) fallaba
+con este error:
 
 ```
 ✘ [ERROR] Asset too large.
 Cloudflare Workers supports assets with sizes of up to 25 MiB.
 ```
-
-Este cambio arregla lo que se puede arreglar desde el código. Lo demás es
-configuración en el panel de Cloudflare y lo tiene que hacer quien tenga
-acceso (ver «Lo que falta en Cloudflare»).
 
 ## Qué se cambió en esta rama
 
@@ -20,43 +17,40 @@ acceso (ver «Lo que falta en Cloudflare»).
 | `public/images/lecciones/q.zip` | 39 MB |
 | `public/images/lecciones/c.zip` | 14 MB |
 
-Cloudflare no acepta archivos de más de 25 MB, así que `q.zip` es el que
-rompe el deploy. Los dos son copias comprimidas de las carpetas `q` y `c`,
-que siguen en su lugar con todas sus imágenes. Ninguna parte de la app los
-usa (no aparecen en `src` ni en `index.html`). Quedaron en el historial de
-git, así que se pueden recuperar si hiciera falta.
+Cloudflare no acepta archivos de más de 25 MB, así que `q.zip` rompía el
+deploy. Los dos son copias comprimidas de las carpetas `q` y `c`, que siguen
+en su lugar con todas sus imágenes. Ninguna parte de la app los usa (no
+aparecen en `src` ni en `index.html`). Quedan en el historial de git por si
+hicieran falta.
 
-### 2. Se agregó `public/_redirects`
+### 2. Se agregó `wrangler.jsonc`
 
-```
-/*    /index.html   200
-```
+Antes no había configuración, y Cloudflare subía la carpeta del código tal
+cual (el log decía «Read 1392 files from the assets directory
+…/comunicacion»). El archivo nuevo le dice tres cosas:
 
-La app usa rutas como `/home` o `/welcome`. Sin este archivo, si alguien
-recarga la página o abre un link directo a una de esas rutas, Cloudflare
-busca un archivo con ese nombre, no lo encuentra y muestra error 404. Con
-él, cualquier ruta carga la app y la app decide qué pantalla mostrar.
-Matemática ya lo tiene.
+- **Publicar `dist`**, que es la app compilada por `npm run build`.
+- **Cualquier ruta carga la app** (`not_found_handling`). Sin esto, recargar
+  estando en `/home` o abrir un link directo a `/welcome` da 404.
+- **`previews`**, que Cloudflare pide para armar la vista previa de las
+  ramas que no son `main`. Sin él, el deploy de la rama fallaba con «Your
+  Wrangler configuration is missing a `previews` block».
 
-## Lo que falta en Cloudflare
+## Configuración en el panel de Cloudflare
 
-Esto no se puede hacer desde el código.
-
-El log del deploy dice «Adding Wrangler files…» y «Read 1392 files from
-the assets directory …/comunicacion»: el proyecto se creó como **Worker** y
-sube la carpeta del código tal cual, sin compilar. Lo que se publica tiene
-que ser `dist`, que es lo que genera `npm run build`.
-
-La propuesta es dejarlo como **Pages**, igual que Matemática:
+En el Worker `leo-y-escribo` → **Settings** → **Build**:
 
 | Campo | Valor |
 |---|---|
-| Framework preset | Vite (o React) |
 | Root directory | `comunicacion` |
 | Build command | `npm run build` |
-| Build output directory | `dist` |
+| Deploy command | `npx wrangler deploy` |
 
-Variables de entorno (Settings → Environment variables):
+El build command es el que importa: sin él no existe `dist` y no hay nada
+que publicar.
+
+Variables de entorno de build (Settings → Variables and secrets, en la parte
+de **build**):
 
 | Variable | Valor |
 |---|---|
@@ -69,7 +63,7 @@ manda a `localhost`.
 
 ## Cómo revisarlo
 
-- [ ] El deploy termina sin «Asset too large».
-- [ ] La app abre en la URL de Cloudflare.
+- [ ] El deploy de la rama termina bien y da un link de vista previa.
+- [ ] La app abre en ese link.
 - [ ] Recargar estando en `/home` no da 404.
 - [ ] El botón de Matemáticas lleva a Matemática con la sesión iniciada.
