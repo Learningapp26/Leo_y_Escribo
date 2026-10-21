@@ -86,8 +86,8 @@ function LoginPage() {
   return (
     <main className="page login-page">
       <Card className="login-shell">
-        <aside className="login-welcome" aria-label="Learning App">
-          <span className="login-brand"><BookOpen aria-hidden="true" /> Learning App</span>
+        <aside className="login-welcome" aria-label="Aprende Fácil">
+          <span className="login-brand"><BookOpen aria-hidden="true" /> Aprende Fácil</span>
           <img className="login-welcome__image" src="/images/login-reading.png" alt="" aria-hidden="true" draggable={false} />
           <h2>Aprender es una aventura</h2>
           <p>Lee, calcula y descubre a tu ritmo.</p>

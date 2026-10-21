@@ -34,7 +34,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--space-sm);
-  color: var(--color-action);
+  color: var(--color-text);
   font-weight: var(--font-weight-bold);
 }
 
@@ -75,7 +75,9 @@
 }
 
 .login-content {
+  --login-texto-suave: color-mix(in srgb, #ffffff 78%, var(--color-bg));
   min-width: 0;
+  color: #ffffff;
   padding: var(--space-xl) clamp(1.5rem, 4vw, 3rem);
   align-self: center;
 }
@@ -97,7 +99,7 @@
 .login-heading p {
   margin-top: var(--space-sm);
   font-size: var(--font-size-sm);
-  color: var(--color-text-alt);
+  color: var(--login-texto-suave);
 }
 .login-form {
   display: flex;
@@ -139,13 +141,14 @@
 .login-form__feedback {
   font-size: var(--font-size-xs);
 }
+.login-field__help { color: var(--login-texto-suave); }
 .login-form__feedback { overflow-wrap: anywhere; }
 .login-divider {
   display: flex;
   align-items: center;
   gap: var(--space-md);
   margin-block: var(--space-md);
-  color: var(--color-text-alt);
+  color: var(--login-texto-suave);
   font-size: var(--font-size-xs);
 }
 .login-divider::before,
@@ -166,7 +169,7 @@
 .login-switch__button {
   background: color-mix(in srgb, var(--color-support) 18%, var(--color-bg));
   border-color: var(--color-support);
-  color: var(--color-text);
+  color: #ffffff;
   box-shadow: none;
 }
 .login-content .btn { white-space: normal; }
