@@ -123,6 +123,10 @@
     width: 100%;
 }
 
+.book-choice-groups--pairs {
+    max-width: calc(720px + var(--space-lg));
+}
+
 .book-choice-groups > .word-choice-group {
     align-items: center;
     flex: 1 1 300px;
@@ -140,7 +144,7 @@
     gap: var(--space-xs);
 }
 
-.book-choice-groups .word-choice-group--images .word-choice-option {
+.book-choice-groups .word-choice-group--wide-options .word-choice-option {
     flex-basis: 100%;
     padding: var(--space-sm);
 }

@@ -19,7 +19,7 @@ function BookLessonReading({ lesson }) {
       <BackButton label={`Volver a la Unidad ${lesson.unitId}`} to={`/lecciones/unidad/${lesson.unitId}`} />
       <header className="text-center">
         {lesson.showReadingSource !== false && <span className="text-ui-label">Unidad {lesson.unitId} · Páginas {lesson.pages}</span>}
-        <h1 id="lesson-title">{getLessonHeading(lesson.id, lesson.title)}</h1>
+        <h1 id="lesson-title">{lesson.heading ?? getLessonHeading(lesson.id, lesson.title)}</h1>
         <p className="text-instruction">{reading.instruction.text}</p>
         <LessonAudioButton audio={reading.instruction}>Escuchar instrucción</LessonAudioButton>
       </header>

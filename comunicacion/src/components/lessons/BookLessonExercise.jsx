@@ -65,7 +65,7 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
         <LessonAudioButton audio={prompt.audio}>Escuchar {prompt.listenLabel ?? (exercise.hideWord ? 'la palabra' : prompt.label)}</LessonAudioButton>
       </>}
       {exercise.pattern && <p className="completion-word-pattern">{exercise.pattern}</p>}
-      {exercise.items && <div className={`selection-options${lesson.centeredItems && exercise.items.length > 1 ? ' selection-options--centered' : ''}`}>
+      {exercise.items && <div className={`selection-options${(exercise.centeredItems ?? (lesson.centeredItems && exercise.items.length > 1)) ? ' selection-options--centered' : ''}`}>
         {exercise.items.map((item) => <Card key={item.id}>
           {item.image && <BookLessonImage key={item.image} src={item.image} alt={item.label} />}
           <p className="text-reading">{item.label}</p>
@@ -93,8 +93,8 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
           </Card>
         })}
       </div>}
-      {exercise.groups && <div className={type === 'match' ? 'book-choice-groups' : 'completion-content'}>
-      {exercise.groups.map((group) => <Group className={`word-choice-group${group.options.some((option) => option.image) ? ' word-choice-group--images' : ''}`} key={group.id} aria-labelledby={`group-${group.id}`}>
+      {exercise.groups && <div className={type === 'match' ? ['book-choice-groups', exercise.groups.length === 4 && 'book-choice-groups--pairs'].filter(Boolean).join(' ') : 'completion-content'}>
+      {exercise.groups.map((group) => <Group className={`word-choice-group${group.options.some((option) => option.image || option.label.length > 3) ? ' word-choice-group--wide-options' : ''}`} key={group.id} aria-labelledby={`group-${group.id}`}>
         <h2 id={`group-${group.id}`}>{group.label}</h2>
         {group.image && <BookLessonImage src={group.image} alt={group.label} />}
         {group.audio && <LessonAudioButton audio={group.audio} aria-label={`Escuchar ${group.label}`}>Escuchar palabra</LessonAudioButton>}
