@@ -32,7 +32,7 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
       if (!exercise.multiple) return [index]
       return current.includes(index) ? current.filter((item) => item !== index) : [...current, index]
     })
-    if (options[index].audio) playAudio(options[index].audio.src)
+    if (options[index].audio && options[index].audio.available !== false) playAudio(options[index].audio.src)
   }
 
   const check = () => {
@@ -47,7 +47,8 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
     setFeedback(correct ? 'correct' : 'retry')
     registrarProgreso({ actividad: `${lesson.id}-${activityId}`, correcto: correct,
       detalle: { leccionId: lesson.id, ejercicioId: exercise.id, pagina: exercise.page } })
-    playAudio((correct ? exercise.resultAudio ?? lesson.feedback.correct : lesson.feedback.retry).src)
+    const feedbackAudio = correct ? exercise.resultAudio ?? lesson.feedback.correct : lesson.feedback.retry
+    if (feedbackAudio.available !== false) playAudio(feedbackAudio.src)
     if (correct) onCorrect()
   }
 

@@ -14,7 +14,7 @@ test('Xx opens Unit 6 only after the final Unit 5 game', () => {
   assert.equal(isLessonUnlocked('x', new Set(['gato-raton'])), true)
   assert.equal(isUnitUnlocked(6, new Set(['gato-raton'])), true)
   assert.equal(isLessonUnlocked('x', new Set(['x'])), true)
-  assert.equal(isLessonUnlocked('y-letra', new Set(['x'])), false)
+  assert.equal(isLessonUnlocked('y-letra', new Set(['x'])), true)
 })
 
 test('Xx retains all eight story paragraphs and three compact activities', () => {

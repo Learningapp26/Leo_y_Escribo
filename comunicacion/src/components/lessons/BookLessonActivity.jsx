@@ -40,7 +40,7 @@ function BookLessonActivity({ lesson, activityId }) {
     try {
       const result = await registrarLeccionCompletada(lesson.id)
       setSaveState(result.error || result.skipped ? 'error' : 'saved')
-      if (!result.error && !result.skipped) playAudio(lesson.feedback.completed.src)
+      if (!result.error && !result.skipped && lesson.feedback.completed.available !== false) playAudio(lesson.feedback.completed.src)
     } catch {
       setSaveState('error')
     } finally {

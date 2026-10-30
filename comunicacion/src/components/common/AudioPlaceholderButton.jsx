@@ -3,7 +3,7 @@ import { Volume2 } from 'lucide-react'
 import Button from './Button'
 
 // Se usa mientras el audio indicado aún no está disponible en public/audio.
-function AudioPlaceholderButton({ children, fullWidth = false, size = 'medium' }) {
+function AudioPlaceholderButton({ children, fullWidth = false, size = 'medium', ...props }) {
   return (
     <Button
       variant="audio"
@@ -12,6 +12,7 @@ function AudioPlaceholderButton({ children, fullWidth = false, size = 'medium' }
       fullWidth={fullWidth}
       disabled
       title="Audio próximamente disponible"
+      {...props}
     >
       {children}
     </Button>

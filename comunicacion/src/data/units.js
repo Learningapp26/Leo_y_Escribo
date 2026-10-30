@@ -348,9 +348,10 @@ export const units = [
       },
       {
         id: 'y-letra',
+        bookPage: 217,
         title: getLessonCardLabel('y-letra'),
         route: '/lecciones/y-letra',
-        available: false,
+        available: true,
       },
       {
         id: 'k',
