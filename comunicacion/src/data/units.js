@@ -362,7 +362,7 @@ export const units = [
         id: 'w',
         title: getLessonCardLabel('w'),
         route: '/lecciones/w',
-        available: false,
+        available: true,
       },
       {
         id: 'fr',
