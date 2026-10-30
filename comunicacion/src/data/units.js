@@ -354,9 +354,10 @@ export const units = [
       },
       {
         id: 'k',
+        bookPage: 223,
         title: getLessonCardLabel('k'),
         route: '/lecciones/k',
-        available: false,
+        available: true,
       },
       {
         id: 'w',
