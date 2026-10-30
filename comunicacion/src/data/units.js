@@ -1,4 +1,4 @@
-import { getLessonCardLabel } from './lessonLabels'
+import { getLessonCardLabel } from './lessonLabels.js'
 
 export const units = [
   {
@@ -341,9 +341,10 @@ export const units = [
     lessons: [
       {
         id: 'x',
+        bookPage: 213,
         title: getLessonCardLabel('x'),
         route: '/lecciones/x',
-        available: false,
+        available: true,
       },
       {
         id: 'y-letra',

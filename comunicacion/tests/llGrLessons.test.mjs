@@ -16,8 +16,8 @@ test('Ll and Gr participate in the sequential Unit 5 progression', () => {
     assert.equal(isLessonUnlocked(id, new Set([id])), true)
     assert.equal(getLessonThemeClass(id), 'planet--5')
   }
-  assert.equal(getLessonById('ll').title, 'Doble Ll')
-  assert.equal(getLessonById('gr').title, 'Combinación Gr')
+  assert.equal(getLessonById('ll').title, 'Ll')
+  assert.equal(getLessonById('gr').title, 'Gr')
   assert.equal(isLessonUnlocked('gr', new Set(['z'])), false)
 })
 
