@@ -555,3 +555,45 @@
 
 }
 
+
+/* Grabadora de voz de los ejercicios orales (la grabación no sale del navegador) */
+.voice-recorder {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.voice-recorder__live {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-ui);
+  font-size: 20px;
+  font-weight: 800;
+  color: #A4472F;
+}
+
+.voice-recorder__live span {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #E5484D;
+}
+
+.voice-recorder__note {
+  font-family: var(--font-ui);
+  font-size: 17px;
+  font-weight: 700;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .voice-recorder__live span { animation: voice-recording 1s ease-in-out infinite alternate; }
+}
+
+@keyframes voice-recording {
+  from { opacity: .35; transform: scale(.8); }
+  to   { opacity: 1; transform: scale(1.1); }
+}

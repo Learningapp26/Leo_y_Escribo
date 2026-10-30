@@ -5,6 +5,7 @@ import Button from '../common/Button'
 import Card from '../common/Card'
 import LessonAudioButton from '../common/LessonAudioButton'
 import BookLessonImage from './BookLessonImage'
+import VoiceRecorder from './VoiceRecorder'
 import { playAudio } from '../../lib/audioPlayer'
 import { registrarProgreso } from '../../lib/progreso'
 
@@ -123,6 +124,7 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
       {feedback === 'retry' && <Button variant="retry" icon={RotateCcw} onClick={() => { setSelected([]); setFeedback('') }}>Intentar nuevamente</Button>}
       {!passive && feedback !== 'correct' && <Button icon={Check} size="large" disabled={type === 'match' ? !groupsReady : !selected.length || (ordered && selected.length !== (exercise.answerLength ?? options.length))} onClick={check}>Comprobar respuesta</Button>}
       {exercise.selectionCount && <p role="status">Palabras elegidas: {selected.length} de {exercise.selectionCount}</p>}
+      {type === 'oral' && exercise.record && <VoiceRecorder onRecorded={() => setPracticed(true)} />}
       {type === 'oral' && <Button variant="secondary" aria-pressed={practiced} disabled={!groupsReady} icon={Check} onClick={() => setPracticed(!practiced)}>{exercise.practiceLabel ?? 'Ya dije mi oración'}</Button>}
       {(feedback === 'correct' || (passive && (type !== 'oral' || practiced))) && <Button size="large" icon={ArrowRight} iconPosition="right" onClick={onNext}>
         {last || 'Continuar'}
