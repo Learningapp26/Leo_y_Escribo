@@ -50,7 +50,7 @@
      --font-alt     : Lexend  — alternativa para instrucciones secundarias
   */
   --font-content: 'Andika', system-ui, sans-serif;  /* todo lo que el niño lee */
-  --font-ui:      'Baloo 2', system-ui, sans-serif; /* títulos, botones, menús, contadores */
+  --font-ui:      'Andika', system-ui, sans-serif; /* títulos, botones, menús, contadores */
   --font-alt:     var(--font-content);
 
   --font-size-xs:       0.875rem;  /* 14px — etiquetas pequeñas */
