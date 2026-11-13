@@ -6,7 +6,7 @@ const DIGRAPHS = ['ll', 'ch', 'rr', 'qu', 'gu']
 export function highlightLetter(text, letter) {
   if (!letter || typeof text !== 'string') return text
   const target = letter.toLowerCase()
-  if (!/^[a-zñ]{1,3}$/.test(target)) return text
+  if (!/^[a-zñü]{1,3}$/.test(target)) return text
 
   const units = [...new Set([target, ...DIGRAPHS])].sort((a, b) => b.length - a.length)
   const pattern = new RegExp(`(${units.join('|')})`, 'gi')
