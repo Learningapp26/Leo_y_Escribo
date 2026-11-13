@@ -13,18 +13,19 @@
   box-shadow: var(--shadow-3d-light);
 }
 
-/* Columna de imagen: 290 px fijos, imagen al alto disponible */
+/* Keep the illustration at its natural ratio, with the audio directly below. */
 .story-card__media {
   display: flex;
   flex: 0 0 290px;
   flex-direction: column;
+  justify-content: center;
   gap: 16px;
 }
 
 .story-card__image {
-  flex: 1;
+  flex: none;
   width: 100%;
-  min-height: 260px;
+  height: auto;
   border: 6px solid var(--lilac);
   border-radius: 24px;
   object-fit: contain;
@@ -155,7 +156,9 @@
   .story-card__media { flex-basis: auto; }
 
   .story-card__image {
-    min-height: 0;
+    align-self: center;
+    width: auto;
+    max-width: 100%;
     max-height: 320px;
   }
 
