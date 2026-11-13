@@ -470,3 +470,8 @@ Sirve para sílabas, palabras, letras*/
   font-weight: var(--font-weight-bold);
   text-align: center;
 }
+
+/* Opt-in two-column layout for four illustrated sequence cards. */
+.completion-bank--pairs {
+    max-width: 720px;
+}

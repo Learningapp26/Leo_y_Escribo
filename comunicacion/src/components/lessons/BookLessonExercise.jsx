@@ -66,6 +66,10 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
         {!exercise.hideWord && <p className="text-word">{prompt.label}</p>}
         <LessonAudioButton audio={prompt.audio}>Escuchar {prompt.listenLabel ?? (exercise.hideWord ? 'la palabra' : prompt.label)}</LessonAudioButton>
       </>}
+      {exercise.teacherPrompt && <details className="word-bank-reference">
+        <summary>Para la maestra</summary>
+        <p className="text-reading">{exercise.teacherPrompt}</p>
+      </details>}
       {exercise.pattern && <p className="completion-word-pattern">{exercise.pattern}</p>}
       {exercise.items && <div className={`selection-options${(exercise.centeredItems ?? (lesson.centeredItems && exercise.items.length > 1)) ? ' selection-options--centered' : ''}`}>
         {exercise.items.map((item) => <Card key={item.id}>
@@ -77,20 +81,20 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
       {ordered && <div className="completion-target" aria-live="polite" aria-label="Tu respuesta">
         <p className="text-word">{answerText || '…'}</p>
       </div>}
-      {options.length > 0 && <div className={ordered ? `completion-bank${exercise.compactOptions ? ' completion-bank--letters' : ''}${exercise.answerIds ? ' completion-bank--images' : ''}` : `selection-options selection-options--centered${exercise.showOptionLabels ? ' selection-options--labeled' : ''}`}>
+      {options.length > 0 && <div className={ordered ? `completion-bank${exercise.compactOptions ? ' completion-bank--letters' : ''}${exercise.answerIds ? ' completion-bank--images' : ''}${exercise.optionLayout === 'pairs' ? ' completion-bank--pairs' : ''}` : `selection-options selection-options--centered${exercise.showOptionLabels ? ' selection-options--labeled' : ''}${exercise.optionLayout === 'board' ? ' selection-options--board' : ''}`}>
         {options.map((option, index) => {
           const active = selected.includes(index)
           return <Card key={`${option.id}-${index}`} className={type === 'oral' ? 'word-choice-option' : ''} selected={active}>
             <Button variant={active && feedback === 'correct' ? 'correct' : 'secondary'} size="large" fullWidth
               aria-pressed={active} aria-disabled={feedback === 'correct' || (ordered && active)} disabled={ordered && active && !exercise.answerIds}
               onClick={() => pick(index)}>
-              {option.image ? <><BookLessonImage key={option.image} src={option.image} alt={option.label} />{exercise.showOptionLabels && <span>{option.label}</span>}</>
+              {option.image ? <><BookLessonImage key={option.image} src={option.image} alt={option.imageAlt ?? option.label} />{exercise.showOptionLabels && <span>{option.label}</span>}{option.caption && <span className="selection-option-caption">{option.caption}</span>}</>
                 : option.label}
               {active && <Check aria-label="Seleccionado" size={20} />}
             </Button>
             {option.audio && <LessonAudioButton audio={option.audio} fullWidth
-              aria-label={`Escuchar ${option.label}`}>
-              {exercise.compactOptions || type === 'oral' ? null : 'Escuchar'}
+              aria-label={`Escuchar ${option.caption ?? option.label}`}>
+              {exercise.compactOptions || exercise.optionLayout === 'board' || type === 'oral' ? null : 'Escuchar'}
             </LessonAudioButton>}
           </Card>
         })}
@@ -108,7 +112,7 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
               {option.image && <BookLessonImage src={option.image} alt={option.label} />}
               {option.label}{groupChoices[group.id] === option.id && <Check aria-label="Seleccionado" size={20} />}
             </Button>
-            <LessonAudioButton audio={option.audio} aria-label={`Escuchar ${option.label}`}>{null}</LessonAudioButton>
+            <LessonAudioButton audio={option.audio} aria-label={`Escuchar ${option.caption ?? option.label}`}>{null}</LessonAudioButton>
           </Card>)}
         </div>
         {type === 'match' && feedback === 'retry' && groupChoices[group.id] !== group.answer && <p role="status">Revisa esta respuesta.</p>}
