@@ -1,5 +1,10 @@
 let currentAudio = null
 let currentSrc = null
+// Missing recordings remain silent until their files are supplied.
+export function playLessonAudio(audio) {
+  if (!audio || audio.available === false) return null
+  return playAudio(audio.src)
+}
 
 // playAudio ahora actúa como toggle para la misma pista:
 // - si se llama con la misma `source` y el audio está reproduciéndose, lo pausa

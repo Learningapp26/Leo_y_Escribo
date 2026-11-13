@@ -6,7 +6,7 @@ import Card from '../common/Card'
 import LessonAudioButton from '../common/LessonAudioButton'
 import BookLessonImage from './BookLessonImage'
 import VoiceRecorder from './VoiceRecorder'
-import { playAudio } from '../../lib/audioPlayer'
+import { playLessonAudio } from '../../lib/audioPlayer'
 import { registrarProgreso } from '../../lib/progreso'
 
 function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, last }) {
@@ -33,7 +33,7 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
       if (!exercise.multiple) return [index]
       return current.includes(index) ? current.filter((item) => item !== index) : [...current, index]
     })
-    if (options[index].audio && options[index].audio.available !== false) playAudio(options[index].audio.src)
+    playLessonAudio(options[index].audio)
   }
 
   const check = () => {
@@ -49,7 +49,7 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
     registrarProgreso({ actividad: `${lesson.id}-${activityId}`, correcto: correct,
       detalle: { leccionId: lesson.id, ejercicioId: exercise.id, pagina: exercise.page } })
     const feedbackAudio = correct ? exercise.resultAudio ?? lesson.feedback.correct : lesson.feedback.retry
-    if (feedbackAudio.available !== false) playAudio(feedbackAudio.src)
+    playLessonAudio(feedbackAudio)
     if (correct) onCorrect()
   }
 
@@ -76,6 +76,7 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
         {exercise.items.map((item) => <Card key={item.id}>
           {item.image && <BookLessonImage key={item.image} src={item.image} alt={item.label} />}
           <p className="text-reading">{item.label}</p>
+          {item.definition && <details className="word-bank-reference"><summary>¿Qué significa?</summary><p className="text-reading">{item.definition}</p>{item.definitionAudio && <LessonAudioButton audio={item.definitionAudio}>Escuchar significado</LessonAudioButton>}</details>}
           <LessonAudioButton audio={item.audio} aria-label={`Escuchar ${item.label}`}>Escuchar</LessonAudioButton>
         </Card>)}
       </div>}
@@ -105,6 +106,7 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
                 : option.label}
               {active && <Check aria-label="Seleccionado" size={20} />}
             </Button>
+            {option.definition && <details className="word-bank-reference"><summary>¿Qué significa?</summary><p className="text-reading">{option.definition}</p>{option.definitionAudio && <LessonAudioButton audio={option.definitionAudio}>Escuchar significado</LessonAudioButton>}</details>}
             {option.audio && <LessonAudioButton audio={option.audio} fullWidth
               aria-label={`Escuchar ${option.caption ?? option.label}`}>
               {exercise.compactOptions || exercise.optionLayout === 'board' || type === 'oral' ? null : 'Escuchar'}
@@ -139,6 +141,7 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
       {feedback && <p className={`selection-feedback selection-feedback--${feedback}`} role="status">
         {feedback === 'correct' ? '¡Correcto! Puedes continuar.' : 'Escucha de nuevo e inténtalo otra vez.'}
       </p>}
+      {feedback === 'correct' && exercise.resultText && <p className="text-word" aria-live="polite">{exercise.resultText}</p>}
       {feedback === 'retry' && <Button variant="retry" icon={RotateCcw} onClick={() => { setSelected([]); setFeedback('') }}>Intentar nuevamente</Button>}
       {!passive && feedback !== 'correct' && <Button icon={Check} size="large" disabled={type === 'match' ? !groupsReady : !selected.length || (ordered && selected.length !== (exercise.answerLength ?? options.length))} onClick={check}>Comprobar respuesta</Button>}
       {exercise.selectionCount && <p role="status">Palabras elegidas: {selected.length} de {exercise.selectionCount}</p>}

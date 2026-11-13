@@ -393,9 +393,10 @@ export const units = [
       },
       {
         id: 'gue-con-dieresis',
+        bookPage: 243,
         title: getLessonCardLabel('gue-con-dieresis'),
         route: '/lecciones/gue-con-dieresis',
-        available: false,
+        available: true,
       },
       {
         id: 'abecedario',
