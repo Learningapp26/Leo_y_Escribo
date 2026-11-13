@@ -375,9 +375,10 @@ export const units = [
       },
       {
         id: 'fl',
+        bookPage: 235,
         title: getLessonCardLabel('fl'),
         route: '/lecciones/fl',
-        available: false,
+        available: true,
       },
       {
         id: 'ge-gi',

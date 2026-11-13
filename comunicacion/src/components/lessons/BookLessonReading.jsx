@@ -25,6 +25,7 @@ function BookLessonReading({ lesson }) {
       </header>
       <StoryCard lessonId={lesson.id} title={reading.title} paragraphs={reading.paragraphs}
         image={reading.image} imageAlt={reading.imageAlt} audio={reading.audio.available === false ? undefined : reading.audio.src} />
+      {reading.source && <p className="text-ui-label">{reading.source}</p>}
       <section className="comprehension-section text-center" aria-labelledby="questions-title">
         <h2 id="questions-title">Conversemos sobre el cuento</h2>
         <p className="text-instruction">{reading.discussionInstruction?.text ?? 'Tu maestra leerá las preguntas. Conversen sobre el cuento.'}</p>
