@@ -55,6 +55,7 @@ export const LESSON_UNIT_MAP = {
   'ge-gi': 6,
   'ce-ci': 6,
   'gue-con-dieresis': 6,
+  abecedario: 6,
 }
 
 export function getLessonUnit(lessonId) {

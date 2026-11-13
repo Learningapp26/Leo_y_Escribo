@@ -368,9 +368,10 @@ export const units = [
       },
       {
         id: 'fr',
+        bookPage: 231,
         title: getLessonCardLabel('fr'),
         route: '/lecciones/fr',
-        available: false,
+        available: true,
       },
       {
         id: 'fl',
@@ -395,6 +396,12 @@ export const units = [
         title: getLessonCardLabel('gue-con-dieresis'),
         route: '/lecciones/gue-con-dieresis',
         available: false,
+      },
+      {
+        id: 'abecedario',
+        title: '¡El juego del abecedario!',
+        route: '/lecciones/abecedario',
+        available: true,
       },
     ],
   },

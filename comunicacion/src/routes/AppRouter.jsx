@@ -158,6 +158,9 @@ import { yLetterLesson } from '../data/yLetterData'
 import { kLesson } from '../data/kData'
 import { wLesson } from '../data/wData'
 import { geGiLesson } from '../data/geGiData'
+import { frLesson } from '../data/frData'
+import AbecedarioPage, { AbecedarioActivityPage } from '../pages/AbecedarioPage'
+import { alphabetGame } from '../data/abecedarioData'
 
 
 import LeccionCrPage from '../pages/LeccionCrPage'
@@ -196,7 +199,7 @@ function AppRouter() {
       <AppSky>
       <LessonAccessGuard>
         <Routes>
-          {[fLesson, rrLesson, enieLesson, drLesson, hLesson, zLesson, llLesson, grLesson, glLesson, xLesson, yLetterLesson, kLesson, wLesson, geGiLesson].flatMap((lesson) => [
+          {[fLesson, rrLesson, enieLesson, drLesson, hLesson, zLesson, llLesson, grLesson, glLesson, xLesson, yLetterLesson, kLesson, wLesson, frLesson, geGiLesson].flatMap((lesson) => [
             <Route key={lesson.id} path={`/lecciones/${lesson.id}`}
               element={<BookLessonReading lesson={lesson} />} />,
             ...lesson.activities.map((activity) => (
@@ -206,6 +209,13 @@ function AppRouter() {
                 </LessonAccessGuard>} />
             )),
           ])}
+          <Route path="/lecciones/abecedario" element={<AbecedarioPage />} />
+          {alphabetGame.activities.map((activity) => (
+            <Route key={activity.id} path={`/actividad/abecedario-${activity.id}`}
+              element={<LessonAccessGuard lessonId="abecedario">
+                <AbecedarioActivityPage key={activity.id} activityId={activity.id} />
+              </LessonAccessGuard>} />
+          ))}
           <Route path="/" element={<LoginPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/welcome" element={<WelcomePage />} />

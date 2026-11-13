@@ -23,7 +23,7 @@ export function getPlanetClass(unit) {
 }
 
 // Juegos finales de cada unidad: se muestran como la caja "Premio".
-export const FINAL_GAME_IDS = new Set(['juguemos-palabras', 'subidas-resbalones', 'domino-palabras', 'juego-memoria', 'gato-raton'])
+export const FINAL_GAME_IDS = new Set(['juguemos-palabras', 'subidas-resbalones', 'domino-palabras', 'juego-memoria', 'gato-raton', 'abecedario'])
 
 // Letra o grupo de letras que se escribe dentro del planeta de una lección.
 export function getLessonGlyph(lesson) {
