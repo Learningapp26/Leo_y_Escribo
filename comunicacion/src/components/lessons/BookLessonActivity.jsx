@@ -12,7 +12,7 @@ import '../../styles/solar.css'
 import BookLessonExercise from './BookLessonExercise'
 import BookLessonSoundBoxes from './BookLessonSoundBoxes'
 import { getLessonThemeClass } from '../../data/lessonColors'
-import { playAudio, stopAudio } from '../../lib/audioPlayer'
+import { playLessonAudio, stopAudio } from '../../lib/audioPlayer'
 import { registrarLeccionCompletada, registrarProgreso } from '../../lib/progreso'
 import '../../styles/selection.css'
 import '../../styles/completion.css'
@@ -40,7 +40,7 @@ function BookLessonActivity({ lesson, activityId }) {
     try {
       const result = await registrarLeccionCompletada(lesson.id)
       setSaveState(result.error || result.skipped ? 'error' : 'saved')
-      if (!result.error && !result.skipped && lesson.feedback.completed.available !== false) playAudio(lesson.feedback.completed.src)
+      if (!result.error && !result.skipped) playLessonAudio(lesson.feedback.completed)
     } catch {
       setSaveState('error')
     } finally {
