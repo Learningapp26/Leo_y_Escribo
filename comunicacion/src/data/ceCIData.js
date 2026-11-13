@@ -9,7 +9,7 @@ const paragraphs = [
   'Celia estudia cerca de Ciudad Vieja. Todos los días camina doce cuadras. Pasa cerca de un estanque de cisnes y sube un pequeño cerro. Al llegar a la cima, baja corriendo y llega a la escuela. ¡Eso hace Celia todos los días!',
 ]
 const story = audio('celia', `Celia\n\n${paragraphs.join('\n\n')}`, 'Historia')
-const storyWords = ['Celia', 'cerca', 'Ciudad', 'doce', 'cerca', 'cisnes', 'cerro', 'cima', 'hace', 'Celia']
+const storyWords = ['Celia', 'estudia',  'cerca' , 'Ciudad' , 'Vieja', 'Todos',  'días',  'camina',  'doce', 'cuadras', 'Pasa', 'cerca', 'estanque', 'cisnes', 'sube', 'pequeño', 'cerro', 'llegar', 'cima', 'baja', 'corriendo', 'llega', 'escuela', 'Eso', 'hace', 'Celia', 'todos', 'días']
 const withCeCi = (text) => /c[eéií]/i.test(text)
 const wordList = [
   'cine', 'hacienda', 'celular', 'entonces', 'cielo', 'maceta', 'cincuenta', 'nueces',
@@ -44,7 +44,7 @@ export const ceCiLesson = {
     title: 'Celia', paragraphs,
     instruction: instruction('lectura', 'Escucha el relato. Fíjate en las palabras que llevan ce y ci.'),
     audio: story,
-    image: '/images/lecciones/ce-ci/lectura-ce-ci.png',
+    image: '/images/lecciones/ce-ci/celia.png',
     imageAlt: 'Celia junto al estanque de cisnes y subiendo el cerro.',
     questions: [
       '¿Qué palabras con ce o ci escuchaste en el relato?',
