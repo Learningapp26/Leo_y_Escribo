@@ -389,7 +389,7 @@ export const units = [
         id: 'ce-ci',
         title: getLessonCardLabel('ce-ci'),
         route: '/lecciones/ce-ci',
-        available: false,
+        available: true,
       },
       {
         id: 'gue-con-dieresis',

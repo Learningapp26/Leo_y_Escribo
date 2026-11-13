@@ -20,6 +20,7 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
   const passive = type === 'present' || type === 'oral'
   const Group = type === 'match' ? Card : 'section'
   const answerText = selected.map((index) => options[index].label).join(exercise.separator ?? '')
+  const completionChoice = exercise.sentenceCompletion && options[selected[0]]
   const groupsReady = (!exercise.groups || exercise.groups.every((group) => groupChoices[group.id]))
     && (!exercise.selectionCount || selected.length === exercise.selectionCount)
 
@@ -78,6 +79,18 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
           <LessonAudioButton audio={item.audio} aria-label={`Escuchar ${item.label}`}>Escuchar</LessonAudioButton>
         </Card>)}
       </div>}
+      {exercise.sentenceCompletion && <>
+        <p className="text-sentence book-sentence-completion" aria-live="polite">
+          {exercise.sentenceCompletion.before}
+          <span className="book-sentence-completion__slot">
+            {completionChoice
+              ? <BookLessonImage key={completionChoice.completionImage} src={completionChoice.completionImage} alt={completionChoice.label} />
+              : '_____'}
+          </span>
+          {exercise.sentenceCompletion.after}
+        </p>
+        <LessonAudioButton audio={exercise.sentenceCompletion.audio}>Escuchar oración</LessonAudioButton>
+      </>}
       {ordered && <div className="completion-target" aria-live="polite" aria-label="Tu respuesta">
         <p className="text-word">{answerText || '…'}</p>
       </div>}

@@ -159,6 +159,7 @@ import { kLesson } from '../data/kData'
 import { wLesson } from '../data/wData'
 import { geGiLesson } from '../data/geGiData'
 import { frLesson } from '../data/frData'
+import { ceCiLesson } from '../data/ceCiData'
 import AbecedarioPage, { AbecedarioActivityPage } from '../pages/AbecedarioPage'
 import { alphabetGame } from '../data/abecedarioData'
 
@@ -199,7 +200,7 @@ function AppRouter() {
       <AppSky>
       <LessonAccessGuard>
         <Routes>
-          {[fLesson, rrLesson, enieLesson, drLesson, hLesson, zLesson, llLesson, grLesson, glLesson, xLesson, yLetterLesson, kLesson, wLesson, frLesson, geGiLesson].flatMap((lesson) => [
+          {[fLesson, rrLesson, enieLesson, drLesson, hLesson, zLesson, llLesson, grLesson, glLesson, xLesson, yLetterLesson, kLesson, wLesson, frLesson, geGiLesson, ceCiLesson].flatMap((lesson) => [
             <Route key={lesson.id} path={`/lecciones/${lesson.id}`}
               element={<BookLessonReading lesson={lesson} />} />,
             ...lesson.activities.map((activity) => (

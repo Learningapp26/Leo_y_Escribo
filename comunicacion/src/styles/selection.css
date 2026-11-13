@@ -178,7 +178,26 @@
 
 .selection-options--labeled .btn:not(.btn--audio) {
     border-radius: var(--radius-md);
-    padding: var(--space-md);
+}
+
+.book-sentence-completion {
+    max-width: 100%;
+    text-align: center;
+}
+
+.book-sentence-completion__slot {
+    display: inline-flex;
+    min-width: 76px;
+    min-height: 68px;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+.book-sentence-completion__slot .selection-image {
+    width: 76px;
+    height: 68px;
+    max-width: 76px;
 }
 
 
