@@ -382,7 +382,7 @@ export const units = [
         id: 'ge-gi',
         title: getLessonCardLabel('ge-gi'),
         route: '/lecciones/ge-gi',
-        available: false,
+        available: true,
       },
       {
         id: 'ce-ci',
