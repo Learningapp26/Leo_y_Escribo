@@ -56,6 +56,9 @@ export const LESSON_UNIT_MAP = {
   'ce-ci': 6,
   'gue-con-dieresis': 6,
   abecedario: 6,
+  'escritura-ll-y': 7,
+  'escritura-q-c': 7,
+  'escritura-h': 7,
 }
 
 export function getLessonUnit(lessonId) {
