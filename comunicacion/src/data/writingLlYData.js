@@ -26,14 +26,13 @@ export const writingLlYLesson = finish({
         `Lee y escucha las palabras que se escriben con ${column === 0 ? 'll' : 'y'}. Repítelas con tu maestra.`, items.map((text) => word(text))))),
     },
     { id: 'combinaciones', title: 'Elegimos ll o y', exercises: [pictures.slice(0, 4), pictures.slice(4)].map((items, index) => ({
-      id: `dibujos-${index}`, page: 253, type: 'match',
+      id: `dibujos-${index}`, page: 253, type: 'match', uniformChoices: true,
       instruction: instruction('combinaciones', 'Observa los dibujos. Selecciona la combinación con la que se escribe el nombre de cada figura. Puedes escuchar la palabra.'),
       groups: items.map((item) => ({ ...pic(item), answer: item[2], options: item[1].map(syllable) })),
     })) },
     { id: 'formar', title: 'Formamos las palabras', exercises: pictures.map((item) => ({
       ...order(`formar-${word(item[0]).id}`, 253, [...item[3]].reverse(), item[0]),
       prompt: pic(item),
-      teacherPrompt: 'La selección de sílabas sustituye la escritura en las líneas del libro. El nombre queda visible para consultar su escritura.',
     })) },
   ],
 })

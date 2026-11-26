@@ -669,3 +669,8 @@
 .book-crossword__cell { position: relative; display: grid; place-items: center; border: 2px solid var(--planet-ink); background: var(--color-surface); color: var(--color-text); }
 .book-crossword__cell small { position: absolute; top: 0; left: 2px; font-size: clamp(9px, 2vw, 12px); line-height: 1; }
 .book-crossword__cell strong { font-size: clamp(16px, 4vw, 26px); padding-top: 6px; }
+
+/* Keep a story centered while the teacher's illustration is still pending. */
+.selection-card .story-card--text-only { flex-direction: column-reverse; }
+.selection-card .story-card--text-only .story-card__media { align-items: center; }
+.selection-card .story-card--text-only .story-card__media .btn { width: auto; }

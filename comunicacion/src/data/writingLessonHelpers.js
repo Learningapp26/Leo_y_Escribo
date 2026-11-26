@@ -17,7 +17,7 @@ export function createWritingContent(id, title, page, introduction) {
       id, title, heading: title, unitId: 7, pages: String(page),
       showReadingSource: false, centeredItems: true,
       reading: { instruction: content.instruction('introduccion', introduction) },
-      completionTitle: `¡Terminaste ${title.toLowerCase()}!`,
+      completionTitle: '¡Terminaste esta lección de escritura!',
       feedback: {
         correct: originalAudio('respuesta-correcta', '¡Correcto! Puedes continuar.'),
         retry: originalAudio('intenta-otra-vez', 'Escucha de nuevo e inténtalo otra vez.'),

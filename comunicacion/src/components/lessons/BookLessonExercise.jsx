@@ -121,7 +121,7 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
       </div>}
       {exercise.crossword && <BookLessonCrossword crossword={exercise.crossword} choices={groupChoices} />}
       {exercise.groups && <div className={type === 'match' ? ['book-choice-groups', exercise.groups.length === 4 && 'book-choice-groups--pairs'].filter(Boolean).join(' ') : 'completion-content'}>
-      {exercise.groups.map((group) => <Group className={`word-choice-group${group.options.some((option) => option.image || option.label.length > 3) ? ' word-choice-group--wide-options' : ''}`} key={group.id} aria-labelledby={`group-${group.id}`}>
+      {exercise.groups.map((group) => <Group className={`word-choice-group${exercise.uniformChoices || group.options.some((option) => option.image || option.label.length > 3) ? ' word-choice-group--wide-options' : ''}`} key={group.id} aria-labelledby={`group-${group.id}`}>
         <h2 id={`group-${group.id}`}>{group.label}</h2>
         {group.image && <BookLessonImage src={group.image} alt={group.imageAlt ?? group.label} />}
         {group.audio && <LessonAudioButton audio={group.audio} aria-label={`Escuchar ${group.label}`}>{group.listenLabel ?? 'Escuchar palabra'}</LessonAudioButton>}
