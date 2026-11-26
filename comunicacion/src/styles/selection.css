@@ -661,3 +661,11 @@
     font-size: var(--font-size-md);
   }
 }
+
+/* Shared, responsive crossword display; answers use the existing choice groups. */
+.book-crossword { width: 100%; margin: 0; display: grid; justify-items: center; gap: var(--space-md); }
+.book-crossword__grid { display: grid; grid-template-columns: repeat(var(--crossword-columns), minmax(0, 1fr)); width: min(100%, 480px); gap: 2px; }
+.book-crossword__grid > span { aspect-ratio: 1; min-width: 0; }
+.book-crossword__cell { position: relative; display: grid; place-items: center; border: 2px solid var(--planet-ink); background: var(--color-surface); color: var(--color-text); }
+.book-crossword__cell small { position: absolute; top: 0; left: 2px; font-size: clamp(9px, 2vw, 12px); line-height: 1; }
+.book-crossword__cell strong { font-size: clamp(16px, 4vw, 26px); padding-top: 6px; }

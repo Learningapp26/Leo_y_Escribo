@@ -4,7 +4,9 @@ import { ArrowRight, Check, RotateCcw, Undo2 } from 'lucide-react'
 import Button from '../common/Button'
 import Card from '../common/Card'
 import LessonAudioButton from '../common/LessonAudioButton'
+import StoryCard from './StoryCard'
 import BookLessonImage from './BookLessonImage'
+import BookLessonCrossword from './BookLessonCrossword'
 import VoiceRecorder from './VoiceRecorder'
 import { playLessonAudio } from '../../lib/audioPlayer'
 import { registrarProgreso } from '../../lib/progreso'
@@ -67,6 +69,9 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
         {!exercise.hideWord && <p className="text-word">{prompt.label}</p>}
         <LessonAudioButton audio={prompt.audio}>Escuchar {prompt.listenLabel ?? (exercise.hideWord ? 'la palabra' : prompt.label)}</LessonAudioButton>
       </>}
+      {exercise.reading && <StoryCard lessonId={lesson.id} title={exercise.reading.title}
+        paragraphs={exercise.reading.paragraphs} image={exercise.reading.image} imageAlt={exercise.reading.imageAlt}
+        audio={exercise.reading.audio.available === false ? undefined : exercise.reading.audio.src} />}
       {exercise.teacherPrompt && <details className="word-bank-reference">
         <summary>Para la maestra</summary>
         <p className="text-reading">{exercise.teacherPrompt}</p>
@@ -114,11 +119,12 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
           </Card>
         })}
       </div>}
+      {exercise.crossword && <BookLessonCrossword crossword={exercise.crossword} choices={groupChoices} />}
       {exercise.groups && <div className={type === 'match' ? ['book-choice-groups', exercise.groups.length === 4 && 'book-choice-groups--pairs'].filter(Boolean).join(' ') : 'completion-content'}>
       {exercise.groups.map((group) => <Group className={`word-choice-group${group.options.some((option) => option.image || option.label.length > 3) ? ' word-choice-group--wide-options' : ''}`} key={group.id} aria-labelledby={`group-${group.id}`}>
         <h2 id={`group-${group.id}`}>{group.label}</h2>
-        {group.image && <BookLessonImage src={group.image} alt={group.label} />}
-        {group.audio && <LessonAudioButton audio={group.audio} aria-label={`Escuchar ${group.label}`}>Escuchar palabra</LessonAudioButton>}
+        {group.image && <BookLessonImage src={group.image} alt={group.imageAlt ?? group.label} />}
+        {group.audio && <LessonAudioButton audio={group.audio} aria-label={`Escuchar ${group.label}`}>{group.listenLabel ?? 'Escuchar palabra'}</LessonAudioButton>}
         <div className="selection-options selection-options--centered">
           {group.options.map((option) => <Card className="word-choice-option" key={option.id} selected={groupChoices[group.id] === option.id}>
             <Button variant="secondary" fullWidth aria-pressed={groupChoices[group.id] === option.id}

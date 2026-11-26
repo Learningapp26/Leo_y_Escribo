@@ -23,10 +23,10 @@ function BookLessonReading({ lesson }) {
         <p className="text-instruction">{reading.instruction.text}</p>
         <LessonAudioButton audio={reading.instruction}>Escuchar instrucción</LessonAudioButton>
       </header>
-      <StoryCard lessonId={lesson.id} title={reading.title} paragraphs={reading.paragraphs}
-        image={reading.image} imageAlt={reading.imageAlt} audio={reading.audio.available === false ? undefined : reading.audio.src} />
+      {reading.paragraphs?.length > 0 && <StoryCard lessonId={lesson.id} title={reading.title} paragraphs={reading.paragraphs}
+        image={reading.image} imageAlt={reading.imageAlt} audio={reading.audio.available === false ? undefined : reading.audio.src} />}
       {reading.source && <p className="text-ui-label">{reading.source}</p>}
-      <section className="comprehension-section text-center" aria-labelledby="questions-title">
+      {reading.questions?.length > 0 && <section className="comprehension-section text-center" aria-labelledby="questions-title">
         <h2 id="questions-title">Conversemos sobre el cuento</h2>
         <p className="text-instruction">{reading.discussionInstruction?.text ?? 'Tu maestra leerá las preguntas. Conversen sobre el cuento.'}</p>
         {reading.discussionInstruction && <LessonAudioButton audio={reading.discussionInstruction}>Escuchar instrucción</LessonAudioButton>}
@@ -39,7 +39,7 @@ function BookLessonReading({ lesson }) {
             </Card>
           ))}
         </div>
-      </section>
+      </section>}
       <section aria-labelledby="activities-title">
         <h2 id="activities-title">Practiquemos</h2>
         <div className="lesson-activity-menu">
