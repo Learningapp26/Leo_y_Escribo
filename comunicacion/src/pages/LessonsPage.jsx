@@ -18,7 +18,7 @@ function LessonsPage() {
   const currentPlanet = current ? getLessonPlanet(current.lesson, current.unit.id) : null
 
   const planets = PLANETS.map((planet) => {
-    const unlocked = !loadingProgress && (planet.id === 0 || (planet.id <= 6 && isUnitUnlocked(planet.id, completedLessons)))
+    const unlocked = !loadingProgress && (planet.id === 0 || isUnitUnlocked(planet.id, completedLessons))
     const state = loadingProgress ? undefined : !unlocked || !planetHasLessons(planet.id) ? 'locked'
       : planet.id === currentPlanet ? 'current'
         : currentPlanet === null || planet.id < currentPlanet ? 'done' : undefined
