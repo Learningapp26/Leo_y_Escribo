@@ -473,10 +473,6 @@ export function isLessonUnlocked(
   )
 
   if (lessonIndex < 0) return false
-  // INICIO PARCHE TEMPORAL: acceso libre sin modificar el progreso guardado.
-  // Para deshacer el parche, eliminar este bloque completo.
-  if (lessonIndex >= 0) return true
-  // FIN PARCHE TEMPORAL.
   if (lessonIndex === 0 || completedLessonIds.has(lessonId)) return true
 
   return completedLessonIds.has(availableLessons[lessonIndex - 1].id)
