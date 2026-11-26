@@ -53,13 +53,14 @@ test('crossword preserves every crossing and fits the original grid', () => {
 test('the full untitled source story is retained including the confirmed pictogram', () => {
   assert.equal(writingQcParagraphs.length, 2)
   assert.equal(writingQcParagraphs[0], 'En el parque que está junto a la casa hay una venta de tacos. Se llama «Taquería Quique». Ahí venden los tacos más ricos. Siempre vamos con mi primo Maquito.')
-  assert.equal(writingQcParagraphs[1], 'Un día, a Maquito le salió una catarina en su taco. Él se quejó con el dueño. Don Quique, el dueño, se disculpó y le obsequió dos tacos más. ¡Estaban exquisitos!')
+  assert.equal(writingQcParagraphs[1], 'Un día, a Maquito le salió una mariquita en su taco. Él se quejó con el dueño. Don Quique, el dueño, se disculpó y le obsequió dos tacos más. ¡Estaban exquisitos!')
   const reading = writingQcLesson.activities[2].exercises[0].reading
+  assert.equal(reading.image, undefined)
   assert.deepEqual(reading.paragraphs, writingQcParagraphs)
   assert.equal(reading.audio.text, writingQcParagraphs.join('\n\n'))
 })
 
-test('audio paths have unique scripts and every activity image exists except the user story image', () => {
+test('audio paths have unique scripts and every activity image exists', () => {
   const tracks = new Map()
   function visit(value) {
     if (!value || typeof value !== 'object') return
@@ -70,7 +71,7 @@ test('audio paths have unique scripts and every activity image exists except the
       if (tracks.has(value.src)) assert.equal(tracks.get(value.src), value.text)
       tracks.set(value.src, value.text)
     }
-    if (value.image && !value.image.endsWith('/lectura-q-c.png')) {
+    if (value.image) {
       assert.ok(existsSync(new URL(`../public${value.image}`, import.meta.url)), value.image)
     }
     Object.values(value).forEach(visit)
