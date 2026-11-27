@@ -1,10 +1,10 @@
 /* ============================================================
    global.css — Leo y Escribo
    Paleta: Cielo y Pradera + Arcoíris Escolar (combinada)
-   Tipografía: Andika (lectura) + Nunito (UI) + Lexend (apoyo)
+   Tipografía: Lexend (contenido e interfaz)
 
    Importar en index.html antes de este archivo:
-   <link href="https://fonts.googleapis.com/css2?family=Andika:ital,wght@0,400;0,700&family=Nunito:wght@400;700;900&family=Lexend:wght@400;700&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800&display=swap" rel="stylesheet">
    ============================================================ */
 
 /* ── 1. Tokens ─────────────────────────────────────────────── */
@@ -44,14 +44,10 @@
   --color-reward:      var(--ae-reward);
   --color-border:      #d2dce8;
 
-  /* Tipografía
-     --font-content : Andika — letras, sílabas, palabras, instrucciones de actividad
-     --font-ui      : Nunito  — botones, títulos, menús, navegación
-     --font-alt     : Lexend  — alternativa para instrucciones secundarias
-  */
-  --font-content: 'Andika', system-ui, sans-serif;  /* todo lo que el niño lee */
-  --font-ui:      'Andika', system-ui, sans-serif; /* títulos, botones, menús, contadores */
-  --font-alt:     var(--font-content);
+  /* Tipografía */
+  --font-content: 'Lexend', system-ui, sans-serif;
+  --font-ui:      'Lexend', system-ui, sans-serif;
+  --font-alt:     'Lexend', system-ui, sans-serif;
 
   --font-size-xs:       0.875rem;  /* 14px — etiquetas pequeñas */
   --font-size-sm:       1rem;      /* 16px — texto de apoyo */
@@ -103,7 +99,7 @@ html {
 }
 
 body {
-  /* Andika como fuente base: la mayoría de contenido es lectura */
+  /* Lexend como fuente base para lectura e instrucciones */
   font-family: var(--font-content);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-normal);
@@ -156,7 +152,7 @@ a:hover {
 
 /* ── 4. Tipografía ─────────────────────────────────────────── */
 
-/* Títulos y elementos de interfaz usan Nunito */
+/* Títulos y elementos de interfaz usan Lexend */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-ui);
   font-weight: 800;
@@ -169,7 +165,7 @@ h2 { font-size: var(--font-size-xl); }
 h3 { font-size: var(--font-size-lg); }
 h4 { font-size: var(--font-size-md); }
 
-/* Párrafos e instrucciones usan Andika (hereda del body) */
+/* Párrafos e instrucciones usan Lexend (hereda del body) */
 p {
   font-size: var(--font-size-md);
   line-height: var(--line-height);

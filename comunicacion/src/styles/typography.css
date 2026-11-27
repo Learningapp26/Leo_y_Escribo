@@ -1,9 +1,7 @@
 /* ============================================================
    typography.css — Leo y Escribo
    Clases reutilizables para contenido de lectura inicial.
-   Fuente de lectura : Andika  (--font-content)
-   Fuente de interfaz: Nunito  (--font-ui)
-   Fuente de apoyo   : Lexend  (--font-alt)
+   Fuente de contenido e interfaz: Lexend (--font-content, --font-ui, --font-alt)
    ============================================================ */
 
 /* ── Letra individual ──────────────────────────────────────── */
@@ -59,7 +57,7 @@
 }
 
 /* ── Instrucción ───────────────────────────────────────────── */
-/* Para instrucciones de actividad — Lexend por claridad */
+/* Para instrucciones de actividad */
 .text-instruction {
   font-family: var(--font-content);
   font-size: 22px;
@@ -71,7 +69,7 @@
 /* ── Instrucción destacada ─────────────────────────────────── */
 /* Instrucción principal de la actividad, más visible */
 .text-instruction--bold {
-  font-family: var(--font-alt);
+  font-family: var(--font-content);
   font-size: var(--font-size-lg);        /* 24px */
   font-weight: var(--font-weight-bold);
   line-height: var(--line-height);

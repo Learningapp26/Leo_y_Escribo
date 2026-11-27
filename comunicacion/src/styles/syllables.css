@@ -52,7 +52,7 @@
 .syllables-instructions p.text-instruction:first-of-type,
 .syllables-card > p.text-instruction:first-child {
 
-    font-family: var(--font-alt);
+    font-family: var(--font-content);
     font-size: var(--font-size-lg);
     font-weight: var(--font-weight-bold);
     color: var(--color-text);
