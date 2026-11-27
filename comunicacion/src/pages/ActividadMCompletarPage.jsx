@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
 import Button from '../components/common/Button'
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import Card from '../components/common/Card'
 import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
@@ -113,7 +114,7 @@ function ActividadMCompletarPage() {
     slots.some((slot) => slot?.optionIndex === optionIndex)
 
   const pickOption = (syllable, optionIndex) => {
-    if (joinFeedback === 'correct') return
+    if (joinFeedback) return
 
     setJoinFeedback('')
 
@@ -216,7 +217,9 @@ function ActividadMCompletarPage() {
             Escuchar palabra
           </Button>
 
-          <p className="completion-word-pattern">{currentWord.pattern}</p>
+          <p className="completion-word-pattern" aria-live="polite">
+            {currentWord.pattern.replace('__', selectedSyllable || '__')}
+          </p>
 
           <div className="completion-bank">
             {mSyllableOptions.map((syllable) => (
@@ -239,6 +242,7 @@ function ActividadMCompletarPage() {
                 type="button"
                 key={syllable}
                 aria-pressed={selectedSyllable === syllable}
+                disabled={Boolean(completionResult)}
                 onClick={() => {
                   setSelectedSyllable(syllable)
                   setCompletionResult('')
@@ -249,25 +253,7 @@ function ActividadMCompletarPage() {
             ))}
           </div>
 
-          {completionResult === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
-              ¡Correcto! La palabra es {currentWord.word}.
-            </p>
-          )}
-
-          {completionResult === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
-              Esa sílaba no completa la palabra. Escucha otra vez.
-            </p>
-          )}
-
-          {completionResult !== 'correct' && (
+          {!completionResult && (
             <Button
               icon={Check}
               size="large"
@@ -279,18 +265,37 @@ function ActividadMCompletarPage() {
             </Button>
           )}
 
+          {completionResult === 'retry' && (
+            <ActivityFeedback correct={false}>
+              <Button
+                variant="retry"
+                icon={RotateCcw}
+                size="large"
+                fullWidth
+                onClick={() => {
+                  setSelectedSyllable('')
+                  setCompletionResult('')
+                }}
+              >
+                Intentar nuevamente
+              </Button>
+            </ActivityFeedback>
+          )}
+
           {completionResult === 'correct' && (
-            <Button
-              icon={ArrowRight}
-              iconPosition="right"
-              size="large"
-              fullWidth
-              onClick={nextWord}
-            >
-              {wordIndex === mWordCompletion.length - 1
-                ? 'Siguiente parte'
-                : 'Siguiente palabra'}
-            </Button>
+            <ActivityFeedback correct>
+              <Button
+                icon={ArrowRight}
+                iconPosition="right"
+                size="large"
+                fullWidth
+                onClick={nextWord}
+              >
+                {wordIndex === mWordCompletion.length - 1
+                  ? 'Siguiente parte'
+                  : 'Siguiente palabra'}
+              </Button>
+            </ActivityFeedback>
           )}
         </Card>
       )}
@@ -349,6 +354,7 @@ function ActividadMCompletarPage() {
                 type="button"
                 key={syllable}
                 aria-pressed={selectedSoundSyllable === syllable}
+                disabled={Boolean(soundResult)}
                 onClick={() => {
                   setSelectedSoundSyllable(syllable)
                   setSoundResult('')
@@ -359,25 +365,7 @@ function ActividadMCompletarPage() {
             ))}
           </div>
 
-          {soundResult === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
-              ¡Correcto! La palabra es {currentSoundWord.word}.
-            </p>
-          )}
-
-          {soundResult === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
-              Esa no es la sílaba correcta. Escucha otra vez.
-            </p>
-          )}
-
-          {soundResult !== 'correct' && (
+          {!soundResult && (
             <Button
               icon={Check}
               size="large"
@@ -389,18 +377,37 @@ function ActividadMCompletarPage() {
             </Button>
           )}
 
+          {soundResult === 'retry' && (
+            <ActivityFeedback correct={false}>
+              <Button
+                variant="retry"
+                icon={RotateCcw}
+                size="large"
+                fullWidth
+                onClick={() => {
+                  setSelectedSoundSyllable('')
+                  setSoundResult('')
+                }}
+              >
+                Intentar nuevamente
+              </Button>
+            </ActivityFeedback>
+          )}
+
           {soundResult === 'correct' && (
-            <Button
-              icon={ArrowRight}
-              iconPosition="right"
-              size="large"
-              fullWidth
-              onClick={nextSoundWord}
-            >
-              {soundIndex === mWordSyllableSelection.length - 1
-                ? 'Siguiente parte'
-                : 'Siguiente palabra'}
-            </Button>
+            <ActivityFeedback correct>
+              <Button
+                icon={ArrowRight}
+                iconPosition="right"
+                size="large"
+                fullWidth
+                onClick={nextSoundWord}
+              >
+                {soundIndex === mWordSyllableSelection.length - 1
+                  ? 'Siguiente parte'
+                  : 'Siguiente palabra'}
+              </Button>
+            </ActivityFeedback>
           )}
         </Card>
       )}
@@ -443,7 +450,7 @@ function ActividadMCompletarPage() {
                     .join(' ')}
                   type="button"
                   key={`${syllable}-${optionIndex}`}
-                  disabled={joinFeedback === 'correct' && !used}
+                  disabled={Boolean(joinFeedback)}
                   aria-pressed={used}
                   onClick={() => pickOption(syllable, optionIndex)}
                 >
@@ -453,25 +460,7 @@ function ActividadMCompletarPage() {
             })}
           </div>
 
-          {joinFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
-              ¡Muy bien! Formaste la palabra {joinItem.word}.
-            </p>
-          )}
-
-          {joinFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
-              Esas sílabas no forman una palabra. Inténtalo de nuevo.
-            </p>
-          )}
-
-          {joinFeedback !== 'correct' && (
+          {!joinFeedback && (
             <Button
               icon={Check}
               size="large"
@@ -484,39 +473,45 @@ function ActividadMCompletarPage() {
           )}
 
           {joinFeedback === 'retry' && (
-            <Button
-              variant="retry"
-              icon={RotateCcw}
-              size="large"
-              fullWidth
-              onClick={retryJoin}
-            >
-              Intentar nuevamente
-            </Button>
+            <ActivityFeedback correct={false}>
+              <Button
+                variant="retry"
+                icon={RotateCcw}
+                size="large"
+                fullWidth
+                onClick={retryJoin}
+              >
+                Intentar nuevamente
+              </Button>
+            </ActivityFeedback>
           )}
 
           {joinFeedback === 'correct' && !isLastJoin && (
-            <Button
-              icon={ArrowRight}
-              iconPosition="right"
-              size="large"
-              fullWidth
-              onClick={nextJoinItem}
-            >
-              Formar otra palabra
-            </Button>
+            <ActivityFeedback correct>
+              <Button
+                icon={ArrowRight}
+                iconPosition="right"
+                size="large"
+                fullWidth
+                onClick={nextJoinItem}
+              >
+                Formar otra palabra
+              </Button>
+            </ActivityFeedback>
           )}
 
           {joinFeedback === 'correct' && isLastJoin && (
-            <Button
-              to="/actividad/m-final"
-              icon={ArrowRight}
-              iconPosition="right"
-              size="large"
-              fullWidth
-            >
-              Ir a la actividad final
-            </Button>
+            <ActivityFeedback correct>
+              <Button
+                to="/actividad/m-final"
+                icon={ArrowRight}
+                iconPosition="right"
+                size="large"
+                fullWidth
+              >
+                Ir a la actividad final
+              </Button>
+            </ActivityFeedback>
           )}
         </Card>
       )}

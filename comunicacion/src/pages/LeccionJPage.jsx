@@ -30,21 +30,23 @@ function LeccionJPage() {
 
         <h1 id="j-lesson-title">{getLessonHeading('j')}</h1>
 
-        <p className="text-instruction">
-          Escucha la fábula con atención y descubre el
-          sonido de la letra J.
-        </p>
+        <div className="selection-instructions">
+          <p className="text-instruction">
+            Escucha la fábula con atención y descubre el
+            sonido de la letra J.
+          </p>
 
-        <Button
-          variant="audio"
-          size="large"
-          icon={Volume2}
-          onClick={() =>
-            playAudio(jReading.instructionAudio)
-          }
-        >
-          Escuchar instrucción
-        </Button>
+          <Button
+            variant="audio"
+            size="large"
+            icon={Volume2}
+            onClick={() =>
+              playAudio(jReading.instructionAudio)
+            }
+          >
+            Escuchar instrucción
+          </Button>
+        </div>
       </header>
 
       <StoryCard lessonId="j" title={jReading.title} paragraphs={jReading.paragraphs} image={jReading.image} imageAlt={jReading.imageAlt} audio={jReading.readingAudio} />

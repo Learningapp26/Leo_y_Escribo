@@ -26,19 +26,21 @@ function LeccionVPage() {
 
         <h1 id="v-lesson-title">{getLessonHeading('v')}</h1>
 
-        <p className="text-instruction">
-          Ahora es tiempo de aprender la letra uve. Para empezar, escucha
-          una historia.
-        </p>
+        <div className="selection-instructions">
+          <p className="text-instruction">
+            Ahora es tiempo de aprender la letra uve. Para empezar, escucha
+            una historia.
+          </p>
 
-        <Button
-          variant="audio"
-          size="large"
-          icon={Volume2}
-          onClick={() => playAudio(vReading.instructionAudio)}
-        >
-          Escuchar instrucción
-        </Button>
+          <Button
+            variant="audio"
+            size="large"
+            icon={Volume2}
+            onClick={() => playAudio(vReading.instructionAudio)}
+          >
+            Escuchar instrucción
+          </Button>
+        </div>
       </header>
 
       <StoryCard lessonId="v" title={vReading.title} paragraphs={vReading.paragraphs} image={vReading.image} imageAlt={vReading.imageAlt} audio={vReading.readingAudio} />

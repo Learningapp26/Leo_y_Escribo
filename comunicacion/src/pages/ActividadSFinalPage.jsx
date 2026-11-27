@@ -1,3 +1,4 @@
+import { fillBlank } from '../lib/fillBlank'
 import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw } from 'lucide-react'
 
@@ -117,7 +118,7 @@ function ActividadSFinalPage() {
     <Card className="selection-card">
       <div className="selection-instructions">
         <p className="text-instruction">{activity.prompt}</p>
-        {'pattern' in activity && <p className="completion-word-pattern">{activity.pattern}</p>}
+        {'pattern' in activity && <p className="completion-word-pattern">{fillBlank(activity.pattern, selected)}</p>}
         {'sentence' in activity && <p className="text-reading">{activity.sentence}</p>}
         <AudioPlaceholderButton>Escuchar instrucción</AudioPlaceholderButton>
         {'sentence' in activity && (

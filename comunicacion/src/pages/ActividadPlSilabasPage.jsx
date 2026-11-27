@@ -1,3 +1,5 @@
+import { LetterSound } from '../components/lessons/SoundIntroduction'
+import { fillBlank } from '../lib/fillBlank'
 import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
@@ -183,18 +185,7 @@ function ActividadPlSilabasPage() {
             </Button>
           </div>
 
-          <div className="selection-options">
-            <span className="text-letter">{formatLetterGroup('pl')}</span>
-          </div>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(plLetterPresentation.soundAudio)}
-          >
-            Escuchar el sonido de PL
-          </Button>
+          <LetterSound letter="pl" audioSrc={plLetterPresentation.soundAudio}>{formatLetterGroup('pl')}</LetterSound>
 
           <div className="syllables-options">
             {plLetterPresentation.combinations.map((item) => (
@@ -354,7 +345,7 @@ function ActividadPlSilabasPage() {
             Escuchar palabra
           </Button>
 
-          <p className="completion-word-pattern">{currentWord.pattern}</p>
+          <p className="completion-word-pattern">{fillBlank(currentWord.pattern, selectedSyllable)}</p>
 
           <div className="completion-bank">
             {plSyllableOptions.map((syllable) => (

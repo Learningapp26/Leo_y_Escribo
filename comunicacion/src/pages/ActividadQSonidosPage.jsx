@@ -1,3 +1,4 @@
+import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -154,31 +155,10 @@ function ActividadQSonidosPage() {
             </Button>
           </div>
 
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(qSoundIntro.soundAudio)}
-          >
-            Escuchar el sonido /q/
-          </Button>
-
-          <img
-            className="selection-image selection-image--featured"
-            src={qSoundIntro.mainWord.image}
-            alt={qSoundIntro.mainWord.name}
+          <SoundIntroduction
+            sounds={[{ letter: 'q', audioSrc: qSoundIntro.soundAudio }]}
+            word={qSoundIntro.mainWord}
           />
-
-          <span className="text-word">{qSoundIntro.mainWord.name}</span>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(qSoundIntro.mainWord.audio)}
-          >
-            Escuchar la palabra queso
-          </Button>
 
           <p className="text-instruction">
             Escucha y repite: quilete, quemada y esquina.

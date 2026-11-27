@@ -1,3 +1,4 @@
+import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
 import {
   ArrowRight,
@@ -281,37 +282,10 @@ function ActividadCSonidosPage() {
             </Button>
           </div>
 
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() =>
-              playAudio(cSoundIntro.soundAudio)
-            }
-          >
-            Escuchar el sonido /c/
-          </Button>
-
-          <img
-            className="selection-image selection-image--featured"
-            src={cSoundIntro.image}
-            alt={cSoundIntro.imageAlt}
+          <SoundIntroduction
+            sounds={[{ letter: 'c', audioSrc: cSoundIntro.soundAudio }]}
+            word={{ name: cSoundIntro.word, image: cSoundIntro.image, imageAlt: cSoundIntro.imageAlt, audio: cSoundIntro.wordAudio }}
           />
-
-          <span className="text-word">
-            {cSoundIntro.word}
-          </span>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() =>
-              playAudio(cSoundIntro.wordAudio)
-            }
-          >
-            Escuchar la palabra coco
-          </Button>
 
           <p className="text-instruction">
             Escucha y repite: casa, come y cura.

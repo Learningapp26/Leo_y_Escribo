@@ -1,3 +1,4 @@
+import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -161,40 +162,10 @@ function ActividadCrSonidosPage() {
             </Button>
           </div>
 
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(crSoundIntro.soundAudioC)}
-          >
-            Escuchar el sonido /c/
-          </Button>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(crSoundIntro.soundAudioR)}
-          >
-            Escuchar el sonido /r/
-          </Button>
-
-          <img
-            className="selection-image selection-image--featured"
-            src={crSoundIntro.mainWord.image}
-            alt={crSoundIntro.mainWord.name}
+          <SoundIntroduction
+            sounds={[{ letter: 'c', audioSrc: crSoundIntro.soundAudioC }, { letter: 'r', audioSrc: crSoundIntro.soundAudioR }]}
+            word={crSoundIntro.mainWord}
           />
-
-          <span className="text-word">{crSoundIntro.mainWord.name}</span>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(crSoundIntro.mainWord.audio)}
-          >
-            Escuchar el sonido de cráter
-          </Button>
 
           <Button
             icon={ArrowRight}

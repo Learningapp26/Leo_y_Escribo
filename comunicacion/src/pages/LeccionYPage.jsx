@@ -29,22 +29,24 @@ function LeccionYPage() {
 
         <h1 id="y-lesson-title">{getLessonHeading('y-conjuncion')}</h1>
 
-        <p className="text-instruction">
-          Escucha la historia y descubre cómo usamos la
-          letra Y para unir dos elementos.
-        </p>
+        <div className="selection-instructions">
+          <p className="text-instruction">
+            Escucha la historia y descubre cómo usamos la
+            letra Y para unir dos elementos.
+          </p>
 
-        <Button
-          variant="audio"
-          size="large"
-          icon={Volume2}
-          onClick={() =>
-            playAudio(yReading.instructionAudio)
-          }
-          data-audio-src={yReading.instructionAudio}
-        >
-          Escuchar instrucción
-        </Button>
+          <Button
+            variant="audio"
+            size="large"
+            icon={Volume2}
+            onClick={() =>
+              playAudio(yReading.instructionAudio)
+            }
+            data-audio-src={yReading.instructionAudio}
+          >
+            Escuchar instrucción
+          </Button>
+        </div>
       </header>
 
       <StoryCard lessonId="y-conjuncion" title={yReading.title} paragraphs={yReading.paragraphs} image={yReading.image} imageAlt={yReading.imageAlt} audio={yReading.readingAudio} />

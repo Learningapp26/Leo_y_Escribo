@@ -1,3 +1,4 @@
+import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -144,31 +145,10 @@ function ActividadPSonidosPage() {
             </Button>
           </div>
 
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(pSoundIntro.soundAudio)}
-          >
-            Escuchar el sonido /p/
-          </Button>
-
-          <img
-            className="selection-image selection-image--featured"
-            src={pSoundIntro.mainWord.image}
-            alt={pSoundIntro.mainWord.name}
+          <SoundIntroduction
+            sounds={[{ letter: 'p', audioSrc: pSoundIntro.soundAudio }]}
+            word={pSoundIntro.mainWord}
           />
-
-          <span className="text-word">{pSoundIntro.mainWord.name}</span>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(pSoundIntro.mainWord.audio)}
-          >
-            Escuchar la palabra papá
-          </Button>
 
           <Button
             icon={ArrowRight}

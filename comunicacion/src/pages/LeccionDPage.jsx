@@ -50,18 +50,20 @@ function LeccionDPage() {
 
         <h1 id="d-lesson-title">{getLessonHeading('d')}</h1>
 
-        <p className="text-instruction">
-          Escucha la historia con atención y descubre el sonido de la letra D.
-        </p>
+        <div className="selection-instructions">
+          <p className="text-instruction">
+            Escucha la historia con atención y descubre el sonido de la letra D.
+          </p>
 
-        <Button
-          variant="audio"
-          size="large"
-          icon={Volume2}
-          onClick={() => playAudio(dReading.instructionAudio)}
-        >
-          Escuchar instrucción
-        </Button>
+          <Button
+            variant="audio"
+            size="large"
+            icon={Volume2}
+            onClick={() => playAudio(dReading.instructionAudio)}
+          >
+            Escuchar instrucción
+          </Button>
+        </div>
       </header>
 
       <StoryCard lessonId="d" title={dReading.title} paragraphs={dReading.paragraphs} image={dReading.image} imageAlt={dReading.imageAlt} audio={dReading.readingAudio} />

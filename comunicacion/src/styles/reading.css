@@ -16,6 +16,11 @@
     gap: var(--space-xl);
 }
 
+.reading-page > header > .selection-instructions {
+    margin-inline: auto;
+    margin-top: var(--space-lg);
+}
+
 /* Card principal */
 /* Tipo dos columnas para la parte del texto y la imagen*/
 

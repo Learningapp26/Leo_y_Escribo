@@ -1,3 +1,4 @@
+import { fillBlank } from '../../lib/fillBlank'
 import { formatLetterGroup } from '../../data/lessonLabels'
 import { useRef, useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Undo2 } from 'lucide-react'
@@ -8,6 +9,7 @@ import StoryCard from './StoryCard'
 import BookLessonImage from './BookLessonImage'
 import BookLessonCrossword from './BookLessonCrossword'
 import VoiceRecorder from './VoiceRecorder'
+import { LetterSound, WordSound } from './SoundIntroduction'
 import { playLessonAudio } from '../../lib/audioPlayer'
 import { registrarProgreso } from '../../lib/progreso'
 
@@ -61,13 +63,19 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
         <p className="text-instruction">{exercise.instruction.text}</p>
         <LessonAudioButton audio={exercise.instruction}>Escuchar instrucción</LessonAudioButton>
       </div>
-      {exercise.letter && <p className="text-letter">{exercise.letterForms ?? formatLetterGroup(exercise.letter.trim().split(/\s+/)[0])}</p>}
-      {exercise.sound && <LessonAudioButton audio={exercise.sound} size="large">Escuchar el sonido de {lesson.letter}</LessonAudioButton>}
+      {exercise.letter && !exercise.sound && <p className="text-letter">{exercise.letterForms ?? formatLetterGroup(exercise.letter.trim().split(/\s+/)[0])}</p>}
+      {exercise.sound && <LetterSound letter={lesson.letter} audio={exercise.sound}>
+        {exercise.letter ? exercise.letterForms ?? formatLetterGroup(exercise.letter.trim().split(/\s+/)[0]) : undefined}
+      </LetterSound>}
       {exercise.extraAudios?.map((audio) => <LessonAudioButton key={audio.src} audio={audio}>Escuchar los sonidos despacio</LessonAudioButton>)}
       {prompt && <>
         {prompt.image && <BookLessonImage key={prompt.image} featured src={prompt.image} alt={prompt.label} />}
-        {!exercise.hideWord && <p className="text-word">{prompt.label}</p>}
-        <LessonAudioButton audio={prompt.audio}>Escuchar {prompt.listenLabel ?? (exercise.hideWord ? 'la palabra' : prompt.label)}</LessonAudioButton>
+        {exercise.sound && !exercise.hideWord
+          ? <WordSound word={prompt.label} audio={prompt.audio} />
+          : <>
+            {!exercise.hideWord && <p className="text-word">{fillBlank(prompt.label, answerText)}</p>}
+            <LessonAudioButton audio={prompt.audio}>Escuchar {prompt.listenLabel ?? (exercise.hideWord ? 'la palabra' : prompt.label)}</LessonAudioButton>
+          </>}
       </>}
       {exercise.reading && <StoryCard lessonId={lesson.id} title={exercise.reading.title}
         paragraphs={exercise.reading.paragraphs} image={exercise.reading.image} imageAlt={exercise.reading.imageAlt}
@@ -76,7 +84,7 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
         <summary>Para la maestra</summary>
         <p className="text-reading">{exercise.teacherPrompt}</p>
       </details>}
-      {exercise.pattern && <p className="completion-word-pattern">{exercise.pattern}</p>}
+      {exercise.pattern && <p className="completion-word-pattern">{fillBlank(exercise.pattern, answerText)}</p>}
       {exercise.items && <div className={`selection-options${(exercise.centeredItems ?? (lesson.centeredItems && exercise.items.length > 1)) ? ' selection-options--centered' : ''}`}>
         {exercise.items.map((item) => <Card key={item.id}>
           {item.image && <BookLessonImage key={item.image} src={item.image} alt={item.label} />}

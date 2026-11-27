@@ -1,3 +1,4 @@
+import { LetterSound } from '../components/lessons/SoundIntroduction'
 import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
@@ -136,18 +137,7 @@ function ActividadPrSilabasPage() {
             </Button>
           </div>
 
-          <div className="selection-options">
-            <span className="text-letter">{formatLetterGroup('pr')}</span>
-          </div>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(prLetterPresentation.soundAudio)}
-          >
-            Escuchar el sonido de PR
-          </Button>
+          <LetterSound letter="pr" audioSrc={prLetterPresentation.soundAudio}>{formatLetterGroup('pr')}</LetterSound>
 
           <div className="syllables-options">
             {prLetterPresentation.combinations.map((item) => (

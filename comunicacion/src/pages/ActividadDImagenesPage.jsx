@@ -1,4 +1,4 @@
-import { formatLetterGroup } from '../data/lessonLabels'
+import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
 import {
   ArrowRight,
@@ -313,45 +313,10 @@ function ActividadDImagenesPage() {
             Escuchar instrucción
           </Button>
 
-          <div className="selection-options">
-            <span className="text-letter">{formatLetterGroup('d')}</span>
-          </div>
-
-          <img
-            className="selection-image selection-image--featured"
-            src={dSoundIntro.mainWord.image}
-            alt={dSoundIntro.mainWord.name}
+          <SoundIntroduction
+            sounds={[{ letter: 'd', audioSrc: dSoundIntro.letterAudio }]}
+            word={dSoundIntro.mainWord}
           />
-
-          <span className="text-word">
-            {dSoundIntro.mainWord.name}
-          </span>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() =>
-              playIfAvailable(
-                dSoundIntro.letterAudio,
-              )
-            }
-          >
-            Escuchar el sonido /d/
-          </Button>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() =>
-              playIfAvailable(
-                dSoundIntro.mainWord.audio,
-              )
-            }
-          >
-            Escuchar dedo
-          </Button>
 
           <Button
             icon={ArrowRight}

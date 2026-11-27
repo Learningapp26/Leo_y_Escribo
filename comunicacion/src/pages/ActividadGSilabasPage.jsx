@@ -1,3 +1,4 @@
+import { LetterSound } from '../components/lessons/SoundIntroduction'
 import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
@@ -215,18 +216,7 @@ function ActividadGSilabasPage() {
             </Button>
           </div>
 
-          <div className="selection-options">
-            <span className="text-letter">{formatLetterGroup('g')}</span>
-          </div>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(gLetterPresentation.soundAudio)}
-          >
-            Escuchar el sonido de la G
-          </Button>
+          <LetterSound letter="g" audioSrc={gLetterPresentation.soundAudio}>{formatLetterGroup('g')}</LetterSound>
 
           <div className="syllables-options">
             {(showSpecialSyllables

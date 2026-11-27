@@ -25,20 +25,22 @@ function LeccionLPage() {
 
         <h1 id="l-lesson-title">{getLessonHeading('l')}</h1>
 
-        <p className="text-instruction">
-          Escucha la historia con atención y descubre el sonido de la letra
-          L.
-        </p>
+        <div className="selection-instructions">
+          <p className="text-instruction">
+            Escucha la historia con atención y descubre el sonido de la letra
+            L.
+          </p>
 
-        <Button
-          variant="audio"
-          size="large"
-          icon={Volume2}
-          onClick={() => playAudio(lReading.instructionAudio)}
-          data-audio-src={lReading.instructionAudio}
-        >
-          Escuchar instrucción
-        </Button>
+          <Button
+            variant="audio"
+            size="large"
+            icon={Volume2}
+            onClick={() => playAudio(lReading.instructionAudio)}
+            data-audio-src={lReading.instructionAudio}
+          >
+            Escuchar instrucción
+          </Button>
+        </div>
       </header>
 
       <StoryCard lessonId="l" title={lReading.title} paragraphs={lReading.paragraphs} image={lReading.image} imageAlt={lReading.imageAlt} audio={lReading.readingAudio} />

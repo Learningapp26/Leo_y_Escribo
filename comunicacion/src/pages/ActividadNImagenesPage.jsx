@@ -1,3 +1,4 @@
+import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -237,23 +238,10 @@ function ActividadNImagenesPage() {
             </p>
           </div>
 
-          <img
-            className="selection-image selection-image--featured"
-            src={nSoundIntro.mainWord.image}
-            alt={nSoundIntro.mainWord.name}
+          <SoundIntroduction
+            sounds={[{ letter: 'n', audioSrc: nSoundIntro.soundAudio }]}
+            word={nSoundIntro.mainWord}
           />
-
-          <span className="text-word">{nSoundIntro.mainWord.name}</span>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            disabled={!nSoundIntro.soundAudio}
-            onClick={() => playAudio(nSoundIntro.soundAudio)}
-          >
-            {getAudioLabel('Escuchar el sonido /n/', nSoundIntro.soundAudio)}
-          </Button>
 
           <div className="selection-instructions">
             <p className="text-instruction">

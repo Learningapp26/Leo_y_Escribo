@@ -1,3 +1,4 @@
+import { LetterSound } from '../components/lessons/SoundIntroduction'
 import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
@@ -139,18 +140,7 @@ function ActividadTrSilabasPage() {
             </Button>
           </div>
 
-          <div className="selection-options">
-            <span className="text-letter">{formatLetterGroup('tr')}</span>
-          </div>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(trLetterPresentation.soundAudio)}
-          >
-            Escuchar el sonido de tr
-          </Button>
+          <LetterSound letter="tr" audioSrc={trLetterPresentation.soundAudio}>{formatLetterGroup('tr')}</LetterSound>
 
           <div className="syllables-options">
             {trLetterPresentation.combinations.map((item) => (

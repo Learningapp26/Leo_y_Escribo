@@ -1,3 +1,4 @@
+import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -138,21 +139,10 @@ function ActividadChSonidosPage() {
             </Button>
           </div>
 
-          <Button variant="audio" size="large" icon={Volume2} onClick={() => playAudio(chSoundIntro.soundAudio)}>
-            Escuchar el sonido /ch/
-          </Button>
-
-          <img
-            className="selection-image selection-image--featured"
-            src={chSoundIntro.mainWord.image}
-            alt={chSoundIntro.mainWord.name}
+          <SoundIntroduction
+            sounds={[{ letter: 'ch', audioSrc: chSoundIntro.soundAudio }]}
+            word={chSoundIntro.mainWord}
           />
-
-          <span className="text-word">{chSoundIntro.mainWord.name}</span>
-
-          <Button variant="audio" size="large" icon={Volume2} onClick={() => playAudio(chSoundIntro.mainWord.audio)}>
-            Escuchar la palabra chocolate
-          </Button>
 
           <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth onClick={goToNextPhase}>
             Continuar

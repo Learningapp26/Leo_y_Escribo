@@ -27,10 +27,6 @@ function playIfAvailable(audio) {
   if (audio) playAudio(audio)
 }
 
-function getWordEnding(pattern) {
-  return pattern.replace('__', '')
-}
-
 function ActividadNCompletarPage() {
   const [phaseIndex, setPhaseIndex] = useState(0)
   const phase = PHASES[phaseIndex]
@@ -42,7 +38,6 @@ function ActividadNCompletarPage() {
   const [completionResult, setCompletionResult] = useState('')
 
   const currentWord = nWordCompletion[wordIndex]
-  const currentWordEnding = getWordEnding(currentWord.pattern)
 
   const checkCompletion = () => {
     if (!selectedSyllable) return
@@ -163,13 +158,11 @@ function ActividadNCompletarPage() {
           </Button>
 
           <div className="completion-bank" aria-live="polite">
-            <span className="completion-chip text-syllable">
-              {selectedSyllable || '__'}
-            </span>
-
-            <span className="completion-chip text-syllable">
-              {currentWordEnding}
-            </span>
+            {currentWord.pattern.split(/(_+)/).filter(Boolean).map((part, index) => (
+              <span className="completion-chip text-syllable" key={index}>
+                {/^_+$/.test(part) ? selectedSyllable || part : part}
+              </span>
+            ))}
           </div>
 
           <div className="completion-bank">

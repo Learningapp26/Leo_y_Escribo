@@ -1,3 +1,4 @@
+import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -152,31 +153,10 @@ function ActividadTrSonidosPage() {
             </Button>
           </div>
 
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(trSoundIntro.soundAudio)}
-          >
-            Escuchar el sonido /tr/
-          </Button>
-
-          <img
-            className="selection-image selection-image--featured"
-            src={trSoundIntro.mainWord.image}
-            alt={trSoundIntro.mainWord.name}
+          <SoundIntroduction
+            sounds={[{ letter: 'tr', audioSrc: trSoundIntro.soundAudio }]}
+            word={trSoundIntro.mainWord}
           />
-
-          <span className="text-word">{trSoundIntro.mainWord.name}</span>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(trSoundIntro.mainWord.audio)}
-          >
-            Escuchar la palabra tren
-          </Button>
 
           <Button
             icon={ArrowRight}

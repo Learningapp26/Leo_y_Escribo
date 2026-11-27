@@ -1,8 +1,9 @@
-import { formatLetterGroup } from '../data/lessonLabels'
+import { LetterSound } from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
 import { ArrowLeft, ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
 import Button from '../components/common/Button'
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import Card from '../components/common/Card'
 import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
@@ -30,12 +31,17 @@ function ActividadMSilabasPage() {
 
   const goToNextPhase = () => setPhaseIndex((current) => current + 1)
 
+  const [touchedSyllables, setTouchedSyllables] = useState([])
+  const allSyllablesTouched = mLetterPresentation.combinations.every(
+    (item) => touchedSyllables.includes(item.syllable),
+  )
+
   // Fase 2: buscar sílabas ma, me, mi, mo, mu
   const [searchSelected, setSearchSelected] = useState([])
   const [searchResult, setSearchResult] = useState('')
 
   const toggleSearchSyllable = (syllable, audio) => {
-    if (searchResult === 'correct') return
+    if (searchResult) return
 
     playAudio(audio)
     setSearchResult('')
@@ -83,7 +89,7 @@ function ActividadMSilabasPage() {
   const isLastSelect = selectIndex === mSyllableSelection.length - 1
 
   const pickSyllable = (option) => {
-    if (selectFeedback === 'correct') return
+    if (selectFeedback) return
 
     playAudio(option.audio)
     setSelectFeedback('')
@@ -126,7 +132,7 @@ function ActividadMSilabasPage() {
       <header className="text-center">
         <span className="text-ui-label">Actividad 2</span>
 
-        <h1 id="m-silabas-title">Sílabas con M</h1>
+        <h1 id="m-silabas-title">Sílabas con m</h1>
       </header>
 
       <ProgressBar
@@ -151,26 +157,24 @@ function ActividadMSilabasPage() {
             </Button>
           </div>
 
-          <div className="selection-options">
-            <span className="text-letter">{formatLetterGroup('m')}</span>
-          </div>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(mLetterPresentation.soundAudio)}
-          >
-            Escuchar el sonido de la M
-          </Button>
+          <LetterSound letter="m" audioSrc={mLetterPresentation.soundAudio}>m</LetterSound>
 
           <div className="syllables-options">
             {mLetterPresentation.combinations.map((item) => (
               <button
-                className="syllable-button"
+                className={[
+                  'syllable-button',
+                  touchedSyllables.includes(item.syllable) ? 'syllable-button--selected' : '',
+                ].filter(Boolean).join(' ')}
                 type="button"
                 key={item.syllable}
-                onClick={() => playAudio(item.audio)}
+                aria-pressed={touchedSyllables.includes(item.syllable)}
+                onClick={() => {
+                  playAudio(item.audio)
+                  setTouchedSyllables((current) =>
+                    current.includes(item.syllable) ? current : [...current, item.syllable],
+                  )
+                }}
               >
                 {item.syllable}
               </button>
@@ -182,7 +186,10 @@ function ActividadMSilabasPage() {
             iconPosition="right"
             size="large"
             fullWidth
-            onClick={goToNextPhase}
+            disabled={!allSyllablesTouched}
+            onClick={() => {
+              if (allSyllablesTouched) goToNextPhase()
+            }}
           >
             Continuar
           </Button>
@@ -226,6 +233,7 @@ function ActividadMSilabasPage() {
                   type="button"
                   key={option.syllable}
                   aria-pressed={selected}
+                  disabled={Boolean(searchResult)}
                   onClick={() =>
                     toggleSearchSyllable(option.syllable, option.audio)
                   }
@@ -236,25 +244,7 @@ function ActividadMSilabasPage() {
             })}
           </div>
 
-          {searchResult === 'correct' && (
-            <p
-              className="syllables-feedback syllables-feedback--correct"
-              role="status"
-            >
-              ¡Muy bien! Encontraste las sílabas ma, me, mi, mo y mu.
-            </p>
-          )}
-
-          {searchResult === 'retry' && (
-            <p
-              className="syllables-feedback syllables-feedback--retry"
-              role="status"
-            >
-              Revisa otra vez. Algunas sílabas seleccionadas no son con M.
-            </p>
-          )}
-
-          {searchResult !== 'correct' && (
+          {!searchResult && (
             <Button
               icon={Check}
               size="large"
@@ -267,27 +257,31 @@ function ActividadMSilabasPage() {
           )}
 
           {searchResult === 'retry' && (
-            <Button
-              variant="retry"
-              icon={RotateCcw}
-              size="large"
-              fullWidth
-              onClick={retrySearch}
-            >
-              Intentar nuevamente
-            </Button>
+            <ActivityFeedback correct={false}>
+              <Button
+                variant="retry"
+                icon={RotateCcw}
+                size="large"
+                fullWidth
+                onClick={retrySearch}
+              >
+                Intentar nuevamente
+              </Button>
+            </ActivityFeedback>
           )}
 
           {searchResult === 'correct' && (
-            <Button
-              icon={ArrowRight}
-              iconPosition="right"
-              size="large"
-              fullWidth
-              onClick={goToNextPhase}
-            >
-              Siguiente parte
-            </Button>
+            <ActivityFeedback correct>
+              <Button
+                icon={ArrowRight}
+                iconPosition="right"
+                size="large"
+                fullWidth
+                onClick={goToNextPhase}
+              >
+                Siguiente parte
+              </Button>
+            </ActivityFeedback>
           )}
         </Card>
       )}
@@ -425,6 +419,7 @@ function ActividadMSilabasPage() {
                   type="button"
                   key={option.syllable}
                   aria-pressed={isSelected}
+                  disabled={Boolean(selectFeedback)}
                   onClick={() => pickSyllable(option)}
                 >
                   {option.syllable}
@@ -433,25 +428,7 @@ function ActividadMSilabasPage() {
             })}
           </div>
 
-          {selectFeedback === 'correct' && (
-            <p
-              className="syllables-feedback syllables-feedback--correct"
-              role="status"
-            >
-              ¡Correcto! {selectItem.name} empieza con {selectedSyllable}.
-            </p>
-          )}
-
-          {selectFeedback === 'retry' && (
-            <p
-              className="syllables-feedback syllables-feedback--retry"
-              role="status"
-            >
-              Esa no es la sílaba correcta. Escucha de nuevo e inténtalo.
-            </p>
-          )}
-
-          {selectFeedback !== 'correct' && (
+          {!selectFeedback && (
             <Button
               icon={Check}
               size="large"
@@ -464,39 +441,45 @@ function ActividadMSilabasPage() {
           )}
 
           {selectFeedback === 'retry' && (
-            <Button
-              variant="retry"
-              icon={RotateCcw}
-              size="large"
-              fullWidth
-              onClick={retrySelect}
-            >
-              Intentar nuevamente
-            </Button>
+            <ActivityFeedback correct={false}>
+              <Button
+                variant="retry"
+                icon={RotateCcw}
+                size="large"
+                fullWidth
+                onClick={retrySelect}
+              >
+                Intentar nuevamente
+              </Button>
+            </ActivityFeedback>
           )}
 
           {selectFeedback === 'correct' && !isLastSelect && (
-            <Button
-              icon={ArrowRight}
-              iconPosition="right"
-              size="large"
-              fullWidth
-              onClick={nextSelectItem}
-            >
-              Siguiente palabra
-            </Button>
+            <ActivityFeedback correct>
+              <Button
+                icon={ArrowRight}
+                iconPosition="right"
+                size="large"
+                fullWidth
+                onClick={nextSelectItem}
+              >
+                Siguiente palabra
+              </Button>
+            </ActivityFeedback>
           )}
 
           {selectFeedback === 'correct' && isLastSelect && (
-            <Button
-              to="/actividad/m-completar"
-              icon={ArrowRight}
-              iconPosition="right"
-              size="large"
-              fullWidth
-            >
-              Siguiente actividad
-            </Button>
+            <ActivityFeedback correct>
+              <Button
+                to="/actividad/m-completar"
+                icon={ArrowRight}
+                iconPosition="right"
+                size="large"
+                fullWidth
+              >
+                Siguiente actividad
+              </Button>
+            </ActivityFeedback>
           )}
         </Card>
       )}

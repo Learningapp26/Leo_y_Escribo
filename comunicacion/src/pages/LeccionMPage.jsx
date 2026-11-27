@@ -25,20 +25,22 @@ function LeccionMPage() {
 
         <h1 id="m-lesson-title">{getLessonHeading('m')}</h1>
 
-        <p className="text-instruction">
-          Durante estos días conocerás la letra m. Para empezar, escucha con atención 
-          una historia que te gustará
-        </p>
+        <div className="selection-instructions">
+          <p className="text-instruction">
+            Durante estos días conocerás la letra m. Para empezar, escucha con atención
+            una historia que te gustará
+          </p>
 
-        <Button
-          variant="audio"
-          size="large"
-          icon={Volume2}
-          onClick={() => playAudio(mReading.instructionAudio)}
-          data-audio-src={mReading.instructionAudio}
-        >
-          Escuchar instrucción
-        </Button>
+          <Button
+            variant="audio"
+            size="large"
+            icon={Volume2}
+            onClick={() => playAudio(mReading.instructionAudio)}
+            data-audio-src={mReading.instructionAudio}
+          >
+            Escuchar instrucción
+          </Button>
+        </div>
       </header>
 
    

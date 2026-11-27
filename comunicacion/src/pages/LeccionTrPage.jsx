@@ -27,19 +27,21 @@ function LeccionTrPage() {
 
         <h1 id="tr-lesson-title">{getLessonHeading('tr')}</h1>
 
-        <p className="text-instruction">
-          Hoy aprenderás dos letras juntas: la te y la erre. Escucha la
-          siguiente historia.
-        </p>
+        <div className="selection-instructions">
+          <p className="text-instruction">
+            Hoy aprenderás dos letras juntas: la te y la erre. Escucha la
+            siguiente historia.
+          </p>
 
-        <Button
-          variant="audio"
-          size="large"
-          icon={Volume2}
-          onClick={() => playAudio(trReading.instructionAudio)}
-        >
-          Escuchar instrucción
-        </Button>
+          <Button
+            variant="audio"
+            size="large"
+            icon={Volume2}
+            onClick={() => playAudio(trReading.instructionAudio)}
+          >
+            Escuchar instrucción
+          </Button>
+        </div>
       </header>
 
       <StoryCard lessonId="tr" title={trReading.title} paragraphs={trReading.paragraphs} image={trReading.image} imageAlt={trReading.imageAlt} audio={trReading.readingAudio} />

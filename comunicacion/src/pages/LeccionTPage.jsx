@@ -80,19 +80,21 @@ function LeccionTPage() {
 
         <h1 id="t-lesson-title">{getLessonHeading('t')}</h1>
 
-        <p className="text-instruction">
-          Hoy aprenderemos la letra t. Escucha la siguiente historia.
-        </p>
+        <div className="selection-instructions">
+          <p className="text-instruction">
+            Hoy aprenderemos la letra t. Escucha la siguiente historia.
+          </p>
 
-        <Button
-          variant="audio"
-          size="large"
-          icon={Volume2}
-          onClick={() => playAudio(tReading.instructionAudio)}
-          data-audio-src={tReading.instructionAudio}
-        >
-          Escuchar instrucción
-        </Button>
+          <Button
+            variant="audio"
+            size="large"
+            icon={Volume2}
+            onClick={() => playAudio(tReading.instructionAudio)}
+            data-audio-src={tReading.instructionAudio}
+          >
+            Escuchar instrucción
+          </Button>
+        </div>
       </header>
 
       <StoryCard lessonId="t" title={tReading.title} paragraphs={tReading.paragraphs} image={tReading.image} imageAlt={tReading.imageAlt} audio={tReading.readingAudio} />

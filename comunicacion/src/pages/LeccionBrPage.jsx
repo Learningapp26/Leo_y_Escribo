@@ -27,19 +27,21 @@ function LeccionBrPage() {
 
         <h1 id="br-lesson-title">{getLessonHeading('br')}</h1>
 
-        <p className="text-instruction">
-          Ahora aprenderás la combinación de dos letras: la be y la erre.
-          Escucha la siguiente historia.
-        </p>
+        <div className="selection-instructions">
+          <p className="text-instruction">
+            Ahora aprenderás la combinación de dos letras: la be y la erre.
+            Escucha la siguiente historia.
+          </p>
 
-        <Button
-          variant="audio"
-          size="large"
-          icon={Volume2}
-          onClick={() => playAudio(brReading.instructionAudio)}
-        >
-          Escuchar instrucción
-        </Button>
+          <Button
+            variant="audio"
+            size="large"
+            icon={Volume2}
+            onClick={() => playAudio(brReading.instructionAudio)}
+          >
+            Escuchar instrucción
+          </Button>
+        </div>
       </header>
 
       <StoryCard lessonId="br" title={brReading.title} paragraphs={brReading.paragraphs} image={brReading.image} imageAlt={brReading.imageAlt} audio={brReading.readingAudio} />

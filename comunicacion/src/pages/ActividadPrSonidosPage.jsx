@@ -1,3 +1,4 @@
+import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -161,40 +162,10 @@ function ActividadPrSonidosPage() {
             </Button>
           </div>
 
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(prSoundIntro.soundAudioP)}
-          >
-            Escuchar el sonido /p/
-          </Button>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(prSoundIntro.soundAudioR)}
-          >
-            Escuchar el sonido /r/
-          </Button>
-
-          <img
-            className="selection-image selection-image--featured"
-            src={prSoundIntro.mainWord.image}
-            alt={prSoundIntro.mainWord.name}
+          <SoundIntroduction
+            sounds={[{ letter: 'p', audioSrc: prSoundIntro.soundAudioP }, { letter: 'r', audioSrc: prSoundIntro.soundAudioR }]}
+            word={prSoundIntro.mainWord}
           />
-
-          <span className="text-word">{prSoundIntro.mainWord.name}</span>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(prSoundIntro.mainWord.audio)}
-          >
-            Escuchar el sonido de premios
-          </Button>
 
           <Button
             icon={ArrowRight}

@@ -1,3 +1,4 @@
+import { fillBlank } from '../lib/fillBlank'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -160,7 +161,7 @@ function ActividadLCompletarPage() {
             Escuchar palabra
           </Button>
 
-          <p className="completion-word-pattern">{currentWord.pattern}</p>
+          <p className="completion-word-pattern">{fillBlank(currentWord.pattern, selectedSyllable)}</p>
 
           <div className="completion-bank">
             {lSyllableOptions.map((syllable) => (

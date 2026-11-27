@@ -1,3 +1,4 @@
+import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
 import {
   ArrowRight,
@@ -189,30 +190,11 @@ function ActividadClSonidosPage() {
             </AudioPlaceholderButton>
           </div>
 
-          <span className="text-syllable">
-            c + l = cl
-          </span>
-
-          <img
-            className={
-              'selection-image ' +
-              'selection-image--featured'
-            }
-            src={clSoundIntro.mainWord.image}
-            alt={
-              clSoundIntro.mainWord.imageAlt
-            }
+          <span className="text-syllable">c + l = cl</span>
+          <SoundIntroduction
+            sounds={clSoundIntro.letters.map((letter) => ({ letter }))}
+            word={clSoundIntro.mainWord}
           />
-
-          <span className="text-word">
-            {clSoundIntro.mainWord.name}
-          </span>
-
-          <AudioPlaceholderButton
-            size="large"
-          >
-            Escuchar la palabra clavo
-          </AudioPlaceholderButton>
 
           <Button
             icon={ArrowRight}

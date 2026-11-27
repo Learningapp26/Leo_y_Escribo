@@ -1,3 +1,5 @@
+import { LetterSound } from '../components/lessons/SoundIntroduction'
+import { fillBlank } from '../lib/fillBlank'
 import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
 import { ArrowLeft, ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
@@ -136,18 +138,7 @@ function ActividadTSilabasPage() {
             </Button>
           </div>
 
-          <div className="selection-options">
-            <span className="text-letter">{formatLetterGroup('t')}</span>
-          </div>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(tLetterPresentation.soundAudio)}
-          >
-            Escuchar el sonido de la T
-          </Button>
+          <LetterSound letter="t" audioSrc={tLetterPresentation.soundAudio}>{formatLetterGroup('t')}</LetterSound>
 
           <div className="syllables-options">
             {tLetterPresentation.combinations.map((item) => (
@@ -389,7 +380,7 @@ function ActividadTSilabasPage() {
             Escuchar palabra
           </Button>
 
-          <p className="completion-word-pattern">{currentWord.pattern}</p>
+          <p className="completion-word-pattern">{fillBlank(currentWord.pattern, selectedSyllable)}</p>
 
           <div className="completion-bank">
             {tSyllableOptions.map((syllable) => (

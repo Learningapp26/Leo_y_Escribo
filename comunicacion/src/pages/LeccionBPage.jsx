@@ -20,19 +20,21 @@ function LeccionBPage() {
       <header className="text-center">
         <span className="text-ui-label">Unidad 3</span>
         <h1 id="b-lesson-title">{getLessonHeading('b')}</h1>
-        <p className="text-instruction">
-          Ha llegado el momento de aprender la letra B. Mira bien cómo se ven la B
-          mayúscula y la b minúscula. Escucha la siguiente historia.
-        </p>
-        <Button
-          variant="audio"
-          size="large"
-          icon={Volume2}
-          onClick={() => playAudio(bReading.instructionAudio)}
-          data-audio-src={bReading.instructionAudio}
-        >
-          Escuchar instrucción
-        </Button>
+        <div className="selection-instructions">
+          <p className="text-instruction">
+            Ha llegado el momento de aprender la letra B. Mira bien cómo se ven la B
+            mayúscula y la b minúscula. Escucha la siguiente historia.
+          </p>
+          <Button
+            variant="audio"
+            size="large"
+            icon={Volume2}
+            onClick={() => playAudio(bReading.instructionAudio)}
+            data-audio-src={bReading.instructionAudio}
+          >
+            Escuchar instrucción
+          </Button>
+        </div>
       </header>
 
       <StoryCard lessonId="b" title={bReading.title} paragraphs={bReading.paragraphs} image={bReading.image} imageAlt={bReading.imageAlt} audio={bReading.readingAudio} />

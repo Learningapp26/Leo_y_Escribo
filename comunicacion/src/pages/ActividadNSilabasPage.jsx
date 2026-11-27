@@ -1,3 +1,4 @@
+import { LetterSound } from '../components/lessons/SoundIntroduction'
 import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
 import { ArrowLeft, ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
@@ -110,19 +111,7 @@ function ActividadNSilabasPage() {
             </Button>
           </div>
 
-          <div className="selection-options">
-            <span className="text-letter">{formatLetterGroup('n')}</span>
-          </div>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            disabled={!nLetterPresentation.soundAudio}
-            onClick={() => playAudio(nLetterPresentation.soundAudio)}
-          >
-            {getAudioLabel('Escuchar el sonido de la N', nLetterPresentation.soundAudio)}
-          </Button>
+          <LetterSound letter="n" audioSrc={nLetterPresentation.soundAudio}>{formatLetterGroup('n')}</LetterSound>
 
           <div className="syllables-options">
             {nLetterPresentation.combinations.map((item) => (

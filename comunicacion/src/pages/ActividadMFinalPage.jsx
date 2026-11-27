@@ -1,7 +1,9 @@
+import { fillBlank } from '../lib/fillBlank'
 import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
 import Button from '../components/common/Button'
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import Card from '../components/common/Card'
 import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
@@ -41,7 +43,7 @@ function ActividadMFinalPage() {
   const caseItem = mSyllableCaseSelection[caseIndex]
 
   const pickCaseSyllable = (option) => {
-    if (caseResult === 'correct') return
+    if (caseResult) return
 
     playAudio(option.audio)
     setCaseResult('')
@@ -97,7 +99,7 @@ function ActividadMFinalPage() {
   const isCountingComplete = taggedWords.length === countSentence.words.length
 
   const toggleWord = (position) => {
-    if (countResult === 'correct') return
+    if (countResult) return
 
     setCountResult('')
 
@@ -236,7 +238,7 @@ function ActividadMFinalPage() {
             Escuchar palabra
           </Button>
 
-          <p className="completion-word-pattern">{caseItem.pattern}</p>
+          <p className="completion-word-pattern">{fillBlank(caseItem.pattern, selectedCaseSyllable)}</p>
 
           <div className="syllables-options">
             {caseItem.options.map((option) => {
@@ -259,6 +261,7 @@ function ActividadMFinalPage() {
                   type="button"
                   key={option.syllable}
                   aria-pressed={isSelected}
+                  disabled={Boolean(caseResult)}
                   onClick={() => pickCaseSyllable(option)}
                 >
                   {option.syllable}
@@ -267,25 +270,7 @@ function ActividadMFinalPage() {
             })}
           </div>
 
-          {caseResult === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
-              ¡Correcto! Se escribe {caseItem.name}.
-            </p>
-          )}
-
-          {caseResult === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
-              Esa no es la sílaba correcta. Escucha otra vez.
-            </p>
-          )}
-
-          {caseResult !== 'correct' && (
+          {!caseResult && (
             <Button
               icon={Check}
               size="large"
@@ -298,29 +283,33 @@ function ActividadMFinalPage() {
           )}
 
           {caseResult === 'retry' && (
-            <Button
-              variant="retry"
-              icon={RotateCcw}
-              size="large"
-              fullWidth
-              onClick={retryCase}
-            >
-              Intentar nuevamente
-            </Button>
+            <ActivityFeedback correct={false}>
+              <Button
+                variant="retry"
+                icon={RotateCcw}
+                size="large"
+                fullWidth
+                onClick={retryCase}
+              >
+                Intentar nuevamente
+              </Button>
+            </ActivityFeedback>
           )}
 
           {caseResult === 'correct' && (
-            <Button
-              icon={ArrowRight}
-              iconPosition="right"
-              size="large"
-              fullWidth
-              onClick={nextCaseItem}
-            >
-              {caseIndex === mSyllableCaseSelection.length - 1
-                ? 'Siguiente parte'
-                : 'Siguiente palabra'}
-            </Button>
+            <ActivityFeedback correct>
+              <Button
+                icon={ArrowRight}
+                iconPosition="right"
+                size="large"
+                fullWidth
+                onClick={nextCaseItem}
+              >
+                {caseIndex === mSyllableCaseSelection.length - 1
+                  ? 'Siguiente parte'
+                  : 'Siguiente palabra'}
+              </Button>
+            </ActivityFeedback>
           )}
         </Card>
       )}
@@ -368,6 +357,7 @@ function ActividadMFinalPage() {
                 type="button"
                 key={`${word}-${position}`}
                 aria-pressed={taggedWords.includes(position)}
+                disabled={Boolean(countResult)}
                 onClick={() => toggleWord(position)}
               >
                 <span className="selection-word">{word}</span>
@@ -402,6 +392,7 @@ function ActividadMFinalPage() {
                   type="button"
                   key={option}
                   aria-pressed={selected}
+                  disabled={Boolean(countResult)}
                   onClick={() => {
                     setCountSelected(option)
                     setCountResult('')
@@ -413,25 +404,7 @@ function ActividadMFinalPage() {
             })}
           </div>
 
-          {countResult === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
-              ¡Correcto! La oración tiene {countSentence.answer} palabras.
-            </p>
-          )}
-
-          {countResult === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
-              Cuenta otra vez cada palabra con cuidado.
-            </p>
-          )}
-
-          {countResult !== 'correct' && (
+          {!countResult && (
             <Button
               icon={Check}
               size="large"
@@ -444,33 +417,37 @@ function ActividadMFinalPage() {
           )}
 
           {countResult === 'retry' && (
-            <Button
-              variant="retry"
-              icon={RotateCcw}
-              size="large"
-              fullWidth
-              onClick={() => {
-                setTaggedWords([])
-                setCountSelected(null)
-                setCountResult('')
-              }}
-            >
-              Intentar nuevamente
-            </Button>
+            <ActivityFeedback correct={false}>
+              <Button
+                variant="retry"
+                icon={RotateCcw}
+                size="large"
+                fullWidth
+                onClick={() => {
+                  setTaggedWords([])
+                  setCountSelected(null)
+                  setCountResult('')
+                }}
+              >
+                Intentar nuevamente
+              </Button>
+            </ActivityFeedback>
           )}
 
           {countResult === 'correct' && (
-            <Button
-              icon={ArrowRight}
-              iconPosition="right"
-              size="large"
-              fullWidth
-              onClick={nextCountSentence}
-            >
-              {countIndex === mWordCounting.length - 1
-                ? 'Finalizar lección'
-                : 'Siguiente oración'}
-            </Button>
+            <ActivityFeedback correct>
+              <Button
+                icon={ArrowRight}
+                iconPosition="right"
+                size="large"
+                fullWidth
+                onClick={nextCountSentence}
+              >
+                {countIndex === mWordCounting.length - 1
+                  ? 'Finalizar lección'
+                  : 'Siguiente oración'}
+              </Button>
+            </ActivityFeedback>
           )}
         </Card>
       )}

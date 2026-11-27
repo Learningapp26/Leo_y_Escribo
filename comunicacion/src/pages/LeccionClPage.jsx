@@ -41,18 +41,20 @@ function LeccionClPage() {
 
         <h1 id="cl-lesson-title">{getLessonHeading('cl')}</h1>
 
-        <p className="text-instruction">
-          Ahora aprenderás la combinación
-          de dos letras: la ce y la ele.
-          Conocerás las sílabas cla, cle,
-          cli, clo y clu.
-        </p>
+        <div className="selection-instructions">
+          <p className="text-instruction">
+            Ahora aprenderás la combinación
+            de dos letras: la ce y la ele.
+            Conocerás las sílabas cla, cle,
+            cli, clo y clu.
+          </p>
 
-        <AudioPlaceholderButton
-          size="large"
-        >
-          Escuchar instrucción
-        </AudioPlaceholderButton>
+          <AudioPlaceholderButton
+            size="large"
+          >
+            Escuchar instrucción
+          </AudioPlaceholderButton>
+        </div>
       </header>
 
       <StoryCard lessonId="cl" title={clReading.title} paragraphs={clReading.paragraphs} image={clReading.image} imageAlt={clReading.imageAlt} />

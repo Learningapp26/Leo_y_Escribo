@@ -39,22 +39,24 @@ function LeccionRPage() {
 
         <h1 id="r-lesson-title">{getLessonHeading('r')}</h1>
 
-        <p className="text-instruction">
-          Escucha la historia y presta atención a las
-          palabras que tienen la letra R.
-        </p>
+        <div className="selection-instructions">
+          <p className="text-instruction">
+            Escucha la historia y presta atención a las
+            palabras que tienen la letra R.
+          </p>
 
-        <Button
-          variant="audio"
-          size="large"
-          icon={Volume2}
-          onClick={() =>
-            playAudio(rReading.instructionAudio)
-          }
-          data-audio-src={rReading.instructionAudio}
-        >
-          Escuchar instrucción
-        </Button>
+          <Button
+            variant="audio"
+            size="large"
+            icon={Volume2}
+            onClick={() =>
+              playAudio(rReading.instructionAudio)
+            }
+            data-audio-src={rReading.instructionAudio}
+          >
+            Escuchar instrucción
+          </Button>
+        </div>
       </header>
 
       <StoryCard lessonId="r" title={rReading.title} paragraphs={rReading.paragraphs} image={rReading.image} imageAlt={rReading.imageAlt} audio={rReading.readingAudio} />

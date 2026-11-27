@@ -21,12 +21,14 @@ function LeccionSPage() {
       <header className="text-center">
         <span className="text-ui-label">Unidad 1</span>
         <h1 id="s-lesson-title">{getLessonHeading('s')}</h1>
-        <p className="text-instruction">
-          Conoce la letra S, lee una fábula y practica sus sonidos y sílabas.
-        </p>
-        <AudioPlaceholderButton size="large">
-          Escuchar instrucción
-        </AudioPlaceholderButton>
+        <div className="selection-instructions">
+          <p className="text-instruction">
+            Conoce la letra S, lee una fábula y practica sus sonidos y sílabas.
+          </p>
+          <AudioPlaceholderButton size="large">
+            Escuchar instrucción
+          </AudioPlaceholderButton>
+        </div>
       </header>
 
       <StoryCard lessonId="s" title={sReading.title} paragraphs={sReading.paragraphs} image={sReading.image} imageAlt={sReading.imageAlt}>

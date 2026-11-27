@@ -25,20 +25,22 @@ function LeccionPPage() {
 
         <h1 id="p-lesson-title">{getLessonHeading('p')}</h1>
 
-        <p className="text-instruction">
-          Llegó el momento de aprender la letra pe. Presta atención a la
-          historia que escucharás.
-        </p>
+        <div className="selection-instructions">
+          <p className="text-instruction">
+            Llegó el momento de aprender la letra pe. Presta atención a la
+            historia que escucharás.
+          </p>
 
-        <Button
-          variant="audio"
-          size="large"
-          icon={Volume2}
-          onClick={() => playAudio(pReading.instructionAudio)}
-          data-audio-src={pReading.instructionAudio}
-        >
-          Escuchar instrucción
-        </Button>
+          <Button
+            variant="audio"
+            size="large"
+            icon={Volume2}
+            onClick={() => playAudio(pReading.instructionAudio)}
+            data-audio-src={pReading.instructionAudio}
+          >
+            Escuchar instrucción
+          </Button>
+        </div>
       </header>
 
       <StoryCard lessonId="p" title={pReading.title} paragraphs={pReading.paragraphs} image={pReading.image} imageAlt={pReading.imageAlt} audio={pReading.readingAudio} />

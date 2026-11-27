@@ -1,3 +1,4 @@
+import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -235,31 +236,10 @@ function ActividadTSonidosPage() {
             </Button>
           </div>
 
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(tSoundIntro.soundAudio)}
-          >
-            Escuchar el sonido /t/
-          </Button>
-
-          <img
-            className="selection-image selection-image--featured"
-            src={tSoundIntro.mainWord.image}
-            alt={tSoundIntro.mainWord.name}
+          <SoundIntroduction
+            sounds={[{ letter: 't', audioSrc: tSoundIntro.soundAudio }]}
+            word={tSoundIntro.mainWord}
           />
-
-          <span className="text-word">{tSoundIntro.mainWord.name}</span>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(tSoundIntro.mainWord.audio)}
-          >
-            Escuchar el sonido de tamal
-          </Button>
 
           <Button
             icon={ArrowRight}

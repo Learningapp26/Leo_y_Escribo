@@ -165,7 +165,7 @@ import { writingLlYLesson } from '../data/writingLlYData'
 import { writingQcLesson } from '../data/writingQcData'
 import { writingHLesson } from '../data/writingHData'
 import { flLesson } from '../data/flData'
-import { ceCiLesson } from '../data/ceCiData'
+import { ceCiLesson } from '../data/ceCIData'
 import AbecedarioPage, { AbecedarioActivityPage } from '../pages/AbecedarioPage'
 import { alphabetGame } from '../data/abecedarioData'
 

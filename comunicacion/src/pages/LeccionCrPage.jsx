@@ -31,19 +31,21 @@ function LeccionCrPage() {
 
         <h1 id="cr-lesson-title">{getLessonHeading('cr')}</h1>
 
-        <p className="text-instruction">
-          Ahora aprenderás la combinación de dos letras: la ce y la erre.
-          Escucha la siguiente historia.
-        </p>
+        <div className="selection-instructions">
+          <p className="text-instruction">
+            Ahora aprenderás la combinación de dos letras: la ce y la erre.
+            Escucha la siguiente historia.
+          </p>
 
-        <Button
-          variant="audio"
-          size="large"
-          icon={Volume2}
-          onClick={() => playAudio(crReading.instructionAudio)}
-        >
-          Escuchar instrucción
-        </Button>
+          <Button
+            variant="audio"
+            size="large"
+            icon={Volume2}
+            onClick={() => playAudio(crReading.instructionAudio)}
+          >
+            Escuchar instrucción
+          </Button>
+        </div>
       </header>
 
       <StoryCard lessonId="cr" title={crReading.title} paragraphs={crReading.paragraphs} image={crReading.image} imageAlt={crReading.imageAlt} audio={crReading.readingAudio} />

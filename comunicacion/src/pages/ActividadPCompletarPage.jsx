@@ -1,3 +1,4 @@
+import { fillBlank } from '../lib/fillBlank'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -186,7 +187,7 @@ function ActividadPCompletarPage() {
             Escuchar palabra
           </Button>
 
-          <p className="completion-word-pattern">{currentWord.pattern}</p>
+          <p className="completion-word-pattern">{fillBlank(currentWord.pattern, selectedSyllable)}</p>
 
           {currentWord.answer === null && (
             <p className="text-instruction">

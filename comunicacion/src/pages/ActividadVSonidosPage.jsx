@@ -1,3 +1,4 @@
+import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -135,21 +136,10 @@ function ActividadVSonidosPage() {
             </Button>
           </div>
 
-          <Button variant="audio" size="large" icon={Volume2} onClick={() => playAudio(vSoundIntro.soundAudio)}>
-            Escuchar el sonido /v/
-          </Button>
-
-          <img
-            className="selection-image selection-image--featured"
-            src={vSoundIntro.mainWord.image}
-            alt={vSoundIntro.mainWord.name}
+          <SoundIntroduction
+            sounds={[{ letter: 'v', audioSrc: vSoundIntro.soundAudio }]}
+            word={vSoundIntro.mainWord}
           />
-
-          <span className="text-word">{vSoundIntro.mainWord.name}</span>
-
-          <Button variant="audio" size="large" icon={Volume2} onClick={() => playAudio(vSoundIntro.mainWord.audio)}>
-            Escuchar la palabra vaca
-          </Button>
 
           <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth onClick={goToNextPhase}>
             Continuar

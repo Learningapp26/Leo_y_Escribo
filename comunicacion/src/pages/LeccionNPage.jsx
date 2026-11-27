@@ -29,20 +29,22 @@ function LeccionNPage() {
 
         <h1 id="n-lesson-title">{getLessonHeading('n')}</h1>
 
-        <p className="text-instruction">
-          Escucha la historia con atención y descubre el sonido de la letra N.
-        </p>
+        <div className="selection-instructions">
+          <p className="text-instruction">
+            Escucha la historia con atención y descubre el sonido de la letra N.
+          </p>
 
-        <Button
-          variant="audio"
-          size="large"
-          icon={Volume2}
-          disabled={!nReading.instructionAudio}
-          onClick={() => playAudio(nReading.instructionAudio)}
-          data-audio-src={nReading.instructionAudio}
-        >
-          {getAudioLabel('Escuchar instrucción', nReading.instructionAudio)}
-        </Button>
+          <Button
+            variant="audio"
+            size="large"
+            icon={Volume2}
+            disabled={!nReading.instructionAudio}
+            onClick={() => playAudio(nReading.instructionAudio)}
+            data-audio-src={nReading.instructionAudio}
+          >
+            {getAudioLabel('Escuchar instrucción', nReading.instructionAudio)}
+          </Button>
+        </div>
       </header>
 
       <StoryCard lessonId="n" title={nReading.title} paragraphs={nReading.paragraphs} image={nReading.image} imageAlt={nReading.imageAlt} audio={nReading.readingAudio} />

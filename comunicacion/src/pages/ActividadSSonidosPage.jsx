@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { ArrowRight, Check, RotateCcw } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 
@@ -132,18 +133,7 @@ function ActividadSSonidosPage() {
             <p>Haz el sonido suavemente: sss. Mira la S mayúscula y la s minúscula.</p>
             <AudioPlaceholderButton>Escuchar instrucción</AudioPlaceholderButton>
           </div>
-          <AudioPlaceholderButton size="large">
-            Escuchar el sonido /s/
-          </AudioPlaceholderButton>
-          <div className="selection-options">
-            <div className="selection-button" aria-label="S mayúscula">
-              <span className="text-word">S</span>
-            </div>
-            <div className="selection-button" aria-label="s minúscula">
-              <span className="text-word">s</span>
-            </div>
-          </div>
-          <AudioPlaceholderButton>Escuchar la palabra sapo</AudioPlaceholderButton>
+          <SoundIntroduction sounds={[{ letter: 's' }]} word={{ name: 'sapo' }} />
           <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth onClick={() => setPhaseIndex(1)}>
             Practicar palabras
           </Button>

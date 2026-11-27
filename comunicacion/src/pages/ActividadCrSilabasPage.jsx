@@ -1,3 +1,4 @@
+import { LetterSound } from '../components/lessons/SoundIntroduction'
 import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
@@ -196,18 +197,7 @@ function ActividadCrSilabasPage() {
             </Button>
           </div>
 
-          <div className="selection-options">
-            <span className="text-letter">{formatLetterGroup('cr')}</span>
-          </div>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(crLetterPresentation.soundAudio)}
-          >
-            Escuchar el sonido de CR
-          </Button>
+          <LetterSound letter="cr" audioSrc={crLetterPresentation.soundAudio}>{formatLetterGroup('cr')}</LetterSound>
 
           <div className="syllables-options">
             {crLetterPresentation.combinations.map((item) => (

@@ -1,3 +1,4 @@
+import { fillBlank } from '../lib/fillBlank'
 import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -243,7 +244,7 @@ function ActividadTFinalPage() {
             Escuchar palabra
           </Button>
 
-          <p className="completion-word-pattern">{caseItem.pattern}</p>
+          <p className="completion-word-pattern">{fillBlank(caseItem.pattern, selectedCaseSyllable)}</p>
 
           <div className="syllables-options">
             {caseItem.options.map((option) => {

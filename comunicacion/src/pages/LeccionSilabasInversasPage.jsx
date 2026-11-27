@@ -22,13 +22,15 @@ function LeccionSilabasInversasPage() {
 
         <h1 id="silabas-inversas-title">{getLessonHeading('silabas-inversas')}</h1>
 
-        <p className="text-instruction">
-          Ya conoces las sílabas donde primero va la consonante, como{' '}
-          <strong>la</strong>, <strong>se</strong> o <strong>ni</strong>.
-          Ahora vamos a aprender las sílabas inversas, donde primero va la
-          vocal y después la consonante, como <strong>al</strong>,{' '}
-          <strong>es</strong> o <strong>un</strong>.
-        </p>
+        <div className="selection-instructions">
+          <p className="text-instruction">
+            Ya conoces las sílabas donde primero va la consonante, como{' '}
+            <strong>la</strong>, <strong>se</strong> o <strong>ni</strong>.
+            Ahora vamos a aprender las sílabas inversas, donde primero va la
+            vocal y después la consonante, como <strong>al</strong>,{' '}
+            <strong>es</strong> o <strong>un</strong>.
+          </p>
+        </div>
       </header>
 
       <section aria-labelledby="silabas-inversas-activities-title">

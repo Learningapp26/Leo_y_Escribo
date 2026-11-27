@@ -1,3 +1,4 @@
+import { LetterSound } from '../components/lessons/SoundIntroduction'
 import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
 import {
@@ -356,18 +357,7 @@ function ActividadLSilabasPage() {
             Conoce la letra L. Toca cada combinación para escucharla.
           </p>
 
-          <div className="selection-options">
-            <span className="text-letter">{formatLetterGroup('l')}</span>
-          </div>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(lLetterPresentation.soundAudio)}
-          >
-            Escuchar el sonido de la L
-          </Button>
+          <LetterSound letter="l" audioSrc={lLetterPresentation.soundAudio}>{formatLetterGroup('l')}</LetterSound>
 
           <div className="syllables-options">
             {lLetterPresentation.combinations.map((item) => (

@@ -1,3 +1,4 @@
+import { LetterSound } from '../components/lessons/SoundIntroduction'
 import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
@@ -204,18 +205,7 @@ function ActividadBlSilabasPage() {
             </Button>
           </div>
 
-          <div className="selection-options">
-            <span className="text-letter">{formatLetterGroup('bl')}</span>
-          </div>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(blLetterPresentation.soundAudio)}
-          >
-            Escuchar el sonido de BL
-          </Button>
+          <LetterSound letter="bl" audioSrc={blLetterPresentation.soundAudio}>{formatLetterGroup('bl')}</LetterSound>
 
           <div className="syllables-options">
             {blLetterPresentation.combinations.map((item) => (

@@ -1,3 +1,4 @@
+import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
@@ -243,31 +244,10 @@ function ActividadGSonidosPage() {
             <span className="text-letter">{formatLetterGroup('g')}</span>
           </div>
 
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(gSoundIntro.soundAudioG)}
-          >
-            Escuchar el sonido /g/
-          </Button>
-
-          <img
-            className="selection-image selection-image--featured"
-            src={gSoundIntro.mainWord.image}
-            alt={gSoundIntro.mainWord.name}
+          <SoundIntroduction
+            sounds={[{ letter: 'g', audioSrc: gSoundIntro.soundAudioG }]}
+            word={gSoundIntro.mainWord}
           />
-
-          <span className="text-word">{gSoundIntro.mainWord.name}</span>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(gSoundIntro.mainWord.audio)}
-          >
-            Escuchar la palabra gato
-          </Button>
 
           <Button
             icon={ArrowRight}

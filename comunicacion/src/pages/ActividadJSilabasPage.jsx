@@ -1,3 +1,4 @@
+import { LetterSound } from '../components/lessons/SoundIntroduction'
 import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
 import {
@@ -449,25 +450,7 @@ function ActividadJSilabasPage() {
             suena.
           </p>
 
-          <div
-            className="selection-options"
-            aria-label="Letra J"
-          >
-            <span className="text-letter">{formatLetterGroup('j')}</span>
-          </div>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() =>
-              playIfAvailable(
-                jLetterPresentation.soundAudio,
-              )
-            }
-          >
-            Escuchar el sonido de la J
-          </Button>
+          <LetterSound letter="j" audioSrc={jLetterPresentation.soundAudio}>{formatLetterGroup('j')}</LetterSound>
 
           <div className="syllables-options">
             {jLetterPresentation.combinations.map(

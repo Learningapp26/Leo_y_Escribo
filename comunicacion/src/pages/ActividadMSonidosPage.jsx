@@ -1,7 +1,9 @@
+import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
 import Button from '../components/common/Button'
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import Card from '../components/common/Card'
 import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
@@ -66,7 +68,7 @@ function ActividadMSonidosPage() {
 
   // Fase 2: selección simple
   const toggleSelected = (item) => {
-    if (selectionFeedback === 'correct') return
+    if (selectionFeedback) return
 
     playAudio(item.audio)
     setSelectionFeedback('')
@@ -101,13 +103,19 @@ function ActividadMSonidosPage() {
   const isMatched = (id) => matchedIds.includes(id)
 
   const pickCard = (item) => {
-    if (pairFeedback === 'retry') return
+    if (pairFeedback) return
     if (isMatched(item.id)) return
 
     playAudio(item.audio)
 
     if (firstPick?.id === item.id) {
-      setFirstPick(null)
+      setFirstPick(secondPick)
+      setSecondPick(null)
+      return
+    }
+
+    if (secondPick?.id === item.id) {
+      setSecondPick(null)
       return
     }
 
@@ -122,7 +130,14 @@ function ActividadMSonidosPage() {
   }
 
   const checkPair = () => {
-    if (!firstPick || !secondPick) return
+    if (
+      pairFeedback ||
+      !firstPick ||
+      !secondPick ||
+      firstPick.id === secondPick.id ||
+      isMatched(firstPick.id) ||
+      isMatched(secondPick.id)
+    ) return
 
     const isCorrect = firstPick.startsWithM && secondPick.startsWithM
 
@@ -152,7 +167,7 @@ function ActividadMSonidosPage() {
 
   // Fase 4: seleccionar las que contienen /m/
   const toggleContainsSelected = (item) => {
-    if (containsFeedback === 'correct') return
+    if (containsFeedback) return
 
     playAudio(item.audio)
     setContainsFeedback('')
@@ -218,31 +233,10 @@ function ActividadMSonidosPage() {
             </Button>
           </div>
 
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(mSoundIntro.soundAudio)}
-          >
-            Escuchar el sonido /m/
-          </Button>
-
-          <img
-            className="selection-image selection-image--featured"
-            src={mSoundIntro.mainWord.image}
-            alt={mSoundIntro.mainWord.name}
+          <SoundIntroduction
+            sounds={[{ letter: 'm', audioSrc: mSoundIntro.soundAudio }]}
+            word={mSoundIntro.mainWord}
           />
-
-          <span className="text-word">{mSoundIntro.mainWord.name}</span>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(mSoundIntro.mainWord.audio)}
-          >
-            Escuchar el sonido de mamá
-          </Button>
 
           <Button
             icon={ArrowRight}
@@ -284,6 +278,7 @@ function ActividadMSonidosPage() {
                 type="button"
                 key={item.id}
                 aria-pressed={selectedIds.includes(item.id)}
+                disabled={Boolean(selectionFeedback)}
                 onClick={() => toggleSelected(item)}
               >
                 <img
@@ -297,25 +292,7 @@ function ActividadMSonidosPage() {
             ))}
           </div>
 
-          {selectionFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
-              ¡Muy bien! Todas empiezan con el sonido /m/.
-            </p>
-          )}
-
-          {selectionFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
-              Revisa otra vez. Algunas imágenes no empiezan con /m/.
-            </p>
-          )}
-
-          {selectionFeedback !== 'correct' && (
+          {!selectionFeedback && (
             <Button
               icon={Check}
               size="large"
@@ -328,27 +305,31 @@ function ActividadMSonidosPage() {
           )}
 
           {selectionFeedback === 'retry' && (
-            <Button
-              variant="retry"
-              icon={RotateCcw}
-              size="large"
-              fullWidth
-              onClick={retrySelection}
-            >
-              Intentar nuevamente
-            </Button>
+            <ActivityFeedback correct={false}>
+              <Button
+                variant="retry"
+                icon={RotateCcw}
+                size="large"
+                fullWidth
+                onClick={retrySelection}
+              >
+                Intentar nuevamente
+              </Button>
+            </ActivityFeedback>
           )}
 
           {selectionFeedback === 'correct' && (
-            <Button
-              icon={ArrowRight}
-              iconPosition="right"
-              size="large"
-              fullWidth
-              onClick={goToNextPhase}
-            >
-              Siguiente parte
-            </Button>
+            <ActivityFeedback correct>
+              <Button
+                icon={ArrowRight}
+                iconPosition="right"
+                size="large"
+                fullWidth
+                onClick={goToNextPhase}
+              >
+                Siguiente parte
+              </Button>
+            </ActivityFeedback>
           )}
         </Card>
       )}
@@ -387,7 +368,7 @@ function ActividadMSonidosPage() {
                     .join(' ')}
                   type="button"
                   key={item.id}
-                  disabled={matched}
+                  disabled={matched || Boolean(pairFeedback)}
                   aria-pressed={selected}
                   onClick={() => pickCard(item)}
                 >
@@ -403,30 +384,12 @@ function ActividadMSonidosPage() {
             })}
           </div>
 
-          {pairFeedback === 'correct' && !isPairsFinished && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
-              ¡Correcto! Las dos empiezan con /m/.
-            </p>
-          )}
-
-          {pairFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
-              Esas imágenes no empiezan con el mismo sonido.
-            </p>
-          )}
-
           {!pairFeedback && (
             <Button
               icon={Check}
               size="large"
               fullWidth
-              disabled={!firstPick || !secondPick}
+              disabled={!firstPick || !secondPick || firstPick.id === secondPick.id}
               onClick={checkPair}
             >
               Comprobar pareja
@@ -434,43 +397,49 @@ function ActividadMSonidosPage() {
           )}
 
           {pairFeedback === 'retry' && (
-            <Button
-              variant="retry"
-              icon={RotateCcw}
-              size="large"
-              fullWidth
-              onClick={() => {
-                setFirstPick(null)
-                setSecondPick(null)
-                setPairFeedback('')
-              }}
-            >
-              Intentar nuevamente
-            </Button>
+            <ActivityFeedback correct={false}>
+              <Button
+                variant="retry"
+                icon={RotateCcw}
+                size="large"
+                fullWidth
+                onClick={() => {
+                  setFirstPick(null)
+                  setSecondPick(null)
+                  setPairFeedback('')
+                }}
+              >
+                Intentar nuevamente
+              </Button>
+            </ActivityFeedback>
           )}
 
           {pairFeedback === 'correct' && !isPairsFinished && (
-            <Button
-              icon={ArrowRight}
-              iconPosition="right"
-              size="large"
-              fullWidth
-              onClick={continuePairs}
-            >
-              Buscar otra pareja
-            </Button>
+            <ActivityFeedback correct>
+              <Button
+                icon={ArrowRight}
+                iconPosition="right"
+                size="large"
+                fullWidth
+                onClick={continuePairs}
+              >
+                Buscar otra pareja
+              </Button>
+            </ActivityFeedback>
           )}
 
           {isPairsFinished && (
-            <Button
-              icon={ArrowRight}
-              iconPosition="right"
-              size="large"
-              fullWidth
-              onClick={goToNextPhase}
-            >
-              Ir a la siguiente actividad
-            </Button>
+            <ActivityFeedback correct>
+              <Button
+                icon={ArrowRight}
+                iconPosition="right"
+                size="large"
+                fullWidth
+                onClick={goToNextPhase}
+              >
+                Ir a la siguiente actividad
+              </Button>
+            </ActivityFeedback>
           )}
         </Card>
       )}
@@ -508,6 +477,7 @@ function ActividadMSonidosPage() {
                 type="button"
                 key={item.id}
                 aria-pressed={containsSelectedIds.includes(item.id)}
+                disabled={Boolean(containsFeedback)}
                 onClick={() => toggleContainsSelected(item)}
               >
                 <img
@@ -521,25 +491,7 @@ function ActividadMSonidosPage() {
             ))}
           </div>
 
-          {containsFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
-              ¡Muy bien! Todas esas figuras tienen el sonido /m/.
-            </p>
-          )}
-
-          {containsFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
-              Revisa otra vez. Algunas figuras no tienen el sonido /m/.
-            </p>
-          )}
-
-          {containsFeedback !== 'correct' && (
+          {!containsFeedback && (
             <Button
               icon={Check}
               size="large"
@@ -552,27 +504,31 @@ function ActividadMSonidosPage() {
           )}
 
           {containsFeedback === 'retry' && (
-            <Button
-              variant="retry"
-              icon={RotateCcw}
-              size="large"
-              fullWidth
-              onClick={retryContainsSelection}
-            >
-              Intentar nuevamente
-            </Button>
+            <ActivityFeedback correct={false}>
+              <Button
+                variant="retry"
+                icon={RotateCcw}
+                size="large"
+                fullWidth
+                onClick={retryContainsSelection}
+              >
+                Intentar nuevamente
+              </Button>
+            </ActivityFeedback>
           )}
 
           {containsFeedback === 'correct' && (
-            <Button
-              to="/actividad/m-silabas"
-              icon={ArrowRight}
-              iconPosition="right"
-              size="large"
-              fullWidth
-            >
-              Ir a la siguiente actividad
-            </Button>
+            <ActivityFeedback correct>
+              <Button
+                to="/actividad/m-silabas"
+                icon={ArrowRight}
+                iconPosition="right"
+                size="large"
+                fullWidth
+              >
+                Ir a la siguiente actividad
+              </Button>
+            </ActivityFeedback>
           )}
         </Card>
       )}

@@ -1,3 +1,4 @@
+import { LetterSound } from '../components/lessons/SoundIntroduction'
 import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
 import { ArrowLeft, ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
@@ -171,25 +172,7 @@ function ActividadDSilabasPage() {
             Toca cada sílaba con D y escucha cómo suena.
           </p>
 
-          <div
-            className="selection-options"
-            aria-label="Letra D"
-          >
-            <span className="text-letter">{formatLetterGroup('d')}</span>
-          </div>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() =>
-              playIfAvailable(
-                dLetterPresentation.soundAudio,
-              )
-            }
-          >
-            Escuchar el sonido de la D
-          </Button>
+          <LetterSound letter="d" audioSrc={dLetterPresentation.soundAudio}>{formatLetterGroup('d')}</LetterSound>
 
           <div className="syllables-options">
             {dLetterPresentation.combinations.map(

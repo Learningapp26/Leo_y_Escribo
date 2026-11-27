@@ -20,8 +20,10 @@ function BookLessonReading({ lesson }) {
       <header className="text-center">
         {lesson.showReadingSource !== false && <span className="text-ui-label">Unidad {lesson.unitId} · Páginas {lesson.pages}</span>}
         <h1 id="lesson-title">{lesson.heading ?? getLessonHeading(lesson.id, lesson.title)}</h1>
-        <p className="text-instruction">{reading.instruction.text}</p>
-        <LessonAudioButton audio={reading.instruction}>Escuchar instrucción</LessonAudioButton>
+        <div className="selection-instructions">
+          <p className="text-instruction">{reading.instruction.text}</p>
+          <LessonAudioButton audio={reading.instruction}>Escuchar instrucción</LessonAudioButton>
+        </div>
       </header>
       {reading.paragraphs?.length > 0 && <StoryCard lessonId={lesson.id} title={reading.title} paragraphs={reading.paragraphs}
         image={reading.image} imageAlt={reading.imageAlt} audio={reading.audio.available === false ? undefined : reading.audio.src} />}

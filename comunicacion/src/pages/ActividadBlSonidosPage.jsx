@@ -1,3 +1,4 @@
+import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -161,40 +162,10 @@ function ActividadBlSonidosPage() {
             </Button>
           </div>
 
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(blSoundIntro.soundAudioP)}
-          >
-            Escuchar el sonido /b/
-          </Button>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(blSoundIntro.soundAudioL)}
-          >
-            Escuchar el sonido /l/
-          </Button>
-
-          <img
-            className="selection-image selection-image--featured"
-            src={blSoundIntro.mainWord.image}
-            alt={blSoundIntro.mainWord.name}
+          <SoundIntroduction
+            sounds={[{ letter: 'b', audioSrc: blSoundIntro.soundAudioP }, { letter: 'l', audioSrc: blSoundIntro.soundAudioL }]}
+            word={blSoundIntro.mainWord}
           />
-
-          <span className="text-word">{blSoundIntro.mainWord.name}</span>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(blSoundIntro.mainWord.audio)}
-          >
-            Escuchar el sonido de blusa
-          </Button>
 
           <Button
             icon={ArrowRight}

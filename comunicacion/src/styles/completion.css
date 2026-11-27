@@ -135,10 +135,10 @@ Sirve para sílabas, palabras, letras*/
     justify-content: center;
     gap: var(--space-md);
     padding: var(--space-xl);
-    /* Borde punteado y con el tema de la unidad */
-    border: 3px dashed var(--lesson-border, var(--color-border));
-    border-radius: var(--radius-lg);
-    background: var(--color-bg-card);
+    border: 3px solid #000;
+    border-radius: 28px;
+    background: color-mix(in srgb, var(--planet-soft, var(--color-bg-card)) 40%, #fff);
+    box-shadow: inset 0 2px 6px rgba(45, 33, 76, .05);
     transition: var(--transition);
 }
 
@@ -147,13 +147,15 @@ Sirve para sílabas, palabras, letras*/
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 90px;
-    min-height: 70px;
+    min-width: 100px;
+    min-height: 80px;
     padding: var(--space-md) var(--space-lg);
-    border-radius: var(--radius-md);
-    background: white;
-    border: 2px solid var(--lesson-border, var(--color-border));
-    cursor: grab;
+    border-radius: 22px;
+    background: #fff;
+    color: var(--ink);
+    border: 2px solid #d5cbea;
+    box-shadow: 0 5px 0 #c9bfdf;
+    cursor: pointer;
     user-select: none;
     transition:
         transform .2s,
@@ -163,14 +165,24 @@ Sirve para sílabas, palabras, letras*/
 }
 
 
-.completion-chip:hover {
+.completion-chip:hover:not(:disabled):not(.completion-active):not(.completion-correct):not(.completion-incorrect) {
     transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    background: #faf7ff;
+    box-shadow: 0 7px 0 #c9bfdf;
 }
 
 
-.completion-chip:active {
-    cursor: grabbing;
+.completion-chip:active:not(:disabled) {
+    transform: translateY(2px);
+}
+
+.completion-chip:disabled {
+    cursor: default;
+}
+
+.completion-chip:focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: 6px;
 }
 
 /* Cuando se arrastra un elemento */
@@ -198,9 +210,10 @@ Sirve para sílabas, palabras, letras*/
     flex-wrap: wrap;
     gap: var(--space-md);
     padding: var(--space-xl);
-    border: 3px dashed var(--lesson-border, var(--color-border));
-    border-radius: var(--radius-lg);
-    background: var(--color-bg-card);
+    border: 3px solid #000;
+    border-radius: 28px;
+    background: color-mix(in srgb, var(--planet-soft, var(--color-bg-card)) 40%, #fff);
+    box-shadow: inset 0 3px 8px rgba(45, 33, 76, .06);
     transition: .2s;
 }
 
@@ -215,23 +228,32 @@ Sirve para sílabas, palabras, letras*/
 
 /*Mientras escribe */
 .completion-active{
-    border-color: var(--color-action);
+    border-color: #e5ac35;
+    background: var(--sun, #FFD166);
+    color: var(--ink);
+    box-shadow:
+        0 5px 0 #c89524,
+        0 0 0 5px rgba(255, 209, 102, .35),
+        0 0 24px rgba(255, 209, 102, .55);
+    transform: translateY(-3px);
 }
 
 /*Correcto*/
 .completion-correct{
     border-color: var(--color-correct);
 
-    background:#eaf8ef;
+    background: var(--mint, #b8f0e0);
 
-    color:var(--color-correct);
+    color: var(--ink);
+    box-shadow: 0 5px 0 #73bca6;
 }
 
 /*Incorrecto*/
 .completion-incorrect{
     border-color: var(--color-retry);
-    background:#fff5e8;
-    color:#d97706;
+    background: var(--peach, #ffc2a6);
+    color: var(--ink);
+    box-shadow: 0 5px 0 #d99d7e;
 }
 
 /*Animaciones*/
@@ -372,7 +394,9 @@ Sirve para sílabas, palabras, letras*/
     align-items: center;
     min-width: 90px;
     min-height: 70px;
-    border-bottom: 4px solid var(--lesson-border, var(--color-border));
+    border: 2px solid #d5cbea;
+    border-radius: 18px;
+    background: #f3effc;
     transition: var(--transition);
 }
 
@@ -414,7 +438,9 @@ Sirve para sílabas, palabras, letras*/
     min-width: 120px;
     min-height: 52px;
     margin: 0 .25rem;
-    border-bottom: 4px solid var(--lesson-border, var(--color-border));
+    border: 2px solid #d5cbea;
+    border-radius: 18px;
+    background: #f3effc;
     transition: var(--transition);
 }
 
@@ -450,6 +476,11 @@ Sirve para sílabas, palabras, letras*/
 }
 
 @media (max-width: 480px) {
+    .completion-bank,
+    .completion-target {
+        padding: var(--space-md);
+    }
+
     .join-result__image {
         width: 150px;
         height: 150px;

@@ -26,19 +26,21 @@ function LeccionChPage() {
 
         <h1 id="ch-lesson-title">{getLessonHeading('ch')}</h1>
 
-        <p className="text-instruction">
-          Aprenderás una nueva letra, la che. Pero antes, escucha la
-          historia de Chailú.
-        </p>
+        <div className="selection-instructions">
+          <p className="text-instruction">
+            Aprenderás una nueva letra, la che. Pero antes, escucha la
+            historia de Chailú.
+          </p>
 
-        <Button
-          variant="audio"
-          size="large"
-          icon={Volume2}
-          onClick={() => playAudio(chReading.instructionAudio)}
-        >
-          Escuchar instrucción
-        </Button>
+          <Button
+            variant="audio"
+            size="large"
+            icon={Volume2}
+            onClick={() => playAudio(chReading.instructionAudio)}
+          >
+            Escuchar instrucción
+          </Button>
+        </div>
       </header>
 
       <StoryCard lessonId="ch" title={chReading.title} paragraphs={chReading.paragraphs} image={chReading.image} imageAlt={chReading.imageAlt} audio={chReading.readingAudio} />

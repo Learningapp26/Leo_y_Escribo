@@ -1,3 +1,4 @@
+import { fillBlank } from '../lib/fillBlank'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw } from 'lucide-react'
 
@@ -73,7 +74,7 @@ function ActividadSSilabasPage() {
         <AudioPlaceholderButton>Escuchar las sílabas</AudioPlaceholderButton>
 
         <p className="completion-word-pattern" aria-label={`Completa ${challenge.word}`}>
-          {challenge.pattern}
+          {fillBlank(challenge.pattern, selectedSyllable)}
         </p>
 
         <div className="syllables-options">

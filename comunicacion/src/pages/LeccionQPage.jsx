@@ -67,20 +67,22 @@ function LeccionQPage() {
 
         <h1 id="q-lesson-title">{getLessonHeading('q')}</h1>
 
-        <p className="text-instruction">
-          Hoy aprenderás una letra con la que escribirás muchas palabras: la
-          cu. Escucha la siguiente historia.
-        </p>
+        <div className="selection-instructions">
+          <p className="text-instruction">
+            Hoy aprenderás una letra con la que escribirás muchas palabras: la
+            cu. Escucha la siguiente historia.
+          </p>
 
-        <Button
-          variant="audio"
-          size="large"
-          icon={Volume2}
-          onClick={() => playAudio(qReading.instructionAudio)}
-          data-audio-src={qReading.instructionAudio}
-        >
-          Escuchar instrucción
-        </Button>
+          <Button
+            variant="audio"
+            size="large"
+            icon={Volume2}
+            onClick={() => playAudio(qReading.instructionAudio)}
+            data-audio-src={qReading.instructionAudio}
+          >
+            Escuchar instrucción
+          </Button>
+        </div>
       </header>
 
       <StoryCard lessonId="q" title={qReading.title} paragraphs={qReading.paragraphs} image={qReading.image} imageAlt={qReading.imageAlt} audio={qReading.readingAudio} />

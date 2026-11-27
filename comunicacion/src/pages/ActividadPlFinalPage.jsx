@@ -1,3 +1,4 @@
+import { fillBlank } from '../lib/fillBlank'
 import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -218,7 +219,7 @@ function ActividadPlFinalPage() {
             </Button>
           </div>
 
-          <p className="completion-word-pattern">{joinItem.pattern}</p>
+          <p className="completion-word-pattern">{fillBlank(joinItem.pattern, selectedEnding)}</p>
 
           <div className="completion-bank">
             {plSyllableJoinOptions.map((ending) => (
@@ -322,7 +323,7 @@ function ActividadPlFinalPage() {
           </div>
 
           <p aria-live="polite" className="text-sentence">
-            {sentenceItem.sentence}
+            {fillBlank(sentenceItem.sentence, selectedWord)}
           </p>
 
           <Button

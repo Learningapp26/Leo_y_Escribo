@@ -1,3 +1,4 @@
+import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -161,40 +162,10 @@ function ActividadBrSonidosPage() {
             </Button>
           </div>
 
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(brSoundIntro.soundAudioP)}
-          >
-            Escuchar el sonido /b/
-          </Button>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(brSoundIntro.soundAudioR)}
-          >
-            Escuchar el sonido /r/
-          </Button>
-
-          <img
-            className="selection-image selection-image--featured"
-            src={brSoundIntro.mainWord.image}
-            alt={brSoundIntro.mainWord.name}
+          <SoundIntroduction
+            sounds={[{ letter: 'b', audioSrc: brSoundIntro.soundAudioP }, { letter: 'r', audioSrc: brSoundIntro.soundAudioR }]}
+            word={brSoundIntro.mainWord}
           />
-
-          <span className="text-word">{brSoundIntro.mainWord.name}</span>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() => playAudio(brSoundIntro.mainWord.audio)}
-          >
-            Escuchar el sonido de brocha
-          </Button>
 
           <Button
             icon={ArrowRight}

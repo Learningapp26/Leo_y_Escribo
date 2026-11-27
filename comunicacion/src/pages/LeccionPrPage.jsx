@@ -28,19 +28,21 @@ function LeccionPrPage() {
 
         <h1 id="pr-lesson-title">{getLessonHeading('pr')}</h1>
 
-        <p className="text-instruction">
-          Aprende otra combinación de letras: la pe y la erre.
-          Escucha la siguiente historia.
-        </p>
+        <div className="selection-instructions">
+          <p className="text-instruction">
+            Aprende otra combinación de letras: la pe y la erre.
+            Escucha la siguiente historia.
+          </p>
 
-        <Button
-          variant="audio"
-          size="large"
-          icon={Volume2}
-          onClick={() => playAudio(prReading.instructionAudio)}
-        >
-          Escuchar instrucción
-        </Button>
+          <Button
+            variant="audio"
+            size="large"
+            icon={Volume2}
+            onClick={() => playAudio(prReading.instructionAudio)}
+          >
+            Escuchar instrucción
+          </Button>
+        </div>
       </header>
 
       <StoryCard lessonId="pr" title={prReading.title} paragraphs={prReading.paragraphs} image={prReading.image} imageAlt={prReading.imageAlt} audio={prReading.readingAudio} />

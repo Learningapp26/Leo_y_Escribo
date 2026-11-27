@@ -40,21 +40,23 @@ function LeccionCPage() {
 
         <h1 id="c-lesson-title">{getLessonHeading('c')}</h1>
 
-        <p className="text-instruction">
-          Hoy aprenderás la letra ce. Escucha la siguiente
-          historia y repite la canción.
-        </p>
+        <div className="selection-instructions">
+          <p className="text-instruction">
+            Hoy aprenderás la letra ce. Escucha la siguiente
+            historia y repite la canción.
+          </p>
 
-        <Button
-          variant="audio"
-          size="large"
-          icon={Volume2}
-          onClick={() =>
-            playAudio(cReading.instructionAudio)
-          }
-        >
-          Escuchar instrucción
-        </Button>
+          <Button
+            variant="audio"
+            size="large"
+            icon={Volume2}
+            onClick={() =>
+              playAudio(cReading.instructionAudio)
+            }
+          >
+            Escuchar instrucción
+          </Button>
+        </div>
       </header>
 
       <StoryCard lessonId="c" title={cReading.title} paragraphs={cReading.paragraphs} image={cReading.image} imageAlt={cReading.imageAlt} audio={cReading.readingAudio} />
