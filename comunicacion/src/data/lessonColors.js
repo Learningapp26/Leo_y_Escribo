@@ -57,6 +57,7 @@ export const LESSON_UNIT_MAP = {
   'gue-con-dieresis': 6,
   abecedario: 6,
   'escritura-vocales-juntas': 7,
+  'escritura-otras-vocales-juntas': 7,
   'escritura-je-ji-ge-gi': 7,
   'escritura-ll-y': 7,
   'escritura-q-c': 7,
