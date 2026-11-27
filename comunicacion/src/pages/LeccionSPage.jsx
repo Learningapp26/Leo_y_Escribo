@@ -32,15 +32,13 @@ function LeccionSPage() {
       </header>
 
       <StoryCard lessonId="s" title={sReading.title} paragraphs={sReading.paragraphs} image={sReading.image} imageAlt={sReading.imageAlt}>
-        <p className="text-instruction">
-            Lee despacio y busca las palabras que tengan la letra S.
-          </p>
       </StoryCard>
 
       <section className="comprehension-section" aria-labelledby="s-comprehension-title">
         <h2 id="s-comprehension-title">Conversemos sobre el cuento</h2>
         <p className="text-instruction">
-          Responde oralmente con tu maestra, maestro o persona que te acompañe.
+          Estas preguntas se trabajan de forma oral, guiadas por la maestra.
+          No es necesario responderlas por escrito.
         </p>
         <div className="comprehension-grid">
           {sComprehensionQuestions.map((question, index) => (
@@ -60,8 +58,8 @@ function LeccionSPage() {
           <Card
             className="lesson-activity-menu__card"
             icon={Images}
-            title="El sonido S"
-            description="Reconoce el sonido /s/ al inicio y al final de las palabras."
+            title="Reconoce el sonido S"
+            description="Escucha el sonido /s/ y encuentra las palabras que lo tienen al inicio y al final."
             footer={
               <Button to="/actividad/s-sonidos" icon={ArrowRight} iconPosition="right" fullWidth>
                 Comenzar
@@ -72,7 +70,7 @@ function LeccionSPage() {
             className="lesson-activity-menu__card"
             icon={ListMusic}
             title="Sílabas con S"
-            description="Practica sa, se, si, so y su para completar palabras."
+            description="Conoce sa, se, si, so y su, lee palabras y busca las sílabas en ellas."
             footer={
               <Button to="/actividad/s-silabas" variant="support" icon={ArrowRight} iconPosition="right" fullWidth>
                 Comenzar
@@ -83,7 +81,7 @@ function LeccionSPage() {
             className="lesson-activity-menu__card"
             icon={PenLine}
             title="Formamos palabras"
-            description="Ordena las sílabas y forma palabras sencillas con S."
+            description="Forma palabras con sílabas y descubre qué palabra nueva queda al quitar una letra."
             footer={
               <Button to="/actividad/s-completar" variant="secondary" icon={ArrowRight} iconPosition="right" fullWidth>
                 Comenzar
@@ -94,7 +92,7 @@ function LeccionSPage() {
             className="lesson-activity-menu__card"
             icon={Sparkles}
             title="Actividad final"
-            description="Demuestra lo que aprendiste sobre el sonido, las sílabas y las palabras con S."
+            description="Reconoce el nombre propio, cuenta las palabras de las oraciones y encuentra la más larga."
             footer={
               <Button to="/actividad/s-final" variant="reward" icon={ArrowRight} iconPosition="right" fullWidth>
                 Comenzar

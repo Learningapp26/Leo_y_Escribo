@@ -134,7 +134,10 @@ function ActividadSSonidosPage() {
             <p>Haz el sonido suavemente: sss. Mira la S mayúscula y la s minúscula.</p>
             <AudioPlaceholderButton>Escuchar instrucción</AudioPlaceholderButton>
           </div>
-          <SoundIntroduction sounds={[{ letter: 's' }]} word={{ name: 'sapo' }} />
+          <SoundIntroduction
+            sounds={[{ letter: 's' }]}
+            word={{ name: 'sapo', image: '/images/lecciones/s/sapo.png' }}
+          />
           <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth onClick={() => setPhaseIndex(1)}>
             Practicar palabras
           </Button>

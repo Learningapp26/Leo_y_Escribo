@@ -1,5 +1,4 @@
 import ActivityFeedback from '../components/common/ActivityFeedback'
-import { fillBlank } from '../lib/fillBlank'
 import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw } from 'lucide-react'
 
@@ -10,83 +9,108 @@ import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
 import StarsCounter from '../components/progress/StarsCounter'
 import { getLessonThemeClass } from '../data/lessonColors'
-import { sFinalActivities } from '../data/sData'
+import {
+  sLongestSentenceId,
+  sProperNounExercise,
+  sSentences,
+} from '../data/sData'
 import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 
 import '../styles/completion.css'
 import '../styles/selection.css'
 import { RewardBurst } from '../components/space/Reward'
 
-const PHASES = ['sonido', 'silaba', 'palabra', 'lectura']
+// Página 24 del libro: reconocer el nombre propio, contar las
+// palabras de cada oración y encontrar la oración más larga.
+const PHASES = ['nombre', 'contar', 'larga']
+
+const totalStars = 1 + sSentences.length + 1
 
 function ActividadSFinalPage() {
   const [phaseIndex, setPhaseIndex] = useState(0)
-  const [selected, setSelected] = useState('')
-  const [wordSlots, setWordSlots] = useState([null, null])
-  const [feedback, setFeedback] = useState('')
   const [stars, setStars] = useState(0)
   const [finished, setFinished] = useState(false)
   const themeClass = getLessonThemeClass('s')
   const phase = PHASES[phaseIndex]
 
-  const resetAnswer = () => {
-    setSelected('')
-    setWordSlots([null, null])
-    setFeedback('')
-  }
+  const goToNextPhase = () => setPhaseIndex((current) => current + 1)
 
-  const retry = () => resetAnswer()
+  // Fase 1: tocar el nombre propio
+  const [selectedName, setSelectedName] = useState('')
+  const [nameFeedback, setNameFeedback] = useState('')
 
-  const checkChoice = (answer) => {
-    const isCorrect = selected === answer
-    setFeedback(isCorrect ? 'correct' : 'retry')
+  const checkName = () => {
+    const isCorrect = selectedName === sProperNounExercise.answer
+    setNameFeedback(isCorrect ? 'correct' : 'retry')
     if (isCorrect) setStars((current) => current + 1)
 
     registrarProgreso({
       actividad: 's-final',
       correcto: isCorrect,
-      detalle: { leccionId: 's', fase: phase, ejercicioId: answer },
+      detalle: { leccionId: 's', fase: 'nombre', ejercicioId: sProperNounExercise.id },
     })
   }
 
-  const next = () => {
-    if (phaseIndex === PHASES.length - 1) {
-      setFinished(true)
-      return
-    }
-    resetAnswer()
-    setPhaseIndex((current) => current + 1)
+  // Fase 2: contar las palabras de cada oración
+  const [countIndex, setCountIndex] = useState(0)
+  const [taggedWords, setTaggedWords] = useState([])
+  const [countSelected, setCountSelected] = useState(null)
+  const [countFeedback, setCountFeedback] = useState('')
+  const countSentence = sSentences[countIndex]
+  const isLastCount = countIndex === sSentences.length - 1
+  const isCountingComplete = taggedWords.length === countSentence.words.length
+
+  const toggleWord = (position) => {
+    if (countFeedback === 'correct') return
+    setCountFeedback('')
+    setTaggedWords((current) =>
+      current.includes(position)
+        ? current.filter((item) => item !== position)
+        : [...current, position],
+    )
   }
 
-  const chooseWordSyllable = (syllable, optionIndex) => {
-    if (feedback === 'correct') return
-    setFeedback('')
-    const alreadyUsed = wordSlots.some((slot) => slot?.optionIndex === optionIndex)
-
-    if (alreadyUsed) {
-      setWordSlots((current) => current.map((slot) => (slot?.optionIndex === optionIndex ? null : slot)))
-      return
-    }
-
-    setWordSlots((current) => {
-      const emptyIndex = current.findIndex((slot) => slot === null)
-      if (emptyIndex === -1) return current
-      const nextSlots = [...current]
-      nextSlots[emptyIndex] = { syllable, optionIndex }
-      return nextSlots
-    })
-  }
-
-  const checkWord = () => {
-    const formed = wordSlots.map((slot) => slot?.syllable ?? '').join('')
-    const isCorrect = formed === sFinalActivities.word.word
-    setFeedback(isCorrect ? 'correct' : 'retry')
+  const checkCount = () => {
+    if (countSelected === null || !isCountingComplete) return
+    const isCorrect = countSelected === countSentence.words.length
+    setCountFeedback(isCorrect ? 'correct' : 'retry')
     if (isCorrect) setStars((current) => current + 1)
 
     registrarProgreso({
       actividad: 's-final',
       correcto: isCorrect,
-      detalle: { leccionId: 's', fase: 'palabra', ejercicioId: sFinalActivities.word.word },
+      detalle: { leccionId: 's', fase: 'contar', ejercicioId: countSentence.id },
+    })
+  }
+
+  const resetCount = () => {
+    setTaggedWords([])
+    setCountSelected(null)
+    setCountFeedback('')
+  }
+
+  const nextCount = () => {
+    resetCount()
+    if (isLastCount) {
+      goToNextPhase()
+      return
+    }
+    setCountIndex((current) => current + 1)
+  }
+
+  // Fase 3: elegir la oración con más palabras
+  const [selectedSentence, setSelectedSentence] = useState('')
+  const [longFeedback, setLongFeedback] = useState('')
+
+  const checkLongest = () => {
+    const isCorrect = selectedSentence === sLongestSentenceId
+    setLongFeedback(isCorrect ? 'correct' : 'retry')
+    if (isCorrect) setStars((current) => current + 1)
+
+    registrarProgreso({
+      actividad: 's-final',
+      correcto: isCorrect,
+      detalle: { leccionId: 's', fase: 'larga', ejercicioId: sLongestSentenceId },
     })
   }
 
@@ -101,9 +125,10 @@ function ActividadSFinalPage() {
           <RewardBurst lessonId="s" />
           <h1>¡Terminaste la lección de la letra S!</h1>
           <p className="text-instruction">
-            Practicaste el sonido /s/, las sílabas sa, se, si, so y su, y palabras sencillas.
+            Practicaste el sonido /s/, las sílabas sa, se, si, so y su, nombres
+            propios y oraciones.
           </p>
-          <StarsCounter current={stars} total={PHASES.length} label="Estrellas" />
+          <StarsCounter current={stars} total={totalStars} label="Estrellas" />
           <AudioPlaceholderButton fullWidth>
             Escuchar felicitación
           </AudioPlaceholderButton>
@@ -115,72 +140,6 @@ function ActividadSFinalPage() {
     )
   }
 
-  const showChoiceStage = (activity) => (
-    <Card className="selection-card">
-      <div className="selection-instructions">
-        <p className="text-instruction">{activity.prompt}</p>
-        {'pattern' in activity && <p className="completion-word-pattern">{fillBlank(activity.pattern, selected)}</p>}
-        {'sentence' in activity && <p className="text-reading">{activity.sentence}</p>}
-        <AudioPlaceholderButton>Escuchar instrucción</AudioPlaceholderButton>
-        {'sentence' in activity && (
-          <AudioPlaceholderButton>Escuchar oración</AudioPlaceholderButton>
-        )}
-      </div>
-      <div className="selection-options">
-        {activity.options.map((option) => {
-          const stateClass =
-            feedback && selected === option
-              ? feedback === 'correct'
-                ? 'selection-button--correct'
-                : 'selection-button--incorrect'
-              : selected === option
-                ? 'selection-button--selected'
-                : ''
-          return (
-            <button
-              className={['selection-button', stateClass].filter(Boolean).join(' ')}
-              type="button"
-              key={option}
-              aria-pressed={selected === option}
-              onClick={() => {
-                if (feedback === 'correct') return
-                setSelected(option)
-                setFeedback('')
-              }}
-            >
-              <span className="text-word">{option}</span>
-            </button>
-          )
-        })}
-      </div>
-      {feedback === 'correct' && (
-        <ActivityFeedback correct message={<>
-          ¡Correcto! {activity.word ? `La palabra es ${activity.word}.` : '¡Sigue así!'}
-        </>} />
-      )}
-      {feedback === 'retry' && (
-        <ActivityFeedback correct={false} message={<>
-          Revisa tu respuesta e inténtalo otra vez.
-        </>} />
-      )}
-      {!feedback && (
-        <Button icon={Check} size="large" fullWidth disabled={!selected} onClick={() => checkChoice(activity.answer)}>
-          Comprobar
-        </Button>
-      )}
-      {feedback === 'retry' && (
-        <Button variant="retry" icon={RotateCcw} size="large" fullWidth onClick={retry}>
-          Intentar nuevamente
-        </Button>
-      )}
-      {feedback === 'correct' && (
-        <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth onClick={next}>
-          {phaseIndex === PHASES.length - 1 ? 'Finalizar lección' : 'Siguiente parte'}
-        </Button>
-      )}
-    </Card>
-  )
-
   return (
     <main className={`page selection-page ${themeClass}`} aria-labelledby="s-final-title">
       <BackButton label="Volver a la lección" to="/lecciones/s" />
@@ -189,66 +148,227 @@ function ActividadSFinalPage() {
         <h1 id="s-final-title">Practica todo lo aprendido</h1>
       </header>
       <ProgressBar value={phaseIndex + 1} max={PHASES.length} label={`Parte ${phaseIndex + 1} de ${PHASES.length}`} />
-      <StarsCounter current={stars} total={PHASES.length} label="Estrellas" />
+      <StarsCounter current={stars} total={totalStars} label="Estrellas" />
 
-      {phase === 'sonido' && showChoiceStage(sFinalActivities.sound)}
-      {phase === 'silaba' && showChoiceStage(sFinalActivities.syllable)}
-      {phase === 'lectura' && showChoiceStage(sFinalActivities.reading)}
-
-      {phase === 'palabra' && (
+      {phase === 'nombre' && (
         <Card className="selection-card">
           <div className="selection-instructions">
-            <p className="text-instruction">{sFinalActivities.word.prompt}</p>
+            <p className="text-instruction">{sProperNounExercise.prompt}</p>
             <AudioPlaceholderButton>Escuchar instrucción</AudioPlaceholderButton>
+            <AudioPlaceholderButton>Escuchar oración</AudioPlaceholderButton>
           </div>
-          <p className="completion-word-pattern" aria-live="polite">
-            {wordSlots[0]?.syllable ?? '__'} {wordSlots[1]?.syllable ?? '__'}
-          </p>
+
+          <p className="text-sentence">{sProperNounExercise.sentence}</p>
+
           <div className="selection-options">
-            {sFinalActivities.word.options.map((syllable, optionIndex) => {
-              const selectedSyllable = wordSlots.some((slot) => slot?.optionIndex === optionIndex)
-              const stateClass =
-                feedback === 'correct' && selectedSyllable
-                  ? 'selection-button--correct'
-                  : selectedSyllable
+            {sProperNounExercise.options.map((option) => {
+              const selected = selectedName === option
+              const stateClass = selected && nameFeedback === 'correct'
+                ? 'selection-button--correct'
+                : selected && nameFeedback === 'retry'
+                  ? 'selection-button--incorrect'
+                  : selected
                     ? 'selection-button--selected'
                     : ''
               return (
                 <button
                   className={['selection-button', stateClass].filter(Boolean).join(' ')}
                   type="button"
-                  key={`${syllable}-${optionIndex}`}
-                  aria-pressed={selectedSyllable}
-                  onClick={() => chooseWordSyllable(syllable, optionIndex)}
+                  key={option}
+                  aria-pressed={selected}
+                  onClick={() => {
+                    if (nameFeedback === 'correct') return
+                    setSelectedName(option)
+                    setNameFeedback('')
+                  }}
                 >
-                  <span className="text-syllable">{syllable}</span>
+                  <span className="text-word">{option}</span>
                 </button>
               )
             })}
           </div>
-          {feedback === 'correct' && (
+
+          {nameFeedback === 'correct' && (
             <ActivityFeedback correct message={<>
-              ¡Correcto! Formaste la palabra {sFinalActivities.word.word}.
+              ¡Correcto! Susi es un nombre propio y lleva mayúscula.
             </>} />
           )}
-          {feedback === 'retry' && (
+          {nameFeedback === 'retry' && (
             <ActivityFeedback correct={false} message={<>
-              Prueba otro orden de sílabas.
+              Busca la palabra que empieza con mayúscula.
             </>} />
           )}
-          {!feedback && (
-            <Button icon={Check} size="large" fullWidth disabled={!wordSlots[0] || !wordSlots[1]} onClick={checkWord}>
-              Comprobar palabra
+
+          {!nameFeedback && (
+            <Button icon={Check} size="large" fullWidth disabled={!selectedName} onClick={checkName}>
+              Comprobar
             </Button>
           )}
-          {feedback === 'retry' && (
-            <Button variant="retry" icon={RotateCcw} size="large" fullWidth onClick={retry}>
+          {nameFeedback === 'retry' && (
+            <Button variant="retry" icon={RotateCcw} size="large" fullWidth onClick={() => { setSelectedName(''); setNameFeedback('') }}>
               Intentar nuevamente
             </Button>
           )}
-          {feedback === 'correct' && (
-            <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth onClick={next}>
+          {nameFeedback === 'correct' && (
+            <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth onClick={goToNextPhase}>
               Siguiente parte
+            </Button>
+          )}
+        </Card>
+      )}
+
+      {phase === 'contar' && (
+        <Card className="selection-card">
+          <div className="selection-instructions">
+            <p className="text-instruction">
+              Lee la oración. Toca cada palabra para contarla. Luego elige
+              cuántas palabras tiene.
+            </p>
+            <AudioPlaceholderButton>Escuchar instrucción</AudioPlaceholderButton>
+          </div>
+
+          <AudioPlaceholderButton>Escuchar oración</AudioPlaceholderButton>
+
+          <div className="sentence-words" aria-label={countSentence.words.join(' ')}>
+            {countSentence.words.map((word, position) => (
+              <button
+                className={[
+                  'sentence-word-button',
+                  'selection-button',
+                  taggedWords.includes(position) ? 'selection-button--selected' : '',
+                ].filter(Boolean).join(' ')}
+                type="button"
+                key={`${word}-${position}`}
+                aria-pressed={taggedWords.includes(position)}
+                onClick={() => toggleWord(position)}
+              >
+                <span className="selection-word">{word}</span>
+              </button>
+            ))}
+          </div>
+
+          {!isCountingComplete && (
+            <p className="text-instruction">Toca todas las palabras antes de comprobar.</p>
+          )}
+
+          <div className="selection-options">
+            {countSentence.options.map((option) => {
+              const selected = countSelected === option
+              const stateClass = selected && countFeedback === 'correct'
+                ? 'selection-button--correct'
+                : selected && countFeedback === 'retry'
+                  ? 'selection-button--incorrect'
+                  : selected
+                    ? 'selection-button--selected'
+                    : ''
+              return (
+                <button
+                  className={['selection-button', stateClass].filter(Boolean).join(' ')}
+                  type="button"
+                  key={option}
+                  aria-pressed={selected}
+                  onClick={() => {
+                    if (countFeedback === 'correct') return
+                    setCountSelected(option)
+                    setCountFeedback('')
+                  }}
+                >
+                  <span className="text-word">{option}</span>
+                </button>
+              )
+            })}
+          </div>
+
+          {countFeedback === 'correct' && (
+            <ActivityFeedback correct message={<>
+              ¡Correcto! La oración tiene {countSentence.words.length} palabras.
+            </>} />
+          )}
+          {countFeedback === 'retry' && (
+            <ActivityFeedback correct={false} message={<>
+              Cuenta otra vez cada palabra con cuidado.
+            </>} />
+          )}
+
+          {!countFeedback && (
+            <Button icon={Check} size="large" fullWidth disabled={countSelected === null || !isCountingComplete} onClick={checkCount}>
+              Comprobar
+            </Button>
+          )}
+          {countFeedback === 'retry' && (
+            <Button variant="retry" icon={RotateCcw} size="large" fullWidth onClick={resetCount}>
+              Intentar nuevamente
+            </Button>
+          )}
+          {countFeedback === 'correct' && (
+            <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth onClick={nextCount}>
+              {isLastCount ? 'Siguiente parte' : 'Siguiente oración'}
+            </Button>
+          )}
+        </Card>
+      )}
+
+      {phase === 'larga' && (
+        <Card className="selection-card">
+          <div className="selection-instructions">
+            <p className="text-instruction">
+              Toca la oración que tiene más palabras. Es la oración más larga.
+            </p>
+            <AudioPlaceholderButton>Escuchar instrucción</AudioPlaceholderButton>
+          </div>
+
+          <div className="selection-options">
+            {sSentences.map((item) => {
+              const selected = selectedSentence === item.id
+              const stateClass = selected && longFeedback === 'correct'
+                ? 'selection-button--correct'
+                : selected && longFeedback === 'retry'
+                  ? 'selection-button--incorrect'
+                  : selected
+                    ? 'selection-button--selected'
+                    : ''
+              return (
+                <button
+                  className={['selection-button', stateClass].filter(Boolean).join(' ')}
+                  type="button"
+                  key={item.id}
+                  aria-pressed={selected}
+                  onClick={() => {
+                    if (longFeedback === 'correct') return
+                    setSelectedSentence(item.id)
+                    setLongFeedback('')
+                  }}
+                >
+                  <span className="selection-word">{item.sentence}</span>
+                </button>
+              )
+            })}
+          </div>
+
+          {longFeedback === 'correct' && (
+            <ActivityFeedback correct message={<>
+              ¡Muy bien! Esa oración tiene 7 palabras, es la más larga.
+            </>} />
+          )}
+          {longFeedback === 'retry' && (
+            <ActivityFeedback correct={false} message={<>
+              Cuenta las palabras de cada oración y compara.
+            </>} />
+          )}
+
+          {!longFeedback && (
+            <Button icon={Check} size="large" fullWidth disabled={!selectedSentence} onClick={checkLongest}>
+              Comprobar
+            </Button>
+          )}
+          {longFeedback === 'retry' && (
+            <Button variant="retry" icon={RotateCcw} size="large" fullWidth onClick={() => { setSelectedSentence(''); setLongFeedback('') }}>
+              Intentar nuevamente
+            </Button>
+          )}
+          {longFeedback === 'correct' && (
+            <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth onClick={() => setFinished(true)}>
+              Finalizar lección
             </Button>
           )}
         </Card>
