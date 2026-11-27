@@ -1,12 +1,17 @@
 import { createBookContent } from './bookLessonHelpers.js'
 
-// Shared metadata for the book's final writing pages. No recordings supplied yet.
-export function createWritingContent(id, title, page, introduction) {
+// Only supplied recordings are enabled; preserve their exact filename casing.
+export function createWritingContent(id, title, page, introduction, recordings = []) {
   const content = createBookContent(id)
   const originalAudio = content.audio
+  const recordedFiles = new Map(recordings.map((file) => [file.toLowerCase(), file]))
   const pending = (value) => {
     if (!value || typeof value !== 'object') return value
-    if (value.src) value.available = false
+    if (value.src) {
+      const file = recordedFiles.get(value.src.split('/').pop().toLowerCase())
+      value.available = Boolean(file)
+      if (file) value.src = `/audio/lecciones/${id}/${file}`
+    }
     Object.values(value).forEach(pending)
     return value
   }
