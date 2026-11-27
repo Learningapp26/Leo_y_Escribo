@@ -1,3 +1,5 @@
+import SyllableCards from '../components/lessons/SyllableCards'
+import useSyllablePractice from '../hooks/useSyllablePractice'
 import ActivityFeedback from '../components/common/ActivityFeedback'
 import { LetterSound } from '../components/lessons/SoundIntroduction'
 import { formatLetterGroup } from '../data/lessonLabels'
@@ -38,6 +40,7 @@ function selectionClass(isSelected, feedback) {
 }
 
 function ActividadBlSilabasPage() {
+  const syllablePractice = useSyllablePractice(blLetterPresentation.combinations)
   const [phaseIndex, setPhaseIndex] = useState(0)
   const phase = PHASES[phaseIndex]
 
@@ -208,25 +211,18 @@ function ActividadBlSilabasPage() {
 
           <LetterSound letter="bl" audioSrc={blLetterPresentation.soundAudio}>{formatLetterGroup('bl')}</LetterSound>
 
-          <div className="syllables-options">
-            {blLetterPresentation.combinations.map((item) => (
-              <button
-                className="syllable-button"
-                type="button"
-                key={item.syllable}
-                onClick={() => playAudio(item.audio)}
-              >
-                {item.syllable}
-              </button>
-            ))}
-          </div>
+          <SyllableCards items={blLetterPresentation.combinations} {...syllablePractice} />
 
           <Button
             icon={ArrowRight}
             iconPosition="right"
             size="large"
             fullWidth
-            onClick={goToNextPhase}
+            disabled={!syllablePractice.allTouched}
+            onClick={() => {
+              if (!syllablePractice.allTouched) return
+              (goToNextPhase)()
+            }}
           >
             Continuar
           </Button>

@@ -1,3 +1,5 @@
+import SyllableCards from '../components/lessons/SyllableCards'
+import useSyllablePractice from '../hooks/useSyllablePractice'
 import ActivityFeedback from '../components/common/ActivityFeedback'
 import { LetterSound } from '../components/lessons/SoundIntroduction'
 import { fillBlank } from '../lib/fillBlank'
@@ -28,6 +30,7 @@ import '../styles/completion.css'
 const PHASES = ['letra', 'buscar', 'asociar', 'completar']
 
 function ActividadTSilabasPage() {
+  const syllablePractice = useSyllablePractice(tLetterPresentation.combinations)
   const [phaseIndex, setPhaseIndex] = useState(0)
   const phase = PHASES[phaseIndex]
 
@@ -141,25 +144,18 @@ function ActividadTSilabasPage() {
 
           <LetterSound letter="t" audioSrc={tLetterPresentation.soundAudio}>{formatLetterGroup('t')}</LetterSound>
 
-          <div className="syllables-options">
-            {tLetterPresentation.combinations.map((item) => (
-              <button
-                className="syllable-button"
-                type="button"
-                key={item.syllable}
-                onClick={() => playAudio(item.audio)}
-              >
-                {item.syllable}
-              </button>
-            ))}
-          </div>
+          <SyllableCards items={tLetterPresentation.combinations} {...syllablePractice} />
 
           <Button
             icon={ArrowRight}
             iconPosition="right"
             size="large"
             fullWidth
-            onClick={goToNextPhase}
+            disabled={!syllablePractice.allTouched}
+            onClick={() => {
+              if (!syllablePractice.allTouched) return
+              (goToNextPhase)()
+            }}
           >
             Continuar
           </Button>

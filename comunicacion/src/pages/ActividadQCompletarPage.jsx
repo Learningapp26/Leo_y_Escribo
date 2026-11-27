@@ -1,3 +1,4 @@
+import '../styles/syllable-reading.css'
 import ActivityFeedback from '../components/common/ActivityFeedback'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
@@ -255,7 +256,7 @@ function ActividadQCompletarPage() {
             />
 
             <p className="completion-words-sentence">
-              <span className="completion-chip text-syllable">
+              <span className="syllable-reading__part">
                 {joinExercise.firstSyllable}
               </span>
 

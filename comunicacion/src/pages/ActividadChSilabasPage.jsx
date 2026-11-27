@@ -1,3 +1,5 @@
+import SyllableCards from '../components/lessons/SyllableCards'
+import useSyllablePractice from '../hooks/useSyllablePractice'
 import ActivityFeedback from '../components/common/ActivityFeedback'
 import { LetterSound } from '../components/lessons/SoundIntroduction'
 import { formatLetterGroup } from '../data/lessonLabels'
@@ -26,6 +28,7 @@ const PHASES = ['letra', 'reconocer', 'palabras']
 const WORD_SYLLABLE_OPTIONS = ['cha', 'che', 'chi', 'cho', 'chu']
 
 function ActividadChSilabasPage() {
+  const syllablePractice = useSyllablePractice(chLetterPresentation.combinations)
   const [phaseIndex, setPhaseIndex] = useState(0)
   const phase = PHASES[phaseIndex]
 
@@ -131,20 +134,13 @@ function ActividadChSilabasPage() {
 
           <LetterSound letter="ch" audioSrc={chLetterPresentation.soundAudio}>{formatLetterGroup('ch')}</LetterSound>
 
-          <div className="syllables-options">
-            {chLetterPresentation.combinations.map((item) => (
-              <button
-                className="syllable-button"
-                type="button"
-                key={item.syllable}
-                onClick={() => playAudio(item.audio)}
-              >
-                {item.syllable}
-              </button>
-            ))}
-          </div>
+          <SyllableCards items={chLetterPresentation.combinations} {...syllablePractice} />
 
-          <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth onClick={goToNextPhase}>
+          <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth disabled={!syllablePractice.allTouched}
+            onClick={() => {
+              if (!syllablePractice.allTouched) return
+              (goToNextPhase)()
+            }}>
             Continuar
           </Button>
         </Card>

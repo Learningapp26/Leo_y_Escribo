@@ -1,3 +1,5 @@
+import SyllableCards from '../components/lessons/SyllableCards'
+import useSyllablePractice from '../hooks/useSyllablePractice'
 import ActivityFeedback from '../components/common/ActivityFeedback'
 import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
@@ -51,6 +53,7 @@ function selectionClass(id, selectedIds, feedback) {
 }
 
 function ActividadSilabasInversasLPage() {
+  const syllablePractice = useSyllablePractice(siLCombinations)
   const [phaseIndex, setPhaseIndex] = useState(0)
   const phase = PHASES[phaseIndex]
 
@@ -222,18 +225,7 @@ function ActividadSilabasInversasLPage() {
             </Button>
           </div>
 
-          <div className="syllables-options">
-            {siLCombinations.map((item) => (
-              <button
-                className="syllable-button"
-                type="button"
-                key={item.syllable}
-                onClick={() => playAudio(item.audio)}
-              >
-                {item.syllable}
-              </button>
-            ))}
-          </div>
+          <SyllableCards items={siLCombinations} {...syllablePractice} />
 
           <p className="text-instruction">
             Escucha estas palabras: {siLExampleWords.join(', ')}.
@@ -244,7 +236,11 @@ function ActividadSilabasInversasLPage() {
             iconPosition="right"
             size="large"
             fullWidth
-            onClick={goToNextPhase}
+            disabled={!syllablePractice.allTouched}
+            onClick={() => {
+              if (!syllablePractice.allTouched) return
+              (goToNextPhase)()
+            }}
           >
             Continuar
           </Button>

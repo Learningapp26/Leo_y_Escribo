@@ -1,4 +1,6 @@
 // Página 14 (actividad 3): separar palabras en sílabas y contarlas.
+export const lSyllableCountInstructionAudio = null // Agregar la grabación de la instrucción.
+
 export const lSyllableCountWords = [
   {
     id: 'luna',
@@ -40,7 +42,7 @@ export const lSyllableCountWords = [
 
 // Página 15 (actividad 1): buscar las sílabas la, le, li, lo, lu.
 export const lSyllableSearch = {
-  instructionAudio: '/audio/lecciones/l/instruccion-buscar-silabas.mp3',
+  instructionAudio: null, // Agregar la grabación que coincida con la instrucción visible.
   targetSyllables: ['la', 'le', 'li', 'lo', 'lu'],
   options: [
     { syllable: 'la', audio: '/audio/lecciones/m/silaba-la.mp3' },
@@ -52,12 +54,13 @@ export const lSyllableSearch = {
     { syllable: 'lo', audio: '/audio/lecciones/l/silaba-lo.mp3' },
     { syllable: 'da', audio: '/audio/lecciones/m/silaba-da.mp3' },
     { syllable: 'lu', audio: '/audio/lecciones/m/silaba-lu.mp3' },
-    { syllable: 'pa', audio: '/audio/lecciones/p/silaba-pa.mp3' },
+    { syllable: 'pa', audio: null }, // Agregar la grabación de «pa».
   ],
 }
 
 // Página 15 (actividad 2): conocer la letra L y sus combinaciones.
 export const lLetterPresentation = {
+  instructionAudio: null, // Agregar la grabación de la instrucción.
   soundAudio: '/audio/lecciones/l/sonido-l.mp3',
   combinations: [
     { syllable: 'la', audio: '/audio/lecciones/m/silaba-la.mp3' },

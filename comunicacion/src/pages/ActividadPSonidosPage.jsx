@@ -1,3 +1,4 @@
+import { ReadOnlySyllables } from '../components/lessons/WordSyllableReading'
 import ActivityFeedback from '../components/common/ActivityFeedback'
 import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
@@ -283,24 +284,7 @@ function ActividadPSonidosPage() {
               alt={pSyllablePositionExample.word}
             />
 
-            <div className="completion-bank">
-              {pSyllablePositionExample.syllables.map((syllable, index) => (
-                <span
-                  className={[
-                    'completion-chip',
-                    'text-syllable',
-                    index === pSyllablePositionExample.answerIndex
-                      ? 'completion-correct'
-                      : '',
-                  ]
-                    .filter(Boolean)
-                    .join(' ')}
-                  key={syllable}
-                >
-                  {syllable}
-                </span>
-              ))}
-            </div>
+            <ReadOnlySyllables syllables={pSyllablePositionExample.syllables} highlightIndex={pSyllablePositionExample.answerIndex} />
           </div>
 
           <img

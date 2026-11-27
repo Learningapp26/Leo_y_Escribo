@@ -1,3 +1,4 @@
+import { ReadOnlySyllables } from '../components/lessons/WordSyllableReading'
 import ActivityFeedback from '../components/common/ActivityFeedback'
 import {
     useRef,
@@ -346,18 +347,7 @@ function ActividadClFinalPage() {
                                 </span>
                             )}
 
-                        {selectedSyllables.map(
-                            (syllable) => (
-                                <span
-                                    className="completion-chip"
-                                    key={syllable}
-                                >
-                                    <span className="selection-word">
-                                        {syllable}
-                                    </span>
-                                </span>
-                            ),
-                        )}
+                        <ReadOnlySyllables syllables={selectedSyllables} />
                     </div>
 
                     <div

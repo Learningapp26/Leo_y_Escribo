@@ -1,0 +1,44 @@
+.syllable-reading {
+  display: grid;
+  gap: var(--space-lg);
+  width: 100%;
+}
+
+.syllable-reading__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md) var(--space-lg);
+}
+
+.syllable-reading__text,
+.syllable-reading__part {
+  margin: 0;
+  font-family: var(--font-content);
+  font-size: clamp(32px, 6vw, 48px);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.4;
+  color: var(--ink);
+  text-align: center;
+  cursor: default;
+}
+
+.syllable-reading__audio {
+  min-height: 64px;
+  padding: 12px 20px;
+  font-size: 20px;
+  gap: 12px;
+}
+
+.syllable-reading__audio .btn__icon {
+  width: 32px;
+  height: 32px;
+}
+
+.syllable-reading__highlight {
+  color: var(--planet-ink, var(--ink));
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 6px;
+}

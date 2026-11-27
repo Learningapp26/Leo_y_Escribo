@@ -1,3 +1,6 @@
+import WordSyllableReading from '../components/lessons/WordSyllableReading'
+import SyllableCards from '../components/lessons/SyllableCards'
+import LessonAudioButton from '../components/common/LessonAudioButton'
 import ActivityFeedback from '../components/common/ActivityFeedback'
 import { LetterSound } from '../components/lessons/SoundIntroduction'
 import { formatLetterGroup } from '../data/lessonLabels'
@@ -94,9 +97,7 @@ function ActividadDSilabasPage() {
     if (vowelResult === 'correct') return
     setVowelResult('')
     setSelectedVowels((current) =>
-      current.includes(vowel)
-        ? current.filter((item) => item !== vowel)
-        : [...current, vowel],
+      current.includes(vowel) ? current : [...current, vowel],
     )
   }
 
@@ -129,11 +130,11 @@ function ActividadDSilabasPage() {
         <Card className="completion-card">
           <p className="text-instruction">Escucha la palabra y cuenta sus sílabas.</p>
           <img className="completion-word-image" src={countWord.image} alt={countWord.name} />
-          <span className="text-word">{countWord.name}</span>
-          <Button variant="audio" icon={Volume2} onClick={() => playIfAvailable(countWord.audio)}>Escuchar {countWord.name}</Button>
-          <div className="completion-bank">
-            {countWord.syllables.map((syllable) => <span className="completion-chip text-syllable" key={syllable}>{syllable}</span>)}
-          </div>
+          <WordSyllableReading
+            word={countWord.name}
+            syllables={countWord.syllables}
+            wordAudio={countWord.audio}
+          />
           <p className="text-instruction">¿Cuántas sílabas tiene?</p>
           <div className="completion-bank">
             {countWord.options.map((option) => (
@@ -184,122 +185,41 @@ function ActividadDSilabasPage() {
 
       {phase === 'letra' && (
         <Card className="syllables-card">
-          <p className="text-instruction">
-            Toca cada sílaba con D y escucha cómo suena.
-          </p>
+          <div className="syllables-instructions">
+            <p className="text-instruction">
+              Toca cada sílaba con D y escucha cómo suena.
+            </p>
+            <LessonAudioButton audio={{ src: dLetterPresentation.instructionAudio, available: Boolean(dLetterPresentation.instructionAudio) }}>
+              Escuchar instrucción
+            </LessonAudioButton>
+          </div>
 
           <LetterSound letter="d" audioSrc={dLetterPresentation.soundAudio}>{formatLetterGroup('d')}</LetterSound>
 
-          <div className="syllables-options">
-            {dLetterPresentation.combinations.map(
-              (item) => {
-                const vowel = item.syllable.slice(1)
+          <SyllableCards
+            items={dLetterPresentation.combinations}
+            isTouched={(index) => selectedVowels.includes(dLetterPresentation.combinations[index].syllable.slice(1))}
+            onTouch={(index) => {
+              const item = dLetterPresentation.combinations[index]
+              toggleVowel(item.syllable.slice(1))
+              playIfAvailable(item.audio)
+            }}
+          />
 
-                const selected =
-                  selectedVowels.includes(vowel)
-
-                const stateClass =
-                  vowelResult && selected
-                    ? vowelResult === 'correct'
-                      ? 'syllable-button--correct'
-                      : 'syllable-button--incorrect'
-                    : selected
-                      ? 'syllable-button--selected'
-                      : ''
-
-                return (
-                  <button
-                    className={[
-                      'syllable-button',
-                      stateClass,
-                    ]
-                      .filter(Boolean)
-                      .join(' ')}
-                    type="button"
-                    key={item.syllable}
-                    aria-pressed={selected}
-                    onClick={() => {
-                      toggleVowel(vowel)
-                      playIfAvailable(item.audio)
-                    }}
-                  >
-                    {item.syllable}
-                  </button>
-                )
-              },
-            )}
-          </div>
-
-          <div
-            className="completion-bank"
-            aria-live="polite"
+          <Button
+            icon={ArrowRight}
+            iconPosition="right"
+            size="large"
+            fullWidth
+            disabled={!dLetterPresentation.combinations.every((item) => selectedVowels.includes(item.syllable.slice(1)))}
+            onClick={() => {
+              if (!dLetterPresentation.combinations.every((item) => selectedVowels.includes(item.syllable.slice(1)))) return
+              checkVowels()
+              setPhaseIndex(3)
+            }}
           >
-            {selectedVowels.length === 0 ? (
-              <span className="text-instruction">
-                Toca las sílabas para descubrirlas.
-              </span>
-            ) : (
-              selectedVowels.map((vowel) => (
-                <span
-                  className="completion-chip text-syllable"
-                  key={vowel}
-                >
-                  d{vowel}
-                </span>
-              ))
-            )}
-          </div>
-
-          {vowelResult === 'correct' && (
-            <ActivityFeedback correct message={<>
-              ¡Muy bien! Encontraste da, de, di, do y du.
-            </>} />
-          )}
-
-          {vowelResult === 'retry' && (
-            <ActivityFeedback correct={false} message={<>
-              Escucha nuevamente y toca todas las sílabas con D.
-            </>} />
-          )}
-
-          {vowelResult === '' && (
-            <Button
-              icon={Check}
-              size="large"
-              fullWidth
-              disabled={selectedVowels.length === 0}
-              onClick={checkVowels}
-            >
-              Comprobar
-            </Button>
-          )}
-
-          {vowelResult === 'retry' && (
-            <Button
-              variant="retry"
-              icon={RotateCcw}
-              size="large"
-              fullWidth
-              onClick={() => {
-                setSelectedVowels([])
-                setVowelResult('')
-              }}
-            >
-              Intentar nuevamente
-            </Button>
-          )}
-
-          {vowelResult === 'correct' && (
-            <Button
-              icon={ArrowRight}
-              iconPosition="right"
-              size="large"
-              fullWidth
-              onClick={() => setPhaseIndex(3)}
-            >
-              Continuar
-            </Button>
-          )}
+            Continuar
+          </Button>
         </Card>
       )}
 

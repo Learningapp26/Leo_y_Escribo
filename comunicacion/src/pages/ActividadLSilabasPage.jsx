@@ -1,3 +1,6 @@
+import WordSyllableReading from '../components/lessons/WordSyllableReading'
+import SyllableCards from '../components/lessons/SyllableCards'
+import useSyllablePractice from '../hooks/useSyllablePractice'
 import ActivityFeedback from '../components/common/ActivityFeedback'
 import { LetterSound } from '../components/lessons/SoundIntroduction'
 import { formatLetterGroup } from '../data/lessonLabels'
@@ -12,6 +15,7 @@ import {
 
 import Button from '../components/common/Button'
 import Card from '../components/common/Card'
+import LessonAudioButton from '../components/common/LessonAudioButton'
 import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
 import { getLessonThemeClass } from '../data/lessonColors'
@@ -20,20 +24,22 @@ import {
   lSyllableAssociationInstructionAudio,
   lSyllableAssociation,
   lSyllableCountWords,
+  lSyllableCountInstructionAudio,
   lSyllableSearch,
 } from '../data/lSilabas'
 import { playAudio } from '../lib/audioPlayer'
 import { registrarProgreso } from '../lib/progreso'
 
-const PHASES = ['contar', 'buscar', 'letra', 'asociar']
+const PHASES = ['letra', 'buscar', 'contar', 'asociar']
 
 function ActividadLSilabasPage() {
+  const syllablePractice = useSyllablePractice(lLetterPresentation.combinations)
   const [phaseIndex, setPhaseIndex] = useState(0)
   const phase = PHASES[phaseIndex]
 
   const themeClass = getLessonThemeClass('l')
 
-  // Fase 1: contar sílabas
+  // Fase 3: contar sílabas
   const [countIndex, setCountIndex] = useState(0)
   const [countSelected, setCountSelected] = useState(null)
   const [countResult, setCountResult] = useState('')
@@ -75,7 +81,7 @@ function ActividadLSilabasPage() {
   const toggleSearchSyllable = (syllable, audio) => {
     if (searchResult === 'correct') return
 
-    playAudio(audio)
+    if (audio) playAudio(audio)
     setSearchResult('')
 
     setSearchSelected((current) =>
@@ -133,9 +139,14 @@ function ActividadLSilabasPage() {
 
       {phase === 'contar' && (
         <Card className="completion-card">
-          <p className="text-instruction">
-            Escucha la palabra y cuenta sus sílabas.
-          </p>
+          <div className="selection-instructions">
+            <p className="text-instruction">
+              Escucha la palabra y cuenta sus sílabas.
+            </p>
+            <LessonAudioButton audio={{ src: lSyllableCountInstructionAudio, available: Boolean(lSyllableCountInstructionAudio) }}>
+              Escuchar instrucción
+            </LessonAudioButton>
+          </div>
 
           <img
             className="completion-word-image"
@@ -143,35 +154,12 @@ function ActividadLSilabasPage() {
             alt={countWord.name}
           />
 
-          <span className="text-word">{countWord.name}</span>
-
-          <div className="completion-content">
-            <Button
-              variant="audio"
-              icon={Volume2}
-              onClick={() => playAudio(countWord.wordAudio)}
-            >
-              Escuchar palabra completa
-            </Button>
-
-            <Button
-              variant="audio"
-              icon={Volume2}
-              onClick={() => playAudio(countWord.syllableAudio)}
-            >
-              Escuchar por sílabas
-            </Button>
-
-            <div className="completion-bank">
-              {countWord.syllables.map((syllable) => (
-                <span className="completion-chip text-syllable" key={syllable}>
-                  {syllable}
-                </span>
-              ))}
-            </div>
-          </div>
-
-          <p className="text-instruction">¿Cuántas sílabas tiene?</p>
+          <WordSyllableReading
+            word={countWord.name}
+            syllables={countWord.syllables}
+            wordAudio={countWord.wordAudio}
+            syllableAudio={countWord.syllableAudio}
+          />
 
           <div className="completion-bank">
             {countWord.options.map((option) => (
@@ -265,13 +253,9 @@ function ActividadLSilabasPage() {
               Toca las sílabas con la letra L y escucha cómo suenan.
             </p>
 
-            <Button
-              variant="audio"
-              icon={Volume2}
-              onClick={() => playAudio(lSyllableSearch.instructionAudio)}
-            >
+            <LessonAudioButton audio={{ src: lSyllableSearch.instructionAudio, available: Boolean(lSyllableSearch.instructionAudio) }}>
               Escuchar instrucción
-            </Button>
+            </LessonAudioButton>
           </div>
 
           <div className="syllables-options">
@@ -357,31 +341,29 @@ function ActividadLSilabasPage() {
 
       {phase === 'letra' && (
         <Card className="syllables-card">
-          <p className="text-instruction">
-            Conoce la letra L. Toca cada combinación para escucharla.
-          </p>
+          <div className="syllables-instructions">
+            <p className="text-instruction">
+              Conoce la letra L. Toca cada combinación para escucharla.
+            </p>
+            <LessonAudioButton audio={{ src: lLetterPresentation.instructionAudio, available: Boolean(lLetterPresentation.instructionAudio) }}>
+              Escuchar instrucción
+            </LessonAudioButton>
+          </div>
 
           <LetterSound letter="l" audioSrc={lLetterPresentation.soundAudio}>{formatLetterGroup('l')}</LetterSound>
 
-          <div className="syllables-options">
-            {lLetterPresentation.combinations.map((item) => (
-              <button
-                className="syllable-button"
-                type="button"
-                key={item.syllable}
-                onClick={() => playAudio(item.audio)}
-              >
-                {item.syllable}
-              </button>
-            ))}
-          </div>
+          <SyllableCards items={lLetterPresentation.combinations} {...syllablePractice} />
 
           <Button
             icon={ArrowRight}
             iconPosition="right"
             size="large"
             fullWidth
-            onClick={() => setPhaseIndex((current) => current + 1)}
+            disabled={!syllablePractice.allTouched}
+            onClick={() => {
+              if (!syllablePractice.allTouched) return
+              (() => setPhaseIndex((current) => current + 1))()
+            }}
           >
             Continuar
           </Button>

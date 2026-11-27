@@ -1,3 +1,5 @@
+import SyllableCards from '../components/lessons/SyllableCards'
+import useSyllablePractice from '../hooks/useSyllablePractice'
 import ActivityFeedback from '../components/common/ActivityFeedback'
 import { LetterSound } from '../components/lessons/SoundIntroduction'
 import { formatLetterGroup } from '../data/lessonLabels'
@@ -27,6 +29,7 @@ const PHASES = ['letra', 'imagenes', 'palabras']
 const totalExercises = bSyllableAssociations.length + bWordSyllableExercises.length
 
 function ActividadBSilabasPage() {
+  const syllablePractice = useSyllablePractice(bSyllables)
   const [phaseIndex, setPhaseIndex] = useState(0)
   const [exerciseIndex, setExerciseIndex] = useState(0)
   const [selected, setSelected] = useState('')
@@ -118,16 +121,18 @@ function ActividadBSilabasPage() {
       <StarsCounter current={stars} total={totalExercises} label="Estrellas" />
 
       {phase === 'letra' && (
-        <Card className="selection-card">
+        <Card className="syllables-card">
           <div className="selection-instructions">
             <p className="text-instruction">Fíjate bien en la B mayúscula y la b minúscula. Después, escucha cómo se combina la b con cada vocal.</p>
             <Button variant="audio" icon={Volume2} onClick={() => playAudio(bSyllableInstructionAudio)} data-audio-src={bSyllableInstructionAudio}>Escuchar instrucción</Button>
           </div>
           <LetterSound letter="b" audioSrc={bSoundIntro.letterAudio}>{formatLetterGroup('b')}</LetterSound>
-          <div className="completion-bank">
-            {bSyllables.map((item) => <Button key={item.syllable} variant="secondary" className="completion-chip text-syllable" onClick={() => playAudio(item.audio)}>{item.syllable}</Button>)}
-          </div>
-          <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth onClick={() => setPhaseIndex(1)}>Continuar con las imágenes</Button>
+          <SyllableCards items={bSyllables} {...syllablePractice} />
+          <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth disabled={!syllablePractice.allTouched}
+            onClick={() => {
+              if (!syllablePractice.allTouched) return
+              (() => setPhaseIndex(1))()
+            }}>Continuar con las imágenes</Button>
         </Card>
       )}
 

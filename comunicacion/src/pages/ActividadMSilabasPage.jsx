@@ -1,3 +1,5 @@
+import SyllableCards from '../components/lessons/SyllableCards'
+import useSyllablePractice from '../hooks/useSyllablePractice'
 import { LetterSound } from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
 import { ArrowLeft, ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
@@ -24,17 +26,13 @@ import '../styles/syllables.css'
 const PHASES = ['letra', 'buscar', 'asociar', 'seleccionar']
 
 function ActividadMSilabasPage() {
+  const syllablePractice = useSyllablePractice(mLetterPresentation.combinations)
   const [phaseIndex, setPhaseIndex] = useState(0)
   const phase = PHASES[phaseIndex]
 
   const themeClass = getLessonThemeClass('m')
 
   const goToNextPhase = () => setPhaseIndex((current) => current + 1)
-
-  const [touchedSyllables, setTouchedSyllables] = useState([])
-  const allSyllablesTouched = mLetterPresentation.combinations.every(
-    (item) => touchedSyllables.includes(item.syllable),
-  )
 
   // Fase 2: buscar sílabas ma, me, mi, mo, mu
   const [searchSelected, setSearchSelected] = useState([])
@@ -159,36 +157,17 @@ function ActividadMSilabasPage() {
 
           <LetterSound letter="m" audioSrc={mLetterPresentation.soundAudio}>m</LetterSound>
 
-          <div className="syllables-options">
-            {mLetterPresentation.combinations.map((item) => (
-              <button
-                className={[
-                  'syllable-button',
-                  touchedSyllables.includes(item.syllable) ? 'syllable-button--selected' : '',
-                ].filter(Boolean).join(' ')}
-                type="button"
-                key={item.syllable}
-                aria-pressed={touchedSyllables.includes(item.syllable)}
-                onClick={() => {
-                  playAudio(item.audio)
-                  setTouchedSyllables((current) =>
-                    current.includes(item.syllable) ? current : [...current, item.syllable],
-                  )
-                }}
-              >
-                {item.syllable}
-              </button>
-            ))}
-          </div>
+          <SyllableCards items={mLetterPresentation.combinations} {...syllablePractice} />
 
           <Button
             icon={ArrowRight}
             iconPosition="right"
             size="large"
             fullWidth
-            disabled={!allSyllablesTouched}
+            disabled={!syllablePractice.allTouched}
             onClick={() => {
-              if (allSyllablesTouched) goToNextPhase()
+              if (!syllablePractice.allTouched) return
+              (goToNextPhase)()
             }}
           >
             Continuar

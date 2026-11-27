@@ -1,5 +1,7 @@
 import ActivityFeedback from '../components/common/ActivityFeedback'
 import { togglePairSelection, isDistinctPair } from '../lib/pairSelection'
+import SyllableCards from '../components/lessons/SyllableCards'
+import useSyllablePractice from '../hooks/useSyllablePractice'
 import { LetterSound } from '../components/lessons/SoundIntroduction'
 import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
@@ -63,6 +65,10 @@ function ActividadGSilabasPage() {
   const goToNextPhase = () => setPhaseIndex((current) => current + 1)
 
   const [showSpecialSyllables, setShowSpecialSyllables] = useState(false)
+  const presentedCombinations = showSpecialSyllables
+    ? gLetterPresentation.specialCombinations
+    : gLetterPresentation.combinations
+  const syllablePractice = useSyllablePractice(presentedCombinations)
 
   const [searchSelected, setSearchSelected] = useState([])
   const [searchResult, setSearchResult] = useState('')
@@ -216,28 +222,16 @@ function ActividadGSilabasPage() {
 
           <LetterSound letter="g" audioSrc={gLetterPresentation.soundAudio}>{formatLetterGroup('g')}</LetterSound>
 
-          <div className="syllables-options">
-            {(showSpecialSyllables
-              ? gLetterPresentation.specialCombinations
-              : gLetterPresentation.combinations
-            ).map((item) => (
-              <button
-                className="syllable-button"
-                type="button"
-                key={item.syllable}
-                onClick={() => playAudio(item.audio)}
-              >
-                {item.syllable}
-              </button>
-            ))}
-          </div>
+          <SyllableCards items={presentedCombinations} {...syllablePractice} />
 
           <Button
             icon={ArrowRight}
             iconPosition="right"
             size="large"
             fullWidth
+            disabled={!syllablePractice.allTouched}
             onClick={() => {
+              if (!syllablePractice.allTouched) return
               if (showSpecialSyllables) {
                 goToNextPhase()
               } else {

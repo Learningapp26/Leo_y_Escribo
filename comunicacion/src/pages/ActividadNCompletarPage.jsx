@@ -1,3 +1,4 @@
+import '../styles/syllable-reading.css'
 import ActivityFeedback from '../components/common/ActivityFeedback'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
@@ -158,9 +159,9 @@ function ActividadNCompletarPage() {
             {getAudioLabel(currentWord.word, currentWord.audio)}
           </Button>
 
-          <div className="completion-bank" aria-live="polite">
+          <div className="syllable-reading__row" aria-live="polite">
             {currentWord.pattern.split(/(_+)/).filter(Boolean).map((part, index) => (
-              <span className="completion-chip text-syllable" key={index}>
+              <span className="syllable-reading__part" key={index}>
                 {/^_+$/.test(part) ? selectedSyllable || part : part}
               </span>
             ))}
@@ -313,14 +314,14 @@ function ActividadNCompletarPage() {
             </section>
           </div>
 
-          <div className="completion-bank" aria-live="polite">
-            <span className="completion-chip text-syllable">
+          <div className="syllable-reading__row" aria-live="polite">
+            <span className="syllable-reading__part">
               {selectedLeft?.syllable ?? '__'}
             </span>
 
             <span className="text-word">+</span>
 
-            <span className="completion-chip text-syllable">
+            <span className="syllable-reading__part">
               {selectedRight?.syllable ?? 'no'}
             </span>
           </div>

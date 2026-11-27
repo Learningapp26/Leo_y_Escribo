@@ -12,6 +12,9 @@ import BookLessonCrossword from './BookLessonCrossword'
 import VoiceRecorder from './VoiceRecorder'
 import { LetterSound, WordSound } from './SoundIntroduction'
 import ListeningWords from './ListeningWords'
+import SyllableCards from './SyllableCards'
+import useSyllablePractice from '../../hooks/useSyllablePractice'
+import { isSyllablePresentation } from '../../lib/syllablePractice'
 import { playLessonAudio } from '../../lib/audioPlayer'
 import { registrarProgreso } from '../../lib/progreso'
 
@@ -24,6 +27,8 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
   const { type, prompt, options = [] } = exercise
   const ordered = type === 'order'
   const passive = type === 'present' || type === 'oral'
+  const syllablePresentation = isSyllablePresentation(exercise)
+  const syllablePractice = useSyllablePractice(exercise.items ?? [], exercise.id)
   const Group = type === 'match' ? Card : 'section'
   const answerText = selected.map((index) => options[index].label).join(exercise.separator ?? '')
   const completionChoice = exercise.sentenceCompletion && options[selected[0]]
@@ -60,13 +65,13 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
   }
 
   return (
-    <Card className={ordered ? 'completion-card' : 'selection-card'}>
-      <div className="selection-instructions">
+    <Card className={syllablePresentation ? 'syllables-card' : ordered ? 'completion-card' : 'selection-card'}>
+      <div className={syllablePresentation ? 'syllables-instructions' : 'selection-instructions'}>
         <p className="text-instruction">{exercise.instruction.text}</p>
         <LessonAudioButton audio={exercise.instruction}>Escuchar instrucción</LessonAudioButton>
       </div>
-      {exercise.letter && !exercise.sound && <p className="text-letter">{exercise.letterForms ?? formatLetterGroup(exercise.letter.trim().split(/\s+/)[0])}</p>}
-      {exercise.sound && <LetterSound letter={lesson.letter} audio={exercise.sound}>
+      {exercise.letter && !exercise.sound && !syllablePresentation && <p className="text-letter">{exercise.letterForms ?? formatLetterGroup(exercise.letter.trim().split(/\s+/)[0])}</p>}
+      {(exercise.sound || syllablePresentation) && <LetterSound letter={lesson.letter} audio={exercise.sound}>
         {exercise.letter ? exercise.letterForms ?? formatLetterGroup(exercise.letter.trim().split(/\s+/)[0]) : undefined}
       </LetterSound>}
       {exercise.extraAudios?.map((audio) => <LessonAudioButton key={audio.src} audio={audio}>Escuchar los sonidos despacio</LessonAudioButton>)}
@@ -87,7 +92,9 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
         <p className="text-reading">{exercise.teacherPrompt}</p>
       </details>}
       {exercise.pattern && <p className="completion-word-pattern">{fillBlank(exercise.pattern, answerText)}</p>}
-      {exercise.items && (type === 'present' && !exercise.letter && !exercise.items.some((item) => item.definition)
+      {exercise.items && (syllablePresentation
+        ? <SyllableCards items={exercise.items} {...syllablePractice} />
+        : type === 'present' && !exercise.letter && !exercise.items.some((item) => item.definition)
         ? <ListeningWords key={exercise.id} items={exercise.items} letter={lesson.letter}
           showInstruction={Boolean(exercise.sound)} instructionAudio={exercise.instruction} />
         : <div className={`selection-options${(exercise.centeredItems ?? (lesson.centeredItems && exercise.items.length > 1)) ? ' selection-options--centered' : ''}`}>
@@ -166,7 +173,12 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
       {exercise.selectionCount && <p role="status">Palabras elegidas: {selected.length} de {exercise.selectionCount}</p>}
       {type === 'oral' && exercise.record && <VoiceRecorder onRecorded={() => setPracticed(true)} />}
       {type === 'oral' && <Button variant="secondary" aria-pressed={practiced} disabled={!groupsReady} icon={Check} onClick={() => setPracticed(!practiced)}>{exercise.practiceLabel ?? 'Ya dije mi oración'}</Button>}
-      {(feedback === 'correct' || (passive && (type !== 'oral' || practiced))) && <Button size="large" icon={ArrowRight} iconPosition="right" onClick={onNext}>
+      {(feedback === 'correct' || (passive && (type !== 'oral' || practiced))) && <Button size="large" icon={ArrowRight} iconPosition="right"
+        disabled={syllablePresentation && !syllablePractice.allTouched}
+        onClick={() => {
+          if (syllablePresentation && !syllablePractice.allTouched) return
+          onNext()
+        }}>
         {last || 'Continuar'}
       </Button>}
     </Card>

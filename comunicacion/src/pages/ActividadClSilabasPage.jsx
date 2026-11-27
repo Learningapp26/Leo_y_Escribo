@@ -1,3 +1,4 @@
+import { ReadOnlySyllables } from '../components/lessons/WordSyllableReading'
 import ActivityFeedback from '../components/common/ActivityFeedback'
 import { useState } from 'react'
 import {
@@ -151,23 +152,7 @@ function ActividadClSilabasPage() {
             </AudioPlaceholderButton>
           </div>
 
-          <div
-            className="completion-bank"
-            aria-label="Sílabas con cl"
-          >
-            {clSyllables.map(
-              (syllable) => (
-                <span
-                  className="completion-chip"
-                  key={syllable}
-                >
-                  <span className="text-syllable">
-                    {syllable}
-                  </span>
-                </span>
-              ),
-            )}
-          </div>
+          <ReadOnlySyllables syllables={clSyllables} />
 
           <Button
             icon={ArrowRight}

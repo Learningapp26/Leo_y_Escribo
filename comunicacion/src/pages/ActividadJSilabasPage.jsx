@@ -1,3 +1,6 @@
+import WordSyllableReading from '../components/lessons/WordSyllableReading'
+import SyllableCards from '../components/lessons/SyllableCards'
+import LessonAudioButton from '../components/common/LessonAudioButton'
 import ActivityFeedback from '../components/common/ActivityFeedback'
 import { LetterSound } from '../components/lessons/SoundIntroduction'
 import { formatLetterGroup } from '../data/lessonLabels'
@@ -149,11 +152,7 @@ function ActividadJSilabasPage() {
     setVowelResult('')
 
     setSelectedVowels((current) =>
-      current.includes(vowel)
-        ? current.filter(
-            (item) => item !== vowel,
-          )
-        : [...current, vowel],
+      current.includes(vowel) ? current : [...current, vowel],
     )
   }
 
@@ -225,32 +224,11 @@ function ActividadJSilabasPage() {
             alt={countWord.name}
           />
 
-          <span className="text-word">
-            {countWord.name}
-          </span>
-
-          <Button
-            variant="audio"
-            icon={Volume2}
-            onClick={() =>
-              playIfAvailable(countWord.audio)
-            }
-          >
-            Escuchar {countWord.name}
-          </Button>
-
-          <div className="completion-bank">
-            {countWord.syllables.map(
-              (syllable, index) => (
-                <span
-                  className="completion-chip text-syllable"
-                  key={`${syllable}-${index}`}
-                >
-                  {syllable}
-                </span>
-              ),
-            )}
-          </div>
+          <WordSyllableReading
+            word={countWord.name}
+            syllables={countWord.syllables}
+            wordAudio={countWord.audio}
+          />
 
           <p className="text-instruction">
             ¿Cuántas sílabas tiene?
@@ -449,128 +427,42 @@ function ActividadJSilabasPage() {
 
       {phase === 'letra' && (
         <Card className="syllables-card">
-          <p className="text-instruction">
-            Toca cada sílaba con J y escucha cómo
-            suena.
-          </p>
+          <div className="syllables-instructions">
+            <p className="text-instruction">
+              Toca cada sílaba con J y escucha cómo
+              suena.
+            </p>
+            <LessonAudioButton audio={{ src: jLetterPresentation.instructionAudio, available: Boolean(jLetterPresentation.instructionAudio) }}>
+              Escuchar instrucción
+            </LessonAudioButton>
+          </div>
 
           <LetterSound letter="j" audioSrc={jLetterPresentation.soundAudio}>{formatLetterGroup('j')}</LetterSound>
 
-          <div className="syllables-options">
-            {jLetterPresentation.combinations.map(
-              (item) => {
-                const vowel =
-                  item.syllable.slice(1)
+          <SyllableCards
+            items={jLetterPresentation.combinations}
+            isTouched={(index) => selectedVowels.includes(jLetterPresentation.combinations[index].syllable.slice(1))}
+            onTouch={(index) => {
+              const item = jLetterPresentation.combinations[index]
+              toggleVowel(item.syllable.slice(1))
+              playIfAvailable(item.audio)
+            }}
+          />
 
-                const selected =
-                  selectedVowels.includes(vowel)
-
-                const stateClass =
-                  vowelResult && selected
-                    ? vowelResult === 'correct'
-                      ? 'syllable-button--correct'
-                      : 'syllable-button--incorrect'
-                    : selected
-                      ? 'syllable-button--selected'
-                      : ''
-
-                return (
-                  <button
-                    className={[
-                      'syllable-button',
-                      stateClass,
-                    ]
-                      .filter(Boolean)
-                      .join(' ')}
-                    type="button"
-                    key={item.syllable}
-                    aria-pressed={selected}
-                    onClick={() => {
-                      toggleVowel(vowel)
-                      playIfAvailable(item.audio)
-                    }}
-                  >
-                    {item.syllable}
-                  </button>
-                )
-              },
-            )}
-          </div>
-
-          <div
-            className="completion-bank"
-            aria-live="polite"
+          <Button
+            icon={ArrowRight}
+            iconPosition="right"
+            size="large"
+            fullWidth
+            disabled={!jLetterPresentation.combinations.every((item) => selectedVowels.includes(item.syllable.slice(1)))}
+            onClick={() => {
+              if (!jLetterPresentation.combinations.every((item) => selectedVowels.includes(item.syllable.slice(1)))) return
+              checkVowels()
+              setPhaseIndex(3)
+            }}
           >
-            {selectedVowels.length === 0 ? (
-              <span className="text-instruction">
-                Toca las sílabas para descubrirlas.
-              </span>
-            ) : (
-              selectedVowels.map((vowel) => (
-                <span
-                  className="completion-chip text-syllable"
-                  key={vowel}
-                >
-                  j{vowel}
-                </span>
-              ))
-            )}
-          </div>
-
-          {vowelResult === 'correct' && (
-            <ActivityFeedback correct message={<>
-              ¡Muy bien! Encontraste ja, je, ji, jo
-              y ju.
-            </>} />
-          )}
-
-          {vowelResult === 'retry' && (
-            <ActivityFeedback correct={false} message={<>
-              Escucha nuevamente y toca todas las
-              sílabas con J.
-            </>} />
-          )}
-
-          {vowelResult === '' && (
-            <Button
-              icon={Check}
-              size="large"
-              fullWidth
-              disabled={
-                selectedVowels.length === 0
-              }
-              onClick={checkVowels}
-            >
-              Comprobar
-            </Button>
-          )}
-
-          {vowelResult === 'retry' && (
-            <Button
-              variant="retry"
-              icon={RotateCcw}
-              size="large"
-              fullWidth
-              onClick={() => {
-                setSelectedVowels([])
-                setVowelResult('')
-              }}
-            >
-              Intentar nuevamente
-            </Button>
-          )}
-
-          {vowelResult === 'correct' && (
-            <Button
-              icon={ArrowRight}
-              iconPosition="right"
-              size="large"
-              fullWidth
-              onClick={() => setPhaseIndex(3)}
-            >
-              Continuar
-            </Button>
-          )}
+            Continuar
+          </Button>
         </Card>
       )}
 
