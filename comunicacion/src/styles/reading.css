@@ -367,3 +367,32 @@
   background: var(--color-retry);
   color: var(--color-text);
 }
+
+/* "Practiquemos" va centrado, igual que el título y la instrucción de la lección */
+.reading-page #activities-title {
+    text-align: center;
+}
+
+/* Encabezado de la lección: título, instrucción y botón con aire entre sí */
+.reading-page > header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+}
+
+.reading-page > header .text-instruction {
+    max-width: 52rem;
+    margin: 0;
+}
+
+.reading-page > header h1 {
+    margin: 0;
+}
+
+.reading-page > header { gap: var(--space-lg); }
+
+.reading-page > section[aria-labelledby="activities-title"] {
+    margin-top: var(--space-xl);
+}
