@@ -1,5 +1,8 @@
 // Página 18 (actividad 1): practicar la lectura de palabras con L.
 // "lila" no usa imagen: se muestra como un círculo de color, igual que en el libro.
+export const lPracticeInstructionAudio = null // Agregar la grabación de la instrucción general.
+export const lProperNounReminderAudio = null // Agregar la grabación del recordatorio de mayúsculas.
+
 export const lPracticeWords = [
   {
     id: 'loma',
@@ -46,8 +49,7 @@ export const lSentenceInstructionAudio =
 export const lWordCountingInstructionAudio =
   '/audio/lecciones/l/instruccion-contar-palabras-l.mp3'
 
-export const lWordImageMatchInstructionAudio =
-  '/audio/lecciones/l/instruccion-relacionar-imagenes-l.mp3'
+export const lWordImageMatchInstructionAudio = null // Agregar la grabación que coincida con la instrucción visible.
 
 // Página 18 (actividad 2): completar oraciones con imágenes.
 export const lSentenceCompletion = [

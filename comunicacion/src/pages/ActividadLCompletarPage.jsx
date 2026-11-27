@@ -5,11 +5,13 @@ import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
 import Button from '../components/common/Button'
 import Card from '../components/common/Card'
+import LessonAudioButton from '../components/common/LessonAudioButton'
 import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
 import { getLessonThemeClass } from '../data/lessonColors'
 import {
   lSyllableJoin,
+  lCompletionInstructionAudio,
   lSyllableJoinInstructionAudio,
   lSyllableOptions,
   lWordCompletion,
@@ -144,9 +146,14 @@ function ActividadLCompletarPage() {
 
       {phase === 'completar' && (
         <Card className="completion-card">
-          <p className="text-instruction">
-            Escucha la palabra y elige la sílaba que falta.
-          </p>
+          <div className="selection-instructions">
+            <p className="text-instruction">
+              Escucha la palabra y elige la sílaba que falta.
+            </p>
+            <LessonAudioButton audio={{ src: lCompletionInstructionAudio, available: Boolean(lCompletionInstructionAudio) }}>
+              Escuchar instrucción
+            </LessonAudioButton>
+          </div>
 
           <img
             className="completion-word-image"
@@ -162,7 +169,9 @@ function ActividadLCompletarPage() {
             Escuchar palabra
           </Button>
 
-          <p className="completion-word-pattern">{fillBlank(currentWord.pattern, selectedSyllable)}</p>
+          <p className="completion-word-pattern" aria-live="polite">
+            {fillBlank(currentWord.pattern.replace(/_+/, '__'), selectedSyllable)}
+          </p>
 
           <div className="completion-bank">
             {lSyllableOptions.map((syllable) => (
@@ -266,6 +275,11 @@ function ActividadLCompletarPage() {
             </Button>
           </div>
 
+          <p aria-live="polite" className="text-word">
+            {selectedLeft?.syllable ?? '__'}
+            {selectedRight?.syllable ?? '__'}
+          </p>
+
           <div className="selection-columns">
             <section className="selection-options" aria-label="Primera sílaba">
               {leftOptions.map((item) => {
@@ -325,11 +339,6 @@ function ActividadLCompletarPage() {
               })}
             </section>
           </div>
-
-          <p aria-live="polite" className="text-word">
-            {selectedLeft?.syllable ?? '__'}
-            {selectedRight?.syllable ?? '__'}
-          </p>
 
           {joinFeedback === 'correct' && !isJoinFinished && (
             <ActivityFeedback correct message={<>

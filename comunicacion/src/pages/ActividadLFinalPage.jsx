@@ -4,12 +4,15 @@ import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
 import Button from '../components/common/Button'
 import Card from '../components/common/Card'
+import LessonAudioButton from '../components/common/LessonAudioButton'
 import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
 import StarsCounter from '../components/progress/StarsCounter'
 import { getLessonThemeClass } from '../data/lessonColors'
 import {
   lPracticeWords,
+  lPracticeInstructionAudio,
+  lProperNounReminderAudio,
   lSentenceCompletion,
   lSentenceInstructionAudio,
   lWordCounting,
@@ -20,6 +23,7 @@ import {
 import { playAudio } from '../lib/audioPlayer'
 import { registrarLeccionCompletada, registrarProgreso } from '../lib/progreso'
 import { RewardBurst } from '../components/space/Reward'
+import '../styles/sound-intro.css'
 
 const PHASES = ['palabras', 'oraciones', 'contar', 'relacionar']
 
@@ -229,14 +233,24 @@ function ActividadLFinalPage() {
 
       {phase === 'palabras' && (
         <Card className="selection-card">
-          <p className="text-instruction">
-            Toca cada palabra y repítela en voz alta.
-          </p>
+          <div className="selection-instructions">
+            <p className="text-instruction">
+              Toca cada palabra y repítela en voz alta.
+            </p>
+            <LessonAudioButton audio={{ src: lPracticeInstructionAudio, available: Boolean(lPracticeInstructionAudio) }}>
+              Escuchar instrucción
+            </LessonAudioButton>
+          </div>
 
           {practiceWord.isProperNoun && (
-            <p className="text-instruction">
-              Recuerda: los nombres propios se escriben con mayúscula.
-            </p>
+            <div className="selection-instructions">
+              <p className="text-instruction">
+                Recuerda: los nombres propios se escriben con mayúscula.
+              </p>
+              <LessonAudioButton audio={{ src: lProperNounReminderAudio, available: Boolean(lProperNounReminderAudio) }}>
+                Escuchar recordatorio de mayúsculas
+              </LessonAudioButton>
+            </div>
           )}
 
           {practiceWord.color ? (
@@ -299,17 +313,19 @@ function ActividadLFinalPage() {
             </Button>
           </div>
 
-          <Button
-            variant="audio"
-            icon={Volume2}
-            onClick={() => playAudio(sentence.sentenceAudio)}
-          >
-            Escuchar oración
-          </Button>
-
-          <p className="text-sentence">
-            {sentence.sentence.replace('___', selectedOption || '________')}
-          </p>
+          <div className="sentence-audio">
+            <Button
+              variant="audio"
+              className="btn--audio-round sound-intro__audio"
+              icon={Volume2}
+              aria-label="Escuchar oración"
+              data-audio-src={sentence.sentenceAudio}
+              onClick={() => playAudio(sentence.sentenceAudio)}
+            />
+            <p className="text-sentence">
+              {sentence.sentence.replace('___', selectedOption || '________')}
+            </p>
+          </div>
 
           <div className="selection-options">
             {sentence.options.map((option) => {
@@ -343,7 +359,6 @@ function ActividadLFinalPage() {
                     alt={option.name}
                   />
 
-                  <span className="selection-word">{option.name}</span>
                 </button>
               )
             })}
@@ -548,13 +563,9 @@ function ActividadLFinalPage() {
               Escucha la palabra y selecciona la imagen que corresponde.
             </p>
 
-            <Button
-              variant="audio"
-              icon={Volume2}
-              onClick={() => playAudio(lWordImageMatchInstructionAudio)}
-            >
+            <LessonAudioButton audio={{ src: lWordImageMatchInstructionAudio, available: Boolean(lWordImageMatchInstructionAudio) }}>
               Escuchar instrucción
-            </Button>
+            </LessonAudioButton>
           </div>
 
           <span className="text-word">{matchItem.word}</span>
@@ -599,7 +610,6 @@ function ActividadLFinalPage() {
                     alt={option.name}
                   />
 
-                  <span className="selection-word">{option.name}</span>
                 </button>
               )
             })}

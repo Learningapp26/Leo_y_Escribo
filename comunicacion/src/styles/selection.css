@@ -35,6 +35,22 @@
 
 /* Instrucciones*/
 
+.sentence-audio {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+    width: 100%;
+}
+
+.sentence-audio > .btn {
+    flex-shrink: 0;
+}
+
+.sentence-audio > .text-sentence {
+    min-width: 0;
+    margin: 0;
+}
+
 .selection-instructions {
     display: flex;
     flex-direction: column;
