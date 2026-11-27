@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import { existsSync } from 'node:fs'
 import { frLesson } from '../src/data/frData.js'
 import { alphabetEntries, alphabetGame, createAlphabetLesson } from '../src/data/abecedarioData.js'
-import { availableLessons, isLessonUnlocked } from '../src/data/units.js'
+import { availableLessons, isLessonUnlocked, getUnitById } from '../src/data/units.js'
 import { getLessonThemeClass } from '../src/data/lessonColors.js'
 
 test('Fr and the alphabet game respect the existing Unit 6 unlock chain', () => {
@@ -15,7 +15,7 @@ test('Fr and the alphabet game respect the existing Unit 6 unlock chain', () => 
     assert.equal(isLessonUnlocked(id, new Set([id])), true)
     assert.equal(getLessonThemeClass(id), 'planet--6')
   }
-  assert.equal(availableLessons.at(-1).id, 'abecedario')
+  assert.equal(getUnitById(6).lessons.at(-1).id, 'abecedario')
 })
 
 test('every randomized board challenge and spelling answer remains playable', () => {

@@ -1,5 +1,9 @@
 // Shared display rules for lesson letters. Keep exercise answers unchanged.
 const LESSON_GROUPS = {
+  'escritura-je-ji-ge-gi': ['je', 'ji', 'ge', 'gi'],
+  'escritura-ll-y': ['ll', 'y'],
+  'escritura-q-c': ['q', 'c'],
+  'escritura-h': ['h'],
   vocales: ['a', 'e', 'i', 'o', 'u'],
   'y-conjuncion': ['y'],
   'y-letra': ['y'],

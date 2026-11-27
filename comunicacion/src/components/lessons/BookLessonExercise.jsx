@@ -4,7 +4,9 @@ import { ArrowRight, Check, RotateCcw, Undo2 } from 'lucide-react'
 import Button from '../common/Button'
 import Card from '../common/Card'
 import LessonAudioButton from '../common/LessonAudioButton'
+import StoryCard from './StoryCard'
 import BookLessonImage from './BookLessonImage'
+import BookLessonCrossword from './BookLessonCrossword'
 import VoiceRecorder from './VoiceRecorder'
 import { playLessonAudio } from '../../lib/audioPlayer'
 import { registrarProgreso } from '../../lib/progreso'
@@ -20,6 +22,7 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
   const passive = type === 'present' || type === 'oral'
   const Group = type === 'match' ? Card : 'section'
   const answerText = selected.map((index) => options[index].label).join(exercise.separator ?? '')
+  const completionChoice = exercise.sentenceCompletion && options[selected[0]]
   const groupsReady = (!exercise.groups || exercise.groups.every((group) => groupChoices[group.id]))
     && (!exercise.selectionCount || selected.length === exercise.selectionCount)
 
@@ -58,7 +61,7 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
         <p className="text-instruction">{exercise.instruction.text}</p>
         <LessonAudioButton audio={exercise.instruction}>Escuchar instrucción</LessonAudioButton>
       </div>
-      {exercise.letter && <p className="text-letter">{formatLetterGroup(exercise.letter.trim().split(/\s+/)[0])}</p>}
+      {exercise.letter && <p className="text-letter">{exercise.letterForms ?? formatLetterGroup(exercise.letter.trim().split(/\s+/)[0])}</p>}
       {exercise.sound && <LessonAudioButton audio={exercise.sound} size="large">Escuchar el sonido de {lesson.letter}</LessonAudioButton>}
       {exercise.extraAudios?.map((audio) => <LessonAudioButton key={audio.src} audio={audio}>Escuchar los sonidos despacio</LessonAudioButton>)}
       {prompt && <>
@@ -66,6 +69,9 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
         {!exercise.hideWord && <p className="text-word">{prompt.label}</p>}
         <LessonAudioButton audio={prompt.audio}>Escuchar {prompt.listenLabel ?? (exercise.hideWord ? 'la palabra' : prompt.label)}</LessonAudioButton>
       </>}
+      {exercise.reading && <StoryCard lessonId={lesson.id} title={exercise.reading.title}
+        paragraphs={exercise.reading.paragraphs} image={exercise.reading.image} imageAlt={exercise.reading.imageAlt}
+        audio={exercise.reading.audio.available === false ? undefined : exercise.reading.audio.src} />}
       {exercise.teacherPrompt && <details className="word-bank-reference">
         <summary>Para la maestra</summary>
         <p className="text-reading">{exercise.teacherPrompt}</p>
@@ -79,6 +85,18 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
           <LessonAudioButton audio={item.audio} aria-label={`Escuchar ${item.label}`}>Escuchar</LessonAudioButton>
         </Card>)}
       </div>}
+      {exercise.sentenceCompletion && <>
+        <p className="text-sentence book-sentence-completion" aria-live="polite">
+          {exercise.sentenceCompletion.before}
+          <span className="book-sentence-completion__slot">
+            {completionChoice
+              ? <BookLessonImage key={completionChoice.completionImage} src={completionChoice.completionImage} alt={completionChoice.label} />
+              : '_____'}
+          </span>
+          {exercise.sentenceCompletion.after}
+        </p>
+        <LessonAudioButton audio={exercise.sentenceCompletion.audio}>Escuchar oración</LessonAudioButton>
+      </>}
       {ordered && <div className="completion-target" aria-live="polite" aria-label="Tu respuesta">
         <p className="text-word">{answerText || '…'}</p>
       </div>}
@@ -101,11 +119,12 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
           </Card>
         })}
       </div>}
+      {exercise.crossword && <BookLessonCrossword crossword={exercise.crossword} choices={groupChoices} />}
       {exercise.groups && <div className={type === 'match' ? ['book-choice-groups', exercise.groups.length === 4 && 'book-choice-groups--pairs'].filter(Boolean).join(' ') : 'completion-content'}>
-      {exercise.groups.map((group) => <Group className={`word-choice-group${group.options.some((option) => option.image || option.label.length > 3) ? ' word-choice-group--wide-options' : ''}`} key={group.id} aria-labelledby={`group-${group.id}`}>
+      {exercise.groups.map((group) => <Group className={`word-choice-group${exercise.uniformChoices || group.options.some((option) => option.image || option.label.length > 3) ? ' word-choice-group--wide-options' : ''}`} key={group.id} aria-labelledby={`group-${group.id}`}>
         <h2 id={`group-${group.id}`}>{group.label}</h2>
-        {group.image && <BookLessonImage src={group.image} alt={group.label} />}
-        {group.audio && <LessonAudioButton audio={group.audio} aria-label={`Escuchar ${group.label}`}>Escuchar palabra</LessonAudioButton>}
+        {group.image && <BookLessonImage src={group.image} alt={group.imageAlt ?? group.label} />}
+        {group.audio && <LessonAudioButton audio={group.audio} aria-label={`Escuchar ${group.label}`}>{group.listenLabel ?? 'Escuchar palabra'}</LessonAudioButton>}
         <div className="selection-options selection-options--centered">
           {group.options.map((option) => <Card className="word-choice-option" key={option.id} selected={groupChoices[group.id] === option.id}>
             <Button variant="secondary" fullWidth aria-pressed={groupChoices[group.id] === option.id}

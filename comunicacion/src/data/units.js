@@ -337,7 +337,7 @@ export const units = [
   {
     id: 6,
     title: 'Unidad 6',
-    pageRange: 'Páginas 213–256',
+    pageRange: 'Páginas 213–246',
     lessons: [
       {
         id: 'x',
@@ -375,9 +375,10 @@ export const units = [
       },
       {
         id: 'fl',
+        bookPage: 235,
         title: getLessonCardLabel('fl'),
         route: '/lecciones/fl',
-        available: false,
+        available: true,
       },
       {
         id: 'ge-gi',
@@ -389,7 +390,7 @@ export const units = [
         id: 'ce-ci',
         title: getLessonCardLabel('ce-ci'),
         route: '/lecciones/ce-ci',
-        available: false,
+        available: true,
       },
       {
         id: 'gue-con-dieresis',
@@ -404,6 +405,15 @@ export const units = [
         route: '/lecciones/abecedario',
         available: true,
       },
+    ],
+  },
+  {
+    id: 7, title: 'Unidad 7', pageRange: 'Páginas 247–255',
+    lessons: [
+      { id: 'escritura-je-ji-ge-gi', bookPage: 252, title: '¡Escribamos palabras con je-ji y ge-gi!', route: '/lecciones/escritura-je-ji-ge-gi', available: true },
+      { id: 'escritura-ll-y', bookPage: 253, title: '¡Escribamos palabras con ll-y!', route: '/lecciones/escritura-ll-y', available: true },
+      { id: 'escritura-q-c', bookPage: 254, title: '¡Escribamos palabras con q-c!', route: '/lecciones/escritura-q-c', available: true },
+      { id: 'escritura-h', bookPage: 255, title: '¡Escribamos palabras con h!', route: '/lecciones/escritura-h', available: true },
     ],
   },
 ]

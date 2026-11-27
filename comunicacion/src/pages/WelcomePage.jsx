@@ -1,23 +1,23 @@
 import { useEffect, useState } from 'react'
 import Button from '../components/common/Button'
 import Card from '../components/common/Card'
-import { esDocente, irAMatematica, RUTA_PANEL_DOCENTE } from '../lib/irAMatematica'
+import { irAMatematica, rutaDelPanel } from '../lib/irAMatematica'
 import '../styles/landing.css'
 
 function WelcomePage() {
-  // La docente no elige proyecto: va directo a su panel, que vive en
-  // Matemática. Se decide aquí y no en el login para cubrir también la
-  // entrada con Google, que vuelve directo a /welcome.
+  // La docente y la coordinación no eligen proyecto: van directo a su
+  // panel, que vive en Matemática. Se decide aquí y no en el login para
+  // cubrir también la entrada con Google, que vuelve directo a /welcome.
   const [revisandoRol, setRevisandoRol] = useState(true)
   const [abriendoMate, setAbriendoMate] = useState(false)
 
   useEffect(() => {
     let activo = true
 
-    esDocente().then(async (docente) => {
+    rutaDelPanel().then(async (ruta) => {
       if (!activo) return
-      if (docente) {
-        const { error } = await irAMatematica(RUTA_PANEL_DOCENTE)
+      if (ruta) {
+        const { error } = await irAMatematica(ruta)
         if (!error) return
       }
       setRevisandoRol(false)

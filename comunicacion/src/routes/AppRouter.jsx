@@ -160,6 +160,12 @@ import { wLesson } from '../data/wData'
 import { geGiLesson } from '../data/geGiData'
 import { gueGuiLesson } from '../data/gueGuiData'
 import { frLesson } from '../data/frData'
+import { writingJeJiGeGiLesson } from '../data/writingJeJiGeGiData'
+import { writingLlYLesson } from '../data/writingLlYData'
+import { writingQcLesson } from '../data/writingQcData'
+import { writingHLesson } from '../data/writingHData'
+import { flLesson } from '../data/flData'
+import { ceCiLesson } from '../data/ceCiData'
 import AbecedarioPage, { AbecedarioActivityPage } from '../pages/AbecedarioPage'
 import { alphabetGame } from '../data/abecedarioData'
 
@@ -200,7 +206,7 @@ function AppRouter() {
       <AppSky>
       <LessonAccessGuard>
         <Routes>
-          {[fLesson, rrLesson, enieLesson, drLesson, hLesson, zLesson, llLesson, grLesson, glLesson, xLesson, yLetterLesson, kLesson, wLesson, frLesson, geGiLesson, gueGuiLesson].flatMap((lesson) => [
+          {[fLesson, rrLesson, enieLesson, drLesson, hLesson, zLesson, llLesson, grLesson, glLesson, xLesson, yLetterLesson, kLesson, wLesson, frLesson, flLesson, geGiLesson, ceCiLesson, gueGuiLesson, writingJeJiGeGiLesson, writingLlYLesson, writingQcLesson, writingHLesson].flatMap((lesson) => [
             <Route key={lesson.id} path={`/lecciones/${lesson.id}`}
               element={<BookLessonReading lesson={lesson} />} />,
             ...lesson.activities.map((activity) => (

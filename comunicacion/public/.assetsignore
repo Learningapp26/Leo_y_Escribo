@@ -1,0 +1,3 @@
+# Keep archived lesson resources in Git, but do not upload them as public assets.
+/images/lecciones/c.zip
+/images/lecciones/q.zip
