@@ -10,7 +10,9 @@ import { getLessonLetters } from '../src/data/lessonLabels.js'
 const lessons = [writingLlYLesson, writingQcLesson, writingHLesson]
 
 test('writing lessons belong to the existing Writer planet and expose three activities', () => {
-  assert.deepEqual(getUnitById(7).lessons.map((lesson) => lesson.id), lessons.map((lesson) => lesson.id))
+  // The Writer planet also holds other writing lessons; these must be in it, in book order.
+  const unitIds = getUnitById(7).lessons.map((lesson) => lesson.id)
+  assert.deepEqual(unitIds.filter((id) => lessons.some((lesson) => lesson.id === id)), lessons.map((lesson) => lesson.id))
   for (const lesson of lessons) {
     assert.equal(lesson.activities.length, 3)
     assert.equal(getLessonById(lesson.id).route, `/lecciones/${lesson.id}`)

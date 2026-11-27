@@ -2,6 +2,7 @@
 const LESSON_GROUPS = {
   'escritura-vocales-juntas': ['vocales juntas'],
   'escritura-otras-vocales-juntas': ['vocales juntas'],
+  'escritura-mp-mb': ['mp', 'mb'],
   'escritura-je-ji-ge-gi': ['je', 'ji', 'ge', 'gi'],
   'escritura-ll-y': ['ll', 'y'],
   'escritura-q-c': ['q', 'c'],

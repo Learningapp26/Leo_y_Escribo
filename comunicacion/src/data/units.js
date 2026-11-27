@@ -412,6 +412,7 @@ export const units = [
     lessons: [
       { id: 'escritura-vocales-juntas', bookPage: 247, title: '¡Escribamos palabras con vocales juntas!', route: '/lecciones/escritura-vocales-juntas', available: true },
       { id: 'escritura-otras-vocales-juntas', bookPage: 249, title: 'Otras palabras con vocales juntas', route: '/lecciones/escritura-otras-vocales-juntas', available: true },
+      { id: 'escritura-mp-mb', bookPage: 251, title: '¡Escribamos palabras con mp-mb!', route: '/lecciones/escritura-mp-mb', available: true },
       { id: 'escritura-je-ji-ge-gi', bookPage: 252, title: '¡Escribamos palabras con je-ji y ge-gi!', route: '/lecciones/escritura-je-ji-ge-gi', available: true },
       { id: 'escritura-ll-y', bookPage: 253, title: '¡Escribamos palabras con ll-y!', route: '/lecciones/escritura-ll-y', available: true },
       { id: 'escritura-q-c', bookPage: 254, title: '¡Escribamos palabras con q-c!', route: '/lecciones/escritura-q-c', available: true },
