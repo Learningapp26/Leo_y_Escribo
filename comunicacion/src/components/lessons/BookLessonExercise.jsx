@@ -153,7 +153,7 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
               {option.image && <BookLessonImage src={option.image} alt={option.label} />}
               {option.label}{groupChoices[group.id] === option.id && <Check aria-label="Seleccionado" size={20} />}
             </Button>
-            <LessonAudioButton audio={option.audio} aria-label={`Escuchar ${option.caption ?? option.label}`}>{null}</LessonAudioButton>
+            {!exercise.hideOptionAudio && <LessonAudioButton audio={option.audio} aria-label={`Escuchar ${option.caption ?? option.label}`}>{null}</LessonAudioButton>}
           </Card>)}
         </div>
         {type === 'match' && feedback === 'retry' && groupChoices[group.id] !== group.answer && <p role="status">Revisa esta respuesta.</p>}
