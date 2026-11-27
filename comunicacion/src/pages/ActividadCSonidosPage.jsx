@@ -1,3 +1,4 @@
+import ListeningWords from '../components/lessons/ListeningWords'
 import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
 import {
@@ -287,24 +288,7 @@ function ActividadCSonidosPage() {
             word={{ name: cSoundIntro.word, image: cSoundIntro.image, imageAlt: cSoundIntro.imageAlt, audio: cSoundIntro.wordAudio }}
           />
 
-          <p className="text-instruction">
-            Escucha y repite: casa, come y cura.
-          </p>
-
-          <div className="completion-bank">
-            {cSoundExamples.map((example) => (
-              <Button
-                key={example.word}
-                variant="audio"
-                icon={Volume2}
-                onClick={() =>
-                  playAudio(example.audio)
-                }
-              >
-                {example.word}
-              </Button>
-            ))}
-          </div>
+          <ListeningWords items={cSoundExamples} letter="C" />
 
           <Button
             icon={ArrowRight}

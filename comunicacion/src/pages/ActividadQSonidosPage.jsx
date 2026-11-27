@@ -1,3 +1,4 @@
+import ListeningWords from '../components/lessons/ListeningWords'
 import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
@@ -160,22 +161,7 @@ function ActividadQSonidosPage() {
             word={qSoundIntro.mainWord}
           />
 
-          <p className="text-instruction">
-            Escucha y repite: quilete, quemada y esquina.
-          </p>
-
-          <div className="completion-bank">
-            {qSoundExamples.map((example) => (
-              <Button
-                key={example.word}
-                variant="audio"
-                icon={Volume2}
-                onClick={() => playAudio(example.audio)}
-              >
-                {example.word}
-              </Button>
-            ))}
-          </div>
+          <ListeningWords items={qSoundExamples} letter="Q" />
 
           <Button
             icon={ArrowRight}

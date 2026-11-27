@@ -1,3 +1,4 @@
+import ListeningWords from '../components/lessons/ListeningWords'
 import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
@@ -243,31 +244,7 @@ function ActividadNImagenesPage() {
             word={nSoundIntro.mainWord}
           />
 
-          <div className="selection-instructions">
-            <p className="text-instruction">
-              Estas palabras también empiezan con el sonido /n/. Tócalas para
-              practicarlas.
-            </p>
-          </div>
-
-          <div className="selection-options">
-            {nSoundIntro.exampleWords.map((word) => (
-              <button
-                className="selection-button"
-                type="button"
-                key={word.id}
-                onClick={() => playIfAvailable(word.audio)}
-              >
-                <img
-                  className="selection-image"
-                  src={word.image}
-                  alt={word.name}
-                />
-
-                <span className="selection-word">{word.name}</span>
-              </button>
-            ))}
-          </div>
+          <ListeningWords items={nSoundIntro.exampleWords} letter="N" />
 
           <Button
             icon={ArrowRight}

@@ -1,3 +1,4 @@
+import ListeningWords from '../components/lessons/ListeningWords'
 import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
@@ -242,31 +243,7 @@ function ActividadLImagenesPage() {
             word={lSoundIntro.mainWord}
           />
 
-          <div className="selection-instructions">
-            <p className="text-instruction">
-              Estas palabras también empiezan con el sonido /l/. Tócalas
-              para escucharlas.
-            </p>
-          </div>
-
-          <div className="selection-options">
-            {lSoundIntro.exampleWords.map((word) => (
-              <button
-                className="selection-button"
-                type="button"
-                key={word.id}
-                onClick={() => playAudio(word.audio)}
-              >
-                <img
-                  className="selection-image"
-                  src={word.image}
-                  alt={word.name}
-                />
-
-                <span className="selection-word">{word.name}</span>
-              </button>
-            ))}
-          </div>
+          <ListeningWords items={lSoundIntro.exampleWords} letter="L" />
 
           <Button
             icon={ArrowRight}

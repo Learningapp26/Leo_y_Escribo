@@ -1,3 +1,4 @@
+import ListeningWords from '../components/lessons/ListeningWords'
 import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
@@ -159,21 +160,7 @@ function ActividadVSonidosPage() {
             </Button>
           </div>
 
-          <div className="selection-options">
-            {vSoundExamples.map((example) => (
-              <Card
-                key={example.word}
-                imageSrc={example.image}
-                imageAlt={example.word}
-                title={example.word}
-                footer={
-                  <Button variant="audio" icon={Volume2} fullWidth onClick={() => playAudio(example.audio)}>
-                    Escuchar
-                  </Button>
-                }
-              />
-            ))}
-          </div>
+          <ListeningWords items={vSoundExamples} letter="V" showInstruction={false} />
 
           <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth onClick={goToNextPhase}>
             Continuar

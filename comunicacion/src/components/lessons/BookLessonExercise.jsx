@@ -10,6 +10,7 @@ import BookLessonImage from './BookLessonImage'
 import BookLessonCrossword from './BookLessonCrossword'
 import VoiceRecorder from './VoiceRecorder'
 import { LetterSound, WordSound } from './SoundIntroduction'
+import ListeningWords from './ListeningWords'
 import { playLessonAudio } from '../../lib/audioPlayer'
 import { registrarProgreso } from '../../lib/progreso'
 
@@ -85,14 +86,17 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
         <p className="text-reading">{exercise.teacherPrompt}</p>
       </details>}
       {exercise.pattern && <p className="completion-word-pattern">{fillBlank(exercise.pattern, answerText)}</p>}
-      {exercise.items && <div className={`selection-options${(exercise.centeredItems ?? (lesson.centeredItems && exercise.items.length > 1)) ? ' selection-options--centered' : ''}`}>
+      {exercise.items && (type === 'present' && !exercise.letter && !exercise.items.some((item) => item.definition)
+        ? <ListeningWords key={exercise.id} items={exercise.items} letter={lesson.letter}
+          showInstruction={Boolean(exercise.sound)} instructionAudio={exercise.instruction} />
+        : <div className={`selection-options${(exercise.centeredItems ?? (lesson.centeredItems && exercise.items.length > 1)) ? ' selection-options--centered' : ''}`}>
         {exercise.items.map((item) => <Card key={item.id}>
           {item.image && <BookLessonImage key={item.image} src={item.image} alt={item.label} />}
           <p className="text-reading">{item.label}</p>
           {item.definition && <details className="word-bank-reference"><summary>¿Qué significa?</summary><p className="text-reading">{item.definition}</p>{item.definitionAudio && <LessonAudioButton audio={item.definitionAudio}>Escuchar significado</LessonAudioButton>}</details>}
           <LessonAudioButton audio={item.audio} aria-label={`Escuchar ${item.label}`}>Escuchar</LessonAudioButton>
         </Card>)}
-      </div>}
+      </div>)}
       {exercise.sentenceCompletion && <>
         <p className="text-sentence book-sentence-completion" aria-live="polite">
           {exercise.sentenceCompletion.before}
