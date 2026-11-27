@@ -9,7 +9,6 @@ export const vowelLesson = {
   instructionAudio: vocalesAudio('Instruccion repaso'),
   progressLabel: 'Parte 1 de 2',
   reviewTitle: 'Estas son las vocales',
-  reviewInstruction: 'Observa cada letra y pronuncia su sonido.',
   allVowelsAudio: vocalesAudio('vocales'),
   activityTitle: 'Actividad: encuentra la vocal',
   activityDescription:
@@ -36,13 +35,13 @@ export const vowelInitialActivity = {
   instruction:
     'Escucha la palabra y selecciona la vocal con la que comienza su nombre.',
   instructionAudio: vocalesAudio('Encuentra la vocal inicial'),
-  prompt: 'Con que vocal comienza?',
   successFeedback: 'Muy bien! Elegiste la vocal correcta.',
   retryFeedback:
     'Casi lo logras. Escucha la palabra e intentalo otra vez.',
   completionTitle: 'Terminaste la actividad',
   completionMessage:
-    'Identificaste la vocal inicial de cada palabra.',
+    'Identificaste todas las vocales.',
+  completionAudio: null, // Agregar aquí la ruta cuando esté grabada la felicitación.
   saveSessionError:
     'No hay una sesión activa. Inicia sesión para guardar tu progreso.',
   saveGenericError:

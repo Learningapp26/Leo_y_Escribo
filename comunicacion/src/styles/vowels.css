@@ -68,7 +68,7 @@
 .vowels-review-card {
   position: relative;
   overflow: visible;
-  padding: var(--space-md);
+  padding: var(--space-xl);
 }
 
 .vowels-review-card::before {
@@ -91,6 +91,31 @@
   color: var(--lesson-primary);
 }
 
+.vowels-review-card__heading,
+.vowels-exercise-card__heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.vowels-review-card__heading .btn,
+.vowels-exercise-card__heading .btn {
+  flex-shrink: 0;
+  gap: 0;
+}
+
+.vowels-review-card__heading .btn__icon,
+.vowels-exercise-card__heading .btn__icon {
+  width: 32px;
+  height: 32px;
+}
+
+.vowels-review-card__heading .btn__label,
+.vowels-exercise-card__heading .btn__label {
+  display: none;
+}
+
 .vowels-list {
   display: flex;
   flex-wrap: wrap;
@@ -101,15 +126,16 @@
 
 .vowels-list__item {
   display: grid;
-  width: 96px;
-  height: 96px;
+  width: 144px;
+  height: 144px;
+  padding: 0;
   place-items: center;
   color: var(--color-surface);
   background-color: var(--lesson-primary);
   border-radius: var(--radius-full);
   box-shadow: 0 8px 18px rgba(3,18,33,0.08);
   font-family: var(--font-content);
-  font-size: calc(var(--font-size-2xl) + 2px);
+  font-size: 56px;
   font-weight: var(--font-weight-bold);
   transition: transform 160ms ease, box-shadow 160ms ease;
   background-image: radial-gradient(circle at 30% 25%, rgba(255,255,255,0.06), transparent 35%);
@@ -172,7 +198,7 @@
 .vowels-exercise-card__word {
   color: var(--lesson-primary);
   font-family: var(--font-content);
-  font-size: var(--font-size-2xl);
+  font-size: clamp(32px, 6vw, 48px);
   text-align: center;
 }
 
@@ -254,9 +280,9 @@
   }
 
   .vowels-list__item {
-    width: 72px;
-    height: 72px;
-    font-size: var(--font-size-xl);
+    width: 112px;
+    height: 112px;
+    font-size: 42px;
   }
 
   .vowels-options {

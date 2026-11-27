@@ -32,21 +32,23 @@ function LeccionVocalesPage() {
 
           <h1 id="titulo-vocales">{getLessonHeading('vocales')}</h1>
 
-          <p className="text-instruction vowels-page__instruction">
-            {vowelLesson.instruction}
-          </p>
+          <div className="selection-instructions">
+            <p className="text-instruction">
+              {vowelLesson.instruction}
+            </p>
 
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() =>
-              playAudio(vowelLesson.instructionAudio)
-            }
-            data-audio-src={vowelLesson.instructionAudio}
-          >
-            Escuchar instrucción
-          </Button>
+            <Button
+              variant="audio"
+              size="large"
+              icon={Volume2}
+              onClick={() =>
+                playAudio(vowelLesson.instructionAudio)
+              }
+              data-audio-src={vowelLesson.instructionAudio}
+            >
+              Escuchar instrucción
+            </Button>
+          </div>
         </header>
 
         <ProgressBar
@@ -61,7 +63,17 @@ function LeccionVocalesPage() {
             aria-hidden="true"
           />
 
-          <h2>{vowelLesson.reviewTitle}</h2>
+          <div className="vowels-review-card__heading">
+            <Button
+              variant="audio"
+              className="btn--audio-round"
+              icon={Volume2}
+              aria-label="Escuchar las vocales"
+              onClick={() => playAudio(vowelLesson.allVowelsAudio)}
+              data-audio-src={vowelLesson.allVowelsAudio}
+            />
+            <h2>{vowelLesson.reviewTitle}</h2>
+          </div>
 
           <div
             className="vowels-list"
@@ -84,18 +96,6 @@ function LeccionVocalesPage() {
             {vowelLesson.reviewInstruction}
           </p>
 
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            fullWidth
-            onClick={() =>
-              playAudio(vowelLesson.allVowelsAudio)
-            }
-            data-audio-src={vowelLesson.allVowelsAudio}
-          >
-            Escuchar las vocales
-          </Button>
         </Card>
 
         <Card

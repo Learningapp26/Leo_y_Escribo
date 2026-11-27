@@ -2,9 +2,11 @@ import { useState } from 'react'
 import {ArrowRight, Check, RotateCcw, Volume2, } from 'lucide-react'
 
 import Button from '../components/common/Button'
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import Card from '../components/common/Card'
 import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
+import { RewardBurst } from '../components/space/Reward'
 import {
   vowelAudioPaths,
   vowelInitialActivity,
@@ -88,18 +90,25 @@ function ActividadVocalesPage() {
       <main className="page selection-page vowels-page planet--0">
         <section className="vowels-page__content">
           <Card className="selection-card vowels-result-card">
-            <span
-              className="vowels-result-card__icon"
-              aria-hidden="true"
-            >
-              *
-            </span>
+            <RewardBurst />
 
             <h1>{vowelInitialActivity.completionTitle}</h1>
 
             <p className="text-instruction">
               {vowelInitialActivity.completionMessage}
             </p>
+
+            {vowelInitialActivity.completionAudio && (
+              <Button
+                variant="audio"
+                icon={Volume2}
+                fullWidth
+                onClick={() => playAudio(vowelInitialActivity.completionAudio)}
+                data-audio-src={vowelInitialActivity.completionAudio}
+              >
+                Escuchar felicitación
+              </Button>
+            )}
 
             <Button
               to="/lecciones/unidad/1"
@@ -108,7 +117,7 @@ function ActividadVocalesPage() {
               size="large"
               fullWidth
             >
-              Volver a la lecciones
+              Volver a las lecciones
             </Button>
           </Card>
         </section>
@@ -136,20 +145,22 @@ function ActividadVocalesPage() {
             {vowelInitialActivity.title}
           </h1>
 
-          <p className="text-instruction vowels-page__instruction">
-            {vowelInitialActivity.instruction}
-          </p>
+          <div className="selection-instructions">
+            <p className="text-instruction">
+              {vowelInitialActivity.instruction}
+            </p>
 
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            onClick={() =>
-              playAudio(vowelInitialActivity.instructionAudio)
-            }
-          >
-            Escuchar instruccion
-          </Button>
+            <Button
+              variant="audio"
+              size="large"
+              icon={Volume2}
+              onClick={() =>
+                playAudio(vowelInitialActivity.instructionAudio)
+              }
+            >
+              Escuchar instruccion
+            </Button>
+          </div>
         </header>
 
         <ProgressBar
@@ -165,19 +176,18 @@ function ActividadVocalesPage() {
             alt={ejercicio.palabra}
           />
 
-          <h2 className="vowels-exercise-card__word">
-            {ejercicio.palabra}
-          </h2>
-
-          <Button
-            variant="audio"
-            size="large"
-            icon={Volume2}
-            fullWidth
-            onClick={() => playAudio(ejercicio.audio)}
-          >
-            Escuchar palabra
-          </Button>
+          <div className="vowels-exercise-card__heading">
+            <Button
+              variant="audio"
+              className="btn--audio-round"
+              icon={Volume2}
+              aria-label={`Escuchar ${ejercicio.palabra}`}
+              onClick={() => playAudio(ejercicio.audio)}
+            />
+            <h2 className="vowels-exercise-card__word">
+              {ejercicio.palabra}
+            </h2>
+          </div>
 
           <p className="text-reading">
             {vowelInitialActivity.prompt}
@@ -204,6 +214,7 @@ function ActividadVocalesPage() {
                     .filter(Boolean)
                     .join(' ')}
                   aria-pressed={selected}
+                  disabled={Boolean(resultado)}
                   onClick={() => {
                     setVocalSeleccionada(vocal)
                     setResultado('')
@@ -215,24 +226,6 @@ function ActividadVocalesPage() {
               )
             })}
           </div>
-
-          {resultado === 'correcto' && (
-            <p
-              className="feedback feedback--success"
-              role="status"
-            >
-              {vowelInitialActivity.successFeedback}
-            </p>
-          )}
-
-          {resultado === 'reintento' && (
-            <p
-              className="feedback feedback--retry"
-              role="status"
-            >
-              {vowelInitialActivity.retryFeedback}
-            </p>
-          )}
 
           <div className="vowels-exercise-card__actions">
             {errorGuardado && (
@@ -254,32 +247,36 @@ function ActividadVocalesPage() {
             )}
 
             {resultado === 'reintento' && (
-              <Button
-                variant="retry"
-                icon={RotateCcw}
-                size="large"
-                fullWidth
-                onClick={reintentarEjercicio}
-              >
-                Intentar nuevamente
-              </Button>
+              <ActivityFeedback correct={false}>
+                <Button
+                  variant="retry"
+                  icon={RotateCcw}
+                  size="large"
+                  fullWidth
+                  onClick={reintentarEjercicio}
+                >
+                  Intentar nuevamente
+                </Button>
+              </ActivityFeedback>
             )}
 
             {resultado === 'correcto' && (
-              <Button
-                icon={ArrowRight}
-                iconPosition="right"
-                size="large"
-                fullWidth
-                disabled={guardandoProgreso}
-                onClick={siguienteEjercicio}
-              >
-                {guardandoProgreso
-                  ? 'Guardando progreso...'
-                  : ejercicioActual === vowelInitialExercises.length - 1
-                    ? 'Finalizar actividad'
-                    : 'Siguiente ejercicio'}
-              </Button>
+              <ActivityFeedback correct>
+                <Button
+                  icon={ArrowRight}
+                  iconPosition="right"
+                  size="large"
+                  fullWidth
+                  disabled={guardandoProgreso}
+                  onClick={siguienteEjercicio}
+                >
+                  {guardandoProgreso
+                    ? 'Guardando progreso...'
+                    : ejercicioActual === vowelInitialExercises.length - 1
+                      ? 'Finalizar actividad'
+                      : 'Siguiente ejercicio'}
+                </Button>
+              </ActivityFeedback>
             )}
           </div>
         </Card>
