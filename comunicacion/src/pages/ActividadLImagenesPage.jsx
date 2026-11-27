@@ -1,3 +1,5 @@
+import { togglePairSelection, isDistinctPair } from '../lib/pairSelection'
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import ListeningWords from '../components/lessons/ListeningWords'
 import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
@@ -101,26 +103,17 @@ function ActividadLImagenesPage() {
   const isMatched = (id) => matchedIds.includes(id)
 
   const pickCard = (item) => {
-    if (pairFeedback === 'retry') return
-    if (isMatched(item.id)) return
+    if (pairFeedback || matchedIds.includes(item.id)) return
 
-    if (firstPick?.id === item.id) {
-      setFirstPick(null)
-      return
-    }
-
-    if (!firstPick) {
-      setFirstPick(item)
-      return
-    }
-
-    if (!secondPick) {
-      setSecondPick(item)
-    }
+    const [nextFirst = null, nextSecond = null] = togglePairSelection(
+      [firstPick, secondPick], item,
+    )
+    setFirstPick(nextFirst)
+    setSecondPick(nextSecond)
   }
 
   const checkPair = () => {
-    if (!firstPick || !secondPick) return
+    if (pairFeedback || !isDistinctPair(firstPick, secondPick, matchedIds)) return
 
     const isCorrect = firstPick.startsWithL && secondPick.startsWithL
 
@@ -151,28 +144,19 @@ function ActividadLImagenesPage() {
   const isSoundMatched = (id) => matchedSoundIds.includes(id)
 
   const pickSoundCard = (item) => {
-    if (soundFeedback === 'retry') return
-    if (isSoundMatched(item.id)) return
+    if (soundFeedback || matchedSoundIds.includes(item.id)) return
 
     playAudio(item.audio)
 
-    if (soundFirstPick?.id === item.id) {
-      setSoundFirstPick(null)
-      return
-    }
-
-    if (!soundFirstPick) {
-      setSoundFirstPick(item)
-      return
-    }
-
-    if (!soundSecondPick) {
-      setSoundSecondPick(item)
-    }
+    const [nextFirst = null, nextSecond = null] = togglePairSelection(
+      [soundFirstPick, soundSecondPick], item,
+    )
+    setSoundFirstPick(nextFirst)
+    setSoundSecondPick(nextSecond)
   }
 
   const checkSoundPair = () => {
-    if (!soundFirstPick || !soundSecondPick) return
+    if (soundFeedback || !isDistinctPair(soundFirstPick, soundSecondPick, matchedSoundIds)) return
 
     const isCorrect = soundFirstPick.pairId === soundSecondPick.pairId
 
@@ -299,24 +283,17 @@ function ActividadLImagenesPage() {
           </div>
 
           {selectionFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Todas empiezan con el sonido /l/.
-            </p>
+            </>} />
           )}
 
           {selectionFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
-              Revisa otra vez. Algunas imágenes no empiezan con /l/.
-            </p>
+            <ActivityFeedback correct={false} message={<>
+            </>} />
           )}
 
-          {selectionFeedback !== 'correct' && (
+          {!selectionFeedback && (
             <Button
               icon={Check}
               size="large"
@@ -388,7 +365,7 @@ function ActividadLImagenesPage() {
                     .join(' ')}
                   type="button"
                   key={item.id}
-                  disabled={matched}
+                  disabled={Boolean(pairFeedback) || matchedIds.includes(item.id)}
                   aria-pressed={selected}
                   onClick={() => pickCard(item)}
                 >
@@ -405,21 +382,15 @@ function ActividadLImagenesPage() {
           </div>
 
           {pairFeedback === 'correct' && !isPairsFinished && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto! Las dos empiezan con /l/.
-            </p>
+            </>} />
           )}
 
           {pairFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esas imágenes no empiezan con el mismo sonido.
-            </p>
+            </>} />
           )}
 
           {!pairFeedback && (
@@ -427,7 +398,7 @@ function ActividadLImagenesPage() {
               icon={Check}
               size="large"
               fullWidth
-              disabled={!firstPick || !secondPick}
+              disabled={Boolean(pairFeedback) || !isDistinctPair(firstPick, secondPick, matchedIds)}
               onClick={checkPair}
             >
               Comprobar pareja
@@ -514,7 +485,7 @@ function ActividadLImagenesPage() {
                     .join(' ')}
                   type="button"
                   key={item.id}
-                  disabled={matched}
+                  disabled={Boolean(soundFeedback) || matchedSoundIds.includes(item.id)}
                   aria-pressed={selected}
                   onClick={() => pickSoundCard(item)}
                 >
@@ -531,22 +502,16 @@ function ActividadLImagenesPage() {
           </div>
 
           {soundFeedback === 'correct' && !isSoundMatchingFinished && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto! Tienen los mismos primeros sonidos.
-            </p>
+            </>} />
           )}
 
           {soundFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esas figuras no tienen los mismos primeros sonidos. Vuelve a
               intentarlo.
-            </p>
+            </>} />
           )}
 
           {!soundFeedback && (
@@ -554,7 +519,7 @@ function ActividadLImagenesPage() {
               icon={Check}
               size="large"
               fullWidth
-              disabled={!soundFirstPick || !soundSecondPick}
+              disabled={Boolean(soundFeedback) || !isDistinctPair(soundFirstPick, soundSecondPick, matchedSoundIds)}
               onClick={checkSoundPair}
             >
               Comprobar pareja

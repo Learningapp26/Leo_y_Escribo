@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -238,21 +239,15 @@ function ActividadTrCompletarPage() {
         </div>
 
         {feedback === 'correct' && (
-          <p
-            className="selection-feedback selection-feedback--correct"
-            role="status"
-          >
+          <ActivityFeedback correct message={<>
             ¡Muy bien! Formaste la palabra {exercise.word}.
-          </p>
+          </>} />
         )}
 
         {feedback === 'retry' && (
-          <p
-            className="selection-feedback selection-feedback--retry"
-            role="status"
-          >
+          <ActivityFeedback correct={false} message={<>
             Ese orden no forma la palabra correcta. Inténtalo de nuevo.
-          </p>
+          </>} />
         )}
 
         {feedback !== 'correct' && (

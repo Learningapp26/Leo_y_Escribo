@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { useState } from 'react'
 import {
   ArrowRight,
@@ -282,28 +283,21 @@ function ActividadCCompletarPage() {
 
           {completionFeedback ===
             'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto! Formaste la palabra{' '}
               {completionExercise.word}.
-            </p>
+            </>} />
           )}
 
           {completionFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esa sílaba no completa la palabra.
               Escucha de nuevo e inténtalo otra
               vez.
-            </p>
+            </>} />
           )}
 
-          {completionFeedback !==
-            'correct' && (
+          {!completionFeedback && (
             <Button
               icon={Check}
               size="large"
@@ -450,28 +444,22 @@ function ActividadCCompletarPage() {
           </div>
 
           {joinFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien!{' '}
               {joinExercise.firstSyllable} +{' '}
               {joinExercise.answer} forma{' '}
               {joinExercise.word}.
-            </p>
+            </>} />
           )}
 
           {joinFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esa sílaba no forma el nombre del
               dibujo. Inténtalo nuevamente.
-            </p>
+            </>} />
           )}
 
-          {joinFeedback !== 'correct' && (
+          {!joinFeedback && (
             <Button
               icon={Check}
               size="large"

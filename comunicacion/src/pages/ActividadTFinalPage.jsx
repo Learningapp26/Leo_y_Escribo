@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { fillBlank } from '../lib/fillBlank'
 import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
@@ -276,24 +277,18 @@ function ActividadTFinalPage() {
           </div>
 
           {caseResult === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto! Se escribe {caseItem.name}.
-            </p>
+            </>} />
           )}
 
           {caseResult === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esa no es la sílaba correcta. Escucha otra vez.
-            </p>
+            </>} />
           )}
 
-          {caseResult !== 'correct' && (
+          {!caseResult && (
             <Button
               icon={Check}
               size="large"
@@ -383,24 +378,18 @@ function ActividadTFinalPage() {
           </div>
 
           {sentenceResult === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Esa es la oración correcta.
-            </p>
+            </>} />
           )}
 
           {sentenceResult === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Ese no es el orden correcto. Revisa otra vez.
-            </p>
+            </>} />
           )}
 
-          {sentenceResult !== 'correct' && (
+          {!sentenceResult && (
             <Button
               icon={Check}
               size="large"

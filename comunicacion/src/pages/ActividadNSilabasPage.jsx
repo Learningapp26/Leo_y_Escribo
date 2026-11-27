@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { LetterSound } from '../components/lessons/SoundIntroduction'
 import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
@@ -260,24 +261,18 @@ function ActividadNSilabasPage() {
           </div>
 
           {searchResult === 'correct' && (
-            <p
-              className="syllables-feedback syllables-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Encontraste las sílabas na, ne, ni, no y nu.
-            </p>
+            </>} />
           )}
 
           {searchResult === 'retry' && (
-            <p
-              className="syllables-feedback syllables-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Revisa otra vez. Algunas sílabas seleccionadas no son con N.
-            </p>
+            </>} />
           )}
 
-          {searchResult !== 'correct' && (
+          {!searchResult && (
             <Button
               icon={Check}
               size="large"

@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -200,24 +201,18 @@ function ActividadGCompletarPage() {
           </div>
 
           {syllableResult === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto! La palabra es {syllableItem.word}.
-            </p>
+            </>} />
           )}
 
           {syllableResult === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esa no es la sílaba correcta. Inténtalo nuevamente.
-            </p>
+            </>} />
           )}
 
-          {syllableResult !== 'correct' && (
+          {!syllableResult && (
             <Button
               icon={Check}
               size="large"
@@ -316,24 +311,18 @@ function ActividadGCompletarPage() {
           </div>
 
           {sentenceResult === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto! {visibleSentence}
-            </p>
+            </>} />
           )}
 
           {sentenceResult === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esa palabra no completa la oración. Inténtalo nuevamente.
-            </p>
+            </>} />
           )}
 
-          {sentenceResult !== 'correct' && (
+          {!sentenceResult && (
             <Button
               icon={Check}
               size="large"

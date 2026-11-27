@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import ListeningWords from '../components/lessons/ListeningWords'
 import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
@@ -369,27 +370,21 @@ function ActividadCSonidosPage() {
           </div>
 
           {initialFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Caballo, corazón y cuna
               comienzan con el sonido /c/.
-            </p>
+            </>} />
           )}
 
           {initialFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Revisa otra vez. Escucha cada
               palabra y busca las que comienzan
               como coco.
-            </p>
+            </>} />
           )}
 
-          {initialFeedback !== 'correct' && (
+          {!initialFeedback && (
             <Button
               icon={Check}
               size="large"
@@ -511,27 +506,21 @@ function ActividadCSonidosPage() {
           </div>
 
           {middleFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto! En{' '}
               {middleExercise.word}, el sonido
               /c/ está en la segunda sílaba.
-            </p>
+            </>} />
           )}
 
           {middleFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Escucha nuevamente y prueba con la
               otra sílaba.
-            </p>
+            </>} />
           )}
 
-          {middleFeedback !== 'correct' && (
+          {!middleFeedback && (
             <Button
               icon={Check}
               size="large"
@@ -672,26 +661,20 @@ function ActividadCSonidosPage() {
           </div>
 
           {rhymeFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien! {rhymeExercise.word}{' '}
               rima con {rhymeExercise.answer}.
-            </p>
+            </>} />
           )}
 
           {rhymeFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Escucha otra vez cómo termina la
               palabra y prueba de nuevo.
-            </p>
+            </>} />
           )}
 
-          {rhymeFeedback !== 'correct' && (
+          {!rhymeFeedback && (
             <Button
               icon={Check}
               size="large"

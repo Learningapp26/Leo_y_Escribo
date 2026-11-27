@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { useState } from 'react'
 import {
   ArrowRight,
@@ -297,16 +298,10 @@ function ActividadClSilabasPage() {
 
           {feedback === 'correct' && (
             <>
-              <p
-                className={
-                  'selection-feedback ' +
-                  'selection-feedback--correct'
-                }
-                role="status"
-              >
+              <ActivityFeedback correct message={<>
                 ¡Excelente! Encontraste todas
                 las palabras con cl.
-              </p>
+              </>} />
 
               <Button
                 to="/actividad/cl-final"
@@ -322,16 +317,10 @@ function ActividadClSilabasPage() {
 
           {feedback === 'retry' && (
             <>
-              <p
-                className={
-                  'selection-feedback ' +
-                  'selection-feedback--retry'
-                }
-                role="status"
-              >
+              <ActivityFeedback correct={false} message={<>
                 Revisa las palabras seleccionadas
                 y vuelve a intentarlo.
-              </p>
+              </>} />
 
               <Button
                 variant="retry"

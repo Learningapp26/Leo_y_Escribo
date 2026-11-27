@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { formatLetterGroup } from '../data/lessonLabels'
 import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
@@ -141,9 +142,9 @@ function ActividadBFinalPage() {
               )
             })}
           </div>
-          {feedback === 'correct' && <p className="selection-feedback selection-feedback--correct" role="status">¡Correcto! {sentence.sentence.replace('___', sentence.answer)}</p>}
-          {feedback === 'retry' && <p className="selection-feedback selection-feedback--retry" role="status">Esa imagen no completa la oración. Escucha de nuevo.</p>}
-          {feedback !== 'correct' && <Button icon={Check} size="large" fullWidth disabled={!selected} onClick={check}>Comprobar respuesta</Button>}
+          {feedback === 'correct' && <ActivityFeedback correct message={<>¡Correcto! {sentence.sentence.replace('___', sentence.answer)}</>} />}
+          {feedback === 'retry' && <ActivityFeedback correct={false} message={<>Esa imagen no completa la oración. Escucha de nuevo.</>} />}
+          {!feedback && <Button icon={Check} size="large" fullWidth disabled={!selected} onClick={check}>Comprobar respuesta</Button>}
           {feedback === 'retry' && <Button variant="retry" icon={RotateCcw} size="large" fullWidth onClick={() => { setSelected(''); setFeedback('') }}>Intentar nuevamente</Button>}
           {feedback === 'correct' && <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth onClick={next}>{sentenceIndex === bSentenceExercises.length - 1 ? 'Finalizar lección' : 'Siguiente oración'}</Button>}
         </Card>

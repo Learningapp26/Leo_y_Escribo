@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -285,24 +286,18 @@ function ActividadPrFinalPage() {
           </div>
 
           {joinResult === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto! La palabra es {joinItem.word}.
-            </p>
+            </>} />
           )}
 
           {joinResult === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esa no es la sílaba correcta. Escucha otra vez.
-            </p>
+            </>} />
           )}
 
-          {joinResult !== 'correct' && (
+          {!joinResult && (
             <Button
               icon={Check}
               size="large"
@@ -398,24 +393,18 @@ function ActividadPrFinalPage() {
           </div>
 
           {sentenceResult === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Esa es la oración correcta.
-            </p>
+            </>} />
           )}
 
           {sentenceResult === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Ese no es el orden correcto. Revisa otra vez.
-            </p>
+            </>} />
           )}
 
-          {sentenceResult !== 'correct' && (
+          {!sentenceResult && (
             <Button
               icon={Check}
               size="large"

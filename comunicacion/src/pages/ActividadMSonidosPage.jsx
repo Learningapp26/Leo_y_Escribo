@@ -1,3 +1,4 @@
+import { togglePairSelection, isDistinctPair } from '../lib/pairSelection'
 import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
@@ -103,41 +104,19 @@ function ActividadMSonidosPage() {
   const isMatched = (id) => matchedIds.includes(id)
 
   const pickCard = (item) => {
-    if (pairFeedback) return
-    if (isMatched(item.id)) return
+    if (pairFeedback || matchedIds.includes(item.id)) return
 
     playAudio(item.audio)
 
-    if (firstPick?.id === item.id) {
-      setFirstPick(secondPick)
-      setSecondPick(null)
-      return
-    }
-
-    if (secondPick?.id === item.id) {
-      setSecondPick(null)
-      return
-    }
-
-    if (!firstPick) {
-      setFirstPick(item)
-      return
-    }
-
-    if (!secondPick) {
-      setSecondPick(item)
-    }
+    const [nextFirst = null, nextSecond = null] = togglePairSelection(
+      [firstPick, secondPick], item,
+    )
+    setFirstPick(nextFirst)
+    setSecondPick(nextSecond)
   }
 
   const checkPair = () => {
-    if (
-      pairFeedback ||
-      !firstPick ||
-      !secondPick ||
-      firstPick.id === secondPick.id ||
-      isMatched(firstPick.id) ||
-      isMatched(secondPick.id)
-    ) return
+    if (pairFeedback || !isDistinctPair(firstPick, secondPick, matchedIds)) return
 
     const isCorrect = firstPick.startsWithM && secondPick.startsWithM
 
@@ -368,7 +347,7 @@ function ActividadMSonidosPage() {
                     .join(' ')}
                   type="button"
                   key={item.id}
-                  disabled={matched || Boolean(pairFeedback)}
+                  disabled={Boolean(pairFeedback) || matchedIds.includes(item.id)}
                   aria-pressed={selected}
                   onClick={() => pickCard(item)}
                 >
@@ -389,7 +368,7 @@ function ActividadMSonidosPage() {
               icon={Check}
               size="large"
               fullWidth
-              disabled={!firstPick || !secondPick || firstPick.id === secondPick.id}
+              disabled={Boolean(pairFeedback) || !isDistinctPair(firstPick, secondPick, matchedIds)}
               onClick={checkPair}
             >
               Comprobar pareja

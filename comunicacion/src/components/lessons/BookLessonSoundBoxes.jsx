@@ -1,3 +1,4 @@
+import ActivityFeedback from '../common/ActivityFeedback'
 import { useRef, useState } from 'react'
 import { ArrowRight, Check, RotateCcw } from 'lucide-react'
 import Button from '../common/Button'
@@ -75,11 +76,11 @@ function BookLessonSoundBoxes({ exercise, lesson, activityId, onNext, onCorrect,
           </li>
         })}
       </ul>
-      {feedback && <p className={`selection-feedback selection-feedback--${feedback}`} role="status">
+      {feedback && <ActivityFeedback correct={feedback === 'correct'} message={<>
         {feedback === 'correct' ? '¡Correcto! Puedes continuar.' : 'Revisa los dibujos marcados en rojo e inténtalo otra vez.'}
-      </p>}
+      </>} />}
       {feedback === 'retry' && <Button variant="retry" icon={RotateCcw} onClick={retry}>Intentar nuevamente</Button>}
-      {feedback !== 'correct' && <Button icon={Check} size="large" disabled={!ready} onClick={check}>Comprobar respuesta</Button>}
+      {!feedback && <Button icon={Check} size="large" disabled={!ready} onClick={check}>Comprobar respuesta</Button>}
       {feedback === 'correct' && <Button size="large" icon={ArrowRight} iconPosition="right" onClick={onNext}>
         {last || 'Continuar'}
       </Button>}

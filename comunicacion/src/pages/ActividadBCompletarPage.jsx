@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -124,9 +125,9 @@ function ActividadBCompletarPage() {
           })}
         </div>
 
-        {feedback === 'correct' && <p className="selection-feedback selection-feedback--correct" role="status">¡Muy bien! Formaste la palabra {exercise.word}.</p>}
-        {feedback === 'retry' && <p className="selection-feedback selection-feedback--retry" role="status">Esa sílaba no forma el nombre del dibujo. Intenta nuevamente.</p>}
-        {feedback !== 'correct' && <Button icon={Check} size="large" fullWidth disabled={!selected} onClick={check}>Comprobar palabra</Button>}
+        {feedback === 'correct' && <ActivityFeedback correct message={<>¡Muy bien! Formaste la palabra {exercise.word}.</>} />}
+        {feedback === 'retry' && <ActivityFeedback correct={false} message={<>Esa sílaba no forma el nombre del dibujo. Intenta nuevamente.</>} />}
+        {!feedback && <Button icon={Check} size="large" fullWidth disabled={!selected} onClick={check}>Comprobar palabra</Button>}
         {feedback === 'retry' && <Button variant="retry" icon={RotateCcw} size="large" fullWidth onClick={() => { setSelected(''); setFeedback('') }}>Intentar nuevamente</Button>}
         {feedback === 'correct' && phase === 'formar' && exerciseIndex === bJoinExercises.length - 1
           ? <Button to="/actividad/b-final" icon={ArrowRight} iconPosition="right" size="large" fullWidth>Ir a la actividad final</Button>

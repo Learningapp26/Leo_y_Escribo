@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { LetterSound } from '../components/lessons/SoundIntroduction'
 import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
@@ -265,24 +266,18 @@ function ActividadBrSilabasPage() {
           </div>
 
           {searchResult === 'correct' && (
-            <p
-              className="syllables-feedback syllables-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Encontraste las sílabas bra, bre, bri, bro y bru.
-            </p>
+            </>} />
           )}
 
           {searchResult === 'retry' && (
-            <p
-              className="syllables-feedback syllables-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Revisa otra vez. Algunas sílabas seleccionadas no son con BR.
-            </p>
+            </>} />
           )}
 
-          {searchResult !== 'correct' && (
+          {!searchResult && (
             <Button
               icon={Check}
               size="large"
@@ -384,24 +379,18 @@ function ActividadBrSilabasPage() {
           </div>
 
           {completionResult === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto! La palabra es {currentWord.word}.
-            </p>
+            </>} />
           )}
 
           {completionResult === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esa sílaba no completa la palabra. Escucha otra vez.
-            </p>
+            </>} />
           )}
 
-          {completionResult !== 'correct' && (
+          {!completionResult && (
             <Button
               icon={Check}
               size="large"
@@ -410,6 +399,21 @@ function ActividadBrSilabasPage() {
               onClick={checkCompletion}
             >
               Comprobar
+            </Button>
+          )}
+
+          {completionResult === 'retry' && (
+            <Button
+              variant="retry"
+              icon={RotateCcw}
+              size="large"
+              fullWidth
+              onClick={() => {
+                setSelectedSyllable('')
+                setCompletionResult('')
+              }}
+            >
+              Intentar nuevamente
             </Button>
           )}
 
@@ -486,25 +490,19 @@ function ActividadBrSilabasPage() {
           </div>
 
           {selectResult === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto! {selectItem.word} lleva la sílaba {selectItem.answer}
               .
-            </p>
+            </>} />
           )}
 
           {selectResult === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esa no es la sílaba correcta. Escucha otra vez.
-            </p>
+            </>} />
           )}
 
-          {selectResult !== 'correct' && (
+          {!selectResult && (
             <Button
               icon={Check}
               size="large"

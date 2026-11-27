@@ -1,3 +1,5 @@
+import { togglePairSelection, isDistinctPair } from '../lib/pairSelection'
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
 import {
@@ -210,32 +212,19 @@ function ActividadDImagenesPage() {
   }
 
   const pickCard = (item) => {
-    if (
-      pairFeedback === 'retry' ||
-      matchedIds.includes(item.id)
-    ) {
-      return
-    }
+    if (pairFeedback || matchedIds.includes(item.id)) return
 
     playIfAvailable(item.audio)
 
-    if (firstPick?.id === item.id) {
-      setFirstPick(null)
-      return
-    }
-
-    if (!firstPick) {
-      setFirstPick(item)
-      return
-    }
-
-    if (!secondPick) {
-      setSecondPick(item)
-    }
+    const [nextFirst = null, nextSecond = null] = togglePairSelection(
+      [firstPick, secondPick], item,
+    )
+    setFirstPick(nextFirst)
+    setSecondPick(nextSecond)
   }
 
   const checkPair = () => {
-    if (!firstPick || !secondPick) return
+    if (pairFeedback || !isDistinctPair(firstPick, secondPick, matchedIds)) return
 
     const isCorrect =
       firstPick.pairId === secondPick.pairId
@@ -388,21 +377,15 @@ function ActividadDImagenesPage() {
           </div>
 
           {selectionFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Todas empiezan con /d/.
-            </p>
+            </>} />
           )}
 
           {selectionFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               {selectionError}
-            </p>
+            </>} />
           )}
 
           {selectionFeedback === '' && (
@@ -513,21 +496,15 @@ function ActividadDImagenesPage() {
           </div>
 
           {syllableFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto!
-            </p>
+            </>} />
           )}
 
           {selectionFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               {selectionError}
-            </p>
+            </>} />
           )}
 
           {syllableFeedback === '' && (
@@ -614,7 +591,8 @@ function ActividadDImagenesPage() {
                     type="button"
                     key={item.id}
                     aria-pressed={selected}
-                    onClick={() => pickCard(item)}
+                    disabled={Boolean(pairFeedback) || matchedIds.includes(item.id)}
+                  onClick={() => pickCard(item)}
                   >
                     <img
                       className="selection-image"
@@ -632,22 +610,16 @@ function ActividadDImagenesPage() {
 
           {pairFeedback === 'correct' &&
             !isPairsFinished && (
-              <p
-                className="selection-feedback selection-feedback--correct"
-                role="status"
-              >
+              <ActivityFeedback correct message={<>
                 ¡Correcto! Empiezan con la misma
                 sílaba.
-              </p>
+              </>} />
             )}
 
           {pairFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Intenta nuevamente.
-            </p>
+            </>} />
           )}
 
           {pairFeedback === '' &&
@@ -656,7 +628,7 @@ function ActividadDImagenesPage() {
                 icon={Check}
                 size="large"
                 fullWidth
-                disabled={!firstPick || !secondPick}
+                disabled={Boolean(pairFeedback) || !isDistinctPair(firstPick, secondPick, matchedIds)}
                 onClick={checkPair}
               >
                 Comprobar pareja

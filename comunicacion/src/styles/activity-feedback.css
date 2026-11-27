@@ -51,6 +51,15 @@
   text-align: center;
 }
 
+.activity-feedback__detail {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-content);
+  font-size: 20px;
+  line-height: 1.4;
+  text-align: center;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .activity-feedback__symbol {
     animation: feedback-symbol-pop 600ms ease-out both;

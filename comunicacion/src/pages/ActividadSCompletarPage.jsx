@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw } from 'lucide-react'
 
@@ -109,17 +110,17 @@ function ActividadSCompletarPage() {
         </div>
 
         {feedback === 'correct' && (
-          <p className="selection-feedback selection-feedback--correct" role="status">
+          <ActivityFeedback correct message={<>
             ¡Muy bien! Formaste la palabra {item.word}.
-          </p>
+          </>} />
         )}
         {feedback === 'retry' && (
-          <p className="selection-feedback selection-feedback--retry" role="status">
+          <ActivityFeedback correct={false} message={<>
             Esas sílabas no forman la palabra. Prueba otro orden.
-          </p>
+          </>} />
         )}
 
-        {feedback !== 'correct' && (
+        {!feedback && (
           <Button icon={Check} size="large" fullWidth disabled={!slots[0] || !slots[1]} onClick={check}>
             Comprobar palabra
           </Button>

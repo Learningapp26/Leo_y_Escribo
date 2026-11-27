@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import {
     useRef,
     useState,
@@ -417,16 +418,10 @@ function ActividadClFinalPage() {
 
                     {wordFeedback === 'correct' && (
                         <>
-                            <p
-                                className={
-                                    'selection-feedback ' +
-                                    'selection-feedback--correct'
-                                }
-                                role="status"
-                            >
+                            <ActivityFeedback correct message={<>
                                 ¡Muy bien! Formaste la palabra{' '}
                                 {currentWord.word}.
-                            </p>
+                            </>} />
 
                             <Button
                                 icon={ArrowRight}
@@ -445,15 +440,9 @@ function ActividadClFinalPage() {
 
                     {wordFeedback === 'retry' && (
                         <>
-                            <p
-                                className={
-                                    'selection-feedback ' +
-                                    'selection-feedback--retry'
-                                }
-                                role="status"
-                            >
+                            <ActivityFeedback correct={false} message={<>
                                 Revisa el orden de las sílabas.
-                            </p>
+                            </>} />
 
                             <Button
                                 variant="retry"
@@ -548,16 +537,10 @@ function ActividadClFinalPage() {
                     {sentenceFeedback ===
                         'correct' && (
                             <>
-                                <p
-                                    className={
-                                        'selection-feedback ' +
-                                        'selection-feedback--correct'
-                                    }
-                                    role="status"
-                                >
+                                <ActivityFeedback correct message={<>
                                     ¡Excelente! Elegiste la oración
                                     correcta.
-                                </p>
+                                </>} />
 
                                 <Button
                                     icon={ArrowRight}
@@ -577,16 +560,10 @@ function ActividadClFinalPage() {
                     {sentenceFeedback ===
                         'retry' && (
                             <>
-                                <p
-                                    className={
-                                        'selection-feedback ' +
-                                        'selection-feedback--retry'
-                                    }
-                                    role="status"
-                                >
+                                <ActivityFeedback correct={false} message={<>
                                     Esa oración no corresponde
                                     a la imagen.
-                                </p>
+                                </>} />
 
                                 <Button
                                     variant="retry"

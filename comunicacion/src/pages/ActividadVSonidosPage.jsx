@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import ListeningWords from '../components/lessons/ListeningWords'
 import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
@@ -204,18 +205,18 @@ function ActividadVSonidosPage() {
           </div>
 
           {initialFeedback === 'correct' && (
-            <p className="selection-feedback selection-feedback--correct" role="status">
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Vela, vaso y volcán comienzan con el sonido /v/.
-            </p>
+            </>} />
           )}
 
           {initialFeedback === 'retry' && (
-            <p className="selection-feedback selection-feedback--retry" role="status">
+            <ActivityFeedback correct={false} message={<>
               Revisa otra vez. Escucha cada palabra y busca las que comienzan como vaca.
-            </p>
+            </>} />
           )}
 
-          {initialFeedback !== 'correct' && (
+          {!initialFeedback && (
             <Button icon={Check} size="large" fullWidth disabled={selectedInitialIds.length === 0} onClick={checkInitial}>
               Comprobar selección
             </Button>
@@ -317,18 +318,18 @@ function ActividadVSonidosPage() {
           </div>
 
           {positionFeedback === 'correct' && (
-            <p className="selection-feedback selection-feedback--correct" role="status">
+            <ActivityFeedback correct message={<>
               ¡Correcto!
-            </p>
+            </>} />
           )}
 
           {positionFeedback === 'retry' && (
-            <p className="selection-feedback selection-feedback--retry" role="status">
+            <ActivityFeedback correct={false} message={<>
               Pronuncia la palabra otra vez, sonido por sonido, y prueba con otro cuadrito.
-            </p>
+            </>} />
           )}
 
-          {positionFeedback !== 'correct' && (
+          {!positionFeedback && (
             <Button icon={Check} size="large" fullWidth disabled={selectedBoxIndex === null} onClick={checkPosition}>
               Comprobar
             </Button>

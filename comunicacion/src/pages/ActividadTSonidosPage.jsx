@@ -1,3 +1,5 @@
+import { togglePairSelection, isDistinctPair } from '../lib/pairSelection'
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
@@ -106,28 +108,19 @@ function ActividadTSonidosPage() {
   const isMatched = (id) => matchedIds.includes(id)
 
   const pickCard = (item) => {
-    if (pairFeedback === 'retry') return
-    if (isMatched(item.id)) return
+    if (pairFeedback || matchedIds.includes(item.id)) return
 
     playAudio(item.audio)
 
-    if (firstPick?.id === item.id) {
-      setFirstPick(null)
-      return
-    }
-
-    if (!firstPick) {
-      setFirstPick(item)
-      return
-    }
-
-    if (!secondPick) {
-      setSecondPick(item)
-    }
+    const [nextFirst = null, nextSecond = null] = togglePairSelection(
+      [firstPick, secondPick], item,
+    )
+    setFirstPick(nextFirst)
+    setSecondPick(nextSecond)
   }
 
   const checkPair = () => {
-    if (!firstPick || !secondPick) return
+    if (pairFeedback || !isDistinctPair(firstPick, secondPick, matchedIds)) return
 
     const isCorrect = firstPick.startsWithT && secondPick.startsWithT
 
@@ -295,24 +288,18 @@ function ActividadTSonidosPage() {
           </div>
 
           {selectionFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Todas empiezan con el sonido /t/.
-            </p>
+            </>} />
           )}
 
           {selectionFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Revisa otra vez. Algunas imágenes no empiezan con /t/.
-            </p>
+            </>} />
           )}
 
-          {selectionFeedback !== 'correct' && (
+          {!selectionFeedback && (
             <Button
               icon={Check}
               size="large"
@@ -384,7 +371,7 @@ function ActividadTSonidosPage() {
                     .join(' ')}
                   type="button"
                   key={item.id}
-                  disabled={matched}
+                  disabled={Boolean(pairFeedback) || matchedIds.includes(item.id)}
                   aria-pressed={selected}
                   onClick={() => pickCard(item)}
                 >
@@ -401,21 +388,15 @@ function ActividadTSonidosPage() {
           </div>
 
           {pairFeedback === 'correct' && !isPairsFinished && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto! Las dos empiezan con /t/.
-            </p>
+            </>} />
           )}
 
           {pairFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esas imágenes no empiezan con el mismo sonido.
-            </p>
+            </>} />
           )}
 
           {!pairFeedback && (
@@ -423,7 +404,7 @@ function ActividadTSonidosPage() {
               icon={Check}
               size="large"
               fullWidth
-              disabled={!firstPick || !secondPick}
+              disabled={Boolean(pairFeedback) || !isDistinctPair(firstPick, secondPick, matchedIds)}
               onClick={checkPair}
             >
               Comprobar pareja
@@ -514,24 +495,18 @@ function ActividadTSonidosPage() {
           </div>
 
           {oddFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Esa es la que termina de forma diferente.
-            </p>
+            </>} />
           )}
 
           {oddFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Revisa otra vez. Alguna no termina de forma diferente.
-            </p>
+            </>} />
           )}
 
-          {oddFeedback !== 'correct' && (
+          {!oddFeedback && (
             <Button
               icon={Check}
               size="large"

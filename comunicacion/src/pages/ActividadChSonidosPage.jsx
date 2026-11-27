@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import ListeningWords from '../components/lessons/ListeningWords'
 import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
@@ -211,18 +212,18 @@ function ActividadChSonidosPage() {
           </div>
 
           {initialFeedback === 'correct' && (
-            <p className="selection-feedback selection-feedback--correct" role="status">
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Chumpa, chaleco y chorizos comienzan con el sonido /ch/.
-            </p>
+            </>} />
           )}
 
           {initialFeedback === 'retry' && (
-            <p className="selection-feedback selection-feedback--retry" role="status">
+            <ActivityFeedback correct={false} message={<>
               Revisa otra vez. Escucha cada palabra y busca las que comienzan como chocolate.
-            </p>
+            </>} />
           )}
 
-          {initialFeedback !== 'correct' && (
+          {!initialFeedback && (
             <Button icon={Check} size="large" fullWidth disabled={selectedInitialIds.length === 0} onClick={checkInitial}>
               Comprobar selección
             </Button>
@@ -298,18 +299,18 @@ function ActividadChSonidosPage() {
           </div>
 
           {positionFeedback === 'correct' && (
-            <p className="selection-feedback selection-feedback--correct" role="status">
+            <ActivityFeedback correct message={<>
               ¡Correcto!
-            </p>
+            </>} />
           )}
 
           {positionFeedback === 'retry' && (
-            <p className="selection-feedback selection-feedback--retry" role="status">
+            <ActivityFeedback correct={false} message={<>
               Escucha otra vez con cuidado.
-            </p>
+            </>} />
           )}
 
-          {positionFeedback !== 'correct' && (
+          {!positionFeedback && (
             <Button icon={Check} size="large" fullWidth disabled={!selectedPosition} onClick={checkPosition}>
               Comprobar
             </Button>

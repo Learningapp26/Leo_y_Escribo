@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -203,25 +204,19 @@ function ActividadQSilabasPage() {
           </div>
 
           {imageFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto! {imageExercise.word} comienza con{' '}
               {imageExercise.syllable}.
-            </p>
+            </>} />
           )}
 
           {imageFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Escucha la palabra otra vez y prueba con otra sílaba.
-            </p>
+            </>} />
           )}
 
-          {imageFeedback !== 'correct' && (
+          {!imageFeedback && (
             <Button
               icon={Check}
               size="large"
@@ -327,26 +322,20 @@ function ActividadQSilabasPage() {
           </div>
 
           {discriminationFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Encontraste todas las sílabas{' '}
               {discriminationExercise.target}.
-            </p>
+            </>} />
           )}
 
           {discriminationFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Revisa la fila otra vez. Puede faltar alguna o puede haber una
               selección que no corresponde.
-            </p>
+            </>} />
           )}
 
-          {discriminationFeedback !== 'correct' && (
+          {!discriminationFeedback && (
             <Button
               icon={Check}
               size="large"

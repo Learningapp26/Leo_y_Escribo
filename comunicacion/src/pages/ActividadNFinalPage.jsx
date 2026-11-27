@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -275,24 +276,18 @@ function ActividadNFinalPage() {
           </div>
 
           {sentenceResult === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto! {sentenceChoice.answer}
-            </p>
+            </>} />
           )}
 
           {sentenceResult === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esa oración no corresponde a la imagen. Mira otra vez.
-            </p>
+            </>} />
           )}
 
-          {sentenceResult !== 'correct' && (
+          {!sentenceResult && (
             <Button
               icon={Check}
               size="large"
@@ -391,24 +386,18 @@ function ActividadNFinalPage() {
           </div>
 
           {matchResult === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto! Esa imagen corresponde a la oración.
-            </p>
+            </>} />
           )}
 
           {matchResult === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esa no es la imagen correcta. Lee otra vez.
-            </p>
+            </>} />
           )}
 
-          {matchResult !== 'correct' && (
+          {!matchResult && (
             <Button
               icon={Check}
               size="large"

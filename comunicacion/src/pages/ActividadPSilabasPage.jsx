@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { LetterSound } from '../components/lessons/SoundIntroduction'
 import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
@@ -257,24 +258,18 @@ function ActividadPSilabasPage() {
           </div>
 
           {findResult === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto! "{findItem.word}" tiene la sílaba "{findItem.answer}".
-            </p>
+            </>} />
           )}
 
           {findResult === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esa no es la sílaba correcta. Escucha otra vez.
-            </p>
+            </>} />
           )}
 
-          {findResult !== 'correct' && (
+          {!findResult && (
             <Button
               icon={Check}
               size="large"

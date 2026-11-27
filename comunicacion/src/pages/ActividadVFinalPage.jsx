@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { formatLetterGroup } from '../data/lessonLabels'
 import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
@@ -207,18 +208,18 @@ function ActividadVFinalPage() {
           </div>
 
           {feedback === 'correct' && (
-            <p className="selection-feedback selection-feedback--correct" role="status">
+            <ActivityFeedback correct message={<>
               ¡Correcto! Esa imagen representa la oración.
-            </p>
+            </>} />
           )}
 
           {feedback === 'retry' && (
-            <p className="selection-feedback selection-feedback--retry" role="status">
+            <ActivityFeedback correct={false} message={<>
               Esa imagen no representa la oración. Escucha de nuevo e inténtalo otra vez.
-            </p>
+            </>} />
           )}
 
-          {feedback !== 'correct' && (
+          {!feedback && (
             <Button icon={Check} size="large" fullWidth disabled={!selectedAnswer} onClick={checkAnswer}>
               Comprobar respuesta
             </Button>

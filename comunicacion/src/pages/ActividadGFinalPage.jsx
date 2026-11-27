@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -204,24 +205,18 @@ function ActividadGFinalPage() {
         </div>
 
         {sentenceResult === 'correct' && (
-          <p
-            className="selection-feedback selection-feedback--correct"
-            role="status"
-          >
+          <ActivityFeedback correct message={<>
             ¡Muy bien! Completaste correctamente la oración.
-          </p>
+          </>} />
         )}
 
         {sentenceResult === 'retry' && (
-          <p
-            className="selection-feedback selection-feedback--retry"
-            role="status"
-          >
+          <ActivityFeedback correct={false} message={<>
             Esas palabras no completan la oración. Inténtalo otra vez.
-          </p>
+          </>} />
         )}
 
-        {sentenceResult !== 'correct' && (
+        {!sentenceResult && (
           <Button
             icon={Check}
             size="large"

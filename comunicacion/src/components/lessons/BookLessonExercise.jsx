@@ -1,3 +1,4 @@
+import ActivityFeedback from '../common/ActivityFeedback'
 import { fillBlank } from '../../lib/fillBlank'
 import { formatLetterGroup } from '../../data/lessonLabels'
 import { useRef, useState } from 'react'
@@ -154,14 +155,14 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
       {type === 'oral' && exercise.groups && groupsReady && <p className="text-instruction" aria-live="polite">
         Forma tu oración con: {exercise.groups.map((group) => group.options.find((option) => option.id === groupChoices[group.id]).label).join(' · ')}.
       </p>}
-      {ordered && feedback !== 'correct' && <Button variant="secondary" icon={Undo2} disabled={!selected.length}
+      {ordered && !feedback && <Button variant="secondary" icon={Undo2} disabled={!selected.length}
         onClick={() => { setSelected((current) => current.slice(0, -1)); setFeedback('') }}>Quitar la última</Button>}
-      {feedback && <p className={`selection-feedback selection-feedback--${feedback}`} role="status">
+      {feedback && <ActivityFeedback correct={feedback === 'correct'} message={<>
         {feedback === 'correct' ? '¡Correcto! Puedes continuar.' : 'Escucha de nuevo e inténtalo otra vez.'}
-      </p>}
+      </>} />}
       {feedback === 'correct' && exercise.resultText && <p className="text-word" aria-live="polite">{exercise.resultText}</p>}
       {feedback === 'retry' && <Button variant="retry" icon={RotateCcw} onClick={() => { setSelected([]); setFeedback('') }}>Intentar nuevamente</Button>}
-      {!passive && feedback !== 'correct' && <Button icon={Check} size="large" disabled={type === 'match' ? !groupsReady : !selected.length || (ordered && selected.length !== (exercise.answerLength ?? options.length))} onClick={check}>Comprobar respuesta</Button>}
+      {!passive && !feedback && <Button icon={Check} size="large" disabled={type === 'match' ? !groupsReady : !selected.length || (ordered && selected.length !== (exercise.answerLength ?? options.length))} onClick={check}>Comprobar respuesta</Button>}
       {exercise.selectionCount && <p role="status">Palabras elegidas: {selected.length} de {exercise.selectionCount}</p>}
       {type === 'oral' && exercise.record && <VoiceRecorder onRecorded={() => setPracticed(true)} />}
       {type === 'oral' && <Button variant="secondary" aria-pressed={practiced} disabled={!groupsReady} icon={Check} onClick={() => setPracticed(!practiced)}>{exercise.practiceLabel ?? 'Ya dije mi oración'}</Button>}

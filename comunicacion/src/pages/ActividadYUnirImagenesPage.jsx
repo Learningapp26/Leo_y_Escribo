@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { useState } from 'react'
 import {
   ArrowRight,
@@ -276,22 +277,16 @@ function ActividadYUnirImagenesPage() {
         </div>
 
         {feedback === 'correct' && (
-          <p
-            className="selection-feedback selection-feedback--correct"
-            role="status"
-          >
+          <ActivityFeedback correct message={<>
             ¡Muy bien! Encontraste la pareja.
-          </p>
+          </>} />
         )}
 
         {feedback === 'retry' && (
-          <p
-            className="selection-feedback selection-feedback--retry"
-            role="status"
-          >
+          <ActivityFeedback correct={false} message={<>
             Esas imágenes no forman una pareja. Escucha de
             nuevo e inténtalo otra vez.
-          </p>
+          </>} />
         )}
 
         {!feedback && (

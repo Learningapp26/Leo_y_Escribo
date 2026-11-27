@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
@@ -221,24 +222,18 @@ function ActividadBrSonidosPage() {
           </div>
 
           {selectionFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Todas empiezan con el sonido /br/.
-            </p>
+            </>} />
           )}
 
           {selectionFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Revisa otra vez. Algunas imágenes no empiezan con /br/.
-            </p>
+            </>} />
           )}
 
-          {selectionFeedback !== 'correct' && (
+          {!selectionFeedback && (
             <Button
               icon={Check}
               size="large"
@@ -323,24 +318,18 @@ function ActividadBrSonidosPage() {
           </div>
 
           {containsFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Todas esas imágenes tienen el sonido /br/.
-            </p>
+            </>} />
           )}
 
           {containsFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Revisa otra vez. Algunas imágenes no tienen el sonido /br/.
-            </p>
+            </>} />
           )}
 
-          {containsFeedback !== 'correct' && (
+          {!containsFeedback && (
             <Button
               icon={Check}
               size="large"

@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { useState } from 'react'
 import {
   ArrowLeft,
@@ -175,23 +176,17 @@ function ActividadRSilabasPage() {
         </div>
 
         {feedback === 'correct' && (
-          <p
-            className="selection-feedback selection-feedback--correct"
-            role="status"
-          >
+          <ActivityFeedback correct message={<>
             ¡Muy bien! {currentExercise.word} comienza con{' '}
             {currentExercise.syllable}.
-          </p>
+          </>} />
         )}
 
         {feedback === 'retry' && (
-          <p
-            className="selection-feedback selection-feedback--retry"
-            role="status"
-          >
+          <ActivityFeedback correct={false} message={<>
             Escucha la palabra nuevamente y selecciona otra
             sílaba.
-          </p>
+          </>} />
         )}
 
         {!feedback && (

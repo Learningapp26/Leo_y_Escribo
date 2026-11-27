@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { LetterSound } from '../components/lessons/SoundIntroduction'
 import { fillBlank } from '../lib/fillBlank'
 import { formatLetterGroup } from '../data/lessonLabels'
@@ -260,24 +261,18 @@ function ActividadPlSilabasPage() {
           </div>
 
           {searchResult === 'correct' && (
-            <p
-              className="syllables-feedback syllables-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Encontraste las sílabas pla, ple, pli, plo y plu.
-            </p>
+            </>} />
           )}
 
           {searchResult === 'retry' && (
-            <p
-              className="syllables-feedback syllables-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Revisa otra vez. Algunas sílabas seleccionadas no son con PL.
-            </p>
+            </>} />
           )}
 
-          {searchResult !== 'correct' && (
+          {!searchResult && (
             <Button
               icon={Check}
               size="large"
@@ -379,24 +374,18 @@ function ActividadPlSilabasPage() {
           </div>
 
           {completionResult === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto! La palabra es {currentWord.word}.
-            </p>
+            </>} />
           )}
 
           {completionResult === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esa sílaba no completa la palabra. Escucha otra vez.
-            </p>
+            </>} />
           )}
 
-          {completionResult !== 'correct' && (
+          {!completionResult && (
             <Button
               icon={Check}
               size="large"
@@ -405,6 +394,21 @@ function ActividadPlSilabasPage() {
               onClick={checkCompletion}
             >
               Comprobar
+            </Button>
+          )}
+
+          {completionResult === 'retry' && (
+            <Button
+              variant="retry"
+              icon={RotateCcw}
+              size="large"
+              fullWidth
+              onClick={() => {
+                setSelectedSyllable('')
+                setCompletionResult('')
+              }}
+            >
+              Intentar nuevamente
             </Button>
           )}
 
@@ -474,25 +478,19 @@ function ActividadPlSilabasPage() {
           </div>
 
           {bankFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Esas palabras llevan la sílaba {bankItem.syllable}.
-            </p>
+            </>} />
           )}
 
           {bankFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Revisa otra vez. Alguna palabra no lleva {bankItem.syllable}, o
               falta alguna.
-            </p>
+            </>} />
           )}
 
-          {bankFeedback !== 'correct' && (
+          {!bankFeedback && (
             <Button
               icon={Check}
               size="large"

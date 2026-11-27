@@ -1,3 +1,4 @@
+import ActivityFeedback from '../common/ActivityFeedback'
 import { useEffect, useState } from 'react'
 import {
   ArrowRight,
@@ -337,15 +338,15 @@ function WordPracticeTemplate({
           </div>
 
           {findFeedback === 'correct' && (
-            <p className="selection-feedback selection-feedback--correct" role="status">
+            <ActivityFeedback correct message={<>
               ¡Correcto! Encontraste todas las palabras con {group.label}.
-            </p>
+            </>} />
           )}
 
           {findFeedback === 'retry' && (
-            <p className="selection-feedback selection-feedback--retry" role="status">
+            <ActivityFeedback correct={false} message={<>
               Revisa las palabras marcadas e inténtalo otra vez.
-            </p>
+            </>} />
           )}
 
           {!findFeedback && (
@@ -428,15 +429,15 @@ function WordPracticeTemplate({
           </div>
 
           {shortFeedback === 'correct' && (
-            <p className="selection-feedback selection-feedback--correct" role="status">
+            <ActivityFeedback correct message={<>
               ¡Muy bien! {group.shortest.answer} es la palabra más corta.
-            </p>
+            </>} />
           )}
 
           {shortFeedback === 'retry' && (
-            <p className="selection-feedback selection-feedback--retry" role="status">
+            <ActivityFeedback correct={false} message={<>
               Mira cuántas letras tiene cada palabra y prueba otra vez.
-            </p>
+            </>} />
           )}
 
           {!shortFeedback && (
@@ -526,9 +527,9 @@ function WordPracticeTemplate({
 
           {syllableFeedback === 'correct' && (
             <>
-              <p className="selection-feedback selection-feedback--correct" role="status">
+              <ActivityFeedback correct message={<>
                 ¡Excelente! La palabra tiene {group.syllables.parts.length} sílabas.
-              </p>
+              </>} />
               <p className="word-practice-syllables" aria-label={`Sílabas: ${group.syllables.parts.join(', ')}`}>
                 {group.syllables.parts.map((part) => (
                   <span key={part}>{part}</span>
@@ -538,9 +539,9 @@ function WordPracticeTemplate({
           )}
 
           {syllableFeedback === 'retry' && (
-            <p className="selection-feedback selection-feedback--retry" role="status">
+            <ActivityFeedback correct={false} message={<>
               Da palmas lentamente y vuelve a contar.
-            </p>
+            </>} />
           )}
 
           {!syllableFeedback && (

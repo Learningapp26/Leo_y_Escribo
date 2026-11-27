@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
@@ -97,10 +98,10 @@ function ActividadBSonidosPage() {
         })}
       </div>
 
-      {feedback === 'correct' && <p className="selection-feedback selection-feedback--correct" role="status">¡Muy bien! Elegiste todas las imágenes correctas.</p>}
-      {feedback === 'retry' && <p className="selection-feedback selection-feedback--retry" role="status">Revisa las palabras y vuelve a intentarlo.</p>}
+      {feedback === 'correct' && <ActivityFeedback correct message={<>¡Muy bien! Elegiste todas las imágenes correctas.</>} />}
+      {feedback === 'retry' && <ActivityFeedback correct={false} message={<>Revisa las palabras y vuelve a intentarlo.</>} />}
 
-      {feedback !== 'correct' && <Button icon={Check} size="large" fullWidth disabled={!selectedIds.length} onClick={() => check(items, answerKey, exerciseId)}>Comprobar</Button>}
+      {!feedback && <Button icon={Check} size="large" fullWidth disabled={!selectedIds.length} onClick={() => check(items, answerKey, exerciseId)}>Comprobar</Button>}
       {feedback === 'retry' && <Button variant="retry" icon={RotateCcw} size="large" fullWidth onClick={() => { setSelectedIds([]); setFeedback('') }}>Intentar nuevamente</Button>}
       {feedback === 'correct' && phase !== 'buscar' && <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth onClick={nextPhase}>Siguiente parte</Button>}
       {feedback === 'correct' && phase === 'buscar' && <Button to="/actividad/b-silabas" icon={ArrowRight} iconPosition="right" size="large" fullWidth>Practicar las sílabas</Button>}

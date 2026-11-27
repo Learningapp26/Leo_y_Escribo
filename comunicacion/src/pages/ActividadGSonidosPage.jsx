@@ -1,3 +1,5 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
+import { togglePairSelection, isDistinctPair } from '../lib/pairSelection'
 import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
@@ -126,7 +128,7 @@ function ActividadGSonidosPage() {
   )?.pairId
 
   const pickPairCard = (item) => {
-    if (pairFeedback) return
+    if (pairFeedback || matchedIds.includes(item.id)) return
 
     const isPicked = pickedIds.includes(item.id)
 
@@ -134,15 +136,13 @@ function ActividadGSonidosPage() {
 
     playAudio(item.audio)
 
-    setPickedIds(
-      isPicked
-        ? pickedIds.filter((id) => id !== item.id)
-        : [...pickedIds, item.id],
+    setPickedIds((current) =>
+      togglePairSelection(current, item.id),
     )
   }
 
   const checkPair = () => {
-    if (pickedIds.length !== 2) return
+    if (pairFeedback || pickedIds.length !== 2 || !isDistinctPair(pickedIds[0], pickedIds[1], matchedIds)) return
 
     const [first, second] = pickedIds.map((id) =>
       gPairPool.find((item) => item.id === id),
@@ -294,24 +294,18 @@ function ActividadGSonidosPage() {
           </div>
 
           {selectionFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Todas empiezan con el sonido /g/.
-            </p>
+            </>} />
           )}
 
           {selectionFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Revisa otra vez. Algunas imágenes no empiezan con /g/.
-            </p>
+            </>} />
           )}
 
-          {selectionFeedback !== 'correct' && (
+          {!selectionFeedback && (
             <Button
               icon={Check}
               size="large"
@@ -379,22 +373,16 @@ function ActividadGSonidosPage() {
           </div>
 
           {pairFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto! Las dos empiezan con {pickedPairId}.
-            </p>
+            </>} />
           )}
 
           {pairFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esas imágenes no empiezan con la misma sílaba. Prueba con
               otras.
-            </p>
+            </>} />
           )}
 
           {!pairFeedback && (
@@ -402,7 +390,7 @@ function ActividadGSonidosPage() {
               icon={Check}
               size="large"
               fullWidth
-              disabled={pickedIds.length !== 2}
+              disabled={Boolean(pairFeedback) || !isDistinctPair(pickedIds[0], pickedIds[1], matchedIds)}
               onClick={checkPair}
             >
               Comprobar pareja
@@ -481,24 +469,18 @@ function ActividadGSonidosPage() {
           </div>
 
           {lastFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Todas tienen el sonido /g/ en la última sílaba.
-            </p>
+            </>} />
           )}
 
           {lastFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Revisa otra vez. Escucha en qué sílaba está el sonido /g/.
-            </p>
+            </>} />
           )}
 
-          {lastFeedback !== 'correct' && (
+          {!lastFeedback && (
             <Button
               icon={Check}
               size="large"

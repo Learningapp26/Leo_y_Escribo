@@ -2,7 +2,7 @@ import { Heart, Sparkles } from 'lucide-react'
 import Alien from '../space/Alien'
 import '../../styles/activity-feedback.css'
 
-function ActivityFeedback({ correct, children }) {
+function ActivityFeedback({ correct, message, children }) {
   const Symbol = correct ? Heart : Sparkles
 
   return (
@@ -15,6 +15,7 @@ function ActivityFeedback({ correct, children }) {
         <p className="activity-feedback__text">
           {correct ? '¡Correcto!' : '¡Casi! Prueba otra vez'}
         </p>
+        {message && <p className="activity-feedback__detail">{message}</p>}
       </div>
       {children}
     </div>

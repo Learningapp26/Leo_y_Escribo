@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
@@ -204,24 +205,18 @@ function ActividadPSonidosPage() {
           </div>
 
           {selectionFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Todas empiezan con el sonido /p/.
-            </p>
+            </>} />
           )}
 
           {selectionFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Revisa otra vez. Alguna imagen no empieza con /p/.
-            </p>
+            </>} />
           )}
 
-          {selectionFeedback !== 'correct' && (
+          {!selectionFeedback && (
             <Button
               icon={Check}
               size="large"
@@ -362,24 +357,18 @@ function ActividadPSonidosPage() {
           </div>
 
           {positionResult === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto! El sonido /p/ está en "{positionItem.syllables[positionItem.answerIndex]}".
-            </p>
+            </>} />
           )}
 
           {positionResult === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Escucha otra vez con cuidado.
-            </p>
+            </>} />
           )}
 
-          {positionResult !== 'correct' && (
+          {!positionResult && (
             <Button
               icon={Check}
               size="large"
@@ -388,6 +377,21 @@ function ActividadPSonidosPage() {
               onClick={checkPosition}
             >
               Comprobar
+            </Button>
+          )}
+
+          {positionResult === 'retry' && (
+            <Button
+              variant="retry"
+              icon={RotateCcw}
+              size="large"
+              fullWidth
+              onClick={() => {
+                setSelectedSyllableIndex(null)
+                setPositionResult('')
+              }}
+            >
+              Intentar nuevamente
             </Button>
           )}
 

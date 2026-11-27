@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { fillBlank } from '../lib/fillBlank'
 import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw } from 'lucide-react'
@@ -153,16 +154,16 @@ function ActividadSFinalPage() {
         })}
       </div>
       {feedback === 'correct' && (
-        <p className="selection-feedback selection-feedback--correct" role="status">
+        <ActivityFeedback correct message={<>
           ¡Correcto! {activity.word ? `La palabra es ${activity.word}.` : '¡Sigue así!'}
-        </p>
+        </>} />
       )}
       {feedback === 'retry' && (
-        <p className="selection-feedback selection-feedback--retry" role="status">
+        <ActivityFeedback correct={false} message={<>
           Revisa tu respuesta e inténtalo otra vez.
-        </p>
+        </>} />
       )}
-      {feedback !== 'correct' && (
+      {!feedback && (
         <Button icon={Check} size="large" fullWidth disabled={!selected} onClick={() => checkChoice(activity.answer)}>
           Comprobar
         </Button>
@@ -226,16 +227,16 @@ function ActividadSFinalPage() {
             })}
           </div>
           {feedback === 'correct' && (
-            <p className="selection-feedback selection-feedback--correct" role="status">
+            <ActivityFeedback correct message={<>
               ¡Correcto! Formaste la palabra {sFinalActivities.word.word}.
-            </p>
+            </>} />
           )}
           {feedback === 'retry' && (
-            <p className="selection-feedback selection-feedback--retry" role="status">
+            <ActivityFeedback correct={false} message={<>
               Prueba otro orden de sílabas.
-            </p>
+            </>} />
           )}
-          {feedback !== 'correct' && (
+          {!feedback && (
             <Button icon={Check} size="large" fullWidth disabled={!wordSlots[0] || !wordSlots[1]} onClick={checkWord}>
               Comprobar palabra
             </Button>

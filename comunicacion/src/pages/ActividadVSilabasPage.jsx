@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { LetterSound } from '../components/lessons/SoundIntroduction'
 import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
@@ -239,18 +240,18 @@ function ActividadVSilabasPage() {
           </div>
 
           {imageFeedback === 'correct' && (
-            <p className="selection-feedback selection-feedback--correct" role="status">
+            <ActivityFeedback correct message={<>
               ¡Correcto! {imageExercise.word} comienza con {imageExercise.syllable}.
-            </p>
+            </>} />
           )}
 
           {imageFeedback === 'retry' && (
-            <p className="selection-feedback selection-feedback--retry" role="status">
+            <ActivityFeedback correct={false} message={<>
               Escucha la palabra otra vez y prueba con otra sílaba.
-            </p>
+            </>} />
           )}
 
-          {imageFeedback !== 'correct' && (
+          {!imageFeedback && (
             <Button icon={Check} size="large" fullWidth disabled={!selectedSyllable} onClick={checkImageSyllable}>
               Comprobar
             </Button>
@@ -326,18 +327,18 @@ function ActividadVSilabasPage() {
           </div>
 
           {wordFeedback === 'correct' && (
-            <p className="selection-feedback selection-feedback--correct" role="status">
+            <ActivityFeedback correct message={<>
               ¡Correcto! {wordExercise.word} empieza con {wordExercise.answer}.
-            </p>
+            </>} />
           )}
 
           {wordFeedback === 'retry' && (
-            <p className="selection-feedback selection-feedback--retry" role="status">
+            <ActivityFeedback correct={false} message={<>
               Esa no es la sílaba correcta. Lee la palabra otra vez.
-            </p>
+            </>} />
           )}
 
-          {wordFeedback !== 'correct' && (
+          {!wordFeedback && (
             <Button icon={Check} size="large" fullWidth disabled={!selectedWordSyllable} onClick={checkWordSyllable}>
               Comprobar
             </Button>

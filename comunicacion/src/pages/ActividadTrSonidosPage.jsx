@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import ListeningWords from '../components/lessons/ListeningWords'
 import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
@@ -297,26 +298,20 @@ function ActividadTrSonidosPage() {
           </div>
 
           {initialFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Tractor, trece y tronco comienzan con el sonido
               /tr/.
-            </p>
+            </>} />
           )}
 
           {initialFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Revisa otra vez. Escucha cada palabra y busca las que
               comienzan como tren.
-            </p>
+            </>} />
           )}
 
-          {initialFeedback !== 'correct' && (
+          {!initialFeedback && (
             <Button
               icon={Check}
               size="large"
@@ -401,25 +396,19 @@ function ActividadTrSonidosPage() {
           </div>
 
           {anywhereFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Electricista, estrella y astronauta tienen el
               sonido /tr/.
-            </p>
+            </>} />
           )}
 
           {anywhereFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Escucha cada palabra despacio y busca dónde suena /tr/.
-            </p>
+            </>} />
           )}
 
-          {anywhereFeedback !== 'correct' && (
+          {!anywhereFeedback && (
             <Button
               icon={Check}
               size="large"

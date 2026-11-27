@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { LetterSound } from '../components/lessons/SoundIntroduction'
 import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
@@ -291,25 +292,19 @@ function ActividadJSilabasPage() {
           </div>
 
           {countResult === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto! {countWord.name} tiene{' '}
               {countWord.syllables.length} sílabas.
-            </p>
+            </>} />
           )}
 
           {countResult === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Escucha otra vez y cuenta con cuidado.
-            </p>
+            </>} />
           )}
 
-          {countResult !== 'correct' && (
+          {!countResult && (
             <Button
               icon={Check}
               size="large"
@@ -318,6 +313,21 @@ function ActividadJSilabasPage() {
               onClick={checkCount}
             >
               Comprobar
+            </Button>
+          )}
+
+          {countResult === 'retry' && (
+            <Button
+              variant="retry"
+              icon={RotateCcw}
+              size="large"
+              fullWidth
+              onClick={() => {
+                setCountSelected(null)
+                setCountResult('')
+              }}
+            >
+              Intentar nuevamente
             </Button>
           )}
 
@@ -383,26 +393,20 @@ function ActividadJSilabasPage() {
           </div>
 
           {searchResult === 'correct' && (
-            <p
-              className="syllables-feedback syllables-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Encontraste todas las
               sílabas con J.
-            </p>
+            </>} />
           )}
 
           {searchResult === 'retry' && (
-            <p
-              className="syllables-feedback syllables-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Revisa nuevamente y toca solamente
               las sílabas que comienzan con J.
-            </p>
+            </>} />
           )}
 
-          {searchResult !== 'correct' && (
+          {!searchResult && (
             <Button
               icon={Check}
               size="large"
@@ -514,23 +518,17 @@ function ActividadJSilabasPage() {
           </div>
 
           {vowelResult === 'correct' && (
-            <p
-              className="syllables-feedback syllables-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Encontraste ja, je, ji, jo
               y ju.
-            </p>
+            </>} />
           )}
 
           {vowelResult === 'retry' && (
-            <p
-              className="syllables-feedback syllables-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Escucha nuevamente y toca todas las
               sílabas con J.
-            </p>
+            </>} />
           )}
 
           {vowelResult === '' && (

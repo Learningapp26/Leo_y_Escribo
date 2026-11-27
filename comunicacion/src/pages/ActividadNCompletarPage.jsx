@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -197,24 +198,18 @@ function ActividadNCompletarPage() {
           </div>
 
           {completionResult === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto! La palabra es {currentWord.word}.
-            </p>
+            </>} />
           )}
 
           {completionResult === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esa sílaba no completa la palabra. Revisa otra vez.
-            </p>
+            </>} />
           )}
 
-          {completionResult !== 'correct' && (
+          {!completionResult && (
             <Button
               icon={Check}
               size="large"
@@ -223,6 +218,21 @@ function ActividadNCompletarPage() {
               onClick={checkCompletion}
             >
               Comprobar
+            </Button>
+          )}
+
+          {completionResult === 'retry' && (
+            <Button
+              variant="retry"
+              icon={RotateCcw}
+              size="large"
+              fullWidth
+              onClick={() => {
+                setSelectedSyllable('')
+                setCompletionResult('')
+              }}
+            >
+              Intentar nuevamente
             </Button>
           )}
 
@@ -318,30 +328,21 @@ function ActividadNCompletarPage() {
           )}
 
           {joinFeedback === 'correct' && !isJoinFinished && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Formaste una palabra.
-            </p>
+            </>} />
           )}
 
           {isJoinFinished && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Usaste todas las sílabas.
-            </p>
+            </>} />
           )}
 
           {joinFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esas sílabas no forman una palabra. Inténtalo de nuevo.
-            </p>
+            </>} />
           )}
 
           {!joinFeedback && !isJoinFinished && (

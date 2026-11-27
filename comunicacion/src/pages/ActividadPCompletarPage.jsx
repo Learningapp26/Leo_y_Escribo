@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { fillBlank } from '../lib/fillBlank'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
@@ -227,24 +228,18 @@ function ActividadPCompletarPage() {
           </div>
 
           {completionResult === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto! La palabra es {currentWord.word}.
-            </p>
+            </>} />
           )}
 
           {completionResult === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esa sílaba no completa la palabra. Escucha otra vez.
-            </p>
+            </>} />
           )}
 
-          {completionResult !== 'correct' && (
+          {!completionResult && (
             <Button
               icon={Check}
               size="large"
@@ -253,6 +248,21 @@ function ActividadPCompletarPage() {
               onClick={checkCompletion}
             >
               Comprobar
+            </Button>
+          )}
+
+          {completionResult === 'retry' && (
+            <Button
+              variant="retry"
+              icon={RotateCcw}
+              size="large"
+              fullWidth
+              onClick={() => {
+                setSelectedSyllable('')
+                setCompletionResult('')
+              }}
+            >
+              Intentar nuevamente
             </Button>
           )}
 
@@ -333,42 +343,30 @@ function ActividadPCompletarPage() {
           </div>
 
           {joinFeedback === 'correct' && !allWordsFound && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Encontraste una palabra. Busca otra.
-            </p>
+            </>} />
           )}
 
           {joinFeedback === 'correct' && allWordsFound && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Excelente! Encontraste las {pWordBuildTargets.length} palabras.
-            </p>
+            </>} />
           )}
 
           {joinFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esas sílabas no forman una palabra. Inténtalo de nuevo.
-            </p>
+            </>} />
           )}
 
           {joinFeedback === 'repeated' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esa palabra ya la encontraste. Busca una diferente.
-            </p>
+            </>} />
           )}
 
-          {joinFeedback !== 'correct' && (
+          {!joinFeedback && (
             <Button
               icon={Check}
               size="large"

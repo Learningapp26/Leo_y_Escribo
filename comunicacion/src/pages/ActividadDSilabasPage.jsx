@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { LetterSound } from '../components/lessons/SoundIntroduction'
 import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
@@ -141,9 +142,24 @@ function ActividadDSilabasPage() {
               </button>
             ))}
           </div>
-          {countResult === 'correct' && <p className="selection-feedback selection-feedback--correct" role="status">¡Correcto! {countWord.name} tiene {countWord.syllables.length} sílabas.</p>}
-          {countResult === 'retry' && <p className="selection-feedback selection-feedback--retry" role="status">Escucha otra vez y cuenta con cuidado.</p>}
-          {countResult !== 'correct' && <Button icon={Check} size="large" fullWidth disabled={countSelected === null} onClick={checkCount}>Comprobar</Button>}
+          {countResult === 'correct' && <ActivityFeedback correct message={<>¡Correcto! {countWord.name} tiene {countWord.syllables.length} sílabas.</>} />}
+          {countResult === 'retry' && <ActivityFeedback correct={false} message={<>Escucha otra vez y cuenta con cuidado.</>} />}
+          {!countResult && <Button icon={Check} size="large" fullWidth disabled={countSelected === null} onClick={checkCount}>Comprobar</Button>}
+
+          {countResult === 'retry' && (
+            <Button
+              variant="retry"
+              icon={RotateCcw}
+              size="large"
+              fullWidth
+              onClick={() => {
+                setCountSelected(null)
+                setCountResult('')
+              }}
+            >
+              Intentar nuevamente
+            </Button>
+          )}
           {countResult === 'correct' && <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth onClick={nextCountWord}>{countIndex === dSyllableCountWords.length - 1 ? 'Siguiente parte' : 'Siguiente palabra'}</Button>}
         </Card>
       )}
@@ -158,9 +174,9 @@ function ActividadDSilabasPage() {
               return <button className={['syllable-button', stateClass].filter(Boolean).join(' ')} type="button" key={option.id} aria-pressed={selected} onClick={() => toggleSearch(option)}>{option.syllable}</button>
             })}
           </div>
-          {searchResult === 'correct' && <p className="syllables-feedback syllables-feedback--correct" role="status">¡Muy bien! Encontraste todas las sílabas con D.</p>}
-          {searchResult === 'retry' && <p className="syllables-feedback syllables-feedback--retry" role="status">Revisa otra vez: debes tocar da, de, di, do y du.</p>}
-          {searchResult !== 'correct' && <Button icon={Check} size="large" fullWidth disabled={searchSelected.length === 0} onClick={checkSearch}>Comprobar selección</Button>}
+          {searchResult === 'correct' && <ActivityFeedback correct message={<>¡Muy bien! Encontraste todas las sílabas con D.</>} />}
+          {searchResult === 'retry' && <ActivityFeedback correct={false} message={<>Revisa otra vez: debes tocar da, de, di, do y du.</>} />}
+          {!searchResult && <Button icon={Check} size="large" fullWidth disabled={searchSelected.length === 0} onClick={checkSearch}>Comprobar selección</Button>}
           {searchResult === 'retry' && <Button variant="retry" icon={RotateCcw} size="large" fullWidth onClick={() => { setSearchSelected([]); setSearchResult('') }}>Intentar nuevamente</Button>}
           {searchResult === 'correct' && <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth onClick={() => setPhaseIndex(2)}>Siguiente parte</Button>}
         </Card>
@@ -235,21 +251,15 @@ function ActividadDSilabasPage() {
           </div>
 
           {vowelResult === 'correct' && (
-            <p
-              className="syllables-feedback syllables-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Encontraste da, de, di, do y du.
-            </p>
+            </>} />
           )}
 
           {vowelResult === 'retry' && (
-            <p
-              className="syllables-feedback syllables-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Escucha nuevamente y toca todas las sílabas con D.
-            </p>
+            </>} />
           )}
 
           {vowelResult === '' && (

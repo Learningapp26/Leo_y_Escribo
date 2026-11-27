@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { useState } from 'react'
 import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { ArrowRight, Check, RotateCcw } from 'lucide-react'
@@ -83,16 +84,16 @@ function SoundSelection({ choices, targetKey, instruction, onContinue, continueL
         ))}
       </div>
       {feedback === 'correct' && (
-        <p className="selection-feedback selection-feedback--correct" role="status">
+        <ActivityFeedback correct message={<>
           ¡Muy bien! Encontraste el sonido /s/.
-        </p>
+        </>} />
       )}
       {feedback === 'retry' && (
-        <p className="selection-feedback selection-feedback--retry" role="status">
+        <ActivityFeedback correct={false} message={<>
           Revisa cada palabra y prueba otra vez.
-        </p>
+        </>} />
       )}
-      {feedback !== 'correct' && (
+      {!feedback && (
         <Button icon={Check} size="large" fullWidth disabled={!selectedIds.length} onClick={check}>
           Comprobar
         </Button>

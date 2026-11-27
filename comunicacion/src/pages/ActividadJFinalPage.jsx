@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { useEffect, useState } from 'react'
 import {ArrowRight,Check,RotateCcw,Volume2,} from 'lucide-react'
 
@@ -425,13 +426,10 @@ function ActividadJFinalPage() {
 
                     {sentenceResult === 'correct' && (
                         <>
-                            <p
-                                className="selection-feedback selection-feedback--correct"
-                                role="status"
-                            >
+                            <ActivityFeedback correct message={<>
                                 ¡Correcto!{' '}
                                 {sentence.completeSentence}
-                            </p>
+                            </>} />
 
                             <Button
                                 variant="audio"
@@ -464,16 +462,13 @@ function ActividadJFinalPage() {
                     )}
 
                     {sentenceResult === 'retry' && (
-                        <p
-                            className="selection-feedback selection-feedback--retry"
-                            role="status"
-                        >
+                        <ActivityFeedback correct={false} message={<>
                             Esa palabra no completa correctamente
                             la oración.
-                        </p>
+                        </>} />
                     )}
 
-                    {sentenceResult !== 'correct' && (
+                    {!sentenceResult && (
                         <Button
                             icon={Check}
                             size="large"
@@ -550,26 +545,20 @@ function ActividadJFinalPage() {
                             </div>
 
                             {countResult === 'correct' && (
-                                <p
-                                    className="selection-feedback selection-feedback--correct"
-                                    role="status"
-                                >
+                                <ActivityFeedback correct message={<>
                                     ¡Muy bien! La oración tiene{' '}
                                     {sentence.wordCount} palabras.
-                                </p>
+                                </>} />
                             )}
 
                             {countResult === 'retry' && (
-                                <p
-                                    className="selection-feedback selection-feedback--retry"
-                                    role="status"
-                                >
+                                <ActivityFeedback correct={false} message={<>
                                     Cuenta nuevamente todas las
                                     palabras de la oración.
-                                </p>
+                                </>} />
                             )}
 
-                            {countResult !== 'correct' && (
+                            {!countResult && (
                                 <Button
                                     icon={Check}
                                     size="large"
@@ -687,25 +676,19 @@ function ActividadJFinalPage() {
                     </div>
 
                     {matchResult === 'correct' && (
-                        <p
-                            className="selection-feedback selection-feedback--correct"
-                            role="status"
-                        >
+                        <ActivityFeedback correct message={<>
                             ¡Correcto! Esa es la imagen de{' '}
                             {matchItem.word}.
-                        </p>
+                        </>} />
                     )}
 
                     {matchResult === 'retry' && (
-                        <p
-                            className="selection-feedback selection-feedback--retry"
-                            role="status"
-                        >
+                        <ActivityFeedback correct={false} message={<>
                             Esa no es la imagen correcta.
-                        </p>
+                        </>} />
                     )}
 
-                    {matchResult !== 'correct' && (
+                    {!matchResult && (
                         <Button
                             icon={Check}
                             size="large"

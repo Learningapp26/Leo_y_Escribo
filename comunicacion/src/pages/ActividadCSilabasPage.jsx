@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { useState } from 'react'
 import {
   ArrowRight,
@@ -274,27 +275,21 @@ function ActividadCSilabasPage() {
           </div>
 
           {imageFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto! {imageExercise.word}{' '}
               comienza con{' '}
               {imageExercise.syllable}.
-            </p>
+            </>} />
           )}
 
           {imageFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Escucha la palabra otra vez y
               prueba con otra sílaba.
-            </p>
+            </>} />
           )}
 
-          {imageFeedback !== 'correct' && (
+          {!imageFeedback && (
             <Button
               icon={Check}
               size="large"
@@ -426,28 +421,22 @@ function ActividadCSilabasPage() {
           </div>
 
           {searchFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Encontraste todas las
               palabras con la sílaba{' '}
               {searchExercise.target}.
-            </p>
+            </>} />
           )}
 
           {searchFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Revisa las palabras otra vez. Puede
               faltar alguna o puede haber una
               selección que no corresponde.
-            </p>
+            </>} />
           )}
 
-          {searchFeedback !== 'correct' && (
+          {!searchFeedback && (
             <Button
               icon={Check}
               size="large"

@@ -1,3 +1,5 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
+import { togglePairSelection, isDistinctPair } from '../lib/pairSelection'
 import { LetterSound } from '../components/lessons/SoundIntroduction'
 import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
@@ -145,21 +147,17 @@ function ActividadGSilabasPage() {
   )?.pairId
 
   const pickPairCard = (item) => {
-    if (pairFeedback) return
+    if (pairFeedback || matchedIds.includes(item.id)) return
 
     const isPicked = pickedIds.includes(item.id)
     if (!isPicked && pickedIds.length >= 2) return
 
     playAudio(item.audio)
-    setPickedIds((current) =>
-      isPicked
-        ? current.filter((id) => id !== item.id)
-        : [...current, item.id],
-    )
+    setPickedIds((current) => togglePairSelection(current, item.id))
   }
 
   const checkPair = () => {
-    if (pickedIds.length !== 2) return
+    if (pairFeedback || pickedIds.length !== 2 || !isDistinctPair(pickedIds[0], pickedIds[1], matchedIds)) return
 
     const [first, second] = pickedIds.map((id) =>
       gSyllablePairPool.find((item) => item.id === id),
@@ -298,24 +296,18 @@ function ActividadGSilabasPage() {
           </div>
 
           {searchResult === 'correct' && (
-            <p
-              className="syllables-feedback syllables-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Encontraste ga, go, gu, gue y gui.
-            </p>
+            </>} />
           )}
 
           {searchResult === 'retry' && (
-            <p
-              className="syllables-feedback syllables-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Revisa otra vez. Algunas sílabas seleccionadas no son con G.
-            </p>
+            </>} />
           )}
 
-          {searchResult !== 'correct' && (
+          {!searchResult && (
             <Button
               icon={Check}
               size="large"
@@ -416,24 +408,18 @@ function ActividadGSilabasPage() {
           </div>
 
           {completionResult === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto! La palabra es {currentWord.word}.
-            </p>
+            </>} />
           )}
 
           {completionResult === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esa sílaba no completa la palabra. Escucha otra vez.
-            </p>
+            </>} />
           )}
 
-          {completionResult !== 'correct' && (
+          {!completionResult && (
             <Button
               icon={Check}
               size="large"
@@ -442,6 +428,21 @@ function ActividadGSilabasPage() {
               onClick={checkCompletion}
             >
               Comprobar
+            </Button>
+          )}
+
+          {completionResult === 'retry' && (
+            <Button
+              variant="retry"
+              icon={RotateCcw}
+              size="large"
+              fullWidth
+              onClick={() => {
+                setSelectedSyllable('')
+                setCompletionResult('')
+              }}
+            >
+              Intentar nuevamente
             </Button>
           )}
 
@@ -488,21 +489,15 @@ function ActividadGSilabasPage() {
           </div>
 
           {pairFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto! Ambas palabras tienen la sílaba {pickedPairId}.
-            </p>
+            </>} />
           )}
 
           {pairFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esas palabras no tienen la misma sílaba con G. Prueba con otras.
-            </p>
+            </>} />
           )}
 
           {!pairFeedback && (
@@ -510,7 +505,7 @@ function ActividadGSilabasPage() {
               icon={Check}
               size="large"
               fullWidth
-              disabled={pickedIds.length !== 2}
+              disabled={Boolean(pairFeedback) || !isDistinctPair(pickedIds[0], pickedIds[1], matchedIds)}
               onClick={checkPair}
             >
               Comprobar pareja

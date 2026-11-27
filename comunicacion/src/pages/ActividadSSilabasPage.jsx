@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { fillBlank } from '../lib/fillBlank'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw } from 'lucide-react'
@@ -104,17 +105,17 @@ function ActividadSSilabasPage() {
         </div>
 
         {feedback === 'correct' && (
-          <p className="syllables-feedback syllables-feedback--correct" role="status">
+          <ActivityFeedback correct message={<>
             ¡Correcto! La palabra es {challenge.word}.
-          </p>
+          </>} />
         )}
         {feedback === 'retry' && (
-          <p className="syllables-feedback syllables-feedback--retry" role="status">
+          <ActivityFeedback correct={false} message={<>
             Esa sílaba no completa la palabra. Inténtalo otra vez.
-          </p>
+          </>} />
         )}
 
-        {feedback !== 'correct' && (
+        {!feedback && (
           <Button icon={Check} size="large" fullWidth disabled={!selectedSyllable} onClick={check}>
             Comprobar
           </Button>

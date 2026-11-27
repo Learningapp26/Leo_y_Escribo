@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -177,18 +178,18 @@ function ActividadVCompletarPage() {
           </div>
 
           {completionFeedback === 'correct' && (
-            <p className="selection-feedback selection-feedback--correct" role="status">
+            <ActivityFeedback correct message={<>
               ¡Correcto! {completionExercise.word} se escribe con {completionExercise.answer}.
-            </p>
+            </>} />
           )}
 
           {completionFeedback === 'retry' && (
-            <p className="selection-feedback selection-feedback--retry" role="status">
+            <ActivityFeedback correct={false} message={<>
               Esa sílaba no corresponde al dibujo. Escucha de nuevo e inténtalo otra vez.
-            </p>
+            </>} />
           )}
 
-          {completionFeedback !== 'correct' && (
+          {!completionFeedback && (
             <Button icon={Check} size="large" fullWidth disabled={!selectedCompletion} onClick={checkCompletion}>
               Comprobar palabra
             </Button>
@@ -266,18 +267,18 @@ function ActividadVCompletarPage() {
           </div>
 
           {choiceFeedback === 'correct' && (
-            <p className="selection-feedback selection-feedback--correct" role="status">
+            <ActivityFeedback correct message={<>
               ¡Correcto! Esa imagen es "{choiceExercise.answer}".
-            </p>
+            </>} />
           )}
 
           {choiceFeedback === 'retry' && (
-            <p className="selection-feedback selection-feedback--retry" role="status">
+            <ActivityFeedback correct={false} message={<>
               Esa no es la palabra que nombra el dibujo. Inténtalo otra vez.
-            </p>
+            </>} />
           )}
 
-          {choiceFeedback !== 'correct' && (
+          {!choiceFeedback && (
             <Button icon={Check} size="large" fullWidth disabled={!selectedChoice} onClick={checkChoice}>
               Comprobar
             </Button>

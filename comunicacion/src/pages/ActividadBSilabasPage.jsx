@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { LetterSound } from '../components/lessons/SoundIntroduction'
 import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
@@ -96,9 +97,9 @@ function ActividadBSilabasPage() {
         })}
       </div>
 
-      {feedback === 'correct' && <p className="selection-feedback selection-feedback--correct" role="status">¡Correcto! La sílaba es {exercise.answer}.</p>}
-      {feedback === 'retry' && <p className="selection-feedback selection-feedback--retry" role="status">Esa no es la sílaba correcta. Mira y escucha otra vez.</p>}
-      {feedback !== 'correct' && <Button icon={Check} size="large" fullWidth disabled={!selected} onClick={check}>Comprobar</Button>}
+      {feedback === 'correct' && <ActivityFeedback correct message={<>¡Correcto! La sílaba es {exercise.answer}.</>} />}
+      {feedback === 'retry' && <ActivityFeedback correct={false} message={<>Esa no es la sílaba correcta. Mira y escucha otra vez.</>} />}
+      {!feedback && <Button icon={Check} size="large" fullWidth disabled={!selected} onClick={check}>Comprobar</Button>}
       {feedback === 'retry' && <Button variant="retry" icon={RotateCcw} size="large" fullWidth onClick={() => { setSelected(''); setFeedback('') }}>Intentar nuevamente</Button>}
       {feedback === 'correct' && phase === 'palabras' && exerciseIndex === bWordSyllableExercises.length - 1
         ? <Button to="/actividad/b-completar" icon={ArrowRight} iconPosition="right" size="large" fullWidth>Ir a completar palabras</Button>

@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import SoundIntroduction from '../components/lessons/SoundIntroduction'
 import { useState } from 'react'
 import {
@@ -285,16 +286,10 @@ function ActividadClSonidosPage() {
           {differentFeedback ===
             'correct' && (
             <>
-              <p
-                className={
-                  'selection-feedback ' +
-                  'selection-feedback--correct'
-                }
-                role="status"
-              >
+              <ActivityFeedback correct message={<>
                 ¡Muy bien! Camión comienza
                 con un sonido diferente.
-              </p>
+              </>} />
 
               <Button
                 icon={ArrowRight}
@@ -310,16 +305,10 @@ function ActividadClSonidosPage() {
 
           {differentFeedback === 'retry' && (
             <>
-              <p
-                className={
-                  'selection-feedback ' +
-                  'selection-feedback--retry'
-                }
-                role="status"
-              >
+              <ActivityFeedback correct={false} message={<>
                 Esa palabra comienza con /cl/.
                 Inténtalo nuevamente.
-              </p>
+              </>} />
 
               <Button
                 variant="retry"
@@ -413,16 +402,10 @@ function ActividadClSonidosPage() {
           {containsFeedback ===
             'correct' && (
             <>
-              <p
-                className={
-                  'selection-feedback ' +
-                  'selection-feedback--correct'
-                }
-                role="status"
-              >
+              <ActivityFeedback correct message={<>
                 ¡Excelente! Chicle y ancla
                 contienen el sonido /cl/.
-              </p>
+              </>} />
 
               <Button
                 icon={ArrowRight}
@@ -438,16 +421,10 @@ function ActividadClSonidosPage() {
 
           {containsFeedback === 'retry' && (
             <>
-              <p
-                className={
-                  'selection-feedback ' +
-                  'selection-feedback--retry'
-                }
-                role="status"
-              >
+              <ActivityFeedback correct={false} message={<>
                 Revisa las palabras y vuelve
                 a intentarlo.
-              </p>
+              </>} />
 
               <Button
                 variant="retry"

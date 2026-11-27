@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { useState } from 'react'
 import {
   ArrowRight,
@@ -180,23 +181,17 @@ function ActividadRSonidosPage() {
         </div>
 
         {feedback === 'correct' && (
-          <p
-            className="selection-feedback selection-feedback--correct"
-            role="status"
-          >
+          <ActivityFeedback correct message={<>
             ¡Correcto! En {exercise.word}, la letra R tiene
             sonido {exercise.answer}.
-          </p>
+          </>} />
         )}
 
         {feedback === 'retry' && (
-          <p
-            className="selection-feedback selection-feedback--retry"
-            role="status"
-          >
+          <ActivityFeedback correct={false} message={<>
             Escucha nuevamente la palabra e inténtalo otra
             vez.
-          </p>
+          </>} />
         )}
 
         {!feedback && (

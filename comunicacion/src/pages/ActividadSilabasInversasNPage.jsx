@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -302,24 +303,18 @@ function ActividadSilabasInversasNPage() {
           </div>
 
           {soundFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien!
-            </p>
+            </>} />
           )}
 
           {soundFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Revisa otra vez. Alguna figura no tiene ese sonido.
-            </p>
+            </>} />
           )}
 
-          {soundFeedback !== 'correct' && (
+          {!soundFeedback && (
             <Button
               icon={Check}
               size="large"
@@ -417,24 +412,18 @@ function ActividadSilabasInversasNPage() {
             </div>
 
             {readingFeedback === 'correct' && (
-              <p
-                className="selection-feedback selection-feedback--correct"
-                role="status"
-              >
+              <ActivityFeedback correct message={<>
                 ¡Muy bien! Encontraste las palabras con ese sonido.
-              </p>
+              </>} />
             )}
 
             {readingFeedback === 'retry' && (
-              <p
-                className="selection-feedback selection-feedback--retry"
-                role="status"
-              >
+              <ActivityFeedback correct={false} message={<>
                 Revisa otra vez. Falta alguna o sobra alguna palabra.
-              </p>
+              </>} />
             )}
 
-            {readingFeedback !== 'correct' && (
+            {!readingFeedback && (
               <Button
                 icon={Check}
                 size="large"
@@ -604,25 +593,19 @@ function ActividadSilabasInversasNPage() {
           </div>
 
           {sentenceFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto!{' '}
               {sentenceItem.template.replace('___', sentenceItem.answer)}
-            </p>
+            </>} />
           )}
 
           {sentenceFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esa imagen no completa la oración. Escucha otra vez.
-            </p>
+            </>} />
           )}
 
-          {sentenceFeedback !== 'correct' && (
+          {!sentenceFeedback && (
             <Button
               icon={Check}
               size="large"
@@ -718,24 +701,18 @@ function ActividadSilabasInversasNPage() {
           </div>
 
           {pictureFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto!
-            </p>
+            </>} />
           )}
 
           {pictureFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esa no es la palabra correcta.
-            </p>
+            </>} />
           )}
 
-          {pictureFeedback !== 'correct' && (
+          {!pictureFeedback && (
             <Button
               icon={Check}
               size="large"

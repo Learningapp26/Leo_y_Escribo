@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { useState } from 'react'
 import {
   ArrowRight,
@@ -254,22 +255,16 @@ function ActividadDCompletarPage() {
           </div>
 
           {completionResult === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto! La palabra es {currentWord.word}.
-            </p>
+            </>} />
           )}
 
           {completionResult === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esa sílaba no completa la palabra.
               Intenta nuevamente.
-            </p>
+            </>} />
           )}
 
           {completionResult === '' && (
@@ -420,10 +415,10 @@ function ActividadDCompletarPage() {
           {joinFeedback === 'correct' &&
             completedPair && (
               <div className="join-result" role="status">
-                <p className="selection-feedback selection-feedback--correct">
+                <ActivityFeedback correct message={<>
                   ¡Muy bien! Formaste la palabra{' '}
                   {completedPair.word}.
-                </p>
+                </>} />
 
                 <img
                   className="join-result__image"
@@ -438,13 +433,10 @@ function ActividadDCompletarPage() {
             )}
 
           {joinFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esas sílabas no forman una de las palabras.
               Intenta nuevamente.
-            </p>
+            </>} />
           )}
 
           {joinFeedback === '' &&
@@ -489,12 +481,9 @@ function ActividadDCompletarPage() {
 
           {isJoinFinished && (
             <>
-              <p
-                className="selection-feedback selection-feedback--correct"
-                role="status"
-              >
+              <ActivityFeedback correct message={<>
                 ¡Excelente! Formaste todas las palabras.
-              </p>
+              </>} />
 
               <Button
                 to="/actividad/d-final"

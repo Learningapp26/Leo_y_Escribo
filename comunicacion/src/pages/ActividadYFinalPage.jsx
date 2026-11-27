@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { useEffect, useState } from 'react'
 import {ArrowRight,Check,RotateCcw,Volume2, } from 'lucide-react'
 
@@ -270,23 +271,17 @@ function ActividadYFinalPage() {
           </div>
 
           {result === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto! Formaste la frase{' '}
               {exercise.first.name} y {exercise.answer}.
-            </p>
+            </>} />
           )}
 
           {result === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esa imagen no completa la frase. Escucha otra
               vez e inténtalo nuevamente.
-            </p>
+            </>} />
           )}
 
           {!result && (

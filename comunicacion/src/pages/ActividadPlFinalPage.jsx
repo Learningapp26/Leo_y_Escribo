@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { fillBlank } from '../lib/fillBlank'
 import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
@@ -248,24 +249,18 @@ function ActividadPlFinalPage() {
           </div>
 
           {joinFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Formaste la palabra {joinItem.word}.
-            </p>
+            </>} />
           )}
 
           {joinFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esa terminación no forma {joinItem.word}. Inténtalo de nuevo.
-            </p>
+            </>} />
           )}
 
-          {joinFeedback !== 'correct' && (
+          {!joinFeedback && (
             <Button
               icon={Check}
               size="large"
@@ -365,24 +360,18 @@ function ActividadPlFinalPage() {
           </div>
 
           {sentenceFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto! La palabra es {sentenceItem.answer}.
-            </p>
+            </>} />
           )}
 
           {sentenceFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esa palabra no completa la oración. Escucha otra vez.
-            </p>
+            </>} />
           )}
 
-          {sentenceFeedback !== 'correct' && (
+          {!sentenceFeedback && (
             <Button
               icon={Check}
               size="large"

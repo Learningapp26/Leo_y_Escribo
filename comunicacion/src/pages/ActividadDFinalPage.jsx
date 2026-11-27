@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { useEffect, useState } from 'react'
 import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
 
@@ -152,9 +153,9 @@ function ActividadDFinalPage() {
               return <button className={['selection-button', stateClass].filter(Boolean).join(' ')} type="button" key={option} aria-pressed={selected} onClick={() => { if (sentenceResult === 'correct') return; setSelectedOption(option); setSentenceResult('') }}><span className="selection-word">{option}</span></button>
             })}
           </div>
-          {sentenceResult === 'correct' && <p className="selection-feedback selection-feedback--correct" role="status">¡Correcto! {sentence.sentence.replace('___', sentence.answer)}</p>}
-          {sentenceResult === 'retry' && <p className="selection-feedback selection-feedback--retry" role="status">Intenta nuevamente.</p>}
-          {sentenceResult !== 'correct' && <Button icon={Check} size="large" fullWidth disabled={!selectedOption} onClick={checkSentence}>Comprobar</Button>}
+          {sentenceResult === 'correct' && <ActivityFeedback correct message={<>¡Correcto! {sentence.sentence.replace('___', sentence.answer)}</>} />}
+          {sentenceResult === 'retry' && <ActivityFeedback correct={false} message={<>Intenta nuevamente.</>} />}
+          {!sentenceResult && <Button icon={Check} size="large" fullWidth disabled={!selectedOption} onClick={checkSentence}>Comprobar</Button>}
           {sentenceResult === 'retry' && <Button variant="retry" icon={RotateCcw} size="large" fullWidth onClick={() => { setSelectedOption(''); setSentenceResult('') }}>Intentar nuevamente</Button>}
           {sentenceResult === 'correct' && <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth onClick={nextSentence}>{sentenceIndex === dSentenceCompletion.length - 1 ? 'Siguiente parte' : 'Siguiente oración'}</Button>}
         </Card>
@@ -177,9 +178,9 @@ function ActividadDFinalPage() {
               )
             })}
           </div>
-          {matchResult === 'correct' && <p className="selection-feedback selection-feedback--correct" role="status">¡Correcto! Esa es la imagen de {matchItem.word}.</p>}
-          {matchResult === 'retry' && <p className="selection-feedback selection-feedback--retry" role="status">Esa no es la imagen correcta. Intenta nuevamente.</p>}
-          {matchResult !== 'correct' && <Button icon={Check} size="large" fullWidth disabled={!selectedImage} onClick={checkMatch}>Comprobar</Button>}
+          {matchResult === 'correct' && <ActivityFeedback correct message={<>¡Correcto! Esa es la imagen de {matchItem.word}.</>} />}
+          {matchResult === 'retry' && <ActivityFeedback correct={false} message={<>Esa no es la imagen correcta. Intenta nuevamente.</>} />}
+          {!matchResult && <Button icon={Check} size="large" fullWidth disabled={!selectedImage} onClick={checkMatch}>Comprobar</Button>}
           {matchResult === 'retry' && <Button variant="retry" icon={RotateCcw} size="large" fullWidth onClick={() => { setSelectedImage(''); setMatchResult('') }}>Intentar nuevamente</Button>}
           {matchResult === 'correct' && <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth onClick={nextMatch}>{matchIndex === dWordImageMatch.length - 1 ? 'Finalizar lección' : 'Siguiente palabra'}</Button>}
         </Card>

@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { LetterSound } from '../components/lessons/SoundIntroduction'
 import { formatLetterGroup } from '../data/lessonLabels'
 import { useState } from 'react'
@@ -278,25 +279,19 @@ function ActividadTrSilabasPage() {
           </div>
 
           {imageFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Correcto! {imageExercise.word} comienza con{' '}
               {imageExercise.syllable}.
-            </p>
+            </>} />
           )}
 
           {imageFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Escucha la palabra otra vez y prueba con otra sílaba.
-            </p>
+            </>} />
           )}
 
-          {imageFeedback !== 'correct' && (
+          {!imageFeedback && (
             <Button
               icon={Check}
               size="large"
@@ -468,25 +463,19 @@ function ActividadTrSilabasPage() {
           </div>
 
           {positionFeedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Excelente! Todas las palabras están bien marcadas.
-            </p>
+            </>} />
           )}
 
           {positionFeedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Algunas palabras no están bien marcadas. Revisa las que se
               movieron un poco.
-            </p>
+            </>} />
           )}
 
-          {positionFeedback !== 'correct' && (
+          {!positionFeedback && (
             <Button
               icon={Check}
               size="large"

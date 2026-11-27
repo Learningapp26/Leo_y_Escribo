@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { formatLetterGroup } from '../data/lessonLabels'
 import { useEffect, useState } from 'react'
 import {
@@ -303,23 +304,17 @@ function ActividadRFinalPage() {
           </div>
 
           {feedback === 'correct' && (
-            <p
-              className="selection-feedback selection-feedback--correct"
-              role="status"
-            >
+            <ActivityFeedback correct message={<>
               ¡Muy bien! Completaste correctamente el
               ejercicio.
-            </p>
+            </>} />
           )}
 
           {feedback === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
+            <ActivityFeedback correct={false} message={<>
               Esa opción no completa correctamente el
               ejercicio. Escucha de nuevo.
-            </p>
+            </>} />
           )}
 
           {!feedback && (

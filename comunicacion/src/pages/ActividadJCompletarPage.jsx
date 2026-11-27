@@ -1,3 +1,4 @@
+import ActivityFeedback from '../components/common/ActivityFeedback'
 import { useState } from 'react'
 import {
     ArrowRight,
@@ -305,10 +306,10 @@ function ActividadJCompletarPage() {
                             className="join-result"
                             role="status"
                         >
-                            <p className="selection-feedback selection-feedback--correct">
+                            <ActivityFeedback correct message={<>
                                 ¡Muy bien! Completaste la palabra{' '}
                                 {currentWord.word}.
-                            </p>
+                            </>} />
 
                             <img
                                 className="join-result__image"
@@ -323,13 +324,10 @@ function ActividadJCompletarPage() {
                     )}
 
                     {completionResult === 'retry' && (
-                        <p
-                            className="selection-feedback selection-feedback--retry"
-                            role="status"
-                        >
+                        <ActivityFeedback correct={false} message={<>
                             Esa sílaba no completa la palabra.
                             Escucha nuevamente e intenta otra vez.
-                        </p>
+                        </>} />
                     )}
 
                     {completionResult === '' && (
@@ -469,10 +467,10 @@ function ActividadJCompletarPage() {
                             className="join-result"
                             role="status"
                         >
-                            <p className="selection-feedback selection-feedback--correct">
+                            <ActivityFeedback correct message={<>
                                 ¡Muy bien! Formaste la palabra{' '}
                                 {currentJoin.word}.
-                            </p>
+                            </>} />
 
                             <img
                                 className="join-result__image"
@@ -487,13 +485,10 @@ function ActividadJCompletarPage() {
                     )}
 
                     {joinResult === 'retry' && (
-                        <p
-                            className="selection-feedback selection-feedback--retry"
-                            role="status"
-                        >
+                        <ActivityFeedback correct={false} message={<>
                             Revisa el orden de las sílabas e
                             intenta nuevamente.
-                        </p>
+                        </>} />
                     )}
 
                     {joinResult === '' && (
