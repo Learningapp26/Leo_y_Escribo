@@ -1,0 +1,15 @@
+digraph {
+  graph [rankdir=TB]
+  graph [bgcolor="#FFFFFF", pad="0.18", ranksep="0.35", nodesep="0.30", dpi=185]
+  node [shape=box, style="rounded,filled", fontname="Arial", fontsize=13, color="#737E9E", fontcolor="#25345A", penwidth=1.2, fillcolor="#F5F7FB", margin="0.18,0.11"]
+  edge [color="#626C87", fontcolor="#334267", fontname="Arial", fontsize=11, arrowsize=0.7]
+  src [label="Commit aprobado de Comunicación",fillcolor="#E8EDFA"]
+  cfg [label="VITE_MATE_URL\nConfiguración del destino"]
+  build [label="npm ci + npm run build\nVite produce comunicacion/dist"]
+  cdn [label="Cloudflare Workers Static Assets\nwrangler.jsonc y fallback SPA"]
+  pagina [label="Navegador\nRutas y medios desde el origen publicado",fillcolor="#E1F3EB"]
+  srv [label="Servicios conectados\nAuth, datos y Matemática"]
+  src -> build; cfg -> build
+  build -> cdn -> pagina -> srv
+  {rank=same; src cfg}
+}

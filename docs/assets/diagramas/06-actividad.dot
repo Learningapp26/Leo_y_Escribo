@@ -1,0 +1,19 @@
+digraph {
+  graph [rankdir=TB]
+  graph [bgcolor="#FFFFFF", pad="0.18", ranksep="0.35", nodesep="0.30", dpi=185]
+  node [shape=box, style="rounded,filled", fontname="Arial", fontsize=13, color="#737E9E", fontcolor="#25345A", penwidth=1.2, fillcolor="#F5F7FB", margin="0.18,0.11"]
+  edge [color="#626C87", fontcolor="#334267", fontname="Arial", fontsize=11, arrowsize=0.7]
+  iniciar [label="Cargar lección, actividad y ejercicio",fillcolor="#E8EDFA"]
+  responder [label="Escuchar, elegir, ordenar o practicar"]
+  validar [label="Comprobar o confirmar práctica\nRegistrar el evento según el tipo"]
+  error [label="Reintento\nCorregir selección"]
+  siguiente [label="Continuar\nSiguiente ejercicio o actividad"]
+  final [label="Último ejercicio de la lección\nGuardar cierre y presentar recompensa",fillcolor="#E1F3EB"]
+  iniciar -> responder -> validar
+  validar -> error [label=" error"]
+  error -> responder
+  validar -> siguiente [label=" acierto o práctica"]
+  siguiente -> responder [label=" quedan pasos"]
+  siguiente -> final [label=" termina"]
+  {rank=same; error siguiente}
+}

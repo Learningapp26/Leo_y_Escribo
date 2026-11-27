@@ -1,0 +1,17 @@
+digraph {
+  graph [rankdir=TB]
+  graph [bgcolor="#FFFFFF", pad="0.18", ranksep="0.35", nodesep="0.30", dpi=185]
+  node [shape=box, style="rounded,filled", fontname="Arial", fontsize=13, color="#737E9E", fontcolor="#25345A", penwidth=1.2, fillcolor="#F5F7FB", margin="0.18,0.11"]
+  edge [color="#626C87", fontcolor="#334267", fontname="Arial", fontsize=11, arrowsize=0.7]
+  auth [label="auth.users\nid UUID · correo · metadatos",fillcolor="#E8EDFA"]
+  perfil [label="perfiles\nid PK/FK · rol"]
+  aula [label="aulas\ncodigo PK · docente_id FK"]
+  est [label="estudiantes\nid PK/FK · codigo_aula FK · docente_id"]
+  prog [label="progreso\nid PK · estudiante_id FK · modulo · detalle",fillcolor="#E1F3EB"]
+  auth -> perfil [label=" 1 a 0..1"]
+  auth -> aula [label=" 1 a muchos"]
+  auth -> est [label=" identidad 1 a 0..1"]
+  aula -> est [label=" 1 a muchos"]
+  est -> prog [label=" 1 a muchos"]
+  {rank=same; perfil aula}
+}

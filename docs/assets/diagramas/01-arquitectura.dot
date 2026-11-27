@@ -1,0 +1,20 @@
+digraph {
+  graph [rankdir=TB]
+  graph [bgcolor="#FFFFFF", pad="0.18", ranksep="0.35", nodesep="0.30", dpi=185]
+  node [shape=box, style="rounded,filled", fontname="Arial", fontsize=13, color="#737E9E", fontcolor="#25345A", penwidth=1.2, fillcolor="#F5F7FB", margin="0.18,0.11"]
+  edge [color="#626C87", fontcolor="#334267", fontname="Arial", fontsize=11, arrowsize=0.7]
+  Navegador [label="Navegador\nReact + React Router",fillcolor="#E8EDFA"]
+  CDN [label="Cloudflare Static Assets\nHTML, CSS, JS y medios"]
+  Leo [label="Comunicación\nLecciones y progreso",fillcolor="#E1F3EB"]
+  Mate [label="Matemática\nPanel docente y coordinación",fillcolor="#E1F3EB"]
+  Auth [label="Supabase Auth\nIdentidad y sesión"]
+  Base [label="Supabase Data API + PostgreSQL\nPerfiles, aulas y progreso"]
+  CDN -> Navegador [label=" entrega"]
+  Navegador -> Leo
+  Navegador -> Mate
+  Leo -> Mate [label=" sesión"]
+  Leo -> Auth; Mate -> Auth
+  Leo -> Base; Mate -> Base
+  {rank=same; Leo Mate}
+  {rank=same; Auth Base}
+}

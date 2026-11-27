@@ -1,0 +1,17 @@
+digraph {
+  graph [rankdir=TB]
+  graph [bgcolor="#FFFFFF", pad="0.18", ranksep="0.35", nodesep="0.30", dpi=185]
+  node [shape=box, style="rounded,filled", fontname="Arial", fontsize=13, color="#737E9E", fontcolor="#25345A", penwidth=1.2, fillcolor="#F5F7FB", margin="0.18,0.11"]
+  edge [color="#626C87", fontcolor="#334267", fontname="Arial", fontsize=11, arrowsize=0.7]
+  main [label="main.jsx → App.jsx",fillcolor="#E8EDFA"]
+  router [label="AppRouter + LessonAccessGuard"]
+  paginas [label="pages/\nInicio, galaxia y ejercicios"]
+  book [label="components/lessons/\nLectura, actividad y respuesta"]
+  estado [label="hooks/ + lib/\nProgreso, sesión y audio"]
+  datos [label="data/\nCatálogo, lecciones y juegos",fillcolor="#E1F3EB"]
+  main -> router; router -> paginas; router -> book
+  paginas -> estado; book -> estado
+  paginas -> datos; book -> datos
+  {rank=same; paginas book}
+  {rank=same; estado datos}
+}

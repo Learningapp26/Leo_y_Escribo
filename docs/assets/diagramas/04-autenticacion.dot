@@ -1,0 +1,17 @@
+digraph {
+  graph [rankdir=TB]
+  graph [bgcolor="#FFFFFF", pad="0.18", ranksep="0.35", nodesep="0.30", dpi=185]
+  node [shape=box, style="rounded,filled", fontname="Arial", fontsize=13, color="#737E9E", fontcolor="#25345A", penwidth=1.2, fillcolor="#F5F7FB", margin="0.18,0.11"]
+  edge [color="#626C87", fontcolor="#334267", fontname="Arial", fontsize=11, arrowsize=0.7]
+  inicio [label="Ingreso o retorno de OAuth"]
+  auth [label="Supabase Auth\nSesión y usuario",fillcolor="#E8EDFA"]
+  rol [label="Lectura de perfiles.rol\no metadatos de alta docente"]
+  estudiante [label="Estudiante\nSelector Leo y Aprendo / Matemáticas"]
+  otro [label="Docente o coordinación\nPanel en Matemática"]
+  destino [label="Matemática reconstruye la sesión\ny aplica control de ruta",fillcolor="#E1F3EB"]
+  inicio -> auth -> rol
+  rol -> estudiante; rol -> otro
+  estudiante -> destino [label=" si elige Matemáticas"]
+  otro -> destino
+  {rank=same; estudiante otro}
+}

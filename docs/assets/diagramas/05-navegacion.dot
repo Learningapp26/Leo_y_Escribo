@@ -1,0 +1,21 @@
+digraph {
+  graph [rankdir=TB]
+  graph [bgcolor="#FFFFFF", pad="0.18", ranksep="0.35", nodesep="0.30", dpi=185]
+  node [shape=box, style="rounded,filled", fontname="Arial", fontsize=13, color="#737E9E", fontcolor="#25345A", penwidth=1.2, fillcolor="#F5F7FB", margin="0.18,0.11"]
+  edge [color="#626C87", fontcolor="#334267", fontname="Arial", fontsize=11, arrowsize=0.7]
+  login [label="Acceso compartido",fillcolor="#E8EDFA"]
+  bienvenida [label="¡Bienvenido!"]
+  panel [label="Mi grupo / Docentes por aprobar\nMatemática"]
+  home [label="Inicio de Comunicación"]
+  avance [label="Mis sellos y Mi viaje"]
+  galaxia [label="Mi galaxia → Planeta"]
+  leccion [label="Lección → Actividad → Cierre",fillcolor="#E1F3EB"]
+  login -> bienvenida [label=" estudiante"]
+  login -> panel [label=" docente o coordinación"]
+  bienvenida -> home [label=" Leo y Aprendo"]
+  home -> avance
+  home -> galaxia -> leccion
+  home -> leccion [label=" ¡Despegar!"]
+  {rank=same; bienvenida panel}
+  {rank=same; avance galaxia}
+}
