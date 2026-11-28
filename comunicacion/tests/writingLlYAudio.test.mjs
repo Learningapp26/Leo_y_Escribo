@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 import { readFileSync, readdirSync } from 'node:fs'
 import { writingLlYLesson as lesson } from '../src/data/writingLlYData.js'
 
-test('ll-y connects all 42 supplied MP3 recordings and keeps missing audio disabled', () => {
+test('ll-y connects all 45 supplied MP3 recordings with no missing audio', () => {
   const folder = new URL('../public/audio/lecciones/escritura-ll-y/', import.meta.url)
   const files = readdirSync(folder)
   const tracks = new Map()
@@ -14,7 +14,7 @@ test('ll-y connects all 42 supplied MP3 recordings and keeps missing audio disab
   }
   visit(lesson)
   const enabled = [...tracks.values()].filter(track => track.available)
-  assert.equal(enabled.length, 42)
+  assert.equal(enabled.length, 45)
   assert.equal(files.length, enabled.length)
   for (const track of enabled) {
     const filename = track.src.split('/').pop()
@@ -22,10 +22,7 @@ test('ll-y connects all 42 supplied MP3 recordings and keeps missing audio disab
     const bytes = readFileSync(new URL(filename, folder))
     assert.ok(bytes.subarray(0, 3).toString() === 'ID3' || (bytes[0] === 0xff && (bytes[1] & 0xe0) === 0xe0), filename)
   }
-  assert.deepEqual([...tracks.values()].filter(track => !track.available).map(track => track.src.split('/').pop()).sort(), [
-    'instruccion-lista-1-0.mp3', 'instruccion-lista-1-1.mp3', 'silaba-llas.mp3',
-    'silaba-yas.mp3', 'yo.mp3',
-  ])
+  assert.deepEqual([...tracks.values()].filter(track => !track.available), [])
 })
 
 test('the instruction confirmed as ll is only assigned to the ll lists', () => {
@@ -35,5 +32,8 @@ test('the instruction confirmed as ll is only assigned to the ll lists', () => {
     assert.equal(exercise.instruction.src, '/audio/lecciones/escritura-ll-y/Instruccion-lista.mp3')
     assert.equal(exercise.instruction.available, true)
   }
-  for (const exercise of lists.slice(2)) assert.equal(exercise.instruction.available, false)
+  for (const exercise of lists.slice(2)) {
+    assert.equal(exercise.instruction.src, '/audio/lecciones/escritura-ll-y/Instruccion-lista-y.mp3')
+    assert.equal(exercise.instruction.available, true)
+  }
 })

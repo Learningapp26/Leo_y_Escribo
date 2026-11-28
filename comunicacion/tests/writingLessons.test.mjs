@@ -72,7 +72,7 @@ test('audio paths have unique scripts and every activity image exists', () => {
       assert.equal(value.available, existsSync(new URL(`../public${value.src}`, import.meta.url)))
       if (tracks.has(value.src)) {
         // The teacher explicitly reuses ll recordings for the matching y syllables.
-        const spoken = (text) => /\/escritura-ll-y\/Silaba-/i.test(value.src) ? text.replace(/^ll/, 'y') : text
+        const spoken = (text) => /\/escritura-ll-y\/(?:Silaba-|Yas\.mp3$)/i.test(value.src) ? text.replace(/^ll/, 'y') : text
         assert.equal(spoken(tracks.get(value.src)), spoken(value.text))
       }
       tracks.set(value.src, value.text)

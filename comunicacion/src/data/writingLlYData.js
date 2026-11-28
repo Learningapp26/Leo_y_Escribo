@@ -47,16 +47,23 @@ const { base, finish, word, syllable, instruction, present, order } = createWrit
     "Yerno.mp3",
     "Yodo.mp3",
     "Yuca.mp3",
+    "Yo.mp3",
+    "Yas.mp3",
+    "Instruccion-lista-y.mp3",
   ],
   {
     "silaba-yu.mp3": "Silaba-llu.mp3",
     "silaba-yar.mp3": "Silaba-llar.mp3",
+    "silaba-yas.mp3": "Yas.mp3",
+    "silaba-llas.mp3": "Yas.mp3",
     "silaba-ye.mp3": "Silaba-lle.mp3",
     "silaba-yec.mp3": "Silaba-llec.mp3",
     "silaba-yo.mp3": "Silaba-llo.mp3",
     "inyeccion.mp3": "Inyecci\u00f3n.mp3",
     "instruccion-lista-0-0.mp3": "Instruccion-lista.mp3",
     "instruccion-lista-0-1.mp3": "Instruccion-lista.mp3",
+    "instruccion-lista-1-0.mp3": "Instruccion-lista-y.mp3",
+    "instruccion-lista-1-1.mp3": "Instruccion-lista-y.mp3",
   },
 )
 const ll = ['llave', 'llamar', 'lleno', 'llanura', 'bella', 'cabello', 'calle', 'collar', 'mejilla', 'costillas']
