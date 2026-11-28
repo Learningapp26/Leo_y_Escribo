@@ -2,7 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { readFileSync, readdirSync } from 'node:fs'
 import { writingVocalesJuntasLesson } from '../src/data/writingVocalesJuntasData.js'
-import { writingLlYLesson } from '../src/data/writingLlYData.js'
+import { writingHLesson } from '../src/data/writingHData.js'
 
 function tracks(value, result = new Map()) {
   if (!value || typeof value !== 'object') return result
@@ -29,5 +29,5 @@ test('all 57 supplied recordings are enabled with exact case-sensitive public pa
 })
 
 test('other writing lessons retain disabled audio until their recordings are supplied', () => {
-  for (const track of tracks(writingLlYLesson).values()) assert.equal(track.available, false)
+  for (const track of tracks(writingHLesson).values()) assert.equal(track.available, false)
 })
