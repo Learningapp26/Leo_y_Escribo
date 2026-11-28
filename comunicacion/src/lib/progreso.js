@@ -9,6 +9,8 @@
 // actividad nunca se rompa por un fallo de guardado.
 
 import { supabase } from './supabaseClient'
+import { WORD_PRACTICE_REQUIREMENTS } from '../data/wordPracticeRequirements'
+import { allPracticeGroupsCompleted, getCompletedPracticeGroups } from './wordPracticeProgress'
 
 const MODULO = 'comunicacion'
 
@@ -117,8 +119,8 @@ export async function registrarProgreso({
 }
 
 // Marca una lección completa. Se llama una sola vez, al llegar a la
-// pantalla final. `parte` es solo para lecciones con mini-lecciones
-// sueltas (ver PARTES_REQUERIDAS abajo), se omite en el resto.
+// pantalla final. `parte` identifica mini-lecciones o grupos de palabras
+// (ver PARTES_REQUERIDAS y WORD_PRACTICE_REQUIREMENTS); se omite en el resto.
 export async function registrarLeccionCompletada(leccionId, parte) {
   return registrarProgreso({
     actividad: 'leccion-completada',
@@ -177,7 +179,9 @@ export async function obtenerResumenProgreso() {
 
       const parte = registro.detalle?.parte
       if (!parte) {
-        completadas.add(leccionId)
+        // Los registros antiguos de repaso podían marcar toda la unidad
+        // después de una sola letra. Se comprueban sus grupos más abajo.
+        if (!WORD_PRACTICE_REQUIREMENTS[leccionId]) completadas.add(leccionId)
         continue
       }
 
@@ -195,6 +199,11 @@ export async function obtenerResumenProgreso() {
     if (partes && requeridas.every((parte) => partes.has(parte))) {
       completadas.add(leccionId)
     }
+  }
+
+  for (const [practiceId, groupIds] of Object.entries(WORD_PRACTICE_REQUIREMENTS)) {
+    const completedGroups = getCompletedPracticeGroups(registros, practiceId, groupIds)
+    if (allPracticeGroupsCompleted(groupIds, completedGroups)) completadas.add(practiceId)
   }
 
   return { estrellas, completadas, iniciadas, diasSeguidos: contarDiasSeguidos(registros) }

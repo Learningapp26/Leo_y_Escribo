@@ -178,4 +178,7 @@ export const unit5WordPracticeConfig = {
   title: 'Palabras para leer y practicar',
   unitLabel: 'Unidad 5 · Práctica de lectura',
   intro: 'Elige un grupo. Lee las palabras y completa los retos.',
+  introAudio: null,
+  completionAudio: null,
+  instructionAudios: { leer: null, buscar: null, corta: null, silabas: null },
 }

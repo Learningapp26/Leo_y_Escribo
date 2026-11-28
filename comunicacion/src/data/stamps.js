@@ -114,15 +114,32 @@ const STAMP_ART = [
   [68, 'Medalla', 'shiny', null, [fill(poly(28, 4, 46, 4, 58, 42, 40, 42)), fill(poly(72, 4, 54, 4, 42, 42, 60, 42)), fill(circle(50, 64, 28)), cut(circle(50, 64, 21)), fill(star(50, 64, 15, 6.5))]],
 ]
 
-export const STAMPS = STAMP_ART.map(([number, name, unit, lesson, parts]) => ({
-  id: `sello-${number}`,
-  number,
-  name,
-  unit: unit === 'shiny' ? null : unit,
-  shiny: unit === 'shiny',
-  lesson,
-  parts,
-}))
+export const STAMPS = [
+  ...STAMP_ART.map(([number, name, unit, lesson, parts]) => ({
+    id: `sello-${number}`,
+    number,
+    name,
+    unit: unit === 'shiny' ? null : unit,
+    shiny: unit === 'shiny',
+    lesson,
+    parts,
+  })),
+  ...Array.from({ length: 5 }, (_, index) => ({
+    id: `sello-lector-${index + 1}`,
+    number: 69 + index,
+    name: `Lector de palabras · Unidad ${index + 1}`,
+    unit: index + 1,
+    shiny: false,
+    practice: true,
+    lesson: `repaso-unidad-${index + 1}`,
+    parts: [
+      fill('M10 30Q28 20 46 30V88Q28 78 10 88Z'),
+      fill('M54 30Q72 20 90 30V88Q72 78 54 88Z'),
+      fill(star(50, 16, 15, 7)),
+      cut('M18 42Q30 37 39 41M18 54Q30 49 39 53M61 41Q72 37 82 42M61 53Q72 49 82 54', { stroke: 3 }),
+    ],
+  })),
+]
 
 export function getStamp(id) {
   return STAMPS.find((stamp) => stamp.id === id) ?? null
@@ -145,7 +162,8 @@ export function getStampForLesson(lessonId, unit, unitLessonIds = []) {
   const own = STAMPS.find((stamp) => stamp.lesson === lessonId)
   if (own) return own
   const free = getUnitStamps(unit).filter((stamp) => !stamp.lesson)
-  const others = unitLessonIds.filter((id) => !STAMPS.some((stamp) => stamp.lesson === id))
+  // Los nuevos sellos de repaso no desplazan los sellos ya asignados a juegos.
+  const others = unitLessonIds.filter((id) => !STAMPS.some((stamp) => stamp.lesson === id && !stamp.practice))
   const index = Math.max(others.indexOf(lessonId), 0)
   return free[index % Math.max(free.length, 1)] ?? null
 }

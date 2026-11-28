@@ -5,13 +5,11 @@ export const wordPracticeGroups = [
     lessonId: 'm',
     label: 'M',
     title: 'Palabras con M',
-    coverImage: '/images/lecciones/m/te-amo-mama.png',
-    coverAlt: 'Una mamá y su hijo se abrazan.',
     words: [
-      { id: 'mama', word: 'mamá', image: '/images/lecciones/m/mama.png', imageAlt: 'Una mamá', audio: '/audio/lecciones/m/mama.mp3' },
-      { id: 'mano', word: 'mano', image: '/images/lecciones/m/mano.png', imageAlt: 'Una mano', audio: '/audio/lecciones/m/mano.mp3' },
-      { id: 'miel', word: 'miel', image: '/images/lecciones/m/miel.png', imageAlt: 'Un frasco de miel', audio: '/audio/lecciones/m/miel.mp3' },
-      { id: 'mariposa', word: 'mariposa', image: '/images/lecciones/m/mariposa.png', imageAlt: 'Una mariposa', audio: '/audio/lecciones/m/mariposa.mp3' },
+      { id: 'mama', word: 'mamá', audio: '/audio/lecciones/m/mama.mp3' },
+      { id: 'mano', word: 'mano', audio: '/audio/lecciones/m/mano.mp3' },
+      { id: 'miel', word: 'miel', audio: '/audio/lecciones/m/miel.mp3' },
+      { id: 'mariposa', word: 'mariposa', audio: '/audio/lecciones/m/mariposa.mp3' },
     ],
     find: {
       prompt: 'Marca las palabras que empiezan con M.',
@@ -30,8 +28,8 @@ export const wordPracticeGroups = [
       options: ['miel', 'mañana', 'mariposa'],
     },
     syllables: {
-      word: 'mariposa',
-      parts: ['ma', 'ri', 'po', 'sa'],
+      word: 'mamá',
+      parts: ['ma', 'má'],
       options: [2, 3, 4],
     },
   },
@@ -39,13 +37,11 @@ export const wordPracticeGroups = [
     lessonId: 'l',
     label: 'L',
     title: 'Palabras con L',
-    coverImage: '/images/lecciones/l/lectura-perro.png',
-    coverAlt: 'Un perro acompaña una lectura.',
     words: [
-      { id: 'ala', word: 'ala', image: '/images/lecciones/l/ala.png', imageAlt: 'Un ala', audio: '/audio/lecciones/l/ala.mp3' },
-      { id: 'luna', word: 'luna', image: '/images/lecciones/l/luna.png', imageAlt: 'La luna', audio: '/audio/lecciones/l/luna.mp3' },
-      { id: 'limon', word: 'limón', image: '/images/lecciones/l/limon.png', imageAlt: 'Un limón', audio: '/audio/lecciones/m/limon.mp3' },
-      { id: 'loma', word: 'loma', image: '/images/lecciones/l/loma.png', imageAlt: 'Una loma', audio: '/audio/lecciones/l/loma.mp3' },
+      { id: 'ala', word: 'ala', audio: '/audio/lecciones/l/ala.mp3' },
+      { id: 'luna', word: 'luna', audio: '/audio/lecciones/l/luna.mp3' },
+      { id: 'limon', word: 'limón', audio: '/audio/lecciones/m/limon.mp3' },
+      { id: 'loma', word: 'loma', audio: '/audio/lecciones/l/loma.mp3' },
     ],
     find: {
       prompt: 'Marca las palabras que empiezan con L.',
@@ -73,13 +69,11 @@ export const wordPracticeGroups = [
     lessonId: 's',
     label: 'S',
     title: 'Palabras con S',
-    coverImage: '/images/lecciones/s/sapos-globos.png',
-    coverAlt: 'Dos sapos inflan globos junto a un lago.',
     words: [
-      { id: 'sol', word: 'sol', image: '/images/lecciones/y/sol.png', imageAlt: 'El sol' },
-      { id: 'sala', word: 'sala' },
-      { id: 'sapo', word: 'sapo' },
-      { id: 'suma', word: 'suma' },
+      { id: 'sol', word: 'sol', audio: null },
+      { id: 'sala', word: 'sala', audio: null },
+      { id: 'sapo', word: 'sapo', audio: null },
+      { id: 'suma', word: 'suma', audio: null },
     ],
     find: {
       prompt: 'Marca las palabras que empiezan con S.',
@@ -105,16 +99,13 @@ export const wordPracticeGroups = [
   },
   {
     lessonId: 'n',
-    showAudio: true,
     label: 'N',
     title: 'Palabras con N',
-    coverImage: '/images/lecciones/n/lectura-nariz-sorprendente.png',
-    coverAlt: 'Una ilustración infantil de la lectura de la letra N.',
     words: [
-      { id: 'nube', word: 'nube', image: '/images/lecciones/n/nube.png', imageAlt: 'Una nube' },
-      { id: 'nido', word: 'nido', image: '/images/lecciones/n/nido.png', imageAlt: 'Un nido' },
-      { id: 'nariz', word: 'nariz', image: '/images/lecciones/n/nariz.png', imageAlt: 'Una nariz' },
-      { id: 'naranja', word: 'naranja', image: '/images/lecciones/n/naranja.png', imageAlt: 'Una naranja' },
+      { id: 'nube', word: 'nube', audio: '/audio/lecciones/b/Nube.mp3' },
+      { id: 'nido', word: 'nido', audio: null },
+      { id: 'nariz', word: 'nariz', audio: null },
+      { id: 'naranja', word: 'naranja', audio: null },
     ],
     find: {
       prompt: 'Marca las palabras que empiezan con N.',
@@ -140,16 +131,13 @@ export const wordPracticeGroups = [
   },
   {
     lessonId: 'p',
-    showAudio: true,
     label: 'P',
     title: 'Palabras con P',
-    coverImage: '/images/lecciones/p/lectura-papa-puma.png',
-    coverAlt: 'Una ilustración infantil de la lectura de la letra P.',
     words: [
-      { id: 'pie', word: 'pie', image: '/images/lecciones/p/pie.png', imageAlt: 'Un pie' },
-      { id: 'puma', word: 'puma', image: '/images/lecciones/p/puma.png', imageAlt: 'Un puma' },
-      { id: 'pelota', word: 'pelota', image: '/images/lecciones/p/pelota.png', imageAlt: 'Una pelota' },
-      { id: 'pala', word: 'pala', image: '/images/lecciones/p/pala.png', imageAlt: 'Una pala' },
+      { id: 'pie', word: 'pie', audio: '/audio/lecciones/escritura-vocales-juntas/Pie.mp3' },
+      { id: 'puma', word: 'puma', audio: null },
+      { id: 'pelota', word: 'pelota', audio: null },
+      { id: 'pala', word: 'pala', audio: null },
     ],
     find: {
       prompt: 'Marca las palabras que empiezan con P.',
@@ -177,13 +165,11 @@ export const wordPracticeGroups = [
     lessonId: 'r',
     label: 'R',
     title: 'Palabras con R',
-    coverImage: '/images/lecciones/r/misterio-rosas.png',
-    coverAlt: 'Una ilustración infantil con rosas para la letra R.',
     words: [
-      { id: 'rosa', word: 'rosa', image: '/images/lecciones/r/rosa.png', imageAlt: 'Una rosa', audio: '/audio/lecciones/r/rosa.mp3' },
-      { id: 'rama', word: 'rama', image: '/images/lecciones/r/rama.png', imageAlt: 'Una rama', audio: '/audio/lecciones/r/rama.mp3' },
-      { id: 'risa', word: 'risa', image: '/images/lecciones/r/risa.png', imageAlt: 'Un niño sonriendo', audio: '/audio/lecciones/r/risa.mp3' },
-      { id: 'mariposa', word: 'mariposa', image: '/images/lecciones/r/mariposa.png', imageAlt: 'Una mariposa', audio: '/audio/lecciones/r/mariposa.mp3' },
+      { id: 'rosa', word: 'rosa', audio: '/audio/lecciones/r/rosa.mp3' },
+      { id: 'rama', word: 'rama', audio: '/audio/lecciones/r/rama.mp3' },
+      { id: 'risa', word: 'risa', audio: '/audio/lecciones/r/risa.mp3' },
+      { id: 'mariposa', word: 'mariposa', audio: '/audio/lecciones/r/mariposa.mp3' },
     ],
     find: {
       prompt: 'Marca las palabras que empiezan con R.',
@@ -198,8 +184,8 @@ export const wordPracticeGroups = [
     },
     shortest: {
       prompt: '¿Cuál es la palabra más corta?',
-      answer: 'sol',
-      options: ['sol', 'rosa', 'risa'],
+      answer: 'mar',
+      options: ['mar', 'rosa', 'risa'],
     },
     syllables: {
       word: 'mariposa',
@@ -209,16 +195,13 @@ export const wordPracticeGroups = [
   },
   {
     lessonId: 't',
-    showAudio: true,
     label: 'T',
     title: 'Palabras con T',
-    coverImage: '/images/lecciones/t/El-tamal-perdido.png',
-    coverAlt: 'Una ilustración infantil del cuento El tamal perdido.',
     words: [
-      { id: 'tamal', word: 'tamal', image: '/images/lecciones/t/tamal.png', imageAlt: 'Un tamal' },
-      { id: 'tela', word: 'tela', image: '/images/lecciones/t/tela.png', imageAlt: 'Un trozo de tela' },
-      { id: 'toro', word: 'toro', image: '/images/lecciones/t/toro.png', imageAlt: 'Un toro', audio: '/audio/lecciones/r/toro.mp3' },
-      { id: 'tomate', word: 'tomate', image: '/images/lecciones/t/tomate.png', imageAlt: 'Un tomate' },
+      { id: 'tamal', word: 'tamal', audio: null },
+      { id: 'tela', word: 'tela', audio: null },
+      { id: 'toro', word: 'toro', audio: '/audio/lecciones/r/toro.mp3' },
+      { id: 'tomate', word: 'tomate', audio: '/audio/lecciones/b/Tomate.mp3' },
     ],
     find: {
       prompt: 'Marca las palabras que empiezan con T.',
@@ -233,8 +216,8 @@ export const wordPracticeGroups = [
     },
     shortest: {
       prompt: '¿Cuál es la palabra más corta?',
-      answer: 'pan',
-      options: ['pan', 'tela', 'tomate'],
+      answer: 'tela',
+      options: ['tela', 'tamal', 'tomate'],
     },
     syllables: {
       word: 'tomate',
@@ -250,6 +233,9 @@ export const unit1WordPracticeConfig = {
   title: 'Palabras para leer y practicar',
   unitLabel: 'Unidad 1 · Práctica de lectura',
   intro: 'Elige una letra. Lee las palabras y completa los retos.',
+  introAudio: null,
+  completionAudio: null,
+  instructionAudios: { leer: null, buscar: null, corta: null, silabas: null },
 }
 
 export const unit3WordPracticeId = 'repaso-unidad-3'
@@ -259,8 +245,6 @@ const unit3WordLists = [
     lessonId: 'b',
     label: 'B b',
     title: 'Palabras con B b',
-    coverImage: '/images/lecciones/b/lectura-bananos-balu.png',
-    coverAlt: 'Balú junto a unos bananos.',
     words: [
       'beso', 'bate', 'barco', 'bajo', 'banca', 'bebida', 'bomba', 'burla',
       'búsqueda', 'burbuja', 'Benito', 'boca', 'balón', 'bonito', 'balsa',
@@ -280,8 +264,6 @@ const unit3WordLists = [
     lessonId: 'bl',
     label: 'bl',
     title: 'Palabras con bl',
-    coverImage: '/images/lecciones/bl/regalo-misterioso.png',
-    coverAlt: 'Una blusa como regalo misterioso.',
     words: [
       'noble', 'blusa', 'tabla', 'potable', 'temblor', 'posible', 'público',
       'bloque', 'bledo', 'blando', 'doblar', 'blanco', 'neblina', 'blancura',
@@ -318,8 +300,6 @@ const unit3WordLists = [
     lessonId: 'j',
     label: 'J j',
     title: 'Palabras con J j',
-    coverImage: '/images/lecciones/j/jirafa.png',
-    coverAlt: 'Una jirafa.',
     words: [
       'jamás', 'jalón', 'juntar', 'jinete', 'joroba', 'mojar', 'encajar',
       'plumaje', 'tarjeta', 'rajado', 'jabón', 'justo', 'Julia', 'jerarca',
@@ -358,8 +338,6 @@ const unit3WordLists = [
     lessonId: 'tr',
     label: 'tr',
     title: 'Palabras con tr',
-    coverImage: '/images/lecciones/tr/lectura.png',
-    coverAlt: 'Una familia junto a un tren.',
     words: [
       'trapo', 'tren', 'tratar', 'trepar', 'trono', 'tropa', 'triste',
       'trasto', 'trompeta', 'sastre', 'tripa', 'trotar', 'trabar', 'traje',
@@ -379,8 +357,6 @@ const unit3WordLists = [
     lessonId: 'otras',
     label: 'Otras palabras',
     title: 'Otras palabras',
-    coverImage: '/images/lecciones/j/conejo.png',
-    coverAlt: 'Un conejo.',
     words: [
       'macho', 'buche', 'rabo', 'mecha', 'entre', 'cajones', 'espejo',
       'conejo', 'subida', 'entrada', 'reja', 'techo', 'ducha', 'tajada',
@@ -408,8 +384,6 @@ export const unit3PracticeGroups = unit3WordLists.map((group) => ({
   themeId: unit3WordPracticeId,
   label: group.label,
   title: group.title,
-  coverImage: group.coverImage,
-  coverAlt: group.coverAlt,
   words: unit3WordsFor(group),
   find: {
     ...group.find,
@@ -438,11 +412,12 @@ export const unit3WordPracticeConfig = {
   title: 'Palabras para leer y practicar',
   unitLabel: 'Unidad 3 · Práctica de lectura',
   intro: 'Elige un grupo. Lee las palabras y completa los retos.',
+  introAudio: null,
+  completionAudio: null,
+  instructionAudios: { leer: null, buscar: null, corta: null, silabas: null },
 }
 
-// Unidad 4 (página 167-168 del libro). cl, cr, f, rr y Ñ ñ todavía no
-// tienen lección/pantalla propia, así que sus grupos no llevan coverImage
-// (se ve la insignia con la letra, igual que "br" y "ch" en la Unidad 3).
+// Unidad 4 (páginas 167–168 del libro).
 export const unit4WordPracticeId = 'repaso-unidad-4'
 
 const unit4WordLists = [
@@ -574,8 +549,6 @@ export const unit4PracticeGroups = unit4WordLists.map((group) => ({
   themeId: unit4WordPracticeId,
   label: group.label,
   title: group.title,
-  coverImage: group.coverImage,
-  coverAlt: group.coverAlt,
   words: unit4WordsFor(group),
   find: {
     ...group.find,
@@ -595,4 +568,7 @@ export const unit4WordPracticeConfig = {
   title: 'Palabras para leer y practicar',
   unitLabel: 'Unidad 4 · Práctica de lectura',
   intro: 'Elige un grupo. Lee las palabras y completa los retos.',
+  introAudio: null,
+  completionAudio: null,
+  instructionAudios: { leer: null, buscar: null, corta: null, silabas: null },
 }

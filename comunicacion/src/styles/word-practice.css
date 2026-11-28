@@ -1,155 +1,110 @@
-/* Palabras para leer y practicar: una adaptación digital de las listas del libro.
-   El color acompaña instrucciones y estados, pero el texto siempre explica la acción. */
+/* Prácticas de lectura: palabras sin ilustraciones y progreso por grupo. */
 .word-practice-page {
   gap: var(--space-lg);
-  position: relative;
-  isolation: isolate;
 }
 
-.word-practice-page::before {
-  position: absolute;
-  z-index: -1;
-  top: 7rem;
-  right: min(8vw, 7rem);
-  width: clamp(9rem, 18vw, 15rem);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: var(--lesson-secondary);
-  content: '';
-  opacity: 0.18;
-  filter: blur(2px);
+.word-practice-header,
+.word-practice-card {
+  width: min(100%, 960px);
+  margin-inline: auto;
+  padding: clamp(20px, 4vw, 36px);
+  border: 3px solid #17243b;
+  border-radius: 28px;
+  background: #f7faff;
+  color: #17243b;
+  box-shadow: 0 6px 0 #17243b30;
 }
 
 .word-practice-header {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(10rem, 15rem);
-  align-items: center;
-  gap: var(--space-xl);
-  padding: var(--space-lg) clamp(var(--space-lg), 5vw, var(--space-2xl));
-  overflow: hidden;
-  border: 2px solid var(--lesson-border);
-  border-radius: var(--radius-lg);
-  background: var(--lesson-surface);
-  box-shadow: var(--shadow-sm);
-}
-
-.word-practice-header__content {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-sm);
+  align-items: center;
+  gap: var(--space-lg);
+  text-align: center;
 }
 
-.word-practice-header__content h1,
-.word-practice-header__content p {
+.word-practice-header h1,
+.word-practice-header .text-ui-label,
+.word-practice-card h2,
+.word-practice-card > .text-instruction {
+  color: #17243b;
+}
+
+.word-practice-header h1,
+.word-practice-card h2 {
   margin: 0;
+}
+
+.word-practice-page .selection-instructions {
+  display: grid;
+  grid-template-columns: 70px minmax(0, 1fr) 64px;
+  align-items: center;
+  gap: 14px;
+  max-width: none;
+  width: 100%;
+}
+
+.word-practice-page .selection-instructions::before {
+  display: block;
+  grid-column: 1;
+  width: 70px;
+  height: 90px;
+}
+
+.word-practice-page .selection-instructions > p {
+  grid-column: 2;
+  margin: 0;
+  padding: 18px;
+  border: 2px solid #d6dfeb;
+  background: #fff;
+  color: #17243b;
+  font-size: clamp(20px, 3vw, 24px);
+  line-height: 1.4;
   text-align: left;
 }
 
-.word-practice-header__image {
-  width: 100%;
-  max-height: 11rem;
-  object-fit: contain;
-  border-radius: var(--radius-md);
-  filter: drop-shadow(0 0.65rem 0.75rem rgba(36, 59, 83, 0.14));
-}
-
-.word-practice-header__placeholder {
-  display: grid;
-  width: min(100%, 11rem);
-  min-height: 8rem;
-  place-items: center;
-  border: 2px solid var(--lesson-border);
-  border-radius: var(--radius-md);
-  color: var(--lesson-primary);
-  background: color-mix(in srgb, var(--lesson-secondary) 42%, var(--lesson-surface));
-  font-family: var(--font-ui);
-  font-size: clamp(2.5rem, 9vw, 4.5rem);
-  font-weight: var(--font-weight-black);
+.word-practice-page .selection-instructions > .btn--audio {
+  grid-column: 3;
+  width: 64px;
+  height: 64px;
+  min-height: 64px;
 }
 
 .word-practice-groups {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
-  gap: var(--space-sm);
+  grid-template-columns: repeat(auto-fit, minmax(92px, 1fr));
+  gap: 12px;
+  width: min(100%, 960px);
+  margin-inline: auto;
 }
 
 .word-practice-group {
-  min-height: 3.5rem;
-  padding: var(--space-sm);
-  color: var(--lesson-text);
-  background-color: var(--lesson-surface);
-  border: 2px solid var(--lesson-border);
-  box-shadow: 0 0.25rem 0 rgba(36, 59, 83, 0.1);
+  min-width: 0;
+  min-height: 64px;
+  padding: 12px;
+  white-space: normal;
+  color: #17243b;
+  background: #fff;
+  border: 2px solid #17243b;
+}
+
+.word-practice-group--complete {
+  background: #def5e9;
 }
 
 .word-practice-group--active {
-  color: var(--planet-on, var(--ink));
-  background-color: var(--lesson-primary);
-  border-color: var(--lesson-primary);
+  background: var(--sun, #ffd166);
+  box-shadow: 0 0 0 3px #ffd16666;
 }
 
 .word-practice-card {
   align-items: center;
-  max-width: 780px;
-  width: 100%;
-  margin-inline: auto;
   text-align: center;
-  background-color: var(--lesson-surface);
-  border: 2px solid var(--lesson-border);
-  box-shadow: 0 0.45rem 0 rgba(36, 59, 83, 0.1);
 }
 
-.word-practice-instructions {
-  display: grid;
-  justify-items: center;
-  gap: var(--space-sm);
-}
-
-.word-practice-instructions > svg {
-  width: 2.25rem;
-  height: 2.25rem;
-  color: var(--lesson-primary);
-}
-
-.word-practice-activity-visual {
-  display: grid;
-  grid-template-columns: 4.5rem minmax(0, 1fr);
-  align-items: center;
-  width: min(100%, 34rem);
-  margin: 0;
-  overflow: hidden;
-  border: 2px solid var(--lesson-border);
-  border-radius: var(--radius-md);
-  background: color-mix(in srgb, var(--lesson-secondary) 42%, var(--lesson-surface));
-  text-align: left;
-}
-
-.word-practice-activity-visual img {
-  width: 4.5rem;
-  height: 4.5rem;
-  object-fit: cover;
-  background: var(--lesson-surface);
-}
-
-.word-practice-activity-visual__placeholder {
-  display: grid;
-  width: 4.5rem;
-  height: 4.5rem;
-  place-items: center;
-  color: var(--lesson-primary);
-  background: var(--lesson-surface);
-  font-family: var(--font-ui);
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-black);
-}
-
-.word-practice-activity-visual figcaption {
-  padding-inline: var(--space-md);
-  font-family: var(--font-ui);
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-black);
-  color: var(--lesson-text);
+.word-practice-card--finished {
+  min-height: 28rem;
+  justify-content: center;
 }
 
 .word-practice-word-list,
@@ -157,7 +112,7 @@
   display: grid;
   width: 100%;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-md);
+  gap: 22px;
 }
 
 .word-practice-options--three {
@@ -166,148 +121,103 @@
 
 .word-practice-word,
 .word-practice-option {
-  min-height: 5.5rem;
-  padding: var(--space-md);
+  min-width: 0;
+  min-height: 100px;
+  padding: 24px;
+  white-space: normal;
   font-family: var(--font-content);
-  font-size: var(--font-size-xl);
+  font-size: clamp(28px, 4vw, 42px);
   font-weight: var(--font-weight-bold);
-  color: var(--lesson-text);
-  background-color: var(--lesson-surface);
-  border: 2px solid var(--lesson-border);
-  box-shadow: 0 0.25rem 0 rgba(36, 59, 83, 0.1);
-  transition: transform var(--transition), box-shadow var(--transition), background-color var(--transition);
+  color: #17243b;
+  background: #fff;
+  border: 2px solid #17243b;
+  border-radius: 24px;
+  box-shadow: 0 5px 0 #c4cddc;
 }
 
 .word-practice-word {
   justify-content: flex-start;
-  gap: var(--space-md);
-  position: relative;
-  overflow: hidden;
+  gap: 24px;
+  text-align: left;
 }
 
-.word-practice-word::after {
-  position: absolute;
-  right: -1.2rem;
-  width: 4.25rem;
-  height: 4.25rem;
+.word-practice-word .btn__label,
+.word-practice-option .btn__label {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.word-practice-word .btn__icon {
+  box-sizing: content-box;
+  width: 32px;
+  height: 32px;
+  padding: 10px;
+  flex-shrink: 0;
   border-radius: 50%;
-  background: var(--lesson-accent);
-  content: '';
-  opacity: 0.32;
+  background: var(--sun, #ffd166);
+  color: #17243b;
 }
 
 .word-practice-word--read,
 .word-practice-option--selected {
-  color: var(--lesson-text);
-  background-color: var(--lesson-secondary);
-  outline: 3px solid var(--lesson-primary);
-  outline-offset: 2px;
+  background: var(--sun, #ffd166);
+  box-shadow: 0 5px 0 #c89524, 0 0 0 4px #ffd16666;
 }
 
-.word-practice-word__icon {
-  width: 1.5rem;
-  height: 1.5rem;
-  color: var(--lesson-primary);
-}
-
-.word-practice-word__image,
-.word-practice-word__icon,
-.word-practice-word .btn__label {
-  position: relative;
-  z-index: 1;
-}
-
-.word-practice-word__image {
-  width: 4rem;
-  height: 4rem;
-  flex: 0 0 auto;
-  object-fit: contain;
-  border-radius: var(--radius-sm);
-  background: var(--lesson-surface);
+.word-practice-word--read .btn__icon {
+  background: #fff7de;
 }
 
 .word-practice-option--correct {
-  color: var(--ink);
-  background-color: var(--color-correct);
-  border-color: var(--color-correct);
+  background: var(--mint);
 }
 
 .word-practice-option--retry {
-  color: var(--lesson-text);
-  background-color: var(--color-retry);
-  border-color: var(--color-retry);
+  background: var(--peach);
 }
 
 .word-practice-status {
+  margin: 0;
   font-family: var(--font-ui);
-  font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);
-  color: var(--lesson-text);
+  color: #17243b;
 }
 
 .word-practice-syllable-word {
-  color: var(--lesson-primary);
-  font-size: clamp(2.5rem, 9vw, 4.5rem);
-}
-
-.word-practice-syllables {
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--space-sm);
-}
-
-.word-practice-syllables span {
-  padding: var(--space-xs) var(--space-md);
-  border-radius: var(--radius-md);
+  gap: 24px;
   font-family: var(--font-content);
-  font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
-  color: var(--lesson-text);
-  background-color: var(--lesson-secondary);
+  color: #17243b;
+  font-size: clamp(36px, 7vw, 56px);
 }
 
-.word-practice-card--finished {
-  min-height: 28rem;
-  justify-content: center;
+.word-practice-audio-only {
+  gap: 0;
+  flex-shrink: 0;
 }
 
-.word-practice-finish-icon {
-  width: 4.5rem;
-  height: 4.5rem;
-  color: var(--color-reward);
+.word-practice-audio-only .btn__label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.word-practice-audio-only .btn__icon {
+  width: 32px;
+  height: 32px;
+}
+
+.word-practice-page > .progress-bar-wrapper .progress-bar-wrapper__header {
+  color: #fff;
 }
 
 @media (max-width: 680px) {
-  .word-practice-header {
-    grid-template-columns: 1fr;
-    justify-items: center;
-    text-align: center;
-  }
-
-  .word-practice-header__content {
-    align-items: center;
-  }
-
-  .word-practice-header__content h1,
-  .word-practice-header__content p {
-    text-align: center;
-  }
-
-  .word-practice-header__image {
-    max-width: 12rem;
-    max-height: 8rem;
-  }
-
-  .word-practice-header__placeholder {
-    max-width: 12rem;
-    min-height: 7rem;
-  }
-
-  .word-practice-groups {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
   .word-practice-options--three {
     grid-template-columns: 1fr;
   }
@@ -321,26 +231,28 @@
 
   .word-practice-word,
   .word-practice-option {
-    min-height: 4.5rem;
-    font-size: var(--font-size-lg);
+    padding: 18px;
+    min-height: 90px;
   }
 
-  .word-practice-word__image {
-    width: 3.25rem;
-    height: 3.25rem;
+  .word-practice-page .selection-instructions {
+    grid-template-columns: 44px minmax(0, 1fr) 52px;
+    gap: 8px;
   }
 
-  .word-practice-activity-visual {
-    grid-template-columns: 3.75rem minmax(0, 1fr);
+  .word-practice-page .selection-instructions::before {
+    width: 44px;
+    height: 64px;
   }
 
-  .word-practice-activity-visual img {
-    width: 3.75rem;
-    height: 3.75rem;
+  .word-practice-page .selection-instructions > p {
+    padding: 12px;
+    font-size: 18px;
   }
 
-  .word-practice-activity-visual__placeholder {
-    width: 3.75rem;
-    height: 3.75rem;
+  .word-practice-page .selection-instructions > .btn--audio {
+    width: 52px;
+    height: 52px;
+    min-height: 52px;
   }
 }

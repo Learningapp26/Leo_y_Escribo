@@ -8,10 +8,10 @@ import { maybeAwardShinyStamp } from '../../data/stamps'
 
 // Tres estrellas, "¡Misión cumplida!", Leo feliz y el sello ganado. Se usa
 // sola dentro de las tarjetas finales o dentro de <RewardScreen>.
-export function RewardBurst({ lessonId, title = '¡Misión cumplida!' }) {
+export function RewardBurst({ lessonId, title = '¡Misión cumplida!', awardShiny = true }) {
   const stamp = lessonId ? getLessonStamp(lessonId) : null
   // El sello brillante se sortea una sola vez al mostrar el premio.
-  const [shiny] = useState(() => (lessonId ? maybeAwardShinyStamp() : null))
+  const [shiny] = useState(() => (lessonId && awardShiny ? maybeAwardShinyStamp() : null))
 
   return (
     <div className="reward-burst">

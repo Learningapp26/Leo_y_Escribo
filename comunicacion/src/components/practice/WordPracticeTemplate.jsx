@@ -1,589 +1,342 @@
-import ActivityFeedback from '../common/ActivityFeedback'
-import { useEffect, useState } from 'react'
-import {
-  ArrowRight,
-  BookOpen,
-  Check,
-  RotateCcw,
-  Sparkles,
-  Volume2,
-} from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { ArrowRight, BookOpen, Check, RotateCcw, Volume2 } from 'lucide-react'
 
-import { getLessonThemeClass } from '../../data/lessonColors'
+import { getLessonThemeClass, getLessonUnit } from '../../data/lessonColors'
 import { playAudio } from '../../lib/audioPlayer'
-import { registrarLeccionCompletada, registrarProgreso } from '../../lib/progreso'
+import { obtenerProgreso, registrarLeccionCompletada, registrarProgreso } from '../../lib/progreso'
+import {
+  allPracticeGroupsCompleted,
+  canAdvanceWordPractice,
+  checkWordPracticeAnswer,
+  createWordPracticeProgress,
+  getCompletedPracticeGroups,
+  WORD_PRACTICE_CHALLENGES,
+  WORD_PRACTICE_STEPS,
+} from '../../lib/wordPracticeProgress'
+import ActivityFeedback from '../common/ActivityFeedback'
 import Button from '../common/Button'
 import Card from '../common/Card'
+import LessonAudioButton from '../common/LessonAudioButton'
+import { ReadOnlySyllables } from '../lessons/WordSyllableReading'
 import BackButton from '../navigation/BackButton'
 import ProgressBar from '../progress/ProgressBar'
 import StarsCounter from '../progress/StarsCounter'
 import { RewardBurst } from '../space/Reward'
+import '../../styles/word-practice.css'
 
-const STEPS = ['leer', 'buscar', 'corta', 'silabas']
+const FEEDBACK_FIELDS = { buscar: 'findFeedback', corta: 'shortFeedback', silabas: 'syllableFeedback' }
+const recording = (audio) => typeof audio === 'string'
+  ? { src: audio, available: Boolean(audio) }
+  : audio ?? { available: false }
 
-const STEP_LABELS = {
-  leer: '1. Leemos',
-  buscar: '2. Buscamos',
-  corta: '3. Comparamos',
-  silabas: '4. Separamos',
-}
-
-function WordPracticeTemplate({
-  groups,
-  title,
-  unitLabel,
-  intro,
-  practiceId,
-}) {
+function WordPracticeTemplate({ groups, title, unitLabel, intro, practiceId, introAudio, completionAudio, instructionAudios = {} }) {
   const [groupId, setGroupId] = useState(groups[0].lessonId)
-  const [stepIndex, setStepIndex] = useState(0)
-  const [readWordIds, setReadWordIds] = useState([])
-  const [selectedFindIds, setSelectedFindIds] = useState([])
-  const [findFeedback, setFindFeedback] = useState('')
-  const [shortWordId, setShortWordId] = useState('')
-  const [shortFeedback, setShortFeedback] = useState('')
-  const [syllableCount, setSyllableCount] = useState(null)
-  const [syllableFeedback, setSyllableFeedback] = useState('')
-  const [stars, setStars] = useState(0)
+  const [progressByGroup, setProgressByGroup] = useState(() => Object.fromEntries(
+    groups.map((group) => [group.lessonId, createWordPracticeProgress()]),
+  ))
+  const [completedIds, setCompletedIds] = useState([])
+  const [ready, setReady] = useState(false)
+  const [saving, setSaving] = useState(false)
+  const [saveError, setSaveError] = useState('')
+  const answerLock = useRef(false)
+  const saveLock = useRef(false)
 
   const group = groups.find((item) => item.lessonId === groupId)
-  const step = STEPS[stepIndex]
-  const themeClass = getLessonThemeClass(group.themeId ?? group.lessonId)
-  const allWordsRead = readWordIds.length === group.words.length
-  const findTargets = group.find.options.filter((option) => option.isTarget)
-  const groupHasAudio = group.showAudio || group.words.some((word) => word.audio)
+  const progress = progressByGroup[groupId]
+  const step = WORD_PRACTICE_STEPS[progress.stepIndex]
+  const finished = progress.stepIndex === WORD_PRACTICE_STEPS.length
+  const allCompleted = allPracticeGroupsCompleted(groups.map((item) => item.lessonId), completedIds)
+  const unitId = getLessonUnit(practiceId)
+  const unitRoute = `/lecciones/unidad/${unitId}`
+  const themeClass = getLessonThemeClass(practiceId)
+  const nextGroup = [...groups.slice(groups.indexOf(group) + 1), ...groups.slice(0, groups.indexOf(group) + 1)]
+    .find((item) => !completedIds.includes(item.lessonId))
+  const totalStars = groups.reduce((sum, item) => sum + (completedIds.includes(item.lessonId)
+    ? WORD_PRACTICE_CHALLENGES.length : progressByGroup[item.lessonId].earnedSteps.length), 0)
 
-  const resetPractice = (nextGroupId) => {
-    setGroupId(nextGroupId)
-    setStepIndex(0)
-    setReadWordIds([])
-    setSelectedFindIds([])
-    setFindFeedback('')
-    setShortWordId('')
-    setShortFeedback('')
-    setSyllableCount(null)
-    setSyllableFeedback('')
-    setStars(0)
+  useEffect(() => {
+    let active = true
+    obtenerProgreso().then((records) => {
+      if (!active) return
+      const ids = groups.map((item) => item.lessonId)
+      const completed = getCompletedPracticeGroups(records, practiceId, ids)
+      setCompletedIds(completed)
+      setProgressByGroup(Object.fromEntries(groups.map((item) => [item.lessonId, {
+        ...createWordPracticeProgress(),
+        ...(completed.includes(item.lessonId) ? {
+          stepIndex: WORD_PRACTICE_STEPS.length,
+          earnedSteps: [...WORD_PRACTICE_CHALLENGES],
+        } : {}),
+      }])))
+      setGroupId(ids.find((id) => !completed.includes(id)) ?? ids[0])
+      setReady(true)
+    }).catch(() => {
+      if (active) setReady(true)
+    })
+    return () => { active = false }
+  }, [groups, practiceId])
+
+  const updateProgress = (update) => setProgressByGroup((current) => ({
+    ...current,
+    [groupId]: update(current[groupId]),
+  }))
+
+  const chooseGroup = (id, review = false) => {
+    if (saveLock.current) return
+    answerLock.current = false
+    setSaveError('')
+    setGroupId(id)
+    if (review) setProgressByGroup((current) => ({ ...current, [id]: createWordPracticeProgress() }))
   }
 
-  const markWordAsRead = (word) => {
-    setReadWordIds((current) =>
-      current.includes(word.id) ? current : [...current, word.id],
-    )
+  const readWord = (word) => {
+    updateProgress((current) => ({
+      ...current,
+      readWordIds: current.readWordIds.includes(word.id) ? current.readWordIds : [...current.readWordIds, word.id],
+    }))
     if (word.audio) playAudio(word.audio)
   }
 
-  const toggleFindWord = (id) => {
-    if (findFeedback) return
-
-    setSelectedFindIds((current) =>
-      current.includes(id)
-        ? current.filter((currentId) => currentId !== id)
-        : [...current, id],
-    )
-  }
-
-  const checkFindWords = () => {
-    const isCorrect =
-      selectedFindIds.length === findTargets.length &&
-      findTargets.every((option) => selectedFindIds.includes(option.id))
-
-    setFindFeedback(isCorrect ? 'correct' : 'retry')
-    if (isCorrect) setStars((current) => current + 1)
-
-    registrarProgreso({
-      actividad: `${practiceId}-buscar`,
-      correcto: isCorrect,
-      detalle: { leccionId: practiceId, fase: 'buscar', grupo: group.lessonId },
+  const checkAnswer = () => {
+    const field = FEEDBACK_FIELDS[step]
+    if (!field || answerLock.current || progress[field]) return
+    if ((step === 'buscar' && !progress.selectedFindIds.length) ||
+      (step === 'corta' && !progress.shortWordId) ||
+      (step === 'silabas' && progress.syllableCount === null)) return
+    answerLock.current = true
+    const correct = checkWordPracticeAnswer(group, progress)
+    updateProgress((current) => ({
+      ...current,
+      [field]: correct ? 'correct' : 'retry',
+      earnedSteps: correct && !current.earnedSteps.includes(step) ? [...current.earnedSteps, step] : current.earnedSteps,
+    }))
+    if (!correct || !completedIds.includes(groupId)) registrarProgreso({
+      actividad: `${practiceId}-${step}`,
+      correcto: correct,
+      detalle: { leccionId: practiceId, fase: step, grupo: groupId },
     })
   }
 
-  const checkShortestWord = () => {
-    const isCorrect = shortWordId === group.shortest.answer
-
-    setShortFeedback(isCorrect ? 'correct' : 'retry')
-    if (isCorrect) setStars((current) => current + 1)
-
-    registrarProgreso({
-      actividad: `${practiceId}-corta`,
-      correcto: isCorrect,
-      detalle: { leccionId: practiceId, fase: 'corta', grupo: group.lessonId },
-    })
+  const retry = () => {
+    answerLock.current = false
+    updateProgress((current) => ({
+      ...current,
+      [FEEDBACK_FIELDS[step]]: '',
+      ...(step === 'buscar' ? { selectedFindIds: [] } : step === 'corta' ? { shortWordId: '' } : { syllableCount: null }),
+    }))
   }
 
-  const checkSyllableCount = () => {
-    const isCorrect = syllableCount === group.syllables.parts.length
-
-    setSyllableFeedback(isCorrect ? 'correct' : 'retry')
-    if (isCorrect) setStars((current) => current + 1)
-
-    registrarProgreso({
-      actividad: `${practiceId}-silabas`,
-      correcto: isCorrect,
-      detalle: { leccionId: practiceId, fase: 'silabas', grupo: group.lessonId },
-    })
+  const finishGroup = async () => {
+    if (saveLock.current) return
+    if (completedIds.includes(groupId)) {
+      updateProgress((current) => ({ ...current, stepIndex: WORD_PRACTICE_STEPS.length }))
+      return
+    }
+    saveLock.current = true
+    setSaving(true)
+    setSaveError('')
+    try {
+      const { error, skipped } = await registrarLeccionCompletada(practiceId, groupId)
+      if (error || skipped) {
+        setSaveError(skipped ? 'Inicia sesión para guardar la práctica.' : 'No se pudo guardar. Intenta nuevamente.')
+        return
+      }
+      setCompletedIds((current) => current.includes(groupId) ? current : [...current, groupId])
+      updateProgress((current) => ({ ...current, stepIndex: WORD_PRACTICE_STEPS.length }))
+    } catch {
+      setSaveError('No se pudo guardar. Intenta nuevamente.')
+    } finally {
+      saveLock.current = false
+      setSaving(false)
+    }
   }
 
-  const nextStep = () => setStepIndex((current) => current + 1)
-
-  useEffect(() => {
-    if (stepIndex === STEPS.length) registrarLeccionCompletada(practiceId)
-  }, [stepIndex, practiceId])
-
-  const activityVisual = (
-    <figure className="word-practice-activity-visual">
-      {group.coverImage ? (
-        <img src={group.coverImage} alt={group.coverAlt} />
-      ) : (
-        <span className="word-practice-activity-visual__placeholder" aria-hidden="true">
-          {group.label}
-        </span>
-      )}
-      <figcaption>{STEP_LABELS[step]}</figcaption>
-    </figure>
-  )
-
-  if (stepIndex === STEPS.length) {
-    return (
-      <main id={practiceId} className={`page word-practice-page ${themeClass}`}>
-        <BackButton label="Volver a lecciones" to="/lecciones" />
-
-        <Card className="word-practice-card word-practice-card--finished">
-          <RewardBurst lessonId={practiceId} />
-          <h1>¡Muy bien!</h1>
-          <p className="text-instruction">
-            Leíste, buscaste y separaste palabras con la letra {group.label}.
-          </p>
-          <StarsCounter current={stars} total={3} label="Estrellas" />
-          <Button
-            icon={BookOpen}
-            size="large"
-            fullWidth
-            onClick={() => resetPractice(groupId)}
-          >
-            Practicar otra vez
-          </Button>
-          <Button
-            to="/lecciones"
-            variant="secondary"
-            icon={ArrowRight}
-            iconPosition="right"
-            size="large"
-            fullWidth
-          >
-            Volver a lecciones
-          </Button>
-        </Card>
-      </main>
-    )
+  const advance = () => {
+    if (!canAdvanceWordPractice(group, progress)) return
+    if (step === 'silabas') {
+      finishGroup()
+      return
+    }
+    answerLock.current = false
+    updateProgress((current) => ({ ...current, stepIndex: current.stepIndex + 1 }))
   }
+
+  const instructions = {
+    leer: 'Toca cada palabra, escúchala y léela en voz alta.',
+    buscar: 'Marca las palabras que empiezan con la letra.',
+    corta: group.shortest.prompt,
+    silabas: 'Da palmas y elige cuántas sílabas tiene esta palabra.',
+  }
+  const headings = {
+    leer: `Leemos palabras con ${group.label}`,
+    buscar: 'Busca la letra',
+    corta: 'Elige la palabra más corta',
+    silabas: 'Separa en sílabas',
+  }
+  const feedback = progress[FEEDBACK_FIELDS[step]]
+  const choices = step === 'buscar' ? group.find.options : step === 'corta' ? group.shortest.options : group.syllables.options
+  const hasSelection = step === 'buscar' ? progress.selectedFindIds.length > 0
+    : step === 'corta' ? Boolean(progress.shortWordId) : progress.syllableCount !== null
+  const syllableAudio = group.syllables.audio ?? group.words.find((word) => word.word === group.syllables.word)?.audio
 
   return (
-    <main
-      id={practiceId}
-      className={`page word-practice-page ${themeClass}`}
-      aria-labelledby={`${practiceId}-title`}
-    >
-      <BackButton label="Volver a lecciones" to="/lecciones" />
+    <main id={practiceId} className={`page word-practice-page ${themeClass}`} aria-labelledby={`${practiceId}-title`} aria-busy={!ready}>
+      <BackButton label={`Volver a la Unidad ${unitId}`} to={unitRoute} />
 
       <header className="word-practice-header">
-        <div className="word-practice-header__content">
-          <span className="text-ui-label">{unitLabel}</span>
-          <h1 id={`${practiceId}-title`}>{title}</h1>
+        <span className="text-ui-label">{unitLabel}</span>
+        <h1 id={`${practiceId}-title`}>{title}</h1>
+        <div className="selection-instructions">
           <p className="text-instruction">{intro}</p>
+          <LessonAudioButton audio={recording(introAudio)}>Escuchar instrucción</LessonAudioButton>
         </div>
-        {group.coverImage ? (
-          <img
-            className="word-practice-header__image"
-            src={group.coverImage}
-            alt={group.coverAlt}
-          />
-        ) : (
-          <span className="word-practice-header__placeholder" aria-hidden="true">
-            {group.label}
-          </span>
-        )}
       </header>
 
-      <div className="word-practice-groups" aria-label="Grupos de palabras">
-        {groups.map((item) => {
-          const isActive = item.lessonId === groupId
+      {!ready ? <Card className="word-practice-card"><p role="status">Cargando práctica…</p></Card> : <>
+        <nav className="word-practice-groups" aria-label="Grupos de palabras">
+          {groups.map((item) => {
+            const completed = completedIds.includes(item.lessonId)
+            return (
+              <Button
+                key={item.lessonId}
+                variant="secondary"
+                className={`word-practice-group${groupId === item.lessonId ? ' word-practice-group--active' : ''}${completed ? ' word-practice-group--complete' : ''}`}
+                icon={completed ? Check : undefined}
+                aria-label={`${item.label}${completed ? ', práctica completada' : ''}`}
+                aria-pressed={groupId === item.lessonId}
+                disabled={saving}
+                onClick={() => chooseGroup(item.lessonId)}
+              >
+                {item.label}
+              </Button>
+            )
+          })}
+        </nav>
 
-          return (
-            <Button
-              key={item.lessonId}
-              variant="secondary"
-              className={[
-                'word-practice-group',
-                isActive ? 'word-practice-group--active' : '',
-              ]
-                .filter(Boolean)
-                .join(' ')}
-              aria-pressed={isActive}
-              onClick={() => resetPractice(item.lessonId)}
+        <ProgressBar value={completedIds.length} max={groups.length} dots={false} label={`Grupos completados: ${completedIds.length} de ${groups.length}`} />
+
+        {finished ? (
+          <Card className="word-practice-card word-practice-card--finished">
+            <RewardBurst
+              key={allCompleted ? 'all' : groupId}
+              lessonId={allCompleted ? practiceId : undefined}
+              awardShiny={false}
+              title={allCompleted ? '¡Completaste todas las prácticas!' : `¡Completaste la práctica de ${group.label}!`}
+            />
+            {allCompleted && <LessonAudioButton
+              audio={recording(completionAudio)}
+              className="btn--audio-round word-practice-audio-only"
+              aria-label="Escuchar felicitación"
             >
-              {item.label}
-            </Button>
-          )
-        })}
-      </div>
-
-      <ProgressBar
-        value={stepIndex + 1}
-        max={STEPS.length}
-        label={`Paso ${stepIndex + 1} de ${STEPS.length}`}
-      />
-
-      <StarsCounter current={stars} total={3} label="Estrellas" />
-
-      {step === 'leer' && (
-        <Card className="word-practice-card">
-          <div className="word-practice-instructions">
-            <BookOpen aria-hidden="true" />
-            <h2>{group.title}</h2>
+              Escuchar felicitación
+            </LessonAudioButton>}
             <p className="text-instruction">
-              Toca cada palabra y léela en voz alta.
-              {groupHasAudio && ' También puedes escucharla.'}
+              {allCompleted ? 'Leíste palabras y completaste los retos de todos los grupos de esta unidad.' : 'Puedes continuar con otra letra o volver a repasar.'}
             </p>
-          </div>
-
-          {activityVisual}
-
-          <div className="word-practice-word-list" aria-label={group.title}>
-            {group.words.map((word) => {
-              const isRead = readWordIds.includes(word.id)
-
-              return (
-                <Button
-                  key={word.id}
-                  variant="secondary"
-                  className={[
-                    'word-practice-word',
-                    isRead ? 'word-practice-word--read' : '',
-                  ]
-                    .filter(Boolean)
-                    .join(' ')}
-                  aria-pressed={isRead}
-                  onClick={() => markWordAsRead(word)}
-                >
-                  {word.image && (
-                    <img
-                      className="word-practice-word__image"
-                      src={word.image}
-                      alt={word.imageAlt}
-                    />
-                  )}
-                  {(word.audio || group.showAudio) && (
-                    <Volume2 className="word-practice-word__icon" aria-hidden="true" />
-                  )}
-                  {word.word}
-                </Button>
-              )
-            })}
-          </div>
-
-          <p className="word-practice-status" aria-live="polite">
-            {readWordIds.length} de {group.words.length} palabras leídas
-          </p>
-
-          <Button
-            icon={ArrowRight}
-            iconPosition="right"
-            size="large"
-            fullWidth
-            disabled={!allWordsRead}
-            onClick={nextStep}
-          >
-            Siguiente reto
-          </Button>
-        </Card>
-      )}
-
-      {step === 'buscar' && (
-        <Card className="word-practice-card">
-          <div className="word-practice-instructions">
-            <Check aria-hidden="true" />
-            <h2>Busca la letra</h2>
-            <p className="text-instruction">{group.find.prompt}</p>
-          </div>
-
-          {activityVisual}
-
-          <div className="word-practice-options">
-            {group.find.options.map((option) => {
-              const isSelected = selectedFindIds.includes(option.id)
-              const stateClass =
-                findFeedback === 'correct' && option.isTarget
-                  ? 'word-practice-option--correct'
-                  : findFeedback === 'retry' && isSelected
-                    ? 'word-practice-option--retry'
-                    : isSelected
-                      ? 'word-practice-option--selected'
-                      : ''
-
-              return (
-                <Button
-                  key={option.id}
-                  variant="secondary"
-                  className={['word-practice-option', stateClass]
-                    .filter(Boolean)
-                    .join(' ')}
-                  aria-pressed={isSelected}
-                  onClick={() => toggleFindWord(option.id)}
-                >
-                  {option.word}
-                </Button>
-              )
-            })}
-          </div>
-
-          {findFeedback === 'correct' && (
-            <ActivityFeedback correct message={<>
-              ¡Correcto! Encontraste todas las palabras con {group.label}.
-            </>} />
-          )}
-
-          {findFeedback === 'retry' && (
-            <ActivityFeedback correct={false} message={<>
-              Revisa las palabras marcadas e inténtalo otra vez.
-            </>} />
-          )}
-
-          {!findFeedback && (
-            <Button
-              icon={Check}
-              size="large"
-              fullWidth
-              disabled={!selectedFindIds.length}
-              onClick={checkFindWords}
-            >
-              Comprobar
+            <StarsCounter current={allCompleted ? totalStars : progress.earnedSteps.length}
+              total={allCompleted ? groups.length * WORD_PRACTICE_CHALLENGES.length : WORD_PRACTICE_CHALLENGES.length} label="Estrellas" />
+            {nextGroup && <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth onClick={() => chooseGroup(nextGroup.lessonId)}>
+              Practicar {nextGroup.label}
+            </Button>}
+            <Button icon={BookOpen} variant="secondary" size="large" fullWidth onClick={() => chooseGroup(groupId, true)}>
+              Volver a repasar {group.label}
             </Button>
-          )}
-
-          {findFeedback === 'retry' && (
-            <Button
-              variant="retry"
-              icon={RotateCcw}
-              size="large"
-              fullWidth
-              onClick={() => {
-                setSelectedFindIds([])
-                setFindFeedback('')
-              }}
-            >
-              Intentar nuevamente
+            <Button to={unitRoute} variant="secondary" icon={ArrowRight} iconPosition="right" size="large" fullWidth>
+              Volver a la Unidad {unitId}
             </Button>
-          )}
+          </Card>
+        ) : <>
+          <ProgressBar value={progress.stepIndex + 1} max={WORD_PRACTICE_STEPS.length} label={`Paso ${progress.stepIndex + 1} de ${WORD_PRACTICE_STEPS.length}`} />
+          <StarsCounter current={progress.earnedSteps.length} total={WORD_PRACTICE_CHALLENGES.length} label="Estrellas" />
 
-          {findFeedback === 'correct' && (
-            <Button
-              icon={ArrowRight}
-              iconPosition="right"
-              size="large"
-              fullWidth
-              onClick={nextStep}
-            >
-              Siguiente reto
-            </Button>
-          )}
-        </Card>
-      )}
+          <Card className="word-practice-card">
+            <h2>{headings[step]}</h2>
+            <div className="selection-instructions">
+              <p className="text-instruction">{instructions[step]}</p>
+              <LessonAudioButton audio={recording(group.instructionAudios?.[step] ?? instructionAudios[step])}>Escuchar instrucción</LessonAudioButton>
+            </div>
 
-      {step === 'corta' && (
-        <Card className="word-practice-card">
-          <div className="word-practice-instructions">
-            <BookOpen aria-hidden="true" />
-            <h2>Palabra corta</h2>
-            <p className="text-instruction">{group.shortest.prompt}</p>
-          </div>
-
-          {activityVisual}
-
-          <div className="word-practice-options word-practice-options--three">
-            {group.shortest.options.map((word) => {
-              const isSelected = shortWordId === word
-              const stateClass =
-                shortFeedback === 'correct' && word === group.shortest.answer
-                  ? 'word-practice-option--correct'
-                  : shortFeedback === 'retry' && isSelected
-                    ? 'word-practice-option--retry'
-                    : isSelected
-                      ? 'word-practice-option--selected'
-                      : ''
-
-              return (
-                <Button
-                  key={word}
-                  variant="secondary"
-                  className={['word-practice-option', stateClass]
-                    .filter(Boolean)
-                    .join(' ')}
-                  aria-pressed={isSelected}
-                  onClick={() => !shortFeedback && setShortWordId(word)}
-                >
-                  {word}
-                </Button>
-              )
-            })}
-          </div>
-
-          {shortFeedback === 'correct' && (
-            <ActivityFeedback correct message={<>
-              ¡Muy bien! {group.shortest.answer} es la palabra más corta.
-            </>} />
-          )}
-
-          {shortFeedback === 'retry' && (
-            <ActivityFeedback correct={false} message={<>
-              Mira cuántas letras tiene cada palabra y prueba otra vez.
-            </>} />
-          )}
-
-          {!shortFeedback && (
-            <Button
-              icon={Check}
-              size="large"
-              fullWidth
-              disabled={!shortWordId}
-              onClick={checkShortestWord}
-            >
-              Comprobar
-            </Button>
-          )}
-
-          {shortFeedback === 'retry' && (
-            <Button
-              variant="retry"
-              icon={RotateCcw}
-              size="large"
-              fullWidth
-              onClick={() => {
-                setShortWordId('')
-                setShortFeedback('')
-              }}
-            >
-              Intentar nuevamente
-            </Button>
-          )}
-
-          {shortFeedback === 'correct' && (
-            <Button
-              icon={ArrowRight}
-              iconPosition="right"
-              size="large"
-              fullWidth
-              onClick={nextStep}
-            >
-              Último reto
-            </Button>
-          )}
-        </Card>
-      )}
-
-      {step === 'silabas' && (
-        <Card className="word-practice-card">
-          <div className="word-practice-instructions">
-            <Volume2 aria-hidden="true" />
-            <h2>Separa en sílabas</h2>
-            <p className="text-instruction">
-              Da palmas y elige cuántas sílabas tiene esta palabra.
-            </p>
-          </div>
-
-          {activityVisual}
-
-          <span className="text-word word-practice-syllable-word">
-            {group.syllables.word}
-          </span>
-
-          <div className="word-practice-options word-practice-options--three">
-            {group.syllables.options.map((count) => {
-              const isSelected = syllableCount === count
-              const stateClass =
-                syllableFeedback === 'correct' && count === group.syllables.parts.length
-                  ? 'word-practice-option--correct'
-                  : syllableFeedback === 'retry' && isSelected
-                    ? 'word-practice-option--retry'
-                    : isSelected
-                      ? 'word-practice-option--selected'
-                      : ''
-
-              return (
-                <Button
-                  key={count}
-                  variant="secondary"
-                  className={['word-practice-option', stateClass]
-                    .filter(Boolean)
-                    .join(' ')}
-                  aria-pressed={isSelected}
-                  onClick={() => !syllableFeedback && setSyllableCount(count)}
-                >
-                  {count} sílabas
-                </Button>
-              )
-            })}
-          </div>
-
-          {syllableFeedback === 'correct' && (
-            <>
-              <ActivityFeedback correct message={<>
-                ¡Excelente! La palabra tiene {group.syllables.parts.length} sílabas.
-              </>} />
-              <p className="word-practice-syllables" aria-label={`Sílabas: ${group.syllables.parts.join(', ')}`}>
-                {group.syllables.parts.map((part) => (
-                  <span key={part}>{part}</span>
+            {step === 'leer' ? <>
+              <div className="word-practice-word-list" aria-label={group.title}>
+                {group.words.map((word) => (
+                  <Button
+                    key={word.id}
+                    variant="secondary"
+                    icon={Volume2}
+                    className={`word-practice-word${progress.readWordIds.includes(word.id) ? ' word-practice-word--read' : ''}`}
+                    aria-label={word.audio ? `Escuchar ${word.word}` : `Leer ${word.word}. Audio pendiente`}
+                    title={!word.audio ? 'Audio pendiente. Puedes leer la palabra en voz alta.' : undefined}
+                    aria-pressed={progress.readWordIds.includes(word.id)}
+                    data-audio-src={word.audio ?? undefined}
+                    onClick={() => readWord(word)}
+                  >
+                    {word.word}
+                  </Button>
                 ))}
+              </div>
+              <p className="word-practice-status" aria-live="polite">
+                {progress.readWordIds.length} de {group.words.length} palabras leídas
               </p>
-            </>
-          )}
+            </> : <>
+              {step === 'silabas' && <div className="word-practice-syllable-word">
+                <LessonAudioButton audio={recording(syllableAudio)} className="btn--audio-round word-practice-audio-only" aria-label={`Escuchar ${group.syllables.word}`}>
+                  Escuchar palabra
+                </LessonAudioButton>
+                <span>{group.syllables.word}</span>
+              </div>}
 
-          {syllableFeedback === 'retry' && (
-            <ActivityFeedback correct={false} message={<>
-              Da palmas lentamente y vuelve a contar.
-            </>} />
-          )}
+              <div className={`word-practice-options${step !== 'buscar' ? ' word-practice-options--three' : ''}`}>
+                {choices.map((option) => {
+                  const id = step === 'buscar' ? option.id : option
+                  const selected = step === 'buscar' ? progress.selectedFindIds.includes(id)
+                    : step === 'corta' ? progress.shortWordId === id : progress.syllableCount === id
+                  const correct = step === 'buscar' ? option.isTarget
+                    : step === 'corta' ? option === group.shortest.answer : option === group.syllables.parts.length
+                  const stateClass = feedback === 'correct' && correct ? 'word-practice-option--correct'
+                    : feedback === 'retry' && selected ? 'word-practice-option--retry'
+                      : selected ? 'word-practice-option--selected' : ''
+                  return (
+                    <Button
+                      key={id}
+                      variant="secondary"
+                      className={`word-practice-option ${stateClass}`.trim()}
+                      aria-pressed={selected}
+                      disabled={Boolean(feedback)}
+                      onClick={() => {
+                        if (feedback) return
+                        updateProgress((current) => step === 'buscar' ? {
+                          ...current,
+                          selectedFindIds: current.selectedFindIds.includes(id)
+                            ? current.selectedFindIds.filter((value) => value !== id) : [...current.selectedFindIds, id],
+                        } : { ...current, [step === 'corta' ? 'shortWordId' : 'syllableCount']: id })
+                      }}
+                    >
+                      {step === 'buscar' ? option.word : step === 'silabas' ? `${option} sílabas` : option}
+                    </Button>
+                  )
+                })}
+              </div>
 
-          {!syllableFeedback && (
-            <Button
-              icon={Check}
-              size="large"
-              fullWidth
-              disabled={syllableCount === null}
-              onClick={checkSyllableCount}
-            >
-              Comprobar
-            </Button>
-          )}
+              {feedback && <ActivityFeedback correct={feedback === 'correct'} />}
+              {step === 'silabas' && feedback === 'correct' && <ReadOnlySyllables syllables={group.syllables.parts} />}
+              {!feedback && <Button icon={Check} size="large" fullWidth disabled={!hasSelection} onClick={checkAnswer}>Comprobar</Button>}
+              {feedback === 'retry' && <Button variant="retry" icon={RotateCcw} size="large" fullWidth onClick={retry}>Intentar nuevamente</Button>}
+            </>}
 
-          {syllableFeedback === 'retry' && (
-            <Button
-              variant="retry"
-              icon={RotateCcw}
-              size="large"
-              fullWidth
-              onClick={() => {
-                setSyllableCount(null)
-                setSyllableFeedback('')
-              }}
-            >
-              Intentar nuevamente
-            </Button>
-          )}
-
-          {syllableFeedback === 'correct' && (
-            <Button
-              icon={Sparkles}
+            {saveError && <p className="feedback feedback--retry" role="alert">{saveError}</p>}
+            {(step === 'leer' || feedback === 'correct') && <Button
+              icon={ArrowRight}
               iconPosition="right"
               size="large"
               fullWidth
-              onClick={nextStep}
+              disabled={!canAdvanceWordPractice(group, progress) || saving}
+              onClick={advance}
             >
-              Finalizar práctica
-            </Button>
-          )}
-        </Card>
-      )}
+              {saving ? 'Guardando…' : saveError ? 'Guardar y continuar' : step === 'silabas' ? 'Terminar esta práctica' : 'Siguiente reto'}
+            </Button>}
+          </Card>
+        </>}
+      </>}
     </main>
   )
 }

@@ -91,8 +91,6 @@ const groupDetails = {
     syllables: { word: 'costal', parts: ['cos', 'tal'], options: [2, 3, 4] },
   },
   pl: {
-    coverImage: '/images/lecciones/pl/plumas-bailarinas.png',
-    coverAlt: 'Plumas que bailan.',
     find: {
       prompt: 'Marca las palabras que empiezan con pl.',
       options: [
@@ -192,8 +190,6 @@ export const unit2PracticeGroups = unit2WordPracticeGroups.map((group) => {
     themeId: unit2WordPracticeId,
     label: group.title,
     title: `Palabras con ${group.title}`,
-    coverImage: details.coverImage,
-    coverAlt: details.coverAlt,
     words: wordsFor(group.id),
     find: {
       ...details.find,
@@ -213,4 +209,7 @@ export const unit2WordPracticeConfig = {
   title: 'Repaso de la Unidad 2',
   unitLabel: 'Unidad 2 · Práctica de lectura',
   intro: 'Elige un grupo. Lee las palabras y completa los retos.',
+  introAudio: null,
+  completionAudio: null,
+  instructionAudios: { leer: null, buscar: null, corta: null, silabas: null },
 }
