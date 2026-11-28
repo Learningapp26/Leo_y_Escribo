@@ -44,7 +44,7 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
       if (!exercise.multiple) return [index]
       return current.includes(index) ? current.filter((item) => item !== index) : [...current, index]
     })
-    playLessonAudio(options[index].audio)
+    if (!exercise.hideOptionAudio) playLessonAudio(options[index].audio)
   }
 
   const check = () => {
@@ -132,7 +132,7 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
               {active && <Check aria-label="Seleccionado" size={20} />}
             </Button>
             {option.definition && <details className="word-bank-reference"><summary>¿Qué significa?</summary><p className="text-reading">{option.definition}</p>{option.definitionAudio && <LessonAudioButton audio={option.definitionAudio}>Escuchar significado</LessonAudioButton>}</details>}
-            {option.audio && <LessonAudioButton audio={option.audio} fullWidth
+            {option.audio && !exercise.hideOptionAudio && <LessonAudioButton audio={option.audio} fullWidth
               aria-label={`Escuchar ${option.caption ?? option.label}`}>
               {exercise.compactOptions || exercise.optionLayout === 'board' || type === 'oral' ? null : 'Escuchar'}
             </LessonAudioButton>}

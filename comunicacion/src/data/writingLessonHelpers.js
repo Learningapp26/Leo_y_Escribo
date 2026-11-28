@@ -1,14 +1,15 @@
 import { createBookContent } from './bookLessonHelpers.js'
 
 // Only supplied recordings are enabled; preserve their exact filename casing.
-export function createWritingContent(id, title, page, introduction, recordings = []) {
+export function createWritingContent(id, title, page, introduction, recordings = [], aliases = {}) {
   const content = createBookContent(id)
   const originalAudio = content.audio
   const recordedFiles = new Map(recordings.map((file) => [file.toLowerCase(), file]))
   const pending = (value) => {
     if (!value || typeof value !== 'object') return value
     if (value.src) {
-      const file = recordedFiles.get(value.src.split('/').pop().toLowerCase())
+      const expected = value.src.split('/').pop().toLowerCase()
+      const file = recordedFiles.get((aliases[expected] ?? expected).toLowerCase())
       value.available = Boolean(file)
       if (file) value.src = `/audio/lecciones/${id}/${file}`
     }
