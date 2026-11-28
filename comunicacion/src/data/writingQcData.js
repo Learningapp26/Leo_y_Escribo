@@ -5,6 +5,35 @@ import { createWritingContent } from './writingLessonHelpers.js'
 const { base, finish, word, audio, instruction, present } = createWritingContent(
   'escritura-q-c', '¡Escribamos palabras con q-c!', 254,
   'Observa los dibujos y reconoce las palabras que los identifican. Después, sustituye los dibujos de la historia por sus palabras e inventa un título con tu maestra.',
+  [
+    "Canasto.mp3",
+    "Casa.mp3",
+    "Chaleco.mp3",
+    "Cubeta.mp3",
+    "Equilibrio.mp3",
+    "Escalera.mp3",
+    "Felicitacion-final.mp3",
+    "Guisquil.mp3",
+    "Historia-taqueria-quique.mp3",
+    "Instruccion-introduccion.mp3",
+    "Instruccion-inventar-titulo.mp3",
+    "Instruccion-leer-historia.mp3",
+    "Instruccion-nombres.mp3",
+    "Instruccion-sustituir-dibujos.mp3",
+    "Intenta-otra-vez.mp3",
+    "Mariquita.mp3",
+    "Oracion-0-1.mp3",
+    "Oracion-0-2.mp3",
+    "Oracion-1-0.mp3",
+    "Oracion-1-1.mp3",
+    "Oracion-1-2.mp3",
+    "Oraci\u00f3n-0-0.mp3",
+    "Parque.mp3",
+    "Quince.mp3",
+    "Respuesta-correcta.mp3",
+    "Tacos.mp3",
+  ],
+  { "oracion-0-0.mp3": "Oraci\u00f3n-0-0.mp3" },
 )
 const bank = ['parque', 'chaleco', 'equilibrio', 'canasto', 'cubeta', 'quince', 'escalera', 'güisquil']
 const reused = { 'güisquil': 'gue-con-dieresis/guisquil', chaleco: 'ch/chaleco', quince: 'q/quince', canasto: 't/canasto', casa: 'c/casa', tacos: 'c/taco' }
@@ -28,7 +57,7 @@ export const writingQcLesson = finish({
   activities: [
     { id: 'dibujos', title: 'Buscamos los nombres', exercises: [drawings.slice(0, 4), drawings.slice(4)].map((items, index) => ({
       id: `nombres-${index}`, page: 254, type: 'match',
-      instruction: instruction('nombres', 'Observa los dibujos y selecciona la palabra que identifica cada uno. Puedes consultar el recuadro.'),
+      instruction: instruction('nombres', 'Observa los dibujos y selecciona la palabra que identifica a cada uno. Puedes consultar el recuadro.'),
       teacherPrompt: bank.join(' · '),
       groups: items.map((text, i) => ({ ...pic(text), answer: word(text).id,
         options: [text, items[(i + 1) % items.length], items[(i + 2) % items.length]].map((value) => word(value)).sort((a, b) => a.label.localeCompare(b.label, 'es')),
