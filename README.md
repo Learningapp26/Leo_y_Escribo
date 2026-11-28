@@ -35,8 +35,7 @@ Abra `http://localhost:5173/login`. El [manual técnico](docs/manual-tecnico.md#
 - Ingrid Nina Alessandra Nájera Marakovits · 231088.
 - Diego Alejandro Ramírez Velásquez · 23601.
 - Adriana Martínez Fuentes · 24086.
-
-El registro original del repositorio también incluye a Marcela Castillo · 24952.
+- Marcela Castillo · 24952.
 
 ## Créditos
 
