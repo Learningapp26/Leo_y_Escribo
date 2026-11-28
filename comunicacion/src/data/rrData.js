@@ -4,7 +4,7 @@ const { audio, word, syllable, instruction, select, present, order } = createBoo
 
 // Solo se reutilizan ilustraciones locales que representan exactamente la palabra.
 const illustratedWord = (text, image) => ({ ...word(text), image })
-const rrSyllables = ['rro', 'rra', 'rre', 'rri', 'rru'].map(syllable)
+const rrSyllables = ['rra', 'rre', 'rri', 'rro', 'rru'].map(syllable)
 
 const paragraphs = [
   'Ricardo regresó a la casa donde vivió de niño, después de muchos años. Su mamá lo recibió como siempre, con un fuerte abrazo.',

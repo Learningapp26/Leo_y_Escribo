@@ -210,10 +210,6 @@ function ActividadYFinalPage() {
             </div>
           </div>
 
-          <p className="text-instruction">
-            Selecciona la imagen que completa la frase.
-          </p>
-
           <div
             className="selection-options"
             aria-label="Opciones de respuesta"
@@ -260,10 +256,6 @@ function ActividadYFinalPage() {
 
                   <span className="selection-word">
                     {option.name}
-                  </span>
-
-                  <span className="text-ui-label">
-                    Toca para escuchar
                   </span>
                 </button>
               )

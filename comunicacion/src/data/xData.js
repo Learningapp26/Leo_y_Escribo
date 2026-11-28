@@ -60,7 +60,7 @@ export const xLesson = {
       present('sonido-ks', 214, 'Algunas veces, entre vocales o antes de una consonante, la equis suena ks. Escucha y repite las palabras.',
         words(['taxi', 'extra', 'boxeo', 'Axel']), { sound: audio('sonido-x-ks', 'ks', 'Sonidos') }),
       present('trazo-y-silabas', 215, 'Observa la equis mayúscula y la equis minúscula. Traza las letras con tu dedo, como indique tu maestra. Escucha y repite las combinaciones con las vocales.',
-        ['xo', 'xa', 'xe', 'xi', 'xu'].map(syllable), { letter: 'Xx' }),
+        ['xa', 'xe', 'xi', 'xo', 'xu'].map(syllable), { letter: 'Xx' }),
     ] },
     { id: 'silabas', title: 'Leemos sílabas y palabras', exercises: [
       { id: 'silabas-dibujos', page: 214, type: 'match',

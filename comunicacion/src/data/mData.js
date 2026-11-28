@@ -243,14 +243,14 @@ export const mSyllableSelection = [
     wordAudio: '/audio/lecciones/m/moño.mp3',
     options: [
       {
-        syllable: 'mo',
-        audio: '/audio/lecciones/m/silaba-mo.mp3',
-        isCorrect: true,
-      },
-      {
         syllable: 'mi',
         audio: '/audio/lecciones/m/silaba-mi.mp3',
         isCorrect: false,
+      },
+      {
+        syllable: 'mo',
+        audio: '/audio/lecciones/m/silaba-mo.mp3',
+        isCorrect: true,
       },
     ],
   },
@@ -261,14 +261,14 @@ export const mSyllableSelection = [
     wordAudio: '/audio/lecciones/m/melón.mp3',
     options: [
       {
-        syllable: 'mu',
-        audio: '/audio/lecciones/m/silaba-mu.mp3',
-        isCorrect: false,
-      },
-      {
         syllable: 'me',
         audio: '/audio/lecciones/m/silaba-me.mp3',
         isCorrect: true,
+      },
+      {
+        syllable: 'mu',
+        audio: '/audio/lecciones/m/silaba-mu.mp3',
+        isCorrect: false,
       },
     ],
   },
@@ -418,7 +418,7 @@ export const mSyllableJoin = [
     id: 'mimo',
     word: 'mimo',
     wordAudio: '/audio/lecciones/m/mimo.mp3',
-    options: ['mi', 'mo', 'mo', 'mi'],
+    options: ['mi', 'mi', 'mo', 'mo'],
   },
   {
     id: 'mama',

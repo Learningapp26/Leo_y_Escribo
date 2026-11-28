@@ -290,14 +290,14 @@ export const blSyllableJoin = [
     wordAudio: '/audio/lecciones/bl/doblada.mp3',
     options: [
       {
-        syllable: 'bli',
-        audio: '/audio/lecciones/bl/silaba-bli.mp3',
-        isCorrect: false,
-      },
-      {
         syllable: 'bla',
         audio: '/audio/lecciones/bl/silaba-bla.mp3',
         isCorrect: true,
+      },
+      {
+        syllable: 'bli',
+        audio: '/audio/lecciones/bl/silaba-bli.mp3',
+        isCorrect: false,
       },
     ],
   },
@@ -308,14 +308,14 @@ export const blSyllableJoin = [
     wordAudio: '/audio/lecciones/bl/estable.mp3',
     options: [
       {
-        syllable: 'bli',
-        audio: '/audio/lecciones/bl/silaba-bli.mp3',
-        isCorrect: false,
-      },
-      {
         syllable: 'ble',
         audio: '/audio/lecciones/bl/silaba-ble.mp3',
         isCorrect: true,
+      },
+      {
+        syllable: 'bli',
+        audio: '/audio/lecciones/bl/silaba-bli.mp3',
+        isCorrect: false,
       },
     ],
   },
@@ -326,14 +326,14 @@ export const blSyllableJoin = [
     wordAudio: '/audio/lecciones/bl/mueble.mp3',
     options: [
       {
-        syllable: 'bli',
-        audio: '/audio/lecciones/bl/silaba-bli.mp3',
-        isCorrect: false,
-      },
-      {
         syllable: 'ble',
         audio: '/audio/lecciones/bl/silaba-ble.mp3',
         isCorrect: true,
+      },
+      {
+        syllable: 'bli',
+        audio: '/audio/lecciones/bl/silaba-bli.mp3',
+        isCorrect: false,
       },
     ],
   },

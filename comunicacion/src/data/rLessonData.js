@@ -187,7 +187,7 @@ export const rCompletionExercises = [
     prefix: '',
     suffix: 'sa',
     answer: 'ro',
-    options: ['ro', 'ra', 'ri'],
+    options: ['ra', 'ri', 'ro'],
     completedWord: 'rosa',
     audio:
       '/audio/lecciones/r/instruccion-completar-r.mp3',
@@ -213,7 +213,7 @@ export const rCompletionExercises = [
     prefix: 'mo',
     suffix: '',
     answer: 'ra',
-    options: ['ro', 're', 'ra'],
+    options: ['ra', 're', 'ro'],
     completedWord: 'mora',
     audio:
       '/audio/lecciones/r/instruccion-completar-r.mp3',
@@ -226,7 +226,7 @@ export const rCompletionExercises = [
     prefix: '',
     suffix: 'lo',
     answer: 'ru',
-    options: ['ri', 'ru', 'ro'],
+    options: ['ri', 'ro', 'ru'],
     completedWord: 'rulo',
     audio:
       '/audio/lecciones/r/instruccion-completar-r.mp3',
@@ -239,7 +239,7 @@ export const rCompletionExercises = [
     prefix: 'ma',
     suffix: 'posa',
     answer: 'ri',
-    options: ['re', 'ri', 'ra'],
+    options: ['ra', 're', 'ri'],
     completedWord: 'mariposa',
     audio:
       '/audio/lecciones/r/instruccion-completar-r.mp3',

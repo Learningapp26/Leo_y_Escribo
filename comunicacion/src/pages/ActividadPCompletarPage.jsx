@@ -163,6 +163,8 @@ function ActividadPCompletarPage() {
           <div className="selection-instructions">
             <p className="text-instruction">
               Escucha la palabra y elige la sílaba que falta.
+                   
+              Ojo: no todas las palabras tienen una sílaba con p.
             </p>
 
             <Button
@@ -190,11 +192,6 @@ function ActividadPCompletarPage() {
 
           <p className="completion-word-pattern">{fillBlank(currentWord.pattern, selectedSyllable)}</p>
 
-          {currentWord.answer === null && (
-            <p className="text-instruction">
-              Ojo: no todas las palabras tienen una sílaba con p.
-            </p>
-          )}
 
           <div className="completion-bank">
             {[...pSyllableOptions, NO_SYLLABLE].map((syllable) => (

@@ -91,11 +91,11 @@ export const wLesson = {
     ] },
     { id: 'silabas', title: 'Leemos sílabas y palabras', exercises: [
       present('letra-y-silabas', 228, 'Fíjate en la letra W mayúscula y la w minúscula. Practica las combinaciones de la letra w con las vocales.',
-        ['wo', 'wa', 'we', 'wi', 'wu'].map(syllable), { letter: 'Ww', prompt: pic('Walter') }),
+        ['wa', 'we', 'wi', 'wo', 'wu'].map(syllable), { letter: 'Ww', prompt: pic('Walter') }),
       { id: 'silabas-dibujos', page: 228, type: 'match',
         instruction: instruction('silabas-dibujos', 'Observa las siguientes imágenes. Trata de leer las palabras que aparecen debajo. Selecciona la combinación wi, wa o we que contiene cada una.'),
         groups: [['kiwi', 'wi'], ['Walda', 'wa'], ['sándwich', 'wi'], ['Wendy', 'we']]
-          .map(([text, answer]) => ({ ...pic(text), answer, options: ['wi', 'wa', 'we'].map(syllable) })),
+          .map(([text, answer]) => ({ ...pic(text), answer, options: ['wa', 'we', 'wi'].map(syllable) })),
       },
       present('repetir-palabras', 228, 'Escucha cada palabra y repítela en voz alta.',
         ['kiwi', 'Walda', 'sándwich', 'Wendy'].map(pic)),

@@ -3,11 +3,8 @@ export const yReading = {
   introduction:
     'En esta historia conoceremos una palabra que nos ayuda a unir personas, animales y objetos.',
   paragraphs: [
-    'Un mago llegó a la escuela con un sombrero y una varita mágica.',
-    'Del sombrero sacó una paloma y un pañuelo.',
-    'Después mostró un conejo y una cuchara.',
-    'Todos observaron felices los objetos que aparecían.',
-    'El mago explicó que la palabra y sirve para unir dos elementos.',
+    'A la escuela llegó un mago con sombrero y bastón. Con una varita mágica, de su sombrero sacó una paloma y un pañuelo, un zapato y un hielo, un billete y una flor, una camisa y un tambor, una pelota y un conejo, un reloj y un espejo.',
+    'Todos veíamos asombrados ¡no paraban de salir objetos por todos lados! Con su varita y unas palabras mágicas, también salieron del sombrero: un florero y un soplador, una cuchara y un tenedor, una llave y un candado, un anillo y un dado, y para no hacer larga la historia, hasta aquí lo dejo porque ya no tengo memoria.',
   ],
   image: '/images/lecciones/y/mago-varita.png',
   imageAlt:
@@ -17,6 +14,14 @@ export const yReading = {
   readingAudio:
     '/audio/lecciones/y/el-mago-y-su-varita.mp3',
 }
+
+export const yComprehensionQuestions = [
+  '¿Comprendes qué es un mago?',
+  '¿Te gustó la historia? ¿Qué te gustó?',
+  '¿Qué sacó el mago de su sombrero?',
+  '¿Qué otras cosas podría sacar el mago de su sombrero?',
+  'Escucha de nuevo la historia. Esta vez, da una palmada cada vez que escuches el sonido /i/ uniendo palabras.',
+]
 
 export const page26Pairs = [
   {

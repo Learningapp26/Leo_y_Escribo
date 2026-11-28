@@ -16,6 +16,8 @@ import { page27Pairs } from '../data/yConjunctionData'
 import { playAudio } from '../lib/audioPlayer'
 import { registrarProgreso } from '../lib/progreso'
 
+import '../styles/y-conjunction.css'
+
 const leftOptions = page27Pairs.map(
   (pair) => pair.first,
 )
@@ -50,7 +52,7 @@ function ActividadYUnirImagenesPage() {
     })
 
   const selectLeft = (item) => {
-    if (isItemMatched(item.id)) return
+    if (feedback || isItemMatched(item.id)) return
 
     setSelectedLeft(item)
     setFeedback('')
@@ -58,7 +60,7 @@ function ActividadYUnirImagenesPage() {
   }
 
   const selectRight = (item) => {
-    if (isItemMatched(item.id)) return
+    if (feedback || isItemMatched(item.id)) return
 
     setSelectedRight(item)
     setFeedback('')
@@ -66,7 +68,7 @@ function ActividadYUnirImagenesPage() {
   }
 
   const checkPair = () => {
-    if (!selectedLeft || !selectedRight) return
+    if (feedback || !selectedLeft || !selectedRight) return
 
     const matchingPair = page27Pairs.find(
       (pair) =>
@@ -90,6 +92,8 @@ function ActividadYUnirImagenesPage() {
       matchingPair.id,
     ])
 
+    setSelectedLeft(null)
+    setSelectedRight(null)
     setFeedback('correct')
     playAudio(matchingPair.phraseAudio)
 
@@ -108,7 +112,7 @@ function ActividadYUnirImagenesPage() {
 
   return (
     <main
-      className={`page selection-page ${themeClass}`}
+      className={`page selection-page y-matching-page ${themeClass}`}
       aria-labelledby="y-match-title"
     >
       <BackButton
@@ -153,126 +157,105 @@ function ActividadYUnirImagenesPage() {
           </Button>
         </div>
 
-        <p className="text-instruction">
-          Primero selecciona una imagen de este grupo.
-        </p>
+        <section className="y-image-group" aria-labelledby="y-primer-grupo">
+          <h2 id="y-primer-grupo">Primer grupo</h2>
+          <div
+            className="selection-options"
+          >
+            {leftOptions.map((item) => {
+              const selected =
+                selectedLeft?.id === item.id
 
-        <div
-          className="selection-options"
-          aria-label="Primer grupo de imágenes"
-        >
-          {leftOptions.map((item) => {
-            const selected =
-              selectedLeft?.id === item.id
+              const matched = isItemMatched(item.id)
 
-            const matched = isItemMatched(item.id)
+              return (
+                <button
+                  className={[
+                    'selection-button',
+                    selected && !matched
+                      ? 'selection-button--selected'
+                      : '',
+                    matched
+                      ? 'y-pair--matched'
+                      : '',
+                  ]
+                    .filter(Boolean)
+                    .join(' ')}
+                  type="button"
+                  key={item.id}
+                  disabled={matched || Boolean(feedback)}
+                  aria-pressed={selected && !matched}
+                  onClick={() => selectLeft(item)}
+                >
+                  <img
+                    className="selection-image"
+                    src={item.image}
+                    alt={item.name}
+                  />
 
-            return (
-              <button
-                className={[
-                  'selection-button',
-                  selected
-                    ? 'selection-button--selected'
-                    : '',
-                  matched
-                    ? 'selection-button--correct'
-                    : '',
-                ]
-                  .filter(Boolean)
-                  .join(' ')}
-                type="button"
-                key={item.id}
-                disabled={matched}
-                aria-pressed={selected}
-                onClick={() => selectLeft(item)}
-              >
-                <img
-                  className="selection-image"
-                  src={item.image}
-                  alt={item.name}
-                />
+                  <span className="selection-word">
+                    {item.name}
+                  </span>
+                  {matched && <Check aria-label="Pareja encontrada" />}
+                </button>
+              )
+            })}
+          </div>
+        </section>
 
-                <span className="selection-word">
-                  {item.name}
-                </span>
-              </button>
-            )
-          })}
-        </div>
+        <section className="y-image-group" aria-labelledby="y-segundo-grupo">
+          <h2 id="y-segundo-grupo">Segundo grupo</h2>
+          <div
+            className="selection-options"
+          >
+            {rightOptions.map((item) => {
+              const selected =
+                selectedRight?.id === item.id
 
-        <p className="text-instruction">
-          Ahora selecciona la imagen que completa la pareja.
-        </p>
+              const matched = isItemMatched(item.id)
 
-        <div
-          className="selection-options"
-          aria-label="Segundo grupo de imágenes"
-        >
-          {rightOptions.map((item) => {
-            const selected =
-              selectedRight?.id === item.id
+              return (
+                <button
+                  className={[
+                    'selection-button',
+                    selected && !matched
+                      ? 'selection-button--selected'
+                      : '',
+                    matched
+                      ? 'y-pair--matched'
+                      : '',
+                  ]
+                    .filter(Boolean)
+                    .join(' ')}
+                  type="button"
+                  key={item.id}
+                  disabled={matched || Boolean(feedback)}
+                  aria-pressed={selected && !matched}
+                  onClick={() => selectRight(item)}
+                >
+                  <img
+                    className="selection-image"
+                    src={item.image}
+                    alt={item.name}
+                  />
 
-            const matched = isItemMatched(item.id)
+                  <span className="selection-word">
+                    {item.name}
+                  </span>
+                  {matched && <Check aria-label="Pareja encontrada" />}
+                </button>
+              )
+            })}
+          </div>
+        </section>
 
-            return (
-              <button
-                className={[
-                  'selection-button',
-                  selected
-                    ? 'selection-button--selected'
-                    : '',
-                  matched
-                    ? 'selection-button--correct'
-                    : '',
-                ]
-                  .filter(Boolean)
-                  .join(' ')}
-                type="button"
-                key={item.id}
-                disabled={matched}
-                aria-pressed={selected}
-                onClick={() => selectRight(item)}
-              >
-                <img
-                  className="selection-image"
-                  src={item.image}
-                  alt={item.name}
-                />
-
-                <span className="selection-word">
-                  {item.name}
-                </span>
-              </button>
-            )
-          })}
-        </div>
-
-        <div
-          className="completion-target"
-          aria-live="polite"
-        >
-          {!selectedLeft && !selectedRight && (
-            <p className="text-reading">
-              Selecciona dos imágenes.
+        <div aria-live="polite">
+          {(selectedLeft || selectedRight) && (
+            <p className="text-sentence">
+              {selectedLeft?.name}
+              {selectedLeft && selectedRight && <strong> y </strong>}
+              {selectedRight?.name}
             </p>
-          )}
-
-          {selectedLeft && (
-            <span className="completion-chip">
-              {selectedLeft.name}
-            </span>
-          )}
-
-          {selectedLeft && selectedRight && (
-            <span className="completion-chip">
-              y
-            </span>
-          )}
-
-          {selectedRight && (
-            <span className="completion-chip">
-              {selectedRight.name}
-            </span>
           )}
         </div>
 
@@ -309,7 +292,7 @@ function ActividadYUnirImagenesPage() {
             fullWidth
             onClick={clearSelection}
           >
-            Intentar nuevamente
+            Volver a intentar
           </Button>
         )}
 

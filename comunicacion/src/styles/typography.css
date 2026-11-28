@@ -47,6 +47,17 @@
 }
 
 /* ── Texto de lectura general ──────────────────────────────── */
+/* Oración que el estudiante construye al ordenar palabras. */
+.sentence-order-result {
+  font-family: var(--font-content);
+  font-size: clamp(32px, 4vw, 40px);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.6;
+  text-align: center;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
 /* Para párrafos y bloques de texto en actividades */
 .text-reading {
   font-family: var(--font-content);

@@ -12,7 +12,7 @@ const paragraphs = [
   'El hipopótamo pronto notó los regalos de la hormiga. Cuando supo quién se las dejaba, le agradeció. La hormiga le contó la historia del día en que quería cruzar el río y se hicieron muy buenos amigos.',
 ]
 
-const hSyllables = ['ho', 'ha', 'he', 'hi', 'hu'].map(syllable)
+const hSyllables = ['ha', 'he', 'hi', 'ho', 'hu'].map(syllable)
 
 export const hLesson = {
   id: 'h', letter: 'H', unitId: 5, pages: '183–188',

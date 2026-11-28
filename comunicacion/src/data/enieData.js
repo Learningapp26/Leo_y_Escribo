@@ -58,12 +58,12 @@ export const enieLesson = {
     ] },
     { id: 'silabas', title: 'La letra Ñ y sus sílabas', exercises: [
       present('letra-enie', 163, 'Esta es la Ñ mayúscula y la ñ minúscula. Observa sus formas. Escucha y repite las combinaciones de ñ con las vocales.',
-        ['ño', 'ña', 'ñe', 'ñi', 'ñu'].map(syllable), { letter: 'Ñ ñ' }),
+        ['ña', 'ñe', 'ñi', 'ño', 'ñu'].map(syllable), { letter: 'Ñ ñ' }),
       select('reconocer-mayuscula', 164, 'Selecciona la Ñ mayúscula.', [{ id: 'mayuscula', label: 'Ñ' }, { id: 'minuscula', label: 'ñ' }], ['mayuscula']),
       select('reconocer-minuscula', 164, 'Selecciona la ñ minúscula.', [{ id: 'mayuscula', label: 'Ñ' }, { id: 'minuscula', label: 'ñ' }], ['minuscula']),
       ...[['otoño', 'ño'], ['meñique', 'ñi'], ['muñeca', 'ñe'], ['piñata', 'ña']].map(([text, answer]) => select(
         `silaba-${word(text).id}`, 163, 'Lee y escucha la palabra. Selecciona la combinación de Ñ con una vocal que encuentres.',
-        ['ño', 'ña', 'ñe', 'ñi', 'ñu'].map(syllable), [syllable(answer).id], { prompt: word(text, true) })),
+        ['ña', 'ñe', 'ñi', 'ño', 'ñu'].map(syllable), [syllable(answer).id], { prompt: word(text, true) })),
       ...[
         ['ño', ['leño', 'corbata', 'cariño', 'riño', 'foca'], ['leño', 'cariño', 'riño']],
         ['ña', ['castaña', 'vaso', 'añade', 'peña', 'creo'], ['castaña', 'añade', 'peña']],
@@ -76,7 +76,7 @@ export const enieLesson = {
     { id: 'completar', title: 'Completemos palabras con Ñ', exercises: [
       ...[['leña', 'le__', 'ña'], ['niño', 'ni__', 'ño'], ['piñata', 'pi__ta', 'ña'], ['cabaña', 'caba__', 'ña']].map(([text, pattern, answer]) => select(
         `completar-${word(text).id}`, 165, 'Escucha el nombre del dibujo y selecciona la sílaba que falta para completar la palabra.',
-        ['ño', 'ña', 'ñe', 'ñi', 'ñu'].map(syllable), [syllable(answer).id], { prompt: word(text, true), hideWord: true, pattern })),
+        ['ña', 'ñe', 'ñi', 'ño', 'ñu'].map(syllable), [syllable(answer).id], { prompt: word(text, true), hideWord: true, pattern })),
       ...[
         ['pañuelo', ['pa', 'lo', 'ñue']], ['mañana', ['ña', 'na', 'ma']], ['rebaño', ['re', 'ba', 'ño']],
         ['pequeña', ['pe', 'ña', 'que']], ['tamaño', ['ta', 'ño', 'ma']], ['niñera', ['ni', 'ra', 'ñe']],

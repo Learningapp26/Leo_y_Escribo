@@ -76,12 +76,15 @@ export const pImagePool = [
 export const pPositionInstructionAudio =
   '/audio/lecciones/p/instruccion-posicion-p.mp3'
 
-// Fase 4: el sonido /p/ no siempre está al inicio. Escuchar la palabra
+// Fase 3: el sonido /p/ no siempre está al inicio. Escuchar la palabra
 // separada en sílabas y tocar la sílaba donde se escucha el sonido /p/.
 // "puma" se muestra resuelta como ejemplo (pu-ma, el sonido está en la
 // primera sílaba).
 export const pSyllablePositionExample = {
   word: 'puma',
+  instructionAudio: '/audio/lecciones/p/ejemplo-posicion-p.mp3',
+  wordAudio: '/audio/lecciones/p/puma.mp3',
+  syllableAudio: '/audio/lecciones/p/puma-silabas.mp3',
   image: '/images/lecciones/p/puma.png',
   syllables: ['pu', 'ma'],
   answerIndex: 0,
@@ -95,7 +98,7 @@ export const pSyllablePosition = [
     wordAudio: null,
     syllableAudio: null,
     syllables: ['pa', 'la'],
-    answerIndex: 1,
+    answerIndex: 0,
   },
   {
     id: 'puma-position',
@@ -173,12 +176,16 @@ export const pLetterPresentation = {
 export const pTraceInstructionAudio =
   '/audio/lecciones/p/instruccion-repasar-p.mp3'
 
+export const pProperNounReminderAudio =
+  '/audio/lecciones/p/recordatorio-nombres-propios.mp3'
+
 // Palabras para repasar (leer y tocar), con la sílaba destacada
 export const pTraceWords = [
   {
     id: 'polos',
     word: 'polos',
     highlighted: 'po',
+    syllableAudio: '/audio/lecciones/p/silaba-po.mp3',
     rest: 'los',
     image: '/images/lecciones/p/polos.png',
     audio: '/audio/lecciones/p/polos.mp3',
@@ -187,6 +194,7 @@ export const pTraceWords = [
     id: 'pamela',
     word: 'Pamela',
     highlighted: 'Pa',
+    syllableAudio: '/audio/lecciones/p/silaba-pa.mp3',
     rest: 'mela',
     image: '/images/lecciones/p/pamela.png',
     audio: '/audio/lecciones/p/pamela.mp3',
@@ -196,6 +204,7 @@ export const pTraceWords = [
     id: 'piso',
     word: 'piso',
     highlighted: 'pi',
+    syllableAudio: '/audio/lecciones/p/silaba-pi.mp3',
     rest: 'so',
     image: '/images/lecciones/p/piso.png',
     audio: '/audio/lecciones/p/piso.mp3',
@@ -204,6 +213,7 @@ export const pTraceWords = [
     id: 'puma',
     word: 'puma',
     highlighted: 'pu',
+    syllableAudio: '/audio/lecciones/p/silaba-pu.mp3',
     rest: 'ma',
     image: '/images/lecciones/p/puma.png',
     audio: '/audio/lecciones/p/puma.mp3',
@@ -223,13 +233,12 @@ export const pFindSyllableWords = [
   { id: 'ropa', word: 'ropa', audio: null, answer: 'pa' },
   { id: 'sapo', word: 'sapo', audio: null, answer: 'po' },
   { id: 'pera', word: 'pera', audio: null, answer: 'pe' },
-  { id: 'pipa', word: 'pipa', audio: null, answer: 'pi' },
   { id: 'pala-find', word: 'pala', audio: null, answer: 'pa' },
   { id: 'puma-find', word: 'puma', audio: null, answer: 'pu' },
   { id: 'topo-find', word: 'topo', audio: null, answer: 'po' },
 ]
 
-export const pSyllableOptions = ['po', 'pa', 'pe', 'pi', 'pu']
+export const pSyllableOptions = ['pa', 'pe', 'pi', 'po', 'pu']
 
 // ============================================================
 // ACTIVIDAD DE COMPLETAR PALABRAS (página 41)
@@ -243,7 +252,7 @@ export const pWordCompletion = [
   {
     id: 'pala-completion',
     word: 'pala',
-    pattern: '___la',
+    pattern: '__la',
     image: '/images/lecciones/p/pala.png',
     audio: null,
     answer: 'pa',
@@ -251,25 +260,25 @@ export const pWordCompletion = [
   {
     id: 'pelota',
     word: 'pelota',
-    pattern: '___lota',
+    pattern: '__lota',
     image: '/images/lecciones/p/pelota.png',
     audio: '/audio/lecciones/p/pelota.mp3',
     answer: 'pe',
   },
   {
-    id: 'tamal-no-p',
-    word: 'tamal',
+    id: 'luna',
+    word: 'luna',
     // No tiene ninguna sílaba con p: es la figura "trampa" del ejercicio,
     // igual que en el libro.
-    pattern: 'tamal',
-    image: '/images/lecciones/t/tamal.png',
+    pattern: 'luna',
+    image: '/images/lecciones/l/luna.png',
     audio: null,
     answer: null,
   },
   {
     id: 'puma-completion',
     word: 'puma',
-    pattern: '___ma',
+    pattern: '__ma',
     image: '/images/lecciones/p/puma.png',
     audio: null,
     answer: 'pu',

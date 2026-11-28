@@ -1,51 +1,50 @@
-import '../styles/syllable-reading.css'
+import BookLessonImage from '../components/lessons/BookLessonImage'
 import ActivityFeedback from '../components/common/ActivityFeedback'
-import { useState } from 'react'
-import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
+import { fillBlank } from '../lib/fillBlank'
+import { useRef, useState } from 'react'
+import { ArrowRight, Check, RotateCcw } from 'lucide-react'
 
 import Button from '../components/common/Button'
 import Card from '../components/common/Card'
+import LessonAudioButton from '../components/common/LessonAudioButton'
 import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
 import { getLessonThemeClass } from '../data/lessonColors'
 import {
+  asAudio,
+  nCompletionInstructionAudio,
+  nJoinInstructionAudio,
+  nJoinSyllable,
   nSyllableJoin,
   nSyllableOptions,
   nWordCompletion,
-} from '../data/nCompletar'
+} from '../data/nData'
 import { playAudio } from '../lib/audioPlayer'
 import { registrarProgreso } from '../lib/progreso'
+import '../styles/selection.css'
+import '../styles/syllables.css'
+import '../styles/completion.css'
 
+// Página 52 del libro: elegir la sílaba que falta y combinar sílabas con «no».
 const PHASES = ['completar', 'unir']
-
-const leftOptions = nSyllableJoin.map((item) => item.first)
-const rightOptions = [{ id: 'no', syllable: 'no' }]
-
-function getAudioLabel(label, audio) {
-  return audio ? label : `${label} pendiente`
-}
-
-function playIfAvailable(audio) {
-  if (audio) playAudio(audio)
-}
 
 function ActividadNCompletarPage() {
   const [phaseIndex, setPhaseIndex] = useState(0)
   const phase = PHASES[phaseIndex]
-
   const themeClass = getLessonThemeClass('n')
+  const answerLock = useRef(false)
 
+  // Fase 1: completar la palabra con la sílaba que falta
   const [wordIndex, setWordIndex] = useState(0)
   const [selectedSyllable, setSelectedSyllable] = useState('')
   const [completionResult, setCompletionResult] = useState('')
-
   const currentWord = nWordCompletion[wordIndex]
+  const isLastWord = wordIndex === nWordCompletion.length - 1
 
   const checkCompletion = () => {
-    if (!selectedSyllable) return
-
+    if (!selectedSyllable || answerLock.current) return
+    answerLock.current = true
     const isCorrect = selectedSyllable === currentWord.answer
-
     setCompletionResult(isCorrect ? 'correct' : 'retry')
 
     registrarProgreso({
@@ -55,117 +54,80 @@ function ActividadNCompletarPage() {
     })
   }
 
-  const nextWord = () => {
-    const isLast = wordIndex === nWordCompletion.length - 1
-
+  const resetCompletion = () => {
+    answerLock.current = false
     setSelectedSyllable('')
     setCompletionResult('')
+  }
 
-    if (isLast) {
-      setPhaseIndex((current) => current + 1)
+  const nextWord = () => {
+    resetCompletion()
+    if (isLastWord) {
+      setPhaseIndex(1)
       return
     }
-
     setWordIndex((current) => current + 1)
   }
 
-  const [selectedLeft, setSelectedLeft] = useState(null)
-  const [selectedRight] = useState(rightOptions[0])
-  const [matchedPairs, setMatchedPairs] = useState([])
+  // Fase 2: combinar cada sílaba con «no»
+  const [selectedId, setSelectedId] = useState(null)
+  const [matchedIds, setMatchedIds] = useState([])
   const [joinFeedback, setJoinFeedback] = useState('')
-
-  const isJoinFinished = matchedPairs.length === nSyllableJoin.length
-
-  const isMatched = (syllableId) =>
-    matchedPairs.some((pairId) => {
-      const pair = nSyllableJoin.find((item) => item.id === pairId)
-
-      return pair?.first.id === syllableId
-    })
+  const selectedItem = nSyllableJoin.find((item) => item.id === selectedId)
+  const isJoinFinished = matchedIds.length === nSyllableJoin.length
+  const lastMatched = nSyllableJoin.find((item) => item.id === matchedIds[matchedIds.length - 1])
 
   const checkJoin = () => {
-    if (!selectedLeft) return
-
-    const matchingPair = nSyllableJoin.find(
-      (item) =>
-        item.first.id === selectedLeft.id &&
-        item.second.id === selectedRight.id,
-    )
-
-    if (!matchingPair) {
-      setJoinFeedback('retry')
-
-      registrarProgreso({
-        actividad: 'n-completar',
-        correcto: false,
-        detalle: { leccionId: 'n', fase: 'unir' },
-      })
-      return
-    }
-
-    setMatchedPairs((current) => [...current, matchingPair.id])
+    if (!selectedItem || matchedIds.includes(selectedItem.id) || answerLock.current) return
+    answerLock.current = true
+    // Cada sílaba del banco forma una palabra al unirse con «no».
+    setMatchedIds((current) => current.includes(selectedItem.id) ? current : [...current, selectedItem.id])
     setJoinFeedback('correct')
-    playIfAvailable(matchingPair.wordAudio)
+    if (selectedItem.wordAudio) playAudio(selectedItem.wordAudio)
 
     registrarProgreso({
       actividad: 'n-completar',
       correcto: true,
-      detalle: { leccionId: 'n', fase: 'unir', ejercicioId: matchingPair.id },
+      detalle: { leccionId: 'n', fase: 'unir', ejercicioId: selectedItem.id },
     })
   }
 
   const continueJoin = () => {
-    setSelectedLeft(null)
+    answerLock.current = false
+    setSelectedId(null)
     setJoinFeedback('')
   }
 
   return (
-    <main
-      className={`page ${themeClass}`}
-      aria-labelledby="n-completar-title"
-    >
+    <main className={`page selection-page ${themeClass}`} aria-labelledby="n-completar-title">
       <BackButton label="Volver a la lección" to="/lecciones/n" />
 
       <header className="text-center">
         <span className="text-ui-label">Actividad 3</span>
-
         <h1 id="n-completar-title">Completamos palabras</h1>
       </header>
 
-      <ProgressBar
-        value={phaseIndex + 1}
-        max={PHASES.length}
-        label={`Parte ${phaseIndex + 1} de ${PHASES.length}`}
-      />
+      <ProgressBar value={phaseIndex + 1} max={PHASES.length} label={`Parte ${phaseIndex + 1} de ${PHASES.length}`} />
 
       {phase === 'completar' && (
         <Card className="completion-card">
-          <p className="text-instruction">
-            Observa la imagen y elige la sílaba que falta.
-          </p>
-
-          <img
-            className="completion-word-image"
-            src={currentWord.image}
-            alt={currentWord.word}
-          />
-
-          <Button
-            variant="audio"
-            icon={Volume2}
-            disabled={!currentWord.audio}
-            onClick={() => playAudio(currentWord.audio)}
-          >
-            {getAudioLabel(currentWord.word, currentWord.audio)}
-          </Button>
-
-          <div className="syllable-reading__row" aria-live="polite">
-            {currentWord.pattern.split(/(_+)/).filter(Boolean).map((part, index) => (
-              <span className="syllable-reading__part" key={index}>
-                {/^_+$/.test(part) ? selectedSyllable || part : part}
-              </span>
-            ))}
+          <div className="selection-instructions">
+            <p className="text-instruction">
+              Nombra el dibujo despacio. Elige la sílaba que falta para
+              completar la palabra.
+            </p>
+            <LessonAudioButton audio={asAudio(nCompletionInstructionAudio)}>
+              Escuchar instrucción
+            </LessonAudioButton>
           </div>
+
+          <BookLessonImage className="completion-word-image" src={currentWord.image} alt={currentWord.word} hideLabel key={currentWord.image} />
+
+          <LessonAudioButton audio={asAudio(currentWord.audio)}>Escuchar palabra</LessonAudioButton>
+
+          <p className="completion-word-pattern" aria-live="polite">
+            {fillBlank(currentWord.pattern, selectedSyllable)}
+          </p>
 
           <div className="completion-bank">
             {nSyllableOptions.map((syllable) => (
@@ -173,24 +135,17 @@ function ActividadNCompletarPage() {
                 className={[
                   'completion-chip',
                   'text-syllable',
-                  selectedSyllable === syllable ? 'completion-active' : '',
-                  completionResult === 'correct' &&
-                  selectedSyllable === syllable
-                    ? 'completion-correct'
-                    : '',
-                  completionResult === 'retry' &&
-                  selectedSyllable === syllable
-                    ? 'completion-incorrect'
-                    : '',
-                ]
-                  .filter(Boolean)
-                  .join(' ')}
+                  selectedSyllable === syllable && !completionResult ? 'completion-active' : '',
+                  completionResult === 'correct' && selectedSyllable === syllable ? 'completion-correct' : '',
+                  completionResult === 'retry' && selectedSyllable === syllable ? 'completion-incorrect' : '',
+                ].filter(Boolean).join(' ')}
                 type="button"
                 key={syllable}
                 aria-pressed={selectedSyllable === syllable}
+                disabled={Boolean(completionResult)}
                 onClick={() => {
+                  if (completionResult) return
                   setSelectedSyllable(syllable)
-                  setCompletionResult('')
                 }}
               >
                 {syllable}
@@ -199,55 +154,25 @@ function ActividadNCompletarPage() {
           </div>
 
           {completionResult === 'correct' && (
-            <ActivityFeedback correct message={<>
-              ¡Correcto! La palabra es {currentWord.word}.
-            </>} />
+            <ActivityFeedback correct message={<>¡Correcto! La palabra es {currentWord.word}.</>} />
           )}
-
           {completionResult === 'retry' && (
-            <ActivityFeedback correct={false} message={<>
-              Esa sílaba no completa la palabra. Revisa otra vez.
-            </>} />
+            <ActivityFeedback correct={false} message={<>Esa sílaba no completa la palabra. Escucha otra vez.</>} />
           )}
 
           {!completionResult && (
-            <Button
-              icon={Check}
-              size="large"
-              fullWidth
-              disabled={!selectedSyllable}
-              onClick={checkCompletion}
-            >
+            <Button icon={Check} size="large" fullWidth disabled={!selectedSyllable} onClick={checkCompletion}>
               Comprobar
             </Button>
           )}
-
           {completionResult === 'retry' && (
-            <Button
-              variant="retry"
-              icon={RotateCcw}
-              size="large"
-              fullWidth
-              onClick={() => {
-                setSelectedSyllable('')
-                setCompletionResult('')
-              }}
-            >
-              Intentar nuevamente
+            <Button variant="retry" icon={RotateCcw} size="large" fullWidth onClick={resetCompletion}>
+              Volver a intentar
             </Button>
           )}
-
           {completionResult === 'correct' && (
-            <Button
-              icon={ArrowRight}
-              iconPosition="right"
-              size="large"
-              fullWidth
-              onClick={nextWord}
-            >
-              {wordIndex === nWordCompletion.length - 1
-                ? 'Siguiente parte'
-                : 'Siguiente palabra'}
+            <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth onClick={nextWord}>
+              {isLastWord ? 'Siguiente parte' : 'Siguiente palabra'}
             </Button>
           )}
         </Card>
@@ -255,144 +180,69 @@ function ActividadNCompletarPage() {
 
       {phase === 'unir' && (
         <Card className="selection-card">
-          <p className="text-instruction">
-            Une una sílaba con <strong>no</strong> para formar una palabra.
-            Las sílabas que ya usaste se irán quitando.
-          </p>
+          <div className="selection-instructions">
+            <p className="text-instruction">
+              Toca una sílaba para unirla con <strong>{nJoinSyllable}</strong> y
+              formar una palabra. Las que ya usaste desaparecen.
+            </p>
+            <LessonAudioButton audio={asAudio(nJoinInstructionAudio)}>
+              Escuchar instrucción
+            </LessonAudioButton>
+          </div>
 
           {!isJoinFinished && (
             <>
-          <div className="selection-columns">
-            <section className="selection-options" aria-label="Primera sílaba">
-              {leftOptions.filter((item) => !isMatched(item.id)).map((item) => {
-                const selected = selectedLeft?.id === item.id
+              <p className="completion-word-pattern" aria-live="polite" aria-label="Palabra que se forma">
+                {selectedItem ? selectedItem.first : '__'} {nJoinSyllable}
+              </p>
 
-                return (
-                  <button
-                    className={[
-                      'selection-button',
-                      selected ? 'selection-button--selected' : '',
-                    ]
-                      .filter(Boolean)
-                      .join(' ')}
-                    type="button"
-                    key={item.id}
-                    aria-pressed={selected}
-                    onClick={() => {
-                      setSelectedLeft(item)
-                      setJoinFeedback('')
-                    }}
-                  >
-                    <span className="text-syllable">{item.syllable}</span>
-                  </button>
-                )
-              })}
-            </section>
-
-            <section className="selection-options" aria-label="Sílaba fija">
-              {rightOptions.map((item) => {
-                const selected =
-                  selectedRight?.id === item.id
-
-                return (
-                  <button
-                    className={[
-                      'selection-button',
-                      selected ? 'selection-button--selected' : '',
-                    ]
-                      .filter(Boolean)
-                      .join(' ')}
-                    type="button"
-                    key={item.id}
-                    disabled
-                    aria-pressed={selected}
-                  >
-                    <span className="text-syllable">{item.syllable}</span>
-                  </button>
-                )
-              })}
-            </section>
-          </div>
-
-          <div className="syllable-reading__row" aria-live="polite">
-            <span className="syllable-reading__part">
-              {selectedLeft?.syllable ?? '__'}
-            </span>
-
-            <span className="text-word">+</span>
-
-            <span className="syllable-reading__part">
-              {selectedRight?.syllable ?? 'no'}
-            </span>
-          </div>
+              <div className="selection-options">
+                {nSyllableJoin
+                  .filter((item) => !matchedIds.includes(item.id))
+                  .map((item) => {
+                    const selected = selectedId === item.id
+                    return (
+                      <button
+                        className={['selection-button', selected ? 'selection-button--selected' : ''].filter(Boolean).join(' ')}
+                        type="button"
+                        key={item.id}
+                        aria-pressed={selected}
+                        disabled={joinFeedback === 'correct'}
+                        onClick={() => setSelectedId(item.id)}
+                      >
+                        <span className="text-syllable">{item.first}</span>
+                      </button>
+                    )
+                  })}
+              </div>
             </>
           )}
 
-          {joinFeedback === 'correct' && !isJoinFinished && (
-            <ActivityFeedback correct message={<>
-              ¡Muy bien! Formaste una palabra.
-            </>} />
+          {joinFeedback === 'correct' && lastMatched && !isJoinFinished && (
+            <ActivityFeedback
+              correct
+              message={<>
+                ¡Muy bien! Formaste {lastMatched.word}.
+                {lastMatched.isProperNoun && ' Es un nombre propio, por eso empieza con mayúscula.'}
+              </>}
+            />
           )}
-
           {isJoinFinished && (
-            <ActivityFeedback correct message={<>
-              ¡Muy bien! Usaste todas las sílabas.
-            </>} />
-          )}
-
-          {joinFeedback === 'retry' && (
-            <ActivityFeedback correct={false} message={<>
-              Esas sílabas no forman una palabra. Inténtalo de nuevo.
-            </>} />
+            <ActivityFeedback correct message={<>¡Excelente! Formaste todas las palabras con no.</>} />
           )}
 
           {!joinFeedback && !isJoinFinished && (
-            <Button
-              icon={Check}
-              size="large"
-              fullWidth
-              disabled={!selectedLeft}
-              onClick={checkJoin}
-            >
-              Comprobar palabra
+            <Button icon={Check} size="large" fullWidth disabled={!selectedItem} onClick={checkJoin}>
+              Formar palabra
             </Button>
           )}
-
-          {joinFeedback === 'retry' && (
-            <Button
-              variant="retry"
-              icon={RotateCcw}
-              size="large"
-              fullWidth
-              onClick={() => {
-                setSelectedLeft(null)
-                setJoinFeedback('')
-              }}
-            >
-              Intentar nuevamente
-            </Button>
-          )}
-
           {joinFeedback === 'correct' && !isJoinFinished && (
-            <Button
-              icon={ArrowRight}
-              iconPosition="right"
-              size="large"
-              fullWidth
-              onClick={continueJoin}
-            >
+            <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth onClick={continueJoin}>
               Formar otra palabra
             </Button>
           )}
-
           {isJoinFinished && (
-            <Button
-              to="/actividad/n-final"
-              icon={ArrowRight}
-              iconPosition="right"
-              size="large"
-              fullWidth
-            >
+            <Button to="/actividad/n-final" icon={ArrowRight} iconPosition="right" size="large" fullWidth>
               Ir a la actividad final
             </Button>
           )}

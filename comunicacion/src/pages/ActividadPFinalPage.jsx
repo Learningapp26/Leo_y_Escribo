@@ -156,10 +156,20 @@ function ActividadPFinalPage() {
             </Button>
           </div>
 
+
           {traceWord.isProperNoun && (
-            <p className="text-instruction">
-              Recuerda: los nombres propios se escriben con mayúscula.
-            </p>
+            <div className="selection-instructions">
+              <p className="text-instruction">
+                Recuerda: los nombres propios se escriben con mayúscula.
+              </p>
+              <Button
+                variant="audio"
+                icon={Volume2}
+                onClick={() => playAudio(pProperNounReminderAudio)}
+              >
+                Escuchar recordatorio
+              </Button>
+            </div>
           )}
 
           <img
@@ -200,9 +210,19 @@ function ActividadPFinalPage() {
 
       {phase === 'oraciones' && (
         <Card className="selection-card">
-          <p className="text-instruction">
-            Escucha la oración y elige la imagen que la completa.
-          </p>
+          <div className="selection-instructions">
+            <p className="text-instruction">
+              Escucha la oración y elige la imagen que la completa.
+            </p>
+
+            <Button
+              variant="audio"
+              icon={Volume2}
+              onClick={() => playAudio(pFinalTraceInstructionAudio)}
+            >
+              Escuchar instrucción
+            </Button>
+          </div>
 
           <Button
             variant="audio"

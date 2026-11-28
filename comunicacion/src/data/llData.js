@@ -70,7 +70,7 @@ export const llLesson = {
     ] },
     { id: 'silabas', title: 'Leemos sílabas y palabras', exercises: [
       present('silabas-ll', 197, 'Observa Ll y ll. Traza las letras con tu dedo, como indique tu maestra. Escucha y repite las sílabas.',
-        ['llo', 'lla', 'lle', 'lli', 'llu'].map(syllable), { letter: 'Ll ll' }),
+        ['lla', 'lle', 'lli', 'llo', 'llu'].map(syllable), { letter: 'Ll ll' }),
       present('leer-palabras', 197, 'Observa las imágenes. Escucha y lee las palabras. Encuentra la doble ele.', pics(['llave', 'llorar', 'gallina', 'Llemo'])),
       select('reconocer-silabas', 197, 'Selecciona solamente las sílabas que tienen doble ele.',
         ['lle', 'lo', 'lla', 'li', 'llu', 'le', 'llo', 'la', 'lli', 'lu'].map(syllable), ['lle', 'lla', 'llu', 'llo', 'lli'], { multiple: true }),

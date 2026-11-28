@@ -342,7 +342,7 @@ function ActividadTFinalPage() {
             </Button>
           </div>
 
-          <p aria-live="polite" className="text-sentence">
+          <p aria-live="polite" className="sentence-order-result">
             {placedIndices.length > 0
               ? placedIndices
                   .map((index) => sentenceItem.options[index])

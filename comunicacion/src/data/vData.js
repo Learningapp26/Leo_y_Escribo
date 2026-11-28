@@ -186,7 +186,7 @@ export const vSyllableImageExercises = [
     syllable: 'vo',
     image: '/images/lecciones/v/voz.png',
     audio: '/audio/lecciones/v/voz.mp3',
-    options: ['vo', 'va'],
+    options: ['va', 'vo'],
   },
   {
     id: 'venado',
@@ -194,7 +194,7 @@ export const vSyllableImageExercises = [
     syllable: 've',
     image: '/images/lecciones/v/venado.png',
     audio: '/audio/lecciones/v/venado.mp3',
-    options: ['vi', 've'],
+    options: ['ve', 'vi'],
   },
   {
     id: 'violin',
@@ -287,7 +287,7 @@ export const vCompletionExercises = [
     imageAlt: 'Un pavo real',
     word: 'pavo',
     answer: 'vo',
-    options: ['vo', 'vi'],
+    options: ['vi', 'vo'],
     before: 'pa',
     after: '',
     audio: '/audio/lecciones/v/pavo.mp3',

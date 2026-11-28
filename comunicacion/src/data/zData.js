@@ -75,12 +75,12 @@ export const zLesson = {
     ] },
     { id: 'silabas', title: 'La letra Z y sus sílabas', exercises: [
       present('letra-z', 191, 'Fíjate en esta letra. Es la Z mayúscula o la z minúscula. Esta letra suena casi igual que la s. Aprenderás nuevas palabras que se escriben con z. Traza esta letra en diferentes superficies, como indique tu maestra o maestro. Repite las combinaciones de la letra z con las vocales.',
-        ['zo', 'za', 'ze', 'zi', 'zu'].map(syllable), { letter: 'Z z', prompt: pic('zapato') }),
+        ['za', 'ze', 'zi', 'zo', 'zu'].map(syllable), { letter: 'Z z', prompt: pic('zapato') }),
       present('leer-palabras', 191, 'Observa las siguientes imágenes. Trata de leer las palabras que aparecen debajo. Fíjate en: zo, ze, zi y zu.',
         pics(['zorro', 'zepelín', 'zíper', 'Zulema'])),
       ...[
         ['zeta', ['za', 'ze'], 'ze'], ['zona', ['za', 'zo'], 'zo'], ['pezuña', ['ze', 'zu'], 'zu'],
-        ['chorizo', ['zo', 'zi'], 'zo'], ['pereza', ['za', 'ze'], 'za'], ['lechuza', ['za', 'zi'], 'za'],
+        ['chorizo', ['zi', 'zo'], 'zo'], ['pereza', ['za', 'ze'], 'za'], ['lechuza', ['za', 'zi'], 'za'],
       ].map(([text, pair, answer]) => select(`rectangulo-${word(text).id}`, 191, text191Rectangles,
         pair.map(syllable), [answer], { prompt: word(text) })),
     ] },

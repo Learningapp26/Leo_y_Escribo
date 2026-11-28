@@ -36,7 +36,7 @@ function LeccionTPage() {
   const allSelected = orderedIds.length === tComprehensionQuestions.length
 
   const pickScene = (item) => {
-    if (orderResult === 'correct') return
+    if (orderResult) return
 
     setOrderResult('')
 
@@ -170,16 +170,7 @@ function LeccionTPage() {
             </p>
           )}
 
-          {orderResult === 'retry' && (
-            <p
-              className="selection-feedback selection-feedback--retry"
-              role="status"
-            >
-              Ese no es el orden correcto. Revisa otra vez.
-            </p>
-          )}
-
-          {orderResult !== 'correct' && (
+          {!orderResult && (
             <Button
               icon={Check}
               size="large"
@@ -199,7 +190,7 @@ function LeccionTPage() {
               fullWidth
               onClick={retryOrder}
             >
-              Intentar nuevamente
+              Volver a intentar
             </Button>
           )}
         </Card>

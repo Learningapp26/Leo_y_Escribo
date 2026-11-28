@@ -53,7 +53,7 @@ export const drLesson = {
     ] },
     { id: 'silabas', title: 'Sílabas y palabras con Dr', exercises: [
       present('silabas-dr', 173, 'Estas son las letras d y r juntas. Observa Dr y dr. Escucha y repite las combinaciones con las vocales.',
-        ['dro', 'dra', 'dre', 'dri', 'dru'].map(syllable), { letter: 'Dr dr' }),
+        ['dra', 'dre', 'dri', 'dro', 'dru'].map(syllable), { letter: 'Dr dr' }),
       present('leer-palabras', 173, 'Observa las imágenes. Escucha y lee las palabras. Señala dónde aparecen dra, dre, dri y dro.',
         words(['almendra', 'ajedrez', 'cocodrilo', 'ladrón'], true)),
       ...[

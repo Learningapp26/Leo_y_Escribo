@@ -15,6 +15,7 @@ import {
   pFindSyllableInstructionAudio,
   pFindSyllableWords,
   pLetterPresentation,
+  pProperNounReminderAudio,
   pSyllableOptions,
   pTraceInstructionAudio,
   pTraceWords,
@@ -139,6 +140,21 @@ function ActividadPSilabasPage() {
             </Button>
           </div>
 
+          {traceItem.isProperNoun && (
+            <div className="selection-instructions">
+              <p className="text-instruction">
+                Recuerda: los nombres propios se escriben con mayúscula.
+              </p>
+              <Button
+                variant="audio"
+                icon={Volume2}
+                onClick={() => playAudio(pProperNounReminderAudio)}
+              >
+                Escuchar recordatorio
+              </Button>
+            </div>
+          )}
+
           <img
             className="selection-image selection-image--featured"
             src={traceItem.image}
@@ -150,19 +166,23 @@ function ActividadPSilabasPage() {
             {traceItem.rest}
           </p>
 
-          {traceItem.isProperNoun && (
-            <p className="text-instruction">
-              Recuerda: los nombres propios se escriben con mayúscula.
-            </p>
-          )}
+          <div className="audio-button-row">
+            <Button
+              variant="audio"
+              icon={Volume2}
+              onClick={() => playAudio(traceItem.syllableAudio)}
+            >
+              Escuchar sílaba
+            </Button>
 
-          <Button
-            variant="audio"
-            icon={Volume2}
-            onClick={() => playAudio(traceItem.audio)}
-          >
-            Escuchar palabra
-          </Button>
+            <Button
+              variant="audio"
+              icon={Volume2}
+              onClick={() => playAudio(traceItem.audio)}
+            >
+              Escuchar palabra completa
+            </Button>
+          </div>
 
           <div className="activity-navigation">
             <Button

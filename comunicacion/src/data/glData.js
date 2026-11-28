@@ -74,12 +74,12 @@ export const glLesson = {
     ] },
     { id: 'silabas', title: 'Sílabas y palabras con Gl', exercises: [
       present('silabas-gl', 207, 'Fíjate en las letras que representan el sonido gl, son la g y la l juntas. Realiza el trazo en diferentes superficies, según indique tu maestra o maestro. Repite las combinaciones de las letras gl con las vocales.',
-        ['glo', 'gla', 'gle', 'gli', 'glu'].map(syllable), { letter: 'Gl gl', prompt: pic('globo') }),
+        ['gla', 'gle', 'gli', 'glo', 'glu'].map(syllable), { letter: 'Gl gl', prompt: pic('globo') }),
       present('leer-palabras', 207, 'Observa las siguientes imágenes. Trata de leer las palabras que aparecen debajo. Fíjate en gla, glu, gli y gle.',
         pics(['gladiola', 'glifo', 'iglú', 'iglesia'])),
       ...[
-        ['glotón', ['glo', 'gla'], 'glo'], ['aglutinar', ['gle', 'glu'], 'glu'], ['manglares', ['gla', 'glo'], 'gla'],
-        ['Glenda', ['gle', 'gli'], 'gle'], ['jungla', ['glu', 'gla'], 'gla'],
+        ['glotón', ['gla', 'glo'], 'glo'], ['aglutinar', ['gle', 'glu'], 'glu'], ['manglares', ['gla', 'glo'], 'gla'],
+        ['Glenda', ['gle', 'gli'], 'gle'], ['jungla', ['gla', 'glu'], 'gla'],
       ].map(([text, pair, answer]) => select(`combinacion-${word(text).id}`, 207, text207Combinations,
         pair.map(syllable), [answer], { prompt: word(text), pattern: 'Ejemplo: arregla → gla' })),
     ] },

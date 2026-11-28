@@ -5,7 +5,7 @@ import Button from '../components/common/Button'
 import Card from '../components/common/Card'
 import BackButton from '../components/navigation/BackButton'
 import { getLessonThemeClass } from '../data/lessonColors'
-import { yReading } from '../data/yConjunctionData'
+import { yComprehensionQuestions, yReading } from '../data/yConjunctionData'
 import { playAudio } from '../lib/audioPlayer'
 import StoryCard from '../components/lessons/StoryCard'
 
@@ -55,54 +55,17 @@ function LeccionYPage() {
         className="comprehension-section"
         aria-labelledby="y-example-title"
       >
-        <h2 id="y-example-title">
-          Observa cómo usamos la Y
-        </h2>
-
-        <p className="text-instruction">
-          La letra Y nos ayuda a unir dos personas,
-          animales u objetos.
-        </p>
+        <h2 id="y-example-title">Conversemos</h2>
 
         <div className="comprehension-grid">
-          <Card className="comprehension-grid__item">
-            <span
-              className="comprehension-list__number"
-              aria-hidden="true"
-            >
-              1
-            </span>
-
-            <p className="text-reading">
-              paloma Y conejo
-            </p>
-          </Card>
-
-          <Card className="comprehension-grid__item">
-            <span
-              className="comprehension-list__number"
-              aria-hidden="true"
-            >
-              2
-            </span>
-
-            <p className="text-reading">
-              pelota Y tambor
-            </p>
-          </Card>
-
-          <Card className="comprehension-grid__item">
-            <span
-              className="comprehension-list__number"
-              aria-hidden="true"
-            >
-              3
-            </span>
-
-            <p className="text-reading">
-              cuaderno Y lápiz
-            </p>
-          </Card>
+          {yComprehensionQuestions.map((question, index) => (
+            <Card className="comprehension-grid__item" key={question}>
+              <span className="comprehension-list__number" aria-hidden="true">
+                {index + 1}
+              </span>
+              <p className="text-reading">{question}</p>
+            </Card>
+          ))}
         </div>
       </section>
 

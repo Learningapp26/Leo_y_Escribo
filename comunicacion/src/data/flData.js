@@ -16,7 +16,7 @@ const paragraphs = [
 ]
 const tongueTwister = 'Floridalma Flores\ntiene una floristería\ncon toda clase de flores.\n\nEn la floristería de Floridalma,\ntodas las flores\nestán en floreros floreados.'
 const floryText = 'Mi hermana Flory es muy flaca.\nLe regalaron un vestido floreado.\nAl probárselo, le quedó flojo.\nElla arregló el vestido floreado.\nAhora no le queda flojo.\n¡Se ve muy linda!'
-const syllables = ['flo', 'fla', 'fle', 'fli', 'flu'].map(syllable)
+const syllables = ['fla', 'fle', 'fli', 'flo', 'flu'].map(syllable)
 const wordGroups = [
   [['inflar', 'fla'], ['flan', 'fla'], ['coliflor', 'flo'], ['chiflido', 'fli'], ['floreado', 'flo']],
   [['flotador', 'flo'], ['inflamado', 'fla'], ['influenza', 'flu'], ['conflicto', 'fli'], ['reflector', 'fle']],

@@ -118,7 +118,7 @@ function BookLessonExercise({ exercise, lesson, activityId, onNext, onCorrect, l
         <LessonAudioButton audio={exercise.sentenceCompletion.audio}>Escuchar oración</LessonAudioButton>
       </>}
       {ordered && <div className="completion-target" aria-live="polite" aria-label="Tu respuesta">
-        <p className="text-word">{answerText || '…'}</p>
+        <p className={exercise.separator === ' ' ? 'sentence-order-result' : 'text-word'}>{answerText || '…'}</p>
       </div>}
       {options.length > 0 && <div className={ordered ? `completion-bank${exercise.compactOptions ? ' completion-bank--letters' : ''}${exercise.answerIds ? ' completion-bank--images' : ''}${exercise.optionLayout === 'pairs' ? ' completion-bank--pairs' : ''}` : `selection-options selection-options--centered${exercise.showOptionLabels ? ' selection-options--labeled' : ''}${exercise.optionLayout === 'board' ? ' selection-options--board' : ''}`}>
         {options.map((option, index) => {

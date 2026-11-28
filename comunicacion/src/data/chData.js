@@ -155,7 +155,7 @@ export const chSyllableImageExercises = [
     syllable: 'cho',
     image: '/images/lecciones/ch/chompipe.png',
     audio: '/audio/lecciones/ch/chompipe.mp3',
-    options: ['cho', 'cha'],
+    options: ['cha', 'cho'],
   },
   {
     id: 'cheque',
@@ -171,7 +171,7 @@ export const chSyllableImageExercises = [
     syllable: 'chi',
     image: '/images/lecciones/ch/chile.png',
     audio: '/audio/lecciones/ch/chile.mp3',
-    options: ['chu', 'chi'],
+    options: ['chi', 'chu'],
   },
   {
     id: 'churro',
@@ -270,7 +270,7 @@ export const chCompletionExercises = [
     imageAlt: 'Un chile',
     word: 'chile',
     answer: 'chi',
-    options: ['chi', 'cha'],
+    options: ['cha', 'chi'],
     before: '',
     after: 'le',
     audio: '/audio/lecciones/ch/chile.mp3',

@@ -165,7 +165,7 @@ function ActividadGFinalPage() {
           </Button>
         </div>
 
-        <p aria-live="polite" className="text-sentence">
+        <p aria-live="polite" className="sentence-order-result">
           {sentenceItem.sentence.split('___').map((part, index, parts) => (
             <span key={`${sentenceItem.id}-${index}`}>
               {part}

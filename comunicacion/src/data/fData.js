@@ -57,15 +57,15 @@ export const fLesson = {
     ] },
     { id: 'silabas', title: 'La letra F y sus sílabas', exercises: [
       present('letra-f', 143, 'Esta es la F mayúscula y la f minúscula. Observa sus formas. Escucha y repite las combinaciones de f con las vocales.',
-        ['fo', 'fa', 'fe', 'fi', 'fu'].map(syllable), { letter: 'F f' }),
+        ['fa', 'fe', 'fi', 'fo', 'fu'].map(syllable), { letter: 'F f' }),
       select('reconocer-mayuscula', 144, 'Selecciona la F mayúscula.', [{ id: 'mayuscula', label: 'F' }, { id: 'minuscula', label: 'f' }], ['mayuscula']),
       select('reconocer-minuscula', 144, 'Selecciona la f minúscula.', [{ id: 'mayuscula', label: 'F' }, { id: 'minuscula', label: 'f' }], ['minuscula']),
       ...[['farol', 'fa'], ['feria', 'fe'], ['firma', 'fi'], ['fuente', 'fu']].map(([text, answer]) => select(
         `silaba-${text}`, 143, 'Lee y escucha la palabra. Selecciona la combinación de F con una vocal que encuentres.',
-        ['fo', 'fa', 'fe', 'fi', 'fu'].map(syllable), [answer], { prompt: word(text, true) })),
+        ['fa', 'fe', 'fi', 'fo', 'fu'].map(syllable), [answer], { prompt: word(text, true) })),
       ...[['jefa', 'fa'], ['futuro', 'fu'], ['fino', 'fi'], ['profe', 'fe'], ['foco', 'fo'], ['feo', 'fe'], ['fama', 'fa'], ['fósforo', 'fo'], ['fibra', 'fi'], ['fuerte', 'fu']].map(([text, answer]) => select(
         `reconocer-${text}`, 143, 'Lee y escucha la palabra. Selecciona la combinación de F con una vocal que encuentres.',
-        ['fo', 'fa', 'fe', 'fi', 'fu'].map(syllable), [answer], { prompt: word(text) })),
+        ['fa', 'fe', 'fi', 'fo', 'fu'].map(syllable), [answer], { prompt: word(text) })),
     ] },
     { id: 'completar', title: 'Formemos palabras con F', exercises: [
       ...['foca', 'faro', 'fiesta', 'fuente'].map((text) => ({

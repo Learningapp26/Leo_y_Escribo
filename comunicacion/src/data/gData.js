@@ -378,14 +378,14 @@ export const gSyllableCompletion = [
     audio: '/audio/lecciones/g/garra.mp3',
     options: [
       {
-        syllable: 'gui',
-        audio: '/audio/lecciones/g/silaba-gui.mp3',
-        isCorrect: false,
-      },
-      {
         syllable: 'ga',
         audio: '/audio/lecciones/g/silaba-ga.mp3',
         isCorrect: true,
+      },
+      {
+        syllable: 'gui',
+        audio: '/audio/lecciones/g/silaba-gui.mp3',
+        isCorrect: false,
       },
     ],
   },
@@ -416,14 +416,14 @@ export const gSyllableCompletion = [
     audio: '/audio/lecciones/g/aguja.mp3',
     options: [
       {
-        syllable: 'gu',
-        audio: '/audio/lecciones/g/silaba-gu.mp3',
-        isCorrect: true,
-      },
-      {
         syllable: 'ga',
         audio: '/audio/lecciones/g/silaba-ga.mp3',
         isCorrect: false,
+      },
+      {
+        syllable: 'gu',
+        audio: '/audio/lecciones/g/silaba-gu.mp3',
+        isCorrect: true,
       },
     ],
   },
@@ -473,14 +473,14 @@ export const gSyllableCompletion = [
     audio: '/audio/lecciones/g/gota.mp3',
     options: [
       {
-        syllable: 'gu',
-        audio: '/audio/lecciones/g/silaba-gu.mp3',
-        isCorrect: false,
-      },
-      {
         syllable: 'go',
         audio: '/audio/lecciones/g/silaba-go.mp3',
         isCorrect: true,
+      },
+      {
+        syllable: 'gu',
+        audio: '/audio/lecciones/g/silaba-gu.mp3',
+        isCorrect: false,
       },
     ],
   },

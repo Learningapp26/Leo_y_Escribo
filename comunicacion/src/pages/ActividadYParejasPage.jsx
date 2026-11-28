@@ -13,6 +13,8 @@ import { getLessonThemeClass } from '../data/lessonColors'
 import { page26Pairs } from '../data/yConjunctionData'
 import { playAudio } from '../lib/audioPlayer'
 
+import '../styles/y-conjunction.css'
+
 function ActividadYParejasPage() {
   const [currentIndex, setCurrentIndex] = useState(0)
 
@@ -81,75 +83,26 @@ function ActividadYParejasPage() {
           </Button>
         </div>
 
-        <p className="text-instruction">
-          Escucha los nombres de los dos elementos.
+        <div className="selection-options" aria-label="Elementos de la pareja">
+          {[currentPair.first, currentPair.second].map((item) => (
+            <Card className="y-listening-card" key={item.id}>
+              <img className="selection-image" src={item.image} alt={item.name} />
+              <span className="selection-word">{item.name}</span>
+              <Button
+                variant="audio"
+                icon={Volume2}
+                aria-label={`Escuchar ${item.name}`}
+                onClick={() => playAudio(item.audio)}
+              >
+                Escuchar
+              </Button>
+            </Card>
+          ))}
+        </div>
+
+        <p className="text-sentence" aria-live="polite">
+          {currentPair.first.name} <strong>y</strong> {currentPair.second.name}
         </p>
-
-        <div
-          className="selection-options"
-          aria-label="Elementos de la pareja"
-        >
-          <button
-            className="selection-button"
-            type="button"
-            onClick={() =>
-              playAudio(currentPair.first.audio)
-            }
-          >
-            <img
-              className="selection-image"
-              src={currentPair.first.image}
-              alt={currentPair.first.name}
-            />
-
-            <span className="selection-word">
-              {currentPair.first.name}
-            </span>
-
-            <span className="text-ui-label">
-              Toca para escuchar
-            </span>
-          </button>
-
-          <button
-            className="selection-button"
-            type="button"
-            onClick={() =>
-              playAudio(currentPair.second.audio)
-            }
-          >
-            <img
-              className="selection-image"
-              src={currentPair.second.image}
-              alt={currentPair.second.name}
-            />
-
-            <span className="selection-word">
-              {currentPair.second.name}
-            </span>
-
-            <span className="text-ui-label">
-              Toca para escuchar
-            </span>
-          </button>
-        </div>
-
-        <div
-          className="completion-target"
-          aria-live="polite"
-        >
-          <span className="completion-chip">
-            {currentPair.first.name}
-          </span>
-
-          <span className="completion-chip">
-            y
-          </span>
-
-          <span className="completion-chip">
-            {currentPair.second.name}
-          </span>
-        </div>
 
         <Button
           variant="audio"

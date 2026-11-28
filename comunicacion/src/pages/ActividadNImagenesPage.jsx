@@ -1,89 +1,54 @@
 import { togglePairSelection, isDistinctPair } from '../lib/pairSelection'
 import ActivityFeedback from '../components/common/ActivityFeedback'
 import ListeningWords from '../components/lessons/ListeningWords'
-import SoundIntroduction from '../components/lessons/SoundIntroduction'
-import { useState } from 'react'
-import { ArrowRight, Check, RotateCcw, Volume2 } from 'lucide-react'
+import SoundIntroduction, { WordSound } from '../components/lessons/SoundIntroduction'
+import BookLessonImage from '../components/lessons/BookLessonImage'
+import { useRef, useState } from 'react'
+import { ArrowRight, Check, RotateCcw } from 'lucide-react'
 
 import Button from '../components/common/Button'
 import Card from '../components/common/Card'
+import LessonAudioButton from '../components/common/LessonAudioButton'
 import BackButton from '../components/navigation/BackButton'
 import ProgressBar from '../components/progress/ProgressBar'
 import { getLessonThemeClass } from '../data/lessonColors'
 import {
+  asAudio,
   nFinalPairMatching,
-  nImagePool,
   nInitialPairMatching,
+  nInitialSelection,
   nSoundIntro,
-} from '../data/nImagenes'
+} from '../data/nData'
 import { playAudio } from '../lib/audioPlayer'
 import { registrarProgreso } from '../lib/progreso'
 import '../styles/selection.css'
 
 const PHASES = ['sonido', 'seleccion', 'parejas-inicio', 'parejas-final']
 
-function getAudioLabel(label, audio) {
-  return audio ? label : `${label} pendiente`
-}
-
 function playIfAvailable(audio) {
   if (audio) playAudio(audio)
 }
 
-const targetIds = nImagePool
-  .filter((item) => item.startsWithN)
-  .map((item) => item.id)
-
-const initialPairTargetIds = ['nave', 'nariz']
-
-const finalPairCounts = nFinalPairMatching.items.reduce((counts, item) => {
-  counts[item.pairId] = (counts[item.pairId] ?? 0) + 1
-  return counts
-}, {})
-
-const finalMatchableCount = nFinalPairMatching.items.filter(
-  (item) => finalPairCounts[item.pairId] === 2,
-).length
-
-function selectionClass(id, selectedIds, feedback) {
-  const isSelected = selectedIds.includes(id)
-
-  if (!isSelected || !feedback) {
-    return isSelected ? 'selection-button--selected' : ''
-  }
-
-  return feedback === 'correct'
-    ? 'selection-button--correct'
-    : 'selection-button--incorrect'
+function Instruction({ text, audio }) {
+  return (
+    <div className="selection-instructions">
+      <p className="text-instruction">{text}</p>
+      <LessonAudioButton audio={asAudio(audio)}>Escuchar instrucción</LessonAudioButton>
+    </div>
+  )
 }
 
-function ActividadNImagenesPage() {
-  const [phaseIndex, setPhaseIndex] = useState(0)
-  const phase = PHASES[phaseIndex]
-
+// Fase 2: tocar las imágenes que empiezan con /n/
+function InitialSelection({ onNext }) {
+  const { items, instructionAudio } = nInitialSelection
+  const targetIds = items.filter((item) => item.startsWithN).map((item) => item.id)
   const [selectedIds, setSelectedIds] = useState([])
-  const [selectionFeedback, setSelectionFeedback] = useState('')
+  const [feedback, setFeedback] = useState('')
+  const answerLock = useRef(false)
 
-  const [firstPick, setFirstPick] = useState(null)
-  const [secondPick, setSecondPick] = useState(null)
-  const [matchedIds, setMatchedIds] = useState([])
-  const [pairFeedback, setPairFeedback] = useState('')
-
-  const [finalFirstPick, setFinalFirstPick] = useState(null)
-  const [finalSecondPick, setFinalSecondPick] = useState(null)
-  const [matchedFinalIds, setMatchedFinalIds] = useState([])
-  const [finalFeedback, setFinalFeedback] = useState('')
-
-  const themeClass = getLessonThemeClass('n')
-
-  const goToNextPhase = () => setPhaseIndex((current) => current + 1)
-
-  const toggleSelected = (item) => {
-    if (selectionFeedback === 'correct') return
-
+  const toggle = (item) => {
+    if (feedback) return
     playIfAvailable(item.audio)
-    setSelectionFeedback('')
-
     setSelectedIds((current) =>
       current.includes(item.id)
         ? current.filter((id) => id !== item.id)
@@ -91,12 +56,14 @@ function ActividadNImagenesPage() {
     )
   }
 
-  const checkSelection = () => {
+  const check = () => {
+    if (!selectedIds.length || answerLock.current) return
+    answerLock.current = true
     const isCorrect =
       selectedIds.length === targetIds.length &&
       selectedIds.every((id) => targetIds.includes(id))
 
-    setSelectionFeedback(isCorrect ? 'correct' : 'retry')
+    setFeedback(isCorrect ? 'correct' : 'retry')
 
     registrarProgreso({
       actividad: 'n-imagenes',
@@ -105,460 +72,243 @@ function ActividadNImagenesPage() {
     })
   }
 
-  const retrySelection = () => {
-    setSelectedIds([])
-    setSelectionFeedback('')
-  }
+  return (
+    <Card className="selection-card">
+      <Instruction
+        text="Toca las imágenes cuyo nombre empieza con el mismo sonido que nariz."
+        audio={instructionAudio}
+      />
 
-  const isMatched = (id) => matchedIds.includes(id)
+      <div className="selection-options">
+        {items.map((item) => {
+          const selected = selectedIds.includes(item.id)
+          const stateClass = selected && feedback
+            ? feedback === 'correct' ? 'selection-button--correct' : 'selection-button--incorrect'
+            : selected ? 'selection-button--selected' : ''
 
-  const pickCard = (item) => {
-    if (pairFeedback || matchedIds.includes(item.id)) return
+          return (
+            <button
+              className={['selection-button', stateClass].filter(Boolean).join(' ')}
+              type="button"
+              key={item.id}
+              aria-pressed={selected}
+              disabled={Boolean(feedback)}
+              onClick={() => toggle(item)}
+            >
+              <BookLessonImage className="selection-image" src={item.image} alt={item.name} hideLabel key={item.image} />
+              <span className="selection-word">{item.name}</span>
+            </button>
+          )
+        })}
+      </div>
 
+      {feedback === 'correct' && (
+        <ActivityFeedback correct message={<>¡Muy bien! Todas empiezan con el sonido /n/.</>} />
+      )}
+      {feedback === 'retry' && (
+        <ActivityFeedback correct={false} message={<>Revisa otra vez. Algunas imágenes no empiezan con /n/.</>} />
+      )}
+
+      {!feedback && (
+        <Button icon={Check} size="large" fullWidth disabled={selectedIds.length === 0} onClick={check}>
+          Comprobar selección
+        </Button>
+      )}
+      {feedback === 'retry' && (
+        <Button variant="retry" icon={RotateCcw} size="large" fullWidth onClick={() => { answerLock.current = false; setSelectedIds([]); setFeedback('') }}>
+          Volver a intentar
+        </Button>
+      )}
+      {feedback === 'correct' && (
+        <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth onClick={onNext}>
+          Siguiente parte
+        </Button>
+      )}
+    </Card>
+  )
+}
+
+// Fases 3 y 4: elegir dos imágenes que formen pareja
+function PairMatching({
+  items, instruction, instructionAudio, isValidPair, total, fase,
+  okText, badText, hideMatched = false, finishLabel, onFinish, finishTo,
+}) {
+  const [first, setFirst] = useState(null)
+  const [second, setSecond] = useState(null)
+  const [matchedIds, setMatchedIds] = useState([])
+  const [feedback, setFeedback] = useState('')
+  const answerLock = useRef(false)
+  const finished = matchedIds.length >= total
+
+  const pick = (item) => {
+    if (feedback || matchedIds.includes(item.id)) return
     playIfAvailable(item.audio)
-
-    const [nextFirst = null, nextSecond = null] = togglePairSelection(
-      [firstPick, secondPick], item,
-    )
-    setFirstPick(nextFirst)
-    setSecondPick(nextSecond)
+    const [nextFirst = null, nextSecond = null] = togglePairSelection([first, second], item)
+    setFirst(nextFirst)
+    setSecond(nextSecond)
   }
 
-  const checkPair = () => {
-    if (pairFeedback || !isDistinctPair(firstPick, secondPick, matchedIds)) return
-
-    const isCorrect =
-      initialPairTargetIds.includes(firstPick.id) &&
-      initialPairTargetIds.includes(secondPick.id)
+  const check = () => {
+    if (answerLock.current || feedback || !isDistinctPair(first, second, matchedIds)) return
+    answerLock.current = true
+    const isCorrect = isValidPair(first, second)
 
     registrarProgreso({
       actividad: 'n-imagenes',
       correcto: isCorrect,
-      detalle: { leccionId: 'n', fase: 'parejas-inicio' },
+      detalle: { leccionId: 'n', fase },
     })
 
     if (isCorrect) {
-      setMatchedIds((current) => [...current, firstPick.id, secondPick.id])
-      setPairFeedback('correct')
+      setMatchedIds((current) => [...current, first.id, second.id])
+      setFeedback('correct')
       return
     }
-
-    setPairFeedback('retry')
+    setFeedback('retry')
   }
 
-  const continuePairs = () => {
-    setFirstPick(null)
-    setSecondPick(null)
-    setPairFeedback('')
+  const reset = () => {
+    answerLock.current = false
+    setFirst(null)
+    setSecond(null)
+    setFeedback('')
   }
 
-  const isPairsFinished = matchedIds.length === initialPairTargetIds.length
-
-  const isFinalMatched = (id) => matchedFinalIds.includes(id)
-
-  const pickFinalCard = (item) => {
-    if (finalFeedback || matchedFinalIds.includes(item.id)) return
-
-    playIfAvailable(item.audio)
-
-    const [nextFirst = null, nextSecond = null] = togglePairSelection(
-      [finalFirstPick, finalSecondPick], item,
-    )
-    setFinalFirstPick(nextFirst)
-    setFinalSecondPick(nextSecond)
-  }
-
-  const checkFinalPair = () => {
-    if (finalFeedback || !isDistinctPair(finalFirstPick, finalSecondPick, matchedFinalIds)) return
-
-    const isCorrect = finalFirstPick.pairId === finalSecondPick.pairId
-
-    registrarProgreso({
-      actividad: 'n-imagenes',
-      correcto: isCorrect,
-      detalle: { leccionId: 'n', fase: 'parejas-final' },
-    })
-
-    if (isCorrect) {
-      setMatchedFinalIds((current) => [
-        ...current,
-        finalFirstPick.id,
-        finalSecondPick.id,
-      ])
-      setFinalFeedback('correct')
-      return
-    }
-
-    setFinalFeedback('retry')
-  }
-
-  const continueFinalPairs = () => {
-    setFinalFirstPick(null)
-    setFinalSecondPick(null)
-    setFinalFeedback('')
-  }
-
-  const isFinalFinished = matchedFinalIds.length === finalMatchableCount
+  const visible = hideMatched ? items.filter((item) => !matchedIds.includes(item.id)) : items
 
   return (
-    <main
-      className={`page selection-page ${themeClass}`}
-      aria-labelledby="n-imagenes-title"
-    >
+    <Card className="selection-card">
+      <Instruction text={instruction} audio={instructionAudio} />
+
+      <div className="selection-options">
+        {visible.map((item) => {
+          const selected = first?.id === item.id || second?.id === item.id
+          const matched = matchedIds.includes(item.id)
+          return (
+            <button
+              className={[
+                'selection-button',
+                selected ? 'selection-button--selected' : '',
+                matched ? 'selection-button--correct' : '',
+              ].filter(Boolean).join(' ')}
+              type="button"
+              key={item.id}
+              disabled={Boolean(feedback) || matched}
+              aria-pressed={selected}
+              onClick={() => pick(item)}
+            >
+              <BookLessonImage className="selection-image" src={item.image} alt={item.name} hideLabel key={item.image} />
+              <span className="selection-word">{item.name}</span>
+            </button>
+          )
+        })}
+      </div>
+
+      {feedback === 'correct' && <ActivityFeedback correct message={<>{okText}</>} />}
+      {feedback === 'retry' && <ActivityFeedback correct={false} message={<>{badText}</>} />}
+
+      {!feedback && !finished && (
+        <Button icon={Check} size="large" fullWidth disabled={!isDistinctPair(first, second, matchedIds)} onClick={check}>
+          Comprobar pareja
+        </Button>
+      )}
+      {feedback === 'retry' && (
+        <Button variant="retry" icon={RotateCcw} size="large" fullWidth onClick={reset}>
+          Volver a intentar
+        </Button>
+      )}
+      {feedback === 'correct' && !finished && (
+        <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth onClick={reset}>
+          Buscar otra pareja
+        </Button>
+      )}
+      {finished && finishTo && (
+        <Button to={finishTo} icon={ArrowRight} iconPosition="right" size="large" fullWidth>
+          {finishLabel}
+        </Button>
+      )}
+      {finished && !finishTo && (
+        <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth onClick={onFinish}>
+          {finishLabel}
+        </Button>
+      )}
+    </Card>
+  )
+}
+
+function ActividadNImagenesPage() {
+  const [phaseIndex, setPhaseIndex] = useState(0)
+  const phase = PHASES[phaseIndex]
+  const themeClass = getLessonThemeClass('n')
+  const goToNextPhase = () => setPhaseIndex((current) => current + 1)
+
+  const initialTotal = nInitialPairMatching.items.filter((item) => item.startsWithN).length
+
+  return (
+    <main className={`page selection-page ${themeClass}`} aria-labelledby="n-imagenes-title">
       <BackButton label="Volver a la lección" to="/lecciones/n" />
 
       <header className="text-center">
         <span className="text-ui-label">Actividad 1</span>
-
-        <h1 id="n-imagenes-title">Reconocemos imágenes</h1>
+        <h1 id="n-imagenes-title">Reconocemos el sonido N</h1>
       </header>
 
-      <ProgressBar
-        value={phaseIndex + 1}
-        max={PHASES.length}
-        label={`Parte ${phaseIndex + 1} de ${PHASES.length}`}
-      />
+      <ProgressBar value={phaseIndex + 1} max={PHASES.length} label={`Parte ${phaseIndex + 1} de ${PHASES.length}`} />
 
       {phase === 'sonido' && (
         <Card className="selection-card">
-          <div className="selection-instructions">
-            <p className="text-instruction">
-              Escucha el sonido de la letra N y la palabra nariz.
-            </p>
-          </div>
+          <Instruction
+            text="Escucha el sonido de la letra N y la palabra nariz."
+            audio={nSoundIntro.instructionAudio}
+          />
 
           <SoundIntroduction
             sounds={[{ letter: 'n', audioSrc: nSoundIntro.soundAudio }]}
-            word={nSoundIntro.mainWord}
           />
+          <BookLessonImage key={nSoundIntro.mainWord.image} src={nSoundIntro.mainWord.image} alt={nSoundIntro.mainWord.name} featured hideLabel />
+          <WordSound word={nSoundIntro.mainWord.name} audioSrc={nSoundIntro.mainWord.audio} />
 
           <ListeningWords items={nSoundIntro.exampleWords} letter="N" />
 
-          <Button
-            icon={ArrowRight}
-            iconPosition="right"
-            size="large"
-            fullWidth
-            onClick={goToNextPhase}
-          >
+          <Button icon={ArrowRight} iconPosition="right" size="large" fullWidth onClick={goToNextPhase}>
             Continuar
           </Button>
         </Card>
       )}
 
-      {phase === 'seleccion' && (
-        <Card className="selection-card">
-          <p className="text-instruction">
-            Toca las imágenes cuyo nombre empieza con el sonido de nariz.
-          </p>
-
-          <div className="selection-options">
-            {nImagePool.map((item) => (
-              <button
-                className={[
-                  'selection-button',
-                  selectionClass(item.id, selectedIds, selectionFeedback),
-                ]
-                  .filter(Boolean)
-                  .join(' ')}
-                type="button"
-                key={item.id}
-                aria-pressed={selectedIds.includes(item.id)}
-                onClick={() => toggleSelected(item)}
-              >
-                <img
-                  className="selection-image"
-                  src={item.image}
-                  alt={item.name}
-                />
-
-                <span className="selection-word">{item.name}</span>
-              </button>
-            ))}
-          </div>
-
-          {selectionFeedback === 'correct' && (
-            <ActivityFeedback correct message={<>
-              ¡Muy bien! Todas empiezan con el sonido /n/.
-            </>} />
-          )}
-
-          {selectionFeedback === 'retry' && (
-            <ActivityFeedback correct={false} message={<>
-              Revisa otra vez. Algunas imágenes no empiezan con /n/.
-            </>} />
-          )}
-
-          {!selectionFeedback && (
-            <Button
-              icon={Check}
-              size="large"
-              fullWidth
-              disabled={selectedIds.length === 0}
-              onClick={checkSelection}
-            >
-              Comprobar selección
-            </Button>
-          )}
-
-          {selectionFeedback === 'retry' && (
-            <Button
-              variant="retry"
-              icon={RotateCcw}
-              size="large"
-              fullWidth
-              onClick={retrySelection}
-            >
-              Intentar nuevamente
-            </Button>
-          )}
-
-          {selectionFeedback === 'correct' && (
-            <Button
-              icon={ArrowRight}
-              iconPosition="right"
-              size="large"
-              fullWidth
-              onClick={goToNextPhase}
-            >
-              Siguiente parte
-            </Button>
-          )}
-        </Card>
-      )}
+      {phase === 'seleccion' && <InitialSelection onNext={goToNextPhase} />}
 
       {phase === 'parejas-inicio' && (
-        <Card className="selection-card">
-          <div className="selection-instructions">
-            <p className="text-instruction">
-              Selecciona dos imágenes que empiecen con el mismo sonido.
-            </p>
-
-            <Button
-              variant="audio"
-              icon={Volume2}
-              disabled={!nInitialPairMatching.instructionAudio}
-              onClick={() => playAudio(nInitialPairMatching.instructionAudio)}
-            >
-              {getAudioLabel('Escuchar instrucción', nInitialPairMatching.instructionAudio)}
-            </Button>
-          </div>
-
-          <div className="selection-options">
-            {nInitialPairMatching.items.map((item) => {
-              const selected =
-                firstPick?.id === item.id || secondPick?.id === item.id
-              const matched = isMatched(item.id)
-
-              return (
-                <button
-                  className={[
-                    'selection-button',
-                    selected ? 'selection-button--selected' : '',
-                    matched ? 'selection-button--correct' : '',
-                  ]
-                    .filter(Boolean)
-                    .join(' ')}
-                  type="button"
-                  key={item.id}
-                  disabled={Boolean(pairFeedback) || matchedIds.includes(item.id)}
-                  aria-pressed={selected}
-                  onClick={() => pickCard(item)}
-                >
-                  <img
-                    className="selection-image"
-                    src={item.image}
-                    alt={item.name}
-                  />
-
-                  <span className="selection-word">{item.name}</span>
-                </button>
-              )
-            })}
-          </div>
-
-          {pairFeedback === 'correct' && !isPairsFinished && (
-            <ActivityFeedback correct message={<>
-              ¡Correcto! Las dos empiezan con /n/.
-            </>} />
-          )}
-
-          {pairFeedback === 'retry' && (
-            <ActivityFeedback correct={false} message={<>
-              Esas imágenes no empiezan con el mismo sonido.
-            </>} />
-          )}
-
-          {!pairFeedback && (
-            <Button
-              icon={Check}
-              size="large"
-              fullWidth
-              disabled={Boolean(pairFeedback) || !isDistinctPair(firstPick, secondPick, matchedIds)}
-              onClick={checkPair}
-            >
-              Comprobar pareja
-            </Button>
-          )}
-
-          {pairFeedback === 'retry' && (
-            <Button
-              variant="retry"
-              icon={RotateCcw}
-              size="large"
-              fullWidth
-              onClick={() => {
-                setFirstPick(null)
-                setSecondPick(null)
-                setPairFeedback('')
-              }}
-            >
-              Intentar nuevamente
-            </Button>
-          )}
-
-          {pairFeedback === 'correct' && !isPairsFinished && (
-            <Button
-              icon={ArrowRight}
-              iconPosition="right"
-              size="large"
-              fullWidth
-              onClick={continuePairs}
-            >
-              Buscar otra pareja
-            </Button>
-          )}
-
-          {isPairsFinished && (
-            <Button
-              icon={ArrowRight}
-              iconPosition="right"
-              size="large"
-              fullWidth
-              onClick={goToNextPhase}
-            >
-              Siguiente parte
-            </Button>
-          )}
-        </Card>
+        <PairMatching
+          key="parejas-inicio"
+          items={nInitialPairMatching.items}
+          instruction="Selecciona dos imágenes que empiecen con el mismo sonido."
+          instructionAudio={nInitialPairMatching.instructionAudio}
+          isValidPair={(a, b) => a.startsWithN && b.startsWithN}
+          total={initialTotal}
+          fase="parejas-inicio"
+          okText="¡Correcto! Las dos empiezan con /n/."
+          badText="Esas imágenes no empiezan con el mismo sonido."
+          finishLabel="Siguiente parte"
+          onFinish={goToNextPhase}
+        />
       )}
 
       {phase === 'parejas-final' && (
-        <Card className="selection-card">
-          <div className="selection-instructions">
-            <p className="text-instruction">
-              Selecciona dos imágenes cuyos nombres terminan igual, como
-              camión y portón.
-            </p>
-
-            <Button
-              variant="audio"
-              icon={Volume2}
-              disabled={!nFinalPairMatching.instructionAudio}
-              onClick={() => playAudio(nFinalPairMatching.instructionAudio)}
-            >
-              {getAudioLabel('Escuchar instrucción', nFinalPairMatching.instructionAudio)}
-            </Button>
-          </div>
-
-          <div className="selection-options selection-options--pairs">
-            {nFinalPairMatching.items
-              .filter((item) => !isFinalMatched(item.id))
-              .map((item) => {
-              const selected =
-                finalFirstPick?.id === item.id ||
-                finalSecondPick?.id === item.id
-
-              return (
-                <button
-                  className={[
-                    'selection-button',
-                    selected ? 'selection-button--selected' : '',
-                  ]
-                    .filter(Boolean)
-                    .join(' ')}
-                  type="button"
-                  key={item.id}
-                  aria-pressed={selected}
-                  disabled={Boolean(finalFeedback) || matchedFinalIds.includes(item.id)}
-                  onClick={() => pickFinalCard(item)}
-                >
-                  <img
-                    className="selection-image"
-                    src={item.image}
-                    alt={item.name}
-                  />
-
-                  <span className="selection-word">{item.name}</span>
-                </button>
-              )
-            })}
-          </div>
-
-          {finalFeedback === 'correct' && !isFinalFinished && (
-            <ActivityFeedback correct message={<>
-              ¡Correcto! Terminan igual.
-            </>} />
-          )}
-
-          {finalFeedback === 'retry' && (
-            <ActivityFeedback correct={false} message={<>
-              Esas palabras no terminan igual. Inténtalo de nuevo.
-            </>} />
-          )}
-
-          {!finalFeedback && (
-            <Button
-              icon={Check}
-              size="large"
-              fullWidth
-              disabled={Boolean(finalFeedback) || !isDistinctPair(finalFirstPick, finalSecondPick, matchedFinalIds)}
-              onClick={checkFinalPair}
-            >
-              Comprobar pareja
-            </Button>
-          )}
-
-          {finalFeedback === 'retry' && (
-            <Button
-              variant="retry"
-              icon={RotateCcw}
-              size="large"
-              fullWidth
-              onClick={() => {
-                setFinalFirstPick(null)
-                setFinalSecondPick(null)
-                setFinalFeedback('')
-              }}
-            >
-              Intentar nuevamente
-            </Button>
-          )}
-
-          {finalFeedback === 'correct' && !isFinalFinished && (
-            <Button
-              icon={ArrowRight}
-              iconPosition="right"
-              size="large"
-              fullWidth
-              onClick={continueFinalPairs}
-            >
-              Buscar otra pareja
-            </Button>
-          )}
-
-          {isFinalFinished && (
-            <Button
-              to="/actividad/n-silabas"
-              icon={ArrowRight}
-              iconPosition="right"
-              size="large"
-              fullWidth
-            >
-              Ir a la siguiente actividad
-            </Button>
-          )}
-        </Card>
+        <PairMatching
+          key="parejas-final"
+          items={nFinalPairMatching.items}
+          instruction="Observa los dibujos. Fíjate en el sonido final y une los que riman, como camión y limón."
+          instructionAudio={nFinalPairMatching.instructionAudio}
+          isValidPair={(a, b) => a.pairId === b.pairId}
+          total={nFinalPairMatching.items.length}
+          fase="parejas-final"
+          okText="¡Correcto! Terminan igual."
+          badText="Esas palabras no terminan igual. Inténtalo de nuevo."
+          hideMatched
+          finishLabel="Ir a la siguiente actividad"
+          finishTo="/actividad/n-silabas"
+        />
       )}
     </main>
   )

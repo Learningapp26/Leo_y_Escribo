@@ -133,7 +133,7 @@ export const bSoundSearchImages = [
 
 export const bSyllableInstructionAudio = bAudio('instruccion-silabas-b')
 
-export const bSyllables = ['bo', 'ba', 'be', 'bi', 'bu'].map((syllable) => ({
+export const bSyllables = ['ba', 'be', 'bi', 'bo', 'bu'].map((syllable) => ({
   syllable,
   audio: bAudio(`silaba-${syllable}`),
 }))

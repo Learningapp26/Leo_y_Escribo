@@ -183,7 +183,7 @@ export const trSyllableImageExercises = [
     syllable: 'tro',
     image: '/images/lecciones/tr/trozos.png',
     audio: '/audio/lecciones/tr/trozos.mp3',
-    options: ['tro', 'tra'],
+    options: ['tra', 'tro'],
   },
   {
     id: 'trigo',

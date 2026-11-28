@@ -11,7 +11,7 @@ const paragraphs = [
   'Para compensar a la señora, la mamá de Frida le compró naranjas, manzanas y fresas. Al salir del mercado, Rufo olfateó las frutas. Empezó a brincar y a ladrar. La mamá de Frida tomó unas fresas y se las dio. Rufo se las comió muy contento. ¡Solo así se calmó!',
 ]
 const tongueTwister = 'Francisco Freña disfruta tomar\nfresco de fresa y frambuesa.\nAdemás, disfruta sacar\nfruta fría del refrigerador.\n\nCon la fruta y el fresco\nFrancisco Freña se refresca.'
-const syllables = ['fro', 'fra', 'fre', 'fri', 'fru'].map(syllable)
+const syllables = ['fra', 'fre', 'fri', 'fro', 'fru'].map(syllable)
 const sequence = [
   ['pelar', 'Pelar el plátano', 'Un hombre pela un plátano.'],
   ['aceite', 'Agregar aceite', 'El hombre agrega aceite a la sartén.'],
@@ -68,7 +68,7 @@ export const frLesson = {
       { id: 'silabas-dibujos', page: 233, type: 'match',
         instruction: instruction('silabas-dibujos', 'Observa las imágenes. Escucha y lee cada palabra. Selecciona la combinación con fr que contiene.'),
         groups: [['frambuesa', 'fra'], ['fresco', 'fre'], ['frijoles', 'fri'], ['frotar', 'fro']]
-          .map(([text, answer]) => ({ ...pic(text), answer, options: ['fro', 'fra', 'fri', 'fre'].map(syllable) })),
+          .map(([text, answer]) => ({ ...pic(text), answer, options: ['fra', 'fre', 'fri', 'fro'].map(syllable) })),
       },
       ...wordGroups.map((group, index) => ({ id: `encontrar-silabas-${index + 1}`, page: 233, type: 'match',
         instruction: instruction('encontrar-silabas', 'Lee y escucha cada palabra. Selecciona fro, fre, fra, fri o fru según la combinación que contiene. Conversa sobre su significado con tu compañero o tu maestra. Di una oración con las palabras nuevas.'),

@@ -246,14 +246,14 @@ export const prSyllableJoin = [
     wordAudio: '/audio/lecciones/pr/prado.mp3',
     options: [
       {
-        syllable: 'pri',
-        audio: '/audio/lecciones/pr/silaba-pri.mp3',
-        isCorrect: false,
-      },
-      {
         syllable: 'pra',
         audio: '/audio/lecciones/pr/silaba-pra.mp3',
         isCorrect: true,
+      },
+      {
+        syllable: 'pri',
+        audio: '/audio/lecciones/pr/silaba-pri.mp3',
+        isCorrect: false,
       },
     ],
   },
@@ -264,14 +264,14 @@ export const prSyllableJoin = [
     wordAudio: '/audio/lecciones/pr/primer.mp3',
     options: [
       {
-        syllable: 'pri',
-        audio: '/audio/lecciones/pr/silaba-pri.mp3',
-        isCorrect: true,
-      },
-      {
         syllable: 'pre',
         audio: '/audio/lecciones/pr/silaba-pre.mp3',
         isCorrect: false,
+      },
+      {
+        syllable: 'pri',
+        audio: '/audio/lecciones/pr/silaba-pri.mp3',
+        isCorrect: true,
       },
     ],
   },

@@ -97,6 +97,13 @@
   white-space: nowrap;
 }
 
+/* Burbuja adicional que conserva la alineación sin repetir el personaje. */
+.selection-instructions.instructions--without-character::before,
+.completion-instructions.instructions--without-character::before,
+.syllables-instructions.instructions--without-character::before {
+  content: none;
+}
+
 /* ── Opciones: tarjeta clara; al elegir, pastel + halo + estrellita ── */
 .selection-button {
   position: relative;

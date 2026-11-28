@@ -252,7 +252,7 @@ export const tSyllableAssociation = [
   {
     id: 'toro',
     word: 'toro',
-    highlighted: 'ti',
+    highlighted: 'to',
     rest: 'ro',
     image: '/images/lecciones/t/toro.png',
     syllableAudio: '/audio/lecciones/t/silaba-ti.mp3',
@@ -329,13 +329,6 @@ export const tSyllableSelection = [
     image: '/images/lecciones/t/pito.png',
     wordAudio: '/audio/lecciones/t/pito.mp3',
     answer: 'to',
-  },
-  {
-    id: 'tita',
-    name: 'Tita',
-    image: '/images/lecciones/t/tita.png',
-    wordAudio: null,
-    answer: 'ti',
   },
   {
     id: 'pato',

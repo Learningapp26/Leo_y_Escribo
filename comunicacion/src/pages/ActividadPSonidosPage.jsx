@@ -85,6 +85,7 @@ function ActividadPSonidosPage() {
   }
 
   // Fase 3: el sonido /p/ no siempre está al inicio de la palabra
+  const [showPositionExample, setShowPositionExample] = useState(true)
   const [positionIndex, setPositionIndex] = useState(0)
   const [selectedSyllableIndex, setSelectedSyllableIndex] = useState(null)
   const [positionResult, setPositionResult] = useState('')
@@ -272,135 +273,175 @@ function ActividadPSonidosPage() {
             </Button>
           </div>
 
-          <div className="completion-content">
-            <p className="text-instruction">
-              Mira el ejemplo: en <strong>puma</strong> el sonido /p/ está en
-              la primera sílaba.
-            </p>
+          {showPositionExample ? (
+            <div className="completion-content">
+              <div className="selection-instructions instructions--without-character">
+                <p className="text-instruction">
+                  Mira el ejemplo: en <strong>puma</strong> el sonido /p/ está en
+                  la primera sílaba.
+                </p>
 
-            <img
-              className="completion-word-image"
-              src={pSyllablePositionExample.image}
-              alt={pSyllablePositionExample.word}
-            />
+                <Button
+                  variant="audio"
+                  icon={Volume2}
+                  onClick={() => playAudio(pSyllablePositionExample.instructionAudio)}
+                >
+                  Escuchar ejemplo
+                </Button>
+              </div>
 
-            <ReadOnlySyllables syllables={pSyllablePositionExample.syllables} highlightIndex={pSyllablePositionExample.answerIndex} />
-          </div>
+              <img
+                className="completion-word-image"
+                src={pSyllablePositionExample.image}
+                alt={pSyllablePositionExample.word}
+              />
 
-          <img
-            className="completion-word-image"
-            src={positionItem.image}
-            alt={positionItem.word}
-          />
+              <ReadOnlySyllables syllables={pSyllablePositionExample.syllables} highlightIndex={pSyllablePositionExample.answerIndex} />
 
-          <div className="completion-content">
-            <Button
-              variant="audio"
-              icon={Volume2}
-              onClick={() => playAudio(positionItem.wordAudio)}
-            >
-              Escuchar palabra completa
-            </Button>
+              <div className="audio-button-row">
+                <Button
+                  variant="audio"
+                  icon={Volume2}
+                  onClick={() => playAudio(pSyllablePositionExample.wordAudio)}
+                >
+                  Escuchar palabra completa
+                </Button>
+                <Button
+                  variant="audio"
+                  icon={Volume2}
+                  onClick={() => playAudio(pSyllablePositionExample.syllableAudio)}
+                >
+                  Escuchar por sílabas
+                </Button>
+              </div>
 
-            <Button
-              variant="audio"
-              icon={Volume2}
-              onClick={() => playAudio(positionItem.syllableAudio)}
-            >
-              Escuchar por sílabas
-            </Button>
-          </div>
+              <Button
+                icon={ArrowRight}
+                iconPosition="right"
+                fullWidth
+                onClick={() => setShowPositionExample(false)}
+              >
+                Comenzar a practicar
+              </Button>
+            </div>
+          ) : (
+            <>
+              <img
+                className="completion-word-image"
+                src={positionItem.image}
+                alt={positionItem.word}
+              />
 
-          <div className="completion-bank">
-            {positionItem.syllables.map((syllable, index) => (
-              <button
-                className={[
-                  'completion-chip',
-                  'text-syllable',
-                  selectedSyllableIndex === index ? 'completion-active' : '',
-                  positionResult === 'correct' && selectedSyllableIndex === index
-                    ? 'completion-correct'
-                    : '',
-                  positionResult === 'retry' && selectedSyllableIndex === index
-                    ? 'completion-incorrect'
-                    : '',
-                ]
-                  .filter(Boolean)
-                  .join(' ')}
-                type="button"
-                key={`${syllable}-${index}`}
-                aria-pressed={selectedSyllableIndex === index}
+              <div className="audio-button-row">
+                <Button
+                  variant="audio"
+                  icon={Volume2}
+                  onClick={() => playAudio(positionItem.wordAudio)}
+                >
+                  Escuchar palabra completa
+                </Button>
+
+                <Button
+                  variant="audio"
+                  icon={Volume2}
+                  onClick={() => playAudio(positionItem.syllableAudio)}
+                >
+                  Escuchar por sílabas
+                </Button>
+              </div>
+
+              <div className="completion-bank">
+                {positionItem.syllables.map((syllable, index) => (
+                  <button
+                    className={[
+                      'completion-chip',
+                      'text-syllable',
+                      selectedSyllableIndex === index ? 'completion-active' : '',
+                      positionResult === 'correct' && selectedSyllableIndex === index
+                        ? 'completion-correct'
+                        : '',
+                      positionResult === 'retry' && selectedSyllableIndex === index
+                        ? 'completion-incorrect'
+                        : '',
+                    ]
+                      .filter(Boolean)
+                      .join(' ')}
+                    type="button"
+                    key={`${syllable}-${index}`}
+                    aria-pressed={selectedSyllableIndex === index}
+                    onClick={() => {
+                      setSelectedSyllableIndex(index)
+                      setPositionResult('')
+                    }}
+                  >
+                    {syllable}
+                  </button>
+                ))}
+              </div>
+
+              {positionResult === 'correct' && (
+                <ActivityFeedback correct message={<>
+                  ¡Correcto! El sonido /p/ está en "{positionItem.syllables[positionItem.answerIndex]}".
+              </>} />
+            )}
+
+            {positionResult === 'retry' && (
+              <ActivityFeedback correct={false} message={<>
+                Escucha otra vez con cuidado.
+              </>} />
+            )}
+
+            {!positionResult && (
+              <Button
+                icon={Check}
+                size="large"
+                fullWidth
+                disabled={selectedSyllableIndex === null}
+                onClick={checkPosition}
+              >
+                Comprobar
+              </Button>
+            )}
+
+            {positionResult === 'retry' && (
+              <Button
+                variant="retry"
+                icon={RotateCcw}
+                size="large"
+                fullWidth
                 onClick={() => {
-                  setSelectedSyllableIndex(index)
+                  setSelectedSyllableIndex(null)
                   setPositionResult('')
                 }}
               >
-                {syllable}
-              </button>
-            ))}
-          </div>
+                Intentar nuevamente
+              </Button>
+            )}
 
-          {positionResult === 'correct' && (
-            <ActivityFeedback correct message={<>
-              ¡Correcto! El sonido /p/ está en "{positionItem.syllables[positionItem.answerIndex]}".
-            </>} />
-          )}
+            {positionResult === 'correct' && !isLastPositionItem && (
+              <Button
+                icon={ArrowRight}
+                iconPosition="right"
+                size="large"
+                fullWidth
+                onClick={nextPositionItem}
+              >
+                Siguiente palabra
+              </Button>
+            )}
 
-          {positionResult === 'retry' && (
-            <ActivityFeedback correct={false} message={<>
-              Escucha otra vez con cuidado.
-            </>} />
-          )}
-
-          {!positionResult && (
-            <Button
-              icon={Check}
-              size="large"
-              fullWidth
-              disabled={selectedSyllableIndex === null}
-              onClick={checkPosition}
-            >
-              Comprobar
-            </Button>
-          )}
-
-          {positionResult === 'retry' && (
-            <Button
-              variant="retry"
-              icon={RotateCcw}
-              size="large"
-              fullWidth
-              onClick={() => {
-                setSelectedSyllableIndex(null)
-                setPositionResult('')
-              }}
-            >
-              Intentar nuevamente
-            </Button>
-          )}
-
-          {positionResult === 'correct' && !isLastPositionItem && (
-            <Button
-              icon={ArrowRight}
-              iconPosition="right"
-              size="large"
-              fullWidth
-              onClick={nextPositionItem}
-            >
-              Siguiente palabra
-            </Button>
-          )}
-
-          {positionResult === 'correct' && isLastPositionItem && (
-            <Button
-              to="/actividad/p-silabas"
-              icon={ArrowRight}
-              iconPosition="right"
-              size="large"
-              fullWidth
-            >
-              Ir a la siguiente actividad
-            </Button>
+            {positionResult === 'correct' && isLastPositionItem && (
+              <Button
+                to="/actividad/p-silabas"
+                icon={ArrowRight}
+                iconPosition="right"
+                size="large"
+                fullWidth
+              >
+                Ir a la siguiente actividad
+              </Button>
+            )}
+            </>
           )}
         </Card>
       )}
